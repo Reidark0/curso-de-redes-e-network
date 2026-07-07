@@ -1,0 +1,13 @@
+{
+  "name": "Redes e Network v2.0",
+  "short_name": "Redes v2.0",
+  "description": "Release final do curso interativo Redes e Network v2.0 da Deixando de ser TBN, com correções P1 de auditoria aplicadas e HTML único offline validado.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f7f8fb",
+  "theme_color": "#1f6feb",
+  "icons": [],
+  "lang": "pt-BR",
+  "orientation": "any",
+  "scope": "./"
+}

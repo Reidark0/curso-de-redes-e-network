@@ -1,0 +1,14 @@
+.lesson-svg, svg.lesson-svg { width: 100%; height: auto; display: block; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface-2); margin: var(--space-4) 0; }
+.svg-node { fill: var(--surface); stroke: var(--border); stroke-width: 2; }
+.svg-node--client { fill: var(--primary-soft); }
+.svg-node--security, .svg-node--firewall { fill: color-mix(in srgb, var(--danger) 12%, var(--surface)); }
+.svg-node--cloud { fill: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+.svg-label { fill: var(--text); font-size: 15px; font-weight: 700; }
+.svg-label--small { fill: var(--muted); font-size: 12px; }
+.svg-flow { stroke: var(--primary); stroke-width: 3; fill: none; }
+.svg-flow--blocked { stroke: var(--danger); stroke-dasharray: 8 6; }
+.svg-boundary, .svg-zone { fill: transparent; stroke: var(--border); stroke-dasharray: 8 8; }
+.svg-arrow { fill: var(--primary); }
+.animated-flow { stroke-dasharray: 12 8; animation: flowMove 1.3s linear infinite; }
+@keyframes flowMove { from { stroke-dashoffset: 20; } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .animated-flow { animation: none; } }

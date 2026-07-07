@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Redes e Network v2.0 — curso interativo da Deixando de ser TBN." />
+  <title>Redes e Network v2.0 | Deixando de ser TBN</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#lesson-main">Ir para o conteúdo</a>
+  <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="icon-button" id="menu-toggle" aria-label="Abrir ou fechar barra lateral" aria-controls="sidebar" aria-expanded="true">☰</button>
+      <button class="brand-block brand-home-button" id="brand-home" type="button" aria-label="Voltar para Home">
+        <span class="brand-mark">TBN</span>
+        <span class="brand-text">
+          <strong>Deixando de ser TBN</strong>
+          <span>Redes e Network v2.0</span>
+        </span>
+      </button>
+      <div class="topbar-search">
+        <label class="sr-only" for="global-search">Buscar no curso</label>
+        <input id="global-search" type="search" placeholder="Buscar aulas, labs, protocolos, comandos..." autocomplete="off" />
+        <div id="search-results" class="search-results" hidden></div>
+      </div>
+      <div class="topbar-actions">
+        <button class="button button--ghost" id="back-button">Voltar</button>
+        <button class="button button--ghost" id="continue-button">Continuar</button>
+        <button class="icon-button" id="theme-toggle" aria-label="Alternar tema">◐</button>
+      </div>
+    </header>
+
+    <aside class="sidebar" id="sidebar" aria-label="Navegação do curso">
+      <div class="sidebar-header">
+        <div>
+          <span class="eyebrow">Curso</span>
+          <h1>Redes e Network</h1>
+        </div>
+        <button class="icon-button" id="sidebar-close" aria-label="Fechar barra lateral">×</button>
+      </div>
+      <button class="button button--secondary sidebar-home-button" id="sidebar-home" type="button">← Voltar para Home</button>
+      <div class="sidebar-tools">
+        <button class="button button--ghost" id="toggle-modules" type="button" aria-pressed="false">Expandir módulos</button>
+      </div>
+      <div class="course-progress-card">
+        <div class="progress-label">
+          <span>Progresso geral</span>
+          <strong id="overall-progress-text">0%</strong>
+        </div>
+        <div class="progress-track progress-track--dual" aria-label="Progresso geral por aulas marcadas e concluídas">
+          <span class="progress-track__marked" id="overall-marked-progress-bar"></span>
+          <span class="progress-track__complete" id="overall-progress-bar"></span>
+        </div>
+        <small id="overall-progress-detail">0/190 concluídas</small>
+      </div>
+      <nav id="module-nav" class="module-nav"></nav>
+    </aside>
+
+    <main id="lesson-main" class="main-content" tabindex="-1">
+      <section class="hero" id="course-hero">
+        <div>
+          <span class="eyebrow">Curso interativo</span>
+          <h2>Redes e Network v2.0</h2>
+          <p>Formação progressiva em fundamentos, infraestrutura, cloud, DevSecOps e segurança de redes.</p>
+        </div>
+        <div class="hero-actions">
+          <button class="button button--primary" id="hero-start">Continuar</button>
+        </div>
+      </section>
+
+      <section class="home-overview" id="home-overview"></section>
+      <section class="dashboard-toolbar" id="dashboard-toolbar">
+        <div>
+          <span class="eyebrow">Roadmap</span>
+          <h2>Módulos do curso</h2>
+          <p>Escolha qualquer módulo. Não há bloqueio por progresso: o acompanhamento é apenas visual.</p>
+        </div>
+      </section>
+      <section class="dashboard-grid" id="dashboard-grid"></section>
+      <section class="module-detail" id="module-detail" hidden></section>
+      <section class="lesson-layout" id="lesson-layout" hidden>
+        <article class="lesson-article" id="lesson-container"></article>
+        <aside class="lesson-aside" id="lesson-aside"></aside>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>
