@@ -1,0 +1,80 @@
+{
+  "id": "2.3",
+  "versao": "nova",
+  "titulo": "Camada 1 — Física: bits no fio, luz e rádio",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4857,
+    "invisiveis": 35,
+    "teoriaVisivel": 2491
+  },
+  "porCampoVisivel": {
+    "content.motivation": 120,
+    "content.problem": 101,
+    "content.concept": 174,
+    "content.internals": 380,
+    "content.architecture": 113,
+    "content.analogy": 73,
+    "content.simpleExample": 80,
+    "content.enterpriseExample": 96,
+    "content.cloudExample": 80,
+    "content.devsecopsExample": 51,
+    "content.securityExample": 128,
+    "content.diagram": 2,
+    "content.summary": 89,
+    "content.nextTheme": 33,
+    "security": 211,
+    "troubleshooting": 446,
+    "glossary": 314,
+    "title+subtitle": 27,
+    "objectives": 59,
+    "learningOutcomes": 83,
+    "quiz": 415,
+    "flashcards": 155,
+    "mentorQuestions": 181,
+    "exercises": 249,
+    "challenge": 164,
+    "commentedSolution": 202,
+    "references": 53,
+    "linksToOtherCourses": 44,
+    "lab": 734
+  },
+  "porCampoInvisivel": {
+    "networkContext": 35
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 35,
+    "alternativa_5minPasso_maisLeitura": 30.6,
+    "plausivel": true,
+    "palavras": 734
+  },
+  "duracao": {
+    "declarada": "100-140 min",
+    "estimatedStudyTimeMinutes": 140,
+    "M": 120,
+    "T": 116.2,
+    "partes": {
+      "teoria": 19.2,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 35
+    },
+    "faixaRecomendada": "100-140 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 19
+  }
+}

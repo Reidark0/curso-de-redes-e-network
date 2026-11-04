@@ -1,0 +1,88 @@
+{
+  "id": "2.3",
+  "versao": "original",
+  "titulo": "Camada 1 — Física: bits no fio, luz e rádio",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4514,
+    "invisiveis": 535,
+    "teoriaVisivel": 2452
+  },
+  "porCampoVisivel": {
+    "content.motivation": 170,
+    "content.history": 172,
+    "content.problem": 127,
+    "content.evolution": 135,
+    "content.concept": 104,
+    "content.internals": 134,
+    "content.architecture": 91,
+    "content.analogy": 84,
+    "content.simpleExample": 81,
+    "content.enterpriseExample": 97,
+    "content.cloudExample": 105,
+    "content.devsecopsExample": 92,
+    "content.securityExample": 152,
+    "content.diagram": 3,
+    "content.summary": 76,
+    "content.nextTheme": 44,
+    "security": 243,
+    "troubleshooting": 311,
+    "glossary": 231,
+    "title+subtitle": 29,
+    "objectives": 59,
+    "learningOutcomes": 83,
+    "quiz": 284,
+    "flashcards": 120,
+    "mentorQuestions": 141,
+    "exercises": 165,
+    "challenge": 164,
+    "commentedSolution": 202,
+    "references": 53,
+    "linksToOtherCourses": 44,
+    "lab": 718
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 34,
+    "content.exercisesIntro": 19,
+    "content.challengeIntro": 26,
+    "content.solutionIntro": 21,
+    "networkContext": 35,
+    "deepDive": 268,
+    "commonMistakes": 132
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 45,
+    "alternativa_5minPasso_maisLeitura": 30.5,
+    "plausivel": true,
+    "palavras": 718
+  },
+  "duracao": {
+    "declarada": "80-115 min",
+    "estimatedStudyTimeMinutes": 115,
+    "M": 97.5,
+    "T": 125.9,
+    "partes": {
+      "teoria": 18.9,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 45
+    },
+    "faixaRecomendada": "105-150 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 17
+  }
+}

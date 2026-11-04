@@ -1,0 +1,14 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>Quando uma placa de rede transmite, ela recebe bits da camada de enlace e precisa representá-los fisicamente. O processo exato depende do meio, mas o raciocínio geral é o mesmo.</p>
+  <ol class="flow-list">
+    <li>A camada de enlace entrega bits que representam um quadro.</li>
+    <li>A interface física aplica codificação e temporização adequadas ao padrão usado.</li>
+    <li>No cobre, o equipamento gera variações elétricas controladas.</li>
+    <li>Na fibra, um transceptor converte sinais elétricos em pulsos de luz.</li>
+    <li>No rádio, o transmissor modula ondas eletromagnéticas em um canal.</li>
+    <li>O receptor mede o sinal, tenta distinguir ruído de informação e reconstrói bits.</li>
+    <li>Se a qualidade for ruim, surgem erros, retransmissões, perda, baixa taxa ou queda de link.</li>
+  </ol>
+  <p>Termos como autonegociação, duplex, taxa negociada, potência óptica, SNR, RSSI, interferência, CRC error e link flap pertencem à vida prática da camada física.</p>
+</section>
