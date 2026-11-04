@@ -1,0 +1,20 @@
+
+<section class="lesson-section lesson-section--problem">
+  <h2>3. Problema</h2>
+  <p>
+    O problema técnico é que a mesma transferência pode ser descrita por unidades diferentes. Um arquivo de 1 GB sendo baixado por uma conexão de 100 Mbps não baixa em 10 segundos apenas porque 100 parece maior que 1. É preciso converter unidades e lembrar que há overhead. A rede não transporta apenas o conteúdo do arquivo; ela transporta também quadros, pacotes, segmentos, cabeçalhos, confirmações, criptografia, retransmissões e controle.
+  </p>
+  <p>
+    Essa confusão causa erros operacionais. Um técnico pode interpretar um teste normal como problema. Um gestor pode comprar link acima do necessário ou abaixo do necessário. Um analista de segurança pode subestimar a velocidade de exfiltração de dados. Um engenheiro de cloud pode errar custo de tráfego por confundir taxa com volume. Um pipeline de DevSecOps pode parecer lento por causa da rede, quando o gargalo real está no registry, no disco, na CPU ou no TLS inspection.
+  </p>
+  <ul class="flow-list">
+    <li><strong>Erro 1:</strong> comparar Mbps com MB/s diretamente.</li>
+    <li><strong>Erro 2:</strong> ignorar que 1 byte equivale a 8 bits.</li>
+    <li><strong>Erro 3:</strong> esperar que a taxa útil seja igual à taxa nominal do link.</li>
+    <li><strong>Erro 4:</strong> testar por Wi-Fi e concluir que o link contratado está ruim.</li>
+    <li><strong>Erro 5:</strong> medir um download de um servidor lento e culpar automaticamente a rede local.</li>
+  </ul>
+  <div class="callout callout--warning">
+    <strong>Regra mental:</strong> links são anunciados em bits por segundo; arquivos normalmente aparecem em bytes. Para estimar MB/s a partir de Mbps, divida por 8. Para estimar Mbps a partir de MB/s, multiplique por 8.
+  </div>
+</section>

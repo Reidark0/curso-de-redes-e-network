@@ -1,0 +1,13 @@
+
+<section class="lesson-section lesson-section--cloud">
+  <h2>11. Exemplo em cloud</h2>
+  <p>
+    Em cloud, a confusão ganha outra dimensão: velocidade e custo. Um serviço pode transferir dados a centenas de Mbps, mas a cobrança costuma aparecer por volume, como GB transferidos para fora da região, entre zonas ou para a internet. Um pipeline que baixa imagens grandes todos os dias pode não parecer pesado em velocidade instantânea, mas pode gerar custo relevante de egress e armazenamento de cache.
+  </p>
+  <p>
+    Outro exemplo: um NAT Gateway, load balancer, firewall gerenciado ou appliance virtual pode ter custo por hora, por GB processado ou por unidade de capacidade. Se o time confunde MB/s com Mbps, pode dimensionar errado ou interpretar métricas de forma ruim. Em arquitetura cloud, você precisa perguntar: qual é a taxa de pico, qual é o volume mensal, onde está o tráfego, há cobrança entre zonas, existe compressão, cache ou private endpoint, e quais logs serão armazenados?
+  </p>
+  <div class="callout callout--security">
+    <strong>Impacto financeiro:</strong> mesmo que a ferramenta seja gratuita, tráfego cloud, armazenamento de logs e processamento por firewall/proxy podem gerar custo recorrente. Unidade correta evita surpresa na fatura.
+  </div>
+</section>

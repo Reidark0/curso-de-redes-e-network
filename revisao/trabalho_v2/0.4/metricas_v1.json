@@ -1,0 +1,96 @@
+{
+  "id": "0.4",
+  "versao": "v1",
+  "titulo": "Bit vs Byte em redes",
+  "tipo": "intermediária",
+  "palavras": {
+    "visiveis": 4934,
+    "teoria": 3485,
+    "praticaExtra": 735,
+    "quiz": 382,
+    "flashcards": 158
+  },
+  "porGrupoTeoria": {
+    "introducao": 708,
+    "contexto": 437,
+    "conteudo": 866,
+    "exemplos": 675,
+    "seguranca_troubleshooting": 799
+  },
+  "porSecao": {
+    "motivation": 165,
+    "summary": 124,
+    "history": 135,
+    "problem": 302,
+    "concept": 398,
+    "internals": 312,
+    "architecture": 155,
+    "diagram": 1,
+    "analogy": 80,
+    "simpleExample": 107,
+    "enterpriseExample": 117,
+    "cloudExample": 145,
+    "devsecopsExample": 113,
+    "securityExample": 113,
+    "objectives": 67,
+    "learningOutcomes": 90,
+    "glossary": 262,
+    "security": 406,
+    "troubleshooting": 393,
+    "nextTheme": 40
+  },
+  "pratica": {
+    "quiz": 382,
+    "flashcards": 158,
+    "lab": 0,
+    "mentorQuestions": 159,
+    "exercises": 118,
+    "challenge": 198,
+    "commentedSolution": 260
+  },
+  "outros": {
+    "title+subtitle": 19,
+    "nextTheme": 40,
+    "references": 50,
+    "linksToOtherCourses": 65
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 8,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 7,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "75-110 min",
+    "estimatedStudyTimeMinutes": 110,
+    "nucleo": 36.8,
+    "nucleoPartes": {
+      "teoria": 26.8,
+      "diagramas": 3,
+      "quiz": 7
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "30-45 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "30-45 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 45
+  }
+}

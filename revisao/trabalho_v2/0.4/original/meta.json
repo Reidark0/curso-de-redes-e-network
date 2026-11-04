@@ -1,0 +1,782 @@
+{
+  "id": "0.4",
+  "moduleId": "m00",
+  "order": 4,
+  "title": "Bit vs Byte em redes",
+  "subtitle": "Como interpretar Mbps, MB/s, throughput, overhead e velocidade real sem cair em conclusões erradas.",
+  "duration": "60-85 min",
+  "estimatedStudyTimeMinutes": 85,
+  "difficulty": "iniciante",
+  "type": "intermediária",
+  "xp": 145,
+  "tags": [
+    "fundamentos",
+    "bit",
+    "byte",
+    "mbps",
+    "mb/s",
+    "throughput",
+    "overhead",
+    "performance",
+    "troubleshooting",
+    "cloud",
+    "segurança"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.1",
+      "reason": "A aula 0.1 explica que informação digital é representada por estados interpretados como bits."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.2",
+      "reason": "A aula 0.2 apresenta a relação entre bit, byte, binário e hexadecimal."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.3",
+      "reason": "A aula 0.3 mostra como bytes podem representar texto em protocolos, logs e APIs."
+    }
+  ],
+  "objectives": [
+    "Diferenciar bit, byte, bps, B/s, Mbps, MB/s, Gbps e GiB com clareza operacional.",
+    "Converter velocidades de rede para taxas aproximadas de transferência de arquivos.",
+    "Explicar por que a velocidade útil costuma ser menor que a velocidade nominal do link.",
+    "Relacionar overhead de protocolos com Ethernet, IP, TCP, TLS, HTTP, VPN, Wi-Fi e cloud.",
+    "Evitar diagnósticos incorretos em testes de velocidade, downloads, backups, logs e transferência entre serviços."
+  ],
+  "learningOutcomes": [
+    "Dado um plano em Mbps, o aluno consegue estimar o máximo teórico em MB/s dividindo por 8.",
+    "Dado um download em MB/s, o aluno consegue converter para Mbps multiplicando por 8.",
+    "Dado um resultado abaixo do teórico, o aluno considera overhead, Wi-Fi, servidor de origem, disco, CPU, VPN e congestionamento antes de concluir falha no provedor.",
+    "Dado um custo cloud por GB trafegado, o aluno entende a diferença entre velocidade instantânea e volume transferido.",
+    "Dado um alerta de exfiltração ou transferência incomum, o aluno interpreta unidades corretamente para estimar impacto."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Camada 1 - Física",
+      "Camada 2 - Enlace",
+      "Camada 3 - Rede",
+      "Camada 4 - Transporte",
+      "Camada 7 - Aplicação"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede",
+      "Internet",
+      "Transporte",
+      "Aplicação"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "Wi-Fi",
+      "IP",
+      "TCP",
+      "UDP",
+      "TLS",
+      "HTTP",
+      "VPN"
+    ],
+    "dependsOn": [
+      "bits",
+      "bytes",
+      "binário",
+      "codificação"
+    ],
+    "enables": [
+      "throughput",
+      "overhead",
+      "performance",
+      "troubleshooting",
+      "dimensionamento",
+      "cloud networking",
+      "segurança operacional"
+    ]
+  },
+  "deepDive": {
+    "mentalModel": "Capacidade de rede é medida em bits por segundo; dados úteis de arquivo normalmente são percebidos em bytes. Entre a capacidade nominal e a aplicação existe overhead e existem gargalos.",
+    "keyTerms": [
+      "bit",
+      "byte",
+      "bps",
+      "Mbps",
+      "MB/s",
+      "Gbps",
+      "throughput",
+      "overhead",
+      "goodput",
+      "egress",
+      "latência"
+    ],
+    "limitations": [
+      "A conversão por 8 fornece teto teórico, não garantia de desempenho real.",
+      "Speedtests medem um cenário específico, não todas as aplicações.",
+      "Wi-Fi pode reduzir throughput por interferência, distância, canal, padrão e concorrência.",
+      "VPN, TLS inspection, proxy e firewall podem mudar a taxa útil.",
+      "Taxa de transferência não é igual a volume total nem a custo cloud."
+    ],
+    "whenToUse": [
+      "Ao interpretar plano de internet, link corporativo ou porta de switch.",
+      "Ao diagnosticar download, backup, replicação ou pipeline lento.",
+      "Ao estimar tempo de transferência de arquivos.",
+      "Ao analisar alertas de exfiltração ou tráfego incomum.",
+      "Ao dimensionar firewall, proxy, VPN, NAT Gateway, SIEM ou registry."
+    ],
+    "whenNotToUse": [
+      "Não use apenas a conversão por 8 para concluir SLA sem medir condições reais.",
+      "Não compare speedtest por Wi-Fi com capacidade contratada sem isolar variáveis.",
+      "Não use taxa média para estimar picos de tráfego sem observar métricas temporais.",
+      "Não trate MB, MiB, GB e GiB como sempre idênticos em auditoria precisa."
+    ],
+    "operationalImpact": [
+      "Ajuda a reduzir chamados indevidos por interpretação errada de velocidade.",
+      "Melhora comunicação entre suporte, redes, segurança, cloud e desenvolvimento.",
+      "Exige padronização de unidades em dashboards e relatórios.",
+      "Facilita dimensionamento de janelas de backup e replicação."
+    ],
+    "financialImpact": [
+      "Evita compra desnecessária de links ou appliances por erro de interpretação.",
+      "Ajuda a estimar custos de egress, ingestão de logs e transferência entre regiões.",
+      "Permite justificar cache, compressão, mirrors e otimização de artefatos.",
+      "Reduz risco de subdimensionar firewall ou proxy e precisar trocar equipamento depois."
+    ],
+    "securityImpact": [
+      "Melhora estimativa de volume em possível exfiltração.",
+      "Ajuda a dimensionar ingestão de logs e retenção no SIEM.",
+      "Evita desativar controles de segurança por culpá-los sem medição correta.",
+      "Permite avaliar impacto de VPN, TLS inspection e proxy com mais precisão."
+    ]
+  },
+  "commonMistakes": [
+    {
+      "mistake": "Achar que 500 Mbps deveriam aparecer como 500 MB/s no navegador.",
+      "whyItHappens": "As siglas são parecidas e muitos usuários não diferenciam b minúsculo de B maiúsculo.",
+      "consequence": "Diagnóstico incorreto e chamados desnecessários.",
+      "correction": "Dividir Mbps por 8 para obter o teto teórico em MB/s."
+    },
+    {
+      "mistake": "Ignorar overhead dos protocolos.",
+      "whyItHappens": "A conta Mbps ÷ 8 parece exata demais.",
+      "consequence": "Expectativa irreal sobre taxa útil.",
+      "correction": "Considerar cabeçalhos, criptografia, retransmissões e gargalos."
+    },
+    {
+      "mistake": "Testar link corporativo por Wi-Fi e concluir problema no provedor.",
+      "whyItHappens": "Wi-Fi é mais conveniente para testar rapidamente.",
+      "consequence": "Culpa atribuída ao ponto errado.",
+      "correction": "Testar cabeado, próximo ao roteador/switch, sem VPN, com múltiplos destinos."
+    },
+    {
+      "mistake": "Confundir velocidade instantânea com volume mensal.",
+      "whyItHappens": "Ambos aparecem como números de dados trafegados.",
+      "consequence": "Erro em custo cloud, backup e capacidade de SIEM.",
+      "correction": "Separar taxa por segundo de volume acumulado por período."
+    }
+  ],
+  "troubleshooting": {
+    "symptoms": [
+      "Download parece menor que o plano contratado.",
+      "Backup demora mais que o esperado.",
+      "Pipeline baixa imagens lentamente.",
+      "Firewall atinge CPU alta durante tráfego intenso.",
+      "Speedtest por Wi-Fi varia muito.",
+      "Custo cloud de tráfego aumenta sem clareza."
+    ],
+    "diagnosticQuestions": [
+      "A métrica está em bits ou bytes?",
+      "A taxa é nominal, média, pico ou throughput útil?",
+      "O teste foi feito por cabo, Wi-Fi, VPN ou proxy?",
+      "O servidor de origem consegue entregar nessa velocidade?",
+      "Há TLS inspection, IPS, WAF, VPN ou NAT no caminho?",
+      "O gargalo pode estar no disco, CPU, storage, registry ou aplicação?"
+    ],
+    "commands": [
+      {
+        "platform": "Windows",
+        "command": "Get-NetAdapter | Select-Object Name, LinkSpeed\nGet-Counter '\\Network Interface(*)\\Bytes Total/sec'",
+        "purpose": "Ver velocidade negociada da interface e taxa de bytes por segundo.",
+        "expectedObservation": "Interface com LinkSpeed coerente e contador de bytes variando durante transferência.",
+        "interpretation": "LinkSpeed mostra capacidade negociada; Bytes/sec mostra tráfego observado, que pode ser convertido para bits multiplicando por 8."
+      },
+      {
+        "platform": "Windows",
+        "command": "Test-NetConnection exemplo.com -Port 443",
+        "purpose": "Validar conectividade básica até um serviço antes de culpar throughput.",
+        "expectedObservation": "TcpTestSucceeded como True quando a porta está acessível.",
+        "interpretation": "Conectividade não garante performance, mas separa falha de acesso de lentidão."
+      },
+      {
+        "platform": "Linux",
+        "command": "ip -s link\ncat /sys/class/net/eth0/speed 2>/dev/null || true",
+        "purpose": "Ver estatísticas de interface e velocidade negociada quando disponível.",
+        "expectedObservation": "Contadores RX/TX aumentando e velocidade como 1000 para 1 Gbps, se suportado.",
+        "interpretation": "Erros, drops e velocidade negociada abaixo do esperado podem explicar throughput ruim."
+      },
+      {
+        "platform": "Linux",
+        "command": "sar -n DEV 1 5  # se sysstat estiver instalado\nss -ti",
+        "purpose": "Observar tráfego por interface e detalhes TCP durante uma transferência.",
+        "expectedObservation": "Taxas de RX/TX e informações de retransmissão/congestionamento quando aplicável.",
+        "interpretation": "Ajuda a distinguir uso real, retransmissão e gargalos de transporte."
+      },
+      {
+        "platform": "Cisco IOS",
+        "command": "show interfaces status\nshow interfaces counters errors\nshow interfaces gigabitEthernet 0/1",
+        "purpose": "Ver velocidade, duplex, erros e drops em portas de switch/roteador.",
+        "expectedObservation": "Porta em velocidade esperada, full-duplex, sem erros relevantes.",
+        "interpretation": "Erros, duplex incorreto ou negociação abaixo do esperado podem reduzir throughput."
+      }
+    ],
+    "decisionTree": [
+      {
+        "if": "Download em MB/s parece baixo",
+        "then": "Multiplicar por 8 e comparar com o link em Mbps antes de abrir incidente."
+      },
+      {
+        "if": "Conversão mostra valor próximo do esperado",
+        "then": "Considerar overhead normal e encerrar como comportamento aceitável ou monitorar."
+      },
+      {
+        "if": "Valor fica muito abaixo do esperado",
+        "then": "Testar cabeado, sem VPN, com outro servidor e verificar interface, erros, CPU e firewall."
+      },
+      {
+        "if": "Somente Wi-Fi está ruim",
+        "then": "Investigar sinal, canal, interferência, padrão Wi-Fi, distância e quantidade de clientes."
+      },
+      {
+        "if": "Somente tráfego via VPN está ruim",
+        "then": "Verificar MTU, criptografia, CPU, split tunneling, rota e gateway da VPN."
+      }
+    ]
+  },
+  "security": {
+    "goodPractices": [
+      "Padronizar dashboards com unidade explícita: Mbps, MB/s, GB/dia, eventos por segundo.",
+      "Registrar metodologia de teste: cabo/Wi-Fi, com/sem VPN, origem, destino, horário e ferramenta.",
+      "Dimensionar firewall, proxy, VPN e SIEM com recursos reais ativados.",
+      "Calcular volume estimado em incidentes de possível exfiltração.",
+      "Separar métricas de taxa, volume, latência, perda e retransmissão."
+    ],
+    "badPractices": [
+      "Comparar Mbps e MB/s sem conversão.",
+      "Usar um único speedtest por Wi-Fi como prova definitiva.",
+      "Desativar inspeção de segurança sem medir gargalos corretamente.",
+      "Subdimensionar SIEM olhando apenas eventos e ignorando bytes ingeridos.",
+      "Confundir tráfego criptografado com tráfego seguro sem análise de destino, volume e comportamento."
+    ],
+    "commonErrors": [
+      "Interpretar 50 MB/s como 50 Mbps.",
+      "Esperar throughput útil igual à velocidade de interface.",
+      "Ignorar overhead de VPN e TLS.",
+      "Confundir GB transferidos com Gbps.",
+      "Não diferenciar MB decimal de MiB binário em medições precisas."
+    ],
+    "vulnerabilities": [
+      {
+        "name": "Subestimação de exfiltração",
+        "description": "Um analista confunde MB/s com Mbps e calcula impacto menor do que o real.",
+        "defensiveExplanation": "A resposta a incidente depende de estimar taxa e volume corretamente. Multiplicar MB/s por 8 antes de comparar com Mbps evita subestimação.",
+        "mitigation": "Padronizar playbooks de incidente com conversão de unidades, cálculo de volume e janela temporal."
+      },
+      {
+        "name": "Controle de segurança subdimensionado",
+        "description": "Firewall, proxy ou VPN é escolhido apenas pelo throughput nominal de marketing.",
+        "defensiveExplanation": "Recursos como IPS, TLS inspection e VPN reduzem capacidade efetiva. Testes devem refletir o cenário real.",
+        "mitigation": "Validar sizing com funcionalidades ativas, tráfego realista, picos e margem de crescimento."
+      },
+      {
+        "name": "Perda de logs por ingestão mal calculada",
+        "description": "O SIEM recebe mais dados do que o licenciamento ou pipeline suporta.",
+        "defensiveExplanation": "Logs devem ser calculados em eventos por segundo e volume por dia, não apenas quantidade de fontes.",
+        "mitigation": "Medir EPS, bytes por evento, compressão, retenção, filtragem e custo por GB."
+      }
+    ],
+    "monitoring": [
+      "Gráficos de interface em bits por segundo e bytes por segundo com legenda clara.",
+      "Erros, drops, retransmissões TCP e saturação de CPU em firewalls/proxies.",
+      "Volume de egress cloud por serviço, região e conta/projeto.",
+      "Ingestão de logs em GB/dia e eventos por segundo.",
+      "Tráfego externo incomum por host, usuário, processo ou workload."
+    ],
+    "hardening": [
+      "Aplicar QoS quando tráfegos críticos competem com backups ou downloads grandes.",
+      "Usar cache, compressão e mirrors internos para reduzir tráfego repetitivo.",
+      "Dimensionar VPN e TLS inspection com margem.",
+      "Segmentar redes para limitar impacto de transferências anômalas.",
+      "Definir alertas por volume e por taxa, não apenas por conexão."
+    ],
+    "detectionIdeas": [
+      "Alertar quando um host mantém taxa de saída incomum por muitos minutos.",
+      "Correlacionar upload externo com processo, usuário e destino.",
+      "Comparar taxa atual com baseline por horário e função do ativo.",
+      "Verificar se aumento de tráfego coincide com backup, pipeline ou incidente.",
+      "Converter unidades automaticamente nos relatórios para evitar ambiguidade."
+    ]
+  },
+  "mentorQuestions": [
+    {
+      "type": "reflexão",
+      "question": "Por que operadoras anunciam links em Mbps, mas navegadores muitas vezes mostram downloads em MB/s?",
+      "hints": [
+        "Pense em transmissão versus arquivo.",
+        "Lembre que 1 byte tem 8 bits."
+      ],
+      "expectedIdeas": [
+        "bits",
+        "bytes",
+        "transmissão",
+        "arquivo",
+        "dividir por 8"
+      ],
+      "explanation": "Redes medem taxa de bits transmitidos; arquivos são agrupamentos de bytes. As unidades pertencem a contextos diferentes."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "Um usuário com link de 300 Mbps baixa a 34 MB/s por cabo. Isso prova problema?",
+      "hints": [
+        "Multiplique 34 por 8.",
+        "Considere overhead."
+      ],
+      "expectedIdeas": [
+        "272 Mbps",
+        "próximo",
+        "overhead",
+        "não necessariamente",
+        "testar mais"
+      ],
+      "explanation": "34 MB/s equivalem a 272 Mbps úteis. Pode ser normal dependendo do servidor, overhead e condições do teste."
+    },
+    {
+      "type": "cenário real",
+      "question": "Como você explicaria para um gestor que um firewall de 5 Gbps pode não entregar 5 Gbps com inspeção TLS e IPS ativados?",
+      "hints": [
+        "Pense em throughput nominal versus real.",
+        "Pense em processamento de segurança."
+      ],
+      "expectedIdeas": [
+        "recursos ativados",
+        "CPU",
+        "inspeção",
+        "throughput efetivo",
+        "teste realista"
+      ],
+      "explanation": "Capacidade de appliance depende dos recursos ativados e do perfil de tráfego. Sizing precisa refletir o uso real."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q0.4.1",
+      "type": "conceito",
+      "q": "100 Mbps equivalem teoricamente a aproximadamente quanto em MB/s?",
+      "opts": [
+        "100 MB/s",
+        "80 MB/s",
+        "12,5 MB/s",
+        "1,25 MB/s"
+      ],
+      "a": 2,
+      "exp": "Como 1 byte tem 8 bits, 100 Mbps ÷ 8 = 12,5 MB/s antes de overhead.",
+      "difficulty": "iniciante",
+      "topic": "conversão"
+    },
+    {
+      "id": "q0.4.2",
+      "type": "diagnóstico",
+      "q": "Um download aparece como 50 MB/s. Qual é a taxa aproximada em Mbps?",
+      "opts": [
+        "50 Mbps",
+        "100 Mbps",
+        "250 Mbps",
+        "400 Mbps"
+      ],
+      "a": 3,
+      "exp": "50 MB/s × 8 = 400 Mbps.",
+      "difficulty": "iniciante",
+      "topic": "conversão"
+    },
+    {
+      "id": "q0.4.3",
+      "type": "comparação",
+      "q": "Qual afirmação está correta?",
+      "opts": [
+        "Mbps e MB/s são a mesma unidade.",
+        "MB/s mede megabits por segundo.",
+        "Mbps é comum para links; MB/s é comum para downloads.",
+        "1 byte tem 10 bits em redes."
+      ],
+      "a": 2,
+      "exp": "Links são normalmente medidos em bits por segundo; downloads e arquivos frequentemente aparecem em bytes por segundo.",
+      "difficulty": "iniciante",
+      "topic": "unidades"
+    },
+    {
+      "id": "q0.4.4",
+      "type": "cenário",
+      "q": "Por que um link de 1 Gbps raramente entrega 125 MB/s úteis exatos para a aplicação?",
+      "opts": [
+        "Porque 1 Gbps não existe.",
+        "Por causa de overhead, gargalos e condições reais.",
+        "Porque byte e bit são iguais.",
+        "Porque HTTP sempre limita tudo a 10 MB/s."
+      ],
+      "a": 1,
+      "exp": "O teto teórico é 125 MB/s, mas protocolos, criptografia, retransmissões, servidor, disco e outros fatores reduzem a taxa útil.",
+      "difficulty": "intermediário",
+      "topic": "overhead"
+    },
+    {
+      "id": "q0.4.5",
+      "type": "segurança",
+      "q": "Em um alerta de possível exfiltração, por que é perigoso confundir 80 MB/s com 80 Mbps?",
+      "opts": [
+        "Porque 80 MB/s equivalem a aproximadamente 640 Mbps.",
+        "Porque 80 MB/s sempre significam zero tráfego.",
+        "Porque Mbps é unidade de armazenamento.",
+        "Porque exfiltração não usa rede."
+      ],
+      "a": 0,
+      "exp": "80 MB/s multiplicados por 8 equivalem a 640 Mbps, alterando a estimativa de volume e severidade.",
+      "difficulty": "intermediário",
+      "topic": "segurança"
+    },
+    {
+      "id": "q0.4.6",
+      "type": "cloud",
+      "q": "Em cloud, qual diferença é essencial para estimar custo de tráfego?",
+      "opts": [
+        "Taxa instantânea e volume acumulado.",
+        "Mouse e teclado.",
+        "ASCII e monitor.",
+        "CPU e cor do cabo."
+      ],
+      "a": 0,
+      "exp": "Velocidade indica taxa; cobrança costuma considerar volume transferido, como GB de egress.",
+      "difficulty": "intermediário",
+      "topic": "cloud"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc0.4.1",
+      "front": "O que é Mbps?",
+      "back": "Megabits por segundo. Unidade comum para velocidade de links de rede.",
+      "tags": [
+        "unidades",
+        "redes"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.4.2",
+      "front": "O que é MB/s?",
+      "back": "Megabytes por segundo. Unidade comum para taxa de transferência de arquivos e downloads.",
+      "tags": [
+        "unidades",
+        "download"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.4.3",
+      "front": "Conta rápida para Mbps virar MB/s",
+      "back": "Divida Mbps por 8 para obter o teto teórico em MB/s.",
+      "tags": [
+        "conversão"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.4.4",
+      "front": "Conta rápida para MB/s virar Mbps",
+      "back": "Multiplique MB/s por 8 para estimar Mbps.",
+      "tags": [
+        "conversão"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.4.5",
+      "front": "O que é overhead?",
+      "back": "Custo adicional de transporte e controle, como cabeçalhos, criptografia, confirmações e retransmissões.",
+      "tags": [
+        "overhead",
+        "protocolos"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc0.4.6",
+      "front": "Por que Wi-Fi não é ideal para testar link contratado?",
+      "back": "Porque adiciona variáveis como interferência, distância, canal, padrão, sinal e concorrência.",
+      "tags": [
+        "wifi",
+        "troubleshooting"
+      ],
+      "difficulty": "intermediário"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex0.4.1",
+      "type": "cálculo",
+      "prompt": "Converta 300 Mbps para MB/s teóricos.",
+      "expectedAnswer": "37,5 MB/s.",
+      "explanation": "300 ÷ 8 = 37,5."
+    },
+    {
+      "id": "ex0.4.2",
+      "type": "cálculo",
+      "prompt": "Um download mostra 42 MB/s. Qual é a taxa aproximada em Mbps?",
+      "expectedAnswer": "336 Mbps.",
+      "explanation": "42 × 8 = 336."
+    },
+    {
+      "id": "ex0.4.3",
+      "type": "diagnóstico",
+      "prompt": "Um usuário com plano de 500 Mbps baixa a 58 MB/s por cabo. Escreva uma conclusão técnica curta.",
+      "expectedAnswer": "58 MB/s equivalem a 464 Mbps úteis. O resultado parece próximo do contratado considerando overhead; não há prova imediata de falha no link.",
+      "explanation": "A conclusão correta converte unidade e considera overhead antes de culpar o provedor."
+    },
+    {
+      "id": "ex0.4.4",
+      "type": "segurança",
+      "prompt": "Um alerta mostra upload sustentado de 25 MB/s por 20 minutos. Estime o volume aproximado transferido.",
+      "expectedAnswer": "25 MB/s × 1200 s = 30000 MB, aproximadamente 30 GB.",
+      "explanation": "Para impacto de incidente, volume acumulado importa tanto quanto taxa instantânea."
+    }
+  ],
+  "challenge": {
+    "title": "Parecer técnico sobre link, Wi-Fi e possível gargalo",
+    "scenario": "A empresa contratou 500 Mbps. Em cabo, um notebook baixa a 54 MB/s. No Wi-Fi, outro baixa a 28 MB/s. O gestor quer abrir chamado com o provedor e trocar o firewall porque acredita que a empresa está recebendo apenas 54 Mbps.",
+    "tasks": [
+      "Converter 54 MB/s para Mbps.",
+      "Converter 28 MB/s para Mbps.",
+      "Comparar os valores com o teto teórico de 500 Mbps.",
+      "Explicar por que Wi-Fi não prova problema no link contratado.",
+      "Listar três testes adicionais antes de trocar equipamento ou acionar o provedor."
+    ],
+    "constraints": [
+      "Usar linguagem compreensível para gestor, mas tecnicamente correta.",
+      "Não afirmar certeza sem evidência.",
+      "Separar link contratado, throughput útil e meio de acesso.",
+      "Não recomendar desativar controles de segurança sem autorização."
+    ],
+    "expectedDeliverables": [
+      "Cálculos de conversão.",
+      "Conclusão sobre o teste cabeado.",
+      "Conclusão sobre o teste Wi-Fi.",
+      "Lista de testes adicionais.",
+      "Recomendação final."
+    ],
+    "gradingRubric": [
+      {
+        "criterion": "Conversão correta",
+        "points": 30,
+        "description": "Converte MB/s para Mbps e Mbps para MB/s sem erro."
+      },
+      {
+        "criterion": "Diagnóstico sem achismo",
+        "points": 25,
+        "description": "Não culpa provedor, Wi-Fi ou firewall sem evidência."
+      },
+      {
+        "criterion": "Consideração de overhead",
+        "points": 20,
+        "description": "Reconhece diferença entre taxa nominal e throughput útil."
+      },
+      {
+        "criterion": "Plano de validação",
+        "points": 15,
+        "description": "Propõe testes cabeados, múltiplos destinos, sem VPN e verificação de interface."
+      },
+      {
+        "criterion": "Comunicação",
+        "points": 10,
+        "description": "Explica em linguagem clara para público não especialista."
+      }
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "Primeiro, identificamos unidades. O gestor confundiu MB/s com Mbps. Depois convertemos as taxas observadas e comparamos com o teto teórico de 500 Mbps, lembrando que o teto útil será menor por overhead. Em seguida, separamos o resultado cabeado do resultado Wi-Fi, porque Wi-Fi tem variáveis próprias.",
+    "steps": [
+      "Calcular teto teórico: 500 Mbps ÷ 8 = 62,5 MB/s.",
+      "Converter teste cabeado: 54 MB/s × 8 = 432 Mbps.",
+      "Converter teste Wi-Fi: 28 MB/s × 8 = 224 Mbps.",
+      "Interpretar: 432 Mbps úteis em cabo está plausivelmente próximo do link de 500 Mbps considerando overhead.",
+      "Interpretar: 224 Mbps no Wi-Fi aponta para investigação do meio sem fio antes de culpar provedor.",
+      "Recomendar novos testes: cabo, outro servidor, sem VPN/proxy quando autorizado, checar LinkSpeed, erros de interface, CPU do firewall e horário."
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "A empresa recebe só 54 Mbps.",
+        "whyItIsWrong": "O valor observado era 54 MB/s, que equivale a 432 Mbps."
+      },
+      {
+        "answer": "O provedor está errado porque Wi-Fi deu 28 MB/s.",
+        "whyItIsWrong": "Wi-Fi não isola o link contratado; ele adiciona interferência, distância, padrão e compartilhamento do meio."
+      },
+      {
+        "answer": "Trocar firewall imediatamente.",
+        "whyItIsWrong": "Não há evidência suficiente. É preciso medir CPU, throughput, recursos ativos e interfaces."
+      }
+    ],
+    "finalAnswer": "O teste cabeado de 54 MB/s equivale a aproximadamente 432 Mbps úteis. Para um link de 500 Mbps, esse valor pode ser aceitável considerando overhead e condições reais. O teste Wi-Fi de 28 MB/s equivale a 224 Mbps e deve ser investigado como limitação do ambiente sem fio. Antes de acionar o provedor ou trocar firewall, recomenda-se testar por cabo, sem VPN quando autorizado, em múltiplos destinos, checar velocidade negociada da interface, erros, CPU do firewall e repetir em horários diferentes."
+  },
+  "glossary": [
+    {
+      "term": "Bit",
+      "shortDefinition": "Menor unidade lógica de informação binária.",
+      "longDefinition": "Unidade que representa um estado binário, normalmente 0 ou 1, usada como base para transmissão e representação digital.",
+      "example": "Um link de 100 Mbps transmite milhões de bits por segundo.",
+      "relatedTerms": [
+        "byte",
+        "bps",
+        "binário"
+      ],
+      "relatedLessons": [
+        "0.1",
+        "0.2",
+        "0.4"
+      ]
+    },
+    {
+      "term": "Byte",
+      "shortDefinition": "Grupo de 8 bits.",
+      "longDefinition": "Unidade comum para medir dados armazenados ou transferidos como arquivos, memória, payloads e logs.",
+      "example": "Um arquivo de 10 MB possui cerca de 80 megabits.",
+      "relatedTerms": [
+        "bit",
+        "MB/s",
+        "octeto"
+      ],
+      "relatedLessons": [
+        "0.2",
+        "0.4"
+      ]
+    },
+    {
+      "term": "Mbps",
+      "shortDefinition": "Megabits por segundo.",
+      "longDefinition": "Unidade de taxa de transmissão comum em links de rede e planos de internet.",
+      "example": "Um link de 500 Mbps tem teto teórico de 62,5 MB/s.",
+      "relatedTerms": [
+        "bps",
+        "Gbps",
+        "throughput"
+      ],
+      "relatedLessons": [
+        "0.4",
+        "0.6"
+      ]
+    },
+    {
+      "term": "MB/s",
+      "shortDefinition": "Megabytes por segundo.",
+      "longDefinition": "Unidade comum para taxa de transferência de arquivos e downloads percebida por aplicações.",
+      "example": "Um download de 50 MB/s equivale a cerca de 400 Mbps.",
+      "relatedTerms": [
+        "byte",
+        "Mbps",
+        "download"
+      ],
+      "relatedLessons": [
+        "0.4"
+      ]
+    },
+    {
+      "term": "Overhead",
+      "shortDefinition": "Custo adicional de transporte e controle.",
+      "longDefinition": "Dados ou processamento extras necessários para que protocolos entreguem, protejam, confirmem, roteiem ou controlem a comunicação.",
+      "example": "Ethernet, IP, TCP e TLS adicionam overhead antes dos bytes úteis da aplicação.",
+      "relatedTerms": [
+        "throughput",
+        "goodput",
+        "cabeçalho"
+      ],
+      "relatedLessons": [
+        "0.4",
+        "6.1",
+        "8.3"
+      ]
+    },
+    {
+      "term": "Throughput",
+      "shortDefinition": "Taxa real de dados transferidos em determinado período.",
+      "longDefinition": "Métrica de desempenho que representa quanto tráfego foi efetivamente transmitido ou recebido, normalmente menor que a velocidade nominal.",
+      "example": "Um link de 1 Gbps pode entregar 900 Mbps úteis em um teste real.",
+      "relatedTerms": [
+        "Mbps",
+        "MB/s",
+        "latência",
+        "perda"
+      ],
+      "relatedLessons": [
+        "0.4",
+        "0.6",
+        "15.1"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Aula 0.1",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Base conceitual sobre representação digital."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Aula 0.2",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Base sobre bit, byte, binário e hexadecimal."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Aula 0.6",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Aprofundará latência, largura de banda, throughput e perda."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "m00",
+      "lesson": "conceitos de pipelines",
+      "reason": "Pipelines dependem de download de dependências, imagens, artefatos e logs; a interpretação correta de taxa e volume ajuda a diagnosticar lentidão."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "módulos de autenticação e logs",
+      "lesson": "logs e auditoria",
+      "reason": "Eventos de autenticação, tokens e auditoria geram volume de dados que precisa ser dimensionado corretamente em SIEM e cloud."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70,
+      "oneOf": [
+        "exerciseDone",
+        "practicalExerciseDone"
+      ]
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "0.5"
+    ]
+  }
+}

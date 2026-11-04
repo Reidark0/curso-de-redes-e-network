@@ -1,0 +1,17 @@
+
+<section class="lesson-section lesson-section--architecture">
+  <h2>7. Arquitetura</h2>
+  <p>
+    Em uma arquitetura corporativa, bit e byte aparecem em pontos diferentes. O link de internet pode ser contratado em Mbps ou Gbps. Interfaces de switch negociam 1G, 10G, 25G ou mais. Firewalls têm throughput máximo divulgado em Gbps, mas esse valor pode cair quando IPS, inspeção SSL, VPN ou logs detalhados são ativados. Storage e sistemas de backup costumam mostrar MB/s ou GB/s. Cloud cobra volume de dados trafegados, frequentemente em GB.
+  </p>
+  <ul>
+    <li><strong>Camada física/enlace:</strong> velocidade de interface, duplex, negociação, Wi-Fi rate.</li>
+    <li><strong>Camada de rede/transporte:</strong> overhead IP/TCP/UDP, perda, retransmissão, janela TCP.</li>
+    <li><strong>Camada de segurança:</strong> TLS, VPN, inspeção, proxy, WAF, firewall e criptografia.</li>
+    <li><strong>Camada de aplicação:</strong> tamanho de arquivos, compressão, cache, servidor de origem e cliente.</li>
+    <li><strong>Operação/cloud:</strong> billing por GB, ingestão de logs, egress, replicação e backup.</li>
+  </ul>
+  <p>
+    O erro arquitetural comum é dimensionar apenas pelo número de marketing. Um firewall anunciado como 5 Gbps pode não entregar 5 Gbps com todas as inspeções ligadas. Um link de 1 Gbps pode não resolver um backup lento se o gargalo estiver no disco. Um cluster Kubernetes pode demorar para baixar imagens não por causa do link, mas por limite do registry, autenticação, proxy ou armazenamento local.
+  </p>
+</section>

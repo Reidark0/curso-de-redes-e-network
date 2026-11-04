@@ -1,0 +1,17 @@
+
+<section class="lesson-section lesson-section--architecture">
+  <h2>Arquitetura</h2>
+  <p>
+    Numa arquitetura corporativa, bit e byte aparecem em pontos diferentes, e cada ponto pode ser o gargalo:
+  </p>
+  <ul>
+    <li><strong>Camada física/enlace:</strong> link de internet em Mbps ou Gbps, portas de switch em 1G, 10G, 25G ou mais, duplex, negociação, taxa do Wi-Fi.</li>
+    <li><strong>Camada de rede/transporte:</strong> overhead IP/TCP/UDP, perda, retransmissão, janela TCP.</li>
+    <li><strong>Camada de segurança:</strong> TLS, VPN, inspeção, proxy, WAF e firewall. O throughput divulgado de um firewall (em Gbps) pode cair quando IPS, inspeção SSL, VPN ou logs detalhados são ativados.</li>
+    <li><strong>Camada de aplicação:</strong> tamanho de arquivos, compressão, cache, servidor de origem e cliente. Storage e backup costumam mostrar MB/s ou GB/s.</li>
+    <li><strong>Operação/cloud:</strong> cobrança por GB, ingestão de logs, egress, replicação e backup.</li>
+  </ul>
+  <p>
+    O erro arquitetural comum é dimensionar pelo número de marketing. Um firewall anunciado como 5 Gbps pode não entregar 5 Gbps com todas as inspeções ligadas, e um link de 1 Gbps não resolve um backup lento se o gargalo estiver no disco.
+  </p>
+</section>

@@ -1,0 +1,28 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>
+    Quando você baixa um arquivo, a aplicação recebe bytes úteis. Para esses bytes chegarem, várias camadas adicionam informações de controle. Em uma rede Ethernet comum usando TCP e HTTPS, um pedaço do arquivo pode estar dentro de um payload HTTP, que passa por TLS, TCP, IP e Ethernet. Cada camada adiciona cabeçalhos ou metadados necessários para entrega, segurança, confiabilidade ou controle.
+  </p>
+  <ol class="flow-list">
+    <li><strong>A aplicação</strong> solicita dados, por exemplo um arquivo via HTTPS.</li>
+    <li><strong>HTTP</strong> organiza requisição e resposta em mensagens de aplicação.</li>
+    <li><strong>TLS</strong> protege confidencialidade e integridade, adicionando custo de criptografia e registros próprios.</li>
+    <li><strong>TCP</strong> divide o fluxo, controla ordem, confirma recebimento e retransmite quando necessário.</li>
+    <li><strong>IP</strong> endereça origem e destino entre redes.</li>
+    <li><strong>Ethernet ou Wi-Fi</strong> transporta quadros no enlace local.</li>
+    <li><strong>A placa de rede e o meio físico</strong> transmitem sinais que representam bits.</li>
+  </ol>
+  <p>
+    O throughput útil é o que sobra para a aplicação depois de todo esse trabalho. Em redes boas, a perda por cabeçalhos pode parecer pequena, mas em cenários com VPN, túneis, fragmentação, retransmissão, Wi-Fi ruim, inspeção de TLS ou alta latência, a diferença pode ficar grande.
+  </p>
+  <div class="content-card">
+    <strong>Fórmulas práticas:</strong>
+    <ul>
+      <li><code>MB/s ≈ Mbps ÷ 8</code></li>
+      <li><code>Mbps ≈ MB/s × 8</code></li>
+      <li><code>tempo em segundos ≈ tamanho em megabits ÷ taxa em Mbps</code></li>
+      <li><code>tamanho em megabits = tamanho em megabytes × 8</code></li>
+    </ul>
+  </div>
+</section>
