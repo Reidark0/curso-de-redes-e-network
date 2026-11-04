@@ -1,0 +1,81 @@
+{
+  "id": "2.2",
+  "versao": "original",
+  "titulo": "Encapsulamento, desencapsulamento e PDUs",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4182,
+    "invisiveis": 631,
+    "teoriaVisivel": 2928
+  },
+  "porCampoVisivel": {
+    "content.motivation": 162,
+    "content.history": 186,
+    "content.problem": 194,
+    "content.evolution": 165,
+    "content.concept": 158,
+    "content.internals": 234,
+    "content.architecture": 143,
+    "content.analogy": 144,
+    "content.simpleExample": 105,
+    "content.enterpriseExample": 108,
+    "content.cloudExample": 98,
+    "content.devsecopsExample": 89,
+    "content.securityExample": 174,
+    "content.diagram": 35,
+    "content.summary": 68,
+    "content.nextTheme": 45,
+    "security": 272,
+    "troubleshooting": 283,
+    "glossary": 265,
+    "title+subtitle": 22,
+    "objectives": 58,
+    "learningOutcomes": 79,
+    "quiz": 254,
+    "flashcards": 103,
+    "mentorQuestions": 156,
+    "exercises": 150,
+    "challenge": 143,
+    "commentedSolution": 185,
+    "references": 53,
+    "linksToOtherCourses": 51
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 40,
+    "content.exercisesIntro": 32,
+    "content.challengeIntro": 32,
+    "content.solutionIntro": 19,
+    "networkContext": 57,
+    "deepDive": 300,
+    "commonMistakes": 151
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "85-120 min",
+    "estimatedStudyTimeMinutes": 120,
+    "M": 102.5,
+    "T": 84.5,
+    "partes": {
+      "teoria": 22.5,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "70-100 min",
+    "vereditoAutomatico": "INFLADA",
+    "pctTeoria": 30
+  }
+}

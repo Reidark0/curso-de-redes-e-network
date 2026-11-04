@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--cloud">
+  <h2>Exemplo em cloud</h2>
+  <p>Em cloud, a instância tem uma interface virtual numa subnet, com route tables e security groups ou NSGs, e pode passar por NAT Gateway, load balancer, firewall gerenciado ou private endpoint. Por baixo, o provedor usa overlays sobre infraestrutura física compartilhada, invisíveis para você. O que você observa são partes desse encapsulamento: flow logs, packet capture da VPC/VNet e logs de load balancer e firewall.</p>
+  <p>No Kubernetes, um pacote pode atravessar Pod, interface virtual, bridge, CNI, overlay, node, Service, kube-proxy e ingress. Se o CNI usa overlay (ex.: VXLAN), a MTU dos pods precisa descontar esse overhead; senão, os sintomas da VPN aparecem dentro do cluster. Service mesh com mTLS acrescenta mais um envelope.</p>
+</section>

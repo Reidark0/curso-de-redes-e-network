@@ -1,0 +1,15 @@
+<section class="lesson-section lesson-section--architecture">
+  <h2>Arquitetura</h2>
+  <p>O encapsulamento se refaz a cada salto. O host monta todos os envelopes e entrega o quadro ao gateway. O roteador desencapsula o quadro recebido, lê o pacote IP, decide o próximo salto, decrementa o TTL e monta um <strong>novo quadro</strong> para o enlace seguinte. Resultado: os MACs mudam a cada salto, e os IPs de origem e destino seguem iguais de ponta a ponta (salvo NAT).</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Componente</th><th>O que examina</th><th>O que decide ou faz</th></tr></thead>
+    <tbody>
+      <tr><td>Switch</td><td>Quadro (MAC)</td><td>Porta de saída dentro da LAN</td></tr>
+      <tr><td>Roteador</td><td>Pacote (IP)</td><td>Próximo salto; troca o quadro a cada enlace</td></tr>
+      <tr><td>Firewall</td><td>IP, porta e estado; alguns também a aplicação</td><td>Permitir ou bloquear o fluxo</td></tr>
+      <tr><td>Tags, VPN e overlay</td><td>O pacote ou quadro inteiro</td><td>Acrescenta uma tag (VLAN 802.1Q) ou encapsula tudo em outro pacote (PPPoE, GRE, IPsec, VXLAN, WireGuard)</td></tr>
+      <tr><td>Cloud</td><td>Interfaces virtuais, overlays e políticas</td><td>Encaminha sobre infraestrutura física que o cliente não vê</td></tr>
+    </tbody>
+  </table></div>
+  <p>Firewalls modernos, proxies e service meshes atuam em várias camadas ao mesmo tempo; a tabela mostra o mínimo que cada um precisa ler.</p>
+</section>

@@ -1,0 +1,14 @@
+<section class="lesson-section lesson-section--evolution">
+  <h2>4. Evolução</h2>
+  <p>O encapsulamento evoluiu junto com a necessidade de transportar dados por redes cada vez mais heterogêneas. A lógica básica permaneceu: cada camada adiciona contexto para que a camada inferior consiga fazer seu trabalho.</p>
+  <table class="data-table comparison-table">
+    <thead><tr><th>Fase</th><th>Como funcionava</th><th>Limitação</th><th>O que veio depois</th></tr></thead>
+    <tbody>
+      <tr><td>Comunicação local simples</td><td>Máquinas próximas trocavam dados em meios compartilhados.</td><td>Pouca escala e pouca separação de responsabilidades.</td><td>Quadros de enlace e endereçamento local.</td></tr>
+      <tr><td>Redes interconectadas</td><td>Hosts passaram a precisar falar com redes diferentes.</td><td>Endereço local não bastava para atravessar redes.</td><td>Pacotes IP e roteamento.</td></tr>
+      <tr><td>Aplicações múltiplas</td><td>Um host passou a executar vários serviços ao mesmo tempo.</td><td>Era necessário identificar processos e fluxos.</td><td>Portas TCP/UDP e conexões.</td></tr>
+      <tr><td>Segurança e túneis</td><td>VPNs e overlays encapsulam pacotes dentro de outros pacotes.</td><td>Aumentam overhead e podem causar problemas de MTU.</td><td>Controle de MSS, PMTUD, observabilidade e desenho cuidadoso.</td></tr>
+      <tr><td>Cloud e SDN</td><td>Redes virtuais usam overlays, tags, políticas e abstrações.</td><td>O caminho físico fica menos visível ao operador.</td><td>Ferramentas de flow logs, traces e diagnóstico por camadas.</td></tr>
+    </tbody>
+  </table>
+</section>

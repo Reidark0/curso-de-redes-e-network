@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--architecture">
+  <h2>7. Arquitetura</h2>
+  <p>Em uma arquitetura real, encapsulamento aparece em cada salto. O host encapsula para enviar ao gateway. O switch encaminha quadros dentro da LAN. O roteador remove o quadro recebido, olha o pacote IP e cria um novo quadro para o próximo enlace. A aplicação final só recebe os dados depois que as camadas inferiores validam e removem seus próprios cabeçalhos.</p>
+  <ul class="flow-list">
+    <li><strong>Host:</strong> monta dados, transporte, IP, enlace e sinal.</li>
+    <li><strong>Switch:</strong> opera principalmente com quadros e endereços MAC.</li>
+    <li><strong>Roteador:</strong> usa o pacote IP para decidir próximo salto, mas troca o quadro a cada enlace.</li>
+    <li><strong>Firewall:</strong> pode avaliar IP, porta, estado, aplicação e política.</li>
+    <li><strong>VPN:</strong> pode encapsular um pacote inteiro dentro de outro pacote.</li>
+    <li><strong>Cloud:</strong> pode adicionar overlays, tags, políticas e virtualização de rede.</li>
+  </ul>
+  <p>Esse detalhe será muito importante quando estudarmos Ethernet, ARP, IPv4, TCP, UDP, DNS, HTTP, TLS, VPN, firewalls e cloud networking.</p>
+</section>

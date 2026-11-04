@@ -1,0 +1,72 @@
+{
+  "id": "2.2",
+  "versao": "nova",
+  "titulo": "Encapsulamento, desencapsulamento e PDUs",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4375,
+    "invisiveis": 57,
+    "teoriaVisivel": 2799
+  },
+  "porCampoVisivel": {
+    "content.motivation": 134,
+    "content.problem": 143,
+    "content.concept": 244,
+    "content.internals": 510,
+    "content.architecture": 174,
+    "content.analogy": 98,
+    "content.simpleExample": 115,
+    "content.enterpriseExample": 86,
+    "content.cloudExample": 117,
+    "content.securityExample": 92,
+    "content.diagram": 33,
+    "content.summary": 108,
+    "content.nextTheme": 38,
+    "security": 246,
+    "troubleshooting": 390,
+    "glossary": 271,
+    "title+subtitle": 21,
+    "objectives": 58,
+    "learningOutcomes": 79,
+    "quiz": 393,
+    "flashcards": 117,
+    "mentorQuestions": 156,
+    "exercises": 265,
+    "challenge": 143,
+    "commentedSolution": 214,
+    "references": 79,
+    "linksToOtherCourses": 51
+  },
+  "porCampoInvisivel": {
+    "networkContext": 57
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "70-100 min",
+    "estimatedStudyTimeMinutes": 100,
+    "M": 85,
+    "T": 83.5,
+    "partes": {
+      "teoria": 21.5,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "70-100 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 29
+  }
+}

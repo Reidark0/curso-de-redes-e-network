@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--motivation">
+  <h2>Motivação</h2>
+  <p>Quando o navegador envia uma requisição, ela não sai pelo cabo como “página web”. Cada camada acrescenta o que precisa (portas, endereços IP, endereços MAC) e, no fim, tudo vira sinal elétrico, luz ou rádio. Esse processo é o <strong>encapsulamento</strong>; o inverso, no destino, é o <strong>desencapsulamento</strong>. É ele que explica o que você vê no Wireshark e no tcpdump, o que um switch, roteador ou firewall consegue inspecionar e por que VPNs mexem com MTU, MSS e fragmentação.</p>
+  <div class="callout callout--problem"><strong>Problema real:</strong> um sistema interno falha apenas quando acessado pela VPN. O DNS resolve, o TCP conecta às vezes, mas uploads grandes falham. Sem entender encapsulamento, alguém culpa “a aplicação”. Com encapsulamento, você passa a suspeitar de MTU, overhead da VPN, fragmentação, MSS ou bloqueio do ICMP de que o Path MTU Discovery precisa.</div>
+</section>

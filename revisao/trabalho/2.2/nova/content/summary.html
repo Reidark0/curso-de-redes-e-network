@@ -1,0 +1,10 @@
+<section class="lesson-section lesson-section--summary">
+  <h2>Resumo</h2>
+  <ul>
+    <li><strong>Modelo mental:</strong> cada camada recebe a PDU de cima, acrescenta seu contexto e entrega para baixo; no destino, cada camada remove o que entende e passa o resto para cima.</li>
+    <li><strong>PDUs:</strong> dados, segmento (TCP) ou datagrama (UDP), pacote, quadro e bits. Chamar tudo de “pacote” tira a precisão do diagnóstico.</li>
+    <li><strong>Cada equipamento lê parte do envelope:</strong> o switch lê o quadro; o roteador lê o pacote e refaz o quadro a cada salto.</li>
+    <li><strong>Túneis somam cabeçalhos</strong> e reduzem a MTU efetiva; com o ICMP do PMTUD bloqueado, pacotes grandes somem e os pequenos passam.</li>
+    <li><strong>Segurança:</strong> o TLS esconde o conteúdo, não os metadados; capturas são evidência sensível.</li>
+  </ul>
+</section>
