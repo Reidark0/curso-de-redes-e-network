@@ -1,0 +1,77 @@
+{
+  "id": "3.3",
+  "versao": "nova",
+  "titulo": "Switches: aprendizado MAC, forwarding e flooding",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4873,
+    "invisiveis": 26,
+    "teoriaVisivel": 2423
+  },
+  "porCampoVisivel": {
+    "content.motivation": 140,
+    "content.problem": 195,
+    "content.concept": 297,
+    "content.internals": 352,
+    "content.architecture": 159,
+    "content.analogy": 79,
+    "content.simpleExample": 96,
+    "content.enterpriseExample": 95,
+    "content.diagram": 2,
+    "content.summary": 122,
+    "content.nextTheme": 26,
+    "security": 345,
+    "troubleshooting": 281,
+    "glossary": 234,
+    "title+subtitle": 26,
+    "objectives": 63,
+    "learningOutcomes": 90,
+    "quiz": 433,
+    "flashcards": 150,
+    "mentorQuestions": 192,
+    "exercises": 319,
+    "challenge": 131,
+    "commentedSolution": 187,
+    "references": 62,
+    "linksToOtherCourses": 58,
+    "lab": 739
+  },
+  "porCampoInvisivel": {
+    "networkContext": 26
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 40,
+    "alternativa_5minPasso_maisLeitura": 35.7,
+    "plausivel": true,
+    "palavras": 739
+  },
+  "duracao": {
+    "declarada": "95-140 min",
+    "estimatedStudyTimeMinutes": 140,
+    "M": 117.5,
+    "T": 114.6,
+    "partes": {
+      "teoria": 18.6,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 20,
+      "lab": 40
+    },
+    "faixaRecomendada": "95-140 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 19
+  }
+}

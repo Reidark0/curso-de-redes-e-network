@@ -1,5 +1,18 @@
-<section class="lesson-section lesson-section--internals"><h2>6. Funcionamento interno</h2>
-<p>O switch toma decisões simples, mas extremamente importantes. Ele não precisa abrir HTTP, TLS ou aplicação para encaminhar um frame Ethernet comum. Ele olha principalmente para os campos de Camada 2.</p>
-<ol class="flow-list"><li>Um frame entra em uma porta do switch.</li><li>O switch lê o <strong>MAC de origem</strong> e atualiza a tabela MAC com porta, VLAN e tempo.</li><li>O switch lê o <strong>MAC de destino</strong>.</li><li>Se o destino é broadcast ou multicast, envia para as portas aplicáveis da VLAN.</li><li>Se o destino unicast é conhecido, encaminha apenas para a porta registrada.</li><li>Se o destino unicast é desconhecido, faz flooding para tentar alcançar o destino.</li><li>Se a entrada MAC envelhece sem tráfego, ela expira pelo aging time.</li></ol>
-<p>A tabela MAC costuma ter entradas dinâmicas, aprendidas automaticamente, e entradas estáticas, configuradas manualmente em alguns cenários. Em switches gerenciáveis, a tabela também é separada por VLAN. Isso é essencial: o mesmo endereço MAC em VLANs diferentes ou uma porta trunk carregando várias VLANs exige contexto. Sem VLAN, a tabela seria ambígua em redes segmentadas.</p>
+<section class="lesson-section lesson-section--internals"><h2>Funcionamento interno</h2>
+<p>Para encaminhar um frame Ethernet comum, o switch não abre IP, HTTP ou TLS. Ele usa três informações de Camada 2 (numa porta de acesso, a VLAN vem da configuração da porta):</p>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Campo</th><th>Tamanho</th><th>Uso pelo switch</th><th>Observação de segurança</th></tr></thead><tbody>
+<tr><td>MAC de origem</td><td>48 bits</td><td>Aprender em qual porta e VLAN aquele MAC está.</td><td>Pode ser falsificado: é evidência, não identidade.</td></tr>
+<tr><td>MAC de destino</td><td>48 bits</td><td>Decidir entre forwarding, filtering e flooding.</td><td>Destino desconhecido gera flooding; excesso indica anomalia ou topologia mal planejada.</td></tr>
+<tr><td>VLAN ID</td><td>12 bits, no tag 802.1Q (quando presente)</td><td>Separar domínios lógicos no mesmo switch ou trunk.</td><td>VLAN errada causa exposição ou isolamento indevido.</td></tr>
+</tbody></table></div>
+<h3>Um frame do Host A (porta 1) para o Host B, passo a passo</h3>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Passo</th><th>O que acontece</th><th>O que pode falhar</th></tr></thead><tbody>
+<tr><td>1. Entrada</td><td>O frame entra pela porta 1 com origem MAC A e destino MAC B.</td><td>Interface down, cabo ruim ou VLAN errada.</td></tr>
+<tr><td>2. Aprendizado</td><td>O switch registra MAC A → porta 1, na VLAN da porta, e reinicia o tempo da entrada.</td><td>Tabela saturada, MAC flapping ou port security bloqueando.</td></tr>
+<tr><td>3. Consulta</td><td>Procura MAC B na tabela, só dentro da mesma VLAN.</td><td>MAC B desconhecido, entrada expirada pelo aging ou destino em outra VLAN.</td></tr>
+<tr><td>4. Decisão</td><td>MAC B conhecido: forwarding só para a porta dele. Desconhecido: flooding na VLAN. Broadcast/multicast: envio às portas aplicáveis da VLAN.</td><td>Flooding excessivo, loop ou domínio de broadcast grande.</td></tr>
+<tr><td>5. Resposta</td><td>Quando B responde, o switch aprende MAC B pela porta onde a resposta entrou. A partir daí, o tráfego entre A e B é só forwarding.</td><td>Host desligado, porta bloqueada, VLAN errada ou política de segurança.</td></tr>
+</tbody></table></div>
+<p><strong>Aging:</strong> uma entrada dinâmica que fica sem tráfego daquele MAC expira depois do aging time. O próximo frame para esse destino volta a ser inundado até o switch reaprender. Além das entradas dinâmicas, alguns cenários usam entradas estáticas, configuradas manualmente.</p>
+<p><strong>Por que a VLAN faz parte da chave:</strong> em switches gerenciáveis a tabela é separada por VLAN. O mesmo MAC pode aparecer em VLANs diferentes, e uma porta trunk carrega várias VLANs. Sem a VLAN, a tabela seria ambígua.</p>
 </section>
