@@ -1,0 +1,90 @@
+{
+  "id": "3.9",
+  "versao": "original",
+  "titulo": "Segurança em L2: ARP spoofing, MAC flooding e defesas",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4660,
+    "invisiveis": 764,
+    "teoriaVisivel": 2610
+  },
+  "porCampoVisivel": {
+    "content.motivation": 179,
+    "content.history": 178,
+    "content.problem": 161,
+    "content.evolution": 120,
+    "content.concept": 104,
+    "content.internals": 153,
+    "content.architecture": 118,
+    "content.analogy": 145,
+    "content.simpleExample": 87,
+    "content.enterpriseExample": 94,
+    "content.cloudExample": 93,
+    "content.devsecopsExample": 94,
+    "content.securityExample": 140,
+    "content.diagram": 3,
+    "content.summary": 73,
+    "content.nextTheme": 37,
+    "security": 348,
+    "troubleshooting": 246,
+    "glossary": 237,
+    "title+subtitle": 26,
+    "objectives": 68,
+    "learningOutcomes": 73,
+    "quiz": 281,
+    "flashcards": 118,
+    "mentorQuestions": 146,
+    "exercises": 174,
+    "challenge": 143,
+    "commentedSolution": 160,
+    "references": 63,
+    "linksToOtherCourses": 48,
+    "lab": 750
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 43,
+    "content.exercisesIntro": 26,
+    "content.challengeIntro": 31,
+    "content.solutionIntro": 25,
+    "networkContext": 36,
+    "protocolFields": 106,
+    "packetFlow": 128,
+    "deepDive": 235,
+    "commonMistakes": 134
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 90,
+    "alternativa_5minPasso_maisLeitura": 40.8,
+    "plausivel": false,
+    "palavras": 750
+  },
+  "duracao": {
+    "declarada": "90-130 min",
+    "estimatedStudyTimeMinutes": 130,
+    "M": 110,
+    "T": 122.8,
+    "partes": {
+      "teoria": 20.1,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 40.8
+    },
+    "faixaRecomendada": "105-145 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 19
+  }
+}

@@ -1,0 +1,18 @@
+<section class="lesson-section lesson-section--diagram"><h2>14. Diagrama SVG</h2>
+<svg class="lesson-svg" viewBox="0 0 980 560" role="img" aria-labelledby="m03l09-title m03l09-desc">
+<title id="m03l09-title">Segurança defensiva em Camada 2</title>
+<desc id="m03l09-desc">Diagrama mostrando host, switch, gateway, atacante local hipotético, controles de L2 e evidências monitoradas.</desc>
+<defs><marker id="m03l09-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" class="svg-arrow" /></marker></defs>
+<rect x="55" y="150" width="160" height="78" rx="14" class="svg-node svg-node--client"/><text x="135" y="185" text-anchor="middle" class="svg-label">Host legítimo</text><text x="135" y="210" text-anchor="middle" class="svg-label svg-label--small">VLAN 10</text>
+<rect x="410" y="140" width="180" height="92" rx="14" class="svg-node svg-node--switch"/><text x="500" y="176" text-anchor="middle" class="svg-label">Switch acesso</text><text x="500" y="202" text-anchor="middle" class="svg-label svg-label--small">MAC table + controles</text>
+<rect x="755" y="150" width="160" height="78" rx="14" class="svg-node svg-node--router"/><text x="835" y="185" text-anchor="middle" class="svg-label">Gateway</text><text x="835" y="210" text-anchor="middle" class="svg-label svg-label--small">roteamento/firewall</text>
+<rect x="55" y="330" width="160" height="78" rx="14" class="svg-node svg-node--attacker"/><text x="135" y="365" text-anchor="middle" class="svg-label">Dispositivo suspeito</text><text x="135" y="390" text-anchor="middle" class="svg-label svg-label--small">porta não autorizada</text>
+<line x1="215" y1="190" x2="410" y2="190" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m03l09-arrow)"/>
+<line x1="590" y1="190" x2="755" y2="190" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m03l09-arrow)"/>
+<line x1="215" y1="370" x2="410" y2="220" class="svg-flow svg-flow--blocked" marker-end="url(#m03l09-arrow)"/>
+<text x="320" y="332" text-anchor="middle" class="svg-label svg-label--small">bloqueio/alerta</text>
+<rect x="300" y="30" width="400" height="66" rx="14" class="svg-zone"/><text x="500" y="58" text-anchor="middle" class="svg-label">Controles</text><text x="500" y="82" text-anchor="middle" class="svg-label svg-label--small">802.1X/NAC · Port Security · DHCP Snooping · DAI · BPDU Guard</text>
+<rect x="260" y="455" width="460" height="70" rx="14" class="svg-node svg-node--security"/><text x="490" y="484" text-anchor="middle" class="svg-label">Evidências para SOC/NOC</text><text x="490" y="510" text-anchor="middle" class="svg-label svg-label--small">MAC flapping · ARP inconsistente · portas novas · storm · logs de switch</text>
+<line x1="500" y1="232" x2="490" y2="455" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m03l09-arrow)"/>
+</svg>
+</section>
