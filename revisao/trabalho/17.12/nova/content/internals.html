@@ -1,6 +1,12 @@
 <section class="lesson-section lesson-section--funcionamento-interno">
-  <h2>6. Funcionamento interno</h2>
-  <p>Internamente, o capstone funciona como uma cadeia de dependências. Um usuário acessa uma aplicação por DNS, passa por rede local ou remota, atravessa controles de identidade e firewall, chega a um balanceador, negocia TLS, alcança um backend, consulta serviços privados, registra logs e gera métricas. Qualquer elo pode falhar.</p>
-  <p>Ao mesmo tempo, a arquitetura possui planos diferentes. O plano de dados transporta pacotes. O plano de controle define rotas, políticas, DNS, identidade e configuração. O plano de observabilidade coleta sinais. O plano de governança define o que é permitido, quem aprova exceções e como mudanças são auditadas.</p>
-  <p>Um bom projeto final explicita esses planos. Quando a aplicação retorna 503, você não conclui automaticamente que “a rede caiu”. Você verifica DNS, TCP, TLS, WAF, LB, health check, rota, firewall, backend, readiness, logs e mudança recente. Quando há tráfego suspeito, você cruza fluxo, DNS, proxy, EDR, identidade, cloud audit, custo e contexto do ativo.</p>
+  <h2>Funcionamento interno</h2>
+  <p>A arquitetura do capstone é uma cadeia de dependências. Um usuário resolve o nome da aplicação por DNS, passa pela rede local ou remota, atravessa controles de identidade e firewall, chega a um balanceador, negocia TLS, alcança um backend, consulta serviços privados, registra logs e gera métricas. Qualquer elo pode falhar.</p>
+  <p>Essa cadeia atravessa quatro planos, e o seu projeto precisa explicitar cada um:</p>
+  <ul>
+    <li><strong>Dados:</strong> transporta os pacotes.</li>
+    <li><strong>Controle:</strong> define rotas, políticas, DNS, identidade e configuração.</li>
+    <li><strong>Observabilidade:</strong> coleta os sinais.</li>
+    <li><strong>Governança:</strong> define o que é permitido, quem aprova exceções e como as mudanças são auditadas.</li>
+  </ul>
+  <p>Por isso, quando a aplicação retorna 503, você não conclui que “a rede caiu”: verifica DNS, TCP, TLS, WAF, LB, health check, rota, firewall, backend, readiness, logs e mudança recente. Quando há tráfego suspeito, cruza fluxo, DNS, proxy, EDR, identidade, cloud audit, custo e contexto do ativo.</p>
 </section>

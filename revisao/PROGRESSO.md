@@ -193,6 +193,6 @@ Status: PENDENTE · EM ANDAMENTO · CONCLUÍDA · FALHOU. Atualizado pelo orques
 | 17.9 | m17/lesson-17-09.js | PENDENTE |  |  |  |  |  |  |
 | 17.10 | m17/lesson-17-10.js | PENDENTE |  |  |  |  |  |  |
 | 17.11 | m17/lesson-17-11.js | PENDENTE |  |  |  |  |  |  |
-| 17.12 | m17/lesson-17-12.js | EM ANDAMENTO |  |  |  |  |  |  |
+| 17.12 | m17/lesson-17-12.js | CONCLUÍDA | 8337→9075 (+9%) | 480-720 min→490-695 min | ORGANIZADA | MÉDIA 27% | PARCIAL | MÉDIO |
 
 ## Resumos por módulo

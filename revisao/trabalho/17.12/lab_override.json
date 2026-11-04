@@ -1,0 +1,4 @@
+{
+  "minutos": 480,
+  "justificativa": "Capstone final (6.10/11.6): o lab produz 12 entregáveis documentais, não passos de 5 min. Estimativa por entregável: escopo e inventário (passos 1-2) 40 min; D02 endereçamento e zonas (3) 35 min; D03+D04 matriz com 12+ fluxos e política de firewall (4) 60 min; D05+D06 DNS e VPN (5) 40 min; D07 cloud/híbrido e publicação web, com D01 (6-7) 50 min; D08 egress, detecção e observabilidade (8-9) 45 min; D09 tabela de testes (10) 40 min; análise do incidente e D10 matriz hipótese-evidência/runbook (11-12) 50 min; D11 RCA técnico e executivo (13) 40 min; portfólio, sanitização e limpeza (14) 30 min; D12 matriz de competências, taxonomia de erros, rubrica e trilha de revisão (15-18) 50 min. Total 480 min (8 h). O valor original (720 min) era a duração declarada da aula inteira, não só do lab."
+}

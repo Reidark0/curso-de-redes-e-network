@@ -1,6 +1,19 @@
 <section class="lesson-section lesson-section--arquitetura">
-  <h2>7. Arquitetura</h2>
-  <p>A arquitetura proposta usa camadas. Na borda pública ficam DNS público, CDN/WAF e Load Balancer. A aplicação reside em subnets privadas ou cluster Kubernetes com Ingress controlado. Dependências sensíveis, como banco gerenciado e storage, são acessadas por endpoints privados e DNS privado. O tráfego de saída passa por egress control, proxy ou firewall com logs.</p>
-  <p>A conectividade híbrida usa VPN ou link dedicado com BGP, rotas filtradas e hub de conectividade. A matriz e a filial ficam segmentadas por função: usuários, servidores, gerenciamento, voz, Wi-Fi corporativo, convidados e dispositivos especiais. O Wi-Fi usa autenticação corporativa e VLAN dinâmica quando aplicável. O acesso remoto usa identidade, MFA, postura do dispositivo e escopo mínimo.</p>
-  <p>A camada de segurança possui segmentação, firewall, SG/NSG/NACL, WAF, NAC, EDR, NDR, DLP, SIEM e playbooks. A camada de operação possui IaC, revisão de mudanças, testes sintéticos, alertas, runbooks, custos monitorados e RCA. A camada de evidência recebe flow logs, DNS logs, proxy logs, WAF/LB logs, cloud audit, Kubernetes audit, EDR e eventos de identidade.</p>
+  <h2>Arquitetura</h2>
+  <p>A arquitetura de referência do capstone é organizada em camadas:</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Camada</th><th>Componentes e decisões</th></tr></thead>
+    <tbody>
+      <tr><td>Borda pública</td><td>DNS público, CDN/WAF e Load Balancer.</td></tr>
+      <tr><td>Aplicação</td><td>Subnets privadas ou cluster Kubernetes com Ingress controlado.</td></tr>
+      <tr><td>Dados</td><td>Banco gerenciado e storage acessados por endpoints privados e DNS privado.</td></tr>
+      <tr><td>Saída</td><td>Egress control por proxy ou firewall, com logs.</td></tr>
+      <tr><td>Conectividade híbrida</td><td>VPN ou link dedicado com BGP, rotas filtradas e hub de conectividade.</td></tr>
+      <tr><td>Matriz e filial</td><td>Segmentação por função: usuários, servidores, gerenciamento, voz, Wi-Fi corporativo, convidados e dispositivos especiais. Wi-Fi com autenticação corporativa e VLAN dinâmica quando aplicável.</td></tr>
+      <tr><td>Acesso remoto</td><td>Identidade, MFA, postura do dispositivo e escopo mínimo.</td></tr>
+      <tr><td>Segurança</td><td>Segmentação, firewall, SG/NSG/NACL, WAF, NAC, EDR, NDR, DLP, SIEM e playbooks.</td></tr>
+      <tr><td>Operação</td><td>IaC, revisão de mudanças, testes sintéticos, alertas, runbooks, custos monitorados e RCA.</td></tr>
+      <tr><td>Evidência</td><td>Flow logs, DNS logs, proxy logs, WAF/LB logs, cloud audit, Kubernetes audit, EDR e eventos de identidade.</td></tr>
+    </tbody>
+  </table></div>
 </section>

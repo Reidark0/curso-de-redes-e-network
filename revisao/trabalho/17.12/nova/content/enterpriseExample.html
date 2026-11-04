@@ -1,6 +1,5 @@
 <section class="lesson-section lesson-section--exemplo-empresarial">
-  <h2>10. Exemplo empresarial</h2>
-  <p>No cenário empresarial, a matriz possui usuários administrativos, equipe de TI, servidores legados, impressoras, Wi-Fi corporativo, Wi-Fi convidado e sistemas internos. A filial precisa acessar apenas aplicações específicas. O datacenter possui AD/DNS, repositórios, ferramentas de monitoramento e um firewall central.</p>
-  <p>A arquitetura separa zonas por função e criticidade. Usuários não acessam diretamente bancos. Wi-Fi convidado só sai para internet. Administração usa bastion e MFA. Servidores críticos têm fluxos explicitamente documentados. Logs de firewall e DNS vão para SIEM. Exceções possuem dono e expiração.</p>
-  <p>O capstone exige transformar esse desenho em matriz de fluxos: origem, destino, porta, protocolo, justificativa, controle, evidência, dono, criticidade e risco residual.</p>
+  <h2>Exemplo empresarial</h2>
+  <p>A matriz tem usuários administrativos, equipe de TI, servidores legados, impressoras, Wi-Fi corporativo, Wi-Fi convidado e sistemas internos. A filial precisa acessar só aplicações específicas. O datacenter tem AD/DNS, repositórios, ferramentas de monitoramento e um firewall central.</p>
+  <p>A arquitetura separa zonas por função e criticidade. Usuários não acessam bancos diretamente. O Wi-Fi convidado só sai para a internet. A administração usa bastion e MFA. Servidores críticos têm fluxos explicitamente documentados. Logs de firewall e DNS vão para o SIEM. Exceções têm dono e expiração. Cada uma dessas regras vira uma ou mais linhas da matriz de fluxos (D03).</p>
 </section>

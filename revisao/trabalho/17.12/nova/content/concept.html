@@ -1,6 +1,62 @@
 <section class="lesson-section lesson-section--conceito">
-  <h2>5. Conceito</h2>
-  <p>O capstone é um projeto integrador em que você produz uma arquitetura de rede corporativa moderna e demonstra que ela é conectável, defensável, diagnosticável e governável. Conectável significa que fluxos legítimos funcionam. Defensável significa que fluxos desnecessários são bloqueados e que controles reduzem impacto. Diagnosticável significa que, quando algo falha, existem evidências suficientes para investigar. Governável significa que mudanças, exceções, custos e riscos possuem donos e critérios.</p>
-  <p>A arquitetura final deve incluir: mapa lógico, plano CIDR, subnets, VLANs, rotas, gateways, NAT, DNS público e privado, VPN ou link dedicado, hub-spoke, firewalls, SG/NSG/NACL, Private Link/Private Endpoint, load balancer, WAF, TLS, Kubernetes networking, Wi-Fi corporativo, logs, SIEM, playbooks, matriz de fluxos, checklist de risco, plano de rollback e RCA de um incidente simulado.</p>
-  <p>O objetivo não é decorar ferramentas, mas demonstrar raciocínio: por que cada componente existe, qual problema resolve, quais riscos adiciona, como é validado e como aparece nos logs.</p>
+  <h2>Conceito</h2>
+  <p>O capstone é um projeto integrador: você produz uma arquitetura de rede corporativa híbrida e demonstra que ela tem quatro propriedades.</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Propriedade</th><th>O que significa</th></tr></thead>
+    <tbody>
+      <tr><td>Conectável</td><td>Os fluxos legítimos funcionam.</td></tr>
+      <tr><td>Defensável</td><td>Os fluxos desnecessários são bloqueados e os controles reduzem impacto.</td></tr>
+      <tr><td>Diagnosticável</td><td>Quando algo falha, há evidência suficiente para investigar.</td></tr>
+      <tr><td>Governável</td><td>Mudanças, exceções, custos e riscos têm dono e critério.</td></tr>
+    </tbody>
+  </table></div>
+  <p>A resposta imatura ataca sintomas isolados: abre portas, reinicia serviços, troca DNS, desativa o WAF ou ignora o custo. A resposta profissional segue uma ordem. Primeiro vem a arquitetura: quais fluxos devem e não devem existir, onde ficam os controles e como a evidência é coletada. Depois a defesa: segmentação, egress control, endpoints privados, identidade, WAF e detecções. Depois o diagnóstico: linha do tempo, matriz hipótese-evidência, logs, PCAP quando necessário e RCA. Por fim, a operação: documentação versionada, revisão por pares, testes em pipeline, indicadores e ajustes após incidentes. Para cada componente, você precisa dizer por que ele existe, que problema resolve, que risco adiciona, como é validado e como aparece nos logs.</p>
+
+  <h3>Os 12 entregáveis</h3>
+  <p>O dossiê tem 12 entregáveis obrigatórios. O conteúdo exigido de cada um está em “Entregáveis”, no painel do Desafio. A tabela mostra em que passo do laboratório cada um é produzido.</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Código</th><th>Entregável</th><th>Passos do lab</th></tr></thead>
+    <tbody>
+      <tr><td>D01</td><td>Arquitetura lógica ponta a ponta</td><td>1, 2, 6, 7</td></tr>
+      <tr><td>D02</td><td>Plano de endereçamento e zonas</td><td>3</td></tr>
+      <tr><td>D03</td><td>Matriz de fluxos</td><td>4</td></tr>
+      <tr><td>D04</td><td>Política de firewall/ACL/SG/NSG/NACL</td><td>4</td></tr>
+      <tr><td>D05</td><td>Plano DNS</td><td>5</td></tr>
+      <tr><td>D06</td><td>Plano VPN/acesso remoto</td><td>5</td></tr>
+      <tr><td>D07</td><td>Desenho cloud/híbrido</td><td>6, 8</td></tr>
+      <tr><td>D08</td><td>Plano de observabilidade</td><td>8, 9</td></tr>
+      <tr><td>D09</td><td>Evidências de testes</td><td>10</td></tr>
+      <tr><td>D10</td><td>Runbook de troubleshooting</td><td>11, 12</td></tr>
+      <tr><td>D11</td><td>RCA do incidente simulado</td><td>13</td></tr>
+      <tr><td>D12</td><td>Rubrica objetiva preenchida</td><td>15 a 18</td></tr>
+    </tbody>
+  </table></div>
+  <p>O passo 14 empacota tudo como portfólio sanitizado e registra a limpeza de qualquer recurso cloud real.</p>
+
+  <h3>Como o dossiê é avaliado</h3>
+  <p>A avaliação tem duas partes. A <strong>pontuação</strong> vem da rubrica de 100 pontos em 8 critérios (painel do Desafio). A <strong>matriz de competências</strong> mostra se cada bloco do curso atingiu o mínimo; uma nota geral alta não compensa uma competência fraca.</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Código</th><th>Competência</th><th>Módulos de revisão</th><th>Mínimo</th><th>Domínio</th><th>Evidência esperada</th></tr></thead>
+    <tbody>
+      <tr><td>C01</td><td>Fundamentos, OSI e encapsulamento</td><td>M00, M01, M02</td><td>70%</td><td>90%</td><td>explica o fluxo de dados por camadas e reconhece onde cada evidência aparece</td></tr>
+      <tr><td>C02</td><td>Ethernet, ARP, VLAN, switching e camada 2</td><td>M03</td><td>70%</td><td>90%</td><td>diagnostica MAC, ARP, VLAN, trunk, STP e domínio de broadcast</td></tr>
+      <tr><td>C03</td><td>IPv4, subnetting, gateway e roteamento básico</td><td>M04, M05, M11</td><td>75%</td><td>90%</td><td>calcula redes, identifica rota local/default e justifica a escolha de caminho</td></tr>
+      <tr><td>C04</td><td>TCP, UDP, portas e serviços essenciais</td><td>M06, M07</td><td>75%</td><td>90%</td><td>diferencia conectividade, serviço escutando, firewall, DNS, DHCP, NAT e logs</td></tr>
+      <tr><td>C05</td><td>HTTP, TLS, proxy, firewall, VPN e publicação segura</td><td>M08, M09, M10</td><td>75%</td><td>90%</td><td>interpreta erros de aplicação/rede e propõe controles com rollback</td></tr>
+      <tr><td>C06</td><td>Wireless, segurança defensiva e Blue Team</td><td>M12, M13, M16</td><td>75%</td><td>90%</td><td>define escopo autorizado, telemetria, detecção, contenção e mitigação</td></tr>
+      <tr><td>C07</td><td>Cloud Networking, Kubernetes e arquitetura híbrida</td><td>M14</td><td>75%</td><td>90%</td><td>projeta VPC/VNet, subnets, rotas, Private Endpoint, DNS privado, egress e custos</td></tr>
+      <tr><td>C08</td><td>Troubleshooting profissional, RCA e comunicação</td><td>M15, M17</td><td>80%</td><td>92%</td><td>transforma sintomas em hipóteses, coleta evidências, decide, comunica e previne recorrência</td></tr>
+    </tbody>
+  </table></div>
+  <p>Decisão final, pela pontuação da rubrica:</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Pontuação</th><th>Decisão</th><th>O que fazer</th></tr></thead>
+    <tbody>
+      <tr><td>90–100</td><td>Aprovado, domínio forte</td><td>Use o dossiê como portfólio, explique as decisões em voz alta e ajude outro aluno a revisar o tema.</td></tr>
+      <tr><td>80–89</td><td>Aprovado com ressalvas</td><td>Registre as lacunas residuais e faça pelo menos um mini lab de reforço por competência fraca.</td></tr>
+      <tr><td>60–79</td><td>Não aprovado, base parcial</td><td>Revise as competências abaixo do mínimo, foque nos erros conceituais e refaça só os blocos afetados.</td></tr>
+      <tr><td>0–59</td><td>Não aprovado, insuficiente</td><td>Refaça a revisão guiada, execute os laboratórios essenciais e produza nova tentativa com evidências.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout warning"><strong>Regra que vale em qualquer faixa:</strong> um entregável ausente, uma competência abaixo do seu mínimo ou uma resposta que você não consegue explicar com evidência impede a conclusão. Refaça a competência afetada (revisão ativa, mini lab e reteste após 24–48 h) antes de concluir, mesmo com 80 pontos ou mais.</div>
 </section>
