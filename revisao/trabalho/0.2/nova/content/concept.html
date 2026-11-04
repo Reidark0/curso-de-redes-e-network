@@ -1,0 +1,49 @@
+
+<section class="lesson-section lesson-section--concept">
+  <h2>5. Conceito</h2>
+  <p>
+    Um <strong>bit</strong> é a menor unidade de informação em sistemas digitais, representando dois estados possíveis: 0 ou 1. Um <strong>byte</strong> é um grupo de 8 bits. Um <strong>nibble</strong> é um grupo de 4 bits. Um <strong>octeto</strong> é um grupo de 8 bits; em redes, o termo é usado com frequência porque reforça o tamanho exato de 8 bits, independentemente de detalhes históricos de arquiteturas de computador.
+  </p>
+  <div class="definition-box">
+    <strong>Definição essencial:</strong> binário é uma forma de escrever números usando base 2; decimal usa base 10; hexadecimal usa base 16. Em hexadecimal, os valores 10 a 15 são representados pelas letras A, B, C, D, E e F.
+  </div>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Unidade</th>
+        <th>Tamanho</th>
+        <th>Quantidade de valores</th>
+        <th>Exemplo em redes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Bit</td>
+        <td>1 bit</td>
+        <td>2 valores: 0 ou 1</td>
+        <td>Uma flag TCP ligada ou desligada</td>
+      </tr>
+      <tr>
+        <td>Nibble</td>
+        <td>4 bits</td>
+        <td>16 valores: 0 a 15</td>
+        <td>Um dígito hexadecimal</td>
+      </tr>
+      <tr>
+        <td>Byte / octeto</td>
+        <td>8 bits</td>
+        <td>256 valores: 0 a 255</td>
+        <td>Um octeto IPv4, como 192</td>
+      </tr>
+      <tr>
+        <td>2 bytes</td>
+        <td>16 bits</td>
+        <td>65536 valores: 0 a 65535</td>
+        <td>Uma porta TCP/UDP</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    A regra mais importante desta aula é: <strong>1 dígito hexadecimal representa 4 bits; 2 dígitos hexadecimais representam 8 bits; 2 dígitos hexadecimais representam 1 byte</strong>. Por isso, <code>FF</code> representa um byte com todos os bits ligados: <code>11111111</code>, que em decimal vale 255.
+  </p>
+</section>

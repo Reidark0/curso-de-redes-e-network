@@ -1,0 +1,851 @@
+{
+  "id": "0.2",
+  "moduleId": "m00",
+  "order": 2,
+  "title": "Bits, bytes, binário e hexadecimal",
+  "subtitle": "A linguagem numérica que aparece por trás de IPv4, máscaras, MAC, IPv6, dumps, logs e análise de pacotes.",
+  "duration": "65-90 min",
+  "estimatedStudyTimeMinutes": 90,
+  "difficulty": "iniciante",
+  "type": "fundamental",
+  "xp": 160,
+  "tags": [
+    "fundamentos",
+    "bits",
+    "bytes",
+    "binário",
+    "hexadecimal",
+    "ipv4",
+    "mac",
+    "subnetting",
+    "wireshark",
+    "segurança"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.1",
+      "reason": "A aula 0.1 explica que computadores representam informação usando estados físicos interpretados como bits. Esta aula aprofunda como esses bits são agrupados, escritos e lidos em bases numéricas."
+    }
+  ],
+  "objectives": [
+    "Diferenciar bit, byte, nibble, octeto e palavra numérica em contexto de redes.",
+    "Converter valores simples entre decimal, binário e hexadecimal sem depender apenas de calculadoras.",
+    "Explicar por que hexadecimal é tão comum em MAC, IPv6, EtherType, dumps, hashes, certificados e payloads.",
+    "Ler um octeto IPv4 em binário e entender por que zeros à esquerda importam.",
+    "Preparar a base para subnetting, máscaras, flags de protocolo, análise de tráfego e troubleshooting."
+  ],
+  "learningOutcomes": [
+    "Dado um octeto decimal entre 0 e 255, o aluno consegue explicar sua representação binária em 8 bits.",
+    "Dado um par hexadecimal como FF, C0 ou A8, o aluno consegue relacioná-lo com decimal e binário.",
+    "Dado um endereço MAC, o aluno reconhece que cada par hexadecimal representa 1 byte.",
+    "Dado um IPv4 como 192.168.10.50, o aluno consegue enxergar cada octeto como um grupo de 8 bits.",
+    "Dado um dump hexadecimal ou log técnico, o aluno evita confundir representação hexadecimal, codificação, criptografia e hash."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Camada 1",
+      "Camada 2",
+      "Camada 3",
+      "Camada 4",
+      "Camada 7"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede",
+      "Internet",
+      "Transporte",
+      "Aplicação"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "IPv4",
+      "IPv6",
+      "TCP",
+      "UDP",
+      "ICMP",
+      "HTTP",
+      "TLS"
+    ],
+    "dependsOn": [
+      "Representação digital da informação",
+      "Estados físicos interpretados como bits"
+    ],
+    "enables": [
+      "Subnetting",
+      "Máscaras IPv4",
+      "Endereços MAC",
+      "IPv6",
+      "Flags TCP",
+      "Análise de pacotes",
+      "Codificações de aplicação"
+    ]
+  },
+  "deepDive": {
+    "mentalModel": "Pense em cada valor técnico como uma sequência de bits que pode ser exibida de formas diferentes. Decimal é amigável para humanos, binário revela estrutura, hexadecimal compacta bytes.",
+    "keyTerms": [
+      "bit",
+      "byte",
+      "nibble",
+      "octeto",
+      "base 2",
+      "base 10",
+      "base 16",
+      "hexadecimal",
+      "zeros à esquerda",
+      "campo fixo"
+    ],
+    "limitations": [
+      "Converter bases não substitui entendimento de protocolos.",
+      "Hexadecimal não revela sozinho se um dado é texto, binário, hash, criptografia ou encoding.",
+      "Calculadoras ajudam, mas sem entendimento o aluno erra prefixos, máscaras e campos fixos.",
+      "Representações podem ser exibidas de forma diferente por ferramentas distintas."
+    ],
+    "whenToUse": [
+      "Ao estudar IPv4, subnetting, máscaras e CIDR.",
+      "Ao ler endereços MAC, IPv6 e dumps hexadecimais.",
+      "Ao interpretar flags, cabeçalhos, payloads e campos de protocolo.",
+      "Ao revisar logs técnicos, certificados, hashes e identificadores."
+    ],
+    "whenNotToUse": [
+      "Não use conversão manual como substituta de validação por ferramenta em mudanças críticas.",
+      "Não use hexadecimal como mecanismo de segurança ou ofuscação confiável.",
+      "Não tire conclusão de segurança apenas pela aparência de bytes em uma captura."
+    ],
+    "operationalImpact": [
+      "Melhora troubleshooting porque o profissional entende máscaras, tamanhos de campo e valores-limite.",
+      "Reduz erros de documentação em endereçamento e análise de pacotes.",
+      "Facilita comunicação entre redes, segurança, infraestrutura, cloud e desenvolvimento."
+    ],
+    "financialImpact": [
+      "Evita redes cloud mal endereçadas que exigem retrabalho, novos gateways, appliances ou migrações.",
+      "Reduz tempo de diagnóstico em incidentes, o que diminui custo operacional.",
+      "Ajuda a dimensionar logs, tráfego e armazenamento com mais clareza sobre bits e bytes."
+    ],
+    "securityImpact": [
+      "Ajuda a distinguir codificação, representação, hash e criptografia.",
+      "Melhora análise defensiva de pacotes, payloads, certificados e identificadores.",
+      "Reduz falsos positivos causados por interpretação incorreta de dumps ou logs."
+    ]
+  },
+  "commonMistakes": [
+    {
+      "mistake": "Confundir bit com byte.",
+      "whyItHappens": "Ambos aparecem em medições de rede, armazenamento e documentação, muitas vezes com abreviações parecidas.",
+      "consequence": "Erro de cálculo de throughput, tamanho de arquivo, velocidade contratada e capacidade de tráfego.",
+      "correction": "Lembrar que 1 byte tem 8 bits. Em geral, b minúsculo representa bit e B maiúsculo representa byte, embora ferramentas nem sempre sejam consistentes."
+    },
+    {
+      "mistake": "Remover zeros à esquerda em octetos IPv4.",
+      "whyItHappens": "Na matemática cotidiana, zeros à esquerda parecem desnecessários.",
+      "consequence": "O aluno passa a comparar campos com tamanhos diferentes e erra subnetting, máscara e leitura de bytes.",
+      "correction": "Em campos fixos, preserve o tamanho. Um octeto sempre deve ser lido como 8 bits."
+    },
+    {
+      "mistake": "Achar que hexadecimal é criptografia.",
+      "whyItHappens": "Hexadecimal parece técnico e pouco legível para humanos.",
+      "consequence": "Falsas conclusões em segurança e análise de payload.",
+      "correction": "Hexadecimal é apenas representação. Criptografia depende de algoritmo, chave e propriedades de segurança."
+    },
+    {
+      "mistake": "Decorar /24 sem entender os bits da máscara.",
+      "whyItHappens": "Muitos materiais ensinam subnetting como tabela pronta.",
+      "consequence": "O aluno trava em /25, /26, /27, VLSM e troubleshoot de máscara incorreta.",
+      "correction": "Relacionar prefixo CIDR com quantidade de bits de rede e host."
+    }
+  ],
+  "troubleshooting": {
+    "symptoms": [
+      "Aluno não entende por que um octeto IPv4 só vai até 255.",
+      "Erro ao converter 10 para binário sem zeros à esquerda.",
+      "Confusão ao ler MAC, IPv6 ou dump hexadecimal.",
+      "Interpretação errada de velocidade em Mb/s versus MB/s.",
+      "Falha ao entender por que /24 corresponde a 255.255.255.0."
+    ],
+    "diagnosticQuestions": [
+      "Qual é o tamanho do campo: 4 bits, 8 bits, 16 bits, 32 bits ou 128 bits?",
+      "A ferramenta está mostrando decimal, binário, hexadecimal ou texto interpretado?",
+      "O valor precisa preservar zeros à esquerda?",
+      "O dado é apenas representado em hex ou foi criptografado/codificado?",
+      "Estou olhando para valor bruto ou interpretação feita por uma ferramenta?"
+    ],
+    "commands": [
+      {
+        "platform": "Windows PowerShell",
+        "command": "[Convert]::ToString(192,2).PadLeft(8,'0'); [Convert]::ToString(192,16).ToUpper()",
+        "purpose": "Converter o valor decimal 192 para binário de 8 bits e hexadecimal.",
+        "expectedObservation": "11000000 e C0.",
+        "interpretation": "Mostra que 192 decimal é o mesmo valor que 11000000 binário e C0 hexadecimal."
+      },
+      {
+        "platform": "Linux",
+        "command": "python3 - <<'PY'\nfor n in [192,168,10,50,255]:\n    print(n, format(n, '08b'), format(n, '02X'))\nPY",
+        "purpose": "Converter octetos comuns de IPv4 para binário e hexadecimal.",
+        "expectedObservation": "192 11000000 C0; 168 10101000 A8; 10 00001010 0A; 50 00110010 32; 255 11111111 FF.",
+        "interpretation": "Demonstra a relação entre decimal, binário de 8 bits e pares hexadecimais."
+      },
+      {
+        "platform": "Cisco IOS",
+        "command": "show interfaces | include bia|address",
+        "purpose": "Observar endereços MAC exibidos em formato hexadecimal em equipamentos Cisco.",
+        "expectedObservation": "Endereços MAC em notação hexadecimal, dependendo da plataforma e versão.",
+        "interpretation": "Cada par hexadecimal representa 1 byte do endereço MAC."
+      }
+    ],
+    "decisionTree": [
+      {
+        "if": "O valor está entre 0 e 255 e aparece em IPv4",
+        "then": "Trate como octeto de 8 bits e preserve zeros à esquerda em binário."
+      },
+      {
+        "if": "O valor aparece como pares separados por dois-pontos em MAC",
+        "then": "Leia cada par hexadecimal como 1 byte."
+      },
+      {
+        "if": "O valor parece ilegível em payload",
+        "then": "Identifique primeiro a representação e o protocolo antes de concluir que é criptografia ou ataque."
+      }
+    ]
+  },
+  "security": {
+    "goodPractices": [
+      "Registrar nos relatórios se um valor está em decimal, binário, hexadecimal ou outra codificação.",
+      "Preservar zeros à esquerda ao documentar campos de tamanho fixo.",
+      "Correlacionar dumps com protocolo, porta, direção, timestamp e host antes de classificar risco.",
+      "Usar ferramentas confiáveis para validar conversões em mudanças críticas de rede.",
+      "Explicar em documentação interna a diferença entre codificação, hash, compressão e criptografia."
+    ],
+    "badPractices": [
+      "Tratar hexadecimal como se fosse criptografia.",
+      "Fazer subnetting apenas por tabela decorada sem entender bits.",
+      "Copiar blocos CIDR para cloud sem validar sobreposição.",
+      "Ignorar unidade de medida em incidentes envolvendo volume de dados.",
+      "Remover zeros à esquerda em campos que exigem tamanho fixo."
+    ],
+    "commonErrors": [
+      "Confundir MB/s com Mb/s.",
+      "Interpretar FF como 15 em vez de 255 quando são dois dígitos hexadecimais.",
+      "Achar que C0 A8 sempre é malicioso, sem perceber que representa 192.168 em muitos endereços privados.",
+      "Concluir que payload ilegível está criptografado sem checar encoding, compressão ou formato binário."
+    ],
+    "vulnerabilities": [
+      {
+        "name": "Interpretação incorreta de evidência técnica",
+        "description": "Um analista pode classificar erroneamente tráfego ou arquivo porque não entende a representação numérica exibida pela ferramenta.",
+        "defensiveExplanation": "Dumps e logs frequentemente mostram bytes em hexadecimal. Isso é uma forma de visualização, não uma conclusão sobre risco.",
+        "mitigation": "Treinar leitura de bases, validar com ferramentas, correlacionar contexto e documentar a unidade ou base usada."
+      },
+      {
+        "name": "Planejamento incorreto de endereçamento",
+        "description": "Blocos CIDR mal compreendidos podem gerar redes sobrepostas, sub-redes pequenas demais ou exposição lateral excessiva.",
+        "defensiveExplanation": "CIDR é contagem de bits. Erros em bits de rede e host afetam roteamento, firewall e cloud.",
+        "mitigation": "Usar plano de endereçamento revisado, validação automática em IaC e revisão por pares antes de aplicar."
+      }
+    ],
+    "monitoring": [
+      "Alertas de tráfego para faixas inesperadas ou sobrepostas.",
+      "Logs de firewall com origem/destino, porta, protocolo e volume.",
+      "Inventário de blocos CIDR em cloud e datacenter.",
+      "Evidências de payload analisadas com contexto de protocolo."
+    ],
+    "hardening": [
+      "Padronizar documentação de redes com base, unidade e tamanho de campo.",
+      "Validar blocos CIDR em pipelines de IaC antes do deploy.",
+      "Evitar decisões de firewall baseadas em interpretação visual incompleta de payload.",
+      "Revisar documentação de incidentes para separar fato observado de inferência."
+    ],
+    "detectionIdeas": [
+      "Procurar inconsistências entre blocos CIDR planejados e implantados.",
+      "Identificar logs com unidades ambíguas de tráfego ou armazenamento.",
+      "Revisar alertas classificados como criptografia suspeita quando podem ser apenas dados binários ou codificados."
+    ]
+  },
+  "lab": {
+    "id": "lab-0.2",
+    "title": "Converter IPv4 para binário e hexadecimal",
+    "labType": "local",
+    "objective": "Praticar a conversão de octetos IPv4 e relacionar decimal, binário e hexadecimal com valores usados em redes.",
+    "scenario": "Você recebeu o endereço 192.168.10.50 em um ticket de troubleshooting e precisa explicar como ele aparece em binário e hexadecimal para preparar as próximas aulas de subnetting e análise de pacotes.",
+    "topology": "Notebook do aluno -> terminal local -> conversão de valores -> documentação da evidência",
+    "architecture": "Laboratório local sem tráfego externo. O aluno trabalha com valores estáticos, comandos locais e raciocínio manual.",
+    "prerequisites": [
+      "Ter concluído a aula 0.1.",
+      "Ter acesso a Windows PowerShell, terminal Linux ou WSL.",
+      "Saber copiar e registrar evidências simples em um arquivo de notas."
+    ],
+    "tools": [
+      "Windows PowerShell ou terminal Linux",
+      "Opcional: Python 3",
+      "Bloco de notas, VS Code ou editor de texto",
+      "Opcional: calculadora do sistema em modo programador"
+    ],
+    "estimatedTimeMinutes": 90,
+    "cost": "zero",
+    "safetyNotes": [
+      "Este laboratório não executa varredura, exploração ou tráfego contra terceiros.",
+      "Não use dados sensíveis reais em exemplos compartilhados.",
+      "O objetivo é defensivo: entender representação numérica e reduzir erros de interpretação."
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "title": "Separar os octetos do IPv4",
+        "instruction": "Escreva o endereço 192.168.10.50 como quatro valores independentes.",
+        "command": "192 | 168 | 10 | 50",
+        "expectedOutput": "Quatro octetos: 192, 168, 10 e 50.",
+        "explanation": "IPv4 possui 32 bits divididos em quatro octetos de 8 bits. Cada parte vai de 0 a 255."
+      },
+      {
+        "number": 2,
+        "title": "Converter manualmente 192 para binário",
+        "instruction": "Use os pesos 128, 64, 32, 16, 8, 4, 2 e 1. Marque 1 quando o peso entra na soma e 0 quando não entra.",
+        "command": "192 = 128 + 64 = 11000000",
+        "expectedOutput": "192 decimal = 11000000 binário.",
+        "explanation": "Os bits de 128 e 64 ficam ligados; os demais ficam desligados."
+      },
+      {
+        "number": 3,
+        "title": "Converter os demais octetos",
+        "instruction": "Repita o processo para 168, 10 e 50, preservando 8 bits em cada octeto.",
+        "command": "168 = 10101000\n10 = 00001010\n50 = 00110010",
+        "expectedOutput": "168 decimal = 10101000; 10 decimal = 00001010; 50 decimal = 00110010.",
+        "explanation": "Zeros à esquerda são obrigatórios quando queremos representar o octeto completo."
+      },
+      {
+        "number": 4,
+        "title": "Validar no Windows PowerShell",
+        "instruction": "No Windows, valide a conversão usando PowerShell.",
+        "command": "192,168,10,50 | ForEach-Object { \"$($_) -> $([Convert]::ToString($_,2).PadLeft(8,'0')) -> $([Convert]::ToString($_,16).ToUpper().PadLeft(2,'0'))\" }",
+        "expectedOutput": "Linhas mostrando 192 -> 11000000 -> C0, 168 -> 10101000 -> A8, 10 -> 00001010 -> 0A e 50 -> 00110010 -> 32.",
+        "explanation": "O comando confirma a conversão manual e mostra o par hexadecimal correspondente a cada octeto."
+      },
+      {
+        "number": 5,
+        "title": "Validar no Linux ou WSL",
+        "instruction": "No Linux, use Python para validar a mesma conversão.",
+        "command": "python3 - <<'PY'\nfor n in [192,168,10,50]:\n    print(f'{n} -> {n:08b} -> {n:02X}')\nPY",
+        "expectedOutput": "192 -> 11000000 -> C0; 168 -> 10101000 -> A8; 10 -> 00001010 -> 0A; 50 -> 00110010 -> 32.",
+        "explanation": "A formatação 08b força 8 bits; 02X força 2 dígitos hexadecimais em maiúsculas."
+      },
+      {
+        "number": 6,
+        "title": "Criar evidência técnica",
+        "instruction": "Registre a representação final em decimal, binário e hexadecimal.",
+        "command": "Decimal: 192.168.10.50\nBinário: 11000000.10101000.00001010.00110010\nHexadecimal: C0 A8 0A 32",
+        "expectedOutput": "Uma pequena evidência textual com as três representações.",
+        "explanation": "Essa evidência será útil quando você estudar captura de pacotes, subnetting e dumps hexadecimais."
+      }
+    ],
+    "expectedResult": "O aluno deve conseguir explicar que 192.168.10.50 é um IPv4 de 32 bits composto por quatro octetos e que os mesmos bytes podem ser exibidos como C0 A8 0A 32 em hexadecimal.",
+    "validation": [
+      {
+        "check": "Cada octeto possui 8 bits",
+        "command": "Conferir visualmente: 11000000, 10101000, 00001010, 00110010",
+        "expected": "Todos os grupos têm exatamente 8 caracteres.",
+        "ifFails": "Adicionar zeros à esquerda até completar 8 bits por octeto."
+      },
+      {
+        "check": "Cada par hexadecimal possui 2 dígitos",
+        "command": "Conferir: C0 A8 0A 32",
+        "expected": "Cada octeto virou um par hexadecimal.",
+        "ifFails": "Adicionar zero à esquerda quando o valor hexadecimal tiver um único dígito, como 0A."
+      },
+      {
+        "check": "Conversão de 255",
+        "command": "Converter 255 para binário e hexadecimal",
+        "expected": "255 = 11111111 = FF",
+        "ifFails": "Revisar pesos binários e regra de 4 bits por dígito hexadecimal."
+      }
+    ],
+    "troubleshooting": [
+      {
+        "symptom": "O valor 10 aparece como 1010 em vez de 00001010.",
+        "probableCause": "A ferramenta removeu zeros à esquerda ou o aluno esqueceu que octeto tem 8 bits.",
+        "howToConfirm": "Contar a quantidade de bits exibidos.",
+        "fix": "Usar PadLeft no PowerShell ou formatação 08b no Python."
+      },
+      {
+        "symptom": "O hexadecimal de 10 aparece como A em vez de 0A.",
+        "probableCause": "A ferramenta exibiu o valor mínimo sem completar o byte.",
+        "howToConfirm": "Verificar se há 2 dígitos hexadecimais por octeto.",
+        "fix": "Adicionar zero à esquerda ou usar formatação 02X."
+      },
+      {
+        "symptom": "O comando Python não funciona no Windows.",
+        "probableCause": "Python não instalado ou não disponível no PATH.",
+        "howToConfirm": "Executar python --version ou py --version.",
+        "fix": "Usar PowerShell ou a calculadora em modo programador."
+      }
+    ],
+    "improvements": [
+      "Converter também 255.255.255.0 para entender a base da máscara /24.",
+      "Converter um endereço MAC real da própria máquina e contar seus 6 bytes.",
+      "Abrir a calculadora em modo programador e comparar as conversões manuais.",
+      "Registrar os valores em uma tabela para reutilizar em subnetting."
+    ],
+    "evidenceToCollect": [
+      "Tabela com decimal, binário e hexadecimal dos octetos 192, 168, 10 e 50.",
+      "Print ou cópia da saída do PowerShell ou Linux.",
+      "Resposta explicando por que 10 deve virar 00001010 e não apenas 1010.",
+      "Conversão adicional de 255 para FF."
+    ],
+    "questions": [
+      "Por que cada octeto IPv4 precisa ter 8 bits?",
+      "Por que 255 é o maior valor de um octeto?",
+      "Por que hexadecimal é mais prático que binário para dumps?",
+      "O que significa dizer que C0 A8 0A 32 representa os bytes de 192.168.10.50?"
+    ],
+    "challenge": "Converta 10.0.1.255 para binário e hexadecimal, preservando o tamanho de cada octeto, e explique por que o último octeto é especial em muitos contextos de rede.",
+    "solution": "10.0.1.255 em binário é 00001010.00000000.00000001.11111111 e em hexadecimal é 0A 00 01 FF. O último octeto vale 255, ou seja, todos os seus bits estão ligados. Em muitas redes, dependendo da máscara, um endereço com todos os bits de host ligados pode ser broadcast da sub-rede; a confirmação depende da máscara usada."
+  },
+  "mentorQuestions": [
+    {
+      "type": "reflexão",
+      "question": "Por que hexadecimal é mais usado para MAC, IPv6 e dumps do que binário puro?",
+      "hints": [
+        "Compare o tamanho da escrita.",
+        "Lembre que 1 dígito hexadecimal representa 4 bits.",
+        "Pense no que é mais fácil para humanos revisarem em logs."
+      ],
+      "expectedIdeas": [
+        "compactação",
+        "legibilidade",
+        "4 bits",
+        "byte",
+        "MAC",
+        "IPv6",
+        "dump"
+      ],
+      "explanation": "Hexadecimal reduz drasticamente o tamanho da escrita e preserva alinhamento com grupos de bits. Dois dígitos hexadecimais equivalem a um byte."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "Um aluno converte o octeto decimal 10 para 1010. O valor está matematicamente errado? E tecnicamente incompleto para IPv4?",
+      "hints": [
+        "Pense na diferença entre valor e campo fixo.",
+        "Um octeto IPv4 tem 8 bits.",
+        "Zeros à esquerda podem ser tecnicamente importantes."
+      ],
+      "expectedIdeas": [
+        "valor correto",
+        "representação incompleta",
+        "octeto",
+        "8 bits",
+        "zeros à esquerda"
+      ],
+      "explanation": "1010 representa o valor decimal 10, mas para exibir um octeto completo precisamos escrever 00001010. O valor é o mesmo, mas o campo técnico exige tamanho fixo."
+    },
+    {
+      "type": "cenário real",
+      "question": "Você encontrou C0 A8 01 01 em um dump. Que hipótese simples você testaria antes de considerar isso suspeito?",
+      "hints": [
+        "Converta C0 e A8 para decimal.",
+        "Pense em endereços privados comuns.",
+        "Não classifique risco sem contexto."
+      ],
+      "expectedIdeas": [
+        "C0=192",
+        "A8=168",
+        "192.168.1.1",
+        "endereço privado",
+        "contexto"
+      ],
+      "explanation": "C0 A8 01 01 representa 192.168.1.1, um endereço privado comum. Isso não prova benignidade nem malícia; apenas mostra que a interpretação correta vem antes da conclusão de segurança."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q0.2.1",
+      "type": "conceito",
+      "q": "Quantos bits existem em 1 byte?",
+      "opts": [
+        "4",
+        "8",
+        "16",
+        "32"
+      ],
+      "a": 1,
+      "exp": "1 byte possui 8 bits. Em redes, um octeto também possui 8 bits.",
+      "difficulty": "iniciante",
+      "topic": "unidades"
+    },
+    {
+      "id": "q0.2.2",
+      "type": "comparação",
+      "q": "Por que 2 dígitos hexadecimais representam exatamente 1 byte?",
+      "opts": [
+        "Porque cada dígito hexadecimal representa 2 bits.",
+        "Porque cada dígito hexadecimal representa 4 bits, então dois representam 8 bits.",
+        "Porque hexadecimal sempre representa endereços IP.",
+        "Porque todo número hexadecimal é criptografado."
+      ],
+      "a": 1,
+      "exp": "A base 16 possui 16 valores possíveis por dígito, o que equivale a 4 bits. Dois dígitos hexadecimais representam 8 bits, ou 1 byte.",
+      "difficulty": "iniciante",
+      "topic": "hexadecimal"
+    },
+    {
+      "id": "q0.2.3",
+      "type": "cálculo",
+      "q": "Qual é o valor decimal de FF em hexadecimal?",
+      "opts": [
+        "15",
+        "127",
+        "240",
+        "255"
+      ],
+      "a": 3,
+      "exp": "F vale 15. FF = 15 × 16 + 15 = 255. Também é o byte 11111111.",
+      "difficulty": "iniciante",
+      "topic": "conversão"
+    },
+    {
+      "id": "q0.2.4",
+      "type": "diagnóstico",
+      "q": "Em IPv4, por que devemos representar o decimal 10 como 00001010 quando estamos mostrando o octeto completo?",
+      "opts": [
+        "Porque 1010 está matematicamente errado.",
+        "Porque todo octeto IPv4 tem 8 bits e os zeros à esquerda completam o campo.",
+        "Porque 10 decimal sempre significa hexadecimal.",
+        "Porque IPv4 usa 10 bits por octeto."
+      ],
+      "a": 1,
+      "exp": "O valor 1010 está correto como valor binário mínimo, mas o octeto completo precisa de 8 bits: 00001010.",
+      "difficulty": "iniciante",
+      "topic": "ipv4"
+    },
+    {
+      "id": "q0.2.5",
+      "type": "segurança",
+      "q": "Qual afirmação está correta sobre hexadecimal em análise de segurança?",
+      "opts": [
+        "Hexadecimal é uma forma de criptografia forte.",
+        "Hexadecimal é sempre sinal de malware.",
+        "Hexadecimal é uma representação compacta de valores binários e precisa de contexto para interpretação.",
+        "Hexadecimal só existe em IPv6."
+      ],
+      "a": 2,
+      "exp": "Hexadecimal é apenas representação. Pode aparecer em dados benignos, maliciosos, logs, dumps, hashes, MAC, IPv6 e muitos outros contextos.",
+      "difficulty": "iniciante",
+      "topic": "segurança"
+    },
+    {
+      "id": "q0.2.6",
+      "type": "cenário",
+      "q": "Um MAC é exibido como AA:BB:CC:DD:EE:FF. Quantos bytes ele possui?",
+      "opts": [
+        "3 bytes",
+        "4 bytes",
+        "6 bytes",
+        "12 bytes"
+      ],
+      "a": 2,
+      "exp": "Cada par hexadecimal representa 1 byte. O endereço possui seis pares: AA, BB, CC, DD, EE e FF. Portanto, são 6 bytes.",
+      "difficulty": "iniciante",
+      "topic": "mac"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc0.2.1",
+      "front": "O que é um bit?",
+      "back": "A menor unidade de informação digital, com dois estados possíveis: 0 ou 1.",
+      "tags": [
+        "bit",
+        "fundamentos"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.2.2",
+      "front": "O que é um byte?",
+      "back": "Um grupo de 8 bits. Em redes, um octeto também possui 8 bits.",
+      "tags": [
+        "byte",
+        "octeto"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.2.3",
+      "front": "Quanto vale FF em decimal?",
+      "back": "255. FF é o maior valor representável em 1 byte.",
+      "tags": [
+        "hexadecimal",
+        "conversão"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.2.4",
+      "front": "Por que hexadecimal é útil em redes?",
+      "back": "Porque compacta binário: 1 dígito hex representa 4 bits e 2 dígitos representam 1 byte.",
+      "tags": [
+        "hexadecimal",
+        "redes"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.2.5",
+      "front": "Por que 10 vira 00001010 em um octeto IPv4?",
+      "back": "Porque o valor 10 precisa ser representado dentro de um campo fixo de 8 bits.",
+      "tags": [
+        "ipv4",
+        "binário"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.2.6",
+      "front": "Hexadecimal é criptografia?",
+      "back": "Não. Hexadecimal é apenas uma forma de representar números e bytes de maneira compacta.",
+      "tags": [
+        "segurança",
+        "hexadecimal"
+      ],
+      "difficulty": "iniciante"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex0.2.1",
+      "type": "cálculo",
+      "prompt": "Converta o decimal 255 para binário de 8 bits e hexadecimal.",
+      "expectedAnswer": "255 = 11111111 = FF.",
+      "explanation": "255 é a soma de todos os pesos de um octeto: 128+64+32+16+8+4+2+1. Em hexadecimal, 1111 vira F e 1111 vira F."
+    },
+    {
+      "id": "ex0.2.2",
+      "type": "cálculo",
+      "prompt": "Converta o decimal 10 para binário de 8 bits e hexadecimal de 2 dígitos.",
+      "expectedAnswer": "10 = 00001010 = 0A.",
+      "explanation": "O valor mínimo em binário seria 1010, mas o octeto completo precisa de 8 bits. Em hexadecimal, A precisa ser exibido como 0A para representar 1 byte."
+    },
+    {
+      "id": "ex0.2.3",
+      "type": "conceitual",
+      "prompt": "Explique por que hexadecimal aparece em endereços MAC.",
+      "expectedAnswer": "MAC possui 48 bits, geralmente exibidos como 6 bytes. Cada byte pode ser representado por 2 dígitos hexadecimais, tornando o endereço mais curto e legível.",
+      "explanation": "Escrever MAC em binário puro seria longo demais. Hexadecimal preserva alinhamento com bytes e melhora a leitura humana."
+    },
+    {
+      "id": "ex0.2.4",
+      "type": "segurança",
+      "prompt": "Você recebeu um alerta contendo bytes em hexadecimal. O que você deve verificar antes de afirmar que é criptografia ou malware?",
+      "expectedAnswer": "Verificar protocolo, origem, destino, porta, contexto, ferramenta que gerou o alerta, formato do dado, possibilidade de encoding, compressão, hash ou binário legítimo.",
+      "explanation": "Hexadecimal é representação. A classificação de segurança exige contexto e correlação, não apenas aparência."
+    }
+  ],
+  "challenge": {
+    "title": "Documentar uma rede pequena em três representações",
+    "scenario": "Você está ajudando um colega que entende configuração básica de IP, mas não entende por que subnetting e Wireshark usam tantos números estranhos. Ele precisa documentar o host 10.0.1.255, sua máscara 255.255.255.0 e um MAC AA:BB:CC:DD:EE:FF.",
+    "tasks": [
+      "Converter 10.0.1.255 para binário, preservando 8 bits por octeto.",
+      "Converter 10.0.1.255 para hexadecimal, preservando 2 dígitos por octeto.",
+      "Converter 255.255.255.0 para binário e explicar por que isso corresponde a /24.",
+      "Explicar quantos bytes existem no MAC AA:BB:CC:DD:EE:FF.",
+      "Escrever uma observação de segurança explicando por que hexadecimal não significa criptografia."
+    ],
+    "constraints": [
+      "Não usar apenas calculadora; explicar o raciocínio.",
+      "Preservar zeros à esquerda em binário e hexadecimal.",
+      "Não classificar nenhum valor como malicioso sem contexto.",
+      "A entrega deve ser compreensível para alguém de TI que está começando em redes."
+    ],
+    "expectedDeliverables": [
+      "Tabela de conversão do IPv4.",
+      "Tabela de conversão da máscara.",
+      "Explicação sobre bytes do MAC.",
+      "Nota defensiva sobre hexadecimal, encoding e criptografia."
+    ],
+    "gradingRubric": [
+      {
+        "criterion": "Conversão correta do IPv4",
+        "points": 30,
+        "description": "O aluno preserva 8 bits por octeto e 2 dígitos hexadecimais por byte."
+      },
+      {
+        "criterion": "Interpretação correta da máscara /24",
+        "points": 25,
+        "description": "O aluno explica que os 24 primeiros bits estão ligados na máscara 255.255.255.0."
+      },
+      {
+        "criterion": "Explicação de MAC em bytes",
+        "points": 20,
+        "description": "O aluno reconhece seis pares hexadecimais como seis bytes."
+      },
+      {
+        "criterion": "Raciocínio de segurança",
+        "points": 25,
+        "description": "O aluno diferencia representação hexadecimal, codificação, hash e criptografia em nível conceitual."
+      }
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "Primeiro identificamos o tamanho dos campos. IPv4 tem quatro octetos de 8 bits. Máscara IPv4 também tem quatro octetos. MAC tem seis bytes normalmente exibidos como pares hexadecimais. Depois convertemos cada campo mantendo seu tamanho, porque redes usam campos fixos.",
+    "steps": [
+      "Separar o IPv4 10.0.1.255 em 10, 0, 1 e 255.",
+      "Converter cada octeto para 8 bits: 00001010, 00000000, 00000001 e 11111111.",
+      "Converter cada octeto para hexadecimal: 0A, 00, 01 e FF.",
+      "Converter a máscara 255.255.255.0 para binário: 11111111.11111111.11111111.00000000.",
+      "Contar os bits ligados da máscara: 24, portanto /24.",
+      "Ler o MAC AA:BB:CC:DD:EE:FF como seis pares hexadecimais, ou seja, seis bytes.",
+      "Registrar que hexadecimal é forma de representação, não mecanismo de segurança."
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "10.0.1.255 em binário é 1010.0.1.11111111.",
+        "whyItIsWrong": "Os valores estão matematicamente reconhecíveis, mas os octetos não foram preservados com 8 bits. Em redes, isso atrapalha máscara e comparação de bits."
+      },
+      {
+        "answer": "AA:BB:CC:DD:EE:FF tem 12 bytes porque tem 12 caracteres hexadecimais.",
+        "whyItIsWrong": "Cada byte é representado por dois dígitos hexadecimais. Portanto 12 dígitos hexadecimais equivalem a 6 bytes."
+      },
+      {
+        "answer": "FF indica criptografia ou ataque.",
+        "whyItIsWrong": "FF é apenas o valor 255 em hexadecimal ou um byte com todos os bits ligados. O significado depende do campo e do contexto."
+      }
+    ],
+    "finalAnswer": "10.0.1.255 = 00001010.00000000.00000001.11111111 = 0A 00 01 FF. A máscara 255.255.255.0 = 11111111.11111111.11111111.00000000, logo possui 24 bits de rede e pode ser escrita como /24. O MAC AA:BB:CC:DD:EE:FF possui 6 bytes. Hexadecimal é representação compacta de bytes, não criptografia."
+  },
+  "glossary": [
+    {
+      "term": "Bit",
+      "shortDefinition": "Menor unidade de informação digital, com valor 0 ou 1.",
+      "longDefinition": "Bit representa um de dois estados possíveis. Em redes, bits compõem campos de protocolos, endereços, máscaras, flags e payloads.",
+      "example": "Uma flag TCP pode ser pensada como um bit ligado ou desligado.",
+      "relatedTerms": [
+        "byte",
+        "binário",
+        "flag"
+      ],
+      "relatedLessons": [
+        "0.1",
+        "0.2",
+        "6.3"
+      ]
+    },
+    {
+      "term": "Byte",
+      "shortDefinition": "Grupo de 8 bits.",
+      "longDefinition": "Byte é uma unidade central para representar dados. Em redes, tamanhos de payload, endereços MAC e octetos IPv4 dependem dessa ideia.",
+      "example": "O valor hexadecimal FF representa um byte com todos os bits ligados.",
+      "relatedTerms": [
+        "bit",
+        "octeto",
+        "hexadecimal"
+      ],
+      "relatedLessons": [
+        "0.2",
+        "0.4",
+        "3.2"
+      ]
+    },
+    {
+      "term": "Octeto",
+      "shortDefinition": "Grupo de 8 bits, termo muito usado em redes.",
+      "longDefinition": "Octeto é usado para reforçar que o campo possui exatamente 8 bits. Cada parte de um endereço IPv4 é um octeto.",
+      "example": "192 em 192.168.10.50 é um octeto IPv4.",
+      "relatedTerms": [
+        "byte",
+        "IPv4",
+        "máscara"
+      ],
+      "relatedLessons": [
+        "0.2",
+        "4.1",
+        "5.1"
+      ]
+    },
+    {
+      "term": "Hexadecimal",
+      "shortDefinition": "Sistema numérico de base 16, usando 0 a 9 e A a F.",
+      "longDefinition": "Hexadecimal é usado porque compacta binário de forma alinhada: cada dígito representa 4 bits, e dois dígitos representam 1 byte.",
+      "example": "C0 A8 0A 32 representa os bytes do IPv4 192.168.10.50.",
+      "relatedTerms": [
+        "binário",
+        "byte",
+        "MAC",
+        "IPv6"
+      ],
+      "relatedLessons": [
+        "0.2",
+        "3.2",
+        "4.1",
+        "8.1"
+      ]
+    },
+    {
+      "term": "Zeros à esquerda",
+      "shortDefinition": "Zeros adicionados antes do valor para completar o tamanho de um campo.",
+      "longDefinition": "Em campos fixos, zeros à esquerda preservam a largura correta. Isso é importante em octetos IPv4, bytes em hexadecimal e campos de protocolo.",
+      "example": "10 decimal em um octeto IPv4 deve ser escrito como 00001010.",
+      "relatedTerms": [
+        "octeto",
+        "campo fixo",
+        "binário"
+      ],
+      "relatedLessons": [
+        "0.2",
+        "5.1"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Aula 0.1: Como computadores representam informação",
+      "organization": "Deixando de ser TBN",
+      "url": "internal:0.1",
+      "note": "Base conceitual para entender bits como representação de estados físicos."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v1.1 — Aula 0.2: Bits, bytes, binário e hexadecimal",
+      "organization": "Deixando de ser TBN",
+      "url": "internal:v1.1:0.2",
+      "note": "Fonte pedagógica congelada usada para preservar ID, título e objetivos aproveitáveis."
+    },
+    {
+      "type": "standard",
+      "title": "Conceitos fundamentais de representação binária e hexadecimal",
+      "organization": "Base técnica consolidada",
+      "url": "internal:foundations",
+      "note": "Conteúdo estável usado como base para redes, sistemas e segurança."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "m00",
+      "lesson": "fundamentos",
+      "reason": "Pipelines, IaC e validação de CIDR dependem de entendimento de bits, bytes e representação de valores."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "tokens-e-codificacao",
+      "lesson": "base64-tokens-claims",
+      "reason": "A próxima aula sobre codificação prepara a base para entender tokens, claims, payloads e representações em autenticação moderna."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70,
+      "oneOf": [
+        "labMarkedDone",
+        "practicalExerciseDone"
+      ]
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "0.3"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>
+    Para entender conversões, pense em posição e peso. No decimal, cada posição vale uma potência de 10. No binário, cada posição vale uma potência de 2. No hexadecimal, cada posição vale uma potência de 16. O número não é mágico: ele é a soma dos símbolos multiplicados pelo peso de suas posições.
+  </p>
+  <h3>Como ler um byte em binário</h3>
+  <p>
+    Um octeto possui 8 posições. Da esquerda para a direita, os pesos são: 128, 64, 32, 16, 8, 4, 2 e 1. Quando um bit está em 1, aquele peso entra na soma. Quando está em 0, não entra.
+  </p>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Bit</th>
+        <th>7</th>
+        <th>6</th>
+        <th>5</th>
+        <th>4</th>
+        <th>3</th>
+        <th>2</th>
+        <th>1</th>
+        <th>0</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Peso</td>
+        <td>128</td>
+        <td>64</td>
+        <td>32</td>
+        <td>16</td>
+        <td>8</td>
+        <td>4</td>
+        <td>2</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>192</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    No exemplo acima, <code>11000000</code> vale 128 + 64 = 192. O valor <code>168</code> é <code>10101000</code>, porque 128 + 32 + 8 = 168. O valor <code>10</code> é <code>00001010</code>, porque 8 + 2 = 10. Os zeros à esquerda importam porque um octeto IPv4 tem tamanho fixo de 8 bits.
+  </p>
+  <h3>Como hexadecimal compacta binário</h3>
+  <p>
+    Hexadecimal trabalha em grupos de 4 bits. O binário <code>1100</code> vale 12, que em hexadecimal é <code>C</code>. O binário <code>0000</code> vale 0. Portanto <code>11000000</code> vira <code>C0</code>. O binário <code>10101000</code> vira <code>A8</code>. Assim, o IPv4 <code>192.168.10.50</code> pode ser visualizado em bytes como <code>C0 A8 0A 32</code>.
+  </p>
+  <ol class="flow-list">
+    <li>Separe o octeto em dois grupos de 4 bits.</li>
+    <li>Converta cada grupo para decimal entre 0 e 15.</li>
+    <li>Troque 10, 11, 12, 13, 14 e 15 por A, B, C, D, E e F.</li>
+    <li>Junte os dois dígitos hexadecimais.</li>
+  </ol>
+</section>

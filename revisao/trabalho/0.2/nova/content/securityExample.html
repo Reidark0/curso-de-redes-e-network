@@ -1,0 +1,40 @@
+
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>
+    Segurança depende muito de interpretação correta. Um atacante pode esconder dados em formatos pouco familiares, mas isso não significa que hexadecimal seja malicioso. Um payload em hex pode ser apenas exibição de bytes. Um texto em Base64 pode ser apenas codificação. Um hash em hexadecimal pode ser uma impressão digital criptográfica. Uma sequência binária pode ser parte legítima de um arquivo. O erro do analista é concluir antes de entender o contexto.
+  </p>
+  <table class="data-table risk-table">
+    <thead>
+      <tr>
+        <th>Risco</th>
+        <th>Como aparece</th>
+        <th>Impacto</th>
+        <th>Mitigação defensiva</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Confundir hex com criptografia</td>
+        <td>Dump mostra bytes como <code>4D 5A</code> ou <code>FF D8</code></td>
+        <td>Análise incorreta do artefato</td>
+        <td>Identificar formato, cabeçalho, contexto e ferramenta de origem</td>
+      </tr>
+      <tr>
+        <td>Ignorar zeros à esquerda</td>
+        <td><code>10</code> tratado como <code>1010</code> em vez de <code>00001010</code></td>
+        <td>Erro em máscara, subnetting e interpretação de campo fixo</td>
+        <td>Respeitar tamanho do campo: octeto, 16 bits, 32 bits ou 128 bits</td>
+      </tr>
+      <tr>
+        <td>Interpretar payload sem contexto</td>
+        <td>Bytes aleatórios em captura de tráfego</td>
+        <td>Falso positivo ou falso negativo</td>
+        <td>Correlacionar protocolo, porta, TLS, logs, endpoint e comportamento</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    O limite ético é claro: nesta aula, o objetivo é interpretação defensiva, troubleshooting e compreensão. Não há instrução para burlar controles, esconder tráfego ou explorar sistemas. O aprendizado serve para analisar evidências e reduzir erros técnicos.
+  </p>
+</section>

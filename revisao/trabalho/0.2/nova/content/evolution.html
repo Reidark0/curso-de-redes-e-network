@@ -1,0 +1,40 @@
+
+<section class="lesson-section lesson-section--evolution">
+  <h2>4. Evolução</h2>
+  <p>
+    O caminho prático foi uma evolução de conveniência e precisão. Primeiro, a máquina precisa de bits. Depois, para manipular grupos de bits com eficiência, surgem agrupamentos como nibble, byte, word e registradores. Para humanos, aparecem notações que equilibram legibilidade e fidelidade técnica. O decimal é amigável, o binário mostra a estrutura real de bits, e o hexadecimal cria uma ponte compacta entre os dois mundos.
+  </p>
+  <table class="data-table comparison-table">
+    <thead>
+      <tr>
+        <th>Representação</th>
+        <th>Vantagem</th>
+        <th>Limitação</th>
+        <th>Uso ideal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Binário puro</td>
+        <td>Mostra exatamente os bits</td>
+        <td>Longo e difícil de ler em campos grandes</td>
+        <td>Máscaras, flags e estudo de funcionamento interno</td>
+      </tr>
+      <tr>
+        <td>Decimal</td>
+        <td>Familiar para humanos</td>
+        <td>Esconde a estrutura de bits</td>
+        <td>IPv4, portas, métricas e valores de configuração</td>
+      </tr>
+      <tr>
+        <td>Hexadecimal</td>
+        <td>Compacto e alinhado a grupos de 4 bits</td>
+        <td>Exige conhecer A a F</td>
+        <td>MAC, IPv6, dumps, campos binários e identificadores</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    Essa evolução explica por que ferramentas modernas alternam entre bases. Uma interface gráfica pode mostrar uma porta como decimal, um MAC como hexadecimal e uma máscara como decimal pontuado, enquanto internamente todos são bits. A maturidade técnica consiste em reconhecer que a representação muda, mas o valor lógico continua sendo interpretado conforme o contexto do protocolo.
+  </p>
+</section>
