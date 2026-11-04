@@ -15,7 +15,7 @@ export const module00 = {
   title: "Fundamentos da Computação",
   subtitle: "A base antes das redes: representação digital, bases numéricas, codificação, sinais, métricas, protocolos e pensamento em camadas.",
   level: "iniciante",
-  estimatedHours: 23,
+  estimatedHours: 4,
   icon: "computing",
   unlockedByDefault: true,
   prerequisites: [],
