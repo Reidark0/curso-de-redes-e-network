@@ -1,0 +1,22 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <p>
+    Uma conversa de protocolo costuma seguir estas fases:</p>
+  <ol class="flow-list">
+    <li><strong>Início:</strong> um lado, o <strong>cliente</strong>, decide falar com o outro, o <strong>servidor</strong>. Por exemplo, o navegador quer uma página.</li>
+    <li><strong>Negociação:</strong> muitos protocolos começam com uma troca inicial de mensagens para combinar versão e opções, chamada <strong>handshake</strong> (“aperto de mão”).</li>
+    <li><strong>Pedido:</strong> o cliente envia uma mensagem com os campos esperados, como o comando, o destino e a versão.</li>
+    <li><strong>Interpretação:</strong> o servidor lê os campos segundo o contrato e confere o estado da conversa. Um formato inválido, um valor proibido ou um pedido fora de hora (dados antes da identificação, por exemplo) recebe erro ou é descartado.</li>
+    <li><strong>Resposta:</strong> o servidor devolve o que foi pedido ou um <strong>código de status</strong> que explica o resultado: sucesso, recurso inexistente, falta de identificação, falta de permissão, erro interno.</li>
+    <li><strong>Espera:</strong> se a resposta não chega no tempo combinado, o cliente repete o pedido ou desiste com erro de timeout.</li>
+    <li><strong>Encerramento:</strong> a conversa termina por uma mensagem de fim, por timeout ou por erro.</li>
+  </ol>
+  <p>
+    A especificação diz como o protocolo deve se comportar, mas quem o executa é software real: um protocolo bem definido pode ter uma implementação com bugs, e um protocolo seguro pode ser mal configurado.</p>
+  <div class="callout warning"><strong>Erros comuns</strong><ul>
+    <li><strong>Achar que protocolo é porta.</strong> Porta é só um número que separa conversas no computador (a 443 costuma ser a dos sites com https), tema da aula 2.6. O protocolo é o contrato inteiro, e um serviço pode até usar uma porta fora do padrão.</li>
+    <li><strong>Achar que ping respondendo prova que a aplicação funciona.</strong> Ping só mostra que o destino responde a um pedido de eco; não testa a conexão com o serviço, a criptografia nem o pedido.</li>
+    <li><strong>Tratar todo código de erro como problema de rede.</strong> Um 403, 404 ou 500 é uma resposta: a mensagem chegou e o servidor respondeu.</li>
+  </ul></div>
+</section>

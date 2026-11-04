@@ -1,0 +1,37 @@
+
+<section class="lesson-section lesson-section--diagram">
+  <h2>Diagrama</h2>
+  <svg class="lesson-svg" viewBox="0 0 980 420" role="img" aria-labelledby="m00l07-title m00l07-desc">
+    <title id="m00l07-title">Protocolo como contrato de comunicação</title>
+    <desc id="m00l07-desc">Diagrama mostrando cliente e servidor trocando mensagens com formato, ordem, estado, timeout, erro e segurança.</desc>
+    <defs>
+      <marker id="m00l07-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
+      </marker>
+    </defs>
+    <rect x="45" y="150" width="150" height="80" rx="14" class="svg-node svg-node--client" />
+    <text x="120" y="184" text-anchor="middle" class="svg-label">Cliente</text>
+    <text x="120" y="207" text-anchor="middle" class="svg-label svg-label--small">implementação A</text>
+    <rect x="785" y="150" width="150" height="80" rx="14" class="svg-node svg-node--server" />
+    <text x="860" y="184" text-anchor="middle" class="svg-label">Servidor</text>
+    <text x="860" y="207" text-anchor="middle" class="svg-label svg-label--small">implementação B</text>
+    <rect x="300" y="40" width="380" height="86" rx="14" class="svg-zone" />
+    <text x="490" y="72" text-anchor="middle" class="svg-label">Contrato do protocolo</text>
+    <text x="490" y="98" text-anchor="middle" class="svg-label svg-label--small">formato + significado + ordem + tempo + erro + segurança</text>
+    <line x1="195" y1="170" x2="785" y2="170" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l07-arrow)" />
+    <text x="490" y="155" text-anchor="middle" class="svg-label svg-label--small">mensagem 1: versão, método, campos</text>
+    <line x1="785" y1="205" x2="195" y2="205" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m00l07-arrow)" />
+    <text x="490" y="232" text-anchor="middle" class="svg-label svg-label--small">mensagem 2: status, dados ou erro</text>
+    <rect x="245" y="285" width="135" height="58" rx="12" class="svg-node svg-node--security" />
+    <text x="312" y="309" text-anchor="middle" class="svg-label">Estado</text>
+    <text x="312" y="329" text-anchor="middle" class="svg-label svg-label--small">fase da conversa</text>
+    <rect x="422" y="285" width="135" height="58" rx="12" class="svg-node svg-node--firewall" />
+    <text x="490" y="309" text-anchor="middle" class="svg-label">Timeout</text>
+    <text x="490" y="329" text-anchor="middle" class="svg-label svg-label--small">espera e repete</text>
+    <rect x="600" y="285" width="135" height="58" rx="12" class="svg-node svg-node--attacker" />
+    <text x="667" y="309" text-anchor="middle" class="svg-label">Erro</text>
+    <text x="667" y="329" text-anchor="middle" class="svg-label svg-label--small">rejeitar ou corrigir</text>
+    <path d="M120 240 C170 310 205 315 245 315" class="svg-flow svg-flow--request" marker-end="url(#m00l07-arrow)" />
+    <path d="M860 240 C805 310 775 315 735 315" class="svg-flow svg-flow--response" marker-end="url(#m00l07-arrow)" />
+  </svg>
+</section>

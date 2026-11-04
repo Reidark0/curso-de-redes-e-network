@@ -1,0 +1,22 @@
+
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <div class="definition-box">
+    <strong>Definição:</strong> protocolo é o contrato de comunicação entre sistemas. Ele diz o que pode ser enviado, em que formato, em que ordem, em que momento, que resposta esperar e o que fazer quando algo dá errado.
+  </div>
+  <p>Todo protocolo define, em maior ou menor grau:</p>
+  <ul>
+    <li><strong>Formato (sintaxe):</strong> quais campos a mensagem tem, como são separados e que tamanho têm.</li>
+    <li><strong>Significado (semântica):</strong> o que cada campo quer dizer e quais valores são válidos. Uma mensagem pode ter o formato certo e mesmo assim trazer um valor proibido.</li>
+    <li><strong>Ordem:</strong> qual mensagem vem antes e qual vem depois.</li>
+    <li><strong>Estado:</strong> em que fase da conversa cada lado está (por exemplo, antes ou depois de se identificar).</li>
+    <li><strong>Tempo:</strong> quanto esperar por uma resposta antes de tentar de novo ou desistir (o <em>timeout</em>).</li>
+    <li><strong>Erro:</strong> como recusar, avisar o motivo ou encerrar.</li>
+    <li><strong>Versão:</strong> como as duas pontas combinam qual versão e quais opções ambas entendem.</li>
+    <li><strong>Segurança:</strong> se e como cada lado prova quem é e protege o conteúdo. Nem todo protocolo faz isso; na web, quem cuida é o TLS (veja o Exemplo).</li>
+  </ul>
+  <p>
+    Essas regras só funcionam entre fabricantes diferentes se forem <strong>padronizadas</strong>: escritas em documentos públicos, como as RFCs do IETF, implementadas por vários fornecedores e testadas entre si. A capacidade de sistemas diferentes conversarem seguindo o mesmo padrão se chama <strong>interoperabilidade</strong>. É por isso que um navegador de uma empresa abre o site hospedado no servidor de outra.</p>
+  <p>
+    Alguns protocolos usam mensagens de texto legíveis, como o <code>GET</code> do pedido web; outros usam campos binários compactos, que você só lê com uma ferramenta. Nos dois casos, quem dá significado aos bytes é o contrato.</p>
+</section>

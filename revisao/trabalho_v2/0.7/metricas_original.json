@@ -1,0 +1,103 @@
+{
+  "id": "0.7",
+  "versao": "original",
+  "titulo": "O que é um protocolo",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5834,
+    "teoria": 3617,
+    "praticaExtra": 1576,
+    "quiz": 333,
+    "flashcards": 126
+  },
+  "porGrupoTeoria": {
+    "introducao": 745,
+    "contexto": 693,
+    "conteudo": 504,
+    "exemplos": 980,
+    "seguranca_troubleshooting": 695
+  },
+  "porSecao": {
+    "motivation": 251,
+    "summary": 70,
+    "history": 275,
+    "problem": 212,
+    "evolution": 206,
+    "concept": 135,
+    "internals": 204,
+    "architecture": 162,
+    "diagram": 3,
+    "analogy": 124,
+    "simpleExample": 160,
+    "enterpriseExample": 196,
+    "cloudExample": 158,
+    "devsecopsExample": 163,
+    "securityExample": 179,
+    "objectives": 80,
+    "learningOutcomes": 110,
+    "glossary": 234,
+    "security": 365,
+    "troubleshooting": 330,
+    "nextTheme": 43
+  },
+  "pratica": {
+    "quiz": 333,
+    "flashcards": 126,
+    "lab": 829,
+    "mentorQuestions": 151,
+    "exercises": 178,
+    "challenge": 178,
+    "commentedSolution": 240
+  },
+  "outros": {
+    "title+subtitle": 18,
+    "nextTheme": 43,
+    "references": 72,
+    "linksToOtherCourses": 49
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 105,
+    "alternativa_5minPorPasso": 30,
+    "plausivel": false,
+    "override": null,
+    "palavras": 829
+  },
+  "duracao": {
+    "declarada": "75-105 min",
+    "estimatedStudyTimeMinutes": 105,
+    "nucleo": 36.8,
+    "nucleoPartes": {
+      "teoria": 27.8,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 75,
+    "praticaExtraPartes": {
+      "lab": 30,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "30-45 min",
+    "praticaExtraArredondada": 75,
+    "recomendada": "30-45 min + 75 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 45
+  }
+}

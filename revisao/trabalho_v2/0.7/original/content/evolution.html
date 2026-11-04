@@ -1,0 +1,20 @@
+
+<section class="lesson-section lesson-section--evolution">
+  <h2>4. Evolução</h2>
+  <p>
+    Protocolos evoluíram de regras simples para ecossistemas complexos. Alguns protocolos antigos eram texto puro e fáceis de ler, mas não tinham autenticação forte ou criptografia. Outros eram binários, eficientes e compactos, mas mais difíceis de depurar manualmente. Protocolos modernos frequentemente combinam negociação de versão, criptografia, compressão, multiplexação, autenticação e observabilidade.
+  </p>
+  <p>
+    A evolução também trouxe separação de responsabilidades. Em vez de um único protocolo resolver tudo, camadas cooperam. Ethernet entrega quadros em uma rede local. IP endereça e encaminha pacotes entre redes. TCP oferece conexão confiável sobre IP. TLS protege a comunicação. HTTP organiza requisições e respostas de aplicações. OIDC, por cima de HTTP e TLS, organiza autenticação federada e tokens. Cada camada tem seu contrato.
+  </p>
+  <table class="data-table comparison-table">
+    <thead><tr><th>Tipo de protocolo</th><th>Característica</th><th>Vantagem</th><th>Limitação</th></tr></thead>
+    <tbody>
+      <tr><td>Texto simples</td><td>Mensagens legíveis por humanos</td><td>Facilita depuração e aprendizado</td><td>Pode ser verboso e exigir cuidado com parsing</td></tr>
+      <tr><td>Binário</td><td>Campos compactos e estruturados</td><td>Eficiência e controle de tamanho</td><td>Mais difícil de ler sem ferramenta</td></tr>
+      <tr><td>Orientado a conexão</td><td>Mantém estado de conversa</td><td>Permite confiabilidade e sequência</td><td>Mais complexo e sensível a timeouts</td></tr>
+      <tr><td>Sem conexão</td><td>Mensagens independentes</td><td>Menor overhead e simplicidade</td><td>Aplicação precisa lidar com perda e ordem</td></tr>
+      <tr><td>Seguro por negociação</td><td>Combina versões, chaves e algoritmos</td><td>Protege confidencialidade e integridade</td><td>Falhas de configuração geram incompatibilidade</td></tr>
+    </tbody>
+  </table>
+</section>

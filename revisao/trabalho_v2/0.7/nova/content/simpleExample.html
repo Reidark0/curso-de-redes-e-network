@@ -1,0 +1,20 @@
+
+<section class="lesson-section lesson-section--example">
+  <h2>Exemplo simples</h2>
+  <p>
+    Abrir <code>https://example.com</code> no navegador já encadeia quatro protocolos, cada um com seu contrato:</p>
+  <ol class="flow-list">
+    <li><strong>DNS:</strong> traduz o nome <code>example.com</code> no endereço numérico do servidor.</li>
+    <li><strong>TCP:</strong> abre uma conexão até o servidor, na porta 443.</li>
+    <li><strong>TLS:</strong> combina a criptografia da conexão e confere o certificado, o documento digital que prova que o servidor é mesmo o <code>example.com</code>.</li>
+    <li><strong>HTTP:</strong> leva o pedido e traz a resposta. O pedido é texto:</li>
+  </ol>
+  <pre class="code-block"><code>GET / HTTP/1.1
+Host: example.com
+Accept: text/html
+</code></pre>
+  <p>
+    A primeira linha traz o comando (<code>GET</code>), o caminho (<code>/</code>, a página inicial) e a versão. As outras são campos do cabeçalho, no formato <code>Nome: valor</code>. A resposta começa com uma linha de status, como <code>HTTP/1.1 200 OK</code> (sucesso) ou <code>HTTP/1.1 404 Not Found</code> (a página do gancho da Motivação).</p>
+  <p>
+    Cada etapa falha de um jeito, e o sintoma diz onde a conversa parou. Se o DNS falha, o nome não resolve e nada mais acontece. Se o TCP falha, a conexão não abre. Se o TLS falha, aparece um erro de certificado. Se o HTTP responde com erro, as três etapas anteriores funcionaram e o servidor recusou o pedido: 401 (faltou identificação ou ela é inválida), 403 (identificado, mas sem permissão), 404 (recurso não encontrado) ou 500 (erro interno do servidor). A ferramenta <code>curl</code>, usada no laboratório, mostra essas etapas uma a uma com a opção <code>-v</code>.</p>
+</section>

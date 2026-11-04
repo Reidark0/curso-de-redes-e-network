@@ -1,0 +1,41 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <p>
+    Por dentro, um protocolo combina seis elementos: <strong>mensagens</strong>, <strong>campos</strong>, <strong>estados</strong>, <strong>temporização</strong>, <strong>erros</strong> e <strong>negociação</strong>. Nem todo protocolo tem todos de forma complexa, mas quase todos têm parte deles. Uma conversa típica segue estas fases:
+  </p>
+  <ol class="flow-list">
+    <li><strong>Início:</strong> uma entidade decide iniciar a comunicação. Pode ser um cliente abrindo conexão TCP, um navegador enviando HTTP ou um resolver perguntando ao DNS.</li>
+    <li><strong>Mensagem inicial:</strong> a primeira mensagem carrega os campos esperados, como versão, método, identificador, tamanho, flags ou destino.</li>
+    <li><strong>Interpretação:</strong> o receptor lê os campos de acordo com o protocolo. Se o formato for inválido, responde com erro ou descarta.</li>
+    <li><strong>Estado:</strong> algumas conversas mudam de fase. Exemplo: antes de autenticar, durante a autenticação, autenticado, encerrando.</li>
+    <li><strong>Resposta:</strong> o receptor responde com sucesso, erro, redirecionamento, desafio de autenticação, confirmação ou o dado pedido.</li>
+    <li><strong>Timeout e repetição:</strong> se algo demora demais, a implementação decide esperar, reenviar, abrir nova conexão ou falhar.</li>
+    <li><strong>Encerramento:</strong> a conversa termina por mensagem explícita, timeout, reset, erro ou fechamento do transporte.</li>
+  </ol>
+  <h3>Tipos de protocolo</h3>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead><tr><th>Tipo</th><th>Característica</th><th>Vantagem</th><th>Limitação</th></tr></thead>
+      <tbody>
+        <tr><td>Texto simples</td><td>Mensagens legíveis por humanos</td><td>Facilita depuração e aprendizado</td><td>Pode ser verboso, exige cuidado com parsing e, nos protocolos antigos, costuma trafegar sem criptografia nem autenticação forte</td></tr>
+        <tr><td>Binário</td><td>Campos compactos e estruturados</td><td>Eficiência e controle de tamanho</td><td>Mais difícil de ler sem ferramenta</td></tr>
+        <tr><td>Orientado a conexão</td><td>Mantém estado de conversa</td><td>Permite confiabilidade e sequência</td><td>Mais complexo e sensível a timeouts</td></tr>
+        <tr><td>Sem conexão</td><td>Mensagens independentes</td><td>Menor overhead e simplicidade</td><td>A aplicação precisa lidar com perda e ordem</td></tr>
+        <tr><td>Seguro por negociação</td><td>Combina versões, chaves e algoritmos</td><td>Protege confidencialidade e integridade</td><td>Falhas de configuração geram incompatibilidade</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Especificação × implementação</h3>
+  <p>
+    A especificação define o comportamento esperado, mas quem executa o protocolo é software e hardware real, que pode ter bugs, configurações incorretas, versões incompatíveis, limites de buffer, parsing inseguro, timeouts agressivos ou logs insuficientes. Daí três cuidados:
+  </p>
+  <ul>
+    <li>um protocolo bem definido não garante implementação correta;</li>
+    <li>um protocolo seguro pode ser configurado de forma insegura;</li>
+    <li>protocolos diferentes podem compartilhar a mesma porta quando há proxy, multiplexação ou encapsulamento.</li>
+  </ul>
+  <p>
+    Por isso, troubleshooting de protocolo exige teoria e evidência prática.
+  </p>
+</section>

@@ -1,0 +1,101 @@
+{
+  "id": "0.7",
+  "versao": "v1",
+  "titulo": "O que é um protocolo",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5604,
+    "teoria": 3174,
+    "praticaExtra": 1503,
+    "quiz": 624,
+    "flashcards": 136
+  },
+  "porGrupoTeoria": {
+    "introducao": 690,
+    "contexto": 274,
+    "conteudo": 697,
+    "exemplos": 748,
+    "seguranca_troubleshooting": 765
+  },
+  "porSecao": {
+    "motivation": 162,
+    "summary": 104,
+    "problem": 274,
+    "concept": 99,
+    "internals": 340,
+    "architecture": 257,
+    "diagram": 1,
+    "analogy": 111,
+    "simpleExample": 182,
+    "enterpriseExample": 150,
+    "cloudExample": 120,
+    "devsecopsExample": 116,
+    "securityExample": 69,
+    "objectives": 80,
+    "learningOutcomes": 110,
+    "glossary": 234,
+    "security": 410,
+    "troubleshooting": 355,
+    "nextTheme": 29
+  },
+  "pratica": {
+    "quiz": 624,
+    "flashcards": 136,
+    "lab": 756,
+    "mentorQuestions": 151,
+    "exercises": 178,
+    "challenge": 178,
+    "commentedSolution": 240
+  },
+  "outros": {
+    "title+subtitle": 17,
+    "nextTheme": 29,
+    "references": 72,
+    "linksToOtherCourses": 49
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 35,
+    "alternativa_5minPorPasso": 30,
+    "plausivel": true,
+    "override": null,
+    "palavras": 756
+  },
+  "duracao": {
+    "declarada": "105-145 min",
+    "estimatedStudyTimeMinutes": 145,
+    "nucleo": 34.4,
+    "nucleoPartes": {
+      "teoria": 24.4,
+      "diagramas": 3,
+      "quiz": 7
+    },
+    "praticaExtra": 80,
+    "praticaExtraPartes": {
+      "lab": 35,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "30-40 min",
+    "praticaExtraArredondada": 80,
+    "recomendada": "30-40 min + 80 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 40
+  }
+}

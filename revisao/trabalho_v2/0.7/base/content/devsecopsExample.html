@@ -1,0 +1,10 @@
+
+<section class="lesson-section lesson-section--devsecops">
+  <h2>Exemplo em DevSecOps</h2>
+  <p>
+    Pipelines conversam o tempo todo por protocolos: o Git clona e envia código, o registry publica imagens por HTTPS, o kubectl fala com o API Server do Kubernetes por HTTPS autenticado, providers de IaC chamam APIs cloud por HTTP/TLS, e a federação OIDC permite que o pipeline assuma uma identidade temporária sem guardar segredo fixo.
+  </p>
+  <p>
+    Por isso, quando um pipeline falha, o erro muitas vezes é de protocolo: token expirado, certificado não confiável, proxy interceptando TLS, API retornando 429 por limite de taxa, endpoint exigindo outro método, payload fora do schema, versão de API removida ou diferença de relógio (clock skew) invalidando uma assinatura. Ler o protocolo permite depurar a automação sem adivinhar.
+  </p>
+</section>

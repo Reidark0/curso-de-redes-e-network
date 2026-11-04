@@ -1,0 +1,26 @@
+
+<section class="lesson-section lesson-section--problem">
+  <h2>Problema</h2>
+  <p>
+    O problema que um protocolo resolve é a ambiguidade: bytes não carregam significado universal. A sequência <code>47 45 54</code> pode ser só três bytes. Numa requisição HTTP, esses bytes são o texto <code>GET</code>, o método da requisição. O significado existe porque cliente e servidor combinaram antes o mesmo protocolo.
+  </p>
+  <p>
+    Sem esse acordo, um servidor não saberia se o primeiro campo é tamanho, comando, versão, usuário ou conteúdo. Um cliente não saberia se a falta de resposta significa erro, processamento demorado, bloqueio, perda ou encerramento normal. Um protocolo responde a essas dúvidas definindo:
+  </p>
+  <ul class="flow-list">
+    <li><strong>Formato (sintaxe):</strong> quais campos existem, como são separados e que tamanho têm.</li>
+    <li><strong>Significado (semântica):</strong> o que cada campo quer dizer e quais valores são válidos.</li>
+    <li><strong>Ordem:</strong> qual mensagem vem antes e qual vem depois.</li>
+    <li><strong>Tempo (temporização):</strong> quanto esperar antes de tentar de novo ou desistir.</li>
+    <li><strong>Estado:</strong> em qual fase da conversa cliente e servidor estão.</li>
+    <li><strong>Versão e negociação:</strong> como as partes combinam versão, algoritmos e opções que ambas suportam.</li>
+    <li><strong>Erro:</strong> como rejeitar, redirecionar, negar, repetir ou encerrar.</li>
+    <li><strong>Segurança:</strong> como autenticar, autorizar, criptografar, validar e registrar.</li>
+  </ul>
+  <p>
+    Essas regras só funcionam entre fabricantes diferentes se forem <strong>padronizadas</strong>. Nas primeiras redes, cada fornecedor criava formatos próprios, e máquinas de fornecedores distintos viravam ilhas incompatíveis. A internet cresceu com protocolos abertos, publicados em documentos públicos (como as RFCs do IETF), implementados por vários fornecedores e testados entre si. Essa capacidade de sistemas diferentes conversarem seguindo o mesmo padrão é a <strong>interoperabilidade</strong>.
+  </p>
+  <div class="callout callout--warning">
+    <strong>Erro comum:</strong> achar que protocolo é sinônimo de porta. Porta é apenas um identificador usado em protocolos de transporte para separar conversas. O protocolo inclui regras de mensagem, estado, temporização, erro, versão e comportamento.
+  </div>
+</section>

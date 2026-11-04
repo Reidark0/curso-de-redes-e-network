@@ -1,0 +1,91 @@
+{
+  "id": "0.7",
+  "versao": "nova",
+  "titulo": "O que é um protocolo",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3590,
+    "teoria": 1459,
+    "praticaExtra": 1165,
+    "quiz": 609,
+    "flashcards": 192
+  },
+  "porGrupoTeoria": {
+    "introducao": 454,
+    "contexto": 141,
+    "conteudo": 575,
+    "exemplos": 289,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 136,
+    "summary": 86,
+    "problem": 141,
+    "concept": 269,
+    "internals": 305,
+    "diagram": 1,
+    "analogy": 67,
+    "simpleExample": 222,
+    "objectives": 75,
+    "learningOutcomes": 0,
+    "glossary": 157,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 27
+  },
+  "pratica": {
+    "quiz": 609,
+    "flashcards": 192,
+    "lab": 416,
+    "mentorQuestions": 202,
+    "exercises": 195,
+    "challenge": 135,
+    "commentedSolution": 217
+  },
+  "outros": {
+    "title+subtitle": 17,
+    "nextTheme": 27,
+    "references": 72,
+    "linksToOtherCourses": 49
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 7,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 4,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 5,
+    "exemplosPorAmbiente": []
+  },
+  "lab": {
+    "estimatedTimeMinutes": 20,
+    "alternativa_5minPorPasso": 20,
+    "plausivel": true,
+    "override": null,
+    "palavras": 416
+  },
+  "duracao": {
+    "declarada": "15-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 20.2,
+    "nucleoPartes": {
+      "teoria": 11.2,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 51,
+    "praticaExtraPartes": {
+      "lab": 20,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-25 min",
+    "praticaExtraArredondada": 50,
+    "recomendada": "15-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}
