@@ -2,25 +2,25 @@
 <section class="lesson-section lesson-section--internals">
   <h2>Funcionamento interno</h2>
   <p>
-    O laboratório é uma cadeia de evidências. Você começa na máquina local, vê como ela representa dados, verifica como está conectada, mede sinais indiretos de rede, testa a resolução de nomes, testa um protocolo de aplicação e organiza tudo em camadas. A topologia é simples: <strong>seu host → interface (Wi-Fi, Ethernet, WSL, VM ou adaptador virtual) → rede local (gateway e DNS) → destino HTTPS de teste</strong>. Em empresa, a mesma cadeia passa por switches, roteadores, firewalls, proxies, VPN, DNS interno, balanceadores e IdP; a escala muda, a disciplina de evidência não.
+    O laboratório segue o caminho de uma conexão comum: <strong>seu computador → interface (Wi-Fi ou cabo) → rede local (gateway e DNS) → caminho pela internet → site HTTPS de teste</strong>. Cada etapa tem um comando e um limite:
   </p>
   <div class="responsive-table">
     <table class="data-table">
-      <thead><tr><th>Etapa</th><th>Comando (Windows / Linux)</th><th>O que prova</th><th>O que não prova</th></tr></thead>
+      <thead><tr><th>Etapa</th><th>Comando (Windows / Linux)</th><th>O que mostra</th><th>O que não mostra</th></tr></thead>
       <tbody>
-        <tr><td>Representação</td><td>Python ou PowerShell: bytes, hex e Base64 de um texto; octetos de um IPv4</td><td>Como texto e números viram bytes, binário e hexadecimal</td><td>Base64 não protege nada: é codificação reversível</td></tr>
-        <tr><td>Meio, enlace e interface</td><td><code>ipconfig /all</code> / <code>ip addr</code></td><td>Tipo e estado do adaptador, IP e máscara/prefixo</td><td>Que o enlace está estável ou na velocidade esperada</td></tr>
-        <tr><td>Rede local</td><td><code>route print</code> / <code>ip route</code>; DNS no <code>ipconfig /all</code> ou <code>resolvectl status</code></td><td>Gateway (rota default) e servidores DNS configurados</td><td>Que gateway e DNS estão respondendo</td></tr>
-        <tr><td>Latência</td><td><code>ping</code> / <code>ping -c 4</code></td><td>Resposta ICMP e RTT aproximado; perda</td><td>TCP 443, TLS ou HTTP. Se falhar, não prova que o destino está fora: ICMP pode ser bloqueado</td></tr>
-        <tr><td>Nome</td><td><code>Resolve-DnsName</code> / <code>getent hosts</code></td><td>O nome resolve para um ou mais IPs</td><td>Porta aberta, TLS válido ou permissão do usuário</td></tr>
-        <tr><td>Caminho</td><td><code>tracert</code> / <code>traceroute</code> ou <code>tracepath</code></td><td>Os saltos até o destino</td><td>Salto sem resposta não prova queda: roteadores podem não responder ICMP</td></tr>
-        <tr><td>Porta</td><td><code>Test-NetConnection -Port 443</code> / no Linux, o próprio <code>curl</code></td><td>O destino aceita conexão TCP na porta</td><td>Que o HTTP responde ou que o usuário tem acesso</td></tr>
-        <tr><td>Aplicação</td><td><code>curl -I https://…</code></td><td>Há comunicação HTTP acima de TCP/TLS; o status (200, 301, 403…) diz o resultado</td><td>Que um usuário específico tem autorização</td></tr>
-        <tr><td>Taxa e volume</td><td>Cálculo: Mbps ÷ 8 = MB/s</td><td>Quanto um link nominal permite em bytes, antes de overhead</td><td>O throughput útil real</td></tr>
+        <tr><td>Interface e endereço</td><td><code>ipconfig /all</code> / <code>ip addr</code></td><td>Adaptador ativo, IP e máscara ou prefixo</td><td>Que o enlace está estável ou na velocidade esperada</td></tr>
+        <tr><td>Gateway e DNS</td><td><code>ipconfig /all</code> / <code>ip route</code> e <code>resolvectl status</code></td><td>Qual gateway (rota default) e quais servidores DNS estão configurados</td><td>Que eles estão respondendo</td></tr>
+        <tr><td>Latência e perda</td><td><code>ping</code> / <code>ping -c 4</code>, primeiro ao gateway, depois a um destino na internet</td><td>Resposta ICMP, tempo de ida e volta (RTT) e perda</td><td>Porta, TLS ou HTTP. Se falhar, não prova que o destino caiu: ICMP pode ser bloqueado</td></tr>
+        <tr><td>Nome</td><td><code>Resolve-DnsName</code> / <code>getent hosts</code></td><td>O nome vira um ou mais IPs</td><td>Que a porta está aberta ou que o site responde</td></tr>
+        <tr><td>Caminho</td><td><code>tracert</code> / <code>traceroute</code> ou <code>tracepath</code></td><td>Os saltos (roteadores) até o destino</td><td>Que um salto marcado com <code>*</code> caiu: roteadores podem não responder ICMP; se o destino final responde, o tráfego passou por ele</td></tr>
+        <tr><td>Porta</td><td><code>Test-NetConnection -Port 443</code> / no Linux, o próprio <code>curl</code></td><td>O destino aceita conexão TCP na porta</td><td>Que o HTTP responde. Se falhar com o nome resolvendo, as hipóteses são rota, firewall, proxy ou serviço parado</td></tr>
+        <tr><td>Aplicação</td><td><code>curl -I https://…</code></td><td>O servidor respondeu em HTTP, por cima de TCP e TLS; o código (200, 301, 403…) diz o resultado</td><td>Que um usuário específico tem permissão. Um 403 é o servidor recusando o acesso: a investigação sobe para permissão, não desce para cabo ou DNS</td></tr>
       </tbody>
     </table>
   </div>
-  <p>
-    Por fim, duas etapas fecham a cadeia: <strong>segurança</strong> (a sanitização de evidência: mascarar o que nas saídas não pode ser exposto, e evitar conclusões perigosas) e <strong>relatório</strong> (as observações viram diagnóstico por camadas).
-  </p>
+  <h3>Os fundamentos do módulo dentro das evidências</h3>
+  <ul>
+    <li><strong>Octetos:</strong> cada um dos quatro números de um IPv4 é um byte. Em <code>192.168.10.50</code>, 168 = 128 + 32 + 8 = <code>10101000</code> em binário e <code>A8</code> em hexadecimal (aula 0.2).</li>
+    <li><strong>Taxas:</strong> planos e testes de velocidade falam em bits por segundo; downloads mostram bytes por segundo. 500 Mbps ÷ 8 = 62,5 MB/s antes de overhead (aula 0.4). Compare sempre na mesma unidade.</li>
+  </ul>
 </section>

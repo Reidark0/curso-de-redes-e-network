@@ -2,10 +2,11 @@
 <section class="lesson-section lesson-section--summary">
   <h2>Resumo</h2>
   <ul>
-    <li><strong>Modelo mental:</strong> o laboratório não procura uma resposta mágica; ele constrói uma trilha de evidências: dado bruto, comando, observação, interpretação, limite da evidência, hipótese e próximo teste.</li>
-    <li><strong>O que lembrar:</strong> cada comando prova uma coisa limitada (ping prova ICMP, DNS prova tradução de nome, curl prova resposta HTTP); registre também o que ele não prova.</li>
-    <li><strong>Fundamentos em uso:</strong> octetos de IPv4 em binário e hex, texto em UTF-8 e Base64 (codificação, não proteção), Mbps ÷ 8 = MB/s antes de overhead.</li>
-    <li><strong>Erro comum:</strong> transformar um teste parcial em conclusão total.</li>
-    <li><strong>Uso real:</strong> chamados de troubleshooting, SOC, cloud, DevSecOps, IAM e resposta a incidentes, sempre com evidências sanitizadas.</li>
+    <li><strong>Ideia central:</strong> para cada teste, registre o que ele mostra, o que não mostra e qual é o próximo teste.</li>
+    <li>Teste de baixo para cima: interface, gateway e DNS, caminho, porta, aplicação.</li>
+    <li>Ping mostra resposta ICMP; DNS, a tradução do nome; curl, a resposta HTTP. Nenhum prova a permissão do usuário.</li>
+    <li>Compare na mesma unidade: 500 Mbps ÷ 8 = 62,5 MB/s antes de overhead.</li>
+    <li>Antes de compartilhar, mascare senhas e tokens, mesmo em Base64.</li>
   </ul>
+  <p><em>Já domina isso? Faça o quiz: com 70% ou mais, você pode seguir.</em></p>
 </section>

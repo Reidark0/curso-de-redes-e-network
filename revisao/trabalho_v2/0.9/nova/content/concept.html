@@ -2,24 +2,21 @@
 <section class="lesson-section lesson-section--concept">
   <h2>Conceito</h2>
   <div class="definition-box">
-    <strong>Definição:</strong> neste curso, laboratório integrador é uma prática guiada de coleta, organização e interpretação de evidências técnicas, que conecta os fundamentos digitais a um cenário real de comunicação em rede, troubleshooting e segurança defensiva.
+    <strong>Definição:</strong> evidência técnica é uma observação registrada (o comando, o horário e a parte relevante da saída) que sustenta ou enfraquece uma hipótese. Hipótese é uma explicação possível para o sintoma, ainda não comprovada.
   </div>
   <p>
-    Em vez de perguntar "o que é um byte?" ou "o que é latência?", o laboratório pergunta como bytes, codificação, sinais, métricas, protocolos e camadas aparecem juntos quando um computador fala com outro sistema. Para cada teste, você escreve uma interpretação honesta:
+    Um comando sozinho não é evidência: o que conta é a leitura dele. Para cada teste, escreva uma frase neste formato:
   </p>
   <div class="callout">
-    <strong>"Este teste mostra X, não mostra Y, e por isso o próximo teste deve ser Z."</strong>
+    <strong>“Este teste mostra X, não mostra Y, e por isso o próximo teste é Z.”</strong>
   </div>
+  <p>Três regras organizam o relatório:</p>
+  <ul>
+    <li><strong>Suba de baixo para cima:</strong> interface e endereço, gateway e DNS, caminho, porta, aplicação. Como você viu na aula 0.8, uma falha embaixo derruba tudo o que está em cima; não adianta testar o site antes de saber se o computador tem endereço.</li>
+    <li><strong>Anote o horário de cada rodada:</strong> um teste que passou agora só prova o estado agora. Em falha intermitente, repita os mesmos testes no momento da falha e compare as rodadas.</li>
+    <li><strong>Mascare antes de compartilhar:</strong> saídas e logs podem conter senhas, tokens, cookies, IPs e nomes internos. Tire o que quem recebe não precisa ver. Um <code>Authorization: Basic</code> em Base64 é uma senha legível para qualquer um que o decodifique; troque o valor por <code>&lt;mascarado&gt;</code>.</li>
+  </ul>
   <p>
-    O resultado é um relatório técnico curto, com comandos, saídas relevantes, tabelas de conversão, hipóteses, interpretação por camada, riscos e próximos passos. Ele não precisa ser perfeito; precisa ser rastreável: outra pessoa deve conseguir refazer cada teste e chegar à mesma leitura.
+    O relatório não precisa achar a causa; precisa ser rastreável: outra pessoa refaz cada teste e chega à mesma leitura. E os próprios comandos têm limites: ping e traceroute podem ser bloqueados, um proxy pode responder no lugar do site, e um teste feito em casa não prova como a rede da empresa se comporta.
   </p>
-  <div class="callout warning">
-    <strong>Limites deste laboratório:</strong>
-    <ul>
-      <li>Ele usa comandos locais e destinos comuns; não substitui ferramentas corporativas de observabilidade.</li>
-      <li>Ping, traceroute e curl podem ser filtrados, alterados por proxy ou tratados de forma diferente em redes reais.</li>
-      <li>Sem captura de pacotes ou logs do servidor, algumas conclusões continuam sendo hipóteses.</li>
-      <li>Redes corporativas podem bloquear comandos ou mascarar informações por política de segurança, e o resultado de uma rede doméstica não prova o comportamento de uma rede corporativa.</li>
-    </ul>
-  </div>
 </section>

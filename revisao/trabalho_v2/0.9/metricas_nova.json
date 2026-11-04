@@ -1,0 +1,91 @@
+{
+  "id": "0.9",
+  "versao": "nova",
+  "titulo": "Laboratório integrador do Módulo 0",
+  "tipo": "ligação integradora",
+  "palavras": {
+    "visiveis": 3119,
+    "teoria": 1335,
+    "praticaExtra": 1145,
+    "quiz": 318,
+    "flashcards": 168
+  },
+  "porGrupoTeoria": {
+    "introducao": 433,
+    "contexto": 126,
+    "conteudo": 589,
+    "exemplos": 187,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 145,
+    "summary": 87,
+    "problem": 126,
+    "concept": 249,
+    "internals": 338,
+    "diagram": 2,
+    "analogy": 50,
+    "simpleExample": 137,
+    "objectives": 81,
+    "learningOutcomes": 0,
+    "glossary": 120,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 40
+  },
+  "pratica": {
+    "quiz": 318,
+    "flashcards": 168,
+    "lab": 395,
+    "mentorQuestions": 178,
+    "exercises": 237,
+    "challenge": 155,
+    "commentedSolution": 180
+  },
+  "outros": {
+    "title+subtitle": 22,
+    "nextTheme": 40,
+    "references": 43,
+    "linksToOtherCourses": 48
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 2,
+    "exercicios": 3,
+    "passosLab": 4,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 5,
+    "exemplosPorAmbiente": []
+  },
+  "lab": {
+    "estimatedTimeMinutes": 30,
+    "alternativa_5minPorPasso": 20,
+    "plausivel": true,
+    "override": null,
+    "palavras": 395
+  },
+  "duracao": {
+    "declarada": "15-25 min + 65 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 19.3,
+    "nucleoPartes": {
+      "teoria": 10.3,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 67,
+    "praticaExtraPartes": {
+      "lab": 30,
+      "mentor": 4,
+      "exercicios": 18,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-25 min",
+    "praticaExtraArredondada": 65,
+    "recomendada": "15-25 min + 65 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

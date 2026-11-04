@@ -2,12 +2,9 @@
 <section class="lesson-section lesson-section--motivation">
   <h2>Motivação</h2>
   <p>
-    Até aqui você estudou peças que parecem separadas: bits, bytes, binário, hexadecimal, UTF-8, Base64, bit por segundo e byte por segundo, sinais físicos, latência, throughput, protocolo e camadas. Se elas ficarem em gavetas isoladas, no trabalho você vai continuar dizendo só <strong>"a rede está ruim"</strong>, <strong>"o sistema caiu"</strong> ou <strong>"deve ser DNS"</strong>.
+    Uma aplicação interna está lenta. O usuário diz que “a internet está ruim”. O time da aplicação diz que “deve ser rede”. O time de redes responde que “o ping está normal”. Cada um rodou um teste, olhou uma parte e tirou uma conclusão maior do que o teste permitia. O problema continua, e alguém sugere “liberar tudo no firewall só para testar”.
   </p>
-  <div class="callout callout--problem">
-    <strong>Problema real:</strong> uma aplicação interna está lenta. O usuário diz que "a internet está ruim". O time de aplicação diz que "deve ser rede". O time de redes diz que "ping está normal". O time de segurança suspeita do proxy. Sem método, cada equipe olha uma parte. Com método, você organiza as evidências: interface, endereço, gateway, DNS, latência, rota, porta, protocolo, payload, codificação, logs e risco.
-  </div>
   <p>
-    Neste laboratório você monta seu primeiro dossiê técnico: comandos executados, saídas relevantes, o que cada saída prova e não prova, hipóteses descartadas, riscos de segurança e próximos passos.
+    Sem método, o diagnóstico vira troca de palpites e mudanças arriscadas. Neste laboratório você junta o que viu no módulo (bytes, Base64, bits e bytes por segundo, latência, protocolos e camadas) para coletar evidências reais no seu computador e dizer, para cada uma, o que ela prova e o que não prova. É assim que se escreve um chamado que outro time consegue usar, e é o mesmo raciocínio de um analista de segurança que precisa separar lentidão comum de ataque.
   </p>
 </section>

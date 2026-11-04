@@ -2,9 +2,12 @@
 <section class="lesson-section lesson-section--example">
   <h2>Exemplo simples</h2>
   <p>
-    Em casa, um site demora a abrir. O diagnóstico fraco é "minha internet está ruim". O diagnóstico melhor coleta evidências: o Wi-Fi está conectado? O IP foi recebido? O gateway responde? O DNS resolve o nome? O caminho tem perda? A porta 443 responde? O site retorna status HTTP? A lentidão ocorre em todos os destinos ou só em um?
+    Em casa, os sites demoram a abrir no notebook. Você roda os testes de baixo para cima e anota:
   </p>
+  <pre class="code-block">ipconfig /all      → IP 192.168.0.23, gateway 192.168.0.1, DNS 192.168.0.1
+ping 192.168.0.1   → tempos entre 3 ms e 210 ms, 25% de perda
+ping 8.8.8.8       → tempos entre 20 ms e 240 ms, 25% de perda</pre>
   <p>
-    Depois você liga cada resposta a um fundamento: o plano contratado é medido em bits por segundo, o download aparece em bytes por segundo, a latência mede tempo, o HTTP é protocolo, o texto da resposta usa uma codificação, o TLS protege o conteúdo e o diagnóstico por camadas evita conclusões apressadas.
+    A perda já aparece no primeiro trecho, entre o notebook e o roteador de casa, antes de qualquer site, DNS ou provedor. O teste mostra que o problema está na rede local; não mostra se a causa é interferência, distância ou o próprio roteador. Próximo teste: repetir o ping ao gateway com cabo ou ao lado do roteador. Se com cabo a perda some, o suspeito é o Wi-Fi (sinal fraco ou interferência, como na aula 0.5), e contratar mais banda não resolveria nada.
   </p>
 </section>
