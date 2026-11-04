@@ -1,0 +1,13 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <p>A topologia influencia como quadros, pacotes e fluxos encontram caminho. Na camada física, importam cabos, fibras, rádio, portas, uplinks e energia. Na camada de enlace, switches, VLANs, tabelas MAC e loops. Na camada de rede, IPs, sub-redes, gateways e rotas. Nas camadas superiores, DNS, proxy, TLS, autenticação e aplicação.</p>
+  <ol class="flow-list">
+    <li><strong>Host decide destino:</strong> o computador determina se o destino parece local ou remoto.</li>
+    <li><strong>Camada local entrega ao próximo salto:</strong> normalmente via switch, AP ou gateway.</li>
+    <li><strong>Intermediários aplicam lógica:</strong> switches consultam MAC/VLAN; roteadores consultam rotas; firewalls aplicam política.</li>
+    <li><strong>Caminho pode mudar:</strong> redundância, balanceamento, falha, métrica ou política podem alterar o trajeto, inclusive de forma dinâmica, por protocolos de roteamento, failover ou automação.</li>
+    <li><strong>Resposta pode voltar por caminho diferente:</strong> em algumas arquiteturas há assimetria, o que afeta firewall stateful, logs e troubleshooting.</li>
+  </ol>
+  <p>Topologia, portanto, não é desenho estático: é a combinação de estrutura, estado, decisão e política. Por isso um diagrama fica obsoleto rápido se não houver processo para atualizá-lo.</p>
+</section>

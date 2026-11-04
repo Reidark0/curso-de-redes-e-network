@@ -1,0 +1,14 @@
+
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>Topologia é uma ferramenta de defesa. Ela revela caminhos possíveis para atacantes, pontos de controle, áreas críticas, zonas de confiança e locais de coleta de logs. Um SOC que não entende topologia corre risco de interpretar alerta isolado sem enxergar movimento lateral ou caminho de exfiltração.</p>
+  <table class="data-table risk-table">
+    <thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead>
+    <tbody>
+      <tr><td>Rede plana</td><td>Todos os ativos no mesmo segmento</td><td>Movimento lateral facilitado</td><td>Segmentação, VLANs, ACLs, firewall interno e monitoramento</td></tr>
+      <tr><td>Ponto único de falha</td><td>Um switch, firewall ou link central sem redundância</td><td>Indisponibilidade ampla</td><td>Redundância, documentação e teste de failover</td></tr>
+      <tr><td>Caminho invisível</td><td>Tráfego passa por túnel, proxy ou peering não documentado</td><td>Falha de auditoria e resposta lenta</td><td>Inventário, diagrama lógico e revisão periódica</td></tr>
+      <tr><td>Assimetria inesperada</td><td>Ida e volta passam por caminhos diferentes</td><td>Firewall stateful pode bloquear ou logs ficam fragmentados</td><td>Planejamento de rotas, inspeção centralizada e observabilidade</td></tr>
+    </tbody>
+  </table>
+</section>

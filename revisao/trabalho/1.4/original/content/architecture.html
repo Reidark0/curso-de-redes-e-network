@@ -1,0 +1,13 @@
+
+<section class="lesson-section lesson-section--architecture">
+  <h2>7. Arquitetura</h2>
+  <p>Em uma empresa, uma topologia típica pode ter acesso, distribuição e core. Usuários conectam-se em switches de acesso ou APs. Esses equipamentos sobem para uma camada de distribuição, onde podem existir VLANs, roteamento, ACLs e agregação. O core conecta datacenter, internet, WAN, firewalls e cloud.</p>
+  <p>Em cloud, o desenho físico fica invisível, mas a topologia lógica continua: VPC/VNet, subnets, route tables, security groups, firewalls, load balancers, private endpoints, peering, transit gateway, hub-and-spoke e zonas de disponibilidade.</p>
+  <ul class="flow-list">
+    <li><strong>Camada de acesso:</strong> onde usuários e endpoints entram.</li>
+    <li><strong>Camada de distribuição:</strong> onde políticas, agregação e roteamento começam a aparecer.</li>
+    <li><strong>Core/backbone:</strong> caminho de alta capacidade entre blocos da rede.</li>
+    <li><strong>Perímetro:</strong> firewalls, proxies, VPNs, WAFs e saída para internet.</li>
+    <li><strong>Cloud/híbrido:</strong> extensões lógicas da rede corporativa em provedores cloud.</li>
+  </ul>
+</section>

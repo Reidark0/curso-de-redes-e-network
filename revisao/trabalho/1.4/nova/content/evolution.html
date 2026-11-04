@@ -1,0 +1,20 @@
+
+<section class="lesson-section lesson-section--evolution">
+  <h2>Evolução</h2>
+  <p>Nas redes antigas, a topologia física era quase igual à lógica: no barramento, todos compartilhavam o mesmo meio; no anel, o tráfego seguia uma sequência previsível entre nós. Com Ethernet comutada, VLANs, roteadores, firewalls, Wi-Fi, VPNs, overlays e cloud, essa relação ficou menos direta. Hoje uma rede pode ser uma estrela fisicamente e várias redes separadas por VLAN logicamente; um datacenter pode ser spine-leaf no físico enquanto a aplicação enxerga redes virtuais, balanceadores e políticas.</p>
+  <p>Cada topologia abaixo surgiu para resolver uma limitação de escala, disponibilidade ou controle. Algumas quase sumiram como desenho físico, mas continuam úteis como modelo mental.</p>
+  <div class="responsive-table">
+  <table class="data-table comparison-table">
+    <thead><tr><th>Topologia</th><th>Como funciona</th><th>Vantagem</th><th>Limitação</th><th>Uso conceitual atual</th></tr></thead>
+    <tbody>
+      <tr><td>Barramento</td><td>Todos compartilham um mesmo meio</td><td>Simples e barato em pequena escala</td><td>Colisão, falha do meio afeta todos, difícil escalar</td><td>Ajuda a entender meio compartilhado e broadcast</td></tr>
+      <tr><td>Anel</td><td>Nós conectados em sequência circular</td><td>Caminho previsível</td><td>Falhas podem afetar o circuito se não houver proteção</td><td>Útil para entender redundância em anéis metropolitanos</td></tr>
+      <tr><td>Estrela</td><td>Dispositivos ligados a um ponto central</td><td>Fácil operação e isolamento de host</td><td>Equipamento central vira ponto crítico</td><td>Comum em LANs com switches</td></tr>
+      <tr><td>Árvore</td><td>Estrelas conectadas em hierarquia</td><td>Organiza campus e prédios</td><td>Pode criar gargalos no núcleo</td><td>Base para acesso, distribuição e core</td></tr>
+      <tr><td>Malha</td><td>Múltiplos caminhos entre nós</td><td>Alta resiliência</td><td>Custo e complexidade</td><td>WAN, backbone, redes críticas e mesh wireless</td></tr>
+      <tr><td>Hub-and-spoke</td><td>Filiais falam com um hub central</td><td>Controle centralizado</td><td>Dependência do hub e caminhos longos</td><td>VPN, SD-WAN, cloud hub e redes corporativas</td></tr>
+      <tr><td>Spine-leaf</td><td>Folhas conectadas a spines</td><td>Baixa latência previsível e escalabilidade horizontal</td><td>Mais portas, planejamento e custo</td><td>Datacenter e cloud-like networking</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>

@@ -1,0 +1,914 @@
+{
+  "id": "1.4",
+  "moduleId": "m01",
+  "order": 4,
+  "title": "Topologias físicas e lógicas",
+  "subtitle": "Como separar o desenho dos cabos do caminho real do tráfego para diagnosticar, proteger e evoluir redes.",
+  "duration": "135-190 min",
+  "estimatedStudyTimeMinutes": 190,
+  "difficulty": "iniciante-intermediário",
+  "type": "fundamental",
+  "xp": 185,
+  "tags": [
+    "redes",
+    "fundamentos",
+    "topologia física",
+    "topologia lógica",
+    "estrela",
+    "malha",
+    "barramento",
+    "anel",
+    "hub-and-spoke",
+    "spine-leaf",
+    "cloud",
+    "segurança",
+    "troubleshooting"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m01",
+      "lesson": "1.1",
+      "reason": "É necessário entender rede como sistema de comunicação antes de analisar seu desenho."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m01",
+      "lesson": "1.2",
+      "reason": "Topologias envolvem dispositivos finais, intermediários, serviços e políticas."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m01",
+      "lesson": "1.3",
+      "reason": "O tipo de rede influencia quais topologias fazem sentido em cada escala."
+    },
+    {
+      "type": "module",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.8",
+      "reason": "Pensar em camadas ajuda a separar caminho físico, caminho lógico e serviço percebido pelo usuário."
+    }
+  ],
+  "objectives": [
+    "Diferenciar topologia física e topologia lógica sem confundir desenho com comportamento do tráfego.",
+    "Reconhecer topologias comuns como estrela, barramento, anel, malha, árvore, hub-and-spoke e spine-leaf.",
+    "Relacionar topologia com disponibilidade, custo, desempenho, segurança e troubleshooting.",
+    "Entender por que cloud e SDN tornam a topologia física menos visível, mas não irrelevante.",
+    "Aprender a mapear uma rede pequena usando observação, comandos e hipóteses verificáveis."
+  ],
+  "learningOutcomes": [
+    "Dado um diagrama simples, o aluno identifica se ele representa topologia física, lógica ou ambas.",
+    "Dado um incidente, o aluno consegue levantar hipóteses de ponto único de falha, loop, caminho assimétrico ou gargalo.",
+    "Dado um cenário empresarial, o aluno propõe melhorias de topologia com justificativa operacional e de segurança."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Camada 1",
+      "Camada 2",
+      "Camada 3",
+      "Camada 4",
+      "Camada 7"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede",
+      "Internet",
+      "Transporte",
+      "Aplicação"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "Wi-Fi",
+      "STP",
+      "ARP",
+      "IPv4",
+      "IPv6",
+      "TCP",
+      "UDP",
+      "DNS",
+      "HTTP",
+      "TLS",
+      "BGP",
+      "OSPF"
+    ],
+    "dependsOn": [
+      "rede como sistema",
+      "dispositivos finais",
+      "dispositivos intermediários",
+      "tipos de rede",
+      "pensamento em camadas"
+    ],
+    "enables": [
+      "meios de transmissão",
+      "cabeamento estruturado",
+      "switching",
+      "VLAN",
+      "roteamento",
+      "firewall",
+      "cloud networking",
+      "troubleshooting profissional"
+    ]
+  },
+  "troubleshooting": {
+    "symptoms": [
+      "Usuários conectados ao mesmo switch não se enxergam",
+      "Falha intermitente quando um link cai",
+      "Aplicação funciona localmente, mas falha pela VPN",
+      "Firewall vê metade da conversa",
+      "Wi-Fi conectado, mas tráfego não alcança servidores internos"
+    ],
+    "diagnosticQuestions": [
+      "O problema está no caminho físico ou lógico?",
+      "Os hosts estão na mesma VLAN ou apenas no mesmo switch?",
+      "Qual gateway é usado?",
+      "Existe firewall, proxy, VPN, NAT ou rota entre origem e destino?",
+      "O retorno do tráfego volta pelo mesmo caminho?",
+      "O diagrama usado está atualizado?"
+    ],
+    "commands": [
+      {
+        "platform": "Windows",
+        "command": "ipconfig /all && route print && tracert <destino>",
+        "purpose": "Ver endereçamento, gateway, rotas locais e caminho até o destino.",
+        "expectedObservation": "IP, máscara, gateway, DNS e saltos do caminho.",
+        "interpretation": "Ajuda a diferenciar problema local, gateway, rota ou destino."
+      },
+      {
+        "platform": "Windows",
+        "command": "Test-NetConnection <host> -Port 443 -TraceRoute",
+        "purpose": "Testar conectividade de porta e caminho aproximado para um serviço.",
+        "expectedObservation": "TcpTestSucceeded e rota exibida quando possível.",
+        "interpretation": "Útil para separar camada 3 de serviço em porta específica."
+      },
+      {
+        "platform": "Linux",
+        "command": "ip addr && ip route && traceroute <destino>",
+        "purpose": "Ver interfaces, rotas e caminho do tráfego.",
+        "expectedObservation": "Interface com IP, rota default e saltos.",
+        "interpretation": "Mostra se o host sabe para onde enviar tráfego."
+      },
+      {
+        "platform": "Linux",
+        "command": "ss -tulpen && curl -I https://example.com",
+        "purpose": "Observar serviços locais e testar caminho HTTP/TLS de saída.",
+        "expectedObservation": "Portas em escuta e headers HTTP.",
+        "interpretation": "Ajuda a conectar topologia lógica com serviços reais."
+      },
+      {
+        "platform": "Cisco IOS",
+        "command": "show cdp neighbors && show interfaces status && show vlan brief",
+        "purpose": "Mapear vizinhos, portas e VLANs em switches Cisco.",
+        "expectedObservation": "Equipamentos vizinhos, estado das portas e VLANs configuradas.",
+        "interpretation": "Ajuda a construir mapa físico e lógico em LAN."
+      },
+      {
+        "platform": "Cisco IOS",
+        "command": "show spanning-tree && show ip route",
+        "purpose": "Ver estado de prevenção de loop e rotas quando aplicável.",
+        "expectedObservation": "Portas bloqueadas/encaminhando e tabela de rotas.",
+        "interpretation": "Ajuda a entender caminho lógico e redundância."
+      }
+    ],
+    "decisionTree": [
+      {
+        "if": "Hosts no mesmo switch não se comunicam",
+        "then": "Verificar VLAN, máscara, firewall local e gateway antes de culpar cabo."
+      },
+      {
+        "if": "Apenas uma parte da rede caiu",
+        "then": "Mapear se há ponto comum: switch de acesso, uplink, AP, firewall, rota ou link WAN."
+      },
+      {
+        "if": "Firewall vê ida, mas não vê volta",
+        "then": "Investigar caminho assimétrico, NAT, rota de retorno e política stateful."
+      },
+      {
+        "if": "Diagrama contradiz evidência",
+        "then": "Confiar na evidência coletada e registrar necessidade de atualizar documentação."
+      }
+    ]
+  },
+  "security": {
+    "goodPractices": [
+      "Manter diagrama físico e lógico separados, mas relacionados.",
+      "Documentar zonas, VLANs, subnets, gateways, firewalls, links WAN, cloud peerings e as redes de gestão e backup.",
+      "Usar a topologia para enxergar caminhos possíveis de ataque, pontos de controle, zonas de confiança e locais de coleta de logs: um SOC que não conhece a topologia interpreta alertas isolados sem ver movimento lateral ou caminho de exfiltração.",
+      "Testar caminhos permitidos e bloqueados.",
+      "Proteger diagramas como informação sensível, com controle de acesso: eles revelam caminhos, zonas, controles e alvos.",
+      "Revisar a topologia após mudanças de rede, cloud ou firewall."
+    ],
+    "badPractices": [
+      "Usar rede plana para usuários, servidores, visitantes e gestão.",
+      "Criar túneis temporários sem documentação.",
+      "Confiar em diagrama antigo durante incidente.",
+      "Não registrar exceções de firewall e rotas manuais."
+    ],
+    "commonErrors": [
+      "Confundir conectividade com autorização.",
+      "Ignorar caminho de retorno.",
+      "Desenhar só a internet e esquecer DNS, proxy, firewall e identidade."
+    ],
+    "vulnerabilities": [
+      {
+        "name": "Movimento lateral por topologia plana",
+        "description": "Quando muitos ativos ficam no mesmo segmento lógico, um host comprometido pode alcançar outros com menos barreiras.",
+        "defensiveExplanation": "O risco aumenta quando não há segmentação, ACLs, firewall interno ou monitoramento lateral.",
+        "mitigation": "Criar zonas, VLANs, ACLs, firewalls internos, EDR, logs e revisão de acessos."
+      },
+      {
+        "name": "Ponto único de falha crítico",
+        "description": "Um componente central sem redundância pode derrubar grande parte da rede.",
+        "defensiveExplanation": "Ataques, falhas ou erros de configuração nesse ponto causam indisponibilidade ampla.",
+        "mitigation": "Redundância, backup de configuração, monitoramento e testes de failover."
+      },
+      {
+        "name": "Caminho oculto sem governança",
+        "description": "Túneis, peerings ou exceções podem permitir tráfego fora dos controles principais.",
+        "defensiveExplanation": "Isso reduz visibilidade e pode criar bypass de segurança.",
+        "mitigation": "Inventário de conectividade, revisão periódica, logs centralizados e aprovação formal."
+      },
+      {
+        "name": "Assimetria inesperada",
+        "description": "Ida e volta do tráfego passam por caminhos diferentes, por exemplo saindo por um firewall e voltando por outro.",
+        "defensiveExplanation": "Um firewall stateful que não viu o início da sessão pode bloquear a resposta, e os logs ficam fragmentados entre equipamentos, atrasando auditoria e resposta a incidentes.",
+        "mitigation": "Planejamento de rotas de ida e volta, inspeção centralizada e observabilidade dos dois sentidos."
+      }
+    ],
+    "monitoring": [
+      "Mudanças em rotas e regras de firewall.",
+      "Novas conexões entre segmentos que antes não se comunicavam.",
+      "Tráfego lateral incomum.",
+      "Queda de uplinks, links WAN ou túneis.",
+      "Alertas de spanning-tree, loops ou flapping de porta."
+    ],
+    "hardening": [
+      "Separar em segmentos distintos as redes de gestão, backup, usuários, servidores e visitantes, conforme função e criticidade.",
+      "Limitar rotas e peerings ao necessário.",
+      "Aplicar menor privilégio em security groups e ACLs.",
+      "Auditar diagramas e configurações periodicamente."
+    ],
+    "detectionIdeas": [
+      "Comparar fluxos reais com topologia documentada.",
+      "Usar NetFlow/sFlow ou logs de firewall para validar caminhos.",
+      "Alertar quando segmento de visitante tenta acessar rede interna.",
+      "Monitorar alterações de rota em cloud e em roteadores."
+    ]
+  },
+  "lab": {
+    "id": "lab-1.4",
+    "title": "Criando mapa físico e lógico de uma rede pequena",
+    "labType": "cloud",
+    "objective": "Construir dois mapas complementares: um físico, baseado em conexões e equipamentos, e outro lógico, baseado em IP, gateway, serviços, rotas e políticas prováveis.",
+    "scenario": "Você recebeu a tarefa de documentar uma rede doméstica, laboratório ou pequena empresa. O objetivo não é descobrir tudo de forma invasiva, mas coletar evidências seguras e organizar hipóteses verificáveis.",
+    "topology": "Host do aluno -> Wi-Fi ou cabo -> roteador/switch/AP -> internet e serviços locais conhecidos.",
+    "architecture": "Ambiente local simples com um ou mais dispositivos finais, equipamento de acesso, gateway, DNS, saída para internet e, opcionalmente, impressora, NAS, VM ou serviço local.",
+    "prerequisites": [
+      "Ter concluído as aulas 1.1 a 1.3.",
+      "Ter acesso administrativo ao próprio computador."
+    ],
+    "tools": [
+      "Windows PowerShell ou Terminal Linux",
+      "Opcional: interface web do roteador doméstico",
+      "Opcional: Packet Tracer para simular topologia",
+      "Editor de texto para desenhar mapa simples"
+    ],
+    "estimatedTimeMinutes": 75,
+    "cost": "zero",
+    "safetyNotes": [
+      "Use apenas comandos locais e de diagnóstico simples; não faça varreduras em redes corporativas sem autorização.",
+      "Não colete senhas, tokens, dados pessoais nem informações sensíveis de terceiros, e sanitize IPs públicos, nomes reais e dados internos antes de compartilhar evidências."
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "title": "Identificar sua conexão física ou sem fio",
+        "instruction": "Descubra se seu host está conectado via cabo, Wi-Fi, VM, VPN ou adaptador virtual.",
+        "command": "Windows: ipconfig /all\nLinux: ip addr",
+        "expectedOutput": "Lista de interfaces com endereços IP, nomes de adaptadores e estado operacional.",
+        "explanation": "Essa etapa inicia o mapa físico provável: por qual interface o host entra na rede."
+      },
+      {
+        "number": 2,
+        "title": "Identificar gateway e rede local",
+        "instruction": "Localize gateway padrão, máscara e DNS para começar o mapa lógico.",
+        "command": "Windows: ipconfig /all && route print\nLinux: ip route && resolvectl status 2>/dev/null || cat /etc/resolv.conf",
+        "expectedOutput": "Gateway default, rota padrão e servidores DNS.",
+        "explanation": "Gateway e rota default indicam para onde o tráfego sai quando o destino não está na rede local."
+      },
+      {
+        "number": 3,
+        "title": "Testar caminho até um destino externo",
+        "instruction": "Observe os saltos até um destino público simples.",
+        "command": "Windows: tracert 1.1.1.1\nLinux: traceroute 1.1.1.1 || tracepath 1.1.1.1",
+        "expectedOutput": "Primeiro salto normalmente é o gateway local; saltos seguintes pertencem à operadora ou caminho externo.",
+        "explanation": "Isso diferencia topologia local de caminho WAN/internet."
+      },
+      {
+        "number": 4,
+        "title": "Testar serviço por nome",
+        "instruction": "Valide se o caminho lógico inclui resolução de nomes.",
+        "command": "Windows: nslookup example.com\nLinux: dig example.com +short || nslookup example.com",
+        "expectedOutput": "Um ou mais endereços IP resolvidos para o nome consultado.",
+        "explanation": "A topologia funcional inclui DNS; sem DNS, a rede pode estar conectada mas aplicações por nome falham."
+      },
+      {
+        "number": 5,
+        "title": "Criar mapa físico inicial",
+        "instruction": "Desenhe os componentes físicos ou prováveis: seu host, AP/roteador, switch se houver, modem, impressora, NAS ou outros equipamentos conhecidos.",
+        "expectedOutput": "Mapa físico simples com nós e conexões conhecidas ou marcadas como hipótese.",
+        "explanation": "Não invente componentes: marque como hipótese quando você não tiver evidência."
+      },
+      {
+        "number": 6,
+        "title": "Criar mapa lógico inicial",
+        "instruction": "Desenhe IP do host, rede local, gateway, DNS, saída para internet e serviços locais conhecidos.",
+        "expectedOutput": "Mapa lógico com rede, gateway, DNS e caminho de saída.",
+        "explanation": "O mapa lógico responde como o tráfego se comporta, não apenas onde há cabos."
+      },
+      {
+        "number": 7,
+        "title": "Registrar riscos e pontos únicos de falha",
+        "instruction": "Liste o que derrubaria a rede se falhasse e que caminhos deveriam ser segmentados.",
+        "expectedOutput": "Lista com pelo menos três riscos, como roteador único, Wi-Fi único, rede de visitantes sem isolamento ou falta de documentação.",
+        "explanation": "Topologia útil sempre mostra impacto operacional e de segurança."
+      }
+    ],
+    "expectedResult": "Ao final, o aluno deve ter dois mapas simples: topologia física e topologia lógica, além de uma lista de evidências, hipóteses, riscos e melhorias.",
+    "validation": [
+      {
+        "check": "Gateway identificado",
+        "command": "Windows: ipconfig /all\nLinux: ip route",
+        "expected": "Gateway ou rota default visível.",
+        "ifFails": "Verifique se há conexão ativa, VPN alterando rota ou interface sem IP."
+      },
+      {
+        "check": "Caminho externo testado",
+        "command": "tracert 1.1.1.1 ou traceroute/tracepath 1.1.1.1",
+        "expected": "Primeiro salto local e saltos externos quando permitido.",
+        "ifFails": "ICMP pode estar bloqueado; tente Test-NetConnection ou curl para um destino HTTP/HTTPS."
+      },
+      {
+        "check": "DNS validado",
+        "command": "nslookup example.com ou dig example.com",
+        "expected": "Nome resolvido para endereço IP.",
+        "ifFails": "Verifique DNS configurado, conectividade com DNS e políticas da rede."
+      },
+      {
+        "check": "Mapa lógico separado do físico",
+        "command": "Revisão manual",
+        "expected": "O mapa físico mostra conexões; o lógico mostra IP, gateway, DNS, rotas e políticas prováveis.",
+        "ifFails": "Reorganize o desenho em duas visões."
+      }
+    ],
+    "troubleshooting": [
+      {
+        "symptom": "Não aparece gateway",
+        "probableCause": "Interface sem IP, rede desconectada ou VPN assumindo rota.",
+        "howToConfirm": "Verificar ipconfig/ip route e estado da interface.",
+        "fix": "Conectar à rede correta, renovar IP ou revisar VPN."
+      },
+      {
+        "symptom": "Traceroute não mostra todos os saltos",
+        "probableCause": "ICMP/TTL expirado bloqueado por firewall ou operadora.",
+        "howToConfirm": "Testar conectividade HTTP com curl ou Test-NetConnection.",
+        "fix": "Registrar limitação da evidência e usar outro método permitido."
+      },
+      {
+        "symptom": "DNS falha mas IP responde",
+        "probableCause": "Servidor DNS indisponível ou bloqueado.",
+        "howToConfirm": "Ping/Test-NetConnection para IP e nslookup para nome.",
+        "fix": "Revisar DNS configurado, rota até DNS ou política de firewall."
+      },
+      {
+        "symptom": "Mapa físico não pode ser confirmado",
+        "probableCause": "Sem acesso ao rack, AP ou roteador.",
+        "howToConfirm": "Comparar documentação existente e evidências locais.",
+        "fix": "Marcar como hipótese e solicitar confirmação autorizada."
+      }
+    ],
+    "improvements": [
+      "Criar versão em Packet Tracer da topologia.",
+      "Adicionar VLANs e firewall lógico ao mapa.",
+      "Criar checklist de atualização do diagrama após mudanças.",
+      "Adicionar visão cloud se houver VPC/VNet ou VPN."
+    ],
+    "evidenceToCollect": [
+      "Saída sanitizada de ipconfig ou ip addr",
+      "Saída sanitizada de route print ou ip route",
+      "Resultado de nslookup/dig",
+      "Resultado de traceroute/tracert quando permitido",
+      "Mapa físico simples",
+      "Mapa lógico simples",
+      "Lista de riscos e hipóteses"
+    ],
+    "questions": [
+      "O que você conseguiu provar e o que ainda é hipótese?",
+      "Qual é o ponto único de falha mais evidente?",
+      "Seu mapa lógico mostra DNS, gateway e política ou apenas cabos?",
+      "Há segmentos que deveriam estar separados?"
+    ],
+    "challenge": "Transforme sua topologia em uma proposta de melhoria com pelo menos uma ação de disponibilidade, uma de segurança e uma de documentação.",
+    "solution": "Uma solução madura separa mapa físico e lógico, identifica evidências, marca hipóteses, aponta pontos únicos de falha e propõe melhorias proporcionais, como rede de visitantes isolada, documentação de gateway/DNS, backup de configuração e revisão de regras."
+  },
+  "mentorQuestions": [
+    {
+      "type": "reflexão",
+      "question": "Por que um diagrama de cabos não é suficiente para diagnosticar uma aplicação que não acessa um serviço?",
+      "hints": [
+        "Pense em IP, rota, firewall, DNS e autenticação.",
+        "O caminho lógico pode não seguir o desenho físico aparente."
+      ],
+      "expectedIdeas": [
+        "topologia física",
+        "topologia lógica",
+        "política",
+        "rota",
+        "serviço"
+      ],
+      "explanation": "A aplicação depende de várias camadas. O cabo pode estar funcionando enquanto uma rota, regra ou serviço falha."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "Metade dos usuários de um andar perdeu acesso aos servidores; a outra metade continua funcionando. Como a topologia ajuda a localizar a causa antes de mexer em qualquer equipamento?",
+      "hints": [
+        "Procure o que os afetados têm em comum e os não afetados não têm.",
+        "Olhe as duas visões: switch de acesso, uplink e AP no físico; VLAN, gateway, rota e firewall no lógico."
+      ],
+      "expectedIdeas": [
+        "ponto comum",
+        "switch de acesso",
+        "uplink",
+        "AP",
+        "VLAN",
+        "rota",
+        "firewall",
+        "diagrama atualizado"
+      ],
+      "explanation": "Comparar afetados e não afetados nos mapas físico e lógico revela o componente que só os afetados compartilham (um uplink, um AP, uma VLAN ou uma regra). Se o diagrama contradiz a evidência, vale a evidência, e o diagrama precisa ser atualizado."
+    },
+    {
+      "type": "cenário real",
+      "question": "Uma empresa quer conectar filiais à cloud. Que topologias lógicas você desenharia antes de liberar tráfego?",
+      "hints": [
+        "Considere hub-and-spoke, firewall central, VPN, peering e subnets.",
+        "Pense em logs e menor privilégio."
+      ],
+      "expectedIdeas": [
+        "hub-and-spoke",
+        "VPC/VNet",
+        "subnets",
+        "rotas",
+        "firewall",
+        "logs",
+        "segurança"
+      ],
+      "explanation": "Cloud networking exige mapa lógico explícito para evitar rotas permissivas, gargalos e falta de visibilidade."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1.4.1",
+      "question": "Qual alternativa descreve melhor topologia lógica?",
+      "options": [
+        "A disposição de cabos, portas e racks que ligam os equipamentos",
+        "O caminho e as regras de comunicação percebidos pelo tráfego",
+        "A lista de equipamentos e modelos instalados na rede",
+        "A velocidade contratada do link de internet"
+      ],
+      "answer": 1,
+      "explanation": "Topologia lógica descreve segmentos, rotas, políticas e caminhos de tráfego. Cabos, portas e racks formam a topologia física.",
+      "topic": "topologia lógica",
+      "difficulty": "iniciante",
+      "type": "conceito"
+    },
+    {
+      "id": "q1.4.2",
+      "question": "Dois computadores estão no mesmo switch, mas em VLANs diferentes. O que é correto afirmar?",
+      "options": [
+        "Eles obrigatoriamente estão na mesma rede lógica",
+        "Eles se comunicam diretamente porque compartilham o switch",
+        "Eles podem estar fisicamente próximos e logicamente separados",
+        "Só um cabo diferente poderia separá-los"
+      ],
+      "answer": 2,
+      "explanation": "A topologia física pode ser a mesma, mas a lógica pode separar tráfego por VLAN.",
+      "topic": "VLAN",
+      "difficulty": "iniciante",
+      "type": "cenário"
+    },
+    {
+      "id": "q1.4.3",
+      "question": "Qual topologia tende a oferecer maior resiliência por múltiplos caminhos, mas aumenta custo e complexidade?",
+      "options": [
+        "Malha",
+        "Barramento",
+        "Estrela",
+        "Hub-and-spoke"
+      ],
+      "answer": 0,
+      "explanation": "Malha cria caminhos alternativos, mas exige mais enlaces, portas, planejamento e controle.",
+      "topic": "malha",
+      "difficulty": "iniciante-intermediário",
+      "type": "comparação"
+    },
+    {
+      "id": "q1.4.4",
+      "question": "Por que uma rede plana é problemática em segurança?",
+      "options": [
+        "Porque impede a comunicação entre usuários e servidores",
+        "Porque multiplica os domínios de broadcast",
+        "Porque exige mais firewalls internos do que uma rede segmentada",
+        "Porque facilita movimento lateral após comprometimento"
+      ],
+      "answer": 3,
+      "explanation": "Sem segmentação, um ativo comprometido pode alcançar mais sistemas com menos barreiras.",
+      "topic": "segurança",
+      "difficulty": "iniciante-intermediário",
+      "type": "segurança"
+    },
+    {
+      "id": "q1.4.5",
+      "question": "Em cloud, qual item representa parte da topologia lógica?",
+      "options": [
+        "O modelo dos switches físicos do provedor",
+        "VPC/VNet, subnets, route tables e security groups",
+        "A posição dos racks dentro do datacenter",
+        "O cabeamento entre os servidores do provedor"
+      ],
+      "answer": 1,
+      "explanation": "Cloud esconde a infraestrutura física (switches, racks, cabos), mas expõe a topologia lógica em redes virtuais, rotas e políticas.",
+      "topic": "cloud",
+      "difficulty": "iniciante",
+      "type": "cloud"
+    },
+    {
+      "id": "q1.4.6",
+      "question": "Um firewall vê pacotes de ida, mas não vê a resposta. Qual hipótese topológica é importante?",
+      "options": [
+        "Falha na resolução DNS do destino",
+        "Cabo rompido entre o host e o switch",
+        "Caminho assimétrico",
+        "Wi-Fi de visitantes sem isolamento"
+      ],
+      "answer": 2,
+      "explanation": "Em caminhos assimétricos, ida e volta passam por pontos diferentes; o firewall stateful vê só metade da conversa e os logs ficam fragmentados. Cabo rompido ou falha de DNS impediriam a própria ida.",
+      "topic": "troubleshooting",
+      "difficulty": "intermediário",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q1.4.7",
+      "type": "comparação",
+      "question": "Em um datacenter spine-leaf, cada leaf se conecta a todos os spines. Qual é o principal benefício e o principal custo desse desenho?",
+      "options": [
+        "Controle centralizado em um hub, ao custo de caminhos mais longos",
+        "Cabeamento mínimo, ao custo de colisões no meio compartilhado",
+        "Caminho circular previsível, ao custo de a falha de um nó afetar o anel",
+        "Latência previsível e escala horizontal, ao custo de mais portas e planejamento"
+      ],
+      "answer": 3,
+      "explanation": "Spine-leaf dá latência previsível e cresce adicionando leafs e spines, mas exige mais portas, planejamento e custo. As outras opções descrevem hub-and-spoke, barramento e anel.",
+      "difficulty": "iniciante-intermediário",
+      "topic": "spine-leaf"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc1.4.1",
+      "front": "O que é topologia física?",
+      "back": "É o desenho de conexões reais ou prováveis entre cabos, portas, APs, switches, roteadores, racks e enlaces.",
+      "tags": [
+        "topologia"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.4.2",
+      "front": "O que é topologia lógica?",
+      "back": "É a forma como o tráfego flui por segmentos, rotas, VLANs, firewalls, túneis, serviços e políticas.",
+      "tags": [
+        "topologia lógica"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.4.4",
+      "front": "Qual o risco de topologia hub-and-spoke?",
+      "back": "O hub pode virar gargalo ou ponto único de falha se não houver redundância e capacidade adequada.",
+      "tags": [
+        "WAN",
+        "arquitetura"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc1.4.5",
+      "front": "Por que diagramas de rede são sensíveis?",
+      "back": "Eles revelam caminhos, zonas, controles, dependências e possíveis alvos para um atacante.",
+      "tags": [
+        "segurança",
+        "documentação"
+      ],
+      "difficulty": "iniciante-intermediário"
+    },
+    {
+      "id": "fc1.4.6",
+      "front": "O que é caminho assimétrico?",
+      "back": "É quando o tráfego de ida e o de volta passam por caminhos diferentes, podendo afetar firewalls e observabilidade.",
+      "tags": [
+        "troubleshooting",
+        "firewall"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc1.4.7",
+      "front": "Na arquitetura acesso, distribuição e core, onde costumam ficar VLANs, roteamento e ACLs?",
+      "back": "Na distribuição, que agrega os switches de acesso. O acesso conecta usuários e endpoints; o core liga datacenter, internet, WAN, firewalls e cloud.",
+      "tags": [
+        "arquitetura",
+        "árvore"
+      ],
+      "difficulty": "iniciante-intermediário"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex1.4.1",
+      "type": "conceitual",
+      "prompt": "Explique com suas palavras a diferença entre topologia física e lógica usando uma rede Wi-Fi doméstica como exemplo.",
+      "expectedAnswer": "A física inclui notebook, rádio, roteador e modem; a lógica inclui IP, gateway, DNS, rota até internet e serviços acessados.",
+      "explanation": "A resposta deve separar meio/conexão de fluxo/regra/serviço."
+    },
+    {
+      "id": "ex1.4.2",
+      "type": "diagnóstico",
+      "prompt": "Dois hosts estão conectados ao mesmo switch, mas um não acessa o outro. Liste cinco hipóteses antes de concluir que o switch está com defeito.",
+      "expectedAnswer": "VLAN diferente, máscara incorreta, firewall local, IP duplicado, ACL, gateway incorreto, porta bloqueada por STP ou política de segurança.",
+      "explanation": "O problema pode estar na topologia lógica, não na física."
+    },
+    {
+      "id": "ex1.4.3",
+      "type": "arquitetura",
+      "prompt": "Uma pequena empresa tem usuários, servidores e visitantes no mesmo Wi-Fi. Que melhoria topológica você sugeriria?",
+      "expectedAnswer": "Separar rede de visitantes, rede corporativa e servidores; aplicar firewall/ACL entre segmentos; documentar gateway, DNS e políticas.",
+      "explanation": "A melhoria reduz movimento lateral e torna troubleshooting mais claro."
+    },
+    {
+      "id": "ex1.4.4",
+      "type": "cloud",
+      "prompt": "Em uma VNet/VPC com subnets pública e privada, o que representa a topologia lógica?",
+      "expectedAnswer": "Subnets, route tables, internet gateway/NAT, security groups, firewall, load balancer, private endpoints e regras de comunicação.",
+      "explanation": "Em cloud, a topologia é definida por software e políticas, mas continua determinando fluxo e risco."
+    }
+  ],
+  "challenge": {
+    "title": "Desenhe duas visões de uma rede pequena",
+    "scenario": "Uma empresa pequena possui 20 usuários, Wi-Fi corporativo, Wi-Fi de visitantes, dois servidores internos, uma impressora, um firewall, um link de internet e uma conexão VPN para cloud.",
+    "tasks": [
+      "Desenhar uma topologia física simplificada.",
+      "Desenhar uma topologia lógica separando usuários, visitantes, servidores e cloud.",
+      "Indicar pelo menos três pontos de controle de segurança.",
+      "Apontar dois pontos únicos de falha.",
+      "Criar um plano de validação com comandos ou evidências."
+    ],
+    "constraints": [
+      "Visitantes não podem acessar servidores internos.",
+      "Servidores devem ser acessados apenas por usuários corporativos autorizados.",
+      "A VPN cloud deve passar pelo firewall.",
+      "O desenho deve ser simples o suficiente para troubleshooting."
+    ],
+    "expectedDeliverables": [
+      "Mapa físico",
+      "Mapa lógico",
+      "Tabela de segmentos",
+      "Lista de riscos",
+      "Plano de validação"
+    ],
+    "gradingRubric": [
+      {
+        "criterion": "Separação física e lógica",
+        "points": 25,
+        "description": "O aluno não mistura cabos com fluxo lógico no mesmo desenho sem legenda."
+      },
+      {
+        "criterion": "Segurança",
+        "points": 25,
+        "description": "Visitantes, usuários, servidores e cloud possuem controles coerentes."
+      },
+      {
+        "criterion": "Troubleshooting",
+        "points": 20,
+        "description": "O plano permite investigar gateway, DNS, rota, firewall e serviço."
+      },
+      {
+        "criterion": "Disponibilidade",
+        "points": 15,
+        "description": "Pontos únicos de falha são identificados."
+      },
+      {
+        "criterion": "Clareza",
+        "points": 15,
+        "description": "O desenho é compreensível e baseado em evidências ou hipóteses marcadas."
+      }
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "Primeiro separamos o que existe fisicamente do que precisa existir logicamente. Depois identificamos grupos com necessidades diferentes: usuários, visitantes, servidores e cloud. Por fim, posicionamos controles e validamos caminhos permitidos e bloqueados.",
+    "steps": [
+      "Listar dispositivos e enlaces físicos.",
+      "Criar segmentos lógicos por função.",
+      "Definir gateway e firewall entre segmentos.",
+      "Garantir que visitantes só acessem internet.",
+      "Garantir que servidores não fiquem na mesma rede dos visitantes.",
+      "Forçar tráfego cloud/VPN pelo firewall.",
+      "Listar comandos de validação: ipconfig/ip route, ping, nslookup, traceroute, Test-NetConnection/curl."
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "Colocar todos na mesma rede e confiar na senha do Wi-Fi.",
+        "whyItIsWrong": "Senha Wi-Fi não substitui segmentação. Visitantes ou dispositivos comprometidos poderiam alcançar recursos internos."
+      },
+      {
+        "answer": "Desenhar apenas uma nuvem chamada internet/cloud.",
+        "whyItIsWrong": "Isso esconde VPN, rotas, firewall, subnets e pontos de controle."
+      },
+      {
+        "answer": "Criar muitos segmentos sem plano de operação.",
+        "whyItIsWrong": "Segmentação sem documentação e validação cria complexidade e falhas difíceis de diagnosticar."
+      }
+    ],
+    "finalAnswer": "Uma solução adequada mostra fisicamente usuários/APs/switch/firewall/link/cloud e logicamente segmentos de usuários, visitantes, servidores e VPN cloud. Visitantes acessam somente internet. Usuários acessam servidores conforme regra. Servidores não iniciam tráfego livre para usuários. A VPN passa pelo firewall. O plano de validação testa IP, gateway, DNS, rota, porta e regras bloqueadas."
+  },
+  "glossary": [
+    {
+      "term": "Topologia física",
+      "shortDefinition": "Forma como equipamentos e enlaces estão conectados fisicamente.",
+      "longDefinition": "Representa cabos, portas, APs, switches, roteadores, racks, links e caminhos físicos ou de rádio.",
+      "example": "Notebook conectado por Wi-Fi a um AP que está cabeado a um switch.",
+      "relatedTerms": [
+        "camada física",
+        "meio",
+        "cabeamento"
+      ],
+      "relatedLessons": [
+        "0.5",
+        "1.4",
+        "1.5"
+      ]
+    },
+    {
+      "term": "Topologia lógica",
+      "shortDefinition": "Forma como o tráfego flui por segmentos, rotas e políticas.",
+      "longDefinition": "Representa VLANs, subnets, gateways, rotas, firewalls, túneis, serviços e caminhos funcionais.",
+      "example": "Usuários e servidores no mesmo switch físico, mas separados por VLAN e firewall.",
+      "relatedTerms": [
+        "VLAN",
+        "rota",
+        "firewall"
+      ],
+      "relatedLessons": [
+        "1.4",
+        "2.1",
+        "3.8",
+        "4.1"
+      ]
+    },
+    {
+      "term": "Ponto único de falha",
+      "shortDefinition": "Componente cuja falha derruba uma função importante sem alternativa automática.",
+      "longDefinition": "Pode ser switch, firewall, roteador, link, AP, servidor DNS ou qualquer dependência sem redundância.",
+      "example": "Um único firewall sem alta disponibilidade conectando toda empresa à internet.",
+      "relatedTerms": [
+        "disponibilidade",
+        "redundância",
+        "resiliência"
+      ],
+      "relatedLessons": [
+        "0.6",
+        "1.4",
+        "15.1"
+      ]
+    },
+    {
+      "term": "Hub-and-spoke",
+      "shortDefinition": "Topologia em que vários pontos remotos se conectam a um hub central.",
+      "longDefinition": "Muito usada em WAN, VPN e cloud para centralizar inspeção, roteamento ou serviços compartilhados.",
+      "example": "Filiais conectadas por VPN a um datacenter central.",
+      "relatedTerms": [
+        "WAN",
+        "VPN",
+        "cloud hub"
+      ],
+      "relatedLessons": [
+        "1.4",
+        "10.1",
+        "14.4"
+      ]
+    },
+    {
+      "term": "Spine-leaf",
+      "shortDefinition": "Topologia de datacenter com switches leaf conectados a switches spine.",
+      "longDefinition": "Busca baixa latência previsível e escala horizontal, reduzindo gargalos tradicionais de hierarquias antigas.",
+      "example": "Servidores conectados a leafs; leafs conectados a todos os spines.",
+      "relatedTerms": [
+        "datacenter",
+        "east-west traffic",
+        "underlay"
+      ],
+      "relatedLessons": [
+        "1.4",
+        "11.1",
+        "14.8"
+      ]
+    },
+    {
+      "term": "Caminho assimétrico",
+      "shortDefinition": "Quando ida e volta do tráfego usam caminhos diferentes.",
+      "longDefinition": "Pode causar problemas em firewalls stateful, NAT, troubleshooting e correlação de logs.",
+      "example": "Pacote sai por um firewall e retorna por outro que não viu o início da sessão.",
+      "relatedTerms": [
+        "roteamento",
+        "firewall stateful",
+        "NAT"
+      ],
+      "relatedLessons": [
+        "1.4",
+        "9.1",
+        "11.5"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Módulo 0",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Base de camadas, sinais, protocolos e métricas."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Aula 1.3",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Tipos de rede usados como contexto para topologias."
+    },
+    {
+      "type": "standard",
+      "title": "IEEE 802 family",
+      "organization": "IEEE",
+      "url": "",
+      "note": "Família de padrões relacionada a LANs, Ethernet e Wi-Fi."
+    },
+    {
+      "type": "official-doc",
+      "title": "Cloud networking architecture documentation",
+      "organization": "AWS, Microsoft Azure e Google Cloud",
+      "url": "",
+      "note": "Usar documentação oficial do provedor ao desenhar topologias cloud reais."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "Cloud e IaC",
+      "lesson": "Terraform e redes cloud",
+      "reason": "Topologia lógica em cloud costuma ser criada como código."
+    },
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "Kubernetes",
+      "lesson": "Services, Ingress e NetworkPolicies",
+      "reason": "Kubernetes possui topologias lógicas próprias acima da rede física."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "Zero Trust",
+      "lesson": "Acesso baseado em identidade e contexto",
+      "reason": "Zero Trust depende de entender caminhos, zonas e pontos de decisão de política."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70,
+      "oneOf": [
+        "labMarkedDone",
+        "practicalExerciseDone"
+      ]
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "1.5"
+    ]
+  }
+}

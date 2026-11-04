@@ -1,0 +1,80 @@
+{
+  "id": "1.4",
+  "versao": "nova",
+  "titulo": "Topologias físicas e lógicas",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5217,
+    "invisiveis": 55,
+    "teoriaVisivel": 2688
+  },
+  "porCampoVisivel": {
+    "content.motivation": 129,
+    "content.problem": 137,
+    "content.evolution": 262,
+    "content.concept": 240,
+    "content.internals": 159,
+    "content.architecture": 138,
+    "content.analogy": 98,
+    "content.simpleExample": 88,
+    "content.enterpriseExample": 80,
+    "content.cloudExample": 129,
+    "content.devsecopsExample": 83,
+    "content.diagram": 1,
+    "content.summary": 100,
+    "content.nextTheme": 37,
+    "security": 424,
+    "troubleshooting": 341,
+    "glossary": 242,
+    "title+subtitle": 21,
+    "objectives": 61,
+    "learningOutcomes": 49,
+    "quiz": 422,
+    "flashcards": 145,
+    "mentorQuestions": 229,
+    "exercises": 188,
+    "challenge": 174,
+    "commentedSolution": 188,
+    "references": 68,
+    "linksToOtherCourses": 70,
+    "lab": 914
+  },
+  "porCampoInvisivel": {
+    "networkContext": 55
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 75,
+    "alternativa_5minPasso_maisLeitura": 42,
+    "plausivel": true,
+    "palavras": 914
+  },
+  "duracao": {
+    "declarada": "135-190 min",
+    "estimatedStudyTimeMinutes": 190,
+    "M": 162.5,
+    "T": 158.7,
+    "partes": {
+      "teoria": 20.7,
+      "diagramas": 3,
+      "quiz": 7,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 75
+    },
+    "faixaRecomendada": "135-190 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 15
+  }
+}

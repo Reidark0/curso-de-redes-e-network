@@ -1,0 +1,88 @@
+{
+  "id": "1.4",
+  "versao": "original",
+  "titulo": "Topologias físicas e lógicas",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4954,
+    "invisiveis": 609,
+    "teoriaVisivel": 2581
+  },
+  "porCampoVisivel": {
+    "content.motivation": 146,
+    "content.history": 119,
+    "content.problem": 145,
+    "content.evolution": 186,
+    "content.concept": 105,
+    "content.internals": 142,
+    "content.architecture": 124,
+    "content.analogy": 107,
+    "content.simpleExample": 89,
+    "content.enterpriseExample": 91,
+    "content.cloudExample": 91,
+    "content.devsecopsExample": 87,
+    "content.securityExample": 140,
+    "content.diagram": 3,
+    "content.summary": 54,
+    "content.nextTheme": 41,
+    "security": 328,
+    "troubleshooting": 341,
+    "glossary": 242,
+    "title+subtitle": 21,
+    "objectives": 61,
+    "learningOutcomes": 49,
+    "quiz": 265,
+    "flashcards": 128,
+    "mentorQuestions": 164,
+    "exercises": 188,
+    "challenge": 174,
+    "commentedSolution": 188,
+    "references": 68,
+    "linksToOtherCourses": 70,
+    "lab": 997
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 32,
+    "content.exercisesIntro": 22,
+    "content.challengeIntro": 30,
+    "content.solutionIntro": 20,
+    "networkContext": 55,
+    "deepDive": 314,
+    "commonMistakes": 136
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 75,
+    "alternativa_5minPasso_maisLeitura": 42.7,
+    "plausivel": true,
+    "palavras": 997
+  },
+  "duracao": {
+    "declarada": "75-105 min",
+    "estimatedStudyTimeMinutes": 105,
+    "M": 90,
+    "T": 156.9,
+    "partes": {
+      "teoria": 19.9,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 75
+    },
+    "faixaRecomendada": "135-190 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 15
+  }
+}

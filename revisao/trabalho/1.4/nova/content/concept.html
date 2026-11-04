@@ -1,0 +1,16 @@
+
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <p>Topologia de rede é a forma como os elementos de uma rede são organizados e conectados. Ela pode ser analisada fisicamente, logicamente ou funcionalmente (os serviços de que o usuário depende, como DNS, proxy e autenticação).</p>
+  <div class="definition-box"><strong>Definição:</strong> topologia física descreve como cabos, enlaces, portas, APs e equipamentos estão conectados. Topologia lógica descreve como o tráfego realmente flui, quais segmentos existem, que caminhos são usados e que políticas controlam a comunicação.</div>
+  <p>Dois computadores podem estar no mesmo switch físico, mas separados logicamente por VLANs e firewall. Dois servidores podem estar em prédios diferentes, mas parecer próximos para uma aplicação por causa de uma rede virtual, túnel ou balanceador.</p>
+  <div class="callout warning">
+    <p><strong>Erros comuns</strong></p>
+    <ul>
+      <li><strong>Confundir física com lógica:</strong> ver os cabos e assumir que o tráfego segue aquele desenho. Isso leva a diagnóstico errado, sobretudo com VLAN, roteamento, VPN e cloud. Separe mapa físico, mapa lógico e mapa de aplicação.</li>
+      <li><strong>Achar que estrela é sempre segura:</strong> ela parece organizada, mas o switch central pode ser ponto único de falha e a rede pode continuar plana. Avalie redundância, segmentação, políticas e monitoramento.</li>
+      <li><strong>Desenhar a cloud como uma nuvem genérica:</strong> rotas, security groups, subnets e custos ficam invisíveis. Represente VPC/VNet, subnets, gateways, firewalls, endpoints e peerings.</li>
+      <li><strong>Usar diagrama como decoração:</strong> um desenho bonito que não ajuda num incidente não é documentação. Todo diagrama deve responder: quem fala com quem, por onde, com que política e que evidência comprova. Simples demais esconde riscos; complexo demais ninguém usa.</li>
+    </ul>
+  </div>
+</section>
