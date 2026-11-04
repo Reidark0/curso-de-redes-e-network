@@ -1,0 +1,96 @@
+{
+  "id": "1.1",
+  "versao": "v1",
+  "titulo": "O que é uma rede e por que existe",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4357,
+    "teoria": 2725,
+    "praticaExtra": 889,
+    "quiz": 465,
+    "flashcards": 122
+  },
+  "porGrupoTeoria": {
+    "introducao": 536,
+    "contexto": 390,
+    "conteudo": 755,
+    "exemplos": 476,
+    "seguranca_troubleshooting": 568
+  },
+  "porSecao": {
+    "motivation": 144,
+    "summary": 112,
+    "history": 182,
+    "problem": 208,
+    "concept": 297,
+    "internals": 253,
+    "architecture": 179,
+    "diagram": 26,
+    "analogy": 84,
+    "simpleExample": 91,
+    "enterpriseExample": 74,
+    "cloudExample": 71,
+    "devsecopsExample": 83,
+    "securityExample": 73,
+    "objectives": 52,
+    "learningOutcomes": 55,
+    "glossary": 173,
+    "security": 278,
+    "troubleshooting": 290,
+    "nextTheme": 29
+  },
+  "pratica": {
+    "quiz": 465,
+    "flashcards": 122,
+    "lab": 0,
+    "mentorQuestions": 204,
+    "exercises": 361,
+    "challenge": 148,
+    "commentedSolution": 176
+  },
+  "outros": {
+    "title+subtitle": 26,
+    "nextTheme": 29,
+    "references": 51,
+    "linksToOtherCourses": 50
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 5,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "70-100 min",
+    "estimatedStudyTimeMinutes": 100,
+    "nucleo": 31,
+    "nucleoPartes": {
+      "teoria": 21,
+      "diagramas": 3,
+      "quiz": 7
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "25-35 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

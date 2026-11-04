@@ -1,0 +1,97 @@
+{
+  "id": "1.1",
+  "versao": "original",
+  "titulo": "O que é uma rede e por que existe",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3598,
+    "teoria": 2412,
+    "praticaExtra": 635,
+    "quiz": 252,
+    "flashcards": 122
+  },
+  "porGrupoTeoria": {
+    "introducao": 502,
+    "contexto": 436,
+    "conteudo": 398,
+    "exemplos": 547,
+    "seguranca_troubleshooting": 529
+  },
+  "porSecao": {
+    "motivation": 163,
+    "summary": 59,
+    "history": 137,
+    "problem": 154,
+    "evolution": 145,
+    "concept": 113,
+    "internals": 156,
+    "architecture": 105,
+    "diagram": 24,
+    "analogy": 92,
+    "simpleExample": 83,
+    "enterpriseExample": 76,
+    "cloudExample": 88,
+    "devsecopsExample": 90,
+    "securityExample": 118,
+    "objectives": 52,
+    "learningOutcomes": 55,
+    "glossary": 173,
+    "security": 239,
+    "troubleshooting": 290,
+    "nextTheme": 49
+  },
+  "pratica": {
+    "quiz": 252,
+    "flashcards": 122,
+    "lab": 0,
+    "mentorQuestions": 135,
+    "exercises": 176,
+    "challenge": 148,
+    "commentedSolution": 176
+  },
+  "outros": {
+    "title+subtitle": 27,
+    "nextTheme": 49,
+    "references": 51,
+    "linksToOtherCourses": 50
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 5,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "75-105 min",
+    "estimatedStudyTimeMinutes": 105,
+    "nucleo": 27.6,
+    "nucleoPartes": {
+      "teoria": 18.6,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "25-35 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

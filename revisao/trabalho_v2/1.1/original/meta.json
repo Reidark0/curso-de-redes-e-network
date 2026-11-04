@@ -1,0 +1,724 @@
+{
+  "id": "1.1",
+  "moduleId": "m01",
+  "order": 1,
+  "title": "O que é uma rede e por que existe",
+  "subtitle": "A rede como resposta ao problema de compartilhar informação, serviços e recursos entre computadores, pessoas, sistemas e organizações.",
+  "duration": "75-105 min",
+  "estimatedStudyTimeMinutes": 105,
+  "difficulty": "iniciante",
+  "type": "fundamental",
+  "xp": 185,
+  "tags": [
+    "redes",
+    "fundamentos",
+    "comunicação",
+    "lan",
+    "wan",
+    "protocolos",
+    "segurança",
+    "troubleshooting",
+    "cloud",
+    "devsecops"
+  ],
+  "prerequisites": [
+    {
+      "type": "module",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.10",
+      "reason": "Antes de definir rede, é necessário entender bits, sinais, protocolos, métricas e pensamento em camadas vistos no Módulo 0."
+    }
+  ],
+  "objectives": [
+    "Explicar por que redes existem antes de decorar equipamentos e protocolos.",
+    "Diferenciar dispositivo final, dispositivo intermediário, meio de transmissão, serviço, protocolo e política.",
+    "Entender rede como sistema sociotécnico: tecnologia, operação, segurança, custo e finalidade.",
+    "Relacionar redes domésticas, corporativas, cloud e DevSecOps.",
+    "Criar um primeiro modelo mental para diagnosticar problemas básicos de conectividade."
+  ],
+  "learningOutcomes": [
+    "Dado um cenário simples, o aluno identifica quem são os participantes da rede e qual problema a rede resolve.",
+    "Dado um incidente inicial, o aluno separa falha de dispositivo, meio, endereço, protocolo, serviço e política.",
+    "Dado um desenho corporativo ou cloud, o aluno explica por que a rede é mais do que cabos e Wi-Fi."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Visão geral de todas as camadas"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede",
+      "Internet",
+      "Transporte",
+      "Aplicação"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "Wi-Fi",
+      "IPv4",
+      "IPv6",
+      "TCP",
+      "UDP",
+      "DNS",
+      "HTTP",
+      "TLS"
+    ],
+    "dependsOn": [
+      "bits",
+      "bytes",
+      "sinais físicos",
+      "protocolos",
+      "pensamento em camadas"
+    ],
+    "enables": [
+      "modelo OSI",
+      "Ethernet",
+      "IPv4",
+      "subnetting",
+      "TCP/UDP",
+      "DNS",
+      "HTTP",
+      "firewalls",
+      "VPN",
+      "cloud networking"
+    ]
+  },
+  "deepDive": {
+    "mentalModel": "Rede é uma cadeia de comunicação: origem, dados, protocolo, endereço, meio, intermediários, destino, política e evidência.",
+    "keyTerms": [
+      "rede",
+      "nó",
+      "host",
+      "serviço",
+      "meio de transmissão",
+      "protocolo",
+      "endereçamento",
+      "política",
+      "observabilidade"
+    ],
+    "limitations": [
+      "Uma rede não garante que o serviço esteja funcionando.",
+      "Conectividade não significa autorização.",
+      "Mais velocidade nominal não corrige todos os problemas.",
+      "Cloud abstrai o cabo, mas não elimina redes."
+    ],
+    "whenToUse": [
+      "Quando dispositivos precisam compartilhar dados ou serviços.",
+      "Quando aplicações precisam se comunicar.",
+      "Quando equipes precisam centralizar recursos e controle.",
+      "Quando ambientes locais e cloud precisam se integrar."
+    ],
+    "whenNotToUse": [
+      "Quando um sistema isolado é exigido por segurança ou regulação.",
+      "Quando conectar algo aumenta risco sem necessidade operacional.",
+      "Quando um recurso pode ser mantido offline por desenho de segurança."
+    ],
+    "operationalImpact": [
+      "Redes exigem documentação, monitoramento, troubleshooting e controle de mudanças.",
+      "Quanto mais interdependências, maior a necessidade de observabilidade e padronização."
+    ],
+    "financialImpact": [
+      "Redes podem exigir switches, roteadores, firewalls, access points, links, licenças e equipe especializada.",
+      "Em cloud, tráfego, NAT gateway, firewalls gerenciados, load balancers e flow logs podem gerar custo recorrente."
+    ],
+    "securityImpact": [
+      "Redes ampliam superfície de ataque quando mal segmentadas.",
+      "Redes bem projetadas reduzem movimento lateral e melhoram detecção."
+    ]
+  },
+  "commonMistakes": [
+    {
+      "mistake": "Achar que rede é só internet.",
+      "whyItHappens": "No uso doméstico, a rede costuma ser percebida apenas quando a internet falha.",
+      "consequence": "O aluno ignora LAN, DNS, gateway, firewall e serviços internos.",
+      "correction": "Internet é uma rede de redes; sua LAN e sua rede corporativa também são redes."
+    },
+    {
+      "mistake": "Confundir conectividade com permissão.",
+      "whyItHappens": "Muitos testes começam com ping ou acesso a porta.",
+      "consequence": "A pessoa conclui que acesso deve ser liberado apenas porque o caminho existe.",
+      "correction": "Conectividade é caminho; autorização é decisão de acesso."
+    },
+    {
+      "mistake": "Chamar tudo de problema de rede.",
+      "whyItHappens": "O sintoma aparece como indisponibilidade para o usuário.",
+      "consequence": "Troubleshooting vira tentativa e erro.",
+      "correction": "Separar dispositivo, meio, endereço, protocolo, serviço, identidade e política."
+    }
+  ],
+  "troubleshooting": {
+    "symptoms": [
+      "Usuário não acessa internet",
+      "Aplicação interna não abre",
+      "Wi-Fi conecta mas nada navega",
+      "Pipeline não alcança registry",
+      "Servidor responde por IP mas não por nome"
+    ],
+    "diagnosticQuestions": [
+      "O problema afeta um usuário, vários usuários ou todos?",
+      "O dispositivo tem IP?",
+      "Existe gateway padrão?",
+      "DNS resolve?",
+      "O caminho até o destino responde?",
+      "A porta do serviço está acessível?",
+      "Existe firewall, proxy, VPN ou política no meio?"
+    ],
+    "commands": [
+      {
+        "platform": "Windows",
+        "command": "ipconfig /all",
+        "purpose": "Ver endereço IP, máscara, gateway, DNS e informações da interface.",
+        "expectedObservation": "Interface ativa com IPv4, gateway e DNS coerentes.",
+        "interpretation": "Se não houver IP válido ou gateway, o problema pode estar antes da aplicação."
+      },
+      {
+        "platform": "Windows",
+        "command": "ping <gateway> && tracert 8.8.8.8",
+        "purpose": "Testar conectividade local e caminho básico para fora.",
+        "expectedObservation": "Resposta do gateway e saltos no caminho.",
+        "interpretation": "Falha no gateway sugere problema local; falha depois pode envolver roteamento, firewall ou provedor."
+      },
+      {
+        "platform": "Linux",
+        "command": "ip addr && ip route && resolvectl status",
+        "purpose": "Ver endereços, rotas e DNS no Linux.",
+        "expectedObservation": "Interface com IP, rota default e servidor DNS configurado.",
+        "interpretation": "Sem rota default, o host não sabe para onde enviar tráfego fora da rede local."
+      },
+      {
+        "platform": "Linux",
+        "command": "ping -c 4 $(ip route | awk '/default/ {print $3; exit}')",
+        "purpose": "Testar alcance do gateway padrão.",
+        "expectedObservation": "Perda baixa e tempos coerentes na rede local.",
+        "interpretation": "Perda para o gateway indica problema local, Wi-Fi, cabo, switch, VLAN ou firewall local."
+      },
+      {
+        "platform": "Cisco IOS",
+        "command": "show ip interface brief",
+        "purpose": "Ver interfaces, endereços e estado operacional.",
+        "expectedObservation": "Interfaces relevantes em up/up.",
+        "interpretation": "Interface down ou administratively down impede comunicação pelo caminho esperado."
+      }
+    ],
+    "decisionTree": [
+      {
+        "if": "Sem IP válido no host",
+        "then": "Verificar DHCP, cabo, Wi-Fi, VLAN ou configuração manual."
+      },
+      {
+        "if": "Tem IP, mas não pinga gateway",
+        "then": "Verificar meio físico, Wi-Fi, máscara, VLAN, firewall local ou gateway errado."
+      },
+      {
+        "if": "Pinga IP externo, mas nomes falham",
+        "then": "Investigar DNS antes de culpar internet inteira."
+      },
+      {
+        "if": "DNS resolve, mas aplicação falha",
+        "then": "Verificar porta, protocolo, TLS, proxy, autenticação e política."
+      }
+    ]
+  },
+  "security": {
+    "goodPractices": [
+      "Documentar segmentos, gateways, serviços críticos e dependências.",
+      "Separar redes por função e criticidade.",
+      "Registrar eventos em firewall, DNS, VPN, proxy e serviços críticos.",
+      "Aplicar menor privilégio também em fluxos de rede.",
+      "Revisar periodicamente regras e exceções."
+    ],
+    "badPractices": [
+      "Colocar todos os ativos na mesma rede sem segmentação.",
+      "Liberar any-any para resolver problema rápido.",
+      "Expor serviços internos diretamente na internet.",
+      "Não manter inventário de dispositivos e serviços.",
+      "Usar conectividade como substituto de autorização."
+    ],
+    "commonErrors": [
+      "Achar que NAT é firewall suficiente.",
+      "Achar que VPN torna qualquer acesso seguro automaticamente.",
+      "Ignorar logs de DNS e proxy em investigação.",
+      "Não separar rede de aplicação e identidade."
+    ],
+    "vulnerabilities": [
+      {
+        "name": "Movimento lateral por rede plana",
+        "description": "Quando muitos ativos ficam no mesmo segmento, um comprometimento pode alcançar mais sistemas.",
+        "defensiveExplanation": "O risco é a ampliação do impacto após o primeiro comprometimento.",
+        "mitigation": "Segmentação, firewalls internos, autenticação forte, EDR, logs e revisão de acessos."
+      },
+      {
+        "name": "Exposição indevida de serviço",
+        "description": "Serviços administrativos ou internos ficam acessíveis além do necessário.",
+        "defensiveExplanation": "A superfície de ataque aumenta quando portas ficam disponíveis para quem não precisa delas.",
+        "mitigation": "Inventário, regras restritivas, bastion, VPN bem controlada, private endpoints e monitoramento."
+      }
+    ],
+    "monitoring": [
+      "Logs de firewall e proxy",
+      "DNS queries incomuns",
+      "Flow logs em cloud",
+      "Conexões laterais inesperadas",
+      "Novos dispositivos na rede"
+    ],
+    "hardening": [
+      "Segmentação por função",
+      "Bloqueio padrão e liberação justificada",
+      "MFA em acessos remotos",
+      "Administração por redes restritas",
+      "Inventário e controle de mudanças"
+    ],
+    "detectionIdeas": [
+      "Comparar tráfego atual com baseline",
+      "Alertar varreduras internas",
+      "Observar tentativas de acesso entre segmentos",
+      "Monitorar falhas repetidas de DNS, proxy ou VPN"
+    ]
+  },
+  "mentorQuestions": [
+    {
+      "type": "reflexão",
+      "question": "Por que uma rede não deve ser definida apenas como computadores conectados?",
+      "hints": [
+        "Pense em protocolos, políticas e serviços.",
+        "Pense em cloud e VPN."
+      ],
+      "expectedIdeas": [
+        "meio",
+        "endereçamento",
+        "protocolos",
+        "serviços",
+        "políticas",
+        "operação",
+        "segurança"
+      ],
+      "explanation": "A definição precisa incluir os elementos que tornam a comunicação útil, controlável e diagnosticável."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "Um usuário diz que 'a rede caiu'. Quais perguntas você faria antes de mexer em firewall ou roteador?",
+      "hints": [
+        "Comece pelo escopo.",
+        "Separe IP, DNS, gateway, aplicação e usuário."
+      ],
+      "expectedIdeas": [
+        "quem é afetado",
+        "qual serviço",
+        "IP válido",
+        "gateway",
+        "DNS",
+        "VPN",
+        "erro exato",
+        "horário"
+      ],
+      "explanation": "Troubleshooting profissional começa reduzindo ambiguidade."
+    },
+    {
+      "type": "cenário real",
+      "question": "Uma empresa quer colocar todos os servidores e usuários na mesma rede para simplificar. Qual é o risco?",
+      "hints": [
+        "Pense em movimento lateral.",
+        "Pense em regras e logs."
+      ],
+      "expectedIdeas": [
+        "rede plana",
+        "movimento lateral",
+        "blast radius",
+        "segmentação",
+        "firewall interno",
+        "monitoramento"
+      ],
+      "explanation": "Simplicidade sem controle pode aumentar impacto de incidentes."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1.1.1",
+      "type": "conceito",
+      "q": "Qual definição é mais útil para uma rede em contexto profissional?",
+      "opts": [
+        "Um conjunto de dispositivos, meios, protocolos, endereços, serviços e políticas que permite comunicação.",
+        "Apenas o cabo que liga computadores.",
+        "Apenas a internet fornecida pelo provedor.",
+        "Qualquer computador com Wi-Fi ligado."
+      ],
+      "a": 0,
+      "exp": "Rede envolve comunicação e controle, não apenas o meio físico ou a internet.",
+      "difficulty": "iniciante",
+      "topic": "conceito"
+    },
+    {
+      "id": "q1.1.2",
+      "type": "diagnóstico",
+      "q": "Um host tem IP e pinga o gateway, mas não acessa sites por nome. Qual hipótese fica forte?",
+      "opts": [
+        "Problema de DNS.",
+        "Cabo necessariamente rompido.",
+        "Fonte do monitor queimada.",
+        "Switch inexistente."
+      ],
+      "a": 0,
+      "exp": "Se o gateway responde, conectividade local existe. Falha por nome sugere DNS, embora outras hipóteses ainda possam existir.",
+      "difficulty": "iniciante",
+      "topic": "dns"
+    },
+    {
+      "id": "q1.1.3",
+      "type": "segurança",
+      "q": "Por que rede plana é arriscada?",
+      "opts": [
+        "Porque facilita movimento lateral entre ativos.",
+        "Porque sempre impede acesso à internet.",
+        "Porque elimina a necessidade de firewall.",
+        "Porque reduz todos os custos a zero."
+      ],
+      "a": 0,
+      "exp": "Rede plana amplia o alcance de um comprometimento e dificulta políticas finas.",
+      "difficulty": "iniciante",
+      "topic": "segurança"
+    },
+    {
+      "id": "q1.1.4",
+      "type": "comparação",
+      "q": "Qual item é um dispositivo intermediário?",
+      "opts": [
+        "Switch",
+        "Notebook do usuário",
+        "Arquivo PDF",
+        "Senha do Wi-Fi"
+      ],
+      "a": 0,
+      "exp": "Switch encaminha comunicação dentro da rede; notebook é dispositivo final.",
+      "difficulty": "iniciante",
+      "topic": "papéis"
+    },
+    {
+      "id": "q1.1.5",
+      "type": "cloud",
+      "q": "Em cloud, qual recurso se aproxima de uma rede virtual?",
+      "opts": [
+        "VPC ou VNet",
+        "Planilha local",
+        "Teclado USB",
+        "Arquivo Base64"
+      ],
+      "a": 0,
+      "exp": "VPC/VNet representam redes virtuais em provedores cloud.",
+      "difficulty": "iniciante",
+      "topic": "cloud"
+    },
+    {
+      "id": "q1.1.6",
+      "type": "devsecops",
+      "q": "Um pipeline não consegue baixar uma imagem do registry. Qual causa de rede é plausível?",
+      "opts": [
+        "DNS, proxy, firewall ou rota bloqueando o acesso.",
+        "O conceito de byte deixou de existir.",
+        "O monitor não suporta 4K.",
+        "O usuário digitou um emoji."
+      ],
+      "a": 0,
+      "exp": "Pipelines dependem de rede para DNS, conexão, proxy, TLS e acesso a serviços externos ou internos.",
+      "difficulty": "iniciante-intermediário",
+      "topic": "devsecops"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc1.1.1",
+      "front": "O que é uma rede?",
+      "back": "Um sistema de comunicação entre participantes usando dispositivos, meios, protocolos, endereços, serviços e políticas.",
+      "tags": [
+        "rede",
+        "conceito"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.1.2",
+      "front": "Internet e rede são sinônimos?",
+      "back": "Não. A internet é uma grande rede de redes. LANs, redes corporativas e redes cloud também são redes.",
+      "tags": [
+        "internet",
+        "lan"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.1.3",
+      "front": "O que é um dispositivo final?",
+      "back": "É um participante que consome ou oferece serviços, como notebook, celular, servidor, VM, container ou impressora.",
+      "tags": [
+        "host",
+        "endpoint"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.1.4",
+      "front": "O que é um dispositivo intermediário?",
+      "back": "É um elemento que encaminha, conecta, filtra ou controla tráfego, como switch, roteador, firewall, AP, proxy ou load balancer.",
+      "tags": [
+        "switch",
+        "roteador",
+        "firewall"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.1.5",
+      "front": "Conectividade significa autorização?",
+      "back": "Não. Conectividade é existir caminho técnico; autorização é permissão para acessar um recurso.",
+      "tags": [
+        "segurança",
+        "iam"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.1.6",
+      "front": "Por que redes precisam de logs?",
+      "back": "Para diagnosticar falhas, investigar incidentes, auditar acessos e entender fluxos reais.",
+      "tags": [
+        "logs",
+        "soc",
+        "troubleshooting"
+      ],
+      "difficulty": "iniciante"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex1.1.1",
+      "type": "conceitual",
+      "prompt": "Explique, com suas palavras, por que rede não é apenas internet.",
+      "expectedAnswer": "Porque uma rede é qualquer sistema de comunicação entre participantes, incluindo LAN, rede corporativa, rede cloud e internet. Internet é uma rede pública global composta por muitas redes.",
+      "explanation": "O objetivo é separar o conceito geral do caso mais famoso."
+    },
+    {
+      "id": "ex1.1.2",
+      "type": "diagnóstico",
+      "prompt": "Liste cinco perguntas que você faria quando alguém diz 'a rede caiu'.",
+      "expectedAnswer": "Quem é afetado? Qual serviço falha? O dispositivo tem IP? O gateway responde? DNS resolve? Há VPN/proxy? Qual erro aparece? Quando começou?",
+      "explanation": "Perguntas reduzem ambiguidade e evitam tentativa e erro."
+    },
+    {
+      "id": "ex1.1.3",
+      "type": "arquitetura",
+      "prompt": "Classifique notebook, switch, roteador, firewall, DNS e aplicação web em papéis de rede.",
+      "expectedAnswer": "Notebook: dispositivo final; switch/roteador/firewall: intermediários; DNS e aplicação web: serviços, embora rodem em dispositivos finais/servidores; firewall também aplica política.",
+      "explanation": "Alguns elementos têm papéis sobrepostos, mas a classificação ajuda o raciocínio."
+    },
+    {
+      "id": "ex1.1.4",
+      "type": "segurança",
+      "prompt": "Por que uma rede que conecta tudo com tudo pode parecer eficiente, mas ser perigosa?",
+      "expectedAnswer": "Porque reduz barreiras internas e facilita movimento lateral, acesso indevido e propagação de incidentes. Segmentação e políticas reduzem impacto.",
+      "explanation": "Eficiência operacional sem controle pode aumentar risco."
+    }
+  ],
+  "challenge": {
+    "title": "Desenhe e explique uma rede pequena",
+    "scenario": "Uma pequena empresa tem 8 notebooks, 1 impressora, 1 servidor de arquivos, Wi-Fi de visitantes e acesso à internet. O dono quer colocar tudo no mesmo Wi-Fi porque parece simples.",
+    "tasks": [
+      "Identificar dispositivos finais e intermediários.",
+      "Explicar quais serviços existem ou deveriam existir.",
+      "Apontar pelo menos três riscos de colocar tudo junto.",
+      "Sugerir uma separação inicial segura.",
+      "Indicar quais evidências deveriam ser registradas para troubleshooting."
+    ],
+    "constraints": [
+      "Não usar termos avançados sem explicar.",
+      "Não propor produto pago como única solução.",
+      "Separar conectividade de autorização.",
+      "Pensar em crescimento futuro."
+    ],
+    "expectedDeliverables": [
+      "Mapa textual da rede",
+      "Lista de papéis",
+      "Tabela de riscos e mitigação",
+      "Checklist inicial de diagnóstico"
+    ],
+    "gradingRubric": [
+      {
+        "criterion": "Identificação correta dos papéis",
+        "points": 25,
+        "description": "Diferencia dispositivos finais, intermediários, serviços e políticas."
+      },
+      {
+        "criterion": "Raciocínio de segurança",
+        "points": 25,
+        "description": "Reconhece riscos de rede plana e propõe segmentação inicial."
+      },
+      {
+        "criterion": "Clareza operacional",
+        "points": 25,
+        "description": "Inclui evidências e passos de diagnóstico."
+      },
+      {
+        "criterion": "Explicação acessível",
+        "points": 25,
+        "description": "Explica sem jargão desnecessário e sem simplificar demais."
+      }
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "Primeiro separamos quem participa da rede. Depois identificamos quais equipamentos apenas usam serviços, quais encaminham tráfego, quais aplicam política e quais serviços são críticos. Só então falamos em risco e mitigação.",
+    "steps": [
+      "Listar notebooks, impressora, servidor, roteador, AP e internet.",
+      "Classificar notebooks, impressora e servidor como dispositivos finais.",
+      "Classificar roteador/AP/switch/firewall como intermediários conforme o ambiente.",
+      "Separar visitantes dos recursos internos.",
+      "Evitar que Wi-Fi de visitantes alcance servidor de arquivos.",
+      "Registrar IPs, gateway, DNS, regras e evidências básicas."
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "Colocar tudo no mesmo Wi-Fi com uma senha forte.",
+        "whyItIsWrong": "Senha forte ajuda no acesso inicial, mas não resolve segmentação, visitantes, movimento lateral ou política interna."
+      },
+      {
+        "answer": "Comprar mais internet resolve segurança.",
+        "whyItIsWrong": "Banda não substitui arquitetura, segmentação, logs ou controle de acesso."
+      },
+      {
+        "answer": "Se pinga, está autorizado.",
+        "whyItIsWrong": "Ping só indica um tipo limitado de conectividade; autorização é outra camada de decisão."
+      }
+    ],
+    "finalAnswer": "Uma solução inicial aceitável separa rede corporativa, servidores/impressora e visitantes; documenta gateway, DNS, regras e responsáveis; registra evidências básicas; e evita que visitantes alcancem recursos internos. A rede deve ser explicada como sistema de comunicação com controle, não como um Wi-Fi único."
+  },
+  "glossary": [
+    {
+      "term": "Rede",
+      "shortDefinition": "Sistema que permite comunicação entre participantes.",
+      "longDefinition": "Conjunto de dispositivos, meios, protocolos, endereços, serviços e políticas que viabiliza troca de dados.",
+      "example": "Uma LAN doméstica, uma rede corporativa e uma VPC em cloud são redes.",
+      "relatedTerms": [
+        "LAN",
+        "WAN",
+        "protocolo",
+        "gateway"
+      ],
+      "relatedLessons": [
+        "1.1",
+        "1.3",
+        "2.1"
+      ]
+    },
+    {
+      "term": "Dispositivo final",
+      "shortDefinition": "Participante que consome ou oferece serviços na rede.",
+      "longDefinition": "Endpoint como notebook, celular, servidor, VM, container, impressora ou câmera.",
+      "example": "Um notebook acessando um sistema web é um dispositivo final.",
+      "relatedTerms": [
+        "host",
+        "endpoint",
+        "servidor"
+      ],
+      "relatedLessons": [
+        "1.2"
+      ]
+    },
+    {
+      "term": "Dispositivo intermediário",
+      "shortDefinition": "Elemento que conecta, encaminha, filtra ou controla tráfego.",
+      "longDefinition": "Switches, roteadores, firewalls, APs, proxies e load balancers são exemplos.",
+      "example": "Um roteador encaminha tráfego entre redes diferentes.",
+      "relatedTerms": [
+        "switch",
+        "roteador",
+        "firewall"
+      ],
+      "relatedLessons": [
+        "1.2",
+        "1.7"
+      ]
+    },
+    {
+      "term": "Conectividade",
+      "shortDefinition": "Capacidade de alcançar tecnicamente outro destino.",
+      "longDefinition": "Conectividade indica caminho de comunicação, mas não prova autorização nem funcionamento completo do serviço.",
+      "example": "Ping para o gateway mostra um tipo de conectividade local.",
+      "relatedTerms": [
+        "rota",
+        "gateway",
+        "latência"
+      ],
+      "relatedLessons": [
+        "0.8",
+        "1.9"
+      ]
+    },
+    {
+      "term": "Política de rede",
+      "shortDefinition": "Regra que permite, bloqueia, registra ou modifica fluxos.",
+      "longDefinition": "Pode existir em firewall, proxy, security group, ACL, NAC, VPN ou controle cloud.",
+      "example": "Permitir HTTPS da rede de usuários para um proxy corporativo.",
+      "relatedTerms": [
+        "firewall",
+        "ACL",
+        "security group"
+      ],
+      "relatedLessons": [
+        "9.1",
+        "14.3"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "internal-course",
+      "title": "Módulo 0 — Fundamentos da Computação",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Base para bits, sinais, protocolos, métricas e pensamento em camadas."
+    },
+    {
+      "type": "standard",
+      "title": "Modelo OSI — referência conceitual para camadas",
+      "organization": "ISO",
+      "url": "",
+      "note": "Será aprofundado no Módulo 2."
+    },
+    {
+      "type": "official-doc",
+      "title": "Documentação de redes virtuais em cloud",
+      "organization": "AWS/Azure/Google Cloud",
+      "url": "",
+      "note": "Usar pesquisa oficial quando o curso chegar ao módulo de Cloud Networking."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "Fundamentos de infraestrutura",
+      "lesson": "Redes em ambientes automatizados",
+      "reason": "Pipelines, runners, Kubernetes e IaC dependem de conectividade, DNS, rotas e políticas."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "Fundamentos de identidade",
+      "lesson": "Autenticação, autorização e federação",
+      "reason": "Conectividade não substitui autorização; IAM depende de protocolos de rede seguros."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70,
+      "oneOf": [
+        "exerciseDone",
+        "practicalExerciseDone"
+      ]
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "1.2"
+    ]
+  }
+}
