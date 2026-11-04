@@ -1,0 +1,79 @@
+{
+  "id": "1.8",
+  "versao": "nova",
+  "titulo": "Métricas: latência, jitter, perda, throughput e disponibilidade",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5779,
+    "invisiveis": 46,
+    "teoriaVisivel": 3185
+  },
+  "porCampoVisivel": {
+    "content.motivation": 134,
+    "content.problem": 202,
+    "content.concept": 153,
+    "content.internals": 579,
+    "content.architecture": 227,
+    "content.analogy": 92,
+    "content.simpleExample": 117,
+    "content.enterpriseExample": 110,
+    "content.cloudExample": 126,
+    "content.devsecopsExample": 74,
+    "content.diagram": 19,
+    "content.summary": 128,
+    "content.nextTheme": 30,
+    "security": 446,
+    "troubleshooting": 425,
+    "glossary": 323,
+    "title+subtitle": 20,
+    "objectives": 70,
+    "learningOutcomes": 65,
+    "quiz": 511,
+    "flashcards": 197,
+    "mentorQuestions": 153,
+    "exercises": 298,
+    "challenge": 157,
+    "commentedSolution": 175,
+    "references": 65,
+    "linksToOtherCourses": 51,
+    "lab": 832
+  },
+  "porCampoInvisivel": {
+    "networkContext": 46
+  },
+  "quantidades": {
+    "quiz": 8,
+    "flashcards": 8,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 45,
+    "alternativa_5minPasso_maisLeitura": 36.4,
+    "plausivel": true,
+    "palavras": 832
+  },
+  "duracao": {
+    "declarada": "115-160 min",
+    "estimatedStudyTimeMinutes": 160,
+    "M": 137.5,
+    "T": 134.5,
+    "partes": {
+      "teoria": 24.5,
+      "diagramas": 3,
+      "quiz": 8,
+      "flashcards": 4,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 45
+    },
+    "faixaRecomendada": "115-160 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 20
+  }
+}
