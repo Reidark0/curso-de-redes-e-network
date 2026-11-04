@@ -225,6 +225,7 @@ Esta seção registra o que o código real impõe e como usar as ferramentas. Mo
 | E | `node revisao/tools/quiz_normalizar.js <id>` | rode ANTES de editar o quiz: converte `nova/meta.json` para o formato padrão, com `answer` numérico |
 | F | `node revisao/tools/montar.js <id>` | gera `aulas novas/mXX/lesson-XX-YY.js` |
 | G | `node revisao/tools/metricas.js <id> nova` | métricas da versão montada (exige o `montar`) |
+| G/H | `node revisao/tools/comparar.js <id>` | palavras por campo antes → depois, cortes e acréscimos brutos (para a checagem da 11.7) |
 | G | `node revisao/tools/validar.js <id>` | checagens da seção 8. ERRO reprova; AVISO não reprova, mas precisa ser justificado na análise |
 
 Fluxo de duração: monte, rode `metricas nova`, ajuste `duration` para a `faixaRecomendada` da nova versão e `estimatedStudyTimeMinutes` para o limite superior, monte de novo e valide.
@@ -254,7 +255,7 @@ Regra: o markup **novo** usa só classes estilizadas. Exemplos: `<div class="cal
 
 ### 11.5 Quiz: ids e progresso salvo
 - Rode `quiz_normalizar` primeiro. A questão **sem id** recebe `id` = índice original como string ("0", "1"…), que é a mesma chave que o app já usava para salvar a resposta (`question.id ?? index`). Assim o progresso dos alunos é preservado. **Isto substitui o "crie q1…qN" da regra 7.7**, que apagaria o progresso salvo.
-- A questão que você mantiver conserva o `id`. A questão **nova** recebe um id inédito na aula (`q<N>`, N maior que os existentes). Nunca reaproveite o id de uma questão removida para outra pergunta.
+- A questão que você mantiver conserva o `id`. A questão **nova** recebe um id inédito na aula: siga o padrão dos ids existentes (ex.: `q0.1.7` se a aula usa `q0.1.N`); se não houver padrão, use `q<N>`. Nunca reaproveite o id de uma questão removida para outra pergunta. O mesmo vale para os ids de flashcards e exercícios, quando existirem.
 - Trocar questões triviais é permitido (7.7), mas sem exagero: quando a questão original é boa, mantenha. Varie a posição da resposta correta. Sem "todas/nenhuma das anteriores".
 
 ### 11.6 Duração
@@ -263,7 +264,7 @@ Regra: o markup **novo** usa só classes estilizadas. Exemplos: `<div class="cal
 - A nova `duration` sai da `faixaRecomendada` da **nova** versão. É normal que ela suba em relação à original quando a original estava SUBESTIMADA: a fórmula é fixa e vale para todas as aulas.
 
 ### 11.7 % de linguiça e escopo da reescrita
-- O % de linguiça é a sua estimativa (palavras visíveis removíveis sem perder informação ÷ visíveis). Confira com a redução real (`metricas`): se a reescrita cortou muito mais do que a linguiça estimada, ou você cortou conhecimento ou a estimativa está errada. Revise.
+- O % de linguiça é a sua estimativa (palavras visíveis removíveis sem perder informação ÷ visíveis). Confira com os **cortes brutos** do `comparar` (não com o saldo líquido, que mistura cortes e acréscimos): se a reescrita cortou muito mais do que a linguiça estimada, ou você cortou conhecimento ou a estimativa está errada. Revise.
 - Conteúdo movido de campos invisíveis **aumenta** as palavras visíveis; isso é esperado e não conta contra a meta.
 - Corte primeiro: seções-padrão vazias de sentido, repetição entre seções, meta-texto, ritual de lab, exemplos por ambiente genéricos. Depois torne a explicação mais direta. Nunca corte mecanismo, número, campo, comando, caso de borda ou erro comum específico.
 

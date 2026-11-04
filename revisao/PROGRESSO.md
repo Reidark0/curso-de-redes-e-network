@@ -4,7 +4,7 @@ Status: PENDENTE · EM ANDAMENTO · CONCLUÍDA · FALHOU. Atualizado pelo orques
 
 | id | arquivo | status | palavras visíveis antes→depois | duração declarada→nova | duração | linguiça | útil | aproveitamento |
 |---|---|---|---|---|---|---|---|---|
-| 0.1 | m00/lesson-00-01.js | EM ANDAMENTO |  |  |  |  |  |  |
+| 0.1 | m00/lesson-00-01.js | CONCLUÍDA | 6802→6455 (-5%) | 55-80 min→105-150 min | SUBESTIMADA | MÉDIA 20% | PARCIAL | BOM |
 | 0.2 | m00/lesson-00-02.js | PENDENTE |  |  |  |  |  |  |
 | 0.3 | m00/lesson-00-03.js | PENDENTE |  |  |  |  |  |  |
 | 0.4 | m00/lesson-00-04.js | PENDENTE |  |  |  |  |  |  |
@@ -58,7 +58,7 @@ Status: PENDENTE · EM ANDAMENTO · CONCLUÍDA · FALHOU. Atualizado pelo orques
 | 5.2 | m05/lesson-05-02.js | PENDENTE |  |  |  |  |  |  |
 | 5.3 | m05/lesson-05-03.js | PENDENTE |  |  |  |  |  |  |
 | 5.4 | m05/lesson-05-04.js | PENDENTE |  |  |  |  |  |  |
-| 5.5 | m05/lesson-05-05.js | PENDENTE |  |  |  |  |  |  |
+| 5.5 | m05/lesson-05-05.js | EM ANDAMENTO |  |  |  |  |  |  |
 | 5.6 | m05/lesson-05-06.js | PENDENTE |  |  |  |  |  |  |
 | 5.7 | m05/lesson-05-07.js | PENDENTE |  |  |  |  |  |  |
 | 5.8 | m05/lesson-05-08.js | PENDENTE |  |  |  |  |  |  |
