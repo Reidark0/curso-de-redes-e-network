@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>Cada equipamento decide com base em informações diferentes. Essa é a chave para diagnosticar.</p>
+  <ol class="flow-list">
+    <li><strong>NIC:</strong> negocia link, velocidade e duplex; possui endereço MAC; entrega e recebe quadros; depende de driver e configuração do sistema operacional.</li>
+    <li><strong>Hub:</strong> recebe sinal em uma porta e repete para todas as outras. Não aprende MAC, não filtra e não entende destino.</li>
+    <li><strong>Switch:</strong> lê o endereço MAC de origem, aprende em qual porta ele está e usa a tabela MAC para enviar quadros apenas pela porta provável do destino.</li>
+    <li><strong>Roteador:</strong> lê o endereço IP de destino, consulta a tabela de rotas e decide o próximo salto para alcançar outra rede.</li>
+    <li><strong>Access point:</strong> conecta clientes Wi‑Fi à rede cabeada, gerenciando SSID, autenticação Wi‑Fi, canal, potência, associação e roaming.</li>
+    <li><strong>Firewall:</strong> compara tráfego com políticas, estado de conexão, zonas, portas, protocolos, aplicações, usuários e contexto, permitindo, bloqueando ou registrando eventos.</li>
+  </ol>
+  <p>Na prática, equipamentos modernos podem acumular papéis. Um roteador residencial costuma ter switch, AP, NAT, DHCP e firewall básico na mesma caixa. Em empresa, a separação costuma ser mais clara para aumentar controle, escala e visibilidade.</p>
+</section>

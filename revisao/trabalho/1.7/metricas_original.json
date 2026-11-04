@@ -1,0 +1,81 @@
+{
+  "id": "1.7",
+  "versao": "original",
+  "titulo": "Equipamentos de rede: NIC, hub, switch, roteador, AP e firewall",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4072,
+    "invisiveis": 772,
+    "teoriaVisivel": 2711
+  },
+  "porCampoVisivel": {
+    "content.motivation": 195,
+    "content.history": 170,
+    "content.problem": 119,
+    "content.evolution": 173,
+    "content.concept": 113,
+    "content.internals": 180,
+    "content.architecture": 146,
+    "content.analogy": 114,
+    "content.simpleExample": 104,
+    "content.enterpriseExample": 108,
+    "content.cloudExample": 92,
+    "content.devsecopsExample": 87,
+    "content.securityExample": 147,
+    "content.diagram": 3,
+    "content.summary": 67,
+    "content.nextTheme": 35,
+    "security": 321,
+    "troubleshooting": 275,
+    "glossary": 262,
+    "title+subtitle": 25,
+    "objectives": 66,
+    "learningOutcomes": 74,
+    "quiz": 283,
+    "flashcards": 129,
+    "mentorQuestions": 147,
+    "exercises": 165,
+    "challenge": 152,
+    "commentedSolution": 206,
+    "references": 62,
+    "linksToOtherCourses": 52
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 40,
+    "content.exercisesIntro": 19,
+    "content.challengeIntro": 32,
+    "content.solutionIntro": 30,
+    "networkContext": 45,
+    "deepDive": 456,
+    "commonMistakes": 150
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "80-115 min",
+    "estimatedStudyTimeMinutes": 115,
+    "M": 97.5,
+    "T": 82.9,
+    "partes": {
+      "teoria": 20.9,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "70-100 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 29
+  }
+}

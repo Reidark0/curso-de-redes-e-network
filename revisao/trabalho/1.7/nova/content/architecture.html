@@ -1,0 +1,12 @@
+<section class="lesson-section lesson-section--architecture">
+  <h2>7. Arquitetura</h2>
+  <p>Em uma arquitetura pequena, o caminho pode parecer simples: notebook → switch → roteador/firewall → internet. Em uma empresa, esse caminho pode envolver NIC, tomada, patch panel, switch de acesso, switch de distribuição, firewall interno, roteador de borda, proxy, VPN, WAF, link MPLS, SD-WAN ou cloud.</p>
+  <ul class="flow-list">
+    <li><strong>Camada de acesso:</strong> onde usuários, impressoras, câmeras, APs e telefones se conectam. Switches de acesso e APs são comuns aqui.</li>
+    <li><strong>Camada de distribuição:</strong> agrega tráfego, aplica algumas políticas e conecta blocos da rede.</li>
+    <li><strong>Borda:</strong> ponto de saída para internet, WAN, parceiros, VPNs ou cloud. Firewalls, roteadores e links ficam aqui.</li>
+    <li><strong>Serviços:</strong> servidores, DNS, DHCP, identidade, aplicações, bancos e observabilidade.</li>
+    <li><strong>Controle de segurança:</strong> firewalls, NAC, IDS/IPS, WAF, proxy, EDR e logs.</li>
+  </ul>
+  <p>A arquitetura correta depende de porte, risco, orçamento, disponibilidade e operação. Uma pequena empresa pode usar um firewall com switch e APs. Um ambiente corporativo maduro separa funções, zonas e responsabilidades.</p>
+</section>
