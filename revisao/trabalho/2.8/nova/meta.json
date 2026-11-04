@@ -3,9 +3,9 @@
   "moduleId": "m02",
   "order": 8,
   "title": "Diagnóstico por camadas: método prático de troubleshooting",
-  "subtitle": "Como transformar sintomas vagos em hipóteses testáveis usando o Modelo OSI, comandos, evidências e interpretação correta.",
-  "duration": "85-120 min",
-  "estimatedStudyTimeMinutes": 120,
+  "subtitle": "Como transformar sintomas vagos em hipóteses testáveis com o Modelo OSI, comandos e evidências bem interpretadas.",
+  "duration": "115-160 min",
+  "estimatedStudyTimeMinutes": 160,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 210,
@@ -109,138 +109,6 @@
       "resposta a incidentes"
     ]
   },
-  "protocolFields": [
-    {
-      "field": "Evidência de Camada 1",
-      "size": "variável",
-      "purpose": "Indicar link, sinal, velocidade negociada, erros físicos ou Wi-Fi instável.",
-      "securityObservation": "Evidências físicas podem revelar localização, portas e topologia interna."
-    },
-    {
-      "field": "Evidência de Camada 3",
-      "size": "variável",
-      "purpose": "Mostrar IP, gateway, rota, TTL e caminho.",
-      "securityObservation": "Rotas e IPs internos devem ser sanitizados em relatórios externos."
-    },
-    {
-      "field": "Evidência de Camada 4",
-      "size": "variável",
-      "purpose": "Mostrar porta aberta, handshake, timeout, reset ou bloqueio stateful.",
-      "securityObservation": "Teste de portas deve respeitar autorização e escopo."
-    },
-    {
-      "field": "Evidência de Camada 7",
-      "size": "variável",
-      "purpose": "Mostrar status HTTP, header, erro de aplicação, WAF, autenticação ou autorização.",
-      "securityObservation": "Headers, cookies e tokens podem conter segredos."
-    }
-  ],
-  "packetFlow": [
-    {
-      "step": 1,
-      "actor": "Usuário ou sistema",
-      "action": "Relata sintoma",
-      "detail": "O relato deve ser convertido em origem, destino, horário, serviço, erro e escopo.",
-      "possibleFailure": "Sintoma incompleto leva a investigação errada."
-    },
-    {
-      "step": 2,
-      "actor": "Analista",
-      "action": "Escolhe direção do diagnóstico",
-      "detail": "Bottom-up para falhas amplas; top-down para erros claros de aplicação.",
-      "possibleFailure": "Começar pela camada errada pode atrasar, mas não invalida se houver método."
-    },
-    {
-      "step": 3,
-      "actor": "Ferramentas",
-      "action": "Coletam evidências por camada",
-      "detail": "ipconfig, ip, ping, arp, traceroute, Test-NetConnection, ss, curl, logs e métricas.",
-      "possibleFailure": "Comando sem interpretação gera falsa confiança."
-    },
-    {
-      "step": 4,
-      "actor": "Equipe técnica",
-      "action": "Define ação corretiva mínima",
-      "detail": "Só alterar configuração depois de hipótese forte e plano de rollback.",
-      "possibleFailure": "Mudança ampla pode resolver sintoma e esconder causa raiz."
-    }
-  ],
-  "deepDive": {
-    "mentalModel": "Troubleshooting por camadas é uma investigação científica aplicada: sintoma vira hipótese; hipótese exige evidência; evidência precisa de interpretação; ação corretiva precisa de validação e rollback.",
-    "keyTerms": [
-      "sintoma",
-      "hipótese",
-      "evidência",
-      "interpretação",
-      "causa provável",
-      "causa raiz",
-      "rollback",
-      "escopo",
-      "matriz OSI"
-    ],
-    "limitations": [
-      "OSI é modelo conceitual, não implementação perfeita da internet.",
-      "Alguns problemas atravessam várias camadas ao mesmo tempo.",
-      "Ping bloqueado não prova indisponibilidade.",
-      "Porta aberta não prova aplicação saudável.",
-      "HTTP 403 não prova falha de rede."
-    ],
-    "whenToUse": [
-      "Incidentes de conectividade.",
-      "Falhas de aplicação com suspeita de rede.",
-      "Mudanças de firewall, proxy, VPN, cloud ou DNS.",
-      "Troubleshooting entre times de rede, segurança e desenvolvimento."
-    ],
-    "whenNotToUse": [
-      "Quando já existe evidência inequívoca e urgente de falha específica, como cabo rompido confirmado.",
-      "Para justificar varreduras sem autorização.",
-      "Como burocracia que atrasa mitigação emergencial já definida."
-    ],
-    "operationalImpact": [
-      "Reduz retrabalho e conflitos entre equipes.",
-      "Melhora qualidade de tickets e handoffs.",
-      "Exige disciplina de documentação.",
-      "Facilita pós-incidente e base de conhecimento."
-    ],
-    "financialImpact": [
-      "Evita compra desnecessária de banda ou appliances.",
-      "Reduz tempo médio de resolução.",
-      "Diminui mudanças indevidas que causam indisponibilidade.",
-      "Em cloud, ajuda a evitar custos por tráfego, NAT ou logs mal interpretados."
-    ],
-    "securityImpact": [
-      "Evita regras permissivas sem evidência.",
-      "Melhora detecção de abuso por camada.",
-      "Reduz exposição de evidências sensíveis.",
-      "Ajuda a diferenciar falha, ataque e política de segurança funcionando."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Dizer que a rede está ok porque o ping respondeu.",
-      "whyItHappens": "Ping testa apenas parte da conectividade e pode não representar o serviço real.",
-      "consequence": "Problemas de TCP, TLS, HTTP, sessão e autorização são ignorados.",
-      "correction": "Testar a camada adequada ao sintoma, incluindo porta, TLS e aplicação."
-    },
-    {
-      "mistake": "Liberar firewall antes de provar bloqueio.",
-      "whyItHappens": "Firewall é culpado frequente em ambientes corporativos.",
-      "consequence": "Aumenta superfície de ataque e pode não resolver a falha.",
-      "correction": "Coletar evidência de origem, destino, porta, horário, regra e log."
-    },
-    {
-      "mistake": "Confundir DNS com conectividade IP.",
-      "whyItHappens": "Usuários acessam nomes, não IPs.",
-      "consequence": "Trocas de rota ou firewall não resolvem falha de resolução.",
-      "correction": "Separar resolução de nomes, rota, porta e aplicação."
-    },
-    {
-      "mistake": "Compartilhar outputs com tokens, IPs internos e nomes sensíveis.",
-      "whyItHappens": "Pressa em abrir ticket ou pedir ajuda.",
-      "consequence": "Vazamento de informações úteis para ataque.",
-      "correction": "Sanitizar evidências antes de compartilhar."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Aplicação não abre",
@@ -267,8 +135,8 @@
       },
       {
         "platform": "Windows",
-        "command": "ping <gateway> && tracert <destino>",
-        "purpose": "Testar alcance local e caminho IP básico.",
+        "command": "ping <gateway>",
+        "purpose": "Testar alcance local; em seguida rode tracert <destino> para ver o caminho IP básico (no Windows PowerShell 5.1 o operador && não existe, então rode um comando por vez).",
         "expectedObservation": "Gateway responde e caminho progride.",
         "interpretation": "Falha no gateway aponta para rede local; falha adiante pode ser rota, firewall ou destino."
       },
@@ -289,15 +157,15 @@
       {
         "platform": "Linux",
         "command": "curl -Iv https://<host>",
-        "purpose": "Observar DNS, conexão TCP, TLS e headers HTTP.",
+        "purpose": "Observar DNS, conexão TCP, TLS e headers HTTP (-I pede só os cabeçalhos; -v mostra os detalhes da conexão e do TLS).",
         "expectedObservation": "Etapas de conexão, certificado e status HTTP.",
         "interpretation": "Permite separar transporte, TLS e aplicação."
       },
       {
         "platform": "Cisco IOS",
-        "command": "show ip interface brief && show ip route && show arp",
-        "purpose": "Validar interfaces, rotas e resolução local em equipamento de rede.",
-        "expectedObservation": "Interfaces up/up, rota esperada e ARP coerente.",
+        "command": "show ip interface brief",
+        "purpose": "Validar interfaces em equipamento de rede; em seguida rode show ip route e show arp (o IOS executa um comando por vez).",
+        "expectedObservation": "Interfaces up/up, rota esperada na tabela e ARP coerente com o gateway.",
         "interpretation": "Ajuda a localizar falha em enlace ou rede."
       }
     ],
@@ -415,15 +283,13 @@
       "Não execute varreduras de portas fora de escopo.",
       "Não colete cookies, tokens ou dados pessoais.",
       "Sanitize nomes internos e IPs antes de compartilhar evidências.",
-      "Use um site público ou ambiente próprio para testes.",
-      "Em cloud real, remova os recursos criados ao final para evitar custos recorrentes."
+      "Use um site público ou ambiente próprio para testes."
     ],
     "steps": [
       {
         "number": 1,
         "title": "Definir sintoma e escopo",
         "instruction": "Escreva origem, destino, horário, erro observado e quem é afetado.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
         "expectedOutput": "Sintoma descrito em termos técnicos mínimos.",
         "explanation": "Sem escopo, qualquer comando pode ser irrelevante."
       },
@@ -479,7 +345,6 @@
         "number": 8,
         "title": "Montar matriz final",
         "instruction": "Preencha uma tabela com camada, evidência, interpretação, hipótese descartada e próximo passo.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
         "expectedOutput": "Matriz OSI de diagnóstico.",
         "explanation": "O valor do lab está na interpretação, não apenas nos comandos."
       }
@@ -527,9 +392,7 @@
     ],
     "improvements": [
       "Adicionar captura Wireshark em laboratório próprio.",
-      "Criar runbook por tipo de sintoma.",
-      "Integrar logs de firewall, WAF e aplicação.",
-      "Transformar a matriz em template de ticket."
+      "Transformar a matriz em template de ticket ou runbook por tipo de sintoma."
     ],
     "evidenceToCollect": [
       "Descrição do sintoma",
@@ -546,8 +409,8 @@
       "O que você não consegue provar com os dados coletados?",
       "Que evidência exigiria acesso a logs corporativos?"
     ],
-    "challenge": "Monte uma matriz para o caso: usuário acessa portal via VPN, DNS resolve, TCP/443 conecta, mas navegador retorna 403.",
-    "solution": "A Camada 4 parece funcional. A investigação deve seguir para TLS, HTTP, WAF, sessão, identidade e autorização. Verifique headers, logs do WAF/API gateway, token/cookie, grupo de acesso, origem via VPN e política. Não faz sentido liberar firewall any-any sem evidência."
+    "challenge": "Monte uma matriz para o caso: usuário acessa o portal via VPN, o DNS resolve, TCP/443 conecta, mas curl -Iv mostra 'SSL certificate problem: unable to get local issuer certificate'.",
+    "solution": "As Camadas 1 a 4 funcionam; a falha está no TLS (Camada 6): o cliente não consegue ligar o certificado recebido a uma CA confiável. Hipóteses: o servidor envia a cadeia incompleta ou um proxy de inspeção TLS corporativo apresenta um certificado cuja CA não está no trust store do cliente. Compare o emissor mostrado pelo curl com o do navegador e com o visto de outra rede. Corrija a cadeia, o certificado ou o trust store; desligar a validação (curl -k) só esconde o problema, e mexer em firewall ou rota não faz sentido."
   },
   "mentorQuestions": [
     {
@@ -603,94 +466,94 @@
   ],
   "quiz": [
     {
-      "id": "q2.8.1",
-      "type": "conceito",
-      "q": "O que significa diagnosticar por camadas?",
-      "opts": [
-        "Investigar comunicação usando hipóteses e evidências organizadas pelo Modelo OSI.",
-        "Sempre começar liberando firewall.",
-        "Usar apenas ping e nslookup.",
-        "Decorar os nomes das sete camadas sem aplicar."
+      "id": "q2.8.7",
+      "question": "Por IP, Test-NetConnection 10.20.0.15 -Port 443 retorna TcpTestSucceeded : True, mas pelo nome o portal não abre e nslookup retorna Non-existent domain. O que investigar primeiro?",
+      "options": [
+        "A regra de firewall para a porta 443.",
+        "A resolução de nomes: servidor DNS configurado, sufixo, zona privada ou split-horizon.",
+        "A rota default do cliente.",
+        "O certificado TLS do portal."
       ],
-      "a": 0,
-      "exp": "O método usa camadas como roteiro de investigação.",
-      "difficulty": "iniciante",
-      "topic": "método"
+      "answer": 1,
+      "explanation": "Por IP o transporte funciona, então rota e firewall já foram validados. A falha está na resolução do nome, e trocar rota ou firewall não a resolve.",
+      "topic": "dns",
+      "difficulty": "intermediário",
+      "type": "diagnóstico"
     },
     {
       "id": "q2.8.2",
-      "type": "diagnóstico",
-      "q": "Ping para o servidor responde, mas TCP/443 falha. Qual camada deve ser investigada com mais foco?",
-      "opts": [
-        "Transporte/firewall/listener.",
-        "Somente física.",
-        "Somente encoding UTF-8.",
-        "Somente autorização IAM."
+      "question": "Ping para o servidor responde, mas TCP/443 falha. Qual camada deve ser investigada com mais foco?",
+      "options": [
+        "Física: cabo ou sinal Wi-Fi.",
+        "Transporte: firewall, listener ou NAT na porta 443.",
+        "Apresentação: certificado TLS.",
+        "Aplicação: autorização no IAM."
       ],
-      "a": 0,
-      "exp": "Se há alcance IP, mas a porta falha, transporte, firewall, NAT ou listener são hipóteses fortes.",
+      "answer": 1,
+      "explanation": "O ping prova alcance IP, então física e rede funcionam. Com a porta falhando, firewall, NAT ou listener são as hipóteses fortes; TLS e IAM nem chegam a ser testados sem a conexão TCP.",
+      "topic": "camada 4",
       "difficulty": "intermediário",
-      "topic": "camada 4"
+      "type": "diagnóstico"
     },
     {
       "id": "q2.8.3",
-      "type": "segurança",
-      "q": "Por que evidências de troubleshooting precisam ser sanitizadas?",
-      "opts": [
+      "question": "Por que evidências de troubleshooting precisam ser sanitizadas?",
+      "options": [
         "Porque podem conter IPs internos, tokens, cookies, domínios e informações de topologia.",
         "Porque comandos de rede nunca geram informação útil.",
         "Porque logs não têm valor técnico.",
         "Porque sanitizar impede qualquer diagnóstico."
       ],
-      "a": 0,
-      "exp": "Evidências podem ajudar o diagnóstico e também revelar dados sensíveis.",
+      "answer": 0,
+      "explanation": "Evidências podem ajudar o diagnóstico e também revelar dados sensíveis.",
+      "topic": "segurança",
       "difficulty": "iniciante",
-      "topic": "segurança"
+      "type": "segurança"
     },
     {
       "id": "q2.8.4",
-      "type": "cenário",
-      "q": "TCP/443 conecta e curl mostra erro de certificado. Qual hipótese é mais provável?",
-      "opts": [
-        "Falha em TLS/camada de apresentação.",
-        "Cabo desconectado.",
-        "Switch sem energia.",
-        "Máscara IP sempre errada."
+      "question": "TCP/443 conecta e curl mostra erro de certificado. Qual hipótese é mais provável?",
+      "options": [
+        "Rota ausente para o servidor.",
+        "Porta 443 bloqueada no firewall.",
+        "Falha em TLS (camada de apresentação), como certificado expirado ou CA não confiável.",
+        "VLAN errada no switch de acesso."
       ],
-      "a": 0,
-      "exp": "A conexão TCP ocorreu; a falha aparece na negociação/validação TLS.",
+      "answer": 2,
+      "explanation": "Se o TCP conectou, VLAN, rota e porta já funcionaram; a falha aparece na negociação ou validação do TLS.",
+      "topic": "tls",
       "difficulty": "intermediário",
-      "topic": "tls"
+      "type": "cenário"
     },
     {
       "id": "q2.8.5",
-      "type": "comparação",
-      "q": "Qual afirmação é correta?",
-      "opts": [
+      "question": "Qual afirmação é correta?",
+      "options": [
         "Porta aberta não prova aplicação saudável.",
         "HTTP 403 prova cabo ruim.",
         "DNS funcionando prova autorização correta.",
         "Traceroute completo prova TLS válido."
       ],
-      "a": 0,
-      "exp": "Cada teste valida apenas parte da comunicação.",
+      "answer": 0,
+      "explanation": "Cada teste valida apenas parte da comunicação.",
+      "topic": "interpretação",
       "difficulty": "iniciante",
-      "topic": "interpretação"
+      "type": "comparação"
     },
     {
       "id": "q2.8.6",
-      "type": "comando",
-      "q": "Qual comando no Windows testa conectividade TCP com uma porta específica?",
-      "opts": [
+      "question": "Qual comando no Windows testa conectividade TCP com uma porta específica?",
+      "options": [
         "Test-NetConnection <host> -Port 443",
         "arp -a",
-        "ipconfig /flushdns",
-        "route print somente"
+        "ipconfig /all",
+        "nslookup <host>"
       ],
-      "a": 0,
-      "exp": "Test-NetConnection permite testar uma porta TCP específica.",
+      "answer": 0,
+      "explanation": "Test-NetConnection com -Port testa uma porta TCP específica (TcpTestSucceeded). arp -a mostra vizinhos da Camada 2, ipconfig /all a configuração IP e nslookup a resolução de nomes.",
+      "topic": "comandos",
       "difficulty": "iniciante",
-      "topic": "comandos"
+      "type": "comando"
     }
   ],
   "flashcards": [
@@ -713,18 +576,18 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc2.8.3",
-      "front": "Porta TCP aberta prova aplicação saudável?",
-      "back": "Não. Prova apenas que houve resposta na camada de transporte; TLS, HTTP, sessão e autorização ainda podem falhar.",
+      "id": "fc2.8.7",
+      "front": "Ping sem resposta prova que o host está fora do ar?",
+      "back": "Não. Muitos firewalls bloqueiam ICMP. Teste o DNS e a porta do serviço (ex.: TCP/443) antes de concluir.",
       "tags": [
-        "camada 4"
+        "icmp"
       ],
       "difficulty": "iniciante"
     },
     {
       "id": "fc2.8.4",
-      "front": "HTTP 401 indica o quê?",
-      "back": "Problema de autenticação ou credencial ausente/inválida, não necessariamente falha de rede.",
+      "front": "HTTP 401 x HTTP 403: o que cada um indica?",
+      "back": "401: autenticação ausente ou inválida (credencial, token). 403: o servidor entendeu e recusou por autorização, política, WAF ou origem bloqueada. Nenhum dos dois indica falha de rede.",
       "tags": [
         "http",
         "iam"
@@ -733,19 +596,19 @@
     },
     {
       "id": "fc2.8.5",
-      "front": "O que é bottom-up troubleshooting?",
-      "back": "Método que começa nas camadas inferiores, como física/enlace, e sobe até aplicação.",
+      "front": "Bottom-up ou top-down: quando usar cada um?",
+      "back": "Bottom-up (da física para a aplicação) em falhas amplas, como uma filial inteira sem acesso. Top-down (da aplicação para baixo) quando há erro de aplicação claro, como 403 ou erro de certificado.",
       "tags": [
         "método"
       ],
       "difficulty": "iniciante"
     },
     {
-      "id": "fc2.8.6",
-      "front": "Por que evitar any-any como teste?",
-      "back": "Porque aumenta a superfície de ataque e pode mascarar a causa real. O teste deve ser específico e reversível.",
+      "id": "fc2.8.8",
+      "front": "Causa provável x causa raiz",
+      "back": "Causa provável é a explicação mais sustentada pelas evidências até agora. Causa raiz é a origem que, corrigida, impede a falha de voltar. Uma mudança ampla pode sumir com o sintoma e esconder a causa raiz.",
       "tags": [
-        "segurança"
+        "método"
       ],
       "difficulty": "intermediário"
     }
@@ -754,30 +617,23 @@
     {
       "id": "ex2.8.1",
       "type": "conceitual",
-      "prompt": "Explique a diferença entre sintoma, hipótese e evidência.",
-      "expectedAnswer": "Sintoma é o problema observado; hipótese é uma causa possível; evidência é dado coletado para sustentar ou descartar a hipótese.",
-      "explanation": "Essa separação evita conclusões precipitadas."
+      "prompt": "Classifique cada item como sintoma, hipótese, evidência, interpretação ou ação corretiva: (a) 'o portal não abre desde as 9h'; (b) 'talvez o certificado tenha vencido'; (c) curl mostra 'SSL certificate problem: certificate has expired'; (d) 'o TCP conecta, então a falha está no TLS'; (e) renovar o certificado, testar de novo e manter o rollback definido.",
+      "expectedAnswer": "(a) sintoma; (b) hipótese; (c) evidência; (d) interpretação; (e) ação corretiva.",
+      "explanation": "Separar as cinco peças evita tratar um palpite como prova e alterar configuração antes de ter evidência."
     },
     {
-      "id": "ex2.8.2",
-      "type": "diagnóstico",
-      "prompt": "Um usuário resolve DNS e conecta em TCP/443, mas recebe HTTP 403. Liste três hipóteses prováveis.",
-      "expectedAnswer": "WAF bloqueando, autorização negada, origem não permitida, token/cookie inválido ou política de aplicação.",
-      "explanation": "O problema aparece acima de TCP."
-    },
-    {
-      "id": "ex2.8.3",
+      "id": "ex2.8.5",
       "type": "comando/output",
-      "prompt": "Qual comando você usaria no Linux para observar TLS e headers HTTP de um site?",
-      "expectedAnswer": "curl -Iv https://<host>",
-      "explanation": "O -I pede headers e o -v mostra detalhes de conexão/TLS."
+      "prompt": "Saídas coletadas a partir da subnet do usuário: ping <gateway> responde; tracert progride até o destino; Test-NetConnection <host> -Port 443 retorna TcpTestSucceeded : False. O mesmo teste a partir de outra subnet retorna True. Qual é a primeira camada com evidência de falha, qual a hipótese mais forte e qual o próximo passo?",
+      "expectedAnswer": "Camadas 1 a 3 estão validadas; a primeira falha é na Camada 4. Como de outra subnet a porta responde, o serviço está no ar: a hipótese forte é firewall, ACL ou security group filtrando essa origem. Próximo passo: consultar o log do firewall com origem, destino, porta e horário, sem abrir regra ampla.",
+      "explanation": "Comparar origens afetadas e não afetadas separa 'serviço parado' de 'origem bloqueada'."
     },
     {
       "id": "ex2.8.4",
       "type": "segurança",
-      "prompt": "Cite três dados que devem ser mascarados em evidências compartilhadas externamente.",
-      "expectedAnswer": "Tokens, cookies, IPs internos, nomes de host internos, domínios privados, usuários e headers sensíveis.",
-      "explanation": "Evidências podem revelar superfície de ataque."
+      "prompt": "Você vai anexar a um ticket externo este trecho de saída do curl -v: 'Connected to erp.interno.corp (10.20.0.15) port 443', '> Cookie: session=8f3a91c2...', '< HTTP/1.1 403 Forbidden'. O que você mascara e o que mantém?",
+      "expectedAnswer": "Mascarar o cookie de sessão (funciona como credencial), o nome de host interno e o IP interno. Manter a porta 443 e o status 403, que são a evidência útil para o diagnóstico.",
+      "explanation": "Evidência sanitizada continua útil para o diagnóstico sem revelar superfície de ataque."
     }
   ],
   "challenge": {

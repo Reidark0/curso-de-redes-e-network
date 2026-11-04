@@ -1,11 +1,12 @@
 <section class="lesson-section lesson-section--problem">
-  <h2>3. Problema</h2>
-  <p>O problema técnico é que sintomas parecidos podem nascer em camadas diferentes. O usuário vê apenas "não funciona". O profissional precisa separar falha de meio físico, domínio de broadcast, rota, porta, sessão, certificado, payload, autenticação e autorização.</p>
+  <h2>Problema</h2>
+  <p>Sintomas parecidos nascem em camadas diferentes. O usuário vê "não funciona"; você precisa separar falha de meio físico, domínio de broadcast, rota, porta, sessão, certificado, payload, autenticação e autorização. Em cloud e Zero Trust, uma falha de identidade pode parecer rede, e uma falha de rede pode parecer aplicação.</p>
+  <p>Sem método, o troubleshooting vira tentativa e erro: um técnico troca o cabo, outro reinicia o roteador, outro libera o firewall, outro culpa o DNS. O Modelo OSI não é a implementação literal da internet, mas virou a linguagem operacional que evita isso, porque cada camada tem sintomas, ferramentas, logs, responsáveis e riscos próprios.</p>
   <ul class="flow-list">
-    <li><strong>Sem método:</strong> comandos são executados sem ordem e as conclusões ficam baseadas em intuição.</li>
+    <li><strong>Sem ordem:</strong> comandos isolados, sem hipótese; um resultado bom em um comando não prova que o resto funciona.</li>
     <li><strong>Sem evidência:</strong> a equipe muda firewall, DNS ou aplicação sem provar onde está a falha.</li>
-    <li><strong>Sem separação por camadas:</strong> um HTTP 403 pode ser confundido com queda de rede, e uma rota ausente pode ser confundida com problema de aplicação.</li>
-    <li><strong>Sem documentação:</strong> a próxima pessoa começa do zero e repete a investigação.</li>
+    <li><strong>Sem separação por camadas:</strong> um HTTP 403 é confundido com queda de rede, e uma rota ausente, com problema de aplicação.</li>
+    <li><strong>Sem visão do caminho:</strong> olhar só o host perde as evidências de firewall, proxy, WAF, cloud e IAM.</li>
+    <li><strong>Sem documentação:</strong> a próxima pessoa repete a investigação do zero.</li>
   </ul>
-  <p>Diagnóstico por camadas resolve esse problema ao impor uma sequência mental: formular hipótese, coletar evidência, interpretar o resultado, descartar causas e avançar para a próxima camada.</p>
 </section>

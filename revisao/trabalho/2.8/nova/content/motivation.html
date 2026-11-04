@@ -1,6 +1,6 @@
 <section class="lesson-section lesson-section--motivation">
-  <h2>1. Motivação</h2>
-  <p>Em suporte, SOC, infraestrutura, cloud e DevSecOps, uma das frases mais perigosas é: <strong>"a rede está lenta"</strong>. Ela parece simples, mas não é diagnóstico. Pode significar cabo ruim, VLAN errada, rota ausente, DNS falhando, porta bloqueada, TLS quebrado, WAF negando, token expirado, aplicação em erro 500 ou simplesmente expectativa incorreta do usuário.</p>
-  <p>O método de diagnóstico por camadas transforma uma reclamação vaga em uma investigação organizada. Em vez de testar comandos aleatórios, você sobe ou desce a pilha OSI coletando evidências. Primeiro verifica se existe link e sinal. Depois verifica enlace local. Depois IP e rota. Depois transporte e portas. Depois sessão, apresentação e aplicação.</p>
-  <div class="callout callout--problem"><strong>Problema real:</strong> uma aplicação interna "não abre" para um usuário remoto. O ping para o gateway funciona, DNS resolve, a porta 443 responde, mas o navegador mostra erro de certificado. Se você testar apenas conectividade IP, dirá que está tudo certo. Se você olhar por camadas, verá que a falha está acima do transporte, provavelmente na camada de apresentação/TLS.</div>
+  <h2>Motivação</h2>
+  <p>"A rede está lenta" ou "o sistema não abre" não é diagnóstico. A mesma frase pode esconder cabo ruim, VLAN errada, rota ausente, DNS falhando, porta bloqueada, TLS quebrado, WAF negando, token expirado, uma aplicação respondendo erro 500 ou só uma expectativa incorreta do usuário.</p>
+  <p>O diagnóstico por camadas transforma essa reclamação vaga em uma investigação organizada: em vez de rodar comandos aleatórios, você percorre a pilha OSI coletando uma evidência por camada.</p>
+  <div class="callout callout--problem"><strong>Problema real:</strong> uma aplicação interna "não abre" para um usuário remoto. O ping para o gateway funciona, o DNS resolve e a porta 443 responde, mas o navegador mostra erro de certificado. Quem testa só conectividade IP conclui que "está tudo certo". Quem olha por camadas vê que a falha está acima do transporte, na camada de apresentação (TLS).</div>
 </section>

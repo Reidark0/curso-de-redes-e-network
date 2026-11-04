@@ -1,13 +1,13 @@
 <section class="lesson-section lesson-section--example">
-  <h2>9. Exemplo simples</h2>
-  <p>Seu notebook não acessa um site. Um diagnóstico por camadas poderia ser:</p>
-  <ol class="flow-list">
-    <li>Verificar se o Wi-Fi está conectado e com sinal adequado.</li>
-    <li>Verificar se recebeu IP, máscara, gateway e DNS.</li>
-    <li>Ping para o gateway local.</li>
-    <li>Resolver o nome com DNS.</li>
-    <li>Testar conexão TCP/443.</li>
-    <li>Usar navegador ou <code>curl -I</code> para observar HTTP/TLS.</li>
-  </ol>
-  <p>Se o gateway responde, mas nomes não resolvem, o problema não é camada física. Se nomes resolvem e TCP conecta, mas HTTP retorna 403, a falha provavelmente está na camada de aplicação ou política.</p>
+  <h2>Exemplo simples</h2>
+  <p>Seu notebook Windows não abre <code>https://portal.example.com</code>. Diagnóstico bottom-up, com a saída de cada passo e o que ela prova:</p>
+  <div class="responsive-table"><table class="data-table"><thead><tr><th>Camada</th><th>Comando</th><th>Saída observada</th><th>Interpretação</th></tr></thead><tbody>
+    <tr><td>1-2</td><td>Status do Wi-Fi</td><td>Conectado, sinal bom</td><td>Há link.</td></tr>
+    <tr><td>3</td><td><code>ipconfig /all</code></td><td><code>IPv4 Address: 192.168.1.20</code>, <code>Default Gateway: 192.168.1.1</code>, DNS configurado</td><td>Configuração local coerente.</td></tr>
+    <tr><td>2-3</td><td><code>ping 192.168.1.1</code></td><td><code>Reply from 192.168.1.1: bytes=32 time=2ms TTL=64</code></td><td>Rede local e gateway funcionam.</td></tr>
+    <tr><td>DNS</td><td><code>nslookup portal.example.com</code></td><td><code>Address: 203.0.113.10</code></td><td>O nome resolve.</td></tr>
+    <tr><td>4</td><td><code>Test-NetConnection portal.example.com -Port 443</code></td><td><code>TcpTestSucceeded : True</code></td><td>A porta aceita conexão.</td></tr>
+    <tr><td>6-7</td><td><code>curl -I https://portal.example.com</code></td><td><code>HTTP/1.1 403 Forbidden</code></td><td>TLS negociou e o servidor negou: aplicação ou política, não rede.</td></tr>
+  </tbody></table></div>
+  <p>A primeira linha com falha indica onde investigar. Se o gateway respondesse e o <code>nslookup</code> retornasse <code>Non-existent domain</code>, o problema seria resolução de nomes, não camada física; se o TCP conectasse e o curl mostrasse erro de certificado, a falha estaria no TLS.</p>
 </section>

@@ -1,14 +1,20 @@
 <section class="lesson-section lesson-section--internals">
-  <h2>6. Funcionamento interno</h2>
-  <p>Um método prático pode seguir dois sentidos. No <strong>bottom-up</strong>, você começa pela Camada 1 e sobe. No <strong>top-down</strong>, você começa pela aplicação e desce. Em incidentes reais, o melhor caminho depende do sintoma.</p>
+  <h2>Funcionamento interno</h2>
+  <p>Escolha primeiro a direção. <strong>Bottom-up</strong> (da Camada 1 para cima) serve para falhas amplas, como uma filial inteira sem acesso. <strong>Top-down</strong> (da aplicação para baixo) serve quando há um erro de aplicação claro: HTTP 401/403/500 ou erro de certificado. Começar pela camada "errada" atrasa, mas não invalida o diagnóstico se você seguir o método.</p>
   <ol class="flow-list">
-    <li><strong>Defina o sintoma:</strong> quem falha, de onde, para qual destino, desde quando e com qual mensagem?</li>
-    <li><strong>Identifique o escopo:</strong> afeta um usuário, uma VLAN, uma filial, uma aplicação, um provedor ou todos?</li>
-    <li><strong>Valide Camada 1:</strong> link, sinal, Wi-Fi, cabo, fibra, energia, velocidade negociada e erros físicos.</li>
-    <li><strong>Valide Camada 2:</strong> MAC, ARP, VLAN, switch, domínio de broadcast e gateway local.</li>
-    <li><strong>Valide Camada 3:</strong> IP, máscara, gateway, rota, TTL, caminho e retorno.</li>
-    <li><strong>Valide Camada 4:</strong> porta, listener, firewall stateful, TCP handshake, UDP, NAT e timeout.</li>
-    <li><strong>Valide Camadas 5-7:</strong> TLS, certificado, HTTP, DNS de aplicação, sessão, token, payload, WAF, autenticação e autorização.</li>
-    <li><strong>Registre evidências:</strong> comando, horário, origem, destino, resultado, interpretação e hipótese descartada.</li>
+    <li><strong>Defina o sintoma:</strong> quem falha, de onde, para qual destino, desde quando e com qual mensagem? Relato incompleto leva a investigação para o lugar errado.</li>
+    <li><strong>Identifique o escopo:</strong> um usuário, uma VLAN, uma filial, uma aplicação, um provedor ou todos?</li>
+    <li><strong>Valide camada por camada</strong> (tabela abaixo), interpretando cada resultado: comando sem interpretação gera falsa confiança.</li>
+    <li><strong>Defina a ação corretiva mínima:</strong> altere configuração só com hipótese forte e plano de rollback.</li>
+    <li><strong>Registre as evidências:</strong> comando, horário, origem, destino, resultado, interpretação e hipótese descartada. Isso melhora tickets, handoffs entre times e o pós-incidente.</li>
   </ol>
+  <div class="responsive-table"><table class="data-table"><thead><tr><th>Camada</th><th>O que verificar</th><th>Comandos típicos</th><th>Cuidado com a evidência</th></tr></thead><tbody>
+    <tr><td>1 Física</td><td>Link, sinal, Wi-Fi, cabo, fibra, transceptor, energia, velocidade negociada, erros físicos.</td><td>Status da interface; <code>show ip interface brief</code> (up/up).</td><td>Revela localização, portas e topologia.</td></tr>
+    <tr><td>2 Enlace</td><td>MAC, ARP, VLAN, switch, trunk, domínio de broadcast, gateway local.</td><td><code>arp -a</code>, <code>ip neigh</code>, <code>show arp</code>.</td><td>MACs e VLANs são dados internos.</td></tr>
+    <tr><td>3 Rede</td><td>IP, máscara, gateway, rota, NAT, TTL, caminho de ida e de retorno.</td><td><code>ipconfig /all</code>, <code>ip addr</code>, <code>ip route</code>, <code>ping</code>, <code>tracert</code>/<code>traceroute</code>.</td><td>Sanitize rotas e IPs internos.</td></tr>
+    <tr><td>4 Transporte</td><td>Porta, listener, handshake TCP, UDP, firewall stateful, timeout, reset.</td><td><code>Test-NetConnection &lt;host&gt; -Port 443</code>, <code>nc -vz &lt;host&gt; 443</code>, <code>ss</code>.</td><td>Teste só portas do escopo autorizado.</td></tr>
+    <tr><td>5-7 Superiores</td><td>TLS, certificado, HTTP, sessão, token, payload, WAF, API, autenticação, autorização; DNS como serviço de que a aplicação depende.</td><td><code>nslookup</code>/<code>dig</code>, <code>curl -Iv https://&lt;host&gt;</code>, logs de proxy, WAF e IAM.</td><td>Headers, cookies e tokens podem conter segredos.</td></tr>
+  </tbody></table></div>
+  <p>Num fluxo corporativo (notebook, Wi-Fi, switch, firewall, VPN, proxy, DNS, balanceador, WAF, API gateway, servidor, banco, IAM), uma falha em qualquer etapa gera o mesmo sintoma final; a tabela põe cada evidência no lugar certo.</p>
+  <div class="callout"><strong>Quando não seguir o roteiro inteiro:</strong> com evidência inequívoca e urgente (ex.: cabo rompido confirmado), corrija. O método também não justifica varreduras sem autorização nem deve atrasar uma mitigação emergencial já definida.</div>
 </section>

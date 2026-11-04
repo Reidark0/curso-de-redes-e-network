@@ -1,6 +1,21 @@
 <section class="lesson-section lesson-section--concept">
-  <h2>5. Conceito</h2>
-  <p>Diagnóstico por camadas é um método de troubleshooting que usa o Modelo OSI como roteiro para investigar falhas de comunicação de forma ordenada.</p>
-  <div class="definition-box"><strong>Definição:</strong> diagnosticar por camadas significa mapear um sintoma para possíveis falhas em cada camada, coletar evidências específicas, interpretar os resultados e avançar somente quando a camada anterior estiver suficientemente validada ou descartada.</div>
-  <p>O objetivo não é decorar sete nomes. O objetivo é raciocinar: existe sinal? existe enlace? existe IP? existe rota? existe transporte? existe sessão? os dados estão representados corretamente? a aplicação entende e autoriza a requisição?</p>
+  <h2>Conceito</h2>
+  <div class="definition-box"><strong>Definição:</strong> diagnosticar por camadas é usar o Modelo OSI como roteiro de troubleshooting: mapear o sintoma para possíveis falhas em cada camada, coletar evidências específicas, interpretar os resultados e avançar somente quando a camada anterior estiver validada ou descartada.</div>
+  <p>Na prática, você responde em ordem: existe sinal? enlace? IP e rota? transporte? sessão? os dados estão representados corretamente (TLS, formato)? a aplicação entende e autoriza a requisição? Mantenha separadas as cinco peças do raciocínio:</p>
+  <div class="responsive-table"><table class="data-table"><thead><tr><th>Peça</th><th>O que é</th><th>Exemplo</th></tr></thead><tbody>
+    <tr><td>Sintoma</td><td>Comportamento observado; ainda não é causa.</td><td>"O portal retorna 403."</td></tr>
+    <tr><td>Hipótese</td><td>Causa possível, a testar.</td><td>"O WAF bloqueia a origem via VPN."</td></tr>
+    <tr><td>Evidência</td><td>Dado de comando, log, métrica ou observação.</td><td>Log do WAF com a regra que negou a requisição às 10:42.</td></tr>
+    <tr><td>Interpretação</td><td>O que a evidência confirma ou descarta, e em qual camada.</td><td>"TCP/443 conecta; a negação é na Camada 7."</td></tr>
+    <tr><td>Ação corretiva</td><td>Menor mudança que trata a causa, com validação e rollback.</td><td>Ajustar só aquela regra do WAF e testar de novo.</td></tr>
+  </tbody></table></div>
+  <p>Enquanto as evidências sustentam uma explicação, você tem a <strong>causa provável</strong>; a <strong>causa raiz</strong> é a origem que, corrigida, impede a falha de voltar. Uma mudança ampla (liberar tudo, reiniciar tudo) pode sumir com o sintoma e esconder a causa raiz. E alguns problemas atravessam várias camadas ao mesmo tempo: o roteiro organiza a busca, não garante uma camada só.</p>
+  <div class="callout warning"><strong>Erros comuns:</strong>
+    <ul>
+      <li><strong>"O ping respondeu, a rede está ok":</strong> ping testa só parte da conectividade; teste a camada do sintoma (porta, TLS, aplicação).</li>
+      <li><strong>Liberar firewall antes de provar bloqueio:</strong> amplia a superfície de ataque e muitas vezes não resolve; prove com origem, destino, porta, horário, regra e log.</li>
+      <li><strong>Confundir DNS com conectividade IP:</strong> usuários acessam nomes; trocar rota ou firewall não resolve falha de resolução.</li>
+      <li><strong>Compartilhar outputs sem sanitizar:</strong> na pressa do ticket, vazam tokens, IPs internos e nomes sensíveis.</li>
+    </ul>
+  </div>
 </section>

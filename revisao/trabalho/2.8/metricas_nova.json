@@ -1,0 +1,78 @@
+{
+  "id": "2.8",
+  "versao": "nova",
+  "titulo": "Diagnóstico por camadas: método prático de troubleshooting",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4579,
+    "invisiveis": 49,
+    "teoriaVisivel": 2409
+  },
+  "porCampoVisivel": {
+    "content.motivation": 133,
+    "content.problem": 186,
+    "content.concept": 305,
+    "content.internals": 367,
+    "content.analogy": 91,
+    "content.simpleExample": 143,
+    "content.enterpriseExample": 85,
+    "content.cloudExample": 146,
+    "content.securityExample": 106,
+    "content.diagram": 1,
+    "content.summary": 90,
+    "content.nextTheme": 28,
+    "security": 197,
+    "troubleshooting": 369,
+    "glossary": 162,
+    "title+subtitle": 23,
+    "objectives": 54,
+    "learningOutcomes": 71,
+    "quiz": 342,
+    "flashcards": 183,
+    "mentorQuestions": 118,
+    "exercises": 280,
+    "challenge": 124,
+    "commentedSolution": 148,
+    "references": 56,
+    "linksToOtherCourses": 49,
+    "lab": 722
+  },
+  "porCampoInvisivel": {
+    "networkContext": 49
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 8,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 60,
+    "alternativa_5minPasso_maisLeitura": 45.6,
+    "plausivel": true,
+    "palavras": 722
+  },
+  "duracao": {
+    "declarada": "115-160 min",
+    "estimatedStudyTimeMinutes": 160,
+    "M": 137.5,
+    "T": 134.5,
+    "partes": {
+      "teoria": 18.5,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 20,
+      "lab": 60
+    },
+    "faixaRecomendada": "115-160 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 16
+  }
+}
