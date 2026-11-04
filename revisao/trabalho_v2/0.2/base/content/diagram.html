@@ -1,0 +1,51 @@
+
+<section class="lesson-section lesson-section--diagram">
+  <h2>Diagrama SVG</h2>
+  <p>O diagrama mostra como o mesmo valor pode ser visto em decimal, binário e hexadecimal, e como isso aparece em um IPv4 real.</p>
+  <svg class="lesson-svg" viewBox="0 0 960 420" role="img" aria-labelledby="m00l02-title m00l02-desc">
+    <title id="m00l02-title">Conversão entre decimal, binário e hexadecimal</title>
+    <desc id="m00l02-desc">O valor decimal 192 é representado como 11000000 em binário e C0 em hexadecimal. O IPv4 192.168.10.50 é dividido em quatro octetos.</desc>
+    <defs>
+      <marker id="m00l02-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
+      </marker>
+    </defs>
+
+    <rect x="40" y="40" width="220" height="80" rx="14" class="svg-node svg-node--client" />
+    <text x="150" y="75" text-anchor="middle" class="svg-label">Decimal</text>
+    <text x="150" y="102" text-anchor="middle" class="svg-label svg-label--small">192</text>
+
+    <line x1="260" y1="80" x2="370" y2="80" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l02-arrow)" />
+
+    <rect x="370" y="40" width="220" height="80" rx="14" class="svg-node svg-node--switch" />
+    <text x="480" y="75" text-anchor="middle" class="svg-label">Binário</text>
+    <text x="480" y="102" text-anchor="middle" class="svg-label svg-label--small">11000000</text>
+
+    <line x1="590" y1="80" x2="700" y2="80" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l02-arrow)" />
+
+    <rect x="700" y="40" width="220" height="80" rx="14" class="svg-node svg-node--server" />
+    <text x="810" y="75" text-anchor="middle" class="svg-label">Hexadecimal</text>
+    <text x="810" y="102" text-anchor="middle" class="svg-label svg-label--small">C0</text>
+
+    <rect x="70" y="185" width="820" height="170" rx="18" class="svg-zone" />
+    <text x="480" y="220" text-anchor="middle" class="svg-label">IPv4 192.168.10.50 como quatro octetos</text>
+
+    <rect x="110" y="250" width="160" height="70" rx="12" class="svg-node" />
+    <text x="190" y="278" text-anchor="middle" class="svg-label svg-label--small">192</text>
+    <text x="190" y="304" text-anchor="middle" class="svg-label svg-label--small">C0</text>
+
+    <rect x="310" y="250" width="160" height="70" rx="12" class="svg-node" />
+    <text x="390" y="278" text-anchor="middle" class="svg-label svg-label--small">168</text>
+    <text x="390" y="304" text-anchor="middle" class="svg-label svg-label--small">A8</text>
+
+    <rect x="510" y="250" width="160" height="70" rx="12" class="svg-node" />
+    <text x="590" y="278" text-anchor="middle" class="svg-label svg-label--small">10</text>
+    <text x="590" y="304" text-anchor="middle" class="svg-label svg-label--small">0A</text>
+
+    <rect x="710" y="250" width="160" height="70" rx="12" class="svg-node" />
+    <text x="790" y="278" text-anchor="middle" class="svg-label svg-label--small">50</text>
+    <text x="790" y="304" text-anchor="middle" class="svg-label svg-label--small">32</text>
+
+    <text x="480" y="382" text-anchor="middle" class="svg-label svg-label--small">Cada octeto tem 8 bits; cada par hexadecimal representa 1 byte.</text>
+  </svg>
+</section>

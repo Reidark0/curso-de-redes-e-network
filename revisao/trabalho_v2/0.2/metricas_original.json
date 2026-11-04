@@ -1,0 +1,103 @@
+{
+  "id": "0.2",
+  "versao": "original",
+  "titulo": "Bits, bytes, binário e hexadecimal",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5801,
+    "teoria": 3503,
+    "praticaExtra": 1703,
+    "quiz": 282,
+    "flashcards": 114
+  },
+  "porGrupoTeoria": {
+    "introducao": 654,
+    "contexto": 711,
+    "conteudo": 657,
+    "exemplos": 836,
+    "seguranca_troubleshooting": 645
+  },
+  "porSecao": {
+    "motivation": 202,
+    "summary": 72,
+    "history": 261,
+    "problem": 264,
+    "evolution": 186,
+    "concept": 207,
+    "internals": 257,
+    "architecture": 167,
+    "diagram": 26,
+    "analogy": 152,
+    "simpleExample": 84,
+    "enterpriseExample": 135,
+    "cloudExample": 139,
+    "devsecopsExample": 127,
+    "securityExample": 199,
+    "objectives": 69,
+    "learningOutcomes": 83,
+    "glossary": 228,
+    "security": 364,
+    "troubleshooting": 281,
+    "nextTheme": 55
+  },
+  "pratica": {
+    "quiz": 282,
+    "flashcards": 114,
+    "lab": 859,
+    "mentorQuestions": 214,
+    "exercises": 187,
+    "challenge": 215,
+    "commentedSolution": 228
+  },
+  "outros": {
+    "title+subtitle": 23,
+    "nextTheme": 55,
+    "references": 70,
+    "linksToOtherCourses": 51
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 5,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 90,
+    "alternativa_5minPorPasso": 30,
+    "plausivel": false,
+    "override": null,
+    "palavras": 859
+  },
+  "duracao": {
+    "declarada": "65-90 min",
+    "estimatedStudyTimeMinutes": 90,
+    "nucleo": 35.9,
+    "nucleoPartes": {
+      "teoria": 26.9,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 75,
+    "praticaExtraPartes": {
+      "lab": 30,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "30-45 min",
+    "praticaExtraArredondada": 75,
+    "recomendada": "30-45 min + 75 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 45
+  }
+}

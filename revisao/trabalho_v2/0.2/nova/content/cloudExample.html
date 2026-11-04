@@ -1,0 +1,10 @@
+
+<section class="lesson-section lesson-section--cloud">
+  <h2>Exemplo em cloud</h2>
+  <p>
+    Em cloud você raramente vê os bits, mas eles governam o desenho da rede. Ao criar uma VPC ou VNet, você escolhe blocos CIDR como <code>10.0.0.0/16</code>, <code>10.0.1.0/24</code> ou <code>172.16.32.0/20</code>. O número depois da barra é a contagem de bits de rede. Um bloco mal escolhido pode impedir peering, integração com o datacenter ou expansão futura, e corrigir isso depois costuma exigir redes adicionais, NAT, rotas complexas ou migrações caras.
+  </p>
+  <div class="callout callout--problem">
+    <strong>Exemplo realista:</strong> uma empresa cria várias VNets com faixas sobrepostas porque ninguém validou os blocos CIDR. Meses depois, a integração via VPN ou peering falha. A raiz do problema está nos bits de endereçamento, não no firewall nem no DNS.
+  </div>
+</section>

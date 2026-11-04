@@ -1,0 +1,46 @@
+
+<section class="lesson-section lesson-section--history">
+  <h2>História</h2>
+  <p>
+    Humanos contam em base 10. Circuitos digitais, como você viu na aula 0.1, distinguem bem dois estados (alto/baixo, 1/0), por isso a base 2 virou a forma natural de representar informação na máquina. O problema é que binário fica longo demais para humanos: um MAC de 48 bits escrito em binário teria 48 caracteres, difíceis de ler, copiar e comparar.
+  </p>
+  <p>
+    A solução foi adotar o hexadecimal (base 16), porque <strong>cada dígito hexadecimal representa exatamente 4 bits</strong>. As redes herdaram essas escolhas: IPv4 em quatro octetos decimais, MAC em seis pares hexadecimais, IPv6 em grupos hexadecimais e dumps de pacotes em hexadecimal. As três bases não concorrem entre si: são formas diferentes de escrever os mesmos bits.
+  </p>
+  <div class="responsive-table">
+  <table class="data-table comparison-table">
+    <thead>
+      <tr>
+        <th>Base</th>
+        <th>Símbolos</th>
+        <th>Vantagem</th>
+        <th>Limitação</th>
+        <th>Onde aparece em redes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Decimal (base 10)</td>
+        <td>0 a 9</td>
+        <td>Familiar para humanos</td>
+        <td>Esconde a estrutura de bits</td>
+        <td>IPv4, portas, métricas, TTL</td>
+      </tr>
+      <tr>
+        <td>Binário (base 2)</td>
+        <td>0 e 1</td>
+        <td>Mostra exatamente os bits</td>
+        <td>Longo e difícil de ler em campos grandes</td>
+        <td>Máscaras, flags, campos de protocolo, cálculo de sub-redes</td>
+      </tr>
+      <tr>
+        <td>Hexadecimal (base 16)</td>
+        <td>0 a 9 e A a F</td>
+        <td>Compacto e alinhado a grupos de 4 bits</td>
+        <td>Exige conhecer os dígitos A a F</td>
+        <td>MAC, IPv6, EtherType, dumps, hashes, certificados</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <p>
+    Um <strong>bit</strong> é a menor unidade de informação digital: dois estados possíveis, 0 ou 1. Um <strong>nibble</strong> é um grupo de 4 bits. Um <strong>byte</strong> é um grupo de 8 bits. Um <strong>octeto</strong> também tem 8 bits; as redes preferem esse termo porque ele garante o tamanho exato, já que em arquiteturas antigas o byte nem sempre tinha 8 bits. Uma <strong>palavra</strong> (word) é o bloco que um processador manipula de uma vez, e o tamanho dela muda conforme a arquitetura (16, 32 ou 64 bits); por isso protocolos de rede descrevem campos em bits e octetos, não em palavras.
+  </p>
+  <div class="definition-box">
+    <strong>Definição essencial:</strong> binário é a escrita de números em base 2; decimal, em base 10; hexadecimal, em base 16. Em hexadecimal, os valores 10 a 15 são escritos com as letras A, B, C, D, E e F. O prefixo <code>0x</code> (como em <code>0x0800</code>) indica que o número está em hexadecimal.
+  </div>
+  <p>
+    Com <em>n</em> bits você representa 2<sup>n</sup> valores, de 0 até 2<sup>n</sup> − 1. É daí que vêm os limites que você verá em todo o curso:
+  </p>
+  <div class="responsive-table">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Unidade</th>
+        <th>Tamanho</th>
+        <th>Quantidade de valores</th>
+        <th>Exemplo em redes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Bit</td>
+        <td>1 bit</td>
+        <td>2 valores: 0 ou 1</td>
+        <td>Uma flag TCP ligada ou desligada</td>
+      </tr>
+      <tr>
+        <td>Nibble</td>
+        <td>4 bits</td>
+        <td>16 valores: 0 a 15</td>
+        <td>Um dígito hexadecimal</td>
+      </tr>
+      <tr>
+        <td>Byte / octeto</td>
+        <td>8 bits</td>
+        <td>256 valores: 0 a 255</td>
+        <td>Um octeto IPv4, como 192</td>
+      </tr>
+      <tr>
+        <td>2 bytes</td>
+        <td>16 bits</td>
+        <td>65536 valores: 0 a 65535</td>
+        <td>Uma porta TCP/UDP</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p>
+    A regra mais importante desta aula: <strong>1 dígito hexadecimal = 4 bits; 2 dígitos hexadecimais = 8 bits = 1 byte</strong>. Por isso <code>FF</code> é um byte com todos os bits ligados, <code>11111111</code>, que vale 255 em decimal.
+  </p>
+  <p>
+    <strong>Bit ou byte nas unidades:</strong> em geral, <code>b</code> minúsculo é bit e <code>B</code> maiúsculo é byte. Velocidade de link costuma vir em bits (Mb/s); tamanho de arquivo e de log, em bytes (MB). Um link de 100 Mb/s transfere no máximo 100 ÷ 8 = 12,5 MB/s, sem contar overhead. Nem toda ferramenta respeita essa convenção, então confira a unidade antes de concluir.
+  </p>
+</section>

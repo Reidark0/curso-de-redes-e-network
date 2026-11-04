@@ -1,0 +1,75 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <p>
+    Toda conversão se apoia em posição e peso. No decimal, cada posição vale uma potência de 10; no binário, uma potência de 2; no hexadecimal, uma potência de 16. O número é a soma de cada símbolo multiplicado pelo peso da sua posição.
+  </p>
+  <h3>Como ler um byte em binário</h3>
+  <p>
+    Um octeto tem 8 posições. Da esquerda para a direita, os pesos são 128, 64, 32, 16, 8, 4, 2 e 1. Bit em 1: o peso entra na soma. Bit em 0: não entra.
+  </p>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Bit</th>
+        <th>7</th>
+        <th>6</th>
+        <th>5</th>
+        <th>4</th>
+        <th>3</th>
+        <th>2</th>
+        <th>1</th>
+        <th>0</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Peso</td>
+        <td>128</td>
+        <td>64</td>
+        <td>32</td>
+        <td>16</td>
+        <td>8</td>
+        <td>4</td>
+        <td>2</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>192</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    Na tabela, <code>11000000</code> vale 128 + 64 = 192. Da mesma forma, <code>168</code> é <code>10101000</code> (128 + 32 + 8) e <code>10</code> é <code>00001010</code> (8 + 2). Para converter de decimal para binário, percorra os pesos da esquerda para a direita: se o peso cabe no que falta, marque 1 e subtraia; se não cabe, marque 0. Os zeros à esquerda importam porque o octeto IPv4 tem tamanho fixo de 8 bits.
+  </p>
+  <h3>Como hexadecimal compacta binário</h3>
+  <p>
+    Hexadecimal trabalha em grupos de 4 bits. O binário <code>1100</code> vale 12, que em hexadecimal é <code>C</code>; <code>0000</code> vale 0. Portanto <code>11000000</code> vira <code>C0</code>, e <code>10101000</code> (<code>1010</code> = A, <code>1000</code> = 8) vira <code>A8</code>. Assim, o IPv4 <code>192.168.10.50</code> aparece em bytes como <code>C0 A8 0A 32</code>.
+  </p>
+  <ol class="flow-list">
+    <li>Separe o octeto em dois grupos de 4 bits.</li>
+    <li>Converta cada grupo para decimal entre 0 e 15.</li>
+    <li>Troque 10, 11, 12, 13, 14 e 15 por A, B, C, D, E e F.</li>
+    <li>Junte os dois dígitos hexadecimais.</li>
+  </ol>
+  <p>
+    No caminho inverso, de hexadecimal para decimal, multiplique o dígito da esquerda por 16 e some o da direita: <code>FF</code> = 15 × 16 + 15 = 255; <code>A8</code> = 10 × 16 + 8 = 168; <code>0A</code> = 0 × 16 + 10 = 10.
+  </p>
+  <div class="callout warning">
+    <strong>Erros comuns:</strong>
+    <ul>
+      <li><strong>Confundir bit com byte:</strong> leva a erros de throughput, tamanho de arquivo e capacidade contratada. Lembre: 1 byte = 8 bits.</li>
+      <li><strong>Remover zeros à esquerda:</strong> <code>1010</code> é o valor 10, mas o octeto completo é <code>00001010</code>. Sem os zeros, você compara campos de tamanhos diferentes e erra máscara e subnetting.</li>
+      <li><strong>Achar que hexadecimal é criptografia:</strong> hexadecimal é só representação; criptografia exige algoritmo e chave.</li>
+      <li><strong>Decorar /24 sem ver os bits:</strong> relacione o prefixo com a quantidade de bits de rede ligados na máscara; só assim /25, /26 e VLSM fazem sentido.</li>
+    </ul>
+  </div>
+</section>

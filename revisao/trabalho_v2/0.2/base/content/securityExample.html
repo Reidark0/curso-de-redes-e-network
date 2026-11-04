@@ -1,0 +1,37 @@
+
+<section class="lesson-section lesson-section--security">
+  <h2>Exemplo em Segurança</h2>
+  <p>
+    Um payload em hexadecimal pode ser só a exibição de bytes; um texto em Base64 pode ser só codificação; um hash em hexadecimal é uma impressão digital, não um segredo. O erro do analista é concluir antes de entender o contexto.
+  </p>
+  <table class="data-table risk-table">
+    <thead>
+      <tr>
+        <th>Risco</th>
+        <th>Como aparece</th>
+        <th>Impacto</th>
+        <th>Mitigação defensiva</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Confundir hex com criptografia</td>
+        <td>Dump mostra bytes como <code>4D 5A</code> (assinatura "MZ" do início de executáveis Windows) ou <code>FF D8</code> (início de arquivos JPEG)</td>
+        <td>Análise incorreta do artefato</td>
+        <td>Identificar formato, cabeçalho, contexto e ferramenta de origem</td>
+      </tr>
+      <tr>
+        <td>Ignorar zeros à esquerda</td>
+        <td><code>10</code> tratado como <code>1010</code> em vez de <code>00001010</code></td>
+        <td>Erro em máscara, subnetting e interpretação de campo fixo</td>
+        <td>Respeitar o tamanho do campo: 8, 16, 32 ou 128 bits</td>
+      </tr>
+      <tr>
+        <td>Interpretar payload sem contexto</td>
+        <td>Bytes aparentemente aleatórios em captura de tráfego</td>
+        <td>Falso positivo ou falso negativo</td>
+        <td>Correlacionar protocolo, porta, TLS, logs, endpoint e comportamento</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
