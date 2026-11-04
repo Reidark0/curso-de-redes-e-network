@@ -112,14 +112,14 @@ export const lesson0001 = {
         "platform": "Linux",
         "command": "printf 'rede' | xxd -g 1",
         "purpose": "Mostrar os bytes correspondentes à palavra rede.",
-        "expectedObservation": "Sequência hexadecimal dos caracteres enviados ao comando.",
+        "expectedObservation": "Os bytes 72 65 64 65, com a palavra rede na coluna de texto.",
         "interpretation": "A palavra é convertida para bytes segundo a codificação do ambiente."
       },
       {
         "platform": "Linux",
         "command": "printf 'rede' | base64",
         "purpose": "Demonstrar uma codificação textual comum usada em APIs, tokens e integrações.",
-        "expectedObservation": "Texto Base64 correspondente à entrada.",
+        "expectedObservation": "cmVkZQ==",
         "interpretation": "Base64 facilita transporte textual de bytes, mas não fornece confidencialidade."
       },
       {
@@ -603,7 +603,7 @@ export const lesson0001 = {
     {
       "id": "ex0.1.3",
       "type": "diagnóstico",
-      "prompt": "Um colega afirma que o cabeçalho Authorization: Basic YWRtaW46MTIzNDU2 está seguro porque não é legível. Decodifique o valor (por exemplo, com echo YWRtaW46MTIzNDU2 | base64 -d) e corrija a afirmação de forma técnica e educada.",
+      "prompt": "Um colega afirma que o cabeçalho Authorization: Basic YWRtaW46MTIzNDU2 está seguro porque não é legível. Decodifique o valor (no Linux, echo YWRtaW46MTIzNDU2 | base64 -d; no Windows, o comando do passo 5 do laboratório) e corrija a afirmação de forma técnica e educada.",
       "expectedAnswer": "O valor decodifica para admin:123456, ou seja, usuário e senha em texto claro. Base64 é codificação reversível, sem chave. Quem capturar o cabeçalho recupera a credencial; ela precisa trafegar dentro de TLS, e segredos devem ser protegidos com criptografia, controle de acesso e gestão de segredos.",
       "explanation": "O objetivo é combater uma confusão muito comum entre codificação e criptografia."
     },
