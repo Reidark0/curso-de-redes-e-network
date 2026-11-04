@@ -1,0 +1,91 @@
+{
+  "id": "0.1",
+  "versao": "nova",
+  "titulo": "Como computadores representam informação",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3075,
+    "teoria": 1282,
+    "praticaExtra": 1010,
+    "quiz": 450,
+    "flashcards": 132
+  },
+  "porGrupoTeoria": {
+    "introducao": 449,
+    "contexto": 144,
+    "conteudo": 508,
+    "exemplos": 181,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 143,
+    "summary": 92,
+    "problem": 144,
+    "concept": 290,
+    "internals": 216,
+    "diagram": 2,
+    "analogy": 58,
+    "simpleExample": 123,
+    "objectives": 52,
+    "learningOutcomes": 0,
+    "glossary": 162,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 42
+  },
+  "pratica": {
+    "quiz": 450,
+    "flashcards": 132,
+    "lab": 400,
+    "mentorQuestions": 167,
+    "exercises": 181,
+    "challenge": 97,
+    "commentedSolution": 165
+  },
+  "outros": {
+    "title+subtitle": 26,
+    "nextTheme": 42,
+    "references": 76,
+    "linksToOtherCourses": 57
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 5,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 4,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 4,
+    "exemplosPorAmbiente": []
+  },
+  "lab": {
+    "estimatedTimeMinutes": 20,
+    "alternativa_5minPorPasso": 20,
+    "plausivel": true,
+    "override": null,
+    "palavras": 400
+  },
+  "duracao": {
+    "declarada": "15-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 18.9,
+    "nucleoPartes": {
+      "teoria": 9.9,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 51,
+    "praticaExtraPartes": {
+      "lab": 20,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-25 min",
+    "praticaExtraArredondada": 50,
+    "recomendada": "15-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

@@ -2,10 +2,9 @@
 <section class="lesson-section lesson-section--problem">
   <h2>Problema</h2>
   <p>
-    Significado humano não atravessa cabos, fibras ou ondas de rádio. O que atravessa o meio físico são sinais. O emissor converte a informação em uma forma física; o receptor reconstrói essa forma física em bits; e o software interpreta os bits como algum tipo de dado.</p>
+    É isso que acontece quando os dois lados não usam a mesma regra. E a regra é necessária porque significado não atravessa cabos, fibras nem ondas de rádio: o que atravessa é um sinal físico, que o destino precisa transformar de volta em bits e depois em dado.</p>
   <p>
-    Sem uma representação combinada, cada máquina poderia interpretar a mesma sequência física de forma diferente: um lado acharia que recebeu a letra A, enquanto o outro enviou um número, um endereço, uma flag ou parte de uma chave criptográfica. Por isso, redes dependem de camadas de interpretação: padrões elétricos, codificação de bits, quadros, pacotes, protocolos de transporte e de aplicação e formatos de dados. É isso que permite que bilhões de dispositivos diferentes troquem informação usando padrões comuns.</p>
-  <h3>Por que dois estados?</h3>
+    Para esse transporte ser confiável, a computação usa só dois estados, como tensão alta ou baixa. O mundo real é contínuo e cheio de ruído: distinguir dois estados bem separados é muito mais seguro do que distinguir dez níveis parecidos. Telégrafos (sinal curto ou longo) e cartões perfurados (furo ou ausência de furo) já usavam essa ideia.</p>
   <p>
-    Telégrafos (sinais curtos e longos), cartões perfurados (furo ou ausência de furo) e circuitos eletrônicos (nível de tensão alto ou baixo) fizeram a mesma coisa: transformar informação em um padrão físico que pode ser registrado, transportado e lido de novo. O mundo real é contínuo (som, luz, temperatura), mas a computação digital escolheu estados discretos porque dois estados são muito mais fáceis de distinguir em hardware real, sujeito a ruído e variação, do que muitos níveis parecidos. Em redes, essa confiabilidade é essencial: se um único bit muda durante a transmissão, o dado interpretado pode mudar completamente.</p>
+    Mas dois estados só resolvem o transporte. Para que um grupo de bits volte a ser a letra certa, origem e destino precisam combinar uma regra de leitura. Esta aula mostra essa cadeia e onde a regra entra.</p>
 </section>

@@ -2,29 +2,10 @@
 <section class="lesson-section lesson-section--example">
   <h2>Exemplo simples</h2>
   <p>
-    Você digita a letra A em um editor de texto. Para você, é uma letra; para o computador, é um número. Nas codificações mais comuns (ASCII e UTF-8), A é o valor decimal 65, que em binário é 01000001. Ao salvar o arquivo ou enviá-lo pela rede, o sistema não transmite a ideia de “A”: transmite um byte que o outro lado interpreta como A porque usa a mesma convenção.</p>
+    Alguns sites e sistemas antigos usam um tipo simples de login chamado autenticação HTTP Basic. Quando você digita usuário e senha, o navegador passa a enviar, junto com cada pedido ao site, uma linha assim:</p>
+  <pre class="code-block">Authorization: Basic dXN1YXJpbzpzZW5oYQ==</pre>
   <p>
-    A palavra “rede” vira quatro bytes, um por letra:</p>
-  <div class="responsive-table">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Caractere</th>
-          <th>Decimal</th>
-          <th>Hexadecimal</th>
-          <th>Binário</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>r</td><td>114</td><td>72</td><td>01110010</td></tr>
-        <tr><td>e</td><td>101</td><td>65</td><td>01100101</td></tr>
-        <tr><td>d</td><td>100</td><td>64</td><td>01100100</td></tr>
-        <tr><td>e</td><td>101</td><td>65</td><td>01100101</td></tr>
-      </tbody>
-    </table>
-  </div>
+    Lido como texto, <code>dXN1YXJpbzpzZW5oYQ==</code> parece embaralhado. Mas ele está só em Base64, uma codificação que reescreve quaisquer bytes usando letras, números e alguns símbolos. Lido com a regra certa, o mesmo valor é <code>usuario:senha</code>.</p>
   <p>
-    São essas quatro colunas que você vai ver no laboratório (a conversão entre bases é o tema da aula 0.2). Se o receptor interpretar esses bytes como texto com a codificação correta, verá “rede”; se os interpretar como outro formato, verá caracteres estranhos ou dados sem sentido. É a origem de logs quebrados e payloads “ilegíveis”. Caracteres acentuados mostram que letra e byte não são a mesma coisa: em UTF-8, “ação” tem 4 letras e ocupa 6 bytes (61 c3 a7 c3 a3 6f), porque “ç” e “ã” usam 2 bytes cada.</p>
-  <p>
-    O mesmo vale para endereços de rede: um endereço IPv4 como 192.168.0.1 são 4 bytes (32 bits) escritos em decimal, e um endereço MAC como 00:1A:2B:3C:4D:5E são 6 bytes (48 bits) escritos em hexadecimal. Por isso binário e hexadecimal aparecem o tempo todo em redes.</p>
+    Qualquer pessoa que capture essa linha decodifica a senha com um comando, sem chave nenhuma (o laboratório mostra como). Base64 só mudou a forma. Quem protege a senha nesse caso é o TLS, a criptografia da conexão que aparece como <code>https://</code> no endereço: sem ele, a senha viaja exposta.</p>
 </section>

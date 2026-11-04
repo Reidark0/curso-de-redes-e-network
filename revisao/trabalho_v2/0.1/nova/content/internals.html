@@ -2,19 +2,32 @@
 <section class="lesson-section lesson-section--internals">
   <h2>Funcionamento interno</h2>
   <p>
-    Você não digita bits: você clica, escreve ou executa um comando. A partir daí, a informação passa por uma cadeia de transformação, e o destino faz o caminho inverso:</p>
+    Quando você envia a palavra “rede” por uma aplicação, ela passa por uma cadeia de traduções, e o destino faz o caminho inverso:</p>
   <ol class="flow-list">
-    <li><strong>Intenção:</strong> uma pessoa ou processo quer realizar algo, como abrir um site, enviar uma mensagem ou consultar uma API.</li>
-    <li><strong>Dado de aplicação:</strong> a aplicação cria uma representação lógica, como uma requisição HTTP, um documento JSON ou um arquivo.</li>
-    <li><strong>Codificação:</strong> textos, números e estruturas são convertidos para bytes segundo regras, como UTF-8, JSON, ASN.1 ou formatos binários próprios.</li>
-    <li><strong>Encapsulamento:</strong> a pilha de rede adiciona cabeçalhos e metadados: portas, IPs, endereços MAC, checksums, tamanho, flags e outros campos.</li>
-    <li><strong>Bits:</strong> os bytes são tratados como sequências de 0 e 1.</li>
-    <li><strong>Sinais físicos:</strong> a placa de rede converte bits em variações físicas no meio: tensão elétrica, luz em fibra ou ondas de rádio.</li>
-    <li><strong>Reconstrução:</strong> o receptor mede os sinais, reconstrói bits, agrupa bytes, valida os protocolos e entrega os dados para a aplicação.</li>
+    <li><strong>Dado:</strong> a aplicação tem o texto “rede”.</li>
+    <li><strong>Bytes:</strong> a codificação transforma cada letra em um byte: <code>72 65 64 65</code> (em hexadecimal).</li>
+    <li><strong>Bits:</strong> cada byte é uma sequência de 8 bits; <code>72</code> é <code>01110010</code>. No caminho, os protocolos de rede acrescentam seus próprios bytes de controle, como o endereço de destino.</li>
+    <li><strong>Sinal:</strong> a placa de rede transforma os bits em tensão elétrica no cabo, pulsos de luz na fibra ou ondas de rádio no Wi-Fi.</li>
+    <li><strong>Volta:</strong> o destino mede o sinal, recupera bits e bytes, e o sistema e a aplicação os interpretam com as mesmas regras (protocolos e codificação) para mostrar “rede”.</li>
   </ol>
-  <p>
-    Esse processo precisa lidar com imperfeições físicas. Cabos sofrem interferência. Rádio sofre ruído, reflexão e disputa pelo meio. Fibra sofre atenuação e problemas de conectorização. O hardware não enxerga zeros e uns abstratos: ele mede um fenômeno físico e decide se aquilo representa 0 ou 1. Por isso existem tolerâncias, sincronização, codificação de linha, checksums, CRCs, retransmissões e protocolos de detecção ou correção de erro.</p>
-  <div class="callout security">
-    <strong>Ligação com segurança:</strong> muitos controles funcionam porque validam a interpretação. Um parser seguro rejeita dados malformados. Um certificado digital ajuda a validar identidade. Um checksum ou CRC detecta alteração acidental, mas qualquer um pode recalculá-lo; um MAC criptográfico (código de autenticação de mensagem, que usa uma chave secreta e não tem relação com o endereço MAC) detecta alteração maliciosa. Um SIEM interpreta logs para transformar bytes em evidência operacional.
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Caractere</th>
+          <th>Decimal</th>
+          <th>Hexadecimal</th>
+          <th>Binário</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>r</td><td>114</td><td>72</td><td>01110010</td></tr>
+        <tr><td>e</td><td>101</td><td>65</td><td>01100101</td></tr>
+        <tr><td>d</td><td>100</td><td>64</td><td>01100100</td></tr>
+        <tr><td>e</td><td>101</td><td>65</td><td>01100101</td></tr>
+      </tbody>
+    </table>
   </div>
+  <p>
+    Cada linha mostra o mesmo byte escrito de quatro formas; converter entre elas é o tema da aula 0.2. Já o hardware não enxerga 0 e 1 abstratos: ele mede um fenômeno físico (uma tensão, uma intensidade de luz) e decide se aquilo é 0 ou 1. Ruído pode atrapalhar essa decisão e trocar um bit; por isso as redes têm mecanismos para detectar erros e retransmitir dados.</p>
 </section>
