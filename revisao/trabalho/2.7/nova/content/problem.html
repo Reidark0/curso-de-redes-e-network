@@ -1,11 +1,11 @@
 <section class="lesson-section lesson-section--problem">
-  <h2>3. Problema</h2>
-  <p>Sem separar sessão, apresentação e aplicação, diagnósticos ficam rasos. O técnico testa ping, testa porta e declara "rede ok". O desenvolvedor diz "é problema de rede". O time de segurança vê 403 ou 401 e acha que é indisponibilidade. O time de IAM vê login falhando e culpa DNS. Cada área usa uma linguagem diferente para sintomas parecidos.</p>
+  <h2>Problema</h2>
+  <p>Sem separar sessão, apresentação e aplicação, o diagnóstico fica raso: o técnico testa ping e porta e declara "rede ok", o desenvolvedor diz "é rede", e quem vê 401 ou 403 trata como indisponibilidade. Cada área descreve o mesmo sintoma com outra linguagem. As camadas superiores dão quatro perguntas para separar o problema:</p>
   <ul class="flow-list">
     <li><strong>Sessão:</strong> quem está conversando, por quanto tempo, com qual contexto, cookie, token, estado ou negociação?</li>
     <li><strong>Apresentação:</strong> os dados estão no formato certo, codificados corretamente, criptografados, comprimidos ou serializados como esperado?</li>
     <li><strong>Aplicação:</strong> o protocolo de aplicação entende a requisição, o endpoint existe, o método é aceito e a resposta tem significado?</li>
     <li><strong>Segurança:</strong> o certificado é confiável, o token é válido, a política permite, o WAF não bloqueou e os logs confirmam?</li>
   </ul>
-  <p>Essas camadas não substituem IP, TCP ou UDP. Elas dependem deles. Porém, elas explicam por que "consegui conectar" não significa "o sistema funcionou".</p>
+  <p>Essas camadas não substituem IP, TCP ou UDP: dependem deles. Elas explicam por que "consegui conectar" não significa "o sistema funcionou".</p>
 </section>

@@ -1,0 +1,72 @@
+{
+  "id": "2.7",
+  "versao": "nova",
+  "titulo": "Camadas 5, 6 e 7 — Sessão, Apresentação e Aplicação",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4239,
+    "invisiveis": 40,
+    "teoriaVisivel": 2612
+  },
+  "porCampoVisivel": {
+    "content.motivation": 118,
+    "content.problem": 145,
+    "content.concept": 283,
+    "content.internals": 482,
+    "content.architecture": 128,
+    "content.analogy": 98,
+    "content.simpleExample": 83,
+    "content.enterpriseExample": 115,
+    "content.cloudExample": 92,
+    "content.devsecopsExample": 79,
+    "content.diagram": 1,
+    "content.summary": 100,
+    "content.nextTheme": 31,
+    "security": 356,
+    "troubleshooting": 290,
+    "glossary": 211,
+    "title+subtitle": 31,
+    "objectives": 76,
+    "learningOutcomes": 94,
+    "quiz": 446,
+    "flashcards": 148,
+    "mentorQuestions": 216,
+    "exercises": 115,
+    "challenge": 169,
+    "commentedSolution": 212,
+    "references": 65,
+    "linksToOtherCourses": 55
+  },
+  "porCampoInvisivel": {
+    "networkContext": 40
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "65-90 min",
+    "estimatedStudyTimeMinutes": 90,
+    "M": 77.5,
+    "T": 76.1,
+    "partes": {
+      "teoria": 20.1,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "65-90 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 30
+  }
+}

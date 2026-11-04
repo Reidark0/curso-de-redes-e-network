@@ -1,10 +1,10 @@
 <section class="lesson-section lesson-section--summary">
-  <h2>19. Resumo</h2>
+  <h2>Resumo</h2>
   <ul>
-    <li><strong>Ideia central:</strong> as Camadas 5, 6 e 7 organizam sessão, representação dos dados e aplicação.</li>
+    <li><strong>Modelo mental:</strong> TCP entrega bytes a uma porta; TLS protege o canal; o encoding define como bytes viram texto; HTTP define método, headers e resposta; sessão e identidade definem contexto e permissão.</li>
     <li><strong>O que lembrar:</strong> porta aberta não prova TLS válido, payload correto, sessão ativa ou autorização.</li>
-    <li><strong>Erro comum:</strong> chamar qualquer erro HTTP, TLS ou autenticação de "problema de rede".</li>
+    <li><strong>Erro comum:</strong> chamar qualquer erro HTTP, TLS ou de autenticação de "problema de rede". 401 é autenticação; 403 é autorização ou política.</li>
     <li><strong>Uso real:</strong> diagnóstico de sites, APIs, SSO, WAF, proxies, gateways, pipelines e aplicações cloud.</li>
-    <li><strong>Segurança:</strong> tokens, cookies, certificados, headers e logs precisam ser tratados como evidências sensíveis.</li>
+    <li><strong>Segurança:</strong> tokens, cookies, certificados, headers e logs são ativos e evidências sensíveis; Base64 não protege nada.</li>
   </ul>
 </section>

@@ -1,15 +1,35 @@
 <section class="lesson-section lesson-section--internals">
-  <h2>6. Funcionamento interno</h2>
-  <p>Considere um acesso HTTPS a uma API. Várias funções superiores aparecem em sequência.</p>
-  <ol class="flow-list">
-    <li>O cliente resolve o nome da API usando DNS.</li>
-    <li>O cliente estabelece TCP com a porta de destino, normalmente 443.</li>
-    <li>O cliente inicia TLS, valida certificado, negocia parâmetros e estabelece canal criptografado.</li>
-    <li>A aplicação envia uma requisição HTTP com método, caminho, headers, corpo e Content-Type.</li>
-    <li>O servidor interpreta o formato do corpo, por exemplo JSON em UTF-8.</li>
-    <li>O servidor valida sessão, cookie, token, claim, escopo ou política de acesso.</li>
-    <li>A aplicação executa lógica de negócio e responde com código, headers e payload.</li>
-    <li>Proxy, WAF, API gateway e logs podem registrar, transformar, bloquear ou enriquecer a transação.</li>
-  </ol>
-  <p>Uma falha em qualquer ponto muda o tipo de evidência. Certificado expirado não é falha de roteamento. HTTP 401 não é porta fechada. JSON inválido não é problema de cabo. Erro de CORS não é ausência de internet. Essa separação reduz retrabalho entre redes, segurança, plataforma e desenvolvimento.</p>
+  <h2>Funcionamento interno</h2>
+  <p>Num acesso HTTPS a uma API, as funções superiores aparecem em sequência. Cada etapa tem uma falha típica, e cada falha deixa uma evidência diferente.</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>#</th><th>O que acontece</th><th>Falha típica</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>O cliente resolve o nome da API por DNS.</td><td>Nome não resolve ou aponta para o destino errado.</td></tr>
+      <tr><td>2</td><td>O cliente estabelece TCP com a porta de destino, normalmente 443.</td><td>Timeout ou recusa: volte às Camadas 3 e 4.</td></tr>
+      <tr><td>3</td><td>O cliente inicia TLS, valida o certificado, negocia parâmetros e estabelece o canal criptografado.</td><td>Certificado expirado, CA não confiável, SNI incorreto, nome fora do SAN ou inspeção corporativa mal configurada.</td></tr>
+      <tr><td>4</td><td>O cliente monta a requisição HTTP: método, URL, headers, cookies, token, <code>Content-Type</code> e corpo.</td><td>Header ausente, payload inválido, encoding errado ou token expirado.</td></tr>
+      <tr><td>5</td><td>Proxy, WAF ou API gateway aplicam política: rota, quota, assinatura, token, tamanho e padrões de payload.</td><td>Bloqueio 403, rate limit 429, rota não publicada (404) ou regra mal calibrada.</td></tr>
+      <tr><td>6</td><td>O servidor interpreta o corpo (por exemplo, JSON em UTF-8) e valida sessão, cookie, token, claim, escopo ou política.</td><td>401 (autenticação) ou 403 (autorização).</td></tr>
+      <tr><td>7</td><td>A aplicação executa a regra de negócio e responde com status, headers e payload.</td><td>404, 409, 422, 500 ou erro de contrato.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Proxy, WAF, API gateway e logs podem registrar, transformar, bloquear ou enriquecer a transação em qualquer ponto. Certificado expirado não é falha de roteamento. HTTP 401 não é porta fechada. JSON inválido não é problema de cabo. Erro de CORS não é ausência de internet. Essa separação reduz o retrabalho entre redes, segurança, plataforma e desenvolvimento.</p>
+  <h3>Campos que você lê no diagnóstico</h3>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Campo</th><th>Para que serve</th><th>Observação de segurança</th></tr></thead>
+    <tbody>
+      <tr><td>Método HTTP</td><td>Indica a ação desejada: GET, POST, PUT, DELETE.</td><td>Método inesperado pode indicar erro de cliente, contrato quebrado ou tentativa indevida.</td></tr>
+      <tr><td>Status HTTP (3 dígitos)</td><td>Informa o resultado: 200, 301, 401, 403, 404, 500.</td><td>Qualquer status prova que um componente HTTP respondeu: a rede entregou a requisição.</td></tr>
+      <tr><td><code>Content-Type</code></td><td>Indica o formato do corpo, como <code>application/json</code> ou <code>text/html</code>.</td><td>Formato incorreto pode quebrar a validação ou abrir risco se a aplicação confiar demais no cliente.</td></tr>
+      <tr><td><code>Authorization</code></td><td>Transporta credenciais ou tokens.</td><td>Nunca deve aparecer em logs, prints, tickets ou evidências sem sanitização.</td></tr>
+      <tr><td>Subject/SAN do certificado</td><td>Vincula o certificado aos nomes de domínio esperados.</td><td>Nome incorreto, cadeia inválida ou expiração causam falha e risco de confiança.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout warning"><strong>Erros comuns:</strong>
+    <ul>
+      <li><strong>Achar que TCP/443 aberto prova que a aplicação funciona.</strong> O teste de porta é o mais fácil, então o incidente é fechado cedo e volta. Valide também certificado, status HTTP, headers, payload e logs de aplicação.</li>
+      <li><strong>Tratar 401 e 403 como queda de rede.</strong> O usuário relata "sistema fora" e o time errado investiga por horas. 401 indica autenticação; 403 indica autorização ou política negada.</li>
+      <li><strong>Ignorar o certificado na pipeline com opção insecure (<code>curl -k</code>).</strong> Resolve o erro na hora, mas mascara interceptação ou configuração errada. Corrija CA, cadeia, SAN, SNI e renovação.</li>
+    </ul>
+  </div>
 </section>

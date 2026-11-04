@@ -1,6 +1,20 @@
 <section class="lesson-section lesson-section--concept">
-  <h2>5. Conceito</h2>
-  <p>No Modelo OSI, as Camadas 5, 6 e 7 representam funções próximas ao usuário e à aplicação.</p>
-  <div class="definition-box"><strong>Definição:</strong> a Camada 5 organiza sessões e contexto de comunicação; a Camada 6 trata representação, codificação, compressão e criptografia dos dados; a Camada 7 define os protocolos e regras de interação usados diretamente pelas aplicações.</div>
-  <p>Na internet real, essas funções muitas vezes se misturam. HTTP pode carregar dados JSON em UTF-8, usar TLS para criptografia, manter sessão com cookie, enviar token em header Authorization e responder códigos como 200, 301, 401, 403, 404 ou 500. O valor do OSI aqui não é forçar uma fronteira perfeita, mas ensinar a perguntar: em que nível o problema aparece?</p>
+  <h2>Conceito</h2>
+  <div class="definition-box"><strong>Definição:</strong> a Camada 5 (sessão) organiza sessões e o contexto da comunicação; a Camada 6 (apresentação) trata representação, codificação, serialização, compressão e criptografia dos dados; a Camada 7 (aplicação) define os protocolos e as regras de interação usados diretamente pelas aplicações.</div>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Camada</th><th>O que trata</th><th>Exemplos</th><th>Sintoma típico de falha</th></tr></thead>
+    <tbody>
+      <tr><td>5 — Sessão</td><td>Estado e continuidade lógica da conversa</td><td>Login, cookie de sessão, token, tempo de expiração</td><td>Usuário "cai" do sistema, 401 depois que a sessão ou o token expira</td></tr>
+      <tr><td>6 — Apresentação</td><td>Como os bytes viram dados compreensíveis e protegidos</td><td>UTF-8, Base64, JSON, compressão, TLS</td><td>Certificado inválido, caracteres trocados, JSON que o servidor não consegue interpretar</td></tr>
+      <tr><td>7 — Aplicação</td><td>Comandos, respostas e erros do protocolo</td><td>HTTP (método, path, headers, status), DNS, SMTP, SSH, APIs</td><td>404, 403, 500, rota de API ausente, método não aceito</td></tr>
+    </tbody>
+  </table></div>
+  <p>Na internet real, essas funções se misturam. O OSI não descreve perfeitamente a pilha TCP/IP: TLS pode ser visto como apresentação, porque criptografa e negocia parâmetros de segurança, mas na pilha TCP/IP fica entre o transporte e a aplicação. Uma única requisição HTTP pode carregar JSON em UTF-8, usar TLS, manter sessão com cookie, enviar token no header <code>Authorization</code>, negociar formato por <code>Content-Type</code>, controlar cache e responder 200, 301, 401, 403, 404 ou 500. O valor do OSI aqui não é traçar uma fronteira perfeita, e sim ensinar a perguntar: em que nível o problema aparece?</p>
+  <div class="callout warning"><strong>O que cada evidência não prova:</strong>
+    <ul>
+      <li>TLS válido não garante que a aplicação é segura.</li>
+      <li>HTTP 200 não garante que o resultado de negócio está correto.</li>
+      <li>Token válido não significa autorização para todas as ações.</li>
+    </ul>
+    A regra vale nos dois sentidos: não declare problema de aplicação antes de testar DNS, rota, porta e TLS.</div>
 </section>

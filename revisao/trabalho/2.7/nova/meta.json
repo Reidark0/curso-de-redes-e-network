@@ -3,9 +3,9 @@
   "moduleId": "m02",
   "order": 7,
   "title": "Camadas 5, 6 e 7 — Sessão, Apresentação e Aplicação",
-  "subtitle": "Onde a comunicação deixa de ser apenas entrega de pacotes e passa a envolver sessões, formatos, criptografia, protocolos de aplicação, APIs e experiência do usuário.",
-  "duration": "85-120 min",
-  "estimatedStudyTimeMinutes": 120,
+  "subtitle": "Onde a comunicação deixa de ser só entrega de pacotes e passa a envolver sessões, formatos, criptografia, protocolos de aplicação e APIs.",
+  "duration": "65-90 min",
+  "estimatedStudyTimeMinutes": 90,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 205,
@@ -114,144 +114,6 @@
       "DevSecOps"
     ]
   },
-  "protocolFields": [
-    {
-      "field": "HTTP Method",
-      "size": "variável",
-      "purpose": "Indicar ação desejada, como GET, POST, PUT ou DELETE.",
-      "securityObservation": "Método inesperado pode indicar erro de cliente, contrato quebrado ou tentativa indevida."
-    },
-    {
-      "field": "HTTP Status Code",
-      "size": "3 dígitos",
-      "purpose": "Informar resultado da requisição, como 200, 301, 401, 403, 404 ou 500.",
-      "securityObservation": "401 e 403 são evidências de autenticação/autorização, não necessariamente falha de rede."
-    },
-    {
-      "field": "Content-Type",
-      "size": "header variável",
-      "purpose": "Indicar o formato do corpo, como application/json ou text/html.",
-      "securityObservation": "Formato incorreto pode quebrar validação ou abrir risco se a aplicação confiar demais no cliente."
-    },
-    {
-      "field": "Authorization",
-      "size": "header variável",
-      "purpose": "Transportar credenciais ou tokens quando usado.",
-      "securityObservation": "Nunca deve ser exposto em logs, prints, tickets ou evidências não sanitizadas."
-    },
-    {
-      "field": "TLS Certificate Subject/SAN",
-      "size": "variável",
-      "purpose": "Vincular certificado a nomes de domínio esperados.",
-      "securityObservation": "Nome incorreto, cadeia inválida ou expiração causam falhas e riscos de confiança."
-    }
-  ],
-  "packetFlow": [
-    {
-      "step": 1,
-      "actor": "Cliente",
-      "action": "Estabelece transporte e inicia TLS.",
-      "detail": "TCP/443 funciona, mas ainda falta validar certificado e negociar parâmetros.",
-      "possibleFailure": "Certificado expirado, CA não confiável, SNI incorreto ou inspeção corporativa mal configurada."
-    },
-    {
-      "step": 2,
-      "actor": "Cliente",
-      "action": "Monta requisição de aplicação.",
-      "detail": "Define método, URL, headers, cookies, token, Content-Type e corpo.",
-      "possibleFailure": "Header ausente, payload inválido, encoding errado ou token expirado."
-    },
-    {
-      "step": 3,
-      "actor": "Gateway/WAF",
-      "action": "Aplica política de aplicação.",
-      "detail": "Pode validar rota, quota, assinatura, token, tamanho e padrões de payload.",
-      "possibleFailure": "Bloqueio 403, rate limit 429, rota não publicada ou regra mal calibrada."
-    },
-    {
-      "step": 4,
-      "actor": "Aplicação",
-      "action": "Processa sessão, identidade e regra de negócio.",
-      "detail": "Retorna status HTTP e payload de resposta.",
-      "possibleFailure": "401, 403, 404, 409, 422, 500 ou erro de contrato."
-    }
-  ],
-  "deepDive": {
-    "mentalModel": "As camadas superiores explicam significado. TCP entrega bytes a uma porta; TLS protege o canal; encoding define como bytes viram texto; HTTP define método, headers e resposta; sessão e identidade definem contexto e permissão.",
-    "keyTerms": [
-      "sessão",
-      "TLS",
-      "certificado",
-      "encoding",
-      "serialização",
-      "HTTP",
-      "header",
-      "cookie",
-      "token",
-      "API gateway",
-      "WAF"
-    ],
-    "limitations": [
-      "OSI não descreve perfeitamente a pilha TCP/IP real.",
-      "TLS não garante que a aplicação é segura.",
-      "HTTP 200 não garante que o resultado de negócio está correto.",
-      "Base64 não é criptografia.",
-      "Token válido não significa autorização para todas as ações."
-    ],
-    "whenToUse": [
-      "Ao diagnosticar sites, APIs e SSO.",
-      "Ao investigar erro HTTP, TLS ou autenticação.",
-      "Ao revisar logs de proxy, WAF, gateway e aplicação.",
-      "Ao desenhar pipelines que acessam serviços internos.",
-      "Ao separar responsabilidade entre redes, segurança, plataforma e desenvolvimento."
-    ],
-    "whenNotToUse": [
-      "Não usar camadas superiores para ignorar evidências de camada física, enlace, rede ou transporte.",
-      "Não declarar problema de aplicação antes de testar DNS, rota, porta e TLS.",
-      "Não publicar evidências com tokens, cookies ou dados pessoais."
-    ],
-    "operationalImpact": [
-      "Exige correlação entre logs de rede, proxy, WAF, IAM e aplicação.",
-      "Aumenta necessidade de documentação de endpoints, certificados, headers e contratos de API.",
-      "Troubleshooting exige acesso a múltiplas equipes e ferramentas."
-    ],
-    "financialImpact": [
-      "WAF, API gateway, logs, certificados gerenciados e observabilidade podem gerar custo recorrente em cloud.",
-      "Erros em camadas superiores podem causar indisponibilidade sem consumo anormal de rede, dificultando detecção simples.",
-      "Logs detalhados aumentam custo de armazenamento e retenção."
-    ],
-    "securityImpact": [
-      "Tokens, cookies e certificados passam a ser ativos sensíveis.",
-      "WAF e proxy ajudam a reduzir risco, mas não substituem autenticação, autorização e validação na aplicação.",
-      "Erros verbosos podem revelar detalhes internos."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Achar que TCP/443 aberto prova que a aplicação está funcionando.",
-      "whyItHappens": "O teste de porta é mais simples que validar TLS, HTTP e autenticação.",
-      "consequence": "Incidentes são fechados cedo demais e voltam sem solução.",
-      "correction": "Validar também certificado, status HTTP, headers, payload e logs de aplicação."
-    },
-    {
-      "mistake": "Confundir Base64 com criptografia.",
-      "whyItHappens": "O texto codificado parece ilegível para humanos.",
-      "consequence": "Segredos podem ser expostos em repositórios, logs ou tickets.",
-      "correction": "Tratar Base64 como representação, não proteção."
-    },
-    {
-      "mistake": "Tratar 401 e 403 como queda de rede.",
-      "whyItHappens": "O usuário vê falha e reporta indisponibilidade genérica.",
-      "consequence": "O time errado investiga por muito tempo.",
-      "correction": "401 indica autenticação; 403 indica autorização ou política negada."
-    },
-    {
-      "mistake": "Ignorar certificado em pipeline com opção insecure.",
-      "whyItHappens": "A opção resolve rápido o erro de TLS.",
-      "consequence": "Cria risco de confiança e pode mascarar interceptação ou configuração incorreta.",
-      "correction": "Corrigir CA, cadeia, SAN, SNI e renovação do certificado."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Porta abre, mas navegador mostra erro de certificado.",
@@ -339,14 +201,10 @@
     ],
     "badPractices": [
       "Usar curl -k como solução permanente.",
-      "Armazenar tokens em logs, tickets ou prints.",
-      "Aceitar qualquer origem CORS sem justificativa.",
-      "Expor erros internos detalhados para usuários finais.",
       "Confiar apenas em WAF sem corrigir a aplicação."
     ],
     "commonErrors": [
-      "Confundir encoding com criptografia.",
-      "Tratar 403 como indisponibilidade genérica.",
+      "Confundir encoding com criptografia: Base64 é reversível por qualquer pessoa.",
       "Não correlacionar logs de WAF, IAM e aplicação.",
       "Não controlar expiração e rotação de certificados."
     ],
@@ -361,13 +219,19 @@
         "name": "TLS mal validado",
         "description": "Clientes ignoram validação de certificado ou aceitam CA incorreta.",
         "defensiveExplanation": "Isso enfraquece a garantia de identidade do servidor.",
-        "mitigation": "Corrigir cadeia, SNI, SAN, CA corporativa e automação de renovação."
+        "mitigation": "Corrigir cadeia, SNI, SAN e CA corporativa; manter inventário de certificados com renovação automática e monitoramento de validade."
       },
       {
         "name": "CORS permissivo",
         "description": "Aplicação permite origins amplas e credenciais indevidas.",
         "defensiveExplanation": "Pode ampliar exposição em aplicações web.",
         "mitigation": "Origins explícitas, revisão de credenciais e testes defensivos."
+      },
+      {
+        "name": "WAF mal calibrado",
+        "description": "Regras do WAF bloqueiam requisições legítimas com 403 ou deixam passar payloads perigosos.",
+        "defensiveExplanation": "O erro de calibração causa indisponibilidade aparente para usuários legítimos ou exposição da aplicação.",
+        "mitigation": "Começar em modo monitorado, fazer tuning, testes controlados e revisão periódica das regras."
       },
       {
         "name": "Erro verboso",
@@ -378,7 +242,7 @@
     ],
     "monitoring": [
       "Logs de WAF, proxy, gateway, aplicação e IAM.",
-      "Taxa de 401, 403, 404, 429 e 5xx.",
+      "Taxa de 401, 403, 404, 429 e 5xx: erros nas camadas superiores derrubam o serviço sem gerar tráfego anormal na rede.",
       "Falhas TLS e certificados próximos do vencimento.",
       "Uso anormal de tokens ou sessões."
     ],
@@ -415,20 +279,19 @@
     },
     {
       "type": "diagnóstico",
-      "question": "Um curl retorna 403. Quais hipóteses você testaria antes de culpar roteamento?",
+      "question": "Um usuário faz login no portal, navega normalmente por um tempo e de repente toda requisição passa a retornar 401, sem nenhuma mudança de rede. Que hipóteses e evidências você procuraria antes de abrir chamado para a equipe de redes?",
       "hints": [
-        "403 é resposta de aplicação/política.",
-        "Procure WAF, API gateway e autorização."
+        "Funcionou antes: o que tem prazo de validade?",
+        "Pense em sessão, cookie, token e relógio do IdP."
       ],
       "expectedIdeas": [
-        "WAF",
-        "permissão",
-        "escopo",
-        "token",
-        "política",
-        "logs"
+        "sessão expirada",
+        "token expirado",
+        "cookie ausente ou bloqueado (SameSite)",
+        "relógio do IdP dessincronizado",
+        "logs do IdP e da aplicação"
       ],
-      "explanation": "Se há 403, algum componente de aplicação respondeu. Isso é diferente de timeout ou porta fechada."
+      "explanation": "401 depois de um período funcionando aponta para a Camada 5: o contexto (sessão ou token) expirou ou deixou de ser enviado. A rede está entregando as respostas; a evidência está no IdP, nos cookies e nos logs de autenticação."
     },
     {
       "type": "cenário real",
@@ -450,93 +313,93 @@
   "quiz": [
     {
       "id": "q2.7.1",
-      "type": "conceito",
-      "q": "Qual é a melhor descrição para as camadas superiores do OSI no diagnóstico prático?",
-      "opts": [
+      "question": "Qual é a melhor descrição para as camadas superiores do OSI no diagnóstico prático?",
+      "options": [
+        "Elas decidem o caminho dos pacotes entre redes diferentes.",
         "Elas tratam sessão, representação dos dados e protocolos de aplicação.",
-        "Elas substituem TCP e UDP.",
-        "Elas são usadas apenas em redes sem fio.",
-        "Elas só servem para cabeamento."
+        "Elas entregam os bytes à porta correta do serviço.",
+        "Elas definem o endereçamento físico (MAC) no segmento local."
       ],
-      "a": 0,
-      "exp": "Sessão, apresentação e aplicação ajudam a organizar contexto, formato, TLS, HTTP, APIs e erros de aplicação.",
+      "answer": 1,
+      "explanation": "Sessão, apresentação e aplicação organizam contexto, formato, TLS, HTTP e APIs. Caminho entre redes é Camada 3, entrega à porta é Camada 4 e MAC é Camada 2.",
+      "topic": "modelo osi",
       "difficulty": "iniciante",
-      "topic": "modelo osi"
+      "type": "conceito"
     },
     {
       "id": "q2.7.2",
-      "type": "diagnóstico",
-      "q": "TCP/443 conecta, mas o navegador alerta certificado expirado. Onde investigar primeiro?",
-      "opts": [
-        "Camada física",
-        "Camada de apresentação/TLS",
-        "ARP",
-        "Gateway padrão"
+      "question": "TCP/443 conecta, mas o navegador alerta certificado expirado. Onde investigar primeiro?",
+      "options": [
+        "Camada 4: porta 443 bloqueada no firewall",
+        "Camada 3: rota até o servidor",
+        "Camada de apresentação/TLS: validade e cadeia do certificado",
+        "Camada 7: permissão do usuário na aplicação"
       ],
-      "a": 1,
-      "exp": "A conectividade TCP existe; o erro aponta para validação de certificado/TLS.",
+      "answer": 2,
+      "explanation": "Se o TCP/443 conectou, porta e rota funcionam. O alerta de certificado expirado aponta para a validação TLS; autorização só entraria depois de um canal TLS confiável.",
+      "topic": "tls",
       "difficulty": "iniciante-intermediário",
-      "topic": "tls"
+      "type": "diagnóstico"
     },
     {
       "id": "q2.7.3",
-      "type": "segurança",
-      "q": "Por que Base64 não deve ser tratado como proteção de segredo?",
-      "opts": [
-        "Porque é apenas uma representação reversível de bytes/texto.",
-        "Porque só funciona em roteadores Cisco.",
-        "Porque exige fibra óptica.",
-        "Porque bloqueia DNS."
+      "question": "Por que Base64 não deve ser tratado como proteção de segredo?",
+      "options": [
+        "Porque é apenas uma representação reversível de bytes em texto, sem chave.",
+        "Porque usa uma chave curta que pode ser quebrada por força bruta.",
+        "Porque protege o dado em trânsito, mas não em repouso.",
+        "Porque comprime o dado e perde parte da informação."
       ],
-      "a": 0,
-      "exp": "Base64 codifica; não criptografa nem protege confidencialidade.",
+      "answer": 0,
+      "explanation": "Base64 codifica, não criptografa: não há chave, e qualquer pessoa decodifica o valor. Não protege confidencialidade nem em trânsito nem em repouso.",
+      "topic": "encoding",
       "difficulty": "iniciante",
-      "topic": "encoding"
+      "type": "segurança"
     },
     {
       "id": "q2.7.4",
-      "type": "cenário",
-      "q": "Uma API retorna HTTP 401. Qual hipótese é mais provável?",
-      "opts": [
-        "Falha de autenticação ou credencial ausente/expirada.",
-        "Cabo desconectado necessariamente.",
-        "TTL zerado necessariamente.",
-        "Switch sem tabela MAC necessariamente."
+      "question": "Uma API retorna HTTP 401. Qual hipótese é mais provável?",
+      "options": [
+        "Erro interno no backend da aplicação.",
+        "Porta 443 fechada no firewall.",
+        "Recurso inexistente no servidor.",
+        "Falha de autenticação: credencial ausente, inválida ou expirada."
       ],
-      "a": 0,
-      "exp": "401 está ligado a autenticação. A rede pode estar entregando a resposta normalmente.",
+      "answer": 3,
+      "explanation": "401 está ligado a autenticação, e o fato de haver resposta HTTP mostra que a rede entregou a requisição. Porta fechada não geraria resposta HTTP; recurso inexistente é 404 e erro interno é 500.",
+      "topic": "http",
       "difficulty": "iniciante",
-      "topic": "http"
+      "type": "cenário"
     },
     {
       "id": "q2.7.5",
-      "type": "comparação",
-      "q": "Qual diferença prática entre 401 e 403?",
-      "opts": [
+      "question": "Qual diferença prática entre 401 e 403?",
+      "options": [
+        "401 aponta autorização negada; 403 aponta credencial ausente.",
         "401 aponta autenticação; 403 aponta autorização ou política negada.",
-        "401 é Camada 1; 403 é Camada 2.",
-        "401 só ocorre em UDP; 403 só em ICMP.",
-        "Não existe diferença."
+        "401 indica recurso inexistente; 403 indica erro interno do servidor.",
+        "Ambos indicam que a conexão TCP foi recusada."
       ],
-      "a": 0,
-      "exp": "Essa distinção ajuda a acionar IAM, aplicação ou política correta.",
+      "answer": 1,
+      "explanation": "401: o serviço não sabe quem você é (credencial ausente ou inválida). 403: sabe, mas a política nega. A distinção indica se você aciona IAM/credencial ou permissão, WAF e gateway.",
+      "topic": "status http",
       "difficulty": "iniciante-intermediário",
-      "topic": "status http"
+      "type": "comparação"
     },
     {
       "id": "q2.7.6",
-      "type": "devsecops",
-      "q": "Em uma pipeline, usar curl -k permanentemente para resolver erro TLS é uma má prática porque:",
-      "opts": [
-        "Ignora validação de certificado e pode mascarar problema de confiança.",
-        "Aumenta automaticamente a banda da rede.",
-        "Desativa TCP.",
-        "Remove a necessidade de autenticação forte."
+      "question": "Em uma pipeline, usar curl -k permanentemente para resolver erro TLS é uma má prática porque:",
+      "options": [
+        "Faz o servidor deixar de exigir autenticação.",
+        "Desativa a criptografia e envia os dados em texto claro.",
+        "Ignora a validação do certificado e pode mascarar interceptação ou erro de confiança.",
+        "Faz o curl ignorar o status HTTP da resposta."
       ],
-      "a": 0,
-      "exp": "-k deve ser usado apenas em diagnóstico controlado. A correção real é ajustar confiança/certificado.",
+      "answer": 2,
+      "explanation": "Com -k o canal continua criptografado, mas o cliente deixa de verificar a identidade do servidor. Use só em diagnóstico controlado; a correção é ajustar CA, cadeia, SAN, SNI ou renovação.",
+      "topic": "pipeline",
       "difficulty": "intermediário",
-      "topic": "pipeline"
+      "type": "devsecops"
     }
   ],
   "flashcards": [
@@ -571,23 +434,24 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc2.7.4",
-      "front": "Porta 443 aberta garante aplicação funcionando?",
-      "back": "Não. Ainda podem falhar TLS, HTTP, sessão, autenticação, autorização, WAF ou backend.",
+      "id": "fc2.7.7",
+      "front": "HTTP 200 garante que a operação deu certo?",
+      "back": "Não. Indica que a requisição HTTP foi processada; o resultado de negócio ainda pode estar errado. Confira payload e logs da aplicação.",
       "tags": [
+        "http",
         "troubleshooting"
       ],
-      "difficulty": "iniciante"
+      "difficulty": "iniciante-intermediário"
     },
     {
-      "id": "fc2.7.5",
-      "front": "Base64 é criptografia?",
-      "back": "Não. É codificação/representação textual de bytes e pode ser revertida facilmente.",
+      "id": "fc2.7.8",
+      "front": "Para que serve o SAN de um certificado?",
+      "back": "Lista os nomes de domínio que o certificado cobre. Se o nome acessado não estiver no SAN, a validação TLS falha mesmo com TCP/443 aberto.",
       "tags": [
-        "segurança",
-        "encoding"
+        "tls",
+        "certificado"
       ],
-      "difficulty": "iniciante"
+      "difficulty": "iniciante-intermediário"
     },
     {
       "id": "fc2.7.6",
@@ -601,13 +465,6 @@
     }
   ],
   "exercises": [
-    {
-      "id": "ex2.7.1",
-      "type": "conceitual",
-      "prompt": "Explique por que um erro de certificado não deve ser tratado como simples falha de roteamento.",
-      "expectedAnswer": "Porque a conexão pode chegar ao servidor e abrir TCP/443, mas a validação de identidade/confiança em TLS falha na camada de apresentação/segurança.",
-      "explanation": "Roteamento leva ao destino; certificado valida confiança e identidade."
-    },
     {
       "id": "ex2.7.2",
       "type": "diagnóstico",

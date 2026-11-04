@@ -1,14 +1,14 @@
 <section class="lesson-section lesson-section--architecture">
-  <h2>7. Arquitetura</h2>
-  <p>Em uma arquitetura moderna, as camadas superiores aparecem em muitos componentes além do servidor final.</p>
+  <h2>Arquitetura</h2>
+  <p>As camadas superiores aparecem em vários componentes além do servidor final, e cada um pode ser a origem da resposta que você vê:</p>
   <ul>
-    <li><strong>Navegador ou cliente:</strong> monta requisição, mantém cookies, valida certificado e interpreta resposta.</li>
-    <li><strong>Proxy corporativo:</strong> registra, filtra, autentica ou inspeciona tráfego conforme política.</li>
+    <li><strong>Navegador ou cliente:</strong> monta a requisição, mantém cookies, valida o certificado e interpreta a resposta.</li>
+    <li><strong>Proxy corporativo:</strong> registra, filtra, autentica ou inspeciona o tráfego conforme a política.</li>
     <li><strong>WAF:</strong> avalia padrões de requisição e pode bloquear tráfego de aplicação.</li>
-    <li><strong>Load balancer:</strong> termina TLS, distribui tráfego e realiza health checks.</li>
+    <li><strong>Load balancer:</strong> termina TLS, distribui tráfego e faz health checks.</li>
     <li><strong>API gateway:</strong> valida rotas, quotas, tokens, headers e versões de API.</li>
     <li><strong>IdP/IAM:</strong> emite tokens, valida sessão e aplica políticas de acesso.</li>
     <li><strong>Aplicação:</strong> interpreta método, path, payload, regras de negócio e autorização.</li>
   </ul>
-  <p>Em cloud, esses elementos podem ser serviços gerenciados. Em DevSecOps, eles viram configuração declarativa em Terraform, Helm, Kubernetes Ingress, Gateway API, annotations, secrets, certificados e policies.</p>
+  <p>Em cloud, esses elementos costumam ser serviços gerenciados. Em DevSecOps, viram configuração declarativa em Terraform, Helm, Kubernetes Ingress, Gateway API, annotations, secrets, certificados e policies.</p>
 </section>
