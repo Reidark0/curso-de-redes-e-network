@@ -1,0 +1,71 @@
+{
+  "id": "0.10",
+  "versao": "nova",
+  "titulo": "Revisão do Módulo 0",
+  "tipo": "ligação/revisão",
+  "palavras": {
+    "visiveis": 4107,
+    "invisiveis": 44,
+    "teoriaVisivel": 2480
+  },
+  "porCampoVisivel": {
+    "content.motivation": 112,
+    "content.problem": 141,
+    "content.concept": 516,
+    "content.internals": 274,
+    "content.analogy": 87,
+    "content.simpleExample": 102,
+    "content.enterpriseExample": 101,
+    "content.devsecopsExample": 139,
+    "content.securityExample": 100,
+    "content.diagram": 1,
+    "content.summary": 84,
+    "content.nextTheme": 50,
+    "security": 211,
+    "troubleshooting": 358,
+    "glossary": 204,
+    "title+subtitle": 19,
+    "objectives": 61,
+    "learningOutcomes": 75,
+    "quiz": 483,
+    "flashcards": 133,
+    "mentorQuestions": 157,
+    "exercises": 230,
+    "challenge": 177,
+    "commentedSolution": 184,
+    "references": 63,
+    "linksToOtherCourses": 45
+  },
+  "porCampoInvisivel": {
+    "networkContext": 44
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "70-100 min",
+    "estimatedStudyTimeMinutes": 100,
+    "M": 85,
+    "T": 82.1,
+    "partes": {
+      "teoria": 19.1,
+      "diagramas": 3,
+      "quiz": 7,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "70-100 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 27
+  }
+}

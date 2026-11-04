@@ -3,7 +3,7 @@
   "moduleId": "m00",
   "order": 10,
   "title": "Revisão do Módulo 0",
-  "subtitle": "Mapa mental, checklist, simulado e preparação para começar Fundamentos de Redes com uma base sólida.",
+  "subtitle": "Mapa mental, pares que confundem, checklist de prontidão e prática para começar Fundamentos de Redes.",
   "duration": "70-100 min",
   "estimatedStudyTimeMinutes": 100,
   "difficulty": "iniciante-intermediário",
@@ -137,74 +137,6 @@
       "Troubleshooting"
     ]
   },
-  "deepDive": {
-    "mentalModel": "O Módulo 0 deve ser lembrado como uma cadeia de transformação: informação -> representação -> codificação -> sinal -> métrica -> protocolo -> camada -> evidência -> decisão.",
-    "keyTerms": [
-      "informação",
-      "bit",
-      "byte",
-      "hexadecimal",
-      "UTF-8",
-      "Base64",
-      "sinal",
-      "latência",
-      "throughput",
-      "protocolo",
-      "camada",
-      "evidência"
-    ],
-    "limitations": [
-      "A revisão não substitui a prática futura com Packet Tracer, Wireshark, Linux, Windows e equipamentos de rede.",
-      "O Módulo 0 prepara o raciocínio, mas ainda não ensina profundamente Ethernet, IP, TCP, DNS ou HTTP.",
-      "Saber comandos isolados não garante diagnóstico; é preciso interpretar evidências no contexto correto."
-    ],
-    "whenToUse": [
-      "Antes de iniciar o Módulo 1.",
-      "Quando um conceito posterior parecer abstrato demais.",
-      "Quando aparecer confusão entre bit e byte, encoding e criptografia, banda e throughput, protocolo e aplicação.",
-      "Quando precisar organizar um diagnóstico por camadas."
-    ],
-    "whenNotToUse": [
-      "Não use a revisão como desculpa para adiar prática real indefinidamente.",
-      "Não tente decorar todos os detalhes; foque relações e aplicação.",
-      "Não pule para módulos avançados se os conceitos desta revisão ainda estiverem confusos."
-    ],
-    "operationalImpact": [
-      "Melhora a qualidade de chamados, relatórios e comunicação entre times.",
-      "Reduz diagnósticos baseados em achismo.",
-      "Ajuda a escolher o próximo teste em vez de executar comandos aleatórios."
-    ],
-    "financialImpact": [
-      "Ajuda a evitar compras ou mudanças erradas, como aumentar banda quando o problema é latência, DNS, aplicação ou autenticação.",
-      "Ajuda a interpretar custos de tráfego, logs e serviços cloud posteriormente.",
-      "Reduz tempo improdutivo ao acelerar triagem inicial."
-    ],
-    "securityImpact": [
-      "Ajuda a evitar exposição de segredo codificado como se fosse criptografado.",
-      "Ajuda a registrar evidências sem vazar dados sensíveis.",
-      "Ajuda a diferenciar falha de conectividade, autenticação, autorização e política."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Achar que revisão é apenas reler conteúdo.",
-      "whyItHappens": "É mais confortável reler do que produzir respostas e resolver cenários.",
-      "consequence": "O aluno sente familiaridade, mas não consegue aplicar.",
-      "correction": "Responder exercícios, explicar em voz alta e montar mapas de relação."
-    },
-    {
-      "mistake": "Confundir termos parecidos.",
-      "whyItHappens": "Bit/byte, encoding/criptografia, latência/throughput e protocolo/aplicação aparecem juntos.",
-      "consequence": "Diagnósticos e decisões técnicas ficam errados.",
-      "correction": "Criar tabela de contraste e usar exemplos práticos."
-    },
-    {
-      "mistake": "Pular camadas no diagnóstico.",
-      "whyItHappens": "O sintoma visível geralmente aparece na aplicação.",
-      "consequence": "A pessoa culpa aplicação, DNS ou firewall sem evidência.",
-      "correction": "Começar por perguntas simples e subir a pilha com evidências."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "O aluno não consegue explicar a diferença entre Mbps e MB/s.",
@@ -222,23 +154,23 @@
       {
         "platform": "Windows",
         "command": "ipconfig /all\nping 8.8.8.8\ntracert 8.8.8.8\nTest-NetConnection example.com -Port 443",
-        "purpose": "Revisar coleta básica de IP, gateway, DNS, RTT, caminho e porta.",
+        "purpose": "Revisar a coleta básica de IP, gateway, DNS, RTT, caminho e porta (o último comando roda no PowerShell).",
         "expectedObservation": "Endereço local, gateway, servidores DNS, respostas ICMP ou falhas, caminho e teste TCP.",
         "interpretation": "Essas evidências ajudam a separar configuração local, caminho, latência e porta, mas não provam autorização nem saúde da aplicação."
       },
       {
         "platform": "Linux",
         "command": "ip addr\nip route\nping -c 4 8.8.8.8\ntraceroute 8.8.8.8\ncurl -I https://example.com",
-        "purpose": "Revisar coleta básica em Linux.",
+        "purpose": "Revisar a mesma coleta básica em Linux.",
         "expectedObservation": "Interfaces, rota default, RTT, caminho e headers HTTP.",
-        "interpretation": "Permite relacionar camada local, rede, transporte e aplicação de forma inicial."
+        "interpretation": "ip addr mostra interfaces e IPs; ip route, a rota default (gateway); ping, RTT e perda; traceroute, o caminho e onde o atraso aparece; curl -I, o código de status HTTP (ex.: 200, 403) e os headers. Nenhum deles prova autorização do usuário nem saúde completa da aplicação."
       },
       {
         "platform": "Cisco IOS",
         "command": "show ip interface brief\nshow interfaces status\nshow running-config | include hostname",
         "purpose": "Revisar a ideia de estado de interface e evidência em equipamento de rede.",
-        "expectedObservation": "Interfaces, estado operacional, IPs configurados e identificação do dispositivo.",
-        "interpretation": "Ajuda a entender que equipamentos também fornecem evidências por camada."
+        "expectedObservation": "Lista de interfaces com IP, Status e Protocol; em switches Catalyst, show interfaces status mostra connected/notconnect, VLAN, duplex e velocidade; e o hostname do equipamento.",
+        "interpretation": "up/up indica camadas 1 e 2 ativas; administratively down indica interface desligada por shutdown; down/down aponta para cabo, porta ou o equipamento do outro lado. Equipamentos de rede também fornecem evidências por camada."
       }
     ],
     "decisionTree": [
@@ -262,11 +194,10 @@
   },
   "security": {
     "goodPractices": [
-      "Sanitizar evidências antes de compartilhar.",
+      "Sanitizar evidências antes de compartilhar: mascarar tokens, IPs internos, nomes de hosts e dados pessoais em prints.",
       "Diferenciar codificação de criptografia.",
-      "Registrar hipóteses e limites do teste.",
-      "Usar testes autorizados, mínimos e defensivos.",
-      "Evitar expor tokens, IPs internos, nomes de hosts e dados pessoais em prints."
+      "Registrar hipóteses e limites de cada teste.",
+      "Usar testes autorizados, mínimos e defensivos."
     ],
     "badPractices": [
       "Abrir regra ampla de firewall só para testar sem justificativa.",
@@ -278,8 +209,7 @@
     "commonErrors": [
       "Confundir disponibilidade com autorização.",
       "Confundir encoding com criptografia.",
-      "Confundir ping bem-sucedido com aplicação saudável.",
-      "Confundir largura de banda nominal com throughput útil."
+      "Confundir ping bem-sucedido com aplicação saudável."
     ],
     "vulnerabilities": [
       {
@@ -306,7 +236,6 @@
       "Mascaramento de logs",
       "Menor privilégio",
       "Segregação de ambientes",
-      "Runbooks de diagnóstico",
       "Revisão de evidências antes de compartilhamento"
     ],
     "detectionIdeas": [
@@ -331,7 +260,7 @@
         "protocolos",
         "métricas"
       ],
-      "explanation": "A resposta ideal conecta fundamento com trabalho real."
+      "explanation": "A resposta ideal liga um fundamento a uma situação real de trabalho (ex.: Base64 num log, 403 num pipeline), em vez de só citar o conceito mais difícil."
     },
     {
       "type": "diagnóstico",
@@ -371,94 +300,109 @@
   ],
   "quiz": [
     {
-      "id": "q0.10.1",
-      "type": "conceito",
-      "q": "Qual frase resume melhor o Módulo 0?",
-      "opts": [
-        "Ele ensina a base de representação, transmissão, medição, protocolo e diagnóstico antes das redes.",
-        "Ele substitui o estudo de Ethernet e IP.",
-        "Ele ensina apenas comandos de terminal.",
-        "Ele ensina apenas história da computação."
-      ],
-      "a": 0,
-      "exp": "O módulo prepara a base mental para estudar redes, não substitui os módulos técnicos seguintes.",
-      "difficulty": "iniciante",
-      "topic": "síntese"
-    },
-    {
       "id": "q0.10.2",
-      "type": "segurança",
-      "q": "Por que Base64 não deve ser tratado como proteção de segredo?",
-      "opts": [
-        "Porque é uma codificação reversível, não criptografia.",
+      "question": "Por que Base64 não deve ser tratado como proteção de segredo?",
+      "options": [
         "Porque só funciona em Linux.",
+        "Porque é uma codificação reversível, não criptografia.",
         "Porque altera a senha permanentemente.",
         "Porque impede leitura por aplicações."
       ],
-      "a": 0,
-      "exp": "Base64 representa bytes em texto e pode ser revertido facilmente.",
+      "answer": 1,
+      "explanation": "Base64 representa bytes em texto e pode ser revertido facilmente.",
+      "topic": "codificação",
       "difficulty": "iniciante",
-      "topic": "codificação"
+      "type": "segurança"
     },
     {
       "id": "q0.10.3",
-      "type": "diagnóstico",
-      "q": "Ping para um destino responde. O que isso NÃO prova sozinho?",
-      "opts": [
-        "Que a aplicação web está saudável e que o usuário tem autorização.",
-        "Que há algum tipo de conectividade ICMP.",
+      "question": "Ping para um destino responde. O que isso NÃO prova sozinho?",
+      "options": [
         "Que houve resposta dentro de certo tempo.",
-        "Que o destino respondeu ao ICMP, se não houver bloqueio intermediário."
+        "Que há algum tipo de conectividade ICMP.",
+        "Que a aplicação web está saudável e que o usuário tem autorização.",
+        "Que o destino estava alcançável por ICMP naquele momento."
       ],
-      "a": 0,
-      "exp": "Ping pode indicar conectividade básica, mas não prova HTTP, TLS, login, autorização ou saúde da aplicação.",
+      "answer": 2,
+      "explanation": "Ping pode indicar conectividade básica, mas não prova HTTP, TLS, login, autorização ou saúde da aplicação.",
+      "topic": "troubleshooting",
       "difficulty": "intermediário",
-      "topic": "troubleshooting"
+      "type": "diagnóstico"
     },
     {
       "id": "q0.10.4",
-      "type": "comparação",
-      "q": "Qual é a diferença prática entre largura de banda e throughput?",
-      "opts": [
-        "Largura de banda é capacidade nominal; throughput é vazão útil observada.",
-        "São sempre exatamente iguais.",
-        "Throughput só existe em Wi-Fi.",
-        "Largura de banda mede apenas latência."
+      "question": "Qual é a diferença prática entre largura de banda e throughput?",
+      "options": [
+        "Largura de banda é a capacidade nominal; throughput é a vazão útil observada.",
+        "Largura de banda é a vazão medida no download; throughput é o tempo de resposta do servidor.",
+        "Throughput é a capacidade contratada do link; largura de banda é o que sobra depois do overhead.",
+        "Largura de banda mede atraso em ms; throughput mede perda de pacotes."
       ],
-      "a": 0,
-      "exp": "Throughput real sofre impacto de overhead, congestionamento, servidor, cliente, Wi-Fi, proxy e outras condições.",
+      "answer": 0,
+      "explanation": "Throughput real sofre impacto de overhead, congestionamento, servidor, cliente, Wi-Fi, proxy e outras condições.",
+      "topic": "métricas",
       "difficulty": "iniciante-intermediário",
-      "topic": "métricas"
+      "type": "comparação"
     },
     {
       "id": "q0.10.5",
-      "type": "camadas",
-      "q": "Qual atitude representa melhor pensamento em camadas?",
-      "opts": [
-        "Separar hipóteses físicas, rede, transporte, aplicação, identidade e política antes de concluir.",
-        "Culpar DNS em todos os casos.",
-        "Abrir qualquer regra de firewall para testar.",
-        "Ignorar evidências locais."
+      "question": "Qual atitude representa melhor pensamento em camadas?",
+      "options": [
+        "Liberar temporariamente o firewall para eliminar a camada de política e simplificar o teste.",
+        "Começar pela aplicação, porque é onde o usuário vê o erro, e só olhar a rede se o log da aplicação estiver limpo.",
+        "Rodar todos os comandos disponíveis de uma vez e escolher a causa que aparecer em mais saídas.",
+        "Separar hipóteses físicas, de rede, transporte, aplicação, identidade e política e testar cada uma com evidência antes de concluir."
       ],
-      "a": 0,
-      "exp": "Pensar em camadas é organizar investigação por dependências e evidências.",
+      "answer": 3,
+      "explanation": "Pensar em camadas é organizar investigação por dependências e evidências.",
+      "topic": "camadas",
       "difficulty": "iniciante",
-      "topic": "camadas"
+      "type": "camadas"
     },
     {
       "id": "q0.10.6",
-      "type": "cenário",
-      "q": "Um pipeline falha com HTTP 403. Qual conclusão é mais segura inicialmente?",
-      "opts": [
-        "Há resposta do serviço, mas pode haver problema de autorização, política, identidade ou escopo de credencial.",
+      "question": "Um pipeline falha com HTTP 403. Qual conclusão é mais segura inicialmente?",
+      "options": [
         "A rede física certamente caiu.",
+        "Há resposta do serviço, mas pode haver problema de autorização, política, identidade ou escopo de credencial.",
         "O DNS certamente está quebrado.",
         "A largura de banda está insuficiente."
       ],
-      "a": 0,
-      "exp": "403 indica resposta HTTP de negação; não deve ser confundido automaticamente com queda de rede.",
+      "answer": 1,
+      "explanation": "403 indica resposta HTTP de negação; não deve ser confundido automaticamente com queda de rede.",
+      "topic": "DevSecOps",
       "difficulty": "intermediário",
-      "topic": "DevSecOps"
+      "type": "cenário"
+    },
+    {
+      "id": "q0.10.7",
+      "type": "cálculo",
+      "question": "Um link de 200 Mbps está livre. Qual é o máximo teórico de download em MB/s, antes do overhead?",
+      "options": [
+        "1.600 MB/s",
+        "200 MB/s",
+        "25 MB/s",
+        "20 MB/s"
+      ],
+      "answer": 2,
+      "explanation": "1 byte = 8 bits, então 200 ÷ 8 = 25 MB/s. Na prática o throughput fica abaixo disso por overhead, Wi-Fi, servidor remoto e congestionamento.",
+      "difficulty": "iniciante",
+      "topic": "métricas"
+    },
+    {
+      "id": "q0.10.8",
+      "type": "cenário",
+      "question": "Um download grande atinge quase toda a velocidade contratada, mas um sistema web interativo demora a responder a cada clique. Qual métrica investigar primeiro?",
+      "options": [
+        "Volume transferido, porque arquivos grandes sempre deixam o link lento.",
+        "Largura de banda, porque é preciso contratar um link maior.",
+        "Throughput, porque o download está muito abaixo do plano.",
+        "Latência (RTT), porque o sintoma é tempo de resposta, não capacidade."
+      ],
+      "answer": 3,
+      "explanation": "Se o download usa quase toda a banda, capacidade não é o gargalo. Muitas idas e voltas pequenas sofrem com latência: investigue RTT, DNS e o tempo de resposta da aplicação.",
+      "difficulty": "iniciante-intermediário",
+      "topic": "métricas"
     }
   ],
   "flashcards": [
@@ -472,12 +416,11 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc0.10.2",
-      "front": "Base64 é criptografia?",
-      "back": "Não. É codificação reversível para representar bytes como texto.",
+      "id": "fc0.10.7",
+      "front": "Perda × jitter: qual a diferença?",
+      "back": "Perda é o percentual de pacotes que não chegam; jitter é a variação da latência entre pacotes. Os dois degradam voz e vídeo mesmo com banda sobrando.",
       "tags": [
-        "segurança",
-        "base64"
+        "métricas"
       ],
       "difficulty": "iniciante"
     },
@@ -529,8 +472,8 @@
     {
       "id": "ex0.10.2",
       "type": "comparação",
-      "prompt": "Compare latência, largura de banda e throughput em uma tabela de três linhas.",
-      "expectedAnswer": "Latência mede tempo; largura de banda mede capacidade nominal; throughput mede vazão útil observada.",
+      "prompt": "Monte uma tabela com latência, largura de banda, throughput, perda e jitter: o que cada um mede e um sintoma típico.",
+      "expectedAnswer": "Latência: tempo de ida e volta (RTT, em ms); sintoma: resposta demorada a cada clique. Largura de banda: capacidade nominal do link (Mbps); sintoma: link saturado no horário de pico. Throughput: vazão útil observada; sintoma: download abaixo do plano por overhead, Wi-Fi ou servidor. Perda: pacotes que não chegam (%); sintoma: retransmissões e chamadas cortando. Jitter: variação da latência; sintoma: áudio e vídeo picotando.",
       "explanation": "Essa comparação evita o erro de chamar qualquer lentidão de falta de banda."
     },
     {

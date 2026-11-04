@@ -1,7 +1,7 @@
 <section class="lesson-section lesson-section--internals">
-  <h2>6. Funcionamento interno</h2>
+  <h2>Funcionamento interno</h2>
   <p>
-    O funcionamento interno do raciocínio do Módulo 0 pode ser visto como uma cadeia. Cada etapa depende da anterior, mas adiciona um novo tipo de pergunta.
+    O raciocínio do Módulo 0 é uma cadeia: cada etapa depende da anterior e acrescenta um novo tipo de pergunta. É o primeiro ensaio do que você fará em redes, decompor um sistema complexo em partes observáveis e testáveis.
   </p>
   <ol class="flow-list">
     <li><strong>Informação:</strong> o que queremos representar? Um número, um texto, uma imagem, uma instrução, um pacote, uma credencial?</li>
@@ -14,7 +14,16 @@
     <li><strong>Camada:</strong> em qual nível da pilha a evidência aponta uma falha?</li>
     <li><strong>Segurança:</strong> quais dados podem vazar, ser adulterados, mal interpretados ou registrados indevidamente?</li>
   </ol>
-  <p>
-    Esse fluxo é o primeiro ensaio do que você fará em redes: decompor sistemas complexos em partes observáveis e testáveis.
-  </p>
+
+  <h3>Checklist de prontidão para o Módulo 1</h3>
+  <p>Marque só o que você consegue fazer sem consultar. Cada item que travar é uma lacuna de fundamento: volte à aula indicada antes de avançar.</p>
+  <ul>
+    <li>Explicar a diferença entre informação, dado, bit, byte, sinal e interpretação (0.1, 0.2, 0.5).</li>
+    <li>Ler um byte em binário, decimal e hexadecimal (0.2).</li>
+    <li>Dizer por que Base64 não é criptografia e por que isso importa em segurança (0.3).</li>
+    <li>Converter Mbps em MB/s e estimar o tempo de uma transferência, lembrando do overhead (0.4).</li>
+    <li>Diferenciar latência, largura de banda, throughput, perda e jitter num cenário real (0.6).</li>
+    <li>Explicar protocolo como contrato e dizer o que um teste prova e o que não prova (0.7, 0.9).</li>
+    <li>Montar um diagnóstico inicial por camadas sem pular direto para a conclusão (0.8).</li>
+  </ul>
 </section>
