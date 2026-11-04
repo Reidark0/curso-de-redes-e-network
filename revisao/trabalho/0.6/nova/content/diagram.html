@@ -1,0 +1,45 @@
+
+<section class="lesson-section lesson-section--diagram">
+  <h2>14. Diagrama SVG</h2>
+  <svg class="lesson-svg" viewBox="0 0 980 420" role="img" aria-labelledby="m00l06-title m00l06-desc">
+    <title id="m00l06-title">Latência, largura de banda e throughput em um caminho de rede</title>
+    <desc id="m00l06-desc">O diagrama mostra um cliente acessando uma aplicação cloud através de Wi-Fi, firewall, internet e load balancer, destacando latência, largura de banda, throughput, perda e filas.</desc>
+    <defs>
+      <marker id="m00l06-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
+      </marker>
+    </defs>
+    <rect x="30" y="150" width="130" height="70" rx="12" class="svg-node svg-node--client" />
+    <text x="95" y="180" text-anchor="middle" class="svg-label">Cliente</text>
+    <text x="95" y="203" text-anchor="middle" class="svg-label svg-label--small">Wi-Fi/cabo</text>
+    <rect x="210" y="150" width="130" height="70" rx="12" class="svg-node svg-node--firewall" />
+    <text x="275" y="180" text-anchor="middle" class="svg-label">Firewall</text>
+    <text x="275" y="203" text-anchor="middle" class="svg-label svg-label--small">fila/inspeção</text>
+    <rect x="405" y="150" width="150" height="70" rx="12" class="svg-node svg-node--router" />
+    <text x="480" y="180" text-anchor="middle" class="svg-label">Internet/WAN</text>
+    <text x="480" y="203" text-anchor="middle" class="svg-label svg-label--small">RTT + perda</text>
+    <rect x="625" y="150" width="130" height="70" rx="12" class="svg-node svg-node--cloud" />
+    <text x="690" y="180" text-anchor="middle" class="svg-label">Load balancer</text>
+    <text x="690" y="203" text-anchor="middle" class="svg-label svg-label--small">cloud</text>
+    <rect x="820" y="150" width="130" height="70" rx="12" class="svg-node svg-node--server" />
+    <text x="885" y="180" text-anchor="middle" class="svg-label">Aplicação</text>
+    <text x="885" y="203" text-anchor="middle" class="svg-label svg-label--small">resposta</text>
+    <line x1="160" y1="185" x2="210" y2="185" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l06-arrow)" />
+    <line x1="340" y1="185" x2="405" y2="185" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l06-arrow)" />
+    <line x1="555" y1="185" x2="625" y2="185" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l06-arrow)" />
+    <line x1="755" y1="185" x2="820" y2="185" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l06-arrow)" />
+    <path d="M885 235 C700 330 310 330 95 235" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m00l06-arrow)" />
+    <rect x="70" y="50" width="250" height="58" rx="10" class="svg-zone" />
+    <text x="195" y="75" text-anchor="middle" class="svg-label">Largura de banda</text>
+    <text x="195" y="96" text-anchor="middle" class="svg-label svg-label--small">capacidade máxima do trecho</text>
+    <rect x="365" y="50" width="250" height="58" rx="10" class="svg-zone" />
+    <text x="490" y="75" text-anchor="middle" class="svg-label">Latência / RTT</text>
+    <text x="490" y="96" text-anchor="middle" class="svg-label svg-label--small">tempo de ida e volta</text>
+    <rect x="660" y="50" width="250" height="58" rx="10" class="svg-zone" />
+    <text x="785" y="75" text-anchor="middle" class="svg-label">Throughput</text>
+    <text x="785" y="96" text-anchor="middle" class="svg-label svg-label--small">dados úteis entregues</text>
+    <text x="275" y="265" text-anchor="middle" class="svg-label svg-label--small">fila aumenta latência</text>
+    <text x="480" y="265" text-anchor="middle" class="svg-label svg-label--small">perda reduz throughput</text>
+    <text x="690" y="265" text-anchor="middle" class="svg-label svg-label--small">processamento adiciona tempo</text>
+  </svg>
+</section>

@@ -1,0 +1,16 @@
+
+<section class="lesson-section lesson-section--concept">
+  <h2>5. Conceito</h2>
+  <div class="definition-box">
+    <strong>Definição:</strong> latência é o tempo que um dado leva para ir de um ponto a outro, geralmente observado como RTT, ou tempo de ida e volta. Largura de banda é a capacidade máxima teórica ou contratada de transmissão em um caminho. Throughput é a taxa real de dados úteis entregue em um período.
+  </div>
+  <p>
+    A diferença é simples, mas profunda. <strong>Largura de banda</strong> responde “quanto caberia por segundo?”. <strong>Throughput</strong> responde “quanto realmente passou por segundo?”. <strong>Latência</strong> responde “quanto tempo demorou para obter resposta?”. Em redes reais, essas respostas raramente são iguais.
+  </p>
+  <p>
+    Um link de 1 Gbps não garante que uma aplicação terá resposta instantânea. Ele diz que, em condições ideais e na camada correta, existe capacidade para transmitir até determinada quantidade de bits por segundo. Se o servidor está longe, se há proxy, VPN, inspeção, filas, congestionamento ou aplicação lenta, a experiência pode continuar ruim.
+  </p>
+  <p>
+    Também é importante entender <strong>jitter</strong> e <strong>perda</strong>. Jitter é a variação da latência. Para uma chamada de vídeo, latência moderada e estável pode ser melhor do que latência às vezes baixa e às vezes altíssima. Perda é quando pacotes não chegam. Em TCP, perda costuma causar retransmissão e queda de throughput. Em UDP, perda pode aparecer como áudio picotando, vídeo com artefatos ou telemetria incompleta.
+  </p>
+</section>

@@ -1,0 +1,88 @@
+{
+  "id": "0.6",
+  "versao": "original",
+  "titulo": "Latência, largura de banda e throughput",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5791,
+    "invisiveis": 673,
+    "teoriaVisivel": 3399
+  },
+  "porCampoVisivel": {
+    "content.motivation": 282,
+    "content.history": 249,
+    "content.problem": 221,
+    "content.evolution": 203,
+    "content.concept": 211,
+    "content.internals": 229,
+    "content.architecture": 169,
+    "content.analogy": 117,
+    "content.simpleExample": 135,
+    "content.enterpriseExample": 129,
+    "content.cloudExample": 115,
+    "content.devsecopsExample": 117,
+    "content.securityExample": 176,
+    "content.diagram": 3,
+    "content.summary": 74,
+    "content.nextTheme": 44,
+    "security": 344,
+    "troubleshooting": 327,
+    "glossary": 254,
+    "title+subtitle": 22,
+    "objectives": 64,
+    "learningOutcomes": 95,
+    "quiz": 322,
+    "flashcards": 132,
+    "mentorQuestions": 163,
+    "exercises": 167,
+    "challenge": 200,
+    "commentedSolution": 231,
+    "references": 72,
+    "linksToOtherCourses": 77,
+    "lab": 847
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 47,
+    "content.exercisesIntro": 24,
+    "content.challengeIntro": 28,
+    "content.solutionIntro": 21,
+    "networkContext": 49,
+    "deepDive": 367,
+    "commonMistakes": 137
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 105,
+    "alternativa_5minPasso_maisLeitura": 31.5,
+    "plausivel": false,
+    "palavras": 847
+  },
+  "duracao": {
+    "declarada": "75-105 min",
+    "estimatedStudyTimeMinutes": 105,
+    "M": 90,
+    "T": 119.7,
+    "partes": {
+      "teoria": 26.1,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 31.5
+    },
+    "faixaRecomendada": "100-145 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 24
+  }
+}
