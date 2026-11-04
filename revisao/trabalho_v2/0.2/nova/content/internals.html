@@ -8,6 +8,7 @@
   <p>
     Um octeto tem 8 posições. Da esquerda para a direita, os pesos são 128, 64, 32, 16, 8, 4, 2 e 1. Bit em 1: o peso entra na soma. Bit em 0: não entra.
   </p>
+  <div class="responsive-table">
   <table class="data-table">
     <thead>
       <tr>
@@ -47,12 +48,13 @@
       </tr>
     </tbody>
   </table>
+  </div>
   <p>
-    Na tabela, <code>11000000</code> vale 128 + 64 = 192. Da mesma forma, <code>168</code> é <code>10101000</code> (128 + 32 + 8) e <code>10</code> é <code>00001010</code> (8 + 2). Para converter de decimal para binário, percorra os pesos da esquerda para a direita: se o peso cabe no que falta, marque 1 e subtraia; se não cabe, marque 0. Os zeros à esquerda importam porque o octeto IPv4 tem tamanho fixo de 8 bits.
+    Na tabela, <code>11000000</code> vale 128 + 64 = 192. Da mesma forma, <code>168</code> é <code>10101000</code> (128 + 32 + 8) e <code>10</code> é <code>00001010</code> (8 + 2). Para converter de decimal para binário, percorra os pesos da esquerda para a direita: se o peso cabe no que falta, marque 1 e subtraia; se não cabe, marque 0.
   </p>
   <h3>Como hexadecimal compacta binário</h3>
   <p>
-    Hexadecimal trabalha em grupos de 4 bits. O binário <code>1100</code> vale 12, que em hexadecimal é <code>C</code>; <code>0000</code> vale 0. Portanto <code>11000000</code> vira <code>C0</code>, e <code>10101000</code> (<code>1010</code> = A, <code>1000</code> = 8) vira <code>A8</code>. Assim, o IPv4 <code>192.168.10.50</code> aparece em bytes como <code>C0 A8 0A 32</code>.
+    Hexadecimal trabalha em grupos de 4 bits. O binário <code>1100</code> vale 12, que em hexadecimal é <code>C</code>; <code>0000</code> vale 0. Portanto <code>11000000</code> vira <code>C0</code>, e <code>10101000</code> (<code>1010</code> = A, <code>1000</code> = 8) vira <code>A8</code>. O passo a passo:
   </p>
   <ol class="flow-list">
     <li>Separe o octeto em dois grupos de 4 bits.</li>
@@ -64,12 +66,11 @@
     No caminho inverso, de hexadecimal para decimal, multiplique o dígito da esquerda por 16 e some o da direita: <code>FF</code> = 15 × 16 + 15 = 255; <code>A8</code> = 10 × 16 + 8 = 168; <code>0A</code> = 0 × 16 + 10 = 10.
   </p>
   <div class="callout warning">
-    <strong>Erros comuns:</strong>
+    <strong>Erros comuns</strong>
     <ul>
-      <li><strong>Confundir bit com byte:</strong> leva a erros de throughput, tamanho de arquivo e capacidade contratada. Lembre: 1 byte = 8 bits.</li>
-      <li><strong>Remover zeros à esquerda:</strong> <code>1010</code> é o valor 10, mas o octeto completo é <code>00001010</code>. Sem os zeros, você compara campos de tamanhos diferentes e erra máscara e subnetting.</li>
-      <li><strong>Achar que hexadecimal é criptografia:</strong> hexadecimal é só representação; criptografia exige algoritmo e chave.</li>
-      <li><strong>Decorar /24 sem ver os bits:</strong> relacione o prefixo com a quantidade de bits de rede ligados na máscara; só assim /25, /26 e VLSM fazem sentido.</li>
+      <li><strong>Remover zeros à esquerda:</strong> <code>1010</code> é o valor 10, mas o octeto completo é <code>00001010</code>, e em hexadecimal é <code>0A</code>, não <code>A</code>. Todo octeto tem 8 bits; sem os zeros, você compara campos de tamanhos diferentes.</li>
+      <li><strong>Ler <code>FF</code> como 15:</strong> <code>F</code> sozinho vale 15, mas <code>FF</code> são dois dígitos, ou seja, um byte inteiro: 255.</li>
+      <li><strong>Achar que hexadecimal é criptografia:</strong> hexadecimal é só uma forma de escrever os bytes; qualquer um converte de volta, sem chave.</li>
     </ul>
   </div>
 </section>

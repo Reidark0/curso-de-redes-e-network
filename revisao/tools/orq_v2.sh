@@ -26,6 +26,15 @@ PY
     node -e "const r=require('/tmp/claude-0/val_$$.json'); console.log('validar', r.ok?'OK':'ERRO', 'erros:', r.erros.length, 'avisos:', r.avisos.length); r.erros.forEach(e=>console.log('  E', e)); r.avisos.forEach(a=>console.log('  A', a))"
     rm -f /tmp/claude-0/val_$$.json
     if [ "$v" = OK ]; then node revisao/tools/progresso.js concluir "$id"; commit "revisao v2: aula $id concluida"; echo pushed; else echo "NAO CONCLUIDA"; exit 1; fi ;;
+  seguir)
+    # fecha <id> (se dado) e prepara a próxima PENDENTE: status, prompt e commit
+    if [ -n "$2" ]; then "$0" fechar "$2" | tail -4 || exit 1; fi
+    nx=$(node revisao/tools/progresso.js proximo | awk '{print $1}')
+    [ "$nx" = FIM ] && { echo FIM; exit 0; }
+    node revisao/tools/progresso.js status "$nx" "EM ANDAMENTO" >/dev/null
+    "$0" prompt "$nx" "${3:-}" >/dev/null
+    commit "revisao v2: $nx em andamento" >/dev/null
+    echo "PROXIMA $nx" ;;
   falhou)
     node revisao/tools/progresso.js falhou "$2"; commit "revisao v2: aula $2 FALHOU (build usa a versao anterior)"; echo pushed ;;
   *) echo "uso: orq_v2.sh iniciar|prompt|fechar|falhou <id>"; exit 2 ;;

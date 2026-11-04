@@ -2,8 +2,9 @@
 <section class="lesson-section lesson-section--example">
   <h2>Exemplo simples</h2>
   <p>
-    Pegue o endereço IPv4 <code>192.168.10.50</code>. Para humanos, ele parece quatro números decimais. Para a rede, ele é um endereço de 32 bits dividido em quatro octetos:
+    Pegue o endereço IPv4 <code>192.168.10.50</code>. Para você, são quatro números decimais. Para a rede, é um endereço de 32 bits dividido em quatro octetos:
   </p>
+  <div class="responsive-table">
   <table class="data-table">
     <thead>
       <tr>
@@ -19,7 +20,11 @@
       <tr><td>50</td><td>00110010</td><td>32</td></tr>
     </tbody>
   </table>
+  </div>
   <p>
-    Então, <code>192.168.10.50</code> pode ser visto como <code>11000000.10101000.00001010.00110010</code> em binário ou <code>C0 A8 0A 32</code> em hexadecimal. Quando o Wireshark mostra bytes em hexadecimal, ele não está inventando outra informação; ele está mostrando a mesma informação em uma escrita mais compacta.
+    Numa listagem de bytes, como a do <code>Format-Hex</code> ou do <code>xxd</code> que você usou na aula 0.1, esse endereço aparece como <code>C0 A8 0A 32</code>. Não é outra informação nem um código: são os mesmos 4 bytes numa escrita mais compacta.
+  </p>
+  <p>
+    O “endereço físico” da placa de rede (o endereço MAC) segue a mesma lógica. No Windows ele aparece como <code>3C-52-82-1A-2B-3C</code>; no Linux, como <code>3c:52:82:1a:2b:3c</code>. São seis pares hexadecimais, ou seja, 6 bytes (48 bits). Separador e maiúsculas mudam conforme a ferramenta; os bytes são os mesmos.
   </p>
 </section>
