@@ -1,14 +1,5 @@
 
 <section class="lesson-section lesson-section--security">
-  <h2>13. Exemplo em Segurança</h2>
-  <p>Em segurança, rede é superfície de ataque, caminho de movimento lateral, fonte de evidência e ponto de controle. Uma rede plana permite que um host comprometido tente alcançar muitos sistemas. Uma rede segmentada reduz impacto, mas exige regras bem mantidas e logs úteis.</p>
-  <table class="data-table risk-table">
-    <thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead>
-    <tbody>
-      <tr><td>Rede plana</td><td>Todos os ativos no mesmo segmento.</td><td>Movimento lateral facilitado.</td><td>Segmentação, firewall interno, ACLs e menor privilégio.</td></tr>
-      <tr><td>Serviço exposto</td><td>Porta acessível sem necessidade.</td><td>Exploração, varredura e vazamento.</td><td>Inventário, regras restritivas e monitoramento.</td></tr>
-      <tr><td>Falta de logs</td><td>Fluxos não registrados.</td><td>Investigação fraca.</td><td>Logs de firewall, DNS, proxy, VPN e flow logs.</td></tr>
-      <tr><td>Confundir conectividade com autorização</td><td>“Pingou, então pode acessar”.</td><td>Decisões inseguras.</td><td>Separar rede, autenticação, autorização e auditoria.</td></tr>
-    </tbody>
-  </table>
+  <h2>Exemplo em Segurança</h2>
+  <p>Em segurança, a rede tem quatro papéis ao mesmo tempo: é superfície de ataque, caminho de movimento lateral, fonte de evidência e ponto de controle. Numa rede plana, um notebook comprometido pode tentar alcançar o servidor de arquivos, as câmeras e a administração. Numa rede segmentada, esse alcance cai, mas só se as regras forem mantidas e os logs registrarem as tentativas. Os riscos e as mitigações estão em <em>Segurança</em>.</p>
 </section>

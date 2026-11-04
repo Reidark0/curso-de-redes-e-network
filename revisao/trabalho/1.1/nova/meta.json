@@ -3,9 +3,9 @@
   "moduleId": "m01",
   "order": 1,
   "title": "O que é uma rede e por que existe",
-  "subtitle": "A rede como resposta ao problema de compartilhar informação, serviços e recursos entre computadores, pessoas, sistemas e organizações.",
-  "duration": "75-105 min",
-  "estimatedStudyTimeMinutes": 105,
+  "subtitle": "A rede como resposta ao problema de compartilhar informação, serviços e recursos entre pessoas, sistemas e organizações.",
+  "duration": "70-100 min",
+  "estimatedStudyTimeMinutes": 100,
   "difficulty": "iniciante",
   "type": "fundamental",
   "xp": 185,
@@ -83,69 +83,6 @@
       "cloud networking"
     ]
   },
-  "deepDive": {
-    "mentalModel": "Rede é uma cadeia de comunicação: origem, dados, protocolo, endereço, meio, intermediários, destino, política e evidência.",
-    "keyTerms": [
-      "rede",
-      "nó",
-      "host",
-      "serviço",
-      "meio de transmissão",
-      "protocolo",
-      "endereçamento",
-      "política",
-      "observabilidade"
-    ],
-    "limitations": [
-      "Uma rede não garante que o serviço esteja funcionando.",
-      "Conectividade não significa autorização.",
-      "Mais velocidade nominal não corrige todos os problemas.",
-      "Cloud abstrai o cabo, mas não elimina redes."
-    ],
-    "whenToUse": [
-      "Quando dispositivos precisam compartilhar dados ou serviços.",
-      "Quando aplicações precisam se comunicar.",
-      "Quando equipes precisam centralizar recursos e controle.",
-      "Quando ambientes locais e cloud precisam se integrar."
-    ],
-    "whenNotToUse": [
-      "Quando um sistema isolado é exigido por segurança ou regulação.",
-      "Quando conectar algo aumenta risco sem necessidade operacional.",
-      "Quando um recurso pode ser mantido offline por desenho de segurança."
-    ],
-    "operationalImpact": [
-      "Redes exigem documentação, monitoramento, troubleshooting e controle de mudanças.",
-      "Quanto mais interdependências, maior a necessidade de observabilidade e padronização."
-    ],
-    "financialImpact": [
-      "Redes podem exigir switches, roteadores, firewalls, access points, links, licenças e equipe especializada.",
-      "Em cloud, tráfego, NAT gateway, firewalls gerenciados, load balancers e flow logs podem gerar custo recorrente."
-    ],
-    "securityImpact": [
-      "Redes ampliam superfície de ataque quando mal segmentadas.",
-      "Redes bem projetadas reduzem movimento lateral e melhoram detecção."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Achar que rede é só internet.",
-      "whyItHappens": "No uso doméstico, a rede costuma ser percebida apenas quando a internet falha.",
-      "consequence": "O aluno ignora LAN, DNS, gateway, firewall e serviços internos.",
-      "correction": "Internet é uma rede de redes; sua LAN e sua rede corporativa também são redes."
-    },
-    {
-      "mistake": "Confundir conectividade com permissão.",
-      "whyItHappens": "Muitos testes começam com ping ou acesso a porta.",
-      "consequence": "A pessoa conclui que acesso deve ser liberado apenas porque o caminho existe.",
-      "correction": "Conectividade é caminho; autorização é decisão de acesso."
-    },
-    {
-      "mistake": "Chamar tudo de problema de rede.",
-      "whyItHappens": "O sintoma aparece como indisponibilidade para o usuário.",
-      "consequence": "Troubleshooting vira tentativa e erro.",
-      "correction": "Separar dispositivo, meio, endereço, protocolo, serviço, identidade e política."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Usuário não acessa internet",
@@ -252,21 +189,24 @@
         "description": "Serviços administrativos ou internos ficam acessíveis além do necessário.",
         "defensiveExplanation": "A superfície de ataque aumenta quando portas ficam disponíveis para quem não precisa delas.",
         "mitigation": "Inventário, regras restritivas, bastion, VPN bem controlada, private endpoints e monitoramento."
+      },
+      {
+        "name": "Fluxos sem registro",
+        "description": "Firewall, DNS, proxy e VPN não registram as conexões, ou os logs não são guardados.",
+        "defensiveExplanation": "Sem registro, não dá para reconstruir o que aconteceu num incidente nem comprovar a causa de uma falha.",
+        "mitigation": "Logs de firewall, DNS, proxy e VPN, flow logs em cloud e retenção definida."
       }
     ],
     "monitoring": [
       "Logs de firewall e proxy",
       "DNS queries incomuns",
       "Flow logs em cloud",
-      "Conexões laterais inesperadas",
       "Novos dispositivos na rede"
     ],
     "hardening": [
-      "Segmentação por função",
       "Bloqueio padrão e liberação justificada",
       "MFA em acessos remotos",
-      "Administração por redes restritas",
-      "Inventário e controle de mudanças"
+      "Administração por redes restritas"
     ],
     "detectionIdeas": [
       "Comparar tráfego atual com baseline",
@@ -315,34 +255,32 @@
     },
     {
       "type": "cenário real",
-      "question": "Uma empresa quer colocar todos os servidores e usuários na mesma rede para simplificar. Qual é o risco?",
+      "question": "Uma clínica tem um computador que só controla um equipamento de exame e não precisa de internet nem de acesso remoto. Faz sentido ligá-lo à rede da clínica por padrão? Quando não vale a pena conectar um sistema?",
       "hints": [
-        "Pense em movimento lateral.",
-        "Pense em regras e logs."
+        "Pense no que se ganha e no que se arrisca ao conectar.",
+        "Pense em exigências de segurança e de regulação."
       ],
       "expectedIdeas": [
-        "rede plana",
-        "movimento lateral",
-        "blast radius",
-        "segmentação",
-        "firewall interno",
-        "monitoramento"
+        "conectar só quando há necessidade operacional",
+        "cada conexão amplia a superfície de ataque",
+        "isolamento exigido por segurança ou regulação",
+        "se precisar conectar, segmentar e registrar"
       ],
-      "explanation": "Simplicidade sem controle pode aumentar impacto de incidentes."
+      "explanation": "A rede existe para atender a uma necessidade de comunicação. Quando ela não existe, ou quando a segurança ou a regulação exigem isolamento, manter o sistema desconectado faz parte do desenho."
     }
   ],
   "quiz": [
     {
       "id": "q1.1.1",
-      "question": "Qual definição é mais útil para uma rede em contexto profissional?",
+      "question": "Qual definição de rede é mais útil em contexto profissional?",
       "options": [
+        "Um conjunto de computadores ligados por cabo ou Wi-Fi.",
         "Um conjunto de dispositivos, meios, protocolos, endereços, serviços e políticas que permite comunicação.",
-        "Apenas o cabo que liga computadores.",
-        "Apenas a internet fornecida pelo provedor.",
-        "Qualquer computador com Wi-Fi ligado."
+        "A conexão com a internet fornecida pelo provedor.",
+        "O conjunto de switches e roteadores de uma organização."
       ],
-      "answer": 0,
-      "explanation": "Rede envolve comunicação e controle, não apenas o meio físico ou a internet.",
+      "answer": 1,
+      "explanation": "Rede envolve comunicação e controle: além de dispositivos e meio, inclui protocolos, endereços, serviços e políticas. Cabo, internet e equipamentos são só partes dela.",
       "topic": "conceito",
       "difficulty": "iniciante",
       "type": "conceito"
@@ -351,76 +289,91 @@
       "id": "q1.1.2",
       "question": "Um host tem IP e pinga o gateway, mas não acessa sites por nome. Qual hipótese fica forte?",
       "options": [
+        "Cabo de rede rompido.",
+        "Host sem endereço IP.",
         "Problema de DNS.",
-        "Cabo necessariamente rompido.",
-        "Fonte do monitor queimada.",
-        "Switch inexistente."
+        "Gateway padrão ausente."
       ],
-      "answer": 0,
-      "explanation": "Se o gateway responde, conectividade local existe. Falha por nome sugere DNS, embora outras hipóteses ainda possam existir.",
+      "answer": 2,
+      "explanation": "Se o host tem IP e o gateway responde, o meio, o endereço e o caminho local funcionam. A falha só por nome aponta para DNS, embora outras hipóteses ainda possam existir.",
       "topic": "dns",
       "difficulty": "iniciante",
       "type": "diagnóstico"
     },
     {
       "id": "q1.1.3",
-      "question": "Por que rede plana é arriscada?",
+      "question": "Por que uma rede plana é arriscada?",
       "options": [
-        "Porque facilita movimento lateral entre ativos.",
-        "Porque sempre impede acesso à internet.",
-        "Porque elimina a necessidade de firewall.",
-        "Porque reduz todos os custos a zero."
+        "Porque um host comprometido pode alcançar muitos outros ativos (movimento lateral).",
+        "Porque impede o uso de DHCP e DNS.",
+        "Porque exige um roteador para cada dispositivo.",
+        "Porque só funciona com cabo, não com Wi-Fi."
       ],
       "answer": 0,
-      "explanation": "Rede plana amplia o alcance de um comprometimento e dificulta políticas finas.",
+      "explanation": "Numa rede plana, todos os ativos estão no mesmo segmento: um comprometimento alcança mais sistemas e fica difícil aplicar políticas entre grupos de ativos.",
       "topic": "segurança",
       "difficulty": "iniciante",
       "type": "segurança"
     },
     {
       "id": "q1.1.4",
-      "question": "Qual item é um dispositivo intermediário?",
+      "question": "Qual destes é um dispositivo intermediário?",
       "options": [
-        "Switch",
         "Notebook do usuário",
-        "Arquivo PDF",
-        "Senha do Wi-Fi"
+        "Servidor de arquivos",
+        "Impressora de rede",
+        "Switch"
       ],
-      "answer": 0,
-      "explanation": "Switch encaminha comunicação dentro da rede; notebook é dispositivo final.",
+      "answer": 3,
+      "explanation": "O switch encaminha a comunicação dentro da rede local. Notebook, servidor e impressora são dispositivos finais: consomem ou oferecem serviços.",
       "topic": "papéis",
       "difficulty": "iniciante",
       "type": "comparação"
     },
     {
       "id": "q1.1.5",
-      "question": "Em cloud, qual recurso se aproxima de uma rede virtual?",
+      "question": "Em cloud, qual recurso corresponde à própria rede virtual, dividida em subnets?",
       "options": [
+        "Security group",
         "VPC ou VNet",
-        "Planilha local",
-        "Teclado USB",
-        "Arquivo Base64"
+        "NAT gateway",
+        "Load balancer"
       ],
-      "answer": 0,
-      "explanation": "VPC/VNet representam redes virtuais em provedores cloud.",
+      "answer": 1,
+      "explanation": "VPC (AWS, Google Cloud) ou VNet (Azure) é a rede virtual. O security group filtra, o NAT gateway dá saída para a internet e o load balancer distribui tráfego.",
       "topic": "cloud",
       "difficulty": "iniciante",
       "type": "cloud"
     },
     {
       "id": "q1.1.6",
-      "question": "Um pipeline não consegue baixar uma imagem do registry. Qual causa de rede é plausível?",
+      "question": "Um pipeline não consegue baixar uma imagem do registry. Qual conjunto de causas de rede é plausível?",
       "options": [
-        "DNS, proxy, firewall ou rota bloqueando o acesso.",
-        "O conceito de byte deixou de existir.",
-        "O monitor não suporta 4K.",
-        "O usuário digitou um emoji."
+        "A imagem é grande demais para trafegar pela rede.",
+        "Runners não usam DNS, então o nome do registry é irrelevante.",
+        "O runner não resolve DNS, está bloqueado por proxy ou firewall, ou não tem rota até o registry.",
+        "Registries só aceitam conexões vindas de notebooks de desenvolvedores."
       ],
-      "answer": 0,
-      "explanation": "Pipelines dependem de rede para DNS, conexão, proxy, TLS e acesso a serviços externos ou internos.",
+      "answer": 2,
+      "explanation": "Pipelines dependem de rede para DNS, rota, proxy, firewall e TLS até serviços externos ou internos.",
       "topic": "devsecops",
       "difficulty": "iniciante-intermediário",
       "type": "devsecops"
+    },
+    {
+      "id": "q1.1.7",
+      "question": "O ping para o servidor de arquivos responde, mas, ao abrir a pasta compartilhada, o usuário recebe “acesso negado”. O que isso indica?",
+      "options": [
+        "O caminho existe; a falha está na autorização do serviço, não na conectividade.",
+        "O cabo do usuário está com defeito.",
+        "O DNS não está resolvendo o nome do servidor.",
+        "Como o ping respondeu, o acesso deveria estar liberado, então o servidor está com defeito."
+      ],
+      "answer": 0,
+      "explanation": "Ping prova só um tipo de conectividade. “Acesso negado” é uma resposta do próprio serviço: o caminho funciona e a decisão de autorização negou o acesso. Conectividade não é autorização.",
+      "topic": "segurança",
+      "difficulty": "iniciante",
+      "type": "diagnóstico"
     }
   ],
   "flashcards": [
@@ -496,11 +449,11 @@
       "explanation": "O objetivo é separar o conceito geral do caso mais famoso."
     },
     {
-      "id": "ex1.1.2",
+      "id": "ex1.1.5",
       "type": "diagnóstico",
-      "prompt": "Liste cinco perguntas que você faria quando alguém diz 'a rede caiu'.",
-      "expectedAnswer": "Quem é afetado? Qual serviço falha? O dispositivo tem IP? O gateway responde? DNS resolve? Há VPN/proxy? Qual erro aparece? Quando começou?",
-      "explanation": "Perguntas reduzem ambiguidade e evitam tentativa e erro."
+      "prompt": "Para cada sintoma, indique em qual etapa da cadeia (endereçamento, meio, destino ou controle) você investigaria primeiro: (a) o notebook não tem endereço IP válido; (b) o host pinga 8.8.8.8, mas nenhum site abre por nome; (c) o nome resolve, mas a conexão na porta do serviço é recusada; (d) a conexão abre, mas o sistema responde “acesso negado”; (e) o cabo foi trocado e o LED da placa de rede continua apagado.",
+      "expectedAnswer": "(a) Endereçamento: verificar DHCP, cabo, Wi-Fi ou configuração manual. (b) Endereçamento por nome: DNS. (c) Destino: o serviço pode estar parado ou a porta fechada; um firewall no caminho também entra na lista. (d) Controle: autenticação ou autorização; o caminho funciona. (e) Meio: cabo, porta do switch ou placa de rede.",
+      "explanation": "O mesmo “não acessa” tem causas em etapas diferentes. Localizar a etapa evita mexer no firewall quando o problema é DNS, ou trocar cabo quando o problema é permissão."
     },
     {
       "id": "ex1.1.3",
@@ -510,11 +463,11 @@
       "explanation": "Alguns elementos têm papéis sobrepostos, mas a classificação ajuda o raciocínio."
     },
     {
-      "id": "ex1.1.4",
-      "type": "segurança",
-      "prompt": "Por que uma rede que conecta tudo com tudo pode parecer eficiente, mas ser perigosa?",
-      "expectedAnswer": "Porque reduz barreiras internas e facilita movimento lateral, acesso indevido e propagação de incidentes. Segmentação e políticas reduzem impacto.",
-      "explanation": "Eficiência operacional sem controle pode aumentar risco."
+      "id": "ex1.1.6",
+      "type": "arquitetura",
+      "prompt": "Para cada papel, dê um exemplo numa rede doméstica, numa rede corporativa e em cloud: (1) a rede local ou o segmento; (2) quem leva o tráfego para fora da rede local; (3) quem filtra o tráfego.",
+      "expectedAnswer": "(1) Casa: o Wi-Fi do roteador; empresa: VLANs e sub-redes; cloud: VPC/VNet e subnets. (2) Casa: o roteador doméstico, que também faz NAT; empresa: roteadores e firewalls; cloud: route table e NAT gateway. (3) Casa: o filtro básico do roteador; empresa: firewalls, proxies e NAC; cloud: security groups, network security groups e firewall gerenciado.",
+      "explanation": "Os papéis são os mesmos nos três ambientes; mudam a escala e os nomes. Quem entende o papel reconhece o recurso em qualquer ambiente."
     }
   ],
   "challenge": {

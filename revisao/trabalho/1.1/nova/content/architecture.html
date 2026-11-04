@@ -1,14 +1,25 @@
 
 <section class="lesson-section lesson-section--architecture">
-  <h2>7. Arquitetura</h2>
-  <p>Dentro de uma arquitetura de rede, alguns papéis aparecem repetidamente.</p>
+  <h2>Arquitetura</h2>
+  <p>Toda rede, de casa à cloud, combina os mesmos papéis:</p>
   <ul>
-    <li><strong>Dispositivos finais:</strong> notebooks, celulares, servidores, impressoras, câmeras, containers, VMs e aplicações.</li>
-    <li><strong>Dispositivos intermediários:</strong> switches, roteadores, firewalls, access points, proxies, load balancers e gateways.</li>
+    <li><strong>Dispositivos finais:</strong> notebooks, celulares, servidores, impressoras, câmeras, VMs, containers e aplicações. Consomem ou oferecem serviços.</li>
+    <li><strong>Dispositivos intermediários:</strong> switches, roteadores, firewalls, access points, proxies, load balancers e gateways. Conectam, encaminham, filtram ou controlam tráfego.</li>
     <li><strong>Meios de transmissão:</strong> cobre, fibra, rádio, links virtuais, túneis e backbones.</li>
-    <li><strong>Protocolos:</strong> regras que definem formato, ordem, erro, estado e interpretação.</li>
+    <li><strong>Protocolos:</strong> regras que definem formato, ordem, tratamento de erro, estado e interpretação das mensagens.</li>
     <li><strong>Serviços essenciais:</strong> DHCP, DNS, NTP, diretórios, autenticação e observabilidade.</li>
     <li><strong>Políticas:</strong> regras de firewall, segmentação, roteamento, autenticação, autorização e auditoria.</li>
   </ul>
-  <p>Em cloud, esses papéis continuam existindo, mas aparecem com outros nomes: VPC/VNet, subnet, route table, security group, network security group, NAT gateway, private endpoint, load balancer, peering e firewall gerenciado.</p>
+  <p>Alguns elementos acumulam papéis: o DNS é um serviço que roda num servidor (dispositivo final), e o firewall encaminha tráfego e também aplica política. Em cloud, os papéis continuam os mesmos, com outros nomes:</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Papel</th><th>Nome em cloud</th></tr></thead>
+    <tbody>
+      <tr><td>Rede e segmentos</td><td>VPC (AWS, Google Cloud) ou VNet (Azure), divididas em subnets</td></tr>
+      <tr><td>Roteamento entre redes</td><td>Route table, peering</td></tr>
+      <tr><td>Saída de redes privadas para a internet</td><td>NAT gateway</td></tr>
+      <tr><td>Filtro e política</td><td>Security group, network security group, firewall gerenciado</td></tr>
+      <tr><td>Distribuição de tráfego entre servidores</td><td>Load balancer</td></tr>
+      <tr><td>Acesso privado a um serviço gerenciado</td><td>Private endpoint</td></tr>
+    </tbody>
+  </table></div>
 </section>
