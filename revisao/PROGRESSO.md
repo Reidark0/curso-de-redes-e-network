@@ -17,7 +17,7 @@ Status: PENDENTE · EM ANDAMENTO · CONCLUÍDA · FALHOU. Atualizado pelo orques
 | 0.9 | m00/lesson-00-09.js | CONCLUÍDA | 5599→5732 (+2%) | 80-120 min→145-205 min | SUBESTIMADA | MÉDIA 16% | FORTE | BOM | CONCLUÍDA | 5598→5731→3119 | 80-120 min → 145-205 min → 15-25 min + 65 min de prática extra |
 | 0.10 | m00/lesson-00-10.js | CONCLUÍDA | 3839→4107 (+7%) | 70-100 min→70-100 min | ORGANIZADA | MÉDIA 18% | PARCIAL | BOM | CONCLUÍDA | 3839→4107→2680 | 70-100 min → 70-100 min → 15-25 min + 35 min de prática extra |
 | 1.1 | m01/lesson-01-01.js | CONCLUÍDA | 3598→4357 (+21%) | 75-105 min→70-100 min | ORGANIZADA | BAIXA 12% | PARCIAL | BOM | CONCLUÍDA | 3598→4357→2793 | 75-105 min → 70-100 min → 15-25 min + 30 min de prática extra |
-| 1.2 | m01/lesson-01-02.js | CONCLUÍDA | 4018→4188 (+4%) | 75-105 min→70-100 min | ORGANIZADA | BAIXA 13% | FORTE | BOM | PENDENTE | | |
+| 1.2 | m01/lesson-01-02.js | CONCLUÍDA | 4018→4188 (+4%) | 75-105 min→70-100 min | ORGANIZADA | BAIXA 13% | FORTE | BOM | EM ANDAMENTO |  |  |
 | 1.3 | m01/lesson-01-03.js | CONCLUÍDA | 3736→4085 (+9%) | 65-95 min→70-100 min | ORGANIZADA | BAIXA 13% | FORTE | BOM | PENDENTE | | |
 | 1.4 | m01/lesson-01-04.js | CONCLUÍDA | 4954→5217 (+5%) | 75-105 min→135-190 min | SUBESTIMADA | BAIXA 11% | FORTE | BOM | PENDENTE | | |
 | 1.5 | m01/lesson-01-05.js | CONCLUÍDA | 3693→4089 (+11%) | 75-110 min→70-100 min | ORGANIZADA | MÉDIA 15% | PARCIAL | BOM | PENDENTE | | |
