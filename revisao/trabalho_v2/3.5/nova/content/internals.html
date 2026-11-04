@@ -1,25 +1,18 @@
 <section class="lesson-section lesson-section--internals"><h2>Funcionamento interno</h2>
-<p>O ARP começa antes da pergunta em broadcast: primeiro o host compara o próprio IP com o IP de destino usando a máscara e decide quem é o próximo salto.</p>
-<ol class="flow-list"><li>O host precisa enviar tráfego para um IP.</li><li>Ele verifica, pela máscara, se o IP está na mesma sub-rede.</li><li>Define o próximo salto: o próprio destino (local) ou o gateway (externo).</li><li>Consulta o cache ARP para ver se já conhece o MAC daquele próximo salto.</li><li>Se não conhece, envia um <strong>ARP Request</strong> em broadcast para <code>ff:ff:ff:ff:ff:ff</code>, que alcança toda a VLAN.</li><li>O dono do IP responde com um <strong>ARP Reply</strong>, normalmente em unicast, direto para quem perguntou.</li><li>O host grava a associação IP-MAC no cache por tempo limitado.</li><li>O pacote IP é encapsulado em um frame Ethernet com o MAC resolvido e sai em unicast.</li></ol>
-<h3>Onde cada etapa pode falhar</h3>
-<div class="responsive-table"><table class="data-table"><thead><tr><th>Etapa</th><th>Falha possível</th></tr></thead><tbody>
-<tr><td>Decidir o próximo salto</td><td>Máscara errada faz o host fazer ARP para o alvo errado (um destino remoto tratado como local, ou o contrário).</td></tr>
-<tr><td>Consultar o cache</td><td>Entrada desatualizada, IP duplicado ou MAC inesperado.</td></tr>
-<tr><td>Request em broadcast</td><td>VLAN errada ou broadcast storm: o dono do IP não recebe a pergunta ou não responde de forma confiável.</td></tr>
-<tr><td>Reply</td><td>Resposta indevida, IP duplicado ou spoofing.</td></tr>
-<tr><td>Tráfego unicast</td><td>Mesmo com ARP funcionando, firewall, rota, porta ou aplicação ainda podem falhar.</td></tr>
-</tbody></table></div>
+<p>Quando um host precisa enviar um pacote IPv4, o ARP entra assim:</p>
+<ol class="flow-list"><li>O host verifica, pela máscara, se o IP de destino está na mesma sub-rede.</li><li>Define o próximo salto: o próprio destino (local) ou o gateway (externo).</li><li>Consulta o cache ARP para ver se já conhece o MAC desse próximo salto. Se conhece, pula para o passo 6.</li><li>Se não conhece, envia um <strong>ARP Request</strong> em broadcast para <code>ff:ff:ff:ff:ff:ff</code>, que alcança toda a VLAN: "quem tem 192.168.1.1? Responda para 192.168.1.50".</li><li>Só o dono daquele IP responde, com um <strong>ARP Reply</strong>, normalmente em unicast, direto para quem perguntou. O host grava a associação IP-MAC no cache por tempo limitado.</li><li>O pacote IP é colocado num frame Ethernet com o MAC resolvido e sai em unicast.</li></ol>
+<p>Se ninguém responde ao Request, o host não tem MAC para pôr no frame e o pacote não sai. Os sistemas avisam isso como "host de destino inacessível".</p>
 <h3>Campos da mensagem ARP</h3>
-<p>Num frame Ethernet, o ARP é identificado pelo EtherType <code>0x0806</code>. Os campos que importam numa captura:</p>
-<div class="responsive-table"><table class="data-table"><thead><tr><th>Campo</th><th>Tamanho</th><th>Função</th><th>Observação defensiva</th></tr></thead><tbody>
-<tr><td>Hardware Type</td><td>16 bits</td><td>Tecnologia de enlace (Ethernet).</td><td>Estável numa LAN Ethernet; valor inesperado sugere captura fora do contexto.</td></tr>
-<tr><td>Protocol Type</td><td>16 bits</td><td>Protocolo lógico resolvido (IPv4).</td><td>Separa ARP de outros protocolos encapsulados.</td></tr>
-<tr><td>Operation</td><td>16 bits</td><td>1 = Request, 2 = Reply.</td><td>Volume alto de Replies, ou Replies que ninguém pediu, merece investigação.</td></tr>
-<tr><td>Sender MAC / IP</td><td>48 + 32 bits</td><td>Quem anuncia a associação.</td><td>Pode ser falsificado: não é identidade forte.</td></tr>
-<tr><td>Target MAC / IP</td><td>48 + 32 bits</td><td>O IP procurado. No Request, o Target MAC vai zerado, porque é justamente o que se procura.</td><td>Requests para muitos IPs em sequência indicam varredura ou comportamento anômalo.</td></tr>
+<p>Num frame Ethernet, o ARP é identificado pelo EtherType <code>0x0806</code>. Request e Reply têm o mesmo formato; os campos que importam numa captura são:</p>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Campo</th><th>Tamanho</th><th>Função</th></tr></thead><tbody>
+<tr><td>Hardware Type / Protocol Type</td><td>16 + 16 bits</td><td>A tecnologia de enlace (Ethernet) e o protocolo resolvido (IPv4).</td></tr>
+<tr><td>Operation</td><td>16 bits</td><td>1 = Request, 2 = Reply.</td></tr>
+<tr><td>Sender MAC / IP</td><td>48 + 32 bits</td><td>Quem envia a mensagem e a associação IP-MAC que ele anuncia.</td></tr>
+<tr><td>Target MAC / IP</td><td>48 + 32 bits</td><td>O IP procurado. No Request, o Target MAC vai zerado (<code>00:00:00:00:00:00</code>), porque é justamente o que se procura.</td></tr>
 </tbody></table></div>
+<p>No Reply, o MAC procurado vem no campo Sender: é a máquina que responde dizendo "esse IP sou eu, e meu MAC é este".</p>
 <h3>Como ler a tabela ARP</h3>
-<pre class="code-block"><code>Linux:   192.168.1.1 dev wlan0 lladdr aa:bb:cc:dd:ee:ff REACHABLE
-Windows: 192.168.1.1           aa-bb-cc-dd-ee-ff     dinâmico</code></pre>
-<p>Cada linha associa um IP a um MAC. No Linux (<code>ip neigh</code>), <code>REACHABLE</code> indica entrada confirmada há pouco, <code>STALE</code> indica entrada ainda utilizável mas não confirmada recentemente, e <code>FAILED</code> indica que o host perguntou e ninguém respondeu. No Windows (<code>arp -a</code>), as entradas aprendidas por ARP aparecem como dinâmicas. Uma entrada do gateway com MAC diferente do documentado, ou que muda ao longo do dia, é uma evidência a investigar, não uma conclusão.</p>
+<pre class="code-block"><code>Linux (ip neigh):  192.168.1.1 dev wlan0 lladdr aa:bb:cc:dd:ee:ff REACHABLE
+Windows (arp -a):  192.168.1.1           aa-bb-cc-dd-ee-ff     dinâmico</code></pre>
+<p>Cada linha associa um IP a um MAC. No Linux, <code>REACHABLE</code> indica entrada confirmada há pouco, <code>STALE</code> indica entrada ainda utilizável mas não confirmada recentemente, e <code>FAILED</code> indica que o host perguntou e ninguém respondeu. No Windows, as entradas aprendidas por ARP aparecem como dinâmicas. A aula 3.6 detalha como esse cache é mantido e como ler entradas problemáticas.</p>
 </section>

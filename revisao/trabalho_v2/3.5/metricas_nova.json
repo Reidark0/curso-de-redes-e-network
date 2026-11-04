@@ -1,0 +1,91 @@
+{
+  "id": "3.5",
+  "versao": "nova",
+  "titulo": "ARP: transformando IPv4 em MAC na rede local",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3594,
+    "teoria": 1806,
+    "praticaExtra": 1114,
+    "quiz": 377,
+    "flashcards": 132
+  },
+  "porGrupoTeoria": {
+    "introducao": 384,
+    "contexto": 131,
+    "conteudo": 631,
+    "exemplos": 174,
+    "seguranca_troubleshooting": 486
+  },
+  "porSecao": {
+    "motivation": 134,
+    "summary": 84,
+    "problem": 131,
+    "concept": 276,
+    "internals": 354,
+    "diagram": 1,
+    "analogy": 61,
+    "simpleExample": 113,
+    "objectives": 72,
+    "learningOutcomes": 0,
+    "glossary": 94,
+    "security": 232,
+    "troubleshooting": 254,
+    "nextTheme": 35
+  },
+  "pratica": {
+    "quiz": 377,
+    "flashcards": 132,
+    "lab": 408,
+    "mentorQuestions": 245,
+    "exercises": 173,
+    "challenge": 80,
+    "commentedSolution": 208
+  },
+  "outros": {
+    "title+subtitle": 22,
+    "nextTheme": 35,
+    "references": 48,
+    "linksToOtherCourses": 60
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 4,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 3,
+    "exemplosPorAmbiente": []
+  },
+  "lab": {
+    "estimatedTimeMinutes": 20,
+    "alternativa_5minPorPasso": 20,
+    "plausivel": true,
+    "override": null,
+    "palavras": 408
+  },
+  "duracao": {
+    "declarada": "20-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 22.9,
+    "nucleoPartes": {
+      "teoria": 13.9,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 51,
+    "praticaExtraPartes": {
+      "lab": 20,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "20-25 min",
+    "praticaExtraArredondada": 50,
+    "recomendada": "20-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

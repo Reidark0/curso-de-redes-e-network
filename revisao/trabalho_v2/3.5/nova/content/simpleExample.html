@@ -1,4 +1,7 @@
 <section class="lesson-section lesson-section--example"><h2>Exemplo simples</h2>
-<p>Seu notebook tem IP <code>192.168.1.50/24</code> e gateway <code>192.168.1.1</code>. Você abre um site. O site está fora da sua rede, então o notebook sabe que deve entregar o pacote ao gateway; para pôr o frame no Wi-Fi, ele precisa do MAC do roteador.</p>
-<p>Se o cache ARP já contém <code>192.168.1.1 → aa:bb:cc:dd:ee:ff</code>, o envio segue sem pergunta nova. Se não contém, o notebook envia um ARP Request em broadcast, o roteador responde e a entrada passa a aparecer em <code>arp -a</code>. Só então o notebook consegue enviar frames ao gateway.</p>
+<p>Seu notebook tem IP <code>192.168.1.50/24</code> e gateway <code>192.168.1.1</code>, e acabou de se conectar ao Wi-Fi: a tabela ARP ainda não tem o gateway. Você manda imprimir na impressora <code>192.168.1.80</code> e depois abre um site hospedado em <code>203.0.113.10</code>. Em seguida, roda <code>arp -a</code> (trecho):</p>
+<pre class="code-block"><code>  Endereço IP           Endereço físico       Tipo
+  192.168.1.1           aa-bb-cc-dd-ee-ff     dinâmico
+  192.168.1.80          11-22-33-44-55-66     dinâmico</code></pre>
+<p>Para imprimir, o notebook perguntou pelo MAC da própria impressora, que está na sua sub-rede. Para o site, perguntou pelo MAC do gateway e entregou a ele o frame. O IP <code>203.0.113.10</code> não aparece na tabela, e nunca vai aparecer: o notebook não precisa do MAC do site, só do MAC de quem dá o próximo passo.</p>
 </section>
