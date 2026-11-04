@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--motivation"><h2>Motivação</h2>
+<p>Você abre uma captura no Wireshark e vê a linha <code>Ethernet II, Src: 3c:52:82:aa:10:22, Dst: ff:ff:ff:ff:ff:ff</code>. Para quem entende Camada 2, ela já conta uma história: qual interface enviou, para quem a entrega local se destina (aqui, todos os hosts do segmento, porque é um broadcast) e, no campo seguinte, qual protocolo vai dentro.</p>
+<p>O frame Ethernet é a unidade de entrega local, e o endereço MAC é o identificador de interface usado nessa entrega. Switch, tabela MAC, ARP, VLAN, flooding e port security, os temas das próximas aulas, dependem de você saber ler esses dois elementos.</p>
+<div class="callout callout--problem"><strong>Problema real:</strong> um SOC observa tráfego estranho vindo de um MAC desconhecido, mas o IP muda ao longo do dia. Quem só olha IP perde a pista. Quem sabe interpretar MAC, OUI, porta de switch, VLAN e frame consegue relacionar evidências de rede, inventário e segurança física.</div>
+</section>

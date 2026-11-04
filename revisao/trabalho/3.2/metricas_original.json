@@ -1,0 +1,90 @@
+{
+  "id": "3.2",
+  "versao": "original",
+  "titulo": "Frame Ethernet e endereço MAC",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4917,
+    "invisiveis": 813,
+    "teoriaVisivel": 2721
+  },
+  "porCampoVisivel": {
+    "content.motivation": 203,
+    "content.history": 173,
+    "content.problem": 168,
+    "content.evolution": 174,
+    "content.concept": 128,
+    "content.internals": 194,
+    "content.architecture": 141,
+    "content.analogy": 94,
+    "content.simpleExample": 104,
+    "content.enterpriseExample": 117,
+    "content.cloudExample": 108,
+    "content.devsecopsExample": 108,
+    "content.securityExample": 157,
+    "content.diagram": 3,
+    "content.summary": 63,
+    "content.nextTheme": 37,
+    "security": 253,
+    "troubleshooting": 262,
+    "glossary": 234,
+    "title+subtitle": 22,
+    "objectives": 53,
+    "learningOutcomes": 75,
+    "quiz": 278,
+    "flashcards": 123,
+    "mentorQuestions": 155,
+    "exercises": 167,
+    "challenge": 125,
+    "commentedSolution": 181,
+    "references": 57,
+    "linksToOtherCourses": 50,
+    "lab": 910
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 48,
+    "content.exercisesIntro": 25,
+    "content.challengeIntro": 32,
+    "content.solutionIntro": 29,
+    "networkContext": 29,
+    "protocolFields": 138,
+    "packetFlow": 130,
+    "deepDive": 249,
+    "commonMistakes": 133
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 55,
+    "alternativa_5minPasso_maisLeitura": 42,
+    "plausivel": true,
+    "palavras": 910
+  },
+  "duracao": {
+    "declarada": "85-120 min",
+    "estimatedStudyTimeMinutes": 120,
+    "M": 102.5,
+    "T": 137.9,
+    "partes": {
+      "teoria": 20.9,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 55
+    },
+    "faixaRecomendada": "115-165 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 17
+  }
+}

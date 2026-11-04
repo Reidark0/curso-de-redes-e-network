@@ -1,0 +1,11 @@
+<section class="lesson-section lesson-section--evolution"><h2>4. Evolução</h2>
+<p>O frame Ethernet foi adaptado ao longo do tempo para atender novas necessidades: interoperabilidade, identificação do protocolo transportado, VLANs, maiores velocidades e ambientes virtuais.</p>
+<table class="data-table comparison-table"><thead><tr><th>Elemento</th><th>Função</th><th>Problema resolvido</th><th>Limitação</th></tr></thead><tbody>
+<tr><td>MAC de destino</td><td>Indica o destinatário local do frame.</td><td>Permite encaminhamento por switches.</td><td>É local ao enlace; não substitui IP.</td></tr>
+<tr><td>MAC de origem</td><td>Indica quem enviou o frame localmente.</td><td>Permite aprendizado da tabela MAC.</td><td>Pode ser alterado em software.</td></tr>
+<tr><td>EtherType</td><td>Indica o protocolo encapsulado.</td><td>Permite entregar o payload ao protocolo correto.</td><td>Não valida se o conteúdo é seguro.</td></tr>
+<tr><td>802.1Q VLAN tag</td><td>Adiciona identificação de VLAN em trunks.</td><td>Permite segmentação lógica sobre enlaces físicos compartilhados.</td><td>Configuração errada pode vazar ou isolar tráfego.</td></tr>
+<tr><td>FCS</td><td>Detecta erro no frame.</td><td>Ajuda a descartar quadros corrompidos.</td><td>Não corrige o erro; apenas detecta.</td></tr>
+</tbody></table>
+<p>O ponto pedagógico importante é que o frame é uma estrutura de enlace. Ele não é “o pacote IP”, mas pode carregar um pacote IP. Ele não é “a conexão TCP”, mas pode carregar um segmento TCP dentro de um pacote IP dentro do payload Ethernet.</p>
+</section>

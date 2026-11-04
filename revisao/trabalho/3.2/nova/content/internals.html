@@ -1,0 +1,23 @@
+<section class="lesson-section lesson-section--internals"><h2>Funcionamento interno</h2>
+<h3>Campos do frame Ethernet II</h3>
+<p>Ethernet II é o formato da maioria das capturas. Cada campo orienta uma decisão:</p>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Campo</th><th>Tamanho</th><th>Função</th><th>O que observar</th></tr></thead><tbody>
+<tr><td>Preâmbulo + SFD</td><td>8 bytes</td><td>Sincroniza o receptor e marca o início do frame.</td><td>Camada física: não aparece em capturas; falhas físicas aparecem nos contadores da interface.</td></tr>
+<tr><td>MAC de destino</td><td>6 bytes</td><td>Destinatário local; o switch usa para escolher a porta de saída.</td><td>Pode ser unicast, multicast ou broadcast; interprete junto com a VLAN.</td></tr>
+<tr><td>MAC de origem</td><td>6 bytes</td><td>Interface que enviou; o switch usa para aprender a porta.</td><td>Pode ser alterado em software ou ser virtual.</td></tr>
+<tr><td>Tag 802.1Q (opcional)</td><td>4 bytes</td><td>Identifica a VLAN em trunks. Fica entre o MAC de origem e o EtherType e começa com 0x8100.</td><td>Configuração errada vaza ou isola tráfego.</td></tr>
+<tr><td>EtherType</td><td>2 bytes</td><td>Protocolo do payload: 0x0800 = IPv4, 0x0806 = ARP, 0x86DD = IPv6.</td><td>Útil em filtros; não diz se o conteúdo é seguro.</td></tr>
+<tr><td>Payload</td><td>46 a 1500 bytes (sem jumbo frames)</td><td>Pacote IP, mensagem ARP etc. Abaixo de 46 bytes, a placa completa com preenchimento (padding).</td><td>Pode conter dados sensíveis se a camada superior não criptografar.</td></tr>
+<tr><td>FCS</td><td>4 bytes (32 bits)</td><td>CRC calculado sobre o frame; o receptor recalcula e descarta o frame se não bater.</td><td>Só detecta, não corrige. Erros CRC/FCS no switch apontam cabo, porta, transceptor ou interferência.</td></tr>
+</tbody></table></div>
+<p>Sem preâmbulo e sem tag, um frame tem de 64 a 1518 bytes (6 + 6 + 2 + 46…1500 + 4). Numa captura feita no próprio host, o FCS muitas vezes também não aparece, porque a placa o confere e o remove antes de entregar o frame ao sistema.</p>
+<h3>Do envio à entrega</h3>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Passo</th><th>O que acontece</th><th>O que pode falhar</th></tr></thead><tbody>
+<tr><td>1. Host escolhe o próximo salto</td><td>Destino na mesma sub-rede: o próprio host. Fora dela: o gateway.</td><td>Máscara ou gateway configurados errado.</td></tr>
+<tr><td>2. Host descobre o MAC</td><td>Em IPv4, consulta o cache ARP ou envia um ARP Request em broadcast.</td><td>Cache obsoleto, resposta inconsistente, VLAN errada.</td></tr>
+<tr><td>3. NIC monta e transmite</td><td>Preenche os campos e transmite como sinais no meio físico.</td><td>Interface down, driver, cabo ruim.</td></tr>
+<tr><td>4. Switch encaminha</td><td>Lê o MAC de origem e atualiza a tabela MAC; lê o MAC de destino e escolhe a porta.</td><td>Flooding, tabela instável, loop, porta em VLAN errada.</td></tr>
+<tr><td>5. Destino recebe</td><td>Confere o FCS e entrega o payload ao protocolo indicado pelo EtherType.</td><td>FCS inválido (frame descartado) ou destino fora do domínio de broadcast.</td></tr>
+</tbody></table></div>
+<div class="callout warning"><strong>Erros comuns</strong><ul><li><strong>Confundir MAC com IP:</strong> o MAC entrega o frame na LAN; o IP endereça logicamente entre redes.</li><li><strong>Achar que o MAC do servidor final aparece no frame:</strong> os MACs mudam a cada enlace roteado; os IPs de origem e destino permanecem no pacote.</li><li><strong>Tratar o MAC como a identidade de uma pessoa:</strong> ele é evidência de interface; correlacione com porta, VLAN, autenticação e logs.</li><li><strong>Ver todo broadcast como ataque:</strong> ARP e DHCP usam broadcast legitimamente; avalie volume, origem e padrão.</li></ul></div>
+</section>

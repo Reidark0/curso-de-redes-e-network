@@ -1,0 +1,4 @@
+<section class="lesson-section lesson-section--example"><h2>Exemplo simples</h2>
+<p>Seu notebook quer acessar o roteador doméstico em <code>192.168.1.1</code>. Antes de enviar o pacote IP, ele precisa mandar um frame para o MAC da interface LAN do roteador. Se não souber esse MAC, usa ARP. Quando descobre, monta um frame Ethernet com o MAC da sua placa na origem e o MAC do roteador no destino.</p>
+<p>Ao rodar <code>arp -a</code>, você vê a associação entre o IP do gateway e um endereço físico. Ela não representa a internet: é só a entrega local até o gateway. Ao acessar um site externo, o MAC de destino continua sendo o do gateway; depois dele, o pacote segue por outros enlaces, cada um com seus próprios frames.</p>
+</section>

@@ -1,0 +1,4 @@
+<section class="lesson-section lesson-section--architecture"><h2>Arquitetura</h2>
+<p>Numa rede corporativa, frames Ethernet circulam em enlaces de acesso, uplinks, trunks, servidores, hypervisors e switches virtuais. Saber o papel de cada componente diante do frame mostra onde procurar um problema:</p>
+<ul class="flow-list"><li><strong>Host:</strong> tem uma NIC com MAC físico ou virtual.</li><li><strong>Switch de acesso:</strong> aprende MACs por porta e encaminha frames.</li><li><strong>VLAN:</strong> separa domínios lógicos de Camada 2; um broadcast não sai da VLAN.</li><li><strong>Gateway:</strong> recebe os frames destinados ao seu MAC quando o tráfego precisa sair da rede local.</li><li><strong>Firewall:</strong> pode ver o frame no enlace local, mas normalmente aplica política nas camadas superiores.</li><li><strong>NAC/802.1X:</strong> pode usar porta, MAC e identidade para controlar acesso; o MAC isolado não basta.</li></ul>
+</section>

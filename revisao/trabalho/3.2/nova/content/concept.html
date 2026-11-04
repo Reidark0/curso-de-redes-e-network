@@ -1,0 +1,17 @@
+<section class="lesson-section lesson-section--concept"><h2>Conceito</h2>
+<p>Um <strong>frame Ethernet</strong> é a unidade de dados da Camada 2 que a Ethernet usa para transportar informações dentro de uma rede local. Ele tem campos de endereçamento e controle e um payload com os dados das camadas superiores. O frame não é o pacote IP: ele <em>carrega</em> o pacote IP, que por sua vez carrega o segmento TCP.</p>
+<div class="definition-box"><strong>Definição:</strong> endereço MAC é um identificador de 48 bits (6 bytes) associado a uma interface de rede, usado como endereço local de Camada 2 em tecnologias como Ethernet.</div>
+<p>O MAC é escrito em hexadecimal, em seis pares, como <code>3c:52:82:aa:10:22</code> (o Windows usa hífens: <code>3C-52-82-AA-10-22</code>). Ele serve para entregar frames na LAN, mas não é identidade forte de usuário nem de dispositivo: pode ser alterado em software, clonado ou gerado por virtualização.</p>
+<h3>Como ler um MAC</h3>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Parte</th><th>Onde fica</th><th>O que indica</th></tr></thead><tbody>
+<tr><td>OUI</td><td>3 primeiros bytes (24 bits)</td><td>Fabricante ou organização que recebeu o prefixo. Sugere o fabricante, mas não prova posse nem identidade.</td></tr>
+<tr><td>Bit I/G</td><td>bit menos significativo do 1º byte</td><td>0 = individual (unicast); 1 = grupo (multicast ou broadcast). Atalho: 2º dígito hex ímpar indica grupo.</td></tr>
+<tr><td>Bit U/L</td><td>2º bit menos significativo do 1º byte</td><td>0 = universal (gravado pelo fabricante); 1 = administrado localmente, como em VMs e no MAC aleatório de privacidade. Num unicast local, o 2º dígito hex é 2, 6, A ou E.</td></tr>
+</tbody></table></div>
+<h3>Unicast, broadcast e multicast</h3>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Destino</th><th>Exemplo</th><th>Quem processa</th><th>Uso típico</th></tr></thead><tbody>
+<tr><td>Unicast</td><td><code>3c:52:82:aa:10:22</code> (0x3c é par)</td><td>Uma única interface</td><td>Tráfego normal, como host → gateway</td></tr>
+<tr><td>Broadcast</td><td><code>ff:ff:ff:ff:ff:ff</code></td><td>Todos os hosts do domínio de broadcast (a VLAN)</td><td>ARP Request, DHCP Discover</td></tr>
+<tr><td>Multicast</td><td><code>01:00:5e:00:00:fb</code> (IPv4), <code>33:33:00:00:00:01</code> (IPv6)</td><td>Interfaces inscritas no grupo; sem IGMP snooping, o switch inunda o frame na VLAN</td><td>mDNS, descoberta de vizinhos IPv6</td></tr>
+</tbody></table></div>
+</section>

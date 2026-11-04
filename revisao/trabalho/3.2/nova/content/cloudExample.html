@@ -1,0 +1,4 @@
+<section class="lesson-section lesson-section--cloud"><h2>Exemplo em cloud</h2>
+<p>Em cloud pública, você não administra switches físicos nem vê broadcast Ethernet como numa LAN local. Cada máquina virtual tem interfaces e MACs virtuais, e uma rede definida por software por trás, que o provedor abstrai para que clientes não compartilhem o mesmo domínio de broadcast.</p>
+<p>Isso pesa em migrações: sistemas legados que dependem de broadcast, descoberta em Camada 2 ou de um MAC específico podem não funcionar igual na cloud. Em ambientes locais e híbridos (hypervisors, bridges Linux, redes Docker, appliances virtuais, runners self-hosted), o raciocínio de Camada 2 volta: um pipeline pode falhar ao baixar artefatos porque a interface virtual do runner está na VLAN errada ou fora do bridge correto, e não por erro no código.</p>
+</section>

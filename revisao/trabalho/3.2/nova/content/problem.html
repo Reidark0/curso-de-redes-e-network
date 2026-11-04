@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--problem"><h2>Problema</h2>
+<p>No meio físico há só uma sequência de sinais. Sem uma estrutura, o receptor não saberia onde a mensagem começa e termina, a quem ela se destina nem qual protocolo deve processá-la. O frame resolve isso, e cada campo dele tem um motivo:</p>
+<ul class="flow-list"><li><strong>Sem frame:</strong> os bits não formariam uma unidade de entrega local interpretável.</li><li><strong>Sem MAC de destino:</strong> o switch não teria critério para encaminhar o quadro.</li><li><strong>Sem MAC de origem:</strong> o switch não aprenderia em qual porta está cada interface.</li><li><strong>Sem EtherType:</strong> o receptor não saberia se o payload carrega IPv4, IPv6, ARP ou outro protocolo.</li><li><strong>Sem FCS:</strong> um quadro corrompido na transmissão seria entregue como se estivesse íntegro.</li></ul>
+<p>O frame resolve só a entrega local dentro de um domínio de Camada 2. Ele não roteia entre redes, não garante identidade forte, não criptografa, não autentica usuário e não substitui firewall.</p>
+</section>

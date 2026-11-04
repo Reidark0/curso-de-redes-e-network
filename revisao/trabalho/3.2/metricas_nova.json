@@ -1,0 +1,78 @@
+{
+  "id": "3.2",
+  "versao": "nova",
+  "titulo": "Frame Ethernet e endereço MAC",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5043,
+    "invisiveis": 29,
+    "teoriaVisivel": 2594
+  },
+  "porCampoVisivel": {
+    "content.motivation": 145,
+    "content.problem": 144,
+    "content.concept": 287,
+    "content.internals": 483,
+    "content.architecture": 110,
+    "content.analogy": 75,
+    "content.simpleExample": 116,
+    "content.enterpriseExample": 109,
+    "content.cloudExample": 122,
+    "content.diagram": 2,
+    "content.summary": 116,
+    "content.nextTheme": 34,
+    "security": 349,
+    "troubleshooting": 262,
+    "glossary": 240,
+    "title+subtitle": 20,
+    "objectives": 53,
+    "learningOutcomes": 75,
+    "quiz": 376,
+    "flashcards": 165,
+    "mentorQuestions": 221,
+    "exercises": 233,
+    "challenge": 125,
+    "commentedSolution": 181,
+    "references": 57,
+    "linksToOtherCourses": 50,
+    "lab": 893
+  },
+  "porCampoInvisivel": {
+    "networkContext": 29
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 40,
+    "alternativa_5minPasso_maisLeitura": 41.9,
+    "plausivel": true,
+    "palavras": 893
+  },
+  "duracao": {
+    "declarada": "105-145 min",
+    "estimatedStudyTimeMinutes": 145,
+    "M": 125,
+    "T": 122,
+    "partes": {
+      "teoria": 20,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 40
+    },
+    "faixaRecomendada": "105-145 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 19
+  }
+}

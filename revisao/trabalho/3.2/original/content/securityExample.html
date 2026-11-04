@@ -1,0 +1,10 @@
+<section class="lesson-section lesson-section--security"><h2>13. Exemplo em Segurança</h2>
+<p>Do ponto de vista defensivo, MAC é evidência útil, mas não prova absoluta. Um endereço MAC pode ser alterado, clonado ou aparecer por trás de virtualização. Por isso, deve ser correlacionado com porta de switch, VLAN, autenticação, DHCP, logs de firewall, EDR, NAC, inventário e identidade.</p>
+<table class="data-table risk-table"><thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead><tbody>
+<tr><td>MAC spoofing</td><td>Dispositivo usa MAC de outro ativo.</td><td>Confusão de inventário e possível bypass frágil.</td><td>802.1X, NAC, port security, inventário e correlação.</td></tr>
+<tr><td>MAC flooding</td><td>Tabela MAC do switch fica instável ou cheia.</td><td>Flooding indevido e degradação.</td><td>Limite de MAC por porta, monitoramento e switches gerenciáveis.</td></tr>
+<tr><td>Rede plana</td><td>Muitos ativos no mesmo domínio de broadcast.</td><td>Maior superfície de movimento lateral.</td><td>VLANs, ACLs, firewall interno e menor privilégio.</td></tr>
+<tr><td>Portas expostas</td><td>Tomadas ativas em áreas públicas.</td><td>Acesso físico indevido à LAN.</td><td>Desativar portas, 802.1X, controle físico e alertas.</td></tr>
+</tbody></table>
+<p>Esta aula não ensina exploração ofensiva. O foco é compreender evidências e controles para defender redes locais.</p>
+</section>
