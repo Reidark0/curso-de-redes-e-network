@@ -1,0 +1,78 @@
+{
+  "id": "3.8",
+  "versao": "nova",
+  "titulo": "STP: evitando loops e broadcast storms",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5530,
+    "invisiveis": 38,
+    "teoriaVisivel": 2906
+  },
+  "porCampoVisivel": {
+    "content.motivation": 120,
+    "content.problem": 148,
+    "content.evolution": 119,
+    "content.concept": 73,
+    "content.internals": 698,
+    "content.architecture": 344,
+    "content.analogy": 74,
+    "content.simpleExample": 70,
+    "content.enterpriseExample": 99,
+    "content.diagram": 2,
+    "content.summary": 119,
+    "content.nextTheme": 37,
+    "security": 336,
+    "troubleshooting": 362,
+    "glossary": 305,
+    "title+subtitle": 23,
+    "objectives": 67,
+    "learningOutcomes": 84,
+    "quiz": 423,
+    "flashcards": 148,
+    "mentorQuestions": 161,
+    "exercises": 346,
+    "challenge": 210,
+    "commentedSolution": 323,
+    "references": 60,
+    "linksToOtherCourses": 52,
+    "lab": 727
+  },
+  "porCampoInvisivel": {
+    "networkContext": 38
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 35,
+    "alternativa_5minPasso_maisLeitura": 35.6,
+    "plausivel": true,
+    "palavras": 727
+  },
+  "duracao": {
+    "declarada": "90-130 min",
+    "estimatedStudyTimeMinutes": 130,
+    "M": 110,
+    "T": 113.4,
+    "partes": {
+      "teoria": 22.4,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 20,
+      "lab": 35
+    },
+    "faixaRecomendada": "95-135 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 22
+  }
+}

@@ -3,7 +3,7 @@
   "moduleId": "m03",
   "order": 8,
   "title": "STP: evitando loops e broadcast storms",
-  "subtitle": "Como switches mantêm redundância sem transformar a LAN em um ciclo destrutivo de frames, broadcast e instabilidade.",
+  "subtitle": "Como switches mantêm redundância física sem transformar a LAN em um ciclo de frames, broadcast e instabilidade.",
   "duration": "90-130 min",
   "estimatedStudyTimeMinutes": 130,
   "difficulty": "iniciante-intermediário",
@@ -90,148 +90,14 @@
       "Arquitetura de campus"
     ]
   },
-  "protocolFields": [
-    {
-      "field": "Bridge ID",
-      "size": "Prioridade + identificador/MAC",
-      "purpose": "Identificar switches na eleição da root bridge.",
-      "securityObservation": "Prioridade incorreta pode permitir root bridge indesejada."
-    },
-    {
-      "field": "BPDU",
-      "size": "PDU de controle de STP",
-      "purpose": "Transportar informações de topologia, root, custo e timers.",
-      "securityObservation": "BPDUs inesperadas em portas de usuário devem ser tratadas como risco operacional."
-    },
-    {
-      "field": "Root Path Cost",
-      "size": "Valor calculado conforme velocidade/custo do caminho",
-      "purpose": "Escolher o melhor caminho até a root bridge.",
-      "securityObservation": "Custos errados podem criar caminhos subótimos e dificultar investigação."
-    },
-    {
-      "field": "Port Role",
-      "size": "Estado lógico da porta",
-      "purpose": "Definir root, designated, alternate/blocked conforme topologia.",
-      "securityObservation": "Portas de usuário não devem influenciar a topologia STP."
-    }
-  ],
-  "packetFlow": [
-    {
-      "step": 1,
-      "actor": "Switches",
-      "action": "Trocam BPDUs.",
-      "detail": "Cada switch anuncia informações de bridge, root conhecida e custo.",
-      "possibleFailure": "BPDUs filtradas ou root indesejada levam a desenho instável."
-    },
-    {
-      "step": 2,
-      "actor": "Domínio L2",
-      "action": "Elege root bridge.",
-      "detail": "O menor Bridge ID vence, considerando prioridade e MAC.",
-      "possibleFailure": "Switch de acesso pode virar raiz se prioridade não for planejada."
-    },
-    {
-      "step": 3,
-      "actor": "Switch não-raiz",
-      "action": "Escolhe root port.",
-      "detail": "A porta com menor custo até a raiz fica como caminho principal.",
-      "possibleFailure": "Custo incorreto ou link ruim pode virar caminho preferencial."
-    },
-    {
-      "step": 4,
-      "actor": "STP",
-      "action": "Bloqueia porta redundante.",
-      "detail": "A porta alternativa deixa de encaminhar frames de dados para quebrar o ciclo.",
-      "possibleFailure": "Se não bloquear, broadcasts podem circular indefinidamente."
-    },
-    {
-      "step": 5,
-      "actor": "Rede em operação",
-      "action": "Converge após falha.",
-      "detail": "Se caminho ativo falha, STP recalcula e libera caminho alternativo.",
-      "possibleFailure": "Convergência lenta ou instável causa indisponibilidade temporária."
-    }
-  ],
-  "deepDive": {
-    "mentalModel": "STP é o freio de segurança da redundância Ethernet: ele não remove os cabos extras, apenas decide quais caminhos podem encaminhar frames sem formar ciclos.",
-    "keyTerms": [
-      "STP",
-      "RSTP",
-      "BPDU",
-      "root bridge",
-      "root port",
-      "designated port",
-      "blocked port",
-      "broadcast storm"
-    ],
-    "limitations": [
-      "STP não substitui bom desenho físico.",
-      "STP não corrige VLANs mal planejadas.",
-      "STP pode convergir lentamente em versões antigas.",
-      "STP não protege sozinho contra todos os ataques de Camada 2."
-    ],
-    "whenToUse": [
-      "Redes Ethernet com caminhos redundantes de Camada 2.",
-      "Switches de acesso e distribuição com uplinks redundantes.",
-      "Ambientes onde loops acidentais podem ocorrer.",
-      "Laboratórios Packet Tracer/GNS3 para entender estabilidade L2."
-    ],
-    "whenNotToUse": [
-      "Como substituto para roteamento adequado em grandes domínios.",
-      "Para mascarar topologia física bagunçada.",
-      "Como única proteção em portas de usuário sem BPDU Guard/storm control."
-    ],
-    "operationalImpact": [
-      "Exige definição de root bridge primária e secundária.",
-      "Exige documentação de trunks, portas de acesso e links redundantes.",
-      "Muda troubleshooting porque uma porta bloqueada pode ser comportamento esperado, não falha."
-    ],
-    "financialImpact": [
-      "Reduz indisponibilidade causada por falha de link, mas exige switches gerenciáveis e tempo de engenharia.",
-      "Falhas de STP podem gerar custo alto de incidente e parada operacional.",
-      "Ferramentas de monitoramento e switches melhores podem aumentar custo inicial, mas reduzem risco."
-    ],
-    "securityImpact": [
-      "Reduz impacto de loops e tempestades acidentais.",
-      "Ajuda a conter mudanças indevidas de topologia quando combinado com Root Guard e BPDU Guard.",
-      "Portas de usuário sem proteção continuam sendo risco relevante."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Conectar dois cabos entre switches sem STP ou agregação correta.",
-      "whyItHappens": "A pessoa acredita que dois cabos significam mais velocidade ou redundância automática.",
-      "consequence": "Loop de Camada 2 e broadcast storm.",
-      "correction": "Usar STP/RSTP ou EtherChannel/LACP corretamente, conforme o objetivo."
-    },
-    {
-      "mistake": "Não definir root bridge planejada.",
-      "whyItHappens": "STP funciona automaticamente, então parece dispensar desenho.",
-      "consequence": "Switch inadequado pode virar raiz e criar caminhos ruins.",
-      "correction": "Configurar prioridade de root primária e secundária."
-    },
-    {
-      "mistake": "Habilitar PortFast em trunk ou porta entre switches.",
-      "whyItHappens": "Confusão entre porta de usuário e porta de infraestrutura.",
-      "consequence": "Risco de loop antes da convergência adequada.",
-      "correction": "Usar PortFast apenas em portas edge/de usuário, com BPDU Guard."
-    },
-    {
-      "mistake": "Achar que porta bloqueada é defeito.",
-      "whyItHappens": "O aluno espera que todo cabo conectado encaminhe tráfego.",
-      "consequence": "Pode remover uma proteção necessária e criar loop.",
-      "correction": "Interpretar estado STP antes de alterar cabos ou portas."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
-      "Rede inteira lenta ou indisponível de repente",
+      "Rede inteira lenta ou indisponível de repente, logo após mudança física",
       "Luzes de switch piscando de forma intensa e contínua",
       "MAC flapping nos logs",
       "CPU alta em switch/firewall",
       "Perda de DHCP, ARP instável e broadcast anormal",
-      "Porta alternando entre estados STP"
+      "Porta alternando entre estados STP ou porta de usuário em err-disabled"
     ],
     "diagnosticQuestions": [
       "Houve mudança física recente em cabos ou switches?",
@@ -258,28 +124,32 @@
       },
       {
         "platform": "Cisco IOS",
-        "command": "show spanning-tree\nshow spanning-tree vlan <id>\nshow mac address-table dynamic\nshow logging | include STP|SPANTREE|MACFLAP\nshow interfaces counters errors",
-        "purpose": "Ver root bridge, estados de portas, MAC flapping, logs e erros.",
-        "expectedObservation": "Root bridge planejada, portas forwarding/blocking coerentes e ausência de MAC flapping excessivo.",
-        "interpretation": "Se root bridge estiver errada ou houver flapping, investigar cabos, trunks e portas de usuário."
+        "command": "show spanning-tree vlan <id>\nshow spanning-tree root\nshow mac address-table dynamic\nshow logging | include STP|SPANTREE|MACFLAP\nshow interfaces status err-disabled\nshow interfaces counters errors",
+        "purpose": "Ver root bridge, papéis e estados das portas, MAC flapping, portas derrubadas por BPDU Guard e erros de interface.",
+        "expectedObservation": "Root bridge planejada, uma porta Altn BLK no ponto previsto, nenhum MAC flapping recorrente e nenhuma porta err-disabled inesperada.",
+        "interpretation": "Root bridge errada ou flapping: investigar cabos, trunks e portas de usuário. Porta err-disabled por BPDU Guard: há switch indevido naquela tomada."
       }
     ],
     "decisionTree": [
       {
         "if": "Há MAC flapping entre duas portas",
-        "then": "Suspeitar de loop, switch indevido, trunk errado ou endpoint bridgeando interfaces."
+        "then": "Suspeitar de loop, switch indevido, trunk errado ou endpoint fazendo bridge entre duas interfaces."
       },
       {
         "if": "Uma porta está blocking/alternate",
-        "then": "Verificar se é comportamento esperado do STP antes de alterar a topologia."
+        "then": "Verificar se é o comportamento esperado do STP antes de alterar a topologia (show spanning-tree interface <porta> detail). Se o objetivo era usar a banda dos dois links, redesenhar com LACP ou roteamento, não desligar o STP."
       },
       {
         "if": "Root bridge não é a planejada",
         "then": "Revisar prioridade STP, Root Guard e desenho de distribuição/core."
       },
       {
+        "if": "Porta de usuário em err-disabled",
+        "then": "BPDU Guard recebeu BPDU: remover o equipamento indevido, confirmar nos logs e só então reabilitar a porta conforme procedimento."
+      },
+      {
         "if": "Broadcast está anormal",
-        "then": "Aplicar contenção operacional, identificar origem e validar storm control."
+        "then": "Aplicar contenção operacional (isolar o link suspeito conforme procedimento), identificar a origem e validar o storm control."
       }
     ]
   },
@@ -287,67 +157,52 @@
     "goodPractices": [
       "Definir root bridge primária e secundária por VLAN/instância.",
       "Usar RSTP/MSTP quando adequado.",
-      "Habilitar BPDU Guard em portas de usuário com PortFast.",
-      "Usar Root Guard onde root não deve aparecer.",
-      "Configurar storm control em portas de acesso.",
-      "Documentar trunks, VLANs permitidas e links redundantes.",
-      "Monitorar mudanças de topologia e MAC flapping."
+      "Documentar trunks, VLANs permitidas e links redundantes (e sanitizar essa documentação antes de compartilhar: ela revela a topologia interna)."
     ],
     "badPractices": [
       "Conectar links redundantes sem controle.",
       "Permitir mini-switches não gerenciados em portas de usuário.",
       "Deixar todos os trunks permitindo todas as VLANs.",
-      "Não definir root bridge.",
       "Desabilitar STP para resolver sintoma sem entender a causa."
-    ],
-    "commonErrors": [
-      "Confundir EtherChannel/LACP com STP.",
-      "Achar que STP aumenta banda.",
-      "Tratar porta bloqueada como defeito sem análise.",
-      "Usar PortFast em porta de switch para switch."
     ],
     "vulnerabilities": [
       {
-        "name": "Loop acidental de Camada 2",
-        "description": "Cabo ou switch indevido cria caminho cíclico para frames Ethernet.",
-        "defensiveExplanation": "O risco principal é indisponibilidade por broadcast storm e instabilidade de tabela MAC.",
-        "mitigation": "RSTP, BPDU Guard, storm control, documentação e controle físico."
+        "name": "Loop de Camada 2 (acidental ou provocado)",
+        "description": "Cabo ou switch indevido cria caminho cíclico para frames Ethernet; o mesmo efeito pode ser provocado de propósito como negação de serviço interna.",
+        "defensiveExplanation": "O risco principal é indisponibilidade da VLAN ou do campus por broadcast storm, CPU alta e tabela MAC instável.",
+        "mitigation": "RSTP, BPDU Guard e storm control nas portas de acesso, documentação e controle físico das tomadas."
       },
       {
         "name": "Root bridge indevida",
-        "description": "Um switch não planejado passa a influenciar a topologia STP.",
-        "defensiveExplanation": "Pode alterar caminhos, piorar desempenho e dificultar investigação.",
-        "mitigation": "Prioridade planejada, Root Guard e monitoramento de eventos STP."
+        "description": "Um switch não planejado (prioridade baixa ou padrão com MAC menor) passa a ser a raiz.",
+        "defensiveExplanation": "Os caminhos da Camada 2 mudam, o desempenho piora e a investigação fica mais difícil.",
+        "mitigation": "Prioridade de root planejada, Root Guard nas portas voltadas ao acesso e alerta de mudança de root."
       },
       {
         "name": "Porta de usuário aceitando BPDUs",
-        "description": "Uma porta edge permite que equipamento conectado participe da topologia STP.",
-        "defensiveExplanation": "A topologia pode ser alterada por erro ou dispositivo não autorizado.",
-        "mitigation": "BPDU Guard, 802.1X/NAC e políticas de porta."
+        "description": "Uma porta edge permite que o equipamento conectado participe da topologia STP.",
+        "defensiveExplanation": "A topologia pode ser alterada por erro ou por dispositivo não autorizado, e um mini-switch pode fechar loop pela borda.",
+        "mitigation": "BPDU Guard, port security, 802.1X/NAC e políticas de porta."
+      },
+      {
+        "name": "Trunk com VLANs demais",
+        "description": "VLANs atravessam trunks onde não deveriam.",
+        "defensiveExplanation": "Um loop ou erro passa a afetar mais VLANs e aumenta a superfície para movimento lateral.",
+        "mitigation": "Allowed VLANs restritas por trunk e revisão de mudanças."
       }
     ],
-    "monitoring": [
-      "Eventos de topologia STP",
-      "Mudança de root bridge",
-      "MAC flapping",
-      "Taxa de broadcast/multicast",
-      "Portas errdisable por BPDU Guard",
-      "CPU alta em switches"
-    ],
     "hardening": [
-      "BPDU Guard em portas edge",
-      "Root Guard em portas estratégicas",
-      "Storm control",
-      "Port security",
-      "802.1X/NAC",
-      "Allowed VLANs restritas em trunks",
-      "Documentação de root e links redundantes"
+      "PortFast + BPDU Guard em portas edge",
+      "Root Guard em portas da distribuição voltadas para o acesso",
+      "Storm control em portas de acesso",
+      "Port security e 802.1X/NAC",
+      "Allowed VLANs restritas em trunks"
     ],
     "detectionIdeas": [
-      "Alertar quando root bridge mudar.",
+      "Alertar quando a root bridge mudar ou houver muitos eventos de mudança de topologia.",
       "Alertar MAC flapping frequente.",
-      "Alertar broadcast acima do baseline.",
-      "Revisar portas com PortFast recebendo BPDU.",
+      "Alertar broadcast/multicast acima do baseline e CPU alta em switches.",
+      "Revisar portas err-disabled por BPDU Guard e portas com PortFast recebendo BPDU.",
       "Correlacionar incidentes de DHCP/ARP com eventos STP."
     ]
   },
@@ -360,9 +215,7 @@
     "topology": "Switch A conectado ao Switch B, Switch B conectado ao Switch C, Switch C conectado ao Switch A. Hosts ligados aos switches B e C na mesma VLAN de laboratório.",
     "architecture": "Camada 2 com redundância física e uma árvore lógica calculada pelo STP/RSTP. O Switch A deve ser a root bridge planejada.",
     "prerequisites": [
-      "Ter concluído as aulas 3.1 a 3.7.",
-      "Opcional: Packet Tracer, GNS3 ou acesso autorizado a switches de laboratório.",
-      "Não executar mudanças em rede corporativa sem autorização."
+      "Opcional: Packet Tracer, GNS3 ou acesso autorizado a switches de laboratório."
     ],
     "tools": [
       "Papel ou editor de desenho",
@@ -370,11 +223,10 @@
       "Terminal Windows/Linux para coleta indireta",
       "Cisco IOS em laboratório opcional"
     ],
-    "estimatedTimeMinutes": 130,
+    "estimatedTimeMinutes": 35,
     "cost": "zero",
     "safetyNotes": [
-      "Não crie loops em rede real.",
-      "Não conecte cabos redundantes em switches corporativos sem mudança aprovada.",
+      "Não crie loops nem conecte cabos redundantes em rede real sem mudança aprovada.",
       "Não desabilite STP para testar impacto.",
       "Sanitize nomes de switches, VLANs, IPs, MACs e topologia antes de compartilhar evidências."
     ],
@@ -382,50 +234,48 @@
       {
         "number": 1,
         "title": "Desenhar a topologia física",
-        "instruction": "Desenhe três switches em triângulo e marque todos os links físicos entre eles.",
-        "analysisTask": "Desenhar a topologia física em papel, editor de desenho, Packet Tracer ou GNS3 e identificar visualmente o ciclo.",
+        "instruction": "Desenhe os três switches em triângulo (papel, editor de desenho, Packet Tracer ou GNS3), marque todos os links físicos e identifique o ciclo.",
         "expectedOutput": "Diagrama físico com Switch A, Switch B e Switch C conectados em ciclo.",
-        "explanation": "A topologia física possui redundância, mas também cria potencial de loop."
+        "explanation": "A topologia física tem redundância, mas também cria potencial de loop."
       },
       {
         "number": 2,
         "title": "Definir root bridge planejada",
-        "instruction": "Escolha o Switch A como root bridge e anote por que ele deve ser a raiz.",
+        "instruction": "Escolha o Switch A como root bridge, anote por que ele deve ser a raiz e atribua prioridade e MAC aos três switches (pode usar os valores do exemplo resolvido ou outros).",
         "command": "Cisco IOS conceitual: spanning-tree vlan 10 priority 4096",
-        "expectedOutput": "Switch A planejado como raiz da VLAN/instância.",
-        "explanation": "A root bridge deve ficar em ponto central e previsível da arquitetura."
+        "expectedOutput": "Switch A com o menor Bridge ID da VLAN 10.",
+        "explanation": "A root bridge deve ficar num ponto central e previsível da arquitetura, não depender do MAC mais baixo."
       },
       {
         "number": 3,
-        "title": "Identificar portas esperadas",
-        "instruction": "Marque root ports, designated ports e uma porta alternativa/bloqueada para quebrar o ciclo.",
+        "title": "Identificar papéis das portas",
+        "instruction": "Com os Bridge IDs e custos, marque root ports, designated ports e a porta alternate que quebra o ciclo. Justifique o desempate no link B–C.",
         "command": "Cisco IOS validação: show spanning-tree vlan 10",
-        "expectedOutput": "Portas em forwarding nos caminhos principais e uma porta em alternate/blocking no caminho redundante.",
-        "explanation": "A porta bloqueada não é defeito; ela evita loop."
+        "expectedOutput": "Portas de A designated; uma root port em B e outra em C; no link B–C, designated no switch de menor Bridge ID e Altn BLK no outro.",
+        "explanation": "A porta bloqueada não é defeito; ela evita o loop."
       },
       {
         "number": 4,
         "title": "Listar sintomas de loop",
-        "instruction": "Monte uma lista de sintomas que indicariam broadcast storm ou instabilidade de STP.",
+        "instruction": "Monte uma lista de sintomas que indicariam broadcast storm ou instabilidade de STP e a fonte de cada um.",
         "command": "show logging | include STP|SPANTREE|MACFLAP",
         "expectedOutput": "Lista com MAC flapping, broadcast alto, CPU alta, perda de conectividade e mudança de topologia.",
-        "explanation": "Sintomas ajudam a priorizar investigação sem chutar causa."
+        "explanation": "Sintomas ajudam a priorizar a investigação sem chutar a causa."
       },
       {
         "number": 5,
         "title": "Planejar proteções de porta",
-        "instruction": "Defina onde usar BPDU Guard, Root Guard, PortFast e storm control.",
-        "command": "Cisco IOS conceitual: spanning-tree portfast\nspanning-tree bpduguard enable\nstorm-control broadcast level ...",
+        "instruction": "Defina onde usar BPDU Guard, Root Guard, PortFast e storm control nessa topologia, incluindo as portas dos hosts em B e C.",
+        "command": "Cisco IOS conceitual:\nspanning-tree portfast\nspanning-tree bpduguard enable\nstorm-control broadcast level <percentual>",
         "expectedOutput": "Tabela de controles por tipo de porta: usuário, trunk, uplink e infraestrutura.",
-        "explanation": "Controles de borda reduzem risco de loops acidentais ou equipamentos indevidos."
+        "explanation": "Controles de borda reduzem o risco de loops acidentais e de equipamentos indevidos."
       },
       {
         "number": 6,
         "title": "Criar relatório sanitizado",
-        "instruction": "Escreva um relatório com topologia, riscos, evidências esperadas e recomendações.",
-        "analysisTask": "Produzir relatório sanitizado com topologia, riscos, evidências esperadas e recomendações defensivas.",
+        "instruction": "Escreva um relatório com topologia, riscos, evidências esperadas e recomendações defensivas.",
         "expectedOutput": "Relatório sem nomes reais, IPs públicos, MACs completos ou informações sensíveis.",
-        "explanation": "Documentação de STP é útil para operação e segurança, mas também pode revelar topologia interna."
+        "explanation": "A documentação de STP é útil para operação e segurança, mas também revela a topologia interna."
       }
     ],
     "expectedResult": "O aluno deve produzir um desenho de topologia redundante, identificar a root bridge planejada, apontar a porta bloqueada pelo STP, listar evidências de loop e recomendar controles defensivos.",
@@ -455,55 +305,21 @@
         "ifFails": "Planejar configuração defensiva antes de produção."
       }
     ],
-    "troubleshooting": [
-      {
-        "symptom": "Broadcast alto e rede instável",
-        "probableCause": "Loop de Camada 2 ou storm.",
-        "howToConfirm": "Ver MAC flapping, eventos STP, taxa de broadcast e mudanças físicas recentes.",
-        "fix": "Isolar link suspeito conforme procedimento, validar STP e aplicar controles."
-      },
-      {
-        "symptom": "Switch de acesso virou root",
-        "probableCause": "Prioridade STP não planejada.",
-        "howToConfirm": "show spanning-tree root ou equivalente.",
-        "fix": "Configurar root primária/secundária e Root Guard."
-      },
-      {
-        "symptom": "Porta de usuário em errdisable",
-        "probableCause": "BPDU Guard recebeu BPDU de switch conectado indevidamente.",
-        "howToConfirm": "show interface status err-disabled e logs.",
-        "fix": "Remover equipamento indevido, validar política e reabilitar conforme procedimento."
-      },
-      {
-        "symptom": "Porta bloqueada e usuário reclama de link redundante sem tráfego",
-        "probableCause": "STP bloqueou caminho para evitar loop.",
-        "howToConfirm": "show spanning-tree interface <porta> detail.",
-        "fix": "Explicar comportamento esperado ou redesenhar com LACP/roteamento se objetivo for usar banda ativa."
-      }
-    ],
     "improvements": [
-      "Simular a topologia no Packet Tracer ou GNS3.",
-      "Criar tabela de root primária/secundária por VLAN.",
-      "Adicionar alertas de mudança de root e MAC flapping.",
-      "Revisar allowed VLANs em trunks.",
-      "Documentar portas edge com BPDU Guard."
+      "Simular a topologia no Packet Tracer ou GNS3, derrubar o link A–B e observar a porta alternate passar a encaminhar.",
+      "Adicionar alertas de mudança de root e MAC flapping."
     ],
     "evidenceToCollect": [
-      "Diagrama físico",
-      "Diagrama lógico STP",
-      "Root bridge planejada",
-      "Portas forwarding e blocked/alternate",
+      "Diagrama físico e diagrama lógico STP",
+      "Root bridge planejada e Bridge IDs usados",
+      "Portas forwarding e alternate/blocked",
       "Logs de STP ou MAC flapping sanitizados",
       "Tabela de controles por porta"
     ],
     "questions": [
-      "Por que STP bloqueia uma porta em uma topologia redundante?",
-      "Por que uma porta bloqueada pode ser comportamento correto?",
-      "Qual o risco de um switch de usuário enviar BPDU?",
+      "Se o link A–B cair, quais portas mudam de papel e por quê?",
       "Por que storm control não substitui STP?"
-    ],
-    "challenge": "Propor uma política defensiva para uma rede com switches de acesso redundantes, impedindo loops acidentais em portas de usuário.",
-    "solution": "A solução deve definir root primária/secundária, RSTP/MSTP conforme necessidade, BPDU Guard em portas edge, Root Guard onde root não deve aparecer, storm control, trunks restritos, documentação e alertas de mudança de topologia. Não se deve desabilitar STP para resolver bloqueio sem entender a topologia."
+    ]
   },
   "mentorQuestions": [
     {
@@ -557,31 +373,31 @@
   ],
   "quiz": [
     {
-      "id": "q3.8.1",
-      "question": "Qual problema o STP resolve principalmente?",
+      "id": "q3.8.7",
+      "question": "Na mesma VLAN, o Switch X tem prioridade 32768 e MAC 0011.1111.1111; o Switch Y tem prioridade 4096 e MAC 00ff.ffff.ffff; o Switch Z tem prioridade 32768 e MAC 0000.0000.0001. Qual vira root bridge?",
       "options": [
-        "Loops de Camada 2 em topologias Ethernet redundantes",
-        "Criptografia de tráfego HTTP",
-        "Resolução de nomes DNS",
-        "Cálculo de sub-redes IPv4"
+        "Z, porque tem o menor MAC",
+        "Y, porque tem a menor prioridade",
+        "X, porque tem prioridade padrão e MAC intermediário",
+        "Nenhum: com prioridades diferentes, a eleição empata e o STP bloqueia todos"
       ],
-      "answer": 0,
-      "explanation": "STP cria uma topologia lógica sem ciclos para evitar loops e broadcast storms em Camada 2.",
-      "topic": "STP",
-      "difficulty": "iniciante",
-      "type": "conceito"
+      "answer": 1,
+      "explanation": "O Bridge ID é comparado primeiro pela prioridade; o MAC só desempata quando as prioridades são iguais. Y tem 4096, a menor.",
+      "topic": "eleição da root bridge",
+      "difficulty": "intermediário",
+      "type": "cálculo"
     },
     {
       "id": "q3.8.2",
-      "question": "Qual sintoma é fortemente associado a loop de Camada 2?",
+      "question": "Qual evidência aponta mais fortemente para um loop de Camada 2?",
       "options": [
-        "MAC flapping e broadcast storm",
-        "Erro 404 em uma página específica",
-        "Senha expirada no IAM",
-        "Certificado TLS vencido"
+        "Erros de CRC crescendo em uma única porta de acesso",
+        "Um único site externo lento enquanto o resto da rede funciona",
+        "O mesmo MAC aparecendo alternadamente em duas portas de uplink, com broadcast muito acima do normal",
+        "Uma porta Altn BLK estável na saída de show spanning-tree"
       ],
-      "answer": 0,
-      "explanation": "MAC flapping, broadcast alto e instabilidade geral são indícios típicos de problemas de Camada 2.",
+      "answer": 2,
+      "explanation": "MAC flapping com broadcast anormal é a assinatura típica de loop. CRC numa porta indica problema físico local, lentidão de um site externo não é L2 local e uma porta Altn BLK estável é o STP funcionando.",
       "topic": "troubleshooting",
       "difficulty": "intermediário",
       "type": "diagnóstico"
@@ -603,15 +419,15 @@
     },
     {
       "id": "q3.8.4",
-      "question": "Qual controle ajuda a impedir que uma porta de usuário participe indevidamente da topologia STP?",
+      "question": "Uma porta de sala de reunião com PortFast recebe uma BPDU de um mini-switch conectado por um usuário. Qual recurso coloca essa porta em err-disabled?",
       "options": [
-        "BPDU Guard",
-        "Base64",
-        "NAT overload",
-        "DNS recursion"
+        "Root Guard",
+        "Storm control",
+        "PortFast",
+        "BPDU Guard"
       ],
-      "answer": 0,
-      "explanation": "BPDU Guard desabilita ou protege a porta quando recebe BPDU inesperada em porta edge.",
+      "answer": 3,
+      "explanation": "BPDU Guard derruba (err-disabled) a porta edge que recebe qualquer BPDU. Root Guard só bloqueia BPDU que anuncia raiz melhor, storm control limita volume de tráfego e PortFast apenas acelera a porta.",
       "topic": "hardening",
       "difficulty": "intermediário",
       "type": "segurança"
@@ -632,31 +448,31 @@
       "type": "arquitetura"
     },
     {
-      "id": "q3.8.6",
-      "question": "Qual comando Cisco é mais diretamente útil para verificar a topologia STP?",
+      "id": "q3.8.8",
+      "question": "Por que não se deve habilitar PortFast em uma porta que liga dois switches?",
       "options": [
-        "show spanning-tree",
-        "show ip nat translations",
-        "show crypto ikev2 sa",
-        "show users"
+        "Porque PortFast impede o switch de enviar BPDUs por qualquer porta",
+        "Porque a porta pula listening/learning e pode encaminhar antes de o STP detectar um ciclo",
+        "Porque PortFast limita o link a 100 Mbps",
+        "Porque PortFast só funciona em trunks 802.1Q"
       ],
-      "answer": 0,
-      "explanation": "show spanning-tree mostra root, portas, estados e informações de STP.",
-      "topic": "Cisco IOS",
-      "difficulty": "iniciante",
-      "type": "comando"
+      "answer": 1,
+      "explanation": "PortFast coloca a porta direto em forwarding, o que só é seguro onde há um único host. Entre switches, isso pode abrir um loop antes da convergência.",
+      "topic": "PortFast",
+      "difficulty": "intermediário",
+      "type": "arquitetura"
     }
   ],
   "flashcards": [
     {
-      "id": "fc3.8.1",
-      "front": "O que é STP?",
-      "back": "Protocolo de Camada 2 que evita loops Ethernet criando uma topologia lógica sem ciclos.",
+      "id": "fc3.8.7",
+      "front": "Como o STP desempata a escolha da root port quando dois caminhos têm o mesmo custo?",
+      "back": "Prefere a porta que recebe BPDU do vizinho com menor Bridge ID; persistindo o empate, a do menor Port ID (prioridade da porta + número).",
       "tags": [
         "stp",
-        "camada 2"
+        "root port"
       ],
-      "difficulty": "iniciante"
+      "difficulty": "intermediário"
     },
     {
       "id": "fc3.8.2",
@@ -669,14 +485,14 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc3.8.3",
-      "front": "O que é BPDU?",
-      "back": "Mensagem de controle usada por switches para trocar informações de STP.",
+      "id": "fc3.8.8",
+      "front": "Prioridade STP: valores possíveis e padrão?",
+      "back": "De 0 a 61440, em múltiplos de 4096; padrão 32768. Em STP por VLAN, a saída mostra prioridade + VLAN (32768 na VLAN 10 = 32778).",
       "tags": [
-        "bpdu",
-        "stp"
+        "stp",
+        "bridge id"
       ],
-      "difficulty": "iniciante"
+      "difficulty": "intermediário"
     },
     {
       "id": "fc3.8.4",
@@ -711,41 +527,34 @@
   ],
   "exercises": [
     {
-      "id": "ex3.8.1",
-      "type": "conceitual",
-      "prompt": "Explique com suas palavras por que Ethernet precisa de STP em topologias redundantes.",
-      "expectedAnswer": "Porque frames Ethernet não têm TTL e switches replicam broadcast/flooding; em loop, frames podem circular indefinidamente e gerar broadcast storm.",
-      "explanation": "A resposta deve conectar loop, flooding, broadcast e ausência de TTL em Camada 2."
+      "id": "ex3.8.5",
+      "type": "cálculo",
+      "prompt": "Quatro switches na VLAN 20, todos com links de 1 Gbps (custo 4): D1 (prioridade 4096), D2 (prioridade 8192), A1 e A2 (prioridade 32768, MAC de A1 menor que o de A2). Links: D1–D2, D1–A1, D1–A2, D2–A1, D2–A2. Indique a root bridge, a root port de cada switch e as portas que ficam alternate.",
+      "expectedAnswer": "Root: D1 (menor prioridade); todas as portas de D1 são designated. D2: root port para D1 (custo 4). A1 e A2: root port no link direto para D1 (custo 4; via D2 custaria 8). Nos links D2–A1 e D2–A2, D2 e o switch de acesso têm o mesmo custo até a raiz (4); o desempate pelo Bridge ID favorece D2 (8192 < 32768), então as portas de D2 são designated e as portas de A1 e A2 para D2 ficam alternate.",
+      "explanation": "Primeiro a raiz, depois a root port de cada switch, depois a designated de cada link; o que sobrar é alternate."
     },
     {
-      "id": "ex3.8.2",
-      "type": "diagnóstico",
-      "prompt": "Liste cinco evidências que você procuraria em um possível loop de Camada 2.",
-      "expectedAnswer": "MAC flapping, eventos STP, mudança de root, broadcast alto, CPU alta no switch, portas errdisable por BPDU Guard, perda generalizada na VLAN.",
-      "explanation": "Essas evidências ajudam a confirmar problema L2 antes de culpar DNS, HTTP ou aplicação."
-    },
-    {
-      "id": "ex3.8.3",
-      "type": "arquitetura",
-      "prompt": "Em uma rede com dois switches de distribuição e vários switches de acesso, onde faria sentido posicionar a root bridge?",
-      "expectedAnswer": "Em um switch de distribuição/core central e previsível, com secundária no outro equipamento de distribuição, evitando que switches de acesso virem root.",
-      "explanation": "Root bridge deve refletir o desenho lógico desejado da rede."
+      "id": "ex3.8.6",
+      "type": "leitura de saída",
+      "prompt": "Num switch de acesso, show spanning-tree vlan 30 mostra: Root ID Priority 4126; Bridge ID Priority 32798 (priority 32768 sys-id-ext 30); Gi0/1 Root FWD 4; Gi0/2 Altn BLK 4; Gi0/5 Desg FWD 19 P2p Edge. Este switch é a raiz? O que cada porta está fazendo? Há algo a corrigir?",
+      "expectedAnswer": "Não é a raiz (Root ID diferente do Bridge ID; a raiz tem prioridade 4096, já que 4126 = 4096 + 30). Gi0/1 é a root port, Gi0/2 é a alternate que quebra o ciclo (esperado) e Gi0/5 é uma porta de host de 100 Mbps (custo 19) com PortFast. Nada a corrigir; apenas confirmar que Gi0/5 tem BPDU Guard.",
+      "explanation": "Some a VLAN à prioridade configurada para ler os números e use a coluna Role para separar root, designated e alternate."
     },
     {
       "id": "ex3.8.4",
       "type": "segurança",
       "prompt": "Explique a diferença entre BPDU Guard, Root Guard e storm control.",
-      "expectedAnswer": "BPDU Guard protege portas edge contra BPDUs inesperadas; Root Guard impede que uma porta aceite root superior onde não deveria; storm control limita tráfego broadcast/multicast/unknown unicast acima de limiares.",
-      "explanation": "Os controles são complementares e atuam em problemas diferentes."
+      "expectedAnswer": "BPDU Guard coloca em err-disabled a porta edge que recebe qualquer BPDU; Root Guard bloqueia (root-inconsistent) a porta que recebe BPDU anunciando raiz melhor, preservando a root planejada; storm control limita broadcast, multicast e unknown unicast acima de um limiar.",
+      "explanation": "Os três se complementam: cada um atua em um problema diferente."
     }
   ],
   "challenge": {
     "title": "Projetar redundância segura para uma LAN pequena",
-    "scenario": "Uma empresa tem três switches: um de distribuição e dois de acesso. Ela quer redundância entre os switches, mas já sofreu uma indisponibilidade causada por loop acidental em uma sala de reunião.",
+    "scenario": "Uma empresa tem dois switches de distribuição (D1 e D2) e dois switches de acesso (A1 e A2), cada acesso com um uplink para cada distribuição, nas VLANs 10 e 20. Ela quer redundância, mas já sofreu uma indisponibilidade causada por loop acidental em uma sala de reunião.",
     "tasks": [
-      "Definir root bridge primária e secundária.",
+      "Definir root bridge primária e secundária, com as prioridades.",
+      "Desenhar a topologia física e a lógica, indicando quais portas ficam alternate e o que muda se D1 falhar.",
       "Indicar onde usar BPDU Guard, Root Guard, PortFast e storm control.",
-      "Desenhar a topologia física e lógica.",
       "Criar plano de validação com comandos.",
       "Listar riscos residuais e evidências a monitorar."
     ],
@@ -766,12 +575,12 @@
       {
         "criterion": "Root bridge planejada",
         "points": 20,
-        "description": "Define primária e secundária coerentes com a topologia."
+        "description": "Define primária e secundária coerentes com a topologia e explica a convergência se a primária falhar."
       },
       {
         "criterion": "Controles de borda",
         "points": 25,
-        "description": "Aplica BPDU Guard, PortFast e storm control adequadamente."
+        "description": "Aplica PortFast, BPDU Guard, Root Guard e storm control nos lugares certos."
       },
       {
         "criterion": "Troubleshooting",
@@ -791,16 +600,16 @@
     ]
   },
   "commentedSolution": {
-    "reasoning": "Primeiro identificamos onde existe redundância física e onde poderia haver loop. Depois escolhemos uma root bridge central e previsível. Em seguida protegemos portas de usuário, porque loops acidentais frequentemente surgem na borda. Por fim definimos evidências de validação e monitoramento.",
+    "reasoning": "Primeiro identificamos onde há redundância física e onde poderia haver loop. Depois escolhemos uma raiz central e previsível e uma secundária para assumir se ela cair. Em seguida protegemos as portas de usuário, porque loops acidentais costumam surgir na borda. Por fim definimos evidências de validação e monitoramento.",
     "steps": [
-      "Desenhar a topologia física.",
-      "Escolher switch de distribuição como root primária.",
-      "Escolher outro equipamento central como root secundária.",
-      "Usar BPDU Guard e PortFast apenas em portas de usuário.",
-      "Usar Root Guard em portas onde root não deve aparecer.",
-      "Aplicar storm control conforme política.",
-      "Validar com show spanning-tree, logs e tabela MAC.",
-      "Documentar e sanitizar evidências."
+      "Desenhar a topologia física: cada acesso com dois uplinks forma ciclos via D1 e D2.",
+      "D1 como root primária das VLANs 10 e 20 (spanning-tree vlan 10,20 priority 4096) e D2 como secundária (prioridade 8192).",
+      "Topologia lógica: os uplinks de A1 e A2 para D1 encaminham; os uplinks para D2 ficam alternate. Se D1 falhar, D2 vira raiz e esses uplinks passam a encaminhar.",
+      "PortFast + BPDU Guard e storm control só nas portas de usuário.",
+      "Root Guard nas portas de D1 e D2 voltadas para A1 e A2.",
+      "Trunks com allowed VLANs restritas a 10 e 20.",
+      "Validar com show spanning-tree vlan 10 e 20, show spanning-tree root, logs de STP/MACFLAP, show interfaces status err-disabled e tabela MAC.",
+      "Documentar e sanitizar as evidências."
     ],
     "commonWrongAnswers": [
       {
@@ -809,14 +618,18 @@
       },
       {
         "answer": "Conectar dois cabos entre switches para dobrar velocidade.",
-        "whyItIsWrong": "Sem agregação correta ou STP, isso cria risco de loop. STP pode bloquear um dos links; LACP é outro assunto."
+        "whyItIsWrong": "Sem agregação, isso cria risco de loop e o STP bloqueia um dos links. Para usar os dois, o caminho é EtherChannel/LACP."
       },
       {
         "answer": "Deixar qualquer switch virar root.",
-        "whyItIsWrong": "A topologia lógica fica imprevisível e pode usar caminhos ruins."
+        "whyItIsWrong": "Com prioridades padrão, vence o menor MAC, que pode ser um switch de acesso antigo; a topologia lógica fica imprevisível."
+      },
+      {
+        "answer": "Colocar a root secundária em um switch de acesso.",
+        "whyItIsWrong": "Se D1 cair, o tráfego entre acessos passaria por um switch de borda; a secundária deve ser a outra distribuição."
       }
     ],
-    "finalAnswer": "Uma solução defensiva define root primária/secundária, mantém RSTP/MSTP conforme arquitetura, protege portas de usuário com PortFast e BPDU Guard, usa Root Guard em pontos estratégicos, aplica storm control, restringe trunks, monitora MAC flapping e mudanças de root, e documenta topologia física/lógica."
+    "finalAnswer": "D1 root primária e D2 secundária, RSTP/MSTP conforme a arquitetura, PortFast + BPDU Guard e storm control nas portas de usuário, Root Guard nas portas da distribuição voltadas ao acesso, trunks restritos, monitoramento de MAC flapping e mudança de root, e topologia física e lógica documentadas."
   },
   "glossary": [
     {
@@ -900,6 +713,19 @@
       "relatedTerms": [
         "root bridge",
         "BPDU"
+      ],
+      "relatedLessons": [
+        "3.8"
+      ]
+    },
+    {
+      "term": "PortFast",
+      "shortDefinition": "Faz uma porta de host encaminhar logo que o link sobe.",
+      "longDefinition": "Recurso que leva a porta direto para forwarding, sem esperar as etapas listening e learning do STP. No RSTP, o equivalente é a porta edge. Só deve ser usado em portas com um único host.",
+      "example": "A porta de um notebook encaminha imediatamente, em vez de esperar cerca de 30 s.",
+      "relatedTerms": [
+        "BPDU Guard",
+        "porta edge"
       ],
       "relatedLessons": [
         "3.8"
