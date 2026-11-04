@@ -1,0 +1,10 @@
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>Nas camadas superiores, muitos riscos são invisíveis para testes simples de conectividade. Um serviço pode estar acessível e ainda assim inseguro por aceitar TLS fraco, expor headers sensíveis, registrar tokens em log, permitir sessão sem expiração, aceitar CORS amplo, não validar Content-Type, retornar erros verbosos ou confiar em Base64 como se fosse criptografia.</p>
+  <table class="data-table risk-table"><thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead><tbody>
+    <tr><td>Certificado inválido</td><td>Erro TLS, alerta no navegador ou falha em pipeline</td><td>Interrupção ou risco de interceptação</td><td>Inventário, renovação automática, validação de cadeia e monitoramento</td></tr>
+    <tr><td>Token em log</td><td>Headers Authorization ou cookies gravados sem sanitização</td><td>Roubo de sessão ou acesso indevido</td><td>Mascaramento, DLP, menor privilégio e rotação</td></tr>
+    <tr><td>WAF mal calibrado</td><td>Bloqueios 403 ou bypass de payloads perigosos</td><td>Indisponibilidade ou exposição</td><td>Modo monitorado, tuning, testes controlados e revisão de regras</td></tr>
+    <tr><td>CORS permissivo</td><td>Origins amplas e credenciais permitidas indevidamente</td><td>Exposição de dados em contexto web</td><td>Origins explícitas, revisão de credenciais e testes defensivos</td></tr>
+  </tbody></table>
+</section>

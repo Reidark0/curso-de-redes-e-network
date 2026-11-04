@@ -1,0 +1,83 @@
+{
+  "id": "2.7",
+  "versao": "original",
+  "titulo": "Camadas 5, 6 e 7 — Sessão, Apresentação e Aplicação",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4055,
+    "invisiveis": 772,
+    "teoriaVisivel": 2659
+  },
+  "porCampoVisivel": {
+    "content.motivation": 184,
+    "content.history": 174,
+    "content.problem": 153,
+    "content.evolution": 170,
+    "content.concept": 115,
+    "content.internals": 160,
+    "content.architecture": 117,
+    "content.analogy": 108,
+    "content.simpleExample": 84,
+    "content.enterpriseExample": 106,
+    "content.cloudExample": 103,
+    "content.devsecopsExample": 107,
+    "content.securityExample": 152,
+    "content.diagram": 3,
+    "content.summary": 72,
+    "content.nextTheme": 39,
+    "security": 311,
+    "troubleshooting": 290,
+    "glossary": 211,
+    "title+subtitle": 34,
+    "objectives": 76,
+    "learningOutcomes": 94,
+    "quiz": 267,
+    "flashcards": 117,
+    "mentorQuestions": 145,
+    "exercises": 162,
+    "challenge": 169,
+    "commentedSolution": 212,
+    "references": 65,
+    "linksToOtherCourses": 55
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 40,
+    "content.exercisesIntro": 14,
+    "content.challengeIntro": 30,
+    "content.solutionIntro": 25,
+    "networkContext": 40,
+    "protocolFields": 124,
+    "packetFlow": 104,
+    "deepDive": 259,
+    "commonMistakes": 136
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "85-120 min",
+    "estimatedStudyTimeMinutes": 120,
+    "M": 102.5,
+    "T": 82.5,
+    "partes": {
+      "teoria": 20.5,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "70-100 min",
+    "vereditoAutomatico": "INFLADA",
+    "pctTeoria": 28
+  }
+}

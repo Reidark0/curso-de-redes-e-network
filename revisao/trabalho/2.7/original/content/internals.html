@@ -1,0 +1,15 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>Considere um acesso HTTPS a uma API. Várias funções superiores aparecem em sequência.</p>
+  <ol class="flow-list">
+    <li>O cliente resolve o nome da API usando DNS.</li>
+    <li>O cliente estabelece TCP com a porta de destino, normalmente 443.</li>
+    <li>O cliente inicia TLS, valida certificado, negocia parâmetros e estabelece canal criptografado.</li>
+    <li>A aplicação envia uma requisição HTTP com método, caminho, headers, corpo e Content-Type.</li>
+    <li>O servidor interpreta o formato do corpo, por exemplo JSON em UTF-8.</li>
+    <li>O servidor valida sessão, cookie, token, claim, escopo ou política de acesso.</li>
+    <li>A aplicação executa lógica de negócio e responde com código, headers e payload.</li>
+    <li>Proxy, WAF, API gateway e logs podem registrar, transformar, bloquear ou enriquecer a transação.</li>
+  </ol>
+  <p>Uma falha em qualquer ponto muda o tipo de evidência. Certificado expirado não é falha de roteamento. HTTP 401 não é porta fechada. JSON inválido não é problema de cabo. Erro de CORS não é ausência de internet. Essa separação reduz retrabalho entre redes, segurança, plataforma e desenvolvimento.</p>
+</section>

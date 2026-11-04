@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--enterprise">
+  <h2>10. Exemplo empresarial</h2>
+  <p>Em uma empresa, o usuário acessa um portal interno. O tráfego passa por proxy, firewall, load balancer, WAF, aplicação e provedor de identidade. O usuário reclama que "a rede caiu". O analista verifica que TCP/443 estabelece, TLS está válido, mas o WAF bloqueou a requisição por header ausente ou payload fora do padrão. O problema é de camada de aplicação/política, não de cabo, rota ou porta.</p>
+  <p>Essa distinção muda a equipe envolvida, a evidência coletada e a solução. Talvez seja necessário ajustar uma regra de WAF, corrigir o cliente, renovar certificado, ajustar cookie SameSite, sincronizar relógio do IdP ou revisar escopos de token.</p>
+</section>
