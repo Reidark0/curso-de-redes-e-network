@@ -1,0 +1,17 @@
+
+<section class="lesson-section lesson-section--example">
+  <h2>9. Exemplo simples</h2>
+  <p>
+    Seu notebook não abre um site. Pensando em camadas, você não começa alterando o DNS sem motivo. Primeiro verifica se o Wi-Fi está conectado. Depois verifica se recebeu IP. Depois testa gateway. Depois testa resolução de nomes. Depois testa conexão na porta. Depois observa TLS/HTTP. Por fim, analisa login, sessão e erro da aplicação.
+  </p>
+  <table class="data-table">
+    <thead><tr><th>Pergunta</th><th>Camada aproximada</th><th>Ferramenta</th></tr></thead>
+    <tbody>
+      <tr><td>Estou conectado ao meio?</td><td>Física/enlace</td><td>Ícone de rede, status da interface</td></tr>
+      <tr><td>Tenho IP e gateway?</td><td>Rede</td><td><code>ipconfig</code>, <code>ip addr</code>, <code>ip route</code></td></tr>
+      <tr><td>O nome resolve?</td><td>Aplicação/serviço essencial</td><td><code>nslookup</code>, <code>dig</code></td></tr>
+      <tr><td>A porta responde?</td><td>Transporte</td><td><code>Test-NetConnection</code>, <code>curl -v</code></td></tr>
+      <tr><td>A aplicação aceita?</td><td>Aplicação/identidade</td><td>Status HTTP, logs, token, sessão</td></tr>
+    </tbody>
+  </table>
+</section>

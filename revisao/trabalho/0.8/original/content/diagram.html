@@ -1,0 +1,31 @@
+
+<section class="lesson-section lesson-section--diagram">
+  <h2>14. Diagrama SVG</h2>
+  <svg class="lesson-svg" viewBox="0 0 980 520" role="img" aria-labelledby="m00l08-title m00l08-desc">
+    <title id="m00l08-title">Pensamento em camadas aplicado ao troubleshooting</title>
+    <desc id="m00l08-desc">Diagrama em pilha mostrando física, enlace, rede, transporte, aplicação, identidade, política e observabilidade.</desc>
+    <defs>
+      <marker id="m00l08-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
+      </marker>
+    </defs>
+    <rect x="80" y="400" width="820" height="48" rx="12" class="svg-node" />
+    <text x="490" y="430" text-anchor="middle" class="svg-label">Física: sinal, cabo, fibra, rádio, energia, interferência</text>
+    <rect x="110" y="345" width="760" height="48" rx="12" class="svg-node svg-node--switch" />
+    <text x="490" y="375" text-anchor="middle" class="svg-label">Enlace: Ethernet, Wi-Fi, MAC, VLAN, quadro local</text>
+    <rect x="140" y="290" width="700" height="48" rx="12" class="svg-node svg-node--router" />
+    <text x="490" y="320" text-anchor="middle" class="svg-label">Rede: IP, rota, gateway, sub-rede, caminho</text>
+    <rect x="170" y="235" width="640" height="48" rx="12" class="svg-node svg-node--server" />
+    <text x="490" y="265" text-anchor="middle" class="svg-label">Transporte: TCP, UDP, portas, sessão, timeout</text>
+    <rect x="200" y="180" width="580" height="48" rx="12" class="svg-node svg-node--cloud" />
+    <text x="490" y="210" text-anchor="middle" class="svg-label">Aplicação: DNS, HTTP, TLS, API, erro, payload</text>
+    <rect x="230" y="125" width="520" height="48" rx="12" class="svg-node svg-node--security" />
+    <text x="490" y="155" text-anchor="middle" class="svg-label">Identidade e autorização: usuário, token, claims, grupos</text>
+    <rect x="260" y="70" width="460" height="48" rx="12" class="svg-node svg-node--firewall" />
+    <text x="490" y="100" text-anchor="middle" class="svg-label">Política e observabilidade: WAF, logs, SIEM, auditoria</text>
+    <line x1="930" y1="425" x2="930" y2="92" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l08-arrow)" />
+    <text x="925" y="260" text-anchor="end" class="svg-label svg-label--small">subir hipóteses</text>
+    <line x1="50" y1="92" x2="50" y2="425" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m00l08-arrow)" />
+    <text x="55" y="260" class="svg-label svg-label--small">descer para validar base</text>
+  </svg>
+</section>

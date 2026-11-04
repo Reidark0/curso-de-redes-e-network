@@ -1,0 +1,10 @@
+
+<section class="lesson-section lesson-section--devsecops">
+  <h2>12. Exemplo em DevSecOps</h2>
+  <p>
+    Um pipeline que publica uma imagem em um registry pode falhar em várias camadas. O runner pode não resolver o DNS do registry. O firewall pode bloquear a porta 443. O proxy pode exigir configuração. TLS pode falhar por CA ausente. O registry pode rejeitar autenticação. A política pode negar push para aquela tag. O scanner pode bloquear por vulnerabilidade crítica. Tudo aparece como falha de pipeline, mas não é o mesmo problema.
+  </p>
+  <p>
+    Pensar em camadas evita correções ruins, como colocar segredo estático no pipeline quando o problema era OIDC audience incorreta, ou liberar saída irrestrita quando bastava configurar proxy. Em DevSecOps, camadas conectam rede, plataforma, identidade, supply chain e política como partes de um mesmo fluxo controlado.
+  </p>
+</section>

@@ -1,0 +1,81 @@
+{
+  "id": "0.8",
+  "versao": "original",
+  "titulo": "Como pensar em camadas",
+  "tipo": "ligação",
+  "palavras": {
+    "visiveis": 3973,
+    "invisiveis": 535,
+    "teoriaVisivel": 2666
+  },
+  "porCampoVisivel": {
+    "content.motivation": 231,
+    "content.history": 153,
+    "content.problem": 142,
+    "content.evolution": 119,
+    "content.concept": 120,
+    "content.internals": 168,
+    "content.architecture": 92,
+    "content.analogy": 136,
+    "content.simpleExample": 105,
+    "content.enterpriseExample": 114,
+    "content.cloudExample": 141,
+    "content.devsecopsExample": 122,
+    "content.securityExample": 146,
+    "content.diagram": 3,
+    "content.summary": 51,
+    "content.nextTheme": 54,
+    "security": 281,
+    "troubleshooting": 296,
+    "glossary": 192,
+    "title+subtitle": 22,
+    "objectives": 73,
+    "learningOutcomes": 84,
+    "quiz": 259,
+    "flashcards": 118,
+    "mentorQuestions": 181,
+    "exercises": 151,
+    "challenge": 164,
+    "commentedSolution": 135,
+    "references": 81,
+    "linksToOtherCourses": 39
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 40,
+    "content.exercisesIntro": 21,
+    "content.challengeIntro": 27,
+    "content.solutionIntro": 33,
+    "networkContext": 43,
+    "deepDive": 236,
+    "commonMistakes": 135
+  },
+  "quantidades": {
+    "quiz": 5,
+    "flashcards": 5,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "55-80 min",
+    "estimatedStudyTimeMinutes": 80,
+    "M": 67.5,
+    "T": 75,
+    "partes": {
+      "teoria": 20.5,
+      "diagramas": 3,
+      "quiz": 5,
+      "flashcards": 2.5,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "65-90 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 31
+  }
+}
