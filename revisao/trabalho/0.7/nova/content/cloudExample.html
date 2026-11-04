@@ -1,13 +1,10 @@
 
 <section class="lesson-section lesson-section--cloud">
-  <h2>11. Exemplo em cloud</h2>
+  <h2>Exemplo em cloud</h2>
   <p>
-    Em cloud, protocolos continuam existindo, mas muitas partes ficam escondidas atrás de serviços gerenciados. Um load balancer pode aceitar HTTPS na borda e falar HTTP com o backend. Um API Gateway pode validar JWT antes de encaminhar a requisição. Um Private Endpoint pode mudar o caminho de rede sem alterar o protocolo da aplicação. Um banco gerenciado pode exigir TLS, certificados ou autenticação por identidade.
+    Em cloud, os protocolos continuam lá, mas muitas partes ficam escondidas atrás de serviços gerenciados. Um load balancer pode aceitar HTTPS na borda e falar HTTP com o backend. Um API Gateway pode validar o JWT antes de encaminhar a requisição. Um Private Endpoint muda o caminho de rede sem alterar o protocolo da aplicação. Um banco gerenciado pode exigir TLS, certificado ou autenticação por identidade.
   </p>
   <p>
-    Isso cria um risco operacional: achar que “cloud resolve a comunicação”. Cloud fornece blocos, mas os contratos continuam importantes. Security Groups, NACLs, route tables, DNS privado, certificados, WAF, políticas de API, service endpoints, mTLS e identity federation podem permitir, negar ou modificar a conversa.
+    O risco é achar que “a cloud resolve a comunicação”. Uma API publicada num API Gateway exige TLS, header de autenticação, método permitido, rota correta e payload JSON válido: a VPC pode estar certa e o DNS pode resolver, e a chamada ainda falha se a mensagem não cumprir o contrato.
   </p>
-  <div class="callout callout--security">
-    <strong>Exemplo cloud:</strong> uma API publicada por API Gateway exige TLS, header de autenticação, método permitido, rota correta e payload JSON válido. A VPC pode estar correta e o DNS pode resolver, mas a chamada ainda falha se o protocolo de aplicação não cumprir o contrato.
-  </div>
 </section>

@@ -1,17 +1,24 @@
 
 <section class="lesson-section lesson-section--architecture">
-  <h2>7. Arquitetura</h2>
+  <h2>Arquitetura</h2>
   <p>
-    Protocolos aparecem em todas as camadas de uma arquitetura corporativa. Um usuário acessando uma aplicação web pode usar Wi‑Fi, Ethernet, IP, TCP, TLS, HTTP, DNS, autenticação federada, APIs internas, conexão com banco, filas e protocolos de observabilidade. Cada trecho pode estar funcionando ou falhando de maneira diferente.
+    Em vez de um único protocolo resolver tudo, vários cooperam, cada um com seu contrato. Ethernet entrega quadros na rede local. IP endereça e encaminha pacotes entre redes. TCP oferece conexão confiável sobre IP. TLS protege a comunicação. HTTP organiza requisições e respostas. OIDC, por cima de HTTP e TLS, organiza autenticação federada e tokens.
   </p>
   <ul>
-    <li><strong>Camadas inferiores:</strong> Ethernet, ARP, IP, ICMP, TCP, UDP e roteamento criam conectividade.</li>
-    <li><strong>Camadas de aplicação:</strong> DNS, HTTP, SSH, SMTP, APIs e bancos organizam serviços.</li>
-    <li><strong>Camadas de segurança:</strong> TLS, Kerberos, SAML, OIDC, OAuth e mTLS criam confiança, identidade e proteção.</li>
-    <li><strong>Camadas de plataforma:</strong> Kubernetes, service mesh, ingress, API gateway e observabilidade usam protocolos para automatizar comunicação.</li>
-    <li><strong>Pontos de falha:</strong> versão incompatível, porta errada, certificado inválido, token vencido, payload malformado, timeout, proxy alterando header ou WAF bloqueando padrão.</li>
+    <li><strong>Conectividade:</strong> Ethernet, ARP, IP, ICMP, TCP, UDP e roteamento.</li>
+    <li><strong>Aplicação:</strong> DNS, HTTP, SSH, SMTP, APIs e bancos de dados organizam serviços.</li>
+    <li><strong>Segurança e identidade:</strong> TLS, mTLS, Kerberos, SAML, OIDC e OAuth criam confiança, identidade e proteção.</li>
+    <li><strong>Plataforma:</strong> Kubernetes, service mesh, ingress, API gateway e observabilidade usam protocolos para automatizar comunicação.</li>
   </ul>
   <p>
-    Pensar em protocolo como arquitetura evita um erro comum: culpar a rede por qualquer falha de comunicação. Às vezes a rede entrega os bytes perfeitamente, mas a aplicação rejeita a mensagem porque o contrato não foi cumprido.
+    Um usuário acessando uma aplicação web pode passar por Wi‑Fi, Ethernet, IP, TCP, TLS, HTTP, DNS, autenticação federada, APIs internas e conexão com banco. Cada trecho pode funcionar ou falhar de forma diferente. Às vezes a rede entrega os bytes perfeitamente, mas a aplicação rejeita a mensagem porque o contrato não foi cumprido.
   </p>
+  <div class="callout warning">
+    <strong>Erros comuns:</strong>
+    <ul>
+      <li><strong>Achar que ping funcionando prova que a aplicação funciona.</strong> Ping testa ICMP e alcance básico; não valida TCP na porta do serviço, TLS, HTTP, autenticação nem a API.</li>
+      <li><strong>Tratar todo erro 4xx ou 5xx como problema de rede.</strong> Esses códigos são respostas do protocolo de aplicação: o servidor recebeu a mensagem e respondeu. Leia os logs da aplicação antes de mexer em firewall e link.</li>
+      <li><strong>Ignorar versão e negociação.</strong> Uma atualização de TLS, API ou schema pode fazer cliente e servidor deixarem de se entender. Documente as versões suportadas, as depreciações e os testes de compatibilidade.</li>
+    </ul>
+  </div>
 </section>

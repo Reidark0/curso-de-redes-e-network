@@ -1,0 +1,80 @@
+{
+  "id": "0.7",
+  "versao": "nova",
+  "titulo": "O que é um protocolo",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5605,
+    "invisiveis": 49,
+    "teoriaVisivel": 3013
+  },
+  "porCampoVisivel": {
+    "content.motivation": 162,
+    "content.problem": 274,
+    "content.concept": 99,
+    "content.internals": 340,
+    "content.architecture": 257,
+    "content.analogy": 111,
+    "content.simpleExample": 182,
+    "content.enterpriseExample": 150,
+    "content.cloudExample": 120,
+    "content.devsecopsExample": 116,
+    "content.securityExample": 69,
+    "content.diagram": 1,
+    "content.summary": 104,
+    "content.nextTheme": 29,
+    "security": 410,
+    "troubleshooting": 355,
+    "glossary": 234,
+    "title+subtitle": 17,
+    "objectives": 80,
+    "learningOutcomes": 110,
+    "quiz": 624,
+    "flashcards": 136,
+    "mentorQuestions": 151,
+    "exercises": 178,
+    "challenge": 178,
+    "commentedSolution": 240,
+    "references": 72,
+    "linksToOtherCourses": 49,
+    "lab": 757
+  },
+  "porCampoInvisivel": {
+    "networkContext": 49
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 35,
+    "alternativa_5minPasso_maisLeitura": 35.8,
+    "plausivel": true,
+    "palavras": 757
+  },
+  "duracao": {
+    "declarada": "105-145 min",
+    "estimatedStudyTimeMinutes": 145,
+    "M": 125,
+    "T": 121.2,
+    "partes": {
+      "teoria": 23.2,
+      "diagramas": 3,
+      "quiz": 7,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 35
+    },
+    "faixaRecomendada": "105-145 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 22
+  }
+}

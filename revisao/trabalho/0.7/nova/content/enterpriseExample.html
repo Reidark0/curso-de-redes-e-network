@@ -1,20 +1,19 @@
 
 <section class="lesson-section lesson-section--enterprise">
-  <h2>10. Exemplo empresarial</h2>
+  <h2>Exemplo empresarial</h2>
   <p>
-    Em uma empresa, protocolos aparecem em todos os serviços: Active Directory, DNS interno, DHCP, VPN, proxies, SIEM, EDR, email, bancos de dados, sistemas legados, APIs, monitoramento e backup. Uma falha de protocolo pode derrubar autenticação, impedir deploy, quebrar integração financeira ou gerar falso positivo no SOC.
+    Considere uma aplicação interna que autentica via SSO. O usuário abre a aplicação com HTTPS. A aplicação redireciona para o provedor de identidade. O navegador carrega cookies, parâmetros e tokens. O provedor autentica o usuário e devolve uma resposta assinada. A aplicação valida assinatura, emissor, audiência, expiração e claims. Tudo isso é protocolo. Um relógio errado, certificado expirado, redirect URI diferente ou token com audiência incorreta pode quebrar o login mesmo com a rede perfeita.
   </p>
-  <p>
-    Considere uma aplicação interna que autentica via SSO. O usuário abre a aplicação com HTTPS. A aplicação redireciona para o provedor de identidade. O navegador carrega cookies, parâmetros e tokens. O provedor autentica o usuário e devolve uma resposta assinada. A aplicação valida assinatura, emissor, audiência, expiração e claims. Tudo isso é protocolo. Um relógio errado, certificado expirado, redirect URI diferente ou token com audiência incorreta pode quebrar login mesmo com a rede perfeita.
-  </p>
-  <table class="data-table comparison-table">
-    <thead><tr><th>Sintoma</th><th>Possível camada/protocolo</th><th>Evidência útil</th><th>Hipótese</th></tr></thead>
-    <tbody>
-      <tr><td>Nome não resolve</td><td>DNS</td><td>Resposta NXDOMAIN ou timeout</td><td>Registro ausente, split DNS ou bloqueio</td></tr>
-      <tr><td>Porta não conecta</td><td>TCP/firewall</td><td>Timeout ou connection refused</td><td>Serviço parado, ACL ou rota</td></tr>
-      <tr><td>Erro de certificado</td><td>TLS</td><td>Certificado expirado ou CN/SAN incorreto</td><td>Problema de PKI ou inspeção</td></tr>
-      <tr><td>403 após login</td><td>HTTP/autorização</td><td>Status code e logs de aplicação</td><td>Usuário autenticado sem permissão</td></tr>
-      <tr><td>Token rejeitado</td><td>OIDC/OAuth</td><td>Issuer, audience, expiração e assinatura</td><td>Contrato de identidade quebrado</td></tr>
-    </tbody>
-  </table>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead><tr><th>Sintoma</th><th>Possível camada/protocolo</th><th>Evidência útil</th><th>Hipótese</th></tr></thead>
+      <tbody>
+        <tr><td>Nome não resolve</td><td>DNS</td><td>Resposta NXDOMAIN ou timeout</td><td>Registro ausente, split DNS ou bloqueio</td></tr>
+        <tr><td>Porta não conecta</td><td>TCP/firewall</td><td>Timeout ou connection refused</td><td>Serviço parado, ACL ou rota</td></tr>
+        <tr><td>Erro de certificado</td><td>TLS</td><td>Certificado expirado ou CN/SAN incorreto</td><td>Problema de PKI ou inspeção</td></tr>
+        <tr><td>403 após login</td><td>HTTP/autorização</td><td>Status code e logs de aplicação</td><td>Usuário autenticado sem permissão</td></tr>
+        <tr><td>Token rejeitado</td><td>OIDC/OAuth</td><td>Issuer, audience, expiração e assinatura</td><td>Contrato de identidade quebrado</td></tr>
+      </tbody>
+    </table>
+  </div>
 </section>

@@ -1,11 +1,8 @@
 
 <section class="lesson-section lesson-section--example">
-  <h2>9. Exemplo simples</h2>
+  <h2>Exemplo simples</h2>
   <p>
-    Um exemplo simples é acessar um site. Você digita um endereço no navegador. Antes de ver a página, vários protocolos cooperam. O DNS traduz o nome para um IP. O TCP, em muitos casos, estabelece conexão. O TLS negocia criptografia e valida certificado quando o acesso é HTTPS. O HTTP envia uma requisição com método, caminho, headers e talvez corpo. O servidor responde com status code, headers e conteúdo.
-  </p>
-  <p>
-    Se algo falhar, a mensagem de erro depende da etapa. Se DNS falhar, o nome não resolve. Se TCP falhar, a porta pode estar fechada ou bloqueada. Se TLS falhar, pode haver problema de certificado, versão ou inspeção. Se HTTP falhar, você pode receber 401, 403, 404, 429 ou 500. Cada erro pertence a uma parte diferente da conversa.
+    Acessar um site já envolve vários protocolos cooperando. O DNS traduz o nome para um IP. O TCP, na maioria dos casos, estabelece a conexão. O TLS negocia a criptografia e valida o certificado quando o acesso é HTTPS. O HTTP envia uma requisição com método, caminho, headers e às vezes corpo. O servidor responde com status code, headers e conteúdo.
   </p>
   <pre class="code-block"><code>GET / HTTP/1.1
 Host: exemplo.local
@@ -14,6 +11,9 @@ Accept: text/html
 
 </code></pre>
   <p>
-    Essa pequena mensagem só faz sentido porque cliente e servidor conhecem HTTP. Sem esse contrato, seriam apenas bytes em uma conexão.
+    Essa pequena mensagem só faz sentido porque cliente e servidor conhecem HTTP. Sem esse contrato, seriam apenas bytes numa conexão.
+  </p>
+  <p>
+    Se algo falhar, o erro depende da etapa. Se o DNS falhar, o nome não resolve. Se o TCP falhar, a porta pode estar fechada ou bloqueada. Se o TLS falhar, pode haver problema de certificado, versão ou inspeção. Se o HTTP responder com erro, o servidor recebeu e entendeu a mensagem e devolveu, por exemplo, 401 (credencial ausente ou inválida), 403 (identidade reconhecida, mas sem permissão), 404 (recurso não encontrado), 429 (limite de requisições excedido) ou 500 (erro interno do servidor). Cada erro pertence a uma parte diferente da conversa.
   </p>
 </section>

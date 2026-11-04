@@ -1,16 +1,13 @@
 
 <section class="lesson-section lesson-section--motivation">
-  <h2>1. Motivação</h2>
+  <h2>Motivação</h2>
   <p>
-    Até agora você estudou como computadores representam informação, como bits e bytes se organizam, como texto vira bytes, como sinais físicos carregam dados e como latência, largura de banda e throughput afetam a experiência. Mas ainda falta uma pergunta central: <strong>como dois sistemas combinam o que cada sequência de bytes significa?</strong>
+    Um computador consegue enviar bytes para outro, mas isso, sozinho, não garante comunicação. O receptor precisa saber onde a mensagem começa e termina, que campos existem, quais valores são permitidos, o que responder, quanto esperar, como tratar erro, quando autenticar e quando encerrar a conversa. Esse conjunto de regras é um <strong>protocolo</strong>.
   </p>
-  <p>
-    Um computador pode enviar bytes para outro. Isso, sozinho, não garante comunicação. O receptor precisa saber onde uma mensagem começa, onde termina, que campos existem, qual valor é permitido, o que responder, quando desistir, como tratar erro, quando autenticar, quando criptografar, quando reenviar e quando encerrar a conversa. Essas regras formam um <strong>protocolo</strong>.
-  </p>
-  <div class="callout callout--problem">
-    <strong>Problema real:</strong> um sistema interno parou de integrar com uma API depois de uma atualização. A rede responde ao ping, o DNS resolve, a porta está aberta e o firewall permite o tráfego. Mesmo assim, a chamada falha. O problema não está na existência do caminho físico; está na conversa: versão TLS incompatível, cabeçalho HTTP obrigatório ausente, token expirado ou payload JSON fora do formato esperado. Ou seja, a falha está no protocolo usado pela aplicação.
+  <div class="callout">
+    <strong>Problema real:</strong> um sistema interno parou de integrar com uma API depois de uma atualização. O servidor responde ao ping, o DNS resolve, a porta está aberta e o firewall permite o tráfego. Mesmo assim, a chamada falha. O caminho existe; o que quebrou foi a conversa: versão TLS incompatível, cabeçalho HTTP obrigatório ausente, token expirado ou payload JSON fora do formato esperado.
   </div>
   <p>
-    Para quem trabalha com TI e Segurança, entender protocolo muda a forma de diagnosticar. Você deixa de perguntar apenas “tem rede?” e passa a perguntar: a mensagem está no formato certo? A ordem está correta? O servidor esperava autenticação antes? Houve negociação de versão? O timeout faz sentido? O cliente entendeu o erro? O proxy alterou algum cabeçalho? O WAF bloqueou por política? O token representa o usuário correto?
+    Entender protocolo muda a forma de diagnosticar. Em vez de perguntar só “tem rede?”, você passa a perguntar: a mensagem está no formato certo e na ordem certa? O servidor esperava autenticação antes? Houve negociação de versão? O timeout faz sentido? Um proxy alterou algum cabeçalho?
   </p>
 </section>

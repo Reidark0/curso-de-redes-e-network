@@ -3,9 +3,9 @@
   "moduleId": "m00",
   "order": 7,
   "title": "O que é um protocolo",
-  "subtitle": "Como computadores combinam regras, mensagens, estados e expectativas para conseguir conversar sem improviso.",
-  "duration": "75-105 min",
-  "estimatedStudyTimeMinutes": 105,
+  "subtitle": "Como computadores combinam regras, mensagens, estados e expectativas para conversar sem improviso.",
+  "duration": "105-145 min",
+  "estimatedStudyTimeMinutes": 145,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 185,
@@ -106,80 +106,6 @@
       "análise de tráfego"
     ]
   },
-  "deepDive": {
-    "mentalModel": "Um protocolo é um contrato operacional. Para entendê-lo, pergunte: quem inicia, que mensagens existem, quais campos são obrigatórios, quais estados existem, quais erros são possíveis, quanto tempo esperar e que controles de segurança protegem a conversa.",
-    "keyTerms": [
-      "protocolo",
-      "mensagem",
-      "campo",
-      "estado",
-      "handshake",
-      "timeout",
-      "retry",
-      "status code",
-      "versão",
-      "negociação",
-      "interoperabilidade"
-    ],
-    "limitations": [
-      "Um protocolo bem definido não garante implementação correta.",
-      "Um protocolo seguro pode ser configurado de forma insegura.",
-      "Protocolos diferentes podem compartilhar a mesma porta em cenários com proxy, multiplexação ou encapsulamento.",
-      "Logs incompletos dificultam diferenciar falha de formato, autenticação, rede e aplicação."
-    ],
-    "whenToUse": [
-      "Ao diagnosticar qualquer falha de comunicação entre sistemas.",
-      "Ao desenhar integrações entre aplicações, APIs, serviços internos e provedores cloud.",
-      "Ao avaliar exposição de serviços e regras de firewall.",
-      "Ao configurar autenticação, criptografia e validação de mensagens."
-    ],
-    "whenNotToUse": [
-      "Não use raciocínio de protocolo para ignorar evidências físicas básicas, como cabo, Wi-Fi ou link down.",
-      "Não presuma erro de aplicação antes de validar DNS, rota, transporte e TLS quando necessário.",
-      "Não trate protocolo como substituto de política de segurança, autenticação ou autorização."
-    ],
-    "operationalImpact": [
-      "Protocolos exigem documentação de versões, portas, dependências, timeouts e códigos de erro.",
-      "Integrações críticas precisam de observabilidade por etapa da conversa.",
-      "Mudanças de versão em APIs, TLS ou autenticação podem quebrar clientes antigos."
-    ],
-    "financialImpact": [
-      "Gateways, WAFs, API gateways, inspeção TLS, logs e observabilidade podem gerar custos em cloud.",
-      "Falhas de protocolo aumentam tempo de troubleshooting e custo operacional.",
-      "Protocolos verbosos podem aumentar tráfego, armazenamento de logs e consumo de recursos."
-    ],
-    "securityImpact": [
-      "Protocolos definem fronteiras de validação, autenticação, criptografia e autorização.",
-      "Versões antigas e parsing frágil podem criar riscos relevantes.",
-      "Monitorar anomalias de protocolo ajuda a detectar abuso, varredura, exfiltração e erro operacional."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Confundir protocolo com porta.",
-      "whyItHappens": "Muitos serviços são ensinados como pares simplificados, como HTTP 80 e HTTPS 443.",
-      "consequence": "A pessoa acha que liberar uma porta resolve o contrato inteiro da comunicação.",
-      "correction": "Porta ajuda a direcionar conversas; protocolo define formato, ordem, estado, erro e segurança."
-    },
-    {
-      "mistake": "Achar que ping funcionando prova que a aplicação funciona.",
-      "whyItHappens": "Ping é um teste visível e simples.",
-      "consequence": "Falhas de TCP, TLS, HTTP, autenticação ou API são ignoradas.",
-      "correction": "Ping testa ICMP e alcance básico; não valida o protocolo da aplicação."
-    },
-    {
-      "mistake": "Tratar todo erro 4xx ou 5xx como problema de rede.",
-      "whyItHappens": "Usuários chamam qualquer falha de acesso de problema de internet.",
-      "consequence": "A investigação vai para firewall e link antes de ler logs de aplicação.",
-      "correction": "Códigos HTTP são parte do protocolo de aplicação e precisam ser interpretados no contexto."
-    },
-    {
-      "mistake": "Ignorar versão e negociação.",
-      "whyItHappens": "Versões parecem detalhe até uma atualização quebrar compatibilidade.",
-      "consequence": "Clientes e servidores deixam de se entender após mudanças de TLS, API ou schema.",
-      "correction": "Documente versões suportadas, depreciações e testes de compatibilidade."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Conectividade básica funciona, mas aplicação falha",
@@ -200,14 +126,14 @@
     "commands": [
       {
         "platform": "Windows",
-        "command": "Test-NetConnection exemplo.com -Port 443",
+        "command": "Test-NetConnection example.com -Port 443",
         "purpose": "Validar se há alcance TCP até uma porta específica.",
         "expectedObservation": "TcpTestSucceeded True quando a conexão TCP é possível.",
         "interpretation": "Confirma transporte básico, mas não valida TLS, HTTP ou autenticação."
       },
       {
         "platform": "Windows",
-        "command": "curl.exe -I https://exemplo.com",
+        "command": "curl.exe -I https://example.com",
         "purpose": "Ver headers e status HTTP de forma simples.",
         "expectedObservation": "Status como HTTP/1.1 200, 301, 403 ou 500.",
         "interpretation": "Mostra resposta do protocolo HTTP e ajuda a separar rede de aplicação."
@@ -243,6 +169,10 @@
     ],
     "decisionTree": [
       {
+        "if": "A interface ou o link está down (cabo, Wi‑Fi, interface fora de up/up)",
+        "then": "Resolver a camada física e o enlace antes de investigar protocolos superiores."
+      },
+      {
         "if": "DNS não resolve o nome",
         "then": "Investigar DNS antes de TCP, TLS ou HTTP."
       },
@@ -267,7 +197,7 @@
   "security": {
     "goodPractices": [
       "Documentar protocolos, portas, versões e fluxos autorizados.",
-      "Desabilitar versões inseguras ou obsoletas quando houver alternativa segura.",
+      "Definir versões mínimas seguras e desabilitar as obsoletas quando houver alternativa.",
       "Validar formato, tamanho, origem, assinatura e autorização das mensagens.",
       "Registrar status, erro, correlation ID e etapa da falha sem expor segredos.",
       "Usar TLS, autenticação forte e autorização explícita quando o protocolo transportar dados sensíveis."
@@ -300,6 +230,12 @@
         "mitigation": "Validar schema, limites de tamanho, tipos, assinatura, origem e autorização."
       },
       {
+        "name": "Serviço sem autenticação",
+        "description": "O serviço aceita comandos ou consultas sem exigir identidade, confiando apenas em estar na rede interna.",
+        "defensiveExplanation": "Qualquer origem que alcance a porta consegue usar o serviço, o que permite acesso indevido e impede atribuir as ações a alguém.",
+        "mitigation": "Exigir autenticação forte e autorização por serviço e restringir as origens permitidas com segmentação."
+      },
+      {
         "name": "Exposição de segredo em protocolo de aplicação",
         "description": "Tokens ou credenciais aparecem em URL, query string, headers logados ou mensagens de erro.",
         "defensiveExplanation": "Segredos em locais logados ou compartilhados podem vazar para SIEM, proxy, histórico ou suporte.",
@@ -307,23 +243,20 @@
       }
     ],
     "monitoring": [
-      "Aumento de erros 4xx/5xx por rota ou cliente.",
-      "Falhas de handshake TLS por versão ou certificado.",
+      "Alertar para picos de 401, 403, 404, 429 e 5xx por rota ou cliente.",
+      "Falhas de handshake TLS por versão ou certificado e uso de versões legadas.",
       "Taxa anormal de resets, timeouts e retries.",
       "Mudança repentina de user-agent, método, payload ou endpoint.",
       "Tentativas repetidas de autenticação ou tokens inválidos."
     ],
     "hardening": [
-      "Configurar versões mínimas seguras.",
       "Aplicar autenticação e autorização por serviço.",
       "Usar schema validation em APIs.",
       "Limitar tamanho de payload e taxa de requisições.",
       "Padronizar erros sem revelar detalhes sensíveis."
     ],
     "detectionIdeas": [
-      "Criar alertas para spikes de status 401, 403, 404, 429 e 5xx.",
       "Correlacionar logs de proxy, WAF, aplicação e identidade.",
-      "Monitorar uso de versões de protocolo legadas.",
       "Observar destinos, portas e protocolos incomuns por segmento.",
       "Usar correlation ID para seguir a conversa entre camadas."
     ]
@@ -331,7 +264,7 @@
   "lab": {
     "id": "lab-0.7",
     "title": "Observando protocolos no próprio computador",
-    "labType": "cloud",
+    "labType": "local",
     "objective": "Identificar evidências de protocolos em uso: sockets, DNS, TCP, TLS, HTTP, status codes e estados de conexão.",
     "scenario": "Você é analista de suporte ou segurança e recebeu a informação de que um serviço web não funciona. Antes de culpar a rede, você irá coletar evidências por etapa da conversa.",
     "topology": "Notebook do aluno -> rede local -> internet -> serviço HTTP/HTTPS público usado apenas para leitura de headers",
@@ -348,23 +281,19 @@
       "ss ou netstat",
       "Opcional: navegador com DevTools"
     ],
-    "estimatedTimeMinutes": 105,
+    "estimatedTimeMinutes": 35,
     "cost": "zero",
     "safetyNotes": [
-      "Não faça varreduras em redes de terceiros.",
-      "Não execute testes de carga.",
-      "Use apenas requisições simples de leitura.",
-      "Não cole tokens, cookies ou credenciais em comandos.",
-      "O objetivo é observar protocolos, não atacar serviços.",
-      "Em cloud real, remova os recursos criados ao final para evitar custos recorrentes."
+      "Não faça varreduras nem testes de carga: use apenas requisições simples de leitura.",
+      "Não cole tokens, cookies ou credenciais em comandos."
     ],
     "steps": [
       {
         "number": 1,
         "title": "Identificar conexões locais",
         "instruction": "Liste conexões ou sockets para perceber que aplicações usam endereços, portas e estados.",
-        "command": "Windows: netstat -ano\nLinux: ss -tulpen",
-        "expectedOutput": "Lista de conexões, portas locais/remotas, estados e, em alguns casos, processos.",
+        "command": "Windows: netstat -ano\nLinux: ss -tunap   # todas as conexões TCP/UDP com estado\nLinux: ss -tulpen  # só os sockets em escuta",
+        "expectedOutput": "Lista de conexões com endereços e portas locais/remotos, estados (LISTENING/LISTEN, ESTABLISHED/ESTAB) e, em alguns casos, o processo. No Linux, sem sudo, o processo só aparece para conexões do seu usuário.",
         "explanation": "Isso mostra que conversas de rede são separadas por protocolo de transporte, endereços, portas e estado."
       },
       {
@@ -379,7 +308,7 @@
         "number": 3,
         "title": "Observar HTTP e TLS com curl",
         "instruction": "Use curl em modo verboso para observar fases da conversa.",
-        "command": "curl -v https://example.com/",
+        "command": "Linux/macOS: curl -v https://example.com/\nWindows: curl.exe -v https://example.com/",
         "expectedOutput": "Linhas indicando resolução, conexão, TLS handshake, certificado, requisição HTTP e status de resposta.",
         "explanation": "O modo verboso ajuda a separar etapas: DNS, TCP, TLS e HTTP."
       },
@@ -387,7 +316,7 @@
         "number": 4,
         "title": "Comparar headers sem baixar corpo completo",
         "instruction": "Peça apenas os headers HTTP para observar status e metadados.",
-        "command": "curl -I https://example.com/",
+        "command": "Linux/macOS: curl -I https://example.com/\nWindows: curl.exe -I https://example.com/",
         "expectedOutput": "Status HTTP e headers, como content-type, server, cache-control ou date.",
         "explanation": "Headers são parte do protocolo HTTP e mostram como o servidor descreve a resposta."
       },
@@ -395,7 +324,7 @@
         "number": 5,
         "title": "Provocar erro controlado de rota inexistente",
         "instruction": "Acesse um caminho improvável para observar um status de erro HTTP sem causar dano.",
-        "command": "curl -I https://example.com/caminho-inexistente-para-lab-redes-v2",
+        "command": "Linux/macOS: curl -I https://example.com/caminho-inexistente-para-lab-redes-v2\nWindows: curl.exe -I https://example.com/caminho-inexistente-para-lab-redes-v2",
         "expectedOutput": "Possível status 404 ou outro código controlado pelo servidor.",
         "explanation": "Erros também fazem parte do protocolo. Um 404 não significa que a rede caiu; significa que o servidor respondeu que o recurso não foi encontrado."
       },
@@ -403,7 +332,6 @@
         "number": 6,
         "title": "Registrar evidências",
         "instruction": "Anote em uma tabela: comando, etapa observada, resultado, hipótese confirmada e hipótese não confirmada.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
         "expectedOutput": "Tabela de evidências do laboratório.",
         "explanation": "Troubleshooting profissional depende de evidências organizadas, não de impressões soltas."
       }
@@ -412,19 +340,19 @@
     "validation": [
       {
         "check": "Conexões locais foram listadas",
-        "command": "netstat -ano ou ss -tulpen",
+        "command": "netstat -ano ou ss -tunap",
         "expected": "Saída com portas, endereços e estados.",
         "ifFails": "Executar o terminal com permissões normais e tentar também netstat sem opções avançadas."
       },
       {
         "check": "HTTP/TLS foi observado",
-        "command": "curl -v https://example.com/",
+        "command": "curl -v https://example.com/ (no Windows: curl.exe -v)",
         "expected": "Saída com etapas de conexão, TLS e resposta HTTP.",
         "ifFails": "Verificar conexão, proxy corporativo, bloqueio local ou ausência do curl."
       },
       {
         "check": "Headers foram coletados",
-        "command": "curl -I https://example.com/",
+        "command": "curl -I https://example.com/ (no Windows: curl.exe -I)",
         "expected": "Status HTTP e headers.",
         "ifFails": "Testar outro destino permitido pela rede ou usar navegador DevTools."
       }
@@ -450,9 +378,7 @@
       }
     ],
     "improvements": [
-      "Repetir o teste em uma API interna de laboratório.",
-      "Observar a aba Network do navegador e comparar com curl.",
-      "Adicionar correlation ID em um serviço próprio de teste.",
+      "Observar a aba Network do navegador (DevTools) e comparar com a saída do curl.",
       "Fazer o mesmo raciocínio com DNS usando nslookup ou dig."
     ],
     "evidenceToCollect": [
@@ -466,9 +392,7 @@
       "Qual evidência pertence ao protocolo HTTP?",
       "Um 404 significa queda de rede?",
       "Por que TLS pode falhar mesmo quando TCP conecta?"
-    ],
-    "challenge": "Explique como você investigaria uma API interna que responde ping, conecta na porta 443, mas falha no pipeline com erro 401.",
-    "solution": "A investigação deve separar etapas: DNS, TCP 443, TLS, HTTP e autenticação. Ping e TCP provam alcance básico. Erro 401 indica que o servidor HTTP respondeu exigindo autenticação ou rejeitando credenciais. A análise deve verificar token, header Authorization, expiração, audience, issuer, permissões, segredo do pipeline e logs do provedor de identidade."
+    ]
   },
   "mentorQuestions": [
     {
@@ -525,93 +449,108 @@
   "quiz": [
     {
       "id": "q0.7.1",
-      "type": "conceito",
-      "q": "Qual é a melhor definição de protocolo em redes e sistemas?",
-      "opts": [
+      "question": "Qual é a melhor definição de protocolo em redes e sistemas?",
+      "options": [
+        "O número de porta que identifica um serviço, como 443 para HTTPS.",
         "Um conjunto de regras que define formato, ordem, significado, erro e comportamento da comunicação.",
-        "Um cabo físico que transporta bits.",
-        "Um número de porta usado exclusivamente por firewalls.",
-        "Um programa de antivírus que bloqueia tráfego."
+        "O meio físico ou sem fio pelo qual os bits trafegam entre dois equipamentos.",
+        "A regra de firewall que autoriza um fluxo entre origem e destino."
       ],
-      "a": 0,
-      "exp": "Protocolo é o contrato de comunicação. Porta, cabo e segurança podem estar relacionados, mas não definem protocolo.",
+      "answer": 1,
+      "explanation": "Protocolo é o contrato de comunicação. Porta, meio físico e regra de firewall participam da comunicação, mas nenhum deles define formato, ordem, significado e tratamento de erro das mensagens.",
+      "topic": "conceito",
       "difficulty": "iniciante",
-      "topic": "conceito"
+      "type": "conceito"
     },
     {
       "id": "q0.7.2",
-      "type": "diagnóstico",
-      "q": "Ping funciona, mas uma chamada HTTPS falha por certificado. Qual camada/protocolo deve ser investigado com prioridade?",
-      "opts": [
+      "question": "Ping funciona, mas uma chamada HTTPS falha por certificado. Qual camada/protocolo deve ser investigado com prioridade?",
+      "options": [
+        "Largura de banda do link, porque certificados são arquivos grandes.",
+        "Firewall da porta 443, porque o ping usa outra porta.",
         "TLS e cadeia de certificados.",
-        "Apenas camada física.",
-        "Somente largura de banda.",
-        "Somente ARP."
+        "ARP na rede local, porque o ping pode ter usado outro endereço MAC."
       ],
-      "a": 0,
-      "exp": "Ping indica alcance ICMP básico. Erro de certificado pertence à negociação TLS e confiança.",
+      "answer": 2,
+      "explanation": "Ping indica alcance ICMP básico (e não usa porta). Um erro de certificado é uma resposta da negociação TLS: a conexão chegou ao servidor, e o problema está na confiança no certificado.",
+      "topic": "tls",
       "difficulty": "iniciante",
-      "topic": "tls"
+      "type": "diagnóstico"
     },
     {
       "id": "q0.7.3",
-      "type": "comparação",
-      "q": "Por que porta não é sinônimo de protocolo?",
-      "opts": [
-        "Porque porta identifica uma conversa no transporte, mas protocolo define regras de mensagem e comportamento.",
-        "Porque portas só existem em Wi-Fi.",
-        "Porque protocolos nunca usam portas.",
-        "Porque porta é sempre criptografada."
+      "question": "Por que porta não é sinônimo de protocolo?",
+      "options": [
+        "Porque a porta identifica uma conversa no transporte, mas o protocolo define regras de mensagem e comportamento.",
+        "Porque cada protocolo usa obrigatoriamente uma única porta fixa, então a porta é só um apelido para ele.",
+        "Porque a porta pertence à camada física e o protocolo à camada de aplicação.",
+        "Porque portas só existem no UDP, e protocolos orientados a conexão não as usam."
       ],
-      "a": 0,
-      "exp": "Portas ajudam a separar fluxos, mas o protocolo é o contrato completo da comunicação.",
+      "answer": 0,
+      "explanation": "Portas ajudam a separar fluxos no transporte (TCP e UDP), mas o protocolo é o contrato completo. Um serviço pode rodar em porta não padrão, e protocolos diferentes podem compartilhar uma porta com proxy ou multiplexação.",
+      "topic": "portas",
       "difficulty": "iniciante",
-      "topic": "portas"
+      "type": "comparação"
     },
     {
       "id": "q0.7.4",
-      "type": "segurança",
-      "q": "Qual prática reduz risco em protocolos que transportam dados sensíveis?",
-      "opts": [
-        "Usar TLS, autenticação, autorização, validação de entrada e logs sem segredos.",
+      "question": "Qual prática reduz risco em protocolos que transportam dados sensíveis?",
+      "options": [
+        "Aceitar todas as versões antigas por compatibilidade.",
         "Desativar validação de certificado para evitar erros.",
         "Registrar tokens completos para facilitar suporte.",
-        "Aceitar todas as versões antigas por compatibilidade."
+        "Usar TLS, autenticação, autorização, validação de entrada e logs sem segredos."
       ],
-      "a": 0,
-      "exp": "Segurança de protocolo depende de proteção, validação, controle e evidência sem vazamento de segredos.",
+      "answer": 3,
+      "explanation": "Segurança de protocolo depende de proteção, validação, controle e evidência sem vazamento de segredos.",
+      "topic": "segurança",
       "difficulty": "intermediário",
-      "topic": "segurança"
+      "type": "segurança"
     },
     {
       "id": "q0.7.5",
-      "type": "cenário",
-      "q": "Uma API retorna 401 no pipeline, mas funciona no notebook do desenvolvedor. Qual hipótese é mais coerente?",
-      "opts": [
+      "question": "Uma API retorna 401 no pipeline, mas funciona no notebook do desenvolvedor. Qual hipótese é mais coerente?",
+      "options": [
+        "A porta 443 está bloqueada no firewall do runner do pipeline.",
         "Credencial, token, header, identidade ou contexto do pipeline estão diferentes.",
-        "O cabo do notebook está sempre quebrado.",
-        "O protocolo HTTP não existe em pipelines.",
-        "A porta 443 não pode estar aberta."
+        "O servidor da API está fora do ar quando o pipeline roda.",
+        "Há perda de pacotes entre o runner e a API, corrompendo a requisição."
       ],
-      "a": 0,
-      "exp": "401 indica problema de autenticação no protocolo de aplicação. Comparar identidade, token e headers é essencial.",
+      "answer": 1,
+      "explanation": "401 é uma resposta HTTP: o servidor estava no ar, a porta conectou e a mensagem chegou. O código indica credencial ausente ou inválida, então compare identidade, token e headers entre o notebook e o pipeline.",
+      "topic": "devsecops",
       "difficulty": "intermediário",
-      "topic": "devsecops"
+      "type": "cenário"
     },
     {
       "id": "q0.7.6",
-      "type": "troubleshooting",
-      "q": "O que o comando curl -v ajuda a observar em uma comunicação HTTPS?",
-      "opts": [
+      "question": "O que o comando curl -v ajuda a observar em uma comunicação HTTPS?",
+      "options": [
+        "O conteúdo descriptografado do tráfego de outros programas da máquina.",
+        "Todos os roteadores no caminho até o servidor, como o traceroute.",
         "Etapas como DNS, conexão, TLS, headers e resposta HTTP.",
-        "A temperatura da placa de rede.",
-        "A senha descriptografada do usuário.",
-        "A topologia física completa do provedor."
+        "Os sockets em escuta no computador local, como o ss -tulpen."
       ],
-      "a": 0,
-      "exp": "curl -v mostra detalhes úteis da conversa, respeitando limites do que o cliente pode observar.",
+      "answer": 2,
+      "explanation": "curl -v mostra a conversa do próprio curl: IP conectado, negociação TLS, headers enviados e recebidos e status HTTP. Não mostra saltos de rede nem o tráfego de outros programas.",
+      "topic": "ferramentas",
       "difficulty": "iniciante",
-      "topic": "ferramentas"
+      "type": "troubleshooting"
+    },
+    {
+      "id": "q0.7.7",
+      "question": "Uma mensagem chega com todos os campos separados corretamente e no tamanho certo, mas um dos campos traz um valor que o protocolo não permite. Que aspecto do contrato foi violado?",
+      "options": [
+        "Estado: a fase da conversa em que cliente e servidor estão.",
+        "Sintaxe: a forma como os campos são separados e dimensionados.",
+        "Temporização: quanto tempo esperar antes de desistir.",
+        "Semântica: o significado e os valores válidos de cada campo."
+      ],
+      "answer": 3,
+      "explanation": "O formato (sintaxe) está correto; o problema é o valor do campo, que pertence à semântica. Temporização e estado tratam de tempo e de fase da conversa, não do conteúdo do campo.",
+      "topic": "conceito",
+      "difficulty": "intermediário",
+      "type": "conceito"
     }
   ],
   "flashcards": [
@@ -625,12 +564,12 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc0.7.2",
-      "front": "Porta é protocolo?",
-      "back": "Não. Porta ajuda a identificar conversas no transporte. O protocolo define o contrato de comunicação.",
+      "id": "fc0.7.7",
+      "front": "Ping funcionando prova que a aplicação funciona?",
+      "back": "Não. Ping testa ICMP e alcance básico; não valida a porta TCP do serviço, o TLS, o HTTP nem a autenticação.",
       "tags": [
-        "porta",
-        "protocolo"
+        "ping",
+        "troubleshooting"
       ],
       "difficulty": "iniciante"
     },
