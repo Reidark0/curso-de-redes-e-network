@@ -1,0 +1,78 @@
+{
+  "id": "3.7",
+  "versao": "nova",
+  "titulo": "VLANs como segmentação de camada 2",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4704,
+    "invisiveis": 35,
+    "teoriaVisivel": 2372
+  },
+  "porCampoVisivel": {
+    "content.motivation": 107,
+    "content.problem": 157,
+    "content.concept": 244,
+    "content.internals": 369,
+    "content.architecture": 133,
+    "content.analogy": 91,
+    "content.simpleExample": 83,
+    "content.enterpriseExample": 80,
+    "content.cloudExample": 85,
+    "content.diagram": 2,
+    "content.summary": 99,
+    "content.nextTheme": 42,
+    "security": 329,
+    "troubleshooting": 269,
+    "glossary": 282,
+    "title+subtitle": 22,
+    "objectives": 48,
+    "learningOutcomes": 75,
+    "quiz": 419,
+    "flashcards": 118,
+    "mentorQuestions": 264,
+    "exercises": 120,
+    "challenge": 155,
+    "commentedSolution": 186,
+    "references": 47,
+    "linksToOtherCourses": 57,
+    "lab": 821
+  },
+  "porCampoInvisivel": {
+    "networkContext": 35
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 8,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 45,
+    "alternativa_5minPasso_maisLeitura": 46.3,
+    "plausivel": true,
+    "palavras": 821
+  },
+  "duracao": {
+    "declarada": "100-145 min",
+    "estimatedStudyTimeMinutes": 145,
+    "M": 122.5,
+    "T": 119.2,
+    "partes": {
+      "teoria": 18.2,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 20,
+      "lab": 45
+    },
+    "faixaRecomendada": "100-145 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 18
+  }
+}

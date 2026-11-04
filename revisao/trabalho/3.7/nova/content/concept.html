@@ -1,5 +1,13 @@
-<section class="lesson-section lesson-section--concept"><h2>5. Conceito</h2>
-<p>Uma VLAN, Virtual LAN, é uma rede local lógica criada dentro de switches Ethernet. Dispositivos na mesma VLAN compartilham o mesmo domínio de broadcast. Dispositivos em VLANs diferentes, mesmo conectados ao mesmo switch físico, ficam separados em Camada 2.</p>
-<div class="definition-box"><strong>Definição:</strong> VLAN é um identificador lógico usado para separar frames Ethernet em domínios de broadcast distintos dentro da mesma infraestrutura física.</div>
-<p>O ponto mais importante: VLAN separa Camada 2. Para um host de uma VLAN falar com outro host de outra VLAN, é necessário roteamento inter-VLAN em um roteador, switch camada 3 ou firewall. É nesse ponto que entram regras, logs e políticas.</p>
+<section class="lesson-section lesson-section--concept"><h2>Conceito</h2>
+<div class="definition-box"><strong>Definição:</strong> VLAN (Virtual LAN) é um identificador lógico que separa frames Ethernet em domínios de broadcast distintos dentro da mesma infraestrutura física de switches.</div>
+<p>Dispositivos na mesma VLAN compartilham o mesmo domínio de broadcast. Dispositivos em VLANs diferentes, mesmo ligados ao mesmo switch, ficam separados em Camada 2. Para um host de uma VLAN falar com um host de outra, é preciso <strong>roteamento inter-VLAN</strong> em um roteador, switch camada 3 ou firewall.</p>
+<h3>VLAN não é sub-rede, rota nem firewall</h3>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Conceito</th><th>Camada</th><th>O que faz</th><th>Relação com a VLAN</th></tr></thead><tbody>
+<tr><td>Domínio de broadcast</td><td>2</td><td>Conjunto de hosts que recebe o mesmo broadcast (ARP, DHCP).</td><td>Cada VLAN forma o seu próprio domínio.</td></tr>
+<tr><td>VLAN</td><td>2</td><td>Define em qual domínio o switch coloca cada porta e cada frame.</td><td>—</td></tr>
+<tr><td>Sub-rede</td><td>3</td><td>Faixa de endereços IP (ex.: 192.168.10.0/24) com um gateway.</td><td>Normalmente uma sub-rede por VLAN, com gateway documentado. Misturar as duas coisas deixa DHCP, gateway e roteamento inconsistentes.</td></tr>
+<tr><td>Rota</td><td>3</td><td>Diz para onde enviar pacotes destinados a outra sub-rede.</td><td>Sem rota e gateway, uma VLAN não alcança a outra.</td></tr>
+<tr><td>Firewall/ACL</td><td>3–4 (ou acima)</td><td>Permite ou bloqueia fluxos por origem, destino e porta.</td><td>Aplicado no roteamento entre VLANs; a VLAN sozinha não filtra nada.</td></tr>
+</tbody></table></div>
+<div class="callout warning"><strong>Erro comum:</strong> achar que VLAN é firewall. Como ela separa redes, parece bloquear tudo, mas a comunicação inter-VLAN pode ficar liberada sem controle. A VLAN também não criptografa nem autentica usuário ou dispositivo: quem controla a comunicação é o firewall/ACL, com logs, no roteamento entre VLANs.</div>
 </section>

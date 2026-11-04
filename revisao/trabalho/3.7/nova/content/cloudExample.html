@@ -1,4 +1,4 @@
-<section class="lesson-section lesson-section--cloud"><h2>11. Exemplo em cloud</h2>
-<p>Em cloud pública, o aluno raramente manipula VLANs diretamente como em um switch físico, mas o raciocínio de segmentação continua. VPCs, VNets, subnets, route tables, security groups, NSGs e firewalls cumprem papéis de separação lógica, controle de caminho e política.</p>
-<p>Em ambientes híbridos, VLANs aparecem em datacenters, links para cloud, firewalls, hypervisors e appliances. Um erro de VLAN em um trunk físico pode parecer problema de cloud, VPN ou DNS, mas a causa pode estar na Camada 2 local.</p>
+<section class="lesson-section lesson-section--cloud"><h2>Exemplo em cloud e DevSecOps</h2>
+<p>Em cloud pública você raramente configura VLANs diretamente: VPCs/VNets, subnets, route tables, security groups/NSGs e firewalls fazem o papel de separação lógica, controle de caminho e política. O raciocínio é o mesmo.</p>
+<p>Em ambientes híbridos e on-premises, VLANs continuam em datacenters, hypervisors, firewalls e links para a cloud. Um erro de VLAN em um trunk físico pode parecer problema de cloud, VPN, DNS ou pipeline: um runner self-hosted na VLAN errada, por exemplo, não consegue baixar imagens do registry privado.</p>
 </section>

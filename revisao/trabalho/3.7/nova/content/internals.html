@@ -1,4 +1,22 @@
-<section class="lesson-section lesson-section--internals"><h2>6. Funcionamento interno</h2>
-<p>Internamente, o switch associa portas, frames e tabelas MAC a uma VLAN. Em uma porta access, o dispositivo final normalmente não vê tag de VLAN; ele envia frames comuns. O switch classifica aquele tráfego na VLAN configurada para a porta. Em uma porta trunk, o frame carrega uma tag 802.1Q indicando a VLAN.</p>
-<ol class="flow-list"><li>O host envia um frame Ethernet sem saber necessariamente que está em uma VLAN.</li><li>A porta access do switch coloca esse frame no domínio lógico daquela VLAN.</li><li>O switch aprende o MAC de origem dentro da VLAN correta.</li><li>Se o destino está na mesma VLAN e é conhecido, encaminha pela porta correta.</li><li>Se o destino é broadcast, envia apenas para portas da mesma VLAN.</li><li>Se o destino está em outra VLAN, o frame não atravessa sozinho; precisa de gateway/roteamento.</li></ol>
+<section class="lesson-section lesson-section--internals"><h2>Funcionamento interno</h2>
+<p>O switch associa cada porta, cada frame e cada entrada da tabela MAC a uma VLAN. Há dois modos de porta:</p>
+<ul>
+<li><strong>Porta access:</strong> pertence a uma única VLAN (a <em>access VLAN</em>) e liga um host final. O host envia frames comuns, sem tag; o switch classifica o tráfego na VLAN configurada para a porta. Porta na VLAN errada põe o host no domínio de broadcast errado.</li>
+<li><strong>Porta trunk:</strong> transporta várias VLANs no mesmo enlace, entre switches, roteadores, firewalls, hypervisors ou APs. Cada frame leva uma tag 802.1Q que indica a VLAN.</li>
+</ul>
+<h3>A tag 802.1Q e a native VLAN</h3>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Elemento</th><th>Tamanho/onde</th><th>Para que serve</th><th>Cuidado</th></tr></thead><tbody>
+<tr><td>Tag 802.1Q</td><td>4 bytes adicionados ao frame Ethernet no trunk</td><td>Carregar a VLAN e a prioridade do frame.</td><td>Portas de usuário comuns não devem aceitar frames com tag.</td></tr>
+<tr><td>VLAN ID</td><td>12 bits dentro da tag</td><td>Identificar a VLAN (0 e 4095 são reservados: sobram 4.094 VLANs).</td><td>Restrinja e documente as VLANs permitidas em cada trunk.</td></tr>
+<tr><td>Native VLAN</td><td>Configuração do trunk</td><td>VLAN atribuída aos frames que trafegam <em>sem tag</em> no trunk.</td><td>Planeje-a, não ponha hosts sensíveis nela e use a mesma nas duas pontas.</td></tr>
+</tbody></table></div>
+<p>Por que a mesma native VLAN nas duas pontas? Se o switch A usa native VLAN 1 e o switch B usa native VLAN 99, os frames que A envia sem tag (VLAN 1) entram na VLAN 99 em B: as duas VLANs se misturam sem ninguém perceber.</p>
+<h3>Caminho de um frame</h3>
+<ol>
+<li>O host na porta access envia um frame comum, sem saber que está em uma VLAN.</li>
+<li>O switch associa o frame à VLAN da porta e aprende o MAC de origem <em>naquela</em> VLAN: a tabela MAC é por VLAN (VLAN inconsistente ou MAC flapping atrapalham o encaminhamento).</li>
+<li>Destino conhecido na mesma VLAN: o switch encaminha pela porta certa. Broadcast: vai só para as portas da mesma VLAN, por isso ARP e DHCP não passam para outra VLAN sem gateway ou DHCP relay.</li>
+<li>No trunk, o frame segue com a tag da VLAN até o próximo switch, roteador ou firewall, desde que a VLAN esteja na lista de permitidas.</li>
+<li>Destino em outra VLAN: o frame não atravessa sozinho. O gateway roteia quando a política permite, aplicando ACLs e logs.</li>
+</ol>
 </section>

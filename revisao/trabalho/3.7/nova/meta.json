@@ -4,8 +4,8 @@
   "order": 7,
   "title": "VLANs como segmentação de camada 2",
   "subtitle": "Como separar domínios de broadcast, organizar a LAN e preparar políticas sem confundir VLAN com firewall.",
-  "duration": "90-125 min",
-  "estimatedStudyTimeMinutes": 125,
+  "duration": "100-145 min",
+  "estimatedStudyTimeMinutes": 145,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 215,
@@ -90,138 +90,6 @@
       "Preparação para STP"
     ]
   },
-  "protocolFields": [
-    {
-      "field": "VLAN ID",
-      "size": "12 bits no campo 802.1Q",
-      "purpose": "Identificar a VLAN do frame em links trunk.",
-      "securityObservation": "VLANs permitidas em trunk devem ser restritas e documentadas."
-    },
-    {
-      "field": "802.1Q Tag",
-      "size": "4 bytes adicionados ao frame Ethernet",
-      "purpose": "Carregar informações de VLAN e prioridade em links trunk.",
-      "securityObservation": "Tags não devem ser aceitas em portas de usuário comuns."
-    },
-    {
-      "field": "Access VLAN",
-      "size": "configuração da porta",
-      "purpose": "Definir a VLAN de uma porta conectada a host final.",
-      "securityObservation": "Porta errada coloca o ativo no domínio de broadcast errado."
-    },
-    {
-      "field": "Native VLAN",
-      "size": "configuração do trunk",
-      "purpose": "VLAN usada para frames não marcados em trunk 802.1Q.",
-      "securityObservation": "Deve ser planejada, não usada para hosts sensíveis, e consistente entre pontas."
-    }
-  ],
-  "packetFlow": [
-    {
-      "step": 1,
-      "actor": "Host na porta access",
-      "action": "Envia frame Ethernet comum.",
-      "detail": "O host geralmente não adiciona tag 802.1Q quando está em uma porta access.",
-      "possibleFailure": "Porta configurada na VLAN errada coloca o host no segmento errado."
-    },
-    {
-      "step": 2,
-      "actor": "Switch",
-      "action": "Associa o frame à VLAN da porta.",
-      "detail": "A tabela MAC é aprendida no contexto daquela VLAN.",
-      "possibleFailure": "MAC flapping ou VLAN inconsistente dificulta forwarding."
-    },
-    {
-      "step": 3,
-      "actor": "Switch",
-      "action": "Encaminha broadcast apenas dentro da VLAN.",
-      "detail": "ARP e DHCP não atravessam para outra VLAN sem gateway/relay.",
-      "possibleFailure": "DHCP ausente ou relay mal configurado faz host ficar sem IP."
-    },
-    {
-      "step": 4,
-      "actor": "Link trunk",
-      "action": "Transporta frames marcados com VLAN ID.",
-      "detail": "Trunks conectam switches, roteadores, firewalls, hypervisors ou APs.",
-      "possibleFailure": "VLAN não permitida no trunk causa isolamento parcial."
-    },
-    {
-      "step": 5,
-      "actor": "Gateway/Firewall",
-      "action": "Roteia entre VLANs quando permitido.",
-      "detail": "Aqui entram ACLs, firewall, logs e políticas.",
-      "possibleFailure": "Liberar any-any entre VLANs anula boa parte do valor defensivo da segmentação."
-    }
-  ],
-  "deepDive": {
-    "mentalModel": "VLAN é uma sala lógica dentro do switch: limita broadcast e organiza Camada 2, mas a porta entre salas é o roteamento com política.",
-    "keyTerms": [
-      "VLAN",
-      "802.1Q",
-      "access port",
-      "trunk",
-      "native VLAN",
-      "inter-VLAN routing"
-    ],
-    "limitations": [
-      "VLAN não criptografa tráfego.",
-      "VLAN não autentica usuário ou dispositivo.",
-      "VLAN não substitui firewall.",
-      "VLAN mal documentada aumenta complexidade."
-    ],
-    "whenToUse": [
-      "Separar grupos por função, risco ou operação.",
-      "Reduzir domínio de broadcast.",
-      "Organizar Wi-Fi corporativo, voz, convidados, IoT e gerenciamento.",
-      "Preparar políticas inter-VLAN."
-    ],
-    "whenNotToUse": [
-      "Como única barreira para dados altamente sensíveis.",
-      "Sem documentação e dono operacional.",
-      "Para esconder problemas de inventário ou IAM."
-    ],
-    "operationalImpact": [
-      "Exige documentação de portas, trunks, VLAN IDs, gateways e DHCP.",
-      "Muda troubleshooting porque VLAN errada pode parecer falha de IP ou DNS.",
-      "Aumenta necessidade de governança de mudanças em switches."
-    ],
-    "financialImpact": [
-      "Pode exigir switches gerenciáveis, controladora Wi-Fi, firewall L3 e tempo de engenharia.",
-      "Reduz custo comparado a switches físicos separados para cada rede.",
-      "Em ambientes híbridos, erros de VLAN podem gerar horas de troubleshooting caro."
-    ],
-    "securityImpact": [
-      "Reduz alcance de broadcast e movimento lateral local.",
-      "Facilita política e logging inter-VLAN.",
-      "Pode criar falsa sensação de segurança se roteamento inter-VLAN estiver liberado demais."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Achar que VLAN é firewall.",
-      "whyItHappens": "A VLAN separa redes logicamente, então parece bloquear tudo.",
-      "consequence": "Comunicação inter-VLAN pode ficar liberada sem controle.",
-      "correction": "Usar firewall/ACL e logs no roteamento entre VLANs."
-    },
-    {
-      "mistake": "Colocar todos os trunks permitindo todas as VLANs.",
-      "whyItHappens": "Facilita implantação inicial.",
-      "consequence": "Aumenta superfície de erro e exposição lateral.",
-      "correction": "Permitir apenas VLANs necessárias e documentadas."
-    },
-    {
-      "mistake": "Usar VLAN 1 para tudo.",
-      "whyItHappens": "Muitos equipamentos vêm com VLAN 1 padrão.",
-      "consequence": "Confusão, risco operacional e baixa governança.",
-      "correction": "Criar VLANs explícitas e manter VLAN padrão sem hosts sensíveis."
-    },
-    {
-      "mistake": "Não relacionar VLAN com sub-rede.",
-      "whyItHappens": "O aluno mistura Camada 2 e Camada 3.",
-      "consequence": "DHCP, gateway e roteamento ficam inconsistentes.",
-      "correction": "Mapear normalmente uma sub-rede por VLAN e documentar gateway."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Host recebe IP de sub-rede errada.",
@@ -257,7 +125,7 @@
         "platform": "Cisco IOS",
         "command": "show vlan brief\nshow interfaces trunk\nshow mac address-table vlan 10\nshow interfaces status",
         "purpose": "Validar VLANs, trunks, MACs e portas.",
-        "expectedObservation": "Porta access na VLAN correta e trunk permitindo VLAN necessária.",
+        "expectedObservation": "Porta access na VLAN correta e trunk ativo, com a VLAN necessária na lista de permitidas e a mesma native VLAN nas duas pontas.",
         "interpretation": "VLAN não permitida no trunk ou porta na VLAN errada explica isolamento."
       }
     ],
@@ -277,6 +145,10 @@
       {
         "if": "VLANs diferentes não se comunicam",
         "then": "Verificar gateway, rota, firewall/ACL e logs inter-VLAN."
+      },
+      {
+        "if": "Broadcast excessivo em uma VLAN",
+        "then": "Procurar loop, dispositivo ruidoso ou rede plana demais com contadores de interface, logs e SPAN/monitoramento autorizado; aplicar STP, storm control ou nova segmentação."
       }
     ]
   },
@@ -285,16 +157,13 @@
       "Separar redes por função e risco.",
       "Documentar VLAN ID, nome, sub-rede, gateway, dono e finalidade.",
       "Usar portas access para hosts finais.",
-      "Restringir VLANs permitidas em trunks.",
-      "Aplicar firewall/ACL entre VLANs com menor privilégio.",
-      "Monitorar mudanças de trunk, porta e VLAN."
+      "Aplicar firewall/ACL entre VLANs com menor privilégio e revisar as exceções."
     ],
     "badPractices": [
       "Usar rede plana para tudo.",
       "Permitir todas as VLANs em todos os trunks sem necessidade.",
-      "Usar VLAN padrão para hosts sensíveis.",
-      "Achar que VLAN substitui autenticação, firewall ou monitoramento.",
-      "Não revisar exceções inter-VLAN."
+      "Usar a VLAN padrão de fábrica (VLAN 1) para tudo ou para hosts sensíveis.",
+      "Achar que VLAN substitui autenticação, firewall ou monitoramento."
     ],
     "commonErrors": [
       "Colocar servidor na VLAN de usuários.",
@@ -316,6 +185,12 @@
         "mitigation": "Portas access por padrão, inventário, revisão de configuração e NAC."
       },
       {
+        "name": "Native VLAN mal planejada",
+        "description": "O trunk usa a VLAN padrão como native VLAN com hosts sensíveis, ou as duas pontas têm native VLANs diferentes.",
+        "defensiveExplanation": "Frames sem tag caem na native VLAN; com valores diferentes nas pontas, duas VLANs se misturam sem controle.",
+        "mitigation": "Native VLAN dedicada, sem hosts, igual nas duas pontas e documentada."
+      },
+      {
         "name": "Rede de convidados mal isolada",
         "description": "Visitantes conseguem alcançar ativos internos.",
         "defensiveExplanation": "A separação lógica não foi acompanhada por política e validação.",
@@ -323,23 +198,19 @@
       }
     ],
     "monitoring": [
-      "Mudanças de configuração em switches.",
-      "Criação ou alteração de trunks.",
-      "MACs inesperados em VLANs sensíveis.",
-      "Tráfego inter-VLAN fora do padrão.",
-      "DHCP em VLANs erradas."
+      "Mudanças de configuração em switches, inclusive criação ou alteração de trunks.",
+      "DHCP oferecido em VLANs erradas.",
+      "Tráfego inter-VLAN fora do padrão nos logs do firewall."
     ],
     "hardening": [
-      "Desabilitar portas não usadas.",
-      "Configurar VLAN de estacionamento para portas ociosas.",
+      "Desabilitar portas não usadas e colocá-las em uma VLAN de estacionamento.",
       "Restringir allowed VLANs em trunks.",
       "Usar DHCP snooping, DAI e port security onde aplicável.",
       "Usar 802.1X/NAC para controle de acesso."
     ],
     "detectionIdeas": [
       "Alertar quando uma porta access vira trunk.",
-      "Comparar MAC/IP/VLAN com inventário.",
-      "Revisar logs de firewall inter-VLAN.",
+      "Comparar MAC/IP/VLAN com o inventário para achar MACs inesperados em VLANs sensíveis.",
       "Detectar variações anormais de broadcast por VLAN."
     ]
   },
@@ -361,12 +232,11 @@
       "Windows/Linux para comandos de validação",
       "Editor de texto para tabela de VLANs"
     ],
-    "estimatedTimeMinutes": 125,
+    "estimatedTimeMinutes": 45,
     "cost": "zero",
     "safetyNotes": [
-      "Não altere VLANs em rede corporativa real sem autorização formal.",
-      "Não conecte laboratório a rede de produção.",
-      "Não colete ou compartilhe MACs/IPs reais sem sanitização."
+      "Use Packet Tracer, GNS3 ou um switch de laboratório isolado; não altere VLANs de uma rede real sem autorização formal.",
+      "Não colete nem compartilhe MACs/IPs reais sem sanitização."
     ],
     "steps": [
       {
@@ -396,8 +266,8 @@
       {
         "number": 4,
         "title": "Configurar portas access",
-        "instruction": "Associe portas de hosts finais às VLANs corretas.",
-        "command": "interface fa0/1\n switchport mode access\n switchport access vlan 10\ninterface fa0/2\n switchport mode access\n switchport access vlan 20",
+        "instruction": "Associe as portas dos hosts finais às VLANs corretas. Use duas portas na VLAN 10 para poder testar a comunicação dentro da mesma VLAN.",
+        "command": "interface fa0/1\n switchport mode access\n switchport access vlan 10\ninterface fa0/3\n switchport mode access\n switchport access vlan 10\ninterface fa0/2\n switchport mode access\n switchport access vlan 20",
         "expectedOutput": "Portas finais em modo access.",
         "explanation": "Hosts finais não devem receber trunk sem necessidade."
       },
@@ -415,15 +285,15 @@
         "instruction": "Verifique VLANs, trunks e MACs aprendidos.",
         "command": "show vlan brief\nshow interfaces trunk\nshow mac address-table",
         "expectedOutput": "Portas nas VLANs corretas e trunk permitindo VLANs planejadas.",
-        "explanation": "Validação evita concluir pela intenção; rede se opera por evidências."
+        "explanation": "Validar evita concluir pela intenção: compare a saída com o plano da etapa 2."
       },
       {
         "number": 7,
         "title": "Testar comunicação esperada",
-        "instruction": "Teste hosts na mesma VLAN e entre VLANs, quando gateway/política estiver disponível.",
+        "instruction": "Configure IP estático nos hosts conforme o plano (ex.: PCs 192.168.10.11 e 192.168.10.12/24, servidor 192.168.20.10/24) e teste a mesma VLAN e entre VLANs.",
         "command": "ping <gateway-da-vlan>\nping <host-da-mesma-vlan>\nping <host-de-outra-vlan>",
-        "expectedOutput": "Mesma VLAN funciona; inter-VLAN depende de roteamento e política.",
-        "explanation": "VLAN separa Camada 2; comunicação entre VLANs precisa de L3."
+        "expectedOutput": "Ping na mesma VLAN funciona. Sem gateway inter-VLAN configurado, o ping para a outra VLAN falha; se o seu lab tiver gateway (roteador ou switch L3), o resultado depende do roteamento e da política.",
+        "explanation": "A falha do ping entre VLANs sem gateway é a evidência de que a VLAN separa a Camada 2; comunicação entre VLANs precisa de L3."
       },
       {
         "number": 8,
@@ -457,7 +327,7 @@
       {
         "check": "Gateway acessível",
         "command": "ping <gateway-da-vlan>",
-        "expected": "Resposta quando gateway/política estiver configurado.",
+        "expected": "Resposta, se houver gateway configurado para a VLAN no seu lab.",
         "ifFails": "Verificar IP, máscara, VLAN, trunk, gateway e firewall."
       }
     ],
@@ -479,38 +349,24 @@
         "probableCause": "Ausência de roteamento inter-VLAN ou bloqueio de firewall.",
         "howToConfirm": "Testar gateway, rota e logs de firewall.",
         "fix": "Configurar gateway/política mínima necessária."
-      },
-      {
-        "symptom": "Broadcast excessivo em uma VLAN",
-        "probableCause": "Rede plana, loop, dispositivo ruidoso ou descoberta abusiva.",
-        "howToConfirm": "Contadores de interface, logs, SPAN/monitoramento autorizado.",
-        "fix": "Investigar origem, aplicar STP/storm control/segmentação."
       }
     ],
     "improvements": [
       "Adicionar DHCP relay por VLAN.",
       "Criar regras inter-VLAN por menor privilégio.",
-      "Separar gerenciamento em VLAN própria com acesso restrito.",
-      "Adicionar 802.1X/NAC em portas de usuário.",
-      "Criar diagrama físico e lógico versionado."
+      "Adicionar 802.1X/NAC em portas de usuário."
     ],
     "evidenceToCollect": [
       "Tabela de VLANs",
-      "show vlan brief",
-      "show interfaces trunk",
-      "show mac address-table",
-      "IP/gateway sanitizados dos hosts",
+      "Saídas de show vlan brief, show interfaces trunk e show mac address-table",
+      "IP/gateway sanitizados dos hosts e resultado dos pings",
       "Diagrama físico/lógico",
       "Regras inter-VLAN esperadas"
     ],
     "questions": [
-      "Por que VLAN limita ARP?",
-      "Por que VLAN não substitui firewall?",
-      "Qual risco de permitir todas as VLANs em todos os trunks?",
-      "O que muda entre porta access e trunk?"
-    ],
-    "challenge": "Projete VLANs para usuários, servidores, convidados, câmeras e gerenciamento em uma filial pequena, indicando gateways, trunks, políticas e evidências de validação.",
-    "solution": "Uma solução madura separa VLANs por função e risco, usa portas access para hosts, trunks restritos entre equipamentos, gateway/firewall para inter-VLAN, DHCP por VLAN, logs e documentação. Convidados não acessam internos; câmeras falam apenas com gravador; gerenciamento é restrito; usuários acessam somente serviços necessários."
+      "Por que VLAN limita ARP, e o que isso tem a ver com o ping que falhou entre VLANs?",
+      "O que muda entre porta access e trunk na saída de show interfaces trunk?"
+    ]
   },
   "mentorQuestions": [
     {
@@ -530,146 +386,145 @@
     },
     {
       "type": "diagnóstico",
-      "question": "Um host recebeu IP da sub-rede de servidores, mas deveria estar na rede de usuários. O que verificar primeiro?",
+      "question": "Dois switches estão ligados por trunk. A VLAN 10 funciona entre eles, mas hosts da VLAN 20 só falam com quem está no mesmo switch. Que hipóteses você testa e com quais evidências?",
       "hints": [
-        "Pense em porta access.",
-        "Pense em DHCP/SSID."
+        "Pense na lista de VLANs permitidas no trunk.",
+        "Pense em onde a VLAN foi criada."
       ],
       "expectedIdeas": [
-        "show vlan brief",
-        "porta do switch",
-        "SSID-VLAN mapping",
-        "DHCP scope"
+        "VLAN 20 fora da allowed list do trunk",
+        "VLAN 20 não criada em um dos switches",
+        "show interfaces trunk nas duas pontas",
+        "show vlan brief"
       ],
-      "explanation": "O sintoma sugere VLAN ou DHCP errado antes de culpar aplicação."
+      "explanation": "Se uma VLAN passa pelo trunk e outra não, o enlace está ativo; o problema é da VLAN 20: fora da lista de permitidas ou inexistente em um dos switches."
     },
     {
       "type": "cenário real",
-      "question": "Como você separaria usuários, convidados e servidores sem criar falsa sensação de segurança?",
+      "question": "Um colega configurou native VLAN 1 em uma ponta do trunk e native VLAN 99 na outra. Nada parou de funcionar. Por que isso ainda é um problema?",
       "hints": [
-        "Pense em VLAN e firewall.",
-        "Pense em logs."
+        "O que acontece com um frame sem tag que chega ao trunk?",
+        "Em qual VLAN cada switch coloca esse frame?"
       ],
       "expectedIdeas": [
-        "VLANs separadas",
-        "inter-VLAN routing",
-        "política mínima",
-        "logs",
-        "documentação"
+        "frames sem tag vão para a native VLAN",
+        "cada ponta coloca o frame em uma VLAN diferente",
+        "VLAN 1 e VLAN 99 se misturam",
+        "native VLAN igual nas duas pontas e sem hosts"
       ],
-      "explanation": "VLAN organiza e limita broadcast; firewall e logs controlam comunicação entre segmentos."
+      "explanation": "Frames sem tag enviados na VLAN 1 por uma ponta entram na VLAN 99 na outra: duas VLANs se misturam em silêncio, quebrando a segmentação e confundindo o troubleshooting."
     }
   ],
   "quiz": [
     {
       "id": "q3.7.1",
-      "type": "conceito",
-      "q": "Qual é a função principal de uma VLAN?",
-      "opts": [
+      "question": "Qual é a função principal de uma VLAN?",
+      "options": [
+        "Criptografar o tráfego entre hosts do mesmo switch",
         "Separar domínios de broadcast em Camada 2",
-        "Criptografar tráfego automaticamente",
-        "Substituir firewall entre servidores",
-        "Aumentar a potência do sinal físico"
+        "Rotear pacotes entre sub-redes diferentes",
+        "Autenticar dispositivos antes de liberar a porta"
       ],
-      "a": 0,
-      "exp": "VLAN separa logicamente domínios de broadcast. Ela não criptografa nem substitui firewall.",
+      "answer": 1,
+      "explanation": "VLAN separa domínios de broadcast. Ela não criptografa, não autentica e não roteia: o roteamento entre VLANs é feito por roteador, switch L3 ou firewall.",
+      "topic": "vlan",
       "difficulty": "iniciante",
-      "topic": "vlan"
+      "type": "conceito"
     },
     {
       "id": "q3.7.2",
-      "type": "comparação",
-      "q": "Qual frase está correta?",
-      "opts": [
-        "Porta access normalmente conecta host final a uma VLAN",
+      "question": "Qual frase está correta?",
+      "options": [
+        "VLAN elimina a necessidade de gateway",
         "Porta trunk nunca carrega mais de uma VLAN",
-        "VLAN elimina necessidade de gateway",
-        "Toda VLAN é uma VPN"
+        "Porta access normalmente conecta host final a uma VLAN",
+        "Em porta access, o host precisa marcar seus frames com tag 802.1Q"
       ],
-      "a": 0,
-      "exp": "Portas access são usadas para hosts finais em uma VLAN. Trunks podem carregar múltiplas VLANs.",
+      "answer": 2,
+      "explanation": "Portas access ligam hosts finais a uma VLAN e recebem frames sem tag. Trunks carregam várias VLANs, e sair da VLAN exige gateway.",
+      "topic": "access trunk",
       "difficulty": "iniciante",
-      "topic": "access trunk"
+      "type": "comparação"
     },
     {
       "id": "q3.7.3",
-      "type": "diagnóstico",
-      "q": "Um host não recebe DHCP após mover de porta. Qual hipótese inicial é forte?",
-      "opts": [
+      "question": "Um host não recebe DHCP após mover de porta. Qual hipótese inicial é forte?",
+      "options": [
         "Porta na VLAN errada ou VLAN sem DHCP/relay",
-        "TLS expirou",
-        "DNS público instável",
-        "MTU de VPN sempre incorreta"
+        "Servidor DNS interno fora do ar",
+        "Certificado TLS do servidor expirado",
+        "Gateway padrão configurado errado no host"
       ],
-      "a": 0,
-      "exp": "Mudança de porta e DHCP falhando apontam primeiro para VLAN/porta/DHCP relay.",
+      "answer": 0,
+      "explanation": "DHCP usa broadcast dentro da VLAN; mudança de porta com DHCP falhando aponta primeiro para a VLAN da porta ou o DHCP/relay. DNS, TLS e gateway só importam depois que o host tem IP.",
+      "topic": "troubleshooting",
       "difficulty": "intermediário",
-      "topic": "troubleshooting"
+      "type": "diagnóstico"
     },
     {
       "id": "q3.7.4",
-      "type": "segurança",
-      "q": "Por que VLAN não deve ser tratada como firewall?",
-      "opts": [
-        "Porque ela separa L2, mas política entre VLANs depende de roteamento/firewall/ACL",
-        "Porque VLAN só existe em Wi-Fi doméstico",
-        "Porque VLAN impede qualquer roteamento",
-        "Porque VLAN só serve para aumentar velocidade"
+      "question": "Por que VLAN não deve ser tratada como firewall?",
+      "options": [
+        "Porque VLAN só funciona em redes Wi-Fi",
+        "Porque VLAN impede qualquer roteamento entre segmentos",
+        "Porque VLAN já filtra portas TCP/UDP entre segmentos",
+        "Porque ela separa L2, mas a política entre VLANs depende de roteamento com firewall/ACL"
       ],
-      "a": 0,
-      "exp": "VLAN separa broadcast. Comunicação entre VLANs deve ser controlada por política.",
+      "answer": 3,
+      "explanation": "VLAN separa o broadcast. Ela não impede o roteamento nem filtra portas: a comunicação entre VLANs deve ser controlada por política no gateway.",
+      "topic": "segurança",
       "difficulty": "intermediário",
-      "topic": "segurança"
+      "type": "segurança"
     },
     {
       "id": "q3.7.5",
-      "type": "arquitetura",
-      "q": "Qual prática é mais segura para trunks?",
-      "opts": [
-        "Permitir apenas VLANs necessárias",
+      "question": "Qual prática é mais segura para trunks?",
+      "options": [
         "Permitir todas as VLANs em todos os trunks",
+        "Permitir apenas as VLANs necessárias",
         "Usar trunk em portas de usuários comuns",
-        "Não documentar native VLAN"
+        "Usar a VLAN 1 como native VLAN com hosts"
       ],
-      "a": 0,
-      "exp": "Allowed VLAN list restrita reduz superfície de erro e exposição.",
+      "answer": 1,
+      "explanation": "Allowed VLAN list restrita reduz a superfície de erro e a exposição. Trunk em porta de usuário e native VLAN com hosts aumentam o risco.",
+      "topic": "trunk",
       "difficulty": "intermediário",
-      "topic": "trunk"
+      "type": "arquitetura"
     },
     {
-      "id": "q3.7.6",
-      "type": "cloud",
-      "q": "Qual conceito em cloud mais se aproxima do raciocínio de segmentação lógica?",
-      "opts": [
-        "Subnets, route tables, security groups/NSGs e firewalls",
-        "Apenas tamanho do disco",
-        "Somente região de billing",
-        "Tema escuro do console"
+      "id": "q3.7.7",
+      "question": "Um PC ligado a uma porta access na VLAN 10 envia um frame comum, sem tag. Como o switch sabe a qual VLAN o frame pertence?",
+      "options": [
+        "Pela native VLAN do trunk mais próximo",
+        "Pelo VLAN ID que o PC grava no cabeçalho IP",
+        "Pela VLAN configurada na porta access de entrada",
+        "Pelo endereço MAC de destino do frame"
       ],
-      "a": 0,
-      "exp": "Cloud usa outros mecanismos, mas o raciocínio de segmentação lógica e política permanece.",
-      "difficulty": "iniciante",
-      "topic": "cloud"
+      "answer": 2,
+      "explanation": "Em porta access o host não marca o frame: o switch usa a VLAN configurada na porta. A tag 802.1Q só aparece no trunk, e a native VLAN vale para frames sem tag que chegam por trunk.",
+      "topic": "access trunk",
+      "difficulty": "intermediário",
+      "type": "conceito"
     }
   ],
   "flashcards": [
     {
-      "id": "fc3.7.1",
-      "front": "O que uma VLAN separa?",
-      "back": "Domínios de broadcast em Camada 2.",
+      "id": "fc3.7.7",
+      "front": "Qual o tamanho da tag 802.1Q e do VLAN ID?",
+      "back": "A tag tem 4 bytes; o VLAN ID ocupa 12 bits dentro dela.",
       "tags": [
-        "vlan"
+        "802.1q"
       ],
-      "difficulty": "iniciante"
+      "difficulty": "intermediário"
     },
     {
-      "id": "fc3.7.2",
-      "front": "VLAN é firewall?",
-      "back": "Não. VLAN separa L2; firewall/ACL controla tráfego entre VLANs.",
+      "id": "fc3.7.8",
+      "front": "O que é native VLAN?",
+      "back": "A VLAN dos frames que trafegam sem tag em um trunk 802.1Q. Deve ser igual nas duas pontas e não ter hosts sensíveis.",
       "tags": [
-        "segurança"
+        "trunk"
       ],
-      "difficulty": "iniciante"
+      "difficulty": "intermediário"
     },
     {
       "id": "fc3.7.3",
@@ -690,13 +545,13 @@
       "difficulty": "intermediário"
     },
     {
-      "id": "fc3.7.5",
-      "front": "Por que restringir VLANs permitidas no trunk?",
-      "back": "Para reduzir erro operacional e exposição de segmentos desnecessários.",
+      "id": "fc3.7.9",
+      "front": "Qual a relação usual entre VLAN e sub-rede?",
+      "back": "Normalmente uma sub-rede IP por VLAN, com gateway próprio documentado.",
       "tags": [
-        "hardening"
+        "vlan"
       ],
-      "difficulty": "intermediário"
+      "difficulty": "iniciante"
     },
     {
       "id": "fc3.7.6",
@@ -715,13 +570,6 @@
       "prompt": "Explique por que ARP de uma VLAN não deve alcançar hosts de outra VLAN.",
       "expectedAnswer": "Porque VLANs separam domínios de broadcast em Camada 2; ARP usa broadcast local e fica limitado ao domínio da VLAN.",
       "explanation": "Essa é uma das funções centrais da segmentação por VLAN."
-    },
-    {
-      "id": "ex3.7.2",
-      "type": "arquitetura",
-      "prompt": "Proponha VLANs para usuários, servidores, convidados e gerenciamento.",
-      "expectedAnswer": "Exemplo: VLAN 10 Usuários, VLAN 20 Servidores, VLAN 40 Convidados, VLAN 99 Gerenciamento, cada uma com sub-rede e gateway próprios.",
-      "explanation": "A numeração pode variar; o importante é separar função, risco e política."
     },
     {
       "id": "ex3.7.3",
@@ -877,9 +725,22 @@
       ]
     },
     {
+      "term": "Native VLAN",
+      "shortDefinition": "VLAN atribuída aos frames sem tag em um trunk 802.1Q.",
+      "longDefinition": "Configuração do trunk que define em qual VLAN entram os frames recebidos sem tag; deve ser igual nas duas pontas.",
+      "example": "Trunk Fa0/24 com native VLAN 999, sem nenhuma porta access nela.",
+      "relatedTerms": [
+        "802.1Q",
+        "trunk"
+      ],
+      "relatedLessons": [
+        "3.7"
+      ]
+    },
+    {
       "term": "Domínio de broadcast",
       "shortDefinition": "Conjunto de hosts que recebe o mesmo broadcast de Camada 2.",
-      "longDefinition": "Em redes com VLAN, cada VLAN normalmente forma seu próprio domínio de broadcast.",
+      "longDefinition": "Em redes com VLAN, cada VLAN forma seu próprio domínio de broadcast.",
       "example": "ARP Request da VLAN 10 não deve alcançar hosts da VLAN 20.",
       "relatedTerms": [
         "ARP",

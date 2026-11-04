@@ -1,4 +1,10 @@
-<section class="lesson-section lesson-section--problem"><h2>3. Problema</h2>
-<p>O problema que a VLAN resolve não é “bloquear tudo”. O problema principal é separar domínios de broadcast e organizar a LAN em grupos lógicos. Sem essa separação, qualquer broadcast de ARP, DHCP ou descoberta local alcança todos os hosts da mesma rede local.</p>
-<ul class="flow-list"><li><strong>Escala:</strong> redes planas crescem mal porque todos compartilham o mesmo domínio de broadcast.</li><li><strong>Operação:</strong> fica difícil saber quais dispositivos pertencem a qual função.</li><li><strong>Segurança:</strong> visitantes, câmeras, usuários e servidores ficam próximos demais.</li><li><strong>Troubleshooting:</strong> uma falha local pode afetar muitos grupos ao mesmo tempo.</li><li><strong>Governança:</strong> políticas de firewall e logs ficam confusos quando tudo está misturado.</li></ul>
+<section class="lesson-section lesson-section--problem"><h2>Problema</h2>
+<p>O problema que a VLAN resolve não é “bloquear tudo”: é separar domínios de broadcast e organizar a LAN em grupos lógicos. Numa rede plana, todo broadcast de ARP, DHCP ou descoberta local alcança todos os hosts, uma falha local afeta todos os grupos e as regras de firewall e os logs ficam confusos.</p>
+<p>Antes das VLANs, ter duas redes exigia cabos e switches separados. O padrão IEEE 802.1Q trouxe a separação lógica: uma marcação (tag) no frame permite que várias VLANs passem pelo mesmo cabo.</p>
+<div class="responsive-table"><table class="data-table comparison-table"><thead><tr><th>Abordagem</th><th>Como funciona</th><th>Limitação</th><th>Uso hoje</th></tr></thead><tbody>
+<tr><td>Rede plana</td><td>Todos na mesma LAN/VLAN.</td><td>Broadcast amplo e pouco controle.</td><td>Só ambientes muito pequenos ou temporários.</td></tr>
+<tr><td>Separação física</td><td>Switches e cabos diferentes por grupo.</td><td>Custo alto e pouca flexibilidade.</td><td>Ambientes que exigem isolamento físico.</td></tr>
+<tr><td>VLAN</td><td>Separação lógica de Camada 2.</td><td>Exige roteamento e política entre VLANs.</td><td>Padrão corporativo para LANs.</td></tr>
+<tr><td>VRF/SDN/overlay</td><td>Segmentação em L3 ou overlay.</td><td>Maior complexidade operacional.</td><td>Datacenter, cloud e multi-tenant.</td></tr>
+</tbody></table></div>
 </section>

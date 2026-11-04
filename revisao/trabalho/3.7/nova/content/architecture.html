@@ -1,4 +1,9 @@
-<section class="lesson-section lesson-section--architecture"><h2>7. Arquitetura</h2>
-<p>Em uma arquitetura corporativa, VLANs costumam representar funções: usuários, servidores, voz, convidados, gerenciamento, impressoras, câmeras, IoT, laboratórios e DMZ interna. Cada VLAN normalmente possui uma sub-rede IP, um gateway, políticas de firewall, logs e dono operacional.</p>
-<ul><li><strong>Camada envolvida:</strong> Camada 2, com impacto direto em Camada 3.</li><li><strong>Componentes:</strong> switches, trunks, access ports, gateways, firewalls, DHCP, NAC e documentação.</li><li><strong>Dependências:</strong> Ethernet, MAC, ARP, broadcast, IP e roteamento.</li><li><strong>Pontos de falha:</strong> VLAN errada na porta, trunk mal permitido, native VLAN insegura, gateway ausente e DHCP incorreto.</li></ul>
+<section class="lesson-section lesson-section--architecture"><h2>Arquitetura</h2>
+<p>Em uma rede corporativa, cada VLAN costuma representar uma função ou nível de risco: usuários, servidores, voz, convidados, gerenciamento, impressoras, câmeras/IoT, laboratórios e DMZ interna. Cada uma normalmente tem sub-rede IP, gateway, política de firewall, logs e dono operacional.</p>
+<ul>
+<li><strong>Componentes:</strong> switches, portas access, trunks, gateway (roteador, switch L3 ou firewall), DHCP, NAC e documentação.</li>
+<li><strong>Pontos de falha:</strong> VLAN errada na porta, VLAN fora do trunk, native VLAN mal planejada, gateway ausente e DHCP/relay incorreto. Uma VLAN errada costuma parecer falha de IP ou de DNS.</li>
+<li><strong>Custo e operação:</strong> exige switches gerenciáveis, gateway L3 e controle de mudanças nos switches, mas sai mais barato que switches separados para cada rede.</li>
+</ul>
+<p>Não use VLAN como única barreira para dados altamente sensíveis, sem documentação e dono, nem para esconder problemas de inventário ou de identidade.</p>
 </section>

@@ -1,3 +1,9 @@
-<section class="lesson-section lesson-section--summary"><h2>19. Resumo</h2>
-<ul><li><strong>Ideia central:</strong> VLAN separa domínios de broadcast em Camada 2.</li><li><strong>O que lembrar:</strong> comunicação entre VLANs exige roteamento e política.</li><li><strong>Erro comum:</strong> achar que VLAN sozinha é firewall.</li><li><strong>Uso real:</strong> separar usuários, servidores, convidados, voz, IoT, câmeras e gerenciamento.</li><li><strong>Segurança:</strong> trunks, native VLAN, ACLs, firewall, DHCP snooping e documentação importam.</li></ul>
+<section class="lesson-section lesson-section--summary"><h2>Resumo</h2>
+<ul>
+<li><strong>Modelo mental:</strong> VLAN é uma sala lógica dentro do switch; limita o broadcast, e a porta entre as salas é o roteamento com política.</li>
+<li><strong>Portas:</strong> access liga um host a uma VLAN, sem tag; trunk leva várias VLANs com tag 802.1Q; frames sem tag no trunk vão para a native VLAN.</li>
+<li><strong>Camada 3:</strong> em geral, uma sub-rede e um gateway por VLAN; falar com outra VLAN exige roteamento inter-VLAN.</li>
+<li><strong>Erro comum:</strong> achar que VLAN é firewall. Ela não filtra, não criptografa e não autentica.</li>
+<li><strong>Segurança:</strong> trunks com VLANs restritas, native VLAN sem hosts, firewall/ACL entre VLANs e documentação.</li>
+</ul>
 </section>
