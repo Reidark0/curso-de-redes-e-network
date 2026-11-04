@@ -146,7 +146,7 @@ Status: PENDENTE · EM ANDAMENTO · CONCLUÍDA · FALHOU. Atualizado pelo orques
 | 13.8 | m13/lesson-13-08.js | — (sem v1) |  |  |  |  |  |  | PENDENTE | | |
 | 13.9 | m13/lesson-13-09.js | — (sem v1) |  |  |  |  |  |  | PENDENTE | | |
 | 13.10 | m13/lesson-13-10.js | — (sem v1) |  |  |  |  |  |  | PENDENTE | | |
-| 14.1 | m14/lesson-14-01.js | — (sem v1) |  |  |  |  |  |  | PENDENTE | | |
+| 14.1 | m14/lesson-14-01.js | — (sem v1) |  |  |  |  |  |  | EM ANDAMENTO |  |  |
 | 14.2 | m14/lesson-14-02.js | — (sem v1) |  |  |  |  |  |  | PENDENTE | | |
 | 14.3 | m14/lesson-14-03.js | — (sem v1) |  |  |  |  |  |  | PENDENTE | | |
 | 14.4 | m14/lesson-14-04.js | — (sem v1) |  |  |  |  |  |  | PENDENTE | | |
