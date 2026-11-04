@@ -564,93 +564,93 @@
   "quiz": [
     {
       "id": "q3.1.1",
-      "type": "conceito",
-      "q": "Qual é a melhor descrição de Ethernet?",
-      "opts": [
+      "question": "Qual é a melhor descrição de Ethernet?",
+      "options": [
         "Tecnologia de LAN que troca frames usando endereços MAC",
         "Protocolo de tradução de nomes em IPs",
         "Sistema de autenticação de usuários web",
         "Protocolo de roteamento entre provedores"
       ],
-      "a": 0,
-      "exp": "Ethernet atua principalmente na comunicação local de camada 2 usando frames e endereços MAC.",
+      "answer": 0,
+      "explanation": "Ethernet atua principalmente na comunicação local de camada 2 usando frames e endereços MAC.",
+      "topic": "ethernet",
       "difficulty": "iniciante",
-      "topic": "ethernet"
+      "type": "conceito"
     },
     {
       "id": "q3.1.2",
-      "type": "comparação",
-      "q": "Qual afirmação diferencia corretamente MAC e IP?",
-      "opts": [
+      "question": "Qual afirmação diferencia corretamente MAC e IP?",
+      "options": [
         "MAC é endereço local de enlace; IP é endereço lógico de rede",
         "MAC substitui IP em redes modernas",
         "IP só existe em redes Wi-Fi",
         "MAC é sempre identidade forte de usuário"
       ],
-      "a": 0,
-      "exp": "MAC é usado no enlace local; IP identifica logicamente origem/destino em camada de rede.",
+      "answer": 0,
+      "explanation": "MAC é usado no enlace local; IP identifica logicamente origem/destino em camada de rede.",
+      "topic": "mac-ip",
       "difficulty": "iniciante",
-      "topic": "mac-ip"
+      "type": "comparação"
     },
     {
       "id": "q3.1.3",
-      "type": "diagnóstico",
-      "q": "Um host cabeado mostra interface desconectada. Qual camada deve ser investigada primeiro?",
-      "opts": [
+      "question": "Um host cabeado mostra interface desconectada. Qual camada deve ser investigada primeiro?",
+      "options": [
         "Camada 1",
         "Camada 4",
         "Camada 7",
         "Camada de autenticação da aplicação"
       ],
-      "a": 0,
-      "exp": "Interface desconectada aponta inicialmente para meio físico, porta, cabo, NIC ou switch.",
+      "answer": 0,
+      "explanation": "Interface desconectada aponta inicialmente para meio físico, porta, cabo, NIC ou switch.",
+      "topic": "troubleshooting",
       "difficulty": "iniciante",
-      "topic": "troubleshooting"
+      "type": "diagnóstico"
     },
     {
       "id": "q3.1.4",
-      "type": "segurança",
-      "q": "Por que MAC não deve ser usado sozinho como controle forte de identidade?",
-      "opts": [
+      "question": "Por que MAC não deve ser usado sozinho como controle forte de identidade?",
+      "options": [
         "Porque pode ser alterado ou falsificado em muitos sistemas",
         "Porque MAC só existe em servidores cloud",
         "Porque MAC criptografa o tráfego",
         "Porque MAC impede ARP automaticamente"
       ],
-      "a": 0,
-      "exp": "MAC pode ser alterado em software; controles fortes exigem autenticação, NAC, logs e correlação.",
+      "answer": 0,
+      "explanation": "MAC pode ser alterado em software; controles fortes exigem autenticação, NAC, logs e correlação.",
+      "topic": "segurança",
       "difficulty": "intermediário",
-      "topic": "segurança"
+      "type": "segurança"
     },
     {
       "id": "q3.1.5",
-      "type": "arquitetura",
-      "q": "Em uma LAN cabeada com switch, o switch encaminha frames principalmente com base em quê?",
-      "opts": [
+      "question": "Em uma LAN cabeada com switch, o switch encaminha frames principalmente com base em quê?",
+      "options": [
         "Tabela MAC",
         "Tabela DNS",
         "Código HTTP",
         "Token JWT"
       ],
-      "a": 0,
-      "exp": "Switches Ethernet aprendem MACs por porta e usam a tabela MAC para encaminhar frames.",
+      "answer": 0,
+      "explanation": "Switches Ethernet aprendem MACs por porta e usam a tabela MAC para encaminhar frames.",
+      "topic": "switching",
       "difficulty": "iniciante",
-      "topic": "switching"
+      "type": "arquitetura"
     },
     {
       "id": "q3.1.6",
-      "type": "cloud",
-      "q": "Em cloud pública, por que ainda vale entender Ethernet mesmo que a camada física seja abstraída?",
-      "opts": [
+      "question": "Em cloud pública, por que ainda vale entender Ethernet mesmo que a camada física seja abstraída?",
+      "options": [
         "Porque conceitos de interface, enlace, encapsulamento e segmentação continuam úteis",
         "Porque o cliente sempre configura cabos físicos da cloud",
         "Porque Ethernet substitui security groups",
         "Porque IP deixa de existir em cloud"
       ],
-      "a": 0,
-      "exp": "Cloud abstrai muitos detalhes físicos, mas redes virtuais ainda dependem de conceitos de interface, enlace e encapsulamento.",
+      "answer": 0,
+      "explanation": "Cloud abstrai muitos detalhes físicos, mas redes virtuais ainda dependem de conceitos de interface, enlace e encapsulamento.",
+      "topic": "cloud",
       "difficulty": "intermediário",
-      "topic": "cloud"
+      "type": "cloud"
     }
   ],
   "flashcards": [

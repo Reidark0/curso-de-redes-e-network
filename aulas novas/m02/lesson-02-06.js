@@ -623,7 +623,7 @@ export const lesson0206 = {
       "id": "ex2.6.2",
       "type": "diagnóstico",
       "prompt": "Um servidor responde ping, mas TCP/22 dá timeout. Liste três hipóteses.",
-      "expectedAnswer": "Firewall descartando em silêncio, serviço SSH parado sem resposta, rota de volta assimétrica, filtro intermediário. Se o serviço só estivesse em outra porta, o host normalmente responderia RST, e não timeout.",
+      "expectedAnswer": "Firewall descartando em silêncio, firewall do host (iptables/Windows Firewall) descartando o SYN, rota de volta assimétrica, filtro intermediário. Se o serviço só estivesse em outra porta, o host normalmente responderia RST, e não timeout.",
       "explanation": "Timeout sugere descarte ou ausência de resposta, não cabo nem DNS (o ping já chegou ao IP)."
     },
     {

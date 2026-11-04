@@ -189,3 +189,5 @@ Palavras visíveis: 4680 → 5102 (+9%; cerca de 400 palavras vieram dos campos 
   ]
 }
 ```
+
+> **Controle de qualidade do m02 (revisor independente):** APROVADA. As correções técnicas (SG/NSG stateful × ACL stateless, curl sem -k, SYN-ACK/RST/timeout, portas efêmeras) e o SVG foram conferidos. Ajuste menor aplicado pelo orquestrador: no ex2.6.2, "serviço SSH parado sem resposta" virou "firewall do host descartando o SYN", porque serviço parado sem filtro gera RST, como a própria aula ensina. Menores aceitos: Ingress/NetworkPolicy e NAT gateway saíram dos exemplos.

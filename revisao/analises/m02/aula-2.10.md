@@ -173,3 +173,5 @@ Aviso do validar: "ids de quiz originais ausentes: q2.10.1, q2.10.3" — esperad
   ]
 }
 ```
+
+> **Controle de qualidade do m02 (revisor independente):** APROVADA. Gabarito conferido. Menores aceitos: a numeração das etapas em `concept` (1 = Aplicação) é inversa à das camadas em `internals`; "OSI não substitui logs reais" saiu junto com a analogia.

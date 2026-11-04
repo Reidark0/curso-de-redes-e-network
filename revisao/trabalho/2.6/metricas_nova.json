@@ -4,7 +4,7 @@
   "titulo": "Camada 4 — Transporte: TCP, UDP, portas e conexões",
   "tipo": "fundamental",
   "palavras": {
-    "visiveis": 5102,
+    "visiveis": 5105,
     "invisiveis": 31,
     "teoriaVisivel": 2624
   },
@@ -31,7 +31,7 @@
     "quiz": 481,
     "flashcards": 140,
     "mentorQuestions": 226,
-    "exercises": 233,
+    "exercises": 236,
     "challenge": 145,
     "commentedSolution": 238,
     "references": 58,
