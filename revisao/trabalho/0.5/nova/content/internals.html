@@ -1,0 +1,19 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>
+    O funcionamento interno pode ser visto como uma cadeia de transformação. A aplicação produz dados. Esses dados viram bytes. Os bytes viram bits. A placa de rede, transceiver ou rádio transforma bits em símbolos físicos. O meio transporta o sinal. O receptor mede o sinal, tenta reconstruir os símbolos, recupera os bits e entrega para as camadas superiores.
+  </p>
+  <ol class="flow-list">
+    <li><strong>Serialização:</strong> os bits precisam ser colocados em uma sequência transmissível.</li>
+    <li><strong>Codificação/modulação:</strong> a sequência é convertida em padrões físicos detectáveis.</li>
+    <li><strong>Transmissão:</strong> o meio carrega energia elétrica, luz ou rádio.</li>
+    <li><strong>Atenuação:</strong> o sinal perde força com distância, conectores, obstáculos ou qualidade do meio.</li>
+    <li><strong>Ruído/interferência:</strong> sinais indesejados dificultam distinguir o dado original.</li>
+    <li><strong>Recepção:</strong> o receptor decide quais padrões representam os bits.</li>
+    <li><strong>Verificação:</strong> camadas superiores detectam erros por mecanismos como FCS/CRC, checksums e retransmissões.</li>
+  </ol>
+  <p>
+    Um ponto fundamental: nem todo erro físico aparece como “cabo desconectado”. Muitas vezes o link continua “up”, mas com contadores de erro, quedas ocasionais, renegociação, perda de pacotes, throughput baixo ou Wi‑Fi oscilando. Essa é a diferença entre ausência total de camada física e camada física degradada.
+  </p>
+</section>

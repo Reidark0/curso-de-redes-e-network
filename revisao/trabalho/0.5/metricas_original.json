@@ -1,0 +1,88 @@
+{
+  "id": "0.5",
+  "versao": "original",
+  "titulo": "Como sinais físicos carregam dados",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5590,
+    "invisiveis": 686,
+    "teoriaVisivel": 3207
+  },
+  "porCampoVisivel": {
+    "content.motivation": 264,
+    "content.history": 204,
+    "content.problem": 203,
+    "content.evolution": 206,
+    "content.concept": 128,
+    "content.internals": 178,
+    "content.architecture": 160,
+    "content.analogy": 110,
+    "content.simpleExample": 111,
+    "content.enterpriseExample": 118,
+    "content.cloudExample": 127,
+    "content.devsecopsExample": 113,
+    "content.securityExample": 199,
+    "content.diagram": 48,
+    "content.summary": 89,
+    "content.nextTheme": 49,
+    "security": 351,
+    "troubleshooting": 316,
+    "glossary": 233,
+    "title+subtitle": 25,
+    "objectives": 61,
+    "learningOutcomes": 86,
+    "quiz": 373,
+    "flashcards": 113,
+    "mentorQuestions": 179,
+    "exercises": 182,
+    "challenge": 194,
+    "commentedSolution": 213,
+    "references": 73,
+    "linksToOtherCourses": 55,
+    "lab": 829
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 51,
+    "content.exercisesIntro": 35,
+    "content.challengeIntro": 35,
+    "content.solutionIntro": 30,
+    "networkContext": 34,
+    "deepDive": 355,
+    "commonMistakes": 146
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 100,
+    "alternativa_5minPasso_maisLeitura": 41.4,
+    "plausivel": false,
+    "palavras": 829
+  },
+  "duracao": {
+    "declarada": "70-100 min",
+    "estimatedStudyTimeMinutes": 100,
+    "M": 85,
+    "T": 128,
+    "partes": {
+      "teoria": 24.7,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 41.4
+    },
+    "faixaRecomendada": "110-155 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 22
+  }
+}

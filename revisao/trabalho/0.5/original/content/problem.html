@@ -1,0 +1,20 @@
+
+<section class="lesson-section lesson-section--problem">
+  <h2>3. Problema</h2>
+  <p>
+    O problema central é: <strong>como fazer um receptor distinguir 0 e 1 em um mundo físico imperfeito?</strong> Cabos têm resistência, capacitância e ruído. Fibra sofre atenuação, conectores sujos e perda por curvatura. Rádio sofre interferência, reflexão, obstáculos, colisões, distância, potência baixa e concorrência com outras redes. O receptor não recebe “bits puros”; ele recebe sinais que precisam ser medidos, sincronizados, filtrados e interpretados.
+  </p>
+  <p>
+    Se o sinal chega forte, limpo e dentro do padrão esperado, a placa de rede consegue reconstruir os bits. Se chega degradado, podem ocorrer erros de quadro, perda, retransmissão, queda de throughput, renegociação de velocidade, latência variável ou desconexão. Isso explica por que uma rede pode ter IP correto e ainda assim funcionar mal.
+  </p>
+  <ul class="flow-list">
+    <li><strong>Sem sinal adequado:</strong> não há link físico.</li>
+    <li><strong>Com sinal fraco:</strong> o link pode subir, mas com erros e retransmissões.</li>
+    <li><strong>Com interferência:</strong> pacotes podem ser perdidos ou precisar ser reenviados.</li>
+    <li><strong>Com meio compartilhado:</strong> throughput real cai conforme mais dispositivos disputam o canal.</li>
+    <li><strong>Com instalação ruim:</strong> problemas aparecem como intermitência difícil de reproduzir.</li>
+  </ul>
+  <div class="callout callout--warning">
+    <strong>Erro comum:</strong> pular direto para DNS, firewall ou aplicação sem verificar camada física. Em troubleshooting profissional, link, erros de interface, negociação, cabo, sinal e meio devem ser verificados antes de hipóteses mais altas.
+  </div>
+</section>
