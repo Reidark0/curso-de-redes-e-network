@@ -4,8 +4,8 @@
   "order": 8,
   "title": "STP: evitando loops e broadcast storms",
   "subtitle": "Como switches mantêm redundância física sem transformar a LAN em um ciclo de frames, broadcast e instabilidade.",
-  "duration": "90-130 min",
-  "estimatedStudyTimeMinutes": 130,
+  "duration": "95-135 min",
+  "estimatedStudyTimeMinutes": 135,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 220,
@@ -127,7 +127,7 @@
         "command": "show spanning-tree vlan <id>\nshow spanning-tree root\nshow mac address-table dynamic\nshow logging | include STP|SPANTREE|MACFLAP\nshow interfaces status err-disabled\nshow interfaces counters errors",
         "purpose": "Ver root bridge, papéis e estados das portas, MAC flapping, portas derrubadas por BPDU Guard e erros de interface.",
         "expectedObservation": "Root bridge planejada, uma porta Altn BLK no ponto previsto, nenhum MAC flapping recorrente e nenhuma porta err-disabled inesperada.",
-        "interpretation": "Root bridge errada ou flapping: investigar cabos, trunks e portas de usuário. Porta err-disabled por BPDU Guard: há switch indevido naquela tomada."
+        "interpretation": "Root errada ou flapping: investigar cabos, trunks e portas de usuário. Porta err-disabled por BPDU Guard: switch indevido naquela tomada."
       }
     ],
     "decisionTree": [
@@ -137,7 +137,7 @@
       },
       {
         "if": "Uma porta está blocking/alternate",
-        "then": "Verificar se é o comportamento esperado do STP antes de alterar a topologia (show spanning-tree interface <porta> detail). Se o objetivo era usar a banda dos dois links, redesenhar com LACP ou roteamento, não desligar o STP."
+        "then": "Confirmar se é o comportamento esperado (show spanning-tree interface <porta> detail) antes de mexer. Para usar a banda dos dois links, redesenhar com LACP ou roteamento, não desligar o STP."
       },
       {
         "if": "Root bridge não é a planejada",
@@ -145,11 +145,11 @@
       },
       {
         "if": "Porta de usuário em err-disabled",
-        "then": "BPDU Guard recebeu BPDU: remover o equipamento indevido, confirmar nos logs e só então reabilitar a porta conforme procedimento."
+        "then": "BPDU Guard recebeu BPDU: remover o equipamento indevido, conferir os logs e reabilitar a porta conforme procedimento."
       },
       {
         "if": "Broadcast está anormal",
-        "then": "Aplicar contenção operacional (isolar o link suspeito conforme procedimento), identificar a origem e validar o storm control."
+        "then": "Conter (isolar o link suspeito conforme procedimento), identificar a origem e validar o storm control."
       }
     ]
   },
@@ -163,7 +163,8 @@
       "Conectar links redundantes sem controle.",
       "Permitir mini-switches não gerenciados em portas de usuário.",
       "Deixar todos os trunks permitindo todas as VLANs.",
-      "Desabilitar STP para resolver sintoma sem entender a causa."
+      "Desabilitar STP para resolver sintoma sem entender a causa.",
+      "Filtrar BPDUs em portas entre switches: o STP deixa de enxergar o ciclo."
     ],
     "vulnerabilities": [
       {
@@ -397,7 +398,7 @@
         "Uma porta Altn BLK estável na saída de show spanning-tree"
       ],
       "answer": 2,
-      "explanation": "MAC flapping com broadcast anormal é a assinatura típica de loop. CRC numa porta indica problema físico local, lentidão de um site externo não é L2 local e uma porta Altn BLK estável é o STP funcionando.",
+      "explanation": "MAC flapping com broadcast anormal é a assinatura de loop. CRC numa porta é problema físico local e uma porta Altn BLK estável é o STP funcionando.",
       "topic": "troubleshooting",
       "difficulty": "intermediário",
       "type": "diagnóstico"
@@ -427,7 +428,7 @@
         "BPDU Guard"
       ],
       "answer": 3,
-      "explanation": "BPDU Guard derruba (err-disabled) a porta edge que recebe qualquer BPDU. Root Guard só bloqueia BPDU que anuncia raiz melhor, storm control limita volume de tráfego e PortFast apenas acelera a porta.",
+      "explanation": "BPDU Guard derruba a porta edge que recebe qualquer BPDU. Root Guard só reage a BPDU de raiz melhor; storm control limita volume; PortFast só acelera a porta.",
       "topic": "hardening",
       "difficulty": "intermediário",
       "type": "segurança"
@@ -457,7 +458,7 @@
         "Porque PortFast só funciona em trunks 802.1Q"
       ],
       "answer": 1,
-      "explanation": "PortFast coloca a porta direto em forwarding, o que só é seguro onde há um único host. Entre switches, isso pode abrir um loop antes da convergência.",
+      "explanation": "PortFast põe a porta direto em forwarding, seguro só com um único host. Entre switches, pode abrir um loop antes da convergência.",
       "topic": "PortFast",
       "difficulty": "intermediário",
       "type": "arquitetura"
@@ -600,7 +601,7 @@
     ]
   },
   "commentedSolution": {
-    "reasoning": "Primeiro identificamos onde há redundância física e onde poderia haver loop. Depois escolhemos uma raiz central e previsível e uma secundária para assumir se ela cair. Em seguida protegemos as portas de usuário, porque loops acidentais costumam surgir na borda. Por fim definimos evidências de validação e monitoramento.",
+    "reasoning": "Primeiro, onde há redundância física e risco de loop. Depois, uma raiz central e previsível e uma secundária que assuma se ela cair. Em seguida, as portas de usuário, onde loops acidentais costumam surgir. Por fim, validação e monitoramento.",
     "steps": [
       "Desenhar a topologia física: cada acesso com dois uplinks forma ciclos via D1 e D2.",
       "D1 como root primária das VLANs 10 e 20 (spanning-tree vlan 10,20 priority 4096) e D2 como secundária (prioridade 8192).",
@@ -629,7 +630,7 @@
         "whyItIsWrong": "Se D1 cair, o tráfego entre acessos passaria por um switch de borda; a secundária deve ser a outra distribuição."
       }
     ],
-    "finalAnswer": "D1 root primária e D2 secundária, RSTP/MSTP conforme a arquitetura, PortFast + BPDU Guard e storm control nas portas de usuário, Root Guard nas portas da distribuição voltadas ao acesso, trunks restritos, monitoramento de MAC flapping e mudança de root, e topologia física e lógica documentadas."
+    "finalAnswer": "D1 root primária e D2 secundária, RSTP/MSTP conforme a arquitetura, PortFast + BPDU Guard e storm control no acesso, Root Guard na distribuição voltada ao acesso, trunks restritos, alertas de MAC flapping e mudança de root, e topologia física e lógica documentadas."
   },
   "glossary": [
     {
