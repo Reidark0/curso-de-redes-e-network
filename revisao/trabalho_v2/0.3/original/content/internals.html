@@ -1,0 +1,24 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>
+    Vamos acompanhar uma frase simples: <code>Olá</code>. Para um humano, isso é texto. Para uma aplicação, primeiro existem caracteres: <code>O</code>, <code>l</code> e <code>á</code>. No Unicode, cada caractere possui um ponto de código. Em UTF-8, cada ponto de código é transformado em um ou mais bytes. Os caracteres ASCII básicos, como <code>O</code> e <code>l</code>, ocupam 1 byte em UTF-8. O caractere <code>á</code> ocupa 2 bytes: <code>C3 A1</code> em hexadecimal.
+  </p>
+  <ol class="flow-list">
+    <li><strong>Passo 1:</strong> o usuário digita um caractere em uma aplicação.</li>
+    <li><strong>Passo 2:</strong> a aplicação representa esse caractere internamente usando um modelo de texto.</li>
+    <li><strong>Passo 3:</strong> ao salvar ou transmitir, a aplicação escolhe uma codificação, como UTF-8.</li>
+    <li><strong>Passo 4:</strong> a codificação transforma os caracteres em bytes.</li>
+    <li><strong>Passo 5:</strong> os bytes são enviados pela rede dentro de protocolos como HTTP/TCP/IP.</li>
+    <li><strong>Passo 6:</strong> o sistema receptor interpreta os bytes usando a codificação esperada.</li>
+    <li><strong>Passo 7:</strong> se a interpretação estiver errada, o texto exibido ou processado será incorreto.</li>
+  </ol>
+  <p>
+    Base64 funciona de forma diferente. Ele não mapeia caracteres humanos para bytes. Ele pega bytes já existentes e os reagrupa em blocos de 6 bits, usando uma tabela de 64 caracteres. Como 6 bits permitem 64 combinações, é possível representar dados binários usando letras, números e alguns símbolos. O caractere <code>=</code> pode aparecer como preenchimento para indicar alinhamento no final.
+  </p>
+  <div class="content-card">
+    <h3>Fluxo mental</h3>
+    <p><strong>Texto humano</strong> → caracteres → pontos de código Unicode → bytes em UTF-8 → pacotes na rede → bytes recebidos → interpretação → texto novamente.</p>
+    <p><strong>Bytes binários</strong> → Base64 → texto seguro para transporte → decodificação → bytes originais.</p>
+  </div>
+</section>

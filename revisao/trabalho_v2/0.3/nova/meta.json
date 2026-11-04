@@ -1,0 +1,427 @@
+{
+  "id": "0.3",
+  "moduleId": "m00",
+  "order": 3,
+  "title": "ASCII, Unicode, UTF-8 e Base64",
+  "subtitle": "Como texto vira bytes em redes, logs, APIs, tokens e análise de segurança.",
+  "duration": "15-25 min + 50 min de prática extra",
+  "estimatedStudyTimeMinutes": 25,
+  "difficulty": "iniciante",
+  "type": "fundamental",
+  "xp": 170,
+  "tags": [
+    "fundamentos",
+    "texto",
+    "ascii",
+    "unicode",
+    "utf-8",
+    "base64",
+    "http",
+    "apis",
+    "logs",
+    "tokens",
+    "segurança"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.1",
+      "reason": "A aula 0.1 explica que computadores representam informação como estados interpretados como bits."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.2",
+      "reason": "A aula 0.2 apresenta bits, bytes, binário e hexadecimal, que são a base para entender caracteres, codificações e Base64."
+    }
+  ],
+  "objectives": [
+    "Diferenciar caractere, ponto de código (Unicode) e codificação (UTF-8), e contar quantos bytes um texto ocupa em UTF-8 (ex.: Olá = 4F 6C C3 A1, 4 bytes).",
+    "Explicar, byte a byte, por que á vira Ã¡ quando bytes UTF-8 são lidos como Latin-1, e reconhecer esse padrão num texto quebrado.",
+    "Explicar como o Base64 reescreve cada 3 bytes como 4 caracteres, calcular o tamanho resultante e justificar por que ele não protege segredos."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Camada 7 - Aplicação",
+      "Camada 6 - Apresentação como modelo conceitual"
+    ],
+    "tcpIpLayers": [
+      "Aplicação"
+    ],
+    "relatedProtocols": [
+      "HTTP",
+      "SMTP",
+      "DNS",
+      "TLS",
+      "SSH",
+      "Syslog"
+    ],
+    "dependsOn": [
+      "bits",
+      "bytes",
+      "binário",
+      "hexadecimal"
+    ],
+    "enables": [
+      "HTTP",
+      "APIs",
+      "logs",
+      "tokens",
+      "certificados",
+      "análise de payload",
+      "segurança de aplicações"
+    ]
+  },
+  "lab": {
+    "id": "lab-0.3",
+    "title": "Observando UTF-8 e Base64 na prática",
+    "labType": "security",
+    "objective": "Ver quantos bytes cada caractere ocupa em UTF-8, reproduzir o texto quebrado Ã¡ e acompanhar o Base64 transformando 3 bytes em 4 caracteres.",
+    "tools": [
+      "Terminal Linux/macOS (com xxd ou od, iconv, base64 e Python 3) ou Windows PowerShell (de preferência o PowerShell 7)"
+    ],
+    "estimatedTimeMinutes": 20,
+    "steps": [
+      {
+        "number": 1,
+        "title": "Ver os bytes UTF-8 de Olá",
+        "instruction": "Mostre, em hexadecimal, os bytes do texto Olá.",
+        "command": "Linux/macOS: printf 'Olá' | xxd -p (sem xxd: printf 'Olá' | od -An -tx1)\nWindows PowerShell: [Text.Encoding]::UTF8.GetBytes('Olá') | ForEach-Object { $_.ToString('X2') }",
+        "expectedOutput": "4f6cc3a1 (no PowerShell, 4F, 6C, C3 e A1, um por linha).",
+        "explanation": "O e l são ASCII e ocupam 1 byte cada; á ocupa 2 bytes, C3 A1. São 3 caracteres e 4 bytes."
+      },
+      {
+        "number": 2,
+        "title": "Comparar caracteres e bytes",
+        "instruction": "Conte caracteres e bytes de textos com e sem acento e de um símbolo fora do Latin-1. O comando é para Linux/macOS; no Windows, salve as três linhas do meio num arquivo .py e rode com python.",
+        "command": "python3 - <<'PY'\nfor s in ['Ola', 'Olá', 'ação', '€']:\n    b = s.encode('utf-8')\n    print(s, 'caracteres=', len(s), 'bytes=', len(b), 'hex=', b.hex())\nPY",
+        "expectedOutput": "Ola caracteres= 3 bytes= 3 hex= 4f6c61\nOlá caracteres= 3 bytes= 4 hex= 4f6cc3a1\nação caracteres= 4 bytes= 6 hex= 61c3a7c3a36f\n€ caracteres= 1 bytes= 3 hex= e282ac",
+        "explanation": "Cada linha confirma a tabela de faixas do UTF-8: ASCII em 1 byte, á, ç e ã em 2, o € em 3."
+      },
+      {
+        "number": 3,
+        "title": "Reproduzir o texto quebrado",
+        "instruction": "Pegue os bytes UTF-8 de Usuário e leia-os como se fossem Latin-1 (ISO-8859-1).",
+        "command": "Linux/macOS: printf 'Usuário' | iconv -f ISO-8859-1 -t UTF-8\nWindows PowerShell: [Text.Encoding]::GetEncoding('ISO-8859-1').GetString([Text.Encoding]::UTF8.GetBytes('Usuário'))",
+        "expectedOutput": "UsuÃ¡rio",
+        "explanation": "O iconv trata cada byte como um caractere Latin-1: C3 vira Ã e A1 vira ¡. É exatamente o erro de um programa que lê UTF-8 com a regra errada. Nenhum byte se perdeu."
+      },
+      {
+        "number": 4,
+        "title": "Acompanhar o Base64 e o preenchimento",
+        "instruction": "Codifique Hel (3 bytes) e Hello (5 bytes) em Base64 e compare os tamanhos.",
+        "command": "Linux/macOS: printf 'Hel' | base64; printf 'Hello' | base64\nWindows PowerShell: [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('Hel')); [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('Hello'))",
+        "expectedOutput": "SGVs\nSGVsbG8=",
+        "explanation": "3 bytes viram 4 caracteres, sem preenchimento: é o bloco calculado à mão na aula. Hello tem um bloco completo e um de 2 bytes, que vira 4 caracteres terminados em =."
+      }
+    ],
+    "expectedResult": "Você viu que Olá ocupa 4 bytes e o € ocupa 3, reproduziu UsuÃ¡rio lendo bytes UTF-8 como Latin-1 e confirmou que o Base64 transforma cada 3 bytes em 4 caracteres, com = quando o último bloco está incompleto."
+  },
+  "mentorQuestions": [
+    {
+      "type": "aplicação",
+      "question": "Um sistema antigo gera arquivos de texto em ASCII, só com letras sem acento, números e pontuação. Um sistema novo, que lê tudo como UTF-8, vai abrir esses arquivos corretamente? E se um dia o sistema antigo passar a gravar á em Latin-1?",
+      "hints": [
+        "Compare os bytes de A no ASCII e no UTF-8.",
+        "Qual é o byte de á em Latin-1? Ele é UTF-8 válido sozinho?"
+      ],
+      "expectedIdeas": [
+        "ASCII é UTF-8 válido",
+        "mesmos bytes de 1 byte",
+        "E1 sozinho é inválido em UTF-8",
+        "símbolo de substituição"
+      ],
+      "explanation": "Sim: o UTF-8 mantém o ASCII com os mesmos valores, então um arquivo só com ASCII já é UTF-8 válido. Já o á gravado em Latin-1 é o byte E1, que sozinho não é UTF-8 válido; o sistema novo deve mostrar o símbolo de substituição no lugar dele."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "Num registro de sistema você encontra o valor dGVzdGU6MTIz. Ele não tem = no fim. Isso descarta a hipótese de Base64? Como você testaria, e com que cuidado?",
+      "hints": [
+        "Quando o Base64 coloca =? Quantos caracteres tem o valor?",
+        "Decodificar revela o conteúdo original."
+      ],
+      "expectedIdeas": [
+        "= só quando o último bloco está incompleto",
+        "12 caracteres = 9 bytes",
+        "decodificar localmente",
+        "tratar como possivelmente sensível"
+      ],
+      "explanation": "Não descarta: o = só aparece quando o último bloco tem 1 ou 2 bytes. 12 caracteres correspondem a 3 blocos completos, 9 bytes. Decodificar localmente (echo dGVzdGU6MTIz | base64 -d) dá teste:123, um par usuário:senha. Como o conteúdo pode ser uma credencial, decodifique só na sua máquina e não cole o resultado em chats ou chamados."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q0.3.1",
+      "question": "Qual afirmação descreve melhor o papel do UTF-8?",
+      "options": [
+        "É uma codificação que transforma caracteres Unicode em bytes.",
+        "É um algoritmo de criptografia para proteger texto.",
+        "É um protocolo de roteamento entre redes.",
+        "É um tipo de endereço MAC."
+      ],
+      "answer": 0,
+      "explanation": "UTF-8 é uma codificação de Unicode em bytes. Ele não oferece sigilo e não é protocolo de rede.",
+      "topic": "utf-8",
+      "difficulty": "iniciante",
+      "type": "conceito"
+    },
+    {
+      "id": "q0.3.2",
+      "question": "Por que Base64 não deve ser usado como mecanismo de proteção de segredo?",
+      "options": [
+        "Porque só funciona em sistemas Linux.",
+        "Porque altera o endereço IP de origem.",
+        "Porque pode ser revertido sem chave.",
+        "Porque sempre corrompe dados binários."
+      ],
+      "answer": 2,
+      "explanation": "Base64 é uma representação reversível de bytes em texto. Qualquer pessoa com o valor pode decodificar se conhecer a regra.",
+      "topic": "base64",
+      "difficulty": "iniciante",
+      "type": "segurança"
+    },
+    {
+      "id": "q0.3.4",
+      "question": "Qual diferença entre Unicode e UTF-8 está correta?",
+      "options": [
+        "Unicode é criptografia; UTF-8 é firewall.",
+        "Unicode é usado apenas em IPv4; UTF-8 apenas em switches.",
+        "Não há diferença: os termos são sempre sinônimos perfeitos.",
+        "Unicode define pontos de código; UTF-8 define como codificá-los em bytes."
+      ],
+      "answer": 3,
+      "explanation": "Unicode organiza o repertório de caracteres. UTF-8 é uma forma de representar esses caracteres em bytes.",
+      "topic": "unicode",
+      "difficulty": "intermediário",
+      "type": "comparação"
+    },
+    {
+      "id": "q0.3.7",
+      "question": "Um log mostra JoÃ£o no lugar de João. Qual é a explicação mais provável?",
+      "options": [
+        "O pacote perdeu bytes no caminho e o TCP não retransmitiu.",
+        "O nome foi criptografado por um malware.",
+        "Os bytes UTF-8 de ã (C3 A3) foram lidos como Latin-1/Windows-1252, em que C3 = Ã e A3 = £.",
+        "O nome foi convertido para Base64 antes de ser gravado."
+      ],
+      "answer": 2,
+      "explanation": "O padrão Ã seguido de outro símbolo é típico de UTF-8 interpretado como tabela de 1 byte. O TCP entrega bytes íntegros; o erro está na interpretação.",
+      "topic": "troubleshooting",
+      "difficulty": "intermediário",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q0.3.8",
+      "question": "Uma coluna aceita no máximo 10 bytes. Por que Conceição (9 caracteres) não cabe se for gravada em UTF-8?",
+      "options": [
+        "Porque UTF-8 usa sempre 2 bytes por caractere, totalizando 18 bytes.",
+        "Porque ç e ã ocupam 2 bytes cada em UTF-8, totalizando 11 bytes.",
+        "Porque UTF-8 acrescenta um byte de preenchimento = ao final do texto.",
+        "Porque o texto é convertido para Base64 antes de ser gravado."
+      ],
+      "answer": 1,
+      "explanation": "Os 7 caracteres ASCII ocupam 1 byte cada e ç (C3 A7) e ã (C3 A3) ocupam 2 cada: 7 + 4 = 11 bytes. Limites em bytes não são limites em caracteres.",
+      "topic": "utf-8",
+      "difficulty": "intermediário",
+      "type": "cálculo"
+    },
+    {
+      "id": "q0.3.9",
+      "question": "Um serviço envia um arquivo de 300 bytes em Base64 dentro de um JSON. Quantos caracteres terá o valor Base64?",
+      "options": [
+        "300",
+        "225",
+        "600",
+        "400"
+      ],
+      "answer": 3,
+      "explanation": "Base64 converte cada bloco de 3 bytes em 4 caracteres: 300 ÷ 3 = 100 blocos × 4 = 400 caracteres, cerca de 33% a mais. Como 300 é múltiplo de 3, não há =.",
+      "topic": "base64",
+      "difficulty": "intermediário",
+      "type": "cálculo"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc0.3.1",
+      "front": "O que é ASCII?",
+      "back": "Uma tabela de 7 bits (128 valores, 0 a 127) que associa números a caracteres básicos do inglês e a controles. Ex.: A = 65 = 0x41.",
+      "tags": [
+        "ascii",
+        "texto"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.3.2",
+      "front": "O que é Unicode?",
+      "back": "Um padrão que atribui pontos de código a um repertório amplo de caracteres do mundo todo.",
+      "tags": [
+        "unicode",
+        "texto"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.3.3",
+      "front": "O que é UTF-8?",
+      "back": "Uma codificação que transforma pontos de código Unicode em sequências de bytes.",
+      "tags": [
+        "utf-8",
+        "bytes"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.3.4",
+      "front": "Base64 é criptografia?",
+      "back": "Não. Base64 é uma representação reversível de bytes como texto e não oferece sigilo.",
+      "tags": [
+        "base64",
+        "segurança"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.3.5",
+      "front": "Por que um caractere pode ocupar mais de 1 byte?",
+      "back": "Porque codificações como UTF-8 usam múltiplos bytes para representar caracteres fora do ASCII básico.",
+      "tags": [
+        "utf-8",
+        "bytes"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.3.7",
+      "front": "Qual a diferença entre Base64 e Base64URL?",
+      "back": "Base64URL troca + por - e / por _ e costuma omitir o =, para caber em endereços web e tokens.",
+      "tags": [
+        "base64",
+        "tokens"
+      ],
+      "difficulty": "intermediário"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex0.3.6",
+      "type": "prático",
+      "prompt": "Calcule sem ferramenta e depois confira no terminal: (a) quantos bytes Coração ocupa em UTF-8; (b) quantos caracteres Base64 resultam de 12 bytes e de 11 bytes, e quantos = aparecem em cada caso.",
+      "expectedAnswer": "(a) 9 bytes: 7 caracteres, dos quais ç e ã ocupam 2 bytes cada. (b) 12 bytes = 4 blocos de 3 = 16 caracteres, sem =. 11 bytes = 3 blocos completos + 2 bytes = 16 caracteres com um = no final.",
+      "explanation": "O exercício fixa as duas contas que mais causam erro em validações e limites: bytes por caractere em UTF-8 e o crescimento de 4/3 do Base64."
+    },
+    {
+      "id": "ex0.3.7",
+      "type": "prático",
+      "prompt": "Codifique à mão o texto Oi! em Base64, como no exemplo do Hel: escreva os 3 bytes em hexadecimal e em binário, separe em grupos de 6 bits e troque cada grupo pelo caractere da tabela. Depois confira no terminal (printf 'Oi!' | base64).",
+      "expectedAnswer": "O = 4F, i = 69, ! = 21: 01001111 01101001 00100001. Grupos de 6 bits: 010011 110110 100100 100001 = 19, 54, 36, 33 = T, 2, k, h. Resultado: T2kh, sem = porque o bloco tem 3 bytes completos.",
+      "explanation": "O exercício repete o algoritmo com valores novos, incluindo um grupo que cai nos dígitos (54 = 2) e outro nas minúsculas (36 = k)."
+    }
+  ],
+  "challenge": {
+    "title": "Dois sistemas, dois erros diferentes",
+    "scenario": "O sistema A envia cadastros para o sistema B, e B envia relatórios de volta para A. O nome do campo Usuário aparece como Usu�rio nas telas de B e como UsuÃ¡rio nos relatórios abertos em A. A equipe acha que a rede entre os dois está corrompendo os dados.",
+    "tasks": [
+      "Dizer qual codificação cada sistema usa e explicar cada erro pelos bytes do á.",
+      "Dizer como confirmar olhando os bytes.",
+      "Propor uma correção que preserve os acentos."
+    ],
+    "expectedDeliverables": [
+      "Uma explicação de 5 a 8 linhas, com os bytes esperados em cada sentido."
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "São dois sintomas diferentes, então provavelmente são duas leituras erradas, uma em cada sentido. Use as pistas da aula: Ã + símbolo indica UTF-8 lido como Latin-1; � indica bytes que não são UTF-8 válido.",
+    "steps": [
+      "B mostra Usu�rio: recebeu um byte que não é UTF-8 válido. É o E1, o á em Latin-1. Logo, A grava em Latin-1 e B lê em UTF-8.",
+      "A mostra UsuÃ¡rio: recebeu C3 A1, o á em UTF-8, e leu cada byte como um caractere Latin-1 (C3 = Ã, A1 = ¡). Logo, B grava em UTF-8 e A lê em Latin-1.",
+      "Confirme olhando os bytes de cada lado (xxd ou Format-Hex): E1 na saída de A, C3 A1 na saída de B.",
+      "Corrija alinhando os dois em UTF-8, ou convertendo a saída de A para UTF-8 antes de enviar, e declarando a codificação quando o formato permitir."
+    ],
+    "commonMistakes": [
+      "Culpar a rede: os bytes chegam exatamente como saíram.",
+      "Remover os acentos: esconde o sintoma e estraga os dados."
+    ],
+    "finalAnswer": "A usa Latin-1 (á = E1) e B usa UTF-8 (á = C3 A1); cada um lê o que recebe com a própria regra. A solução é alinhar a codificação dos dois, preferencialmente em UTF-8."
+  },
+  "glossary": [
+    {
+      "term": "Content-Type",
+      "shortDefinition": "Cabeçalho do HTTP que informa o tipo do conteúdo enviado e, muitas vezes, a codificação do texto.",
+      "example": "Content-Type: text/html; charset=utf-8",
+      "relatedLessons": [
+        "8.2"
+      ]
+    },
+    {
+      "term": "JSON",
+      "shortDefinition": "Formato de texto usado por sistemas e APIs para trocar dados organizados em campos e valores.",
+      "example": "{\"nome\": \"Conceição\"}",
+      "relatedLessons": [
+        "8.6"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "standard",
+      "title": "The Unicode Standard",
+      "organization": "Unicode Consortium",
+      "url": "https://www.unicode.org/standard/standard.html",
+      "note": "Referência conceitual para Unicode e pontos de código."
+    },
+    {
+      "type": "rfc",
+      "title": "RFC 3629 - UTF-8, a transformation format of ISO 10646",
+      "organization": "IETF",
+      "url": "https://www.rfc-editor.org/rfc/rfc3629",
+      "note": "Referência técnica estável sobre UTF-8."
+    },
+    {
+      "type": "rfc",
+      "title": "RFC 4648 - The Base16, Base32, and Base64 Data Encodings",
+      "organization": "IETF",
+      "url": "https://www.rfc-editor.org/rfc/rfc4648",
+      "note": "Referência técnica sobre Base64 e outras codificações."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 - Aula 0.2",
+      "organization": "Deixando de ser TBN",
+      "url": "internal://redes-e-network/m00/0.2",
+      "note": "Base necessária sobre bits, bytes, binário e hexadecimal."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "Kubernetes e Segurança de Workloads",
+      "lesson": "Secrets e configuração",
+      "reason": "Kubernetes Secrets usam Base64 para representar bytes em YAML/JSON, mas exigem RBAC, criptografia e gestão segura."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "Tokens, Claims e Federação",
+      "lesson": "JWT, claims e representação de tokens",
+      "reason": "JWT usa Base64URL em suas partes, o que não deve ser confundido com criptografia do conteúdo."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "0.4"
+    ]
+  }
+}

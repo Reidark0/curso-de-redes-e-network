@@ -1,0 +1,27 @@
+
+<section class="lesson-section lesson-section--history">
+  <h2>História</h2>
+  <p>
+    Os primeiros sistemas comerciais precisavam representar texto em inglês: letras, dígitos, pontuação e alguns caracteres de controle. O <strong>ASCII</strong> resolveu isso com uma tabela de 7 bits (128 valores, de 0 a 127) que associa números a caracteres. A letra <code>A</code>, por exemplo, é o decimal 65, o hexadecimal <code>0x41</code> e o binário <code>0100 0001</code>.
+  </p>
+  <p>
+    Acentos, outros alfabetos, símbolos e ideogramas não cabem em 128 valores. Surgiram então tabelas locais de 8 bits (como ISO-8859-1, também chamada Latin-1, e Windows-1252) que usam os valores de 128 a 255 para caracteres regionais. Isso criou fragmentação: o mesmo byte significa caracteres diferentes conforme a tabela usada. É daí que vem o texto quebrado, como <code>UsuÃ¡rio</code> no lugar de <code>Usuário</code>.
+  </p>
+  <p>
+    O <strong>Unicode</strong> organizou um repertório universal, atribuindo a cada caractere um ponto de código, como <code>U+0041</code> para <code>A</code> e <code>U+00E1</code> para <code>á</code>. Ponto de código ainda não é a sequência de bytes transmitida: para isso existem codificações como UTF-8, UTF-16 e UTF-32. O <strong>UTF-8</strong> dominou a web e os sistemas modernos porque os caracteres ASCII continuam ocupando 1 byte, com os mesmos valores, e os demais usam de 2 a 4 bytes.
+  </p>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead>
+        <tr><th>Padrão</th><th>O que resolveu</th><th>Limitação / o que não é</th><th>Exemplo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>ASCII</td><td>Texto básico em inglês; ainda é a base de headers e comandos de protocolos</td><td>Só 128 caracteres; não cobre idiomas globais</td><td><code>A</code> = 65 = <code>0x41</code></td></tr>
+        <tr><td>Tabelas locais (Latin-1, Windows-1252)</td><td>Caracteres regionais em 1 byte</td><td>O mesmo byte muda de sentido entre tabelas</td><td><code>0xE1</code> = <code>á</code> em Latin-1</td></tr>
+        <tr><td>Unicode</td><td>Repertório universal de caracteres</td><td>Não é, sozinho, a sequência de bytes</td><td><code>á</code> = <code>U+00E1</code></td></tr>
+        <tr><td>UTF-8</td><td>Codificar Unicode em bytes, compatível com ASCII</td><td>Caracteres têm tamanhos diferentes; não é criptografia</td><td><code>á</code> = <code>C3 A1</code></td></tr>
+        <tr><td>Base64</td><td>Transportar bytes quaisquer em canais de texto</td><td>Aumenta o tamanho; não protege segredo</td><td><code>admin:admin</code> = <code>YWRtaW46YWRtaW4=</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>

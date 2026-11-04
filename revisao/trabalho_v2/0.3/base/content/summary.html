@@ -1,0 +1,11 @@
+
+<section class="lesson-section lesson-section--summary">
+  <h2>Resumo</h2>
+  <ul>
+    <li><strong>Ideia central:</strong> a rede transporta bytes; a aplicação dá significado a eles. Codificação é a ponte entre símbolos humanos e bytes transmitidos.</li>
+    <li><strong>ASCII, Unicode e UTF-8:</strong> ASCII tem 128 caracteres básicos; Unicode dá um ponto de código a cada caractere (<code>á</code> = <code>U+00E1</code>); UTF-8 transforma esses pontos em 1 a 4 bytes (<code>á</code> = <code>C3 A1</code>) e mantém o ASCII em 1 byte.</li>
+    <li><strong>Base64:</strong> reescreve cada 3 bytes como 4 caracteres de texto (cerca de 33% maior). Serve para transporte, é reversível sem chave e não é sigilo.</li>
+    <li><strong>Diagnóstico:</strong> <code>Ã¡</code> no lugar de <code>á</code> indica bytes UTF-8 lidos como Latin-1; compare os bytes reais e o charset declarado antes de culpar a rede.</li>
+    <li><strong>Uso real:</strong> HTTP, APIs, JSON, logs, SIEM, certificados PEM, Basic, JWT (Base64URL), Kubernetes Secrets e pipelines.</li>
+  </ul>
+</section>

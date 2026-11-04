@@ -1,0 +1,13 @@
+
+<section class="lesson-section lesson-section--motivation">
+  <h2>Motivação</h2>
+  <p>
+    Redes transportam bytes, mas boa parte do que você lê em TI e Segurança é texto: domínios, URLs, cabeçalhos HTTP, JSON, logs, nomes de usuário, tokens e eventos de SIEM. Quando esse texto vira bytes de um jeito e é lido de outro, aparecem falhas difíceis de diagnosticar: acentos quebrados, autenticação falhando, payloads rejeitados, assinaturas inválidas e evidências de incidente mal interpretadas.
+  </p>
+  <p>
+    Imagine um SOC analisando um alerta de API. Um campo mostra <code>Usuário</code>, outro mostra <code>UsuÃ¡rio</code>, e um cabeçalho contém <code>Basic YWRtaW46YWRtaW4=</code>. Sem entender codificação, o analista pode achar que Base64 é criptografia, que o texto foi corrompido por malware, ou perder tempo investigando a rede quando o problema real é conversão de caracteres.
+  </p>
+  <div class="callout callout--problem">
+    <strong>Problema real:</strong> duas aplicações estão funcionando na rede, o firewall permite o tráfego, o TLS está válido, mas a integração falha porque uma API espera UTF-8 e outra envia texto em outra codificação. O pacote chega, porém a interpretação dos bytes está errada.
+  </div>
+</section>

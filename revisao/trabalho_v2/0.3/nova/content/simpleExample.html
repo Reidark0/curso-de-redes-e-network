@@ -1,0 +1,21 @@
+
+<section class="lesson-section lesson-section--example">
+  <h2>Exemplo simples</h2>
+  <p>
+    Um sistema de cadastro guarda o nome numa coluna de banco de dados limitada a 10 bytes. O programador testou com <code>Francisco</code>: 9 letras sem acento, 9 bytes, cabe. Aí chega a cliente <code>Conceição</code>, também com 9 letras:
+  </p>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead>
+        <tr><th>Texto</th><th>Caracteres</th><th>Bytes em UTF-8 (hex)</th><th>Total de bytes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>Francisco</code></td><td>9</td><td><code>46 72 61 6E 63 69 73 63 6F</code></td><td>9</td></tr>
+        <tr><td><code>Conceição</code></td><td>9</td><td><code>43 6F 6E 63 65 69 C3 A7 C3 A3 6F</code></td><td>11</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    O <code>ç</code> e o <code>ã</code> ocupam 2 bytes cada, então o nome tem 11 bytes e não cabe. Se o sistema simplesmente cortar no 10º byte, sobra <code>C3</code> sozinho no fim, metade do <code>ã</code>, e a tela mostra <code>Conceiç�</code>. O erro não está no nome da cliente: está em medir em caracteres um limite que é em bytes.
+  </p>
+</section>

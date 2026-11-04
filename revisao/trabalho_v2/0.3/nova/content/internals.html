@@ -1,0 +1,48 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <h3>Do texto aos bytes (UTF-8)</h3>
+  <p>
+    Acompanhe a palavra <code>Olá</code>: três caracteres, com pontos de código <code>U+004F</code>, <code>U+006C</code> e <code>U+00E1</code>. Em UTF-8, <code>O</code> e <code>l</code> ocupam 1 byte cada (<code>4F</code> e <code>6C</code>, os mesmos valores do ASCII), e <code>á</code> ocupa 2 bytes: <code>C3 A1</code>. Resultado: 3 caracteres, 4 bytes. Esses bytes viajam pela rede como quaisquer outros; o receptor os transforma de volta em texto com a codificação que ele espera. O tamanho de cada caractere depende do ponto de código:
+  </p>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead>
+        <tr><th>Faixa de pontos de código</th><th>Bytes em UTF-8</th><th>Exemplo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>U+0000</code> a <code>U+007F</code> (ASCII)</td><td>1</td><td><code>A</code> = <code>41</code></td></tr>
+        <tr><td><code>U+0080</code> a <code>U+07FF</code></td><td>2</td><td><code>á</code> = <code>C3 A1</code>, <code>ç</code> = <code>C3 A7</code>, <code>ã</code> = <code>C3 A3</code></td></tr>
+        <tr><td><code>U+0800</code> a <code>U+FFFF</code></td><td>3</td><td><code>€</code> (<code>U+20AC</code>) = <code>E2 82 AC</code></td></tr>
+        <tr><td><code>U+10000</code> em diante</td><td>4</td><td>😀 (<code>U+1F600</code>) = <code>F0 9F 98 80</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Por que “á” vira “Ã¡”</h3>
+  <p>
+    O texto quebrado tem uma causa exata: os bytes UTF-8 de <code>á</code>, <code>C3 A1</code>, foram lidos com uma tabela de 1 byte por caractere, como Latin-1 ou Windows-1252. Nessas tabelas, <code>C3</code> é <code>Ã</code> e <code>A1</code> é <code>¡</code>. Do mesmo jeito, <code>ç</code> (<code>C3 A7</code>) vira <code>Ã§</code> e <code>ã</code> (<code>C3 A3</code>) vira <code>Ã£</code>, e foi assim que João virou “JoÃ£o”. Ver <code>Ã</code> seguido de outro símbolo é uma pista forte de UTF-8 lido como Latin-1. O caminho inverso também acontece: o byte Latin-1 <code>E1</code> (<code>á</code>) sozinho não é UTF-8 válido, e o receptor em UTF-8 costuma mostrar o símbolo de substituição <code>�</code>, como em “Usu�rio”.
+  </p>
+  <h3>Base64: bytes como texto</h3>
+  <p>
+    Nem todo canal de texto aceita qualquer byte: valores de controle e bytes binários podem ser alterados ou rejeitados num e-mail ou num JSON. O Base64 reescreve os bytes com 64 caracteres seguros, numerados nesta ordem: <code>A–Z</code> valem 0 a 25, <code>a–z</code> valem 26 a 51, <code>0–9</code> valem 52 a 61, <code>+</code> vale 62 e <code>/</code> vale 63.
+  </p>
+  <ol class="flow-list">
+    <li>Junte os bytes em blocos de 3 (24 bits).</li>
+    <li>Divida cada bloco em 4 grupos de 6 bits; 6 bits dão 64 combinações.</li>
+    <li>Troque cada grupo pelo caractere de mesmo número.</li>
+    <li>Se o último bloco tiver só 1 ou 2 bytes, complete a saída com <code>==</code> ou <code>=</code> (preenchimento).</li>
+  </ol>
+  <p>
+    Exemplo: <code>Hel</code> = <code>48 65 6C</code> = <code>01001000 01100101 01101100</code>. Em grupos de 6 bits: <code>010010</code> <code>000110</code> <code>010101</code> <code>101100</code> = 18, 6, 21, 44 = <code>S</code>, <code>G</code>, <code>V</code>, <code>s</code>. Por isso <code>Hello</code> (5 bytes) começa com <code>SGVs</code> e termina como <code>SGVsbG8=</code>: o último bloco tem 2 bytes e ganha um <code>=</code>.
+  </p>
+  <p>
+    Consequência prática: cada 3 bytes viram 4 caracteres, então o Base64 aumenta o tamanho em cerca de 33%. Anexos de e-mail viajam em Base64, e é por isso que o arquivo de 20 MB da Motivação vira uma mensagem de cerca de 27 MB e passa do limite de 25 MB. A variante <strong>Base64URL</strong>, usada em endereços web e tokens, troca <code>+</code> por <code>-</code> e <code>/</code> por <code>_</code> e costuma omitir o <code>=</code>.
+  </p>
+  <div class="callout warning">
+    <strong>Erros comuns</strong>
+    <ul>
+      <li>Achar que 1 caractere = 1 byte. Isso só vale no ASCII: limites medidos em bytes (uma coluna de banco, um campo de formulário) falham com acentos e emojis.</li>
+      <li>Achar que textos iguais na tela têm os mesmos bytes. <code>á</code> pode ser um ponto de código só, <code>U+00E1</code> (<code>C3 A1</code>), ou <code>a</code> seguido do acento combinante <code>U+0301</code> (<code>61 CC 81</code>). Sistemas que comparam nomes precisam converter os dois para a mesma forma antes.</li>
+    </ul>
+  </div>
+</section>

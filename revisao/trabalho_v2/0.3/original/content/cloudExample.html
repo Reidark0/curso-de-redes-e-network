@@ -1,0 +1,21 @@
+
+<section class="lesson-section lesson-section--cloud">
+  <h2>11. Exemplo em cloud</h2>
+  <p>
+    Em cloud, codificação aparece em funções serverless, filas, eventos, logs gerenciados, objetos em storage, API gateways, balanceadores, secrets, certificados e serviços de observabilidade. Um evento JSON enviado para uma fila é texto codificado em bytes. Um segredo pode estar em texto, Base64 ou formato binário. Um certificado armazenado em PEM contém Base64. Logs em serviços gerenciados precisam preservar caracteres corretamente para busca e alertas.
+  </p>
+  <p>
+    Também é comum encontrar Base64 em integrações. Algumas plataformas exigem que dados binários sejam enviados em Base64 dentro de JSON, porque JSON é textual. Isso aumenta o tamanho dos dados e pode impactar custo de tráfego, armazenamento e logs. Em cargas grandes, essa decisão deixa de ser apenas técnica e vira decisão financeira.
+  </p>
+  <table class="data-table">
+    <thead>
+      <tr><th>Cenário cloud</th><th>Onde entra codificação</th><th>Risco</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>API Gateway</td><td>Headers, query string e corpo JSON</td><td>Charset inconsistente ou payload rejeitado</td></tr>
+      <tr><td>Fila/event bus</td><td>Evento textual ou binário codificado</td><td>Aumento de tamanho com Base64</td></tr>
+      <tr><td>Logs gerenciados</td><td>Mensagens em UTF-8</td><td>Busca e correlação prejudicadas por texto quebrado</td></tr>
+      <tr><td>Secrets/certificados</td><td>PEM, Base64, JSON e variáveis de ambiente</td><td>Confundir codificação com proteção</td></tr>
+    </tbody>
+  </table>
+</section>

@@ -1,0 +1,13 @@
+
+<section class="lesson-section lesson-section--devsecops">
+  <h2>Exemplo em DevSecOps</h2>
+  <p>
+    Em repositórios, YAML e pipelines, um arquivo salvo numa codificação inesperada pode quebrar o build, e um scanner pode mostrar um achado em formato escapado que o time precisa saber ler.
+  </p>
+  <p>
+    O caso mais didático é o Kubernetes: objetos Secret exibem os valores em Base64. Isso não significa que o conteúdo esteja protegido. A segurança depende de RBAC, criptografia em repouso, controle de acesso ao etcd, auditoria e rotação. Base64 só torna os bytes representáveis dentro de YAML/JSON.
+  </p>
+  <div class="callout callout--warning">
+    <strong>Erro comum em pipelines:</strong> commitar um segredo em Base64 achando que ele está protegido. Use cofres de segredo, variáveis protegidas, OIDC federation, rotação e menor privilégio.
+  </div>
+</section>

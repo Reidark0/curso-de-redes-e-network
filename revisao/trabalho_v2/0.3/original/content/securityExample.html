@@ -1,0 +1,21 @@
+
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>
+    Segurança da informação depende de interpretar evidências corretamente. Muitos alertas, payloads e tokens usam codificações. Um analista pode encontrar Base64 em HTTP Basic, em partes de JWT, em scripts, em malware, em anexos, em certificados, em dados enviados por API ou em logs. O ponto essencial é: codificação é reversível quando você conhece a regra. Criptografia depende de chave. Hash é função unidirecional. Assinatura digital prova integridade e autoria dentro de um modelo criptográfico. Misturar esses conceitos causa decisões inseguras.
+  </p>
+  <table class="data-table risk-table">
+    <thead>
+      <tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Base64 tratado como segredo</td><td>Credenciais codificadas em scripts, YAML ou logs</td><td>Exposição direta após decodificação</td><td>Usar cofre de segredos, RBAC, rotação e evitar logs sensíveis</td></tr>
+      <tr><td>Texto quebrado em logs</td><td>Caracteres acentuados ou símbolos ilegíveis</td><td>Busca, correlação e auditoria prejudicadas</td><td>Padronizar UTF-8 e validar pipeline de logging</td></tr>
+      <tr><td>Normalização inconsistente</td><td>WAF, aplicação e banco interpretam texto de formas distintas</td><td>Bypass lógico, falso positivo ou falso negativo</td><td>Normalizar entrada e alinhar validações por camada</td></tr>
+      <tr><td>Caracteres visualmente parecidos</td><td>Domínios, usuários ou identificadores semelhantes</td><td>Phishing, confusão operacional ou fraude</td><td>Monitorar homógrafos, validar domínios e aplicar políticas de nomes</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Em laboratórios, é aceitável decodificar exemplos controlados e entender formatos. Não é aceitável usar esse conhecimento para tentar expor credenciais de terceiros, burlar controles ou acessar sistemas sem autorização.
+  </p>
+</section>

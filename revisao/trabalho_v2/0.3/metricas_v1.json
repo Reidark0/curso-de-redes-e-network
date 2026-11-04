@@ -1,0 +1,100 @@
+{
+  "id": "0.3",
+  "versao": "v1",
+  "titulo": "ASCII, Unicode, UTF-8 e Base64",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 6034,
+    "teoria": 3504,
+    "praticaExtra": 1733,
+    "quiz": 470,
+    "flashcards": 146
+  },
+  "porGrupoTeoria": {
+    "introducao": 696,
+    "contexto": 516,
+    "conteudo": 959,
+    "exemplos": 527,
+    "seguranca_troubleshooting": 806
+  },
+  "porSecao": {
+    "motivation": 159,
+    "summary": 128,
+    "history": 294,
+    "problem": 222,
+    "concept": 305,
+    "internals": 522,
+    "architecture": 131,
+    "diagram": 1,
+    "analogy": 113,
+    "simpleExample": 100,
+    "enterpriseExample": 121,
+    "cloudExample": 86,
+    "devsecopsExample": 107,
+    "objectives": 75,
+    "learningOutcomes": 92,
+    "glossary": 242,
+    "security": 453,
+    "troubleshooting": 353,
+    "nextTheme": 37
+  },
+  "pratica": {
+    "quiz": 470,
+    "flashcards": 146,
+    "lab": 751,
+    "mentorQuestions": 267,
+    "exercises": 291,
+    "challenge": 186,
+    "commentedSolution": 238
+  },
+  "outros": {
+    "title+subtitle": 18,
+    "nextTheme": 37,
+    "references": 63,
+    "linksToOtherCourses": 63
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 7,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 30,
+    "alternativa_5minPorPasso": 25,
+    "plausivel": true,
+    "override": null,
+    "palavras": 751
+  },
+  "duracao": {
+    "declarada": "100-145 min",
+    "estimatedStudyTimeMinutes": 145,
+    "nucleo": 37,
+    "nucleoPartes": {
+      "teoria": 27,
+      "diagramas": 3,
+      "quiz": 7
+    },
+    "praticaExtra": 75,
+    "praticaExtraPartes": {
+      "lab": 30,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "30-45 min",
+    "praticaExtraArredondada": 75,
+    "recomendada": "30-45 min + 75 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 45
+  }
+}

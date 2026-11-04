@@ -1,0 +1,19 @@
+
+<section class="lesson-section lesson-section--problem">
+  <h2>Problema</h2>
+  <p>
+    Texto não é transmitido como ideia abstrata: ele precisa virar bytes, e os dois lados precisam concordar sobre como interpretá-los. Se o emissor grava com uma codificação e o receptor lê com outra, o tráfego chega intacto e o resultado sai errado.
+  </p>
+  <p>
+    Protocolos transportam sequências de bytes; alguns campos são binários, outros são texto. HTTP usa texto em headers e payloads, JSON é texto, DNS carrega nomes, logs são texto. Autenticação Basic usa Base64, certificados PEM são Base64 entre marcadores textuais e JWT tem partes em Base64URL. A rede pode estar perfeita e a aplicação falhar ao interpretar o conteúdo.
+  </p>
+  <ul class="flow-list">
+    <li><strong>Caracteres não ASCII:</strong> acentos, símbolos e emojis ocupam mais bytes que o esperado.</li>
+    <li><strong>Base64 mal compreendido:</strong> dados decodificáveis por qualquer um são tratados como segredo.</li>
+    <li><strong>Logs quebrados:</strong> evidências de auditoria e incidente ficam difíceis de pesquisar e correlacionar.</li>
+    <li><strong>Assinaturas inválidas:</strong> mudar bytes ao converter texto invalida HMAC, assinatura digital ou hash.</li>
+  </ul>
+  <div class="callout callout--warning">
+    <strong>Armadilha comum:</strong> dois textos iguais na tela não têm necessariamente os mesmos bytes. Normalização Unicode, acentos compostos e caracteres visualmente parecidos causam diferenças importantes em autenticação, logs e validações. Exemplo: <code>á</code> pode ser o ponto de código único <code>U+00E1</code> (bytes <code>C3 A1</code>) ou <code>a</code> seguido do acento combinante <code>U+0301</code> (bytes <code>61 CC 81</code>). Normalizar (por exemplo, para a forma NFC) faz as duas virarem a mesma sequência antes de comparar.
+  </div>
+</section>

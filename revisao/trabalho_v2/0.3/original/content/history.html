@@ -1,0 +1,25 @@
+
+<section class="lesson-section lesson-section--history">
+  <h2>2. História</h2>
+  <p>
+    No começo da computação comercial, muitos sistemas precisavam representar texto em inglês: letras maiúsculas e minúsculas, números, pontuação e alguns caracteres de controle. O ASCII surgiu nesse contexto como uma tabela padronizada que associava números a caracteres. Por exemplo, a letra <code>A</code> é associada ao valor decimal 65, que em hexadecimal é <code>0x41</code>. Para sistemas simples, isso resolvia bastante coisa.
+  </p>
+  <p>
+    O mundo, porém, não cabe no inglês básico. Idiomas têm acentos, alfabetos diferentes, símbolos matemáticos, moedas, ideogramas, sinais gráficos, emojis e marcas culturais. Vários padrões locais surgiram para tentar representar caracteres além do ASCII, mas isso criou fragmentação: o mesmo valor numérico poderia significar caracteres diferentes dependendo da tabela usada. Esse é o tipo de problema que gera o famoso texto quebrado, como <code>UsuÃ¡rio</code> no lugar de <code>Usuário</code>.
+  </p>
+  <p>
+    O Unicode surgiu para organizar um repertório universal de caracteres. Ele atribui pontos de código a caracteres, como <code>U+0041</code> para <code>A</code> e <code>U+00E1</code> para <code>á</code>. Mas ponto de código não é ainda a sequência de bytes transmitida. Para isso existem codificações, como UTF-8, UTF-16 e UTF-32. Na web e em sistemas modernos, UTF-8 se tornou dominante porque preserva compatibilidade com ASCII para caracteres básicos e representa caracteres adicionais usando múltiplos bytes.
+  </p>
+  <table class="data-table comparison-table">
+    <thead>
+      <tr><th>Época/abordagem</th><th>Problema resolvido</th><th>Limitação</th><th>Impacto em redes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>ASCII</td><td>Padronizar texto básico em inglês</td><td>Não cobre adequadamente idiomas globais</td><td>Ainda aparece em protocolos, headers e comandos</td></tr>
+      <tr><td>Tabelas locais</td><td>Adicionar caracteres regionais</td><td>Geram incompatibilidade entre sistemas</td><td>Podem quebrar logs, e-mails, APIs e integrações</td></tr>
+      <tr><td>Unicode</td><td>Unificar repertório de caracteres</td><td>Precisa de uma codificação em bytes</td><td>Permite sistemas globais e multilíngues</td></tr>
+      <tr><td>UTF-8</td><td>Codificar Unicode em bytes de forma eficiente</td><td>Caracteres podem ocupar tamanhos diferentes</td><td>Base prática da web, APIs, Linux e muitos logs modernos</td></tr>
+      <tr><td>Base64</td><td>Transportar bytes usando caracteres seguros de texto</td><td>Aumenta tamanho e não protege segredo</td><td>Aparece em HTTP, e-mail, tokens, certificados e payloads</td></tr>
+    </tbody>
+  </table>
+</section>

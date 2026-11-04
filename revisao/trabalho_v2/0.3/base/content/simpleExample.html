@@ -1,0 +1,22 @@
+
+<section class="lesson-section lesson-section--example">
+  <h2>Exemplo simples</h2>
+  <p>
+    No seu notebook, crie um arquivo com <code>Ola</code> e outro com <code>Olá</code>. Na tela, a diferença é só o acento; em bytes, o segundo arquivo é maior. É por isso que contagem de caracteres e contagem de bytes nem sempre coincidem.
+  </p>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead>
+        <tr><th>Texto</th><th>Caracteres</th><th>Bytes em UTF-8 (hex)</th><th>Total de bytes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>Ola</code></td><td>3</td><td><code>4F 6C 61</code></td><td>3</td></tr>
+        <tr><td><code>Olá</code></td><td>3</td><td><code>4F 6C C3 A1</code></td><td>4</td></tr>
+        <tr><td><code>ação</code></td><td>4</td><td><code>61 C3 A7 C3 A3 6F</code></td><td>6</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Outro exemplo: <code>Hello</code> em Base64 vira <code>SGVsbG8=</code>. Isso não é segredo: qualquer ferramenta comum decodifica de volta para <code>Hello</code>. Base64 serve para transporte, não para sigilo.
+  </p>
+</section>

@@ -1,0 +1,26 @@
+
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <p>
+    Três ideias separam o que você vê na tela do que viaja pela rede. Um <strong>caractere</strong> é o símbolo que você percebe, como <code>A</code>, <code>ç</code> ou <code>€</code>. Um <strong>ponto de código</strong> é o número que o Unicode atribui a esse caractere, escrito como <code>U+</code> seguido de hexadecimal: <code>A</code> é <code>U+0041</code> e <code>á</code> é <code>U+00E1</code>. Uma <strong>codificação</strong> é a regra que transforma esses números em bytes.
+  </p>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead>
+        <tr><th>Padrão</th><th>O que é</th><th>Exemplo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>ASCII</td><td>Tabela de 7 bits: 128 valores (0 a 127) para letras sem acento, dígitos, pontuação e controles</td><td><code>A</code> = 65 = <code>41</code></td></tr>
+        <tr><td>Latin-1, Windows-1252</td><td>Tabelas regionais de 1 byte: usam os valores 128 a 255 para acentos</td><td><code>E1</code> = <code>á</code></td></tr>
+        <tr><td>Unicode</td><td>Lista universal: um ponto de código para cada caractere de qualquer idioma. Não define bytes</td><td><code>á</code> = <code>U+00E1</code></td></tr>
+        <tr><td>UTF-8</td><td>Codificação do Unicode em 1 a 4 bytes; o ASCII continua igual, em 1 byte</td><td><code>á</code> = <code>C3 A1</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Como a mesma letra pode virar bytes diferentes, quem recebe precisa saber qual codificação foi usada. Por isso muitos formatos a declaram: uma página web costuma informar <code>charset=utf-8</code> no cabeçalho <code>Content-Type</code>. Se a declaração falta ou está errada, o receptor adivinha, e pode errar.
+  </p>
+  <p>
+    <strong>Base64</strong> resolve outro problema: ele não transforma letras em bytes, e sim bytes quaisquer em texto, usando só 64 caracteres seguros. Como na codificação de texto, a regra é pública: qualquer um reverte, sem chave. Base64 muda a forma dos dados, não os protege.
+  </p>
+</section>
