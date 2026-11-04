@@ -1,0 +1,12 @@
+<section class="lesson-section lesson-section--enterprise">
+  <h2>Exemplo empresarial</h2>
+  <p>Numa empresa, usuários ficam na VLAN 10, impressoras na VLAN 20, servidores na VLAN 30 e visitantes na VLAN 40. O mesmo switch conecta tudo fisicamente, mas separa os domínios. Incidente comum: o usuário muda de mesa e o novo ponto está na VLAN errada. O notebook recebe IP de outra rede, não acessa sistemas internos ou cai na rede de visitantes; se a porta estiver na VLAN de servidores, o risco é também de segurança.</p>
+  <p>No switch, a tabela MAC mostra onde o notebook foi aprendido (valores ilustrativos):</p>
+  <pre class="code-block">Switch# show mac address-table dynamic
+          Mac Address Table
+-------------------------------------------
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+  40    aabb.cc00.0110    DYNAMIC     Gi0/7</pre>
+  <p>Leitura: o MAC do notebook (aabb.cc00.0110, no formato Cisco) foi aprendido na porta Gi0/7, mas na VLAN 40, de visitantes. Se a documentação diz VLAN 10 para esse ponto, a hipótese de VLAN errada se confirma: confira com <code>show vlan brief</code> e corrija a porta numa mudança autorizada. O diagnóstico completo olha porta, VLAN, tabela MAC, DHCP e gateway.</p>
+</section>

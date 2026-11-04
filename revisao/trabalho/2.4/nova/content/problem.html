@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--problem">
+  <h2>Problema</h2>
+  <p>A Camada 1 transmite bits, mas não sabe onde começa e termina um quadro, quem é o destinatário local, por qual porta do switch o tráfego deve sair nem se dois grupos de dispositivos devem ficar separados. A Camada 2 resolve a entrega local:</p>
+  <ul class="flow-list">
+    <li><strong>Delimitação:</strong> transformar o fluxo de bits em quadros identificáveis.</li>
+    <li><strong>Endereçamento local:</strong> identificar origem e destino por MAC dentro do enlace.</li>
+    <li><strong>Comutação:</strong> permitir que switches encaminhem o tráfego para a porta correta.</li>
+    <li><strong>Segmentação:</strong> separar domínios de broadcast com VLANs.</li>
+    <li><strong>Resolução local:</strong> permitir que o IPv4 descubra o MAC com ARP.</li>
+    <li><strong>Diagnóstico:</strong> diferenciar falha física, VLAN errada, MAC ausente, loop e problema de gateway.</li>
+  </ul>
+  <p>As primeiras redes Ethernet usavam um meio compartilhado, com colisões e pouca escala. O hub repetia o sinal em todas as portas sem aprender MAC, expondo todo o tráfego local. O switch resolveu isso aprendendo em que porta está cada MAC e enviando o quadro só para ela. Com redes maiores (voz, servidores, visitantes), vieram as VLANs: várias redes lógicas sobre os mesmos switches.</p>
+</section>

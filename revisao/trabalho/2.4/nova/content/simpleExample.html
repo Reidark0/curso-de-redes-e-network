@@ -1,0 +1,7 @@
+<section class="lesson-section lesson-section--example">
+  <h2>Exemplo simples</h2>
+  <p>Em casa, seu notebook (192.168.0.15/24) acessa um site. Como o site está fora da rede 192.168.0.0/24, o frame sai com o MAC de destino do roteador (gateway 192.168.0.1), e não do servidor do site. Se o notebook ainda não conhece esse MAC, faz ARP. Depois de um <code>ping 192.168.0.1</code>, a tabela de vizinhos no Linux mostra algo como (valores ilustrativos):</p>
+  <pre class="code-block">$ ip neigh
+192.168.0.1 dev wlan0 lladdr a4:2b:b0:12:34:56 REACHABLE</pre>
+  <p>Leitura: o IP do gateway está associado a um MAC e a entrada foi confirmada recentemente (REACHABLE; STALE indica uma entrada ainda válida que não é confirmada há algum tempo). Se aparecer <code>FAILED</code> e sem <code>lladdr</code>, o ARP não teve resposta: o problema está na entrega local (Wi-Fi, cabo, VLAN ou gateway), mesmo que pareça "internet lenta".</p>
+</section>

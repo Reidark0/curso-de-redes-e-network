@@ -1,0 +1,79 @@
+{
+  "id": "2.4",
+  "versao": "nova",
+  "titulo": "Camada 2 — Enlace: frames, MAC, switch, VLAN e ARP",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5406,
+    "invisiveis": 31,
+    "teoriaVisivel": 2881
+  },
+  "porCampoVisivel": {
+    "content.motivation": 125,
+    "content.problem": 171,
+    "content.concept": 228,
+    "content.internals": 390,
+    "content.architecture": 195,
+    "content.analogy": 92,
+    "content.simpleExample": 127,
+    "content.enterpriseExample": 167,
+    "content.cloudExample": 75,
+    "content.devsecopsExample": 83,
+    "content.diagram": 2,
+    "content.summary": 125,
+    "content.nextTheme": 36,
+    "security": 397,
+    "troubleshooting": 433,
+    "glossary": 235,
+    "title+subtitle": 25,
+    "objectives": 57,
+    "learningOutcomes": 76,
+    "quiz": 471,
+    "flashcards": 162,
+    "mentorQuestions": 244,
+    "exercises": 294,
+    "challenge": 150,
+    "commentedSolution": 200,
+    "references": 45,
+    "linksToOtherCourses": 63,
+    "lab": 738
+  },
+  "porCampoInvisivel": {
+    "networkContext": 31
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 45,
+    "alternativa_5minPasso_maisLeitura": 35.7,
+    "plausivel": true,
+    "palavras": 738
+  },
+  "duracao": {
+    "declarada": "110-155 min",
+    "estimatedStudyTimeMinutes": 155,
+    "M": 132.5,
+    "T": 129.2,
+    "partes": {
+      "teoria": 22.2,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 45
+    },
+    "faixaRecomendada": "110-155 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 19
+  }
+}

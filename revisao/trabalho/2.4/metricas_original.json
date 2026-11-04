@@ -1,0 +1,90 @@
+{
+  "id": "2.4",
+  "versao": "original",
+  "titulo": "Camada 2 — Enlace: frames, MAC, switch, VLAN e ARP",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4918,
+    "invisiveis": 738,
+    "teoriaVisivel": 2677
+  },
+  "porCampoVisivel": {
+    "content.motivation": 163,
+    "content.history": 178,
+    "content.problem": 141,
+    "content.evolution": 113,
+    "content.concept": 111,
+    "content.internals": 174,
+    "content.architecture": 133,
+    "content.analogy": 118,
+    "content.simpleExample": 105,
+    "content.enterpriseExample": 105,
+    "content.cloudExample": 83,
+    "content.devsecopsExample": 88,
+    "content.securityExample": 125,
+    "content.diagram": 3,
+    "content.summary": 60,
+    "content.nextTheme": 42,
+    "security": 324,
+    "troubleshooting": 376,
+    "glossary": 235,
+    "title+subtitle": 28,
+    "objectives": 57,
+    "learningOutcomes": 76,
+    "quiz": 279,
+    "flashcards": 124,
+    "mentorQuestions": 173,
+    "exercises": 190,
+    "challenge": 150,
+    "commentedSolution": 192,
+    "references": 45,
+    "linksToOtherCourses": 63,
+    "lab": 864
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 35,
+    "content.exercisesIntro": 16,
+    "content.challengeIntro": 33,
+    "content.solutionIntro": 24,
+    "networkContext": 31,
+    "protocolFields": 95,
+    "packetFlow": 117,
+    "deepDive": 258,
+    "commonMistakes": 129
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 60,
+    "alternativa_5minPasso_maisLeitura": 36.6,
+    "plausivel": true,
+    "palavras": 864
+  },
+  "duracao": {
+    "declarada": "85-120 min",
+    "estimatedStudyTimeMinutes": 120,
+    "M": 102.5,
+    "T": 142.6,
+    "partes": {
+      "teoria": 20.6,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 60
+    },
+    "faixaRecomendada": "120-170 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 17
+  }
+}

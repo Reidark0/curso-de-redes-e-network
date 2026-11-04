@@ -1,0 +1,10 @@
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>A Camada 2 possui riscos específicos. ARP não possui autenticação nativa no IPv4. Switches podem sofrer loops. Portas físicas podem ser usadas por dispositivos não autorizados. VLANs mal planejadas podem expor sistemas. Uma rede plana facilita movimento lateral.</p>
+  <table class="data-table risk-table"><thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead><tbody>
+    <tr><td>ARP spoofing</td><td>Associação falsa entre IP e MAC</td><td>Interceptação ou indisponibilidade local</td><td>Dynamic ARP Inspection, segmentação, criptografia e monitoramento</td></tr>
+    <tr><td>Porta exposta</td><td>Tomada ativa em sala pública</td><td>Acesso não autorizado à LAN</td><td>802.1X, NAC, port security e shutdown de portas não usadas</td></tr>
+    <tr><td>VLAN errada</td><td>Host em segmento indevido</td><td>Acesso indevido ou falha operacional</td><td>Documentação, revisão de mudança e automação</td></tr>
+    <tr><td>Loop de Camada 2</td><td>Broadcast storm e rede indisponível</td><td>Queda ampla da LAN</td><td>STP, BPDU Guard, monitoramento e mudança controlada</td></tr>
+  </tbody></table>
+</section>

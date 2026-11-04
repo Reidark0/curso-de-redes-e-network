@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--motivation">
+  <h2>Motivação</h2>
+  <p>Antes de qualquer pacote IP, TCP ou HTTP chegar ao destino, um dispositivo precisa entregar um quadro a outro dentro da mesma rede local. Essa entrega é trabalho da Camada 2 (Enlace de Dados): ela organiza em quadros (frames) os bits que vêm da Camada 1, endereça cada quadro por MAC, comuta pelos switches, separa grupos por VLAN e, em IPv4 sobre Ethernet, usa ARP para descobrir qual MAC corresponde a um IP da LAN.</p>
+  <div class="callout callout--problem"><strong>Problema real:</strong> uma estação recebe IP correto por DHCP, mas não consegue falar com o gateway. O DNS não é o problema, a rota padrão existe e o cabo está conectado. A equipe descobre que a porta do switch está na VLAN errada. O problema estava na Camada 2.</div>
+</section>
