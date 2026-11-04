@@ -1,0 +1,9 @@
+<section class="lesson-section lesson-section--security"><h2>13. Exemplo em Segurança</h2>
+<p>Em segurança, STP é controle de disponibilidade e resiliência. Loops podem ser acidentais, mas também podem ser explorados como forma de causar negação de serviço interna. Além disso, uma root bridge indevida pode alterar caminhos de tráfego e dificultar investigação.</p>
+<table class="data-table risk-table"><thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead><tbody>
+<tr><td>Loop de Camada 2</td><td>Broadcast storm, CPU alta, perda geral.</td><td>Indisponibilidade da VLAN ou campus.</td><td>RSTP, BPDU Guard, storm control e documentação.</td></tr>
+<tr><td>Root bridge indevida</td><td>Switch não planejado vira raiz.</td><td>Caminhos ruins e instabilidade.</td><td>Definir prioridade da root e usar Root Guard.</td></tr>
+<tr><td>Porta de usuário com switch indevido</td><td>Mini-switch ou bridge acidental.</td><td>Loop, bypass de desenho e risco operacional.</td><td>BPDU Guard, port security, 802.1X/NAC.</td></tr>
+<tr><td>Trunk mal configurado</td><td>VLANs excessivas atravessam onde não deveriam.</td><td>Maior superfície de erro e movimento lateral.</td><td>Allowed VLANs restritas e revisão de mudança.</td></tr>
+</tbody></table>
+</section>

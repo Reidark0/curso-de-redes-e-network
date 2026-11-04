@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--motivation"><h2>1. Motivação</h2>
+<p>Imagine uma empresa que decide melhorar a disponibilidade da rede. Um técnico conecta dois switches por mais de um caminho para que, se um cabo falhar, o outro mantenha a comunicação. A intenção é boa: redundância. Poucos segundos depois, a rede inteira fica instável. Impressoras somem, telefonia IP falha, usuários perdem acesso, o firewall registra volume anormal e o time de suporte só ouve uma frase: “a rede caiu”.</p>
+<p>O problema é que Ethernet de Camada 2 não possui, por si só, um mecanismo simples como o TTL do IP para matar frames que ficam circulando. Se houver um ciclo físico ou lógico entre switches, broadcasts, multicasts e unknown unicasts podem circular indefinidamente, serem replicados e consumir a LAN. O resultado é uma tempestade de broadcast, tabelas MAC instáveis e indisponibilidade.</p>
+<div class="callout callout--problem"><strong>Problema real:</strong> redundância sem controle em Camada 2 pode derrubar a rede. O STP existe para permitir caminhos físicos redundantes, mas manter apenas uma topologia lógica ativa sem loops.</div>
+</section>

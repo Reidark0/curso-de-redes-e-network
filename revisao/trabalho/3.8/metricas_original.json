@@ -1,0 +1,90 @@
+{
+  "id": "3.8",
+  "versao": "original",
+  "titulo": "STP: evitando loops e broadcast storms",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4778,
+    "invisiveis": 713,
+    "teoriaVisivel": 2524
+  },
+  "porCampoVisivel": {
+    "content.motivation": 162,
+    "content.history": 169,
+    "content.problem": 132,
+    "content.evolution": 117,
+    "content.concept": 99,
+    "content.internals": 176,
+    "content.architecture": 123,
+    "content.analogy": 95,
+    "content.simpleExample": 91,
+    "content.enterpriseExample": 118,
+    "content.cloudExample": 104,
+    "content.devsecopsExample": 107,
+    "content.securityExample": 136,
+    "content.diagram": 3,
+    "content.summary": 63,
+    "content.nextTheme": 41,
+    "security": 284,
+    "troubleshooting": 265,
+    "glossary": 239,
+    "title+subtitle": 23,
+    "objectives": 67,
+    "learningOutcomes": 84,
+    "quiz": 249,
+    "flashcards": 111,
+    "mentorQuestions": 161,
+    "exercises": 197,
+    "challenge": 166,
+    "commentedSolution": 202,
+    "references": 60,
+    "linksToOtherCourses": 52,
+    "lab": 882
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 41,
+    "content.exercisesIntro": 17,
+    "content.challengeIntro": 25,
+    "content.solutionIntro": 28,
+    "networkContext": 38,
+    "protocolFields": 91,
+    "packetFlow": 120,
+    "deepDive": 222,
+    "commonMistakes": 131
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 130,
+    "alternativa_5minPasso_maisLeitura": 36.8,
+    "plausivel": false,
+    "palavras": 882
+  },
+  "duracao": {
+    "declarada": "90-130 min",
+    "estimatedStudyTimeMinutes": 130,
+    "M": 110,
+    "T": 118.2,
+    "partes": {
+      "teoria": 19.4,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 36.8
+    },
+    "faixaRecomendada": "100-140 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 19
+  }
+}

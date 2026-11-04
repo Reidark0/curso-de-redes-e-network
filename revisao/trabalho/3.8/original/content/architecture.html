@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--architecture"><h2>7. Arquitetura</h2>
+<p>Em uma arquitetura de campus ou escritório, STP costuma aparecer entre switches de acesso, distribuição e core quando há links redundantes de Camada 2. Ele também aparece em redes com trunks, VLANs, switches empilhados, controladoras, APs, hypervisors e pequenos switches conectados indevidamente por usuários.</p>
+<ul><li><strong>Camada envolvida:</strong> Camada 2 do Modelo OSI.</li><li><strong>Componentes:</strong> switches, trunks, VLANs, BPDUs, portas access, portas trunk e links redundantes.</li><li><strong>Dependências:</strong> Ethernet, MAC, broadcast, VLANs e tabela MAC.</li><li><strong>Pontos de falha:</strong> root bridge indesejada, BPDU bloqueada, loop físico, trunk errado, switch não gerenciado e porta de usuário sem proteção.</li></ul>
+<p>Uma boa arquitetura define explicitamente quem deve ser root bridge, quais portas são de usuário, quais portas são trunk, onde redundância é permitida e quais proteções devem estar habilitadas.</p>
+</section>

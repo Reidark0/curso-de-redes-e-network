@@ -1,0 +1,11 @@
+<section class="lesson-section lesson-section--evolution"><h2>4. Evolução</h2>
+<p>A evolução do STP reflete a necessidade de manter estabilidade sem sacrificar disponibilidade.</p>
+<table class="data-table comparison-table"><thead><tr><th>Abordagem</th><th>Como funciona</th><th>Limitação</th><th>Uso moderno</th></tr></thead><tbody>
+<tr><td>Sem redundância</td><td>Um caminho físico entre switches.</td><td>Ponto único de falha.</td><td>Ambientes simples ou temporários.</td></tr>
+<tr><td>Redundância sem STP</td><td>Dois ou mais caminhos ativos em L2.</td><td>Loops e broadcast storms.</td><td>Má prática em Ethernet tradicional.</td></tr>
+<tr><td>STP 802.1D</td><td>Calcula árvore sem ciclos e bloqueia portas.</td><td>Convergência mais lenta.</td><td>Base conceitual importante.</td></tr>
+<tr><td>RSTP 802.1w</td><td>Convergência mais rápida.</td><td>Ainda exige bom desenho e configuração.</td><td>Padrão comum em redes modernas.</td></tr>
+<tr><td>MSTP / instâncias</td><td>Permite mapear VLANs para instâncias.</td><td>Complexidade maior.</td><td>Redes corporativas com múltiplas VLANs.</td></tr>
+<tr><td>MLAG/vPC/Stack/EVPN</td><td>Alternativas modernas para redundância ativa.</td><td>Dependem de fabricante, arquitetura e operação madura.</td><td>Datacenter e campus modernos.</td></tr>
+</tbody></table>
+</section>
