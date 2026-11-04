@@ -1,0 +1,90 @@
+{
+  "id": "4.2",
+  "versao": "original",
+  "titulo": "Estrutura do endereço IPv4 e octetos",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3981,
+    "invisiveis": 738,
+    "teoriaVisivel": 2322
+  },
+  "porCampoVisivel": {
+    "content.motivation": 137,
+    "content.history": 119,
+    "content.problem": 110,
+    "content.evolution": 74,
+    "content.concept": 128,
+    "content.internals": 207,
+    "content.architecture": 84,
+    "content.analogy": 94,
+    "content.simpleExample": 119,
+    "content.enterpriseExample": 82,
+    "content.cloudExample": 82,
+    "content.devsecopsExample": 84,
+    "content.securityExample": 111,
+    "content.diagram": 3,
+    "content.summary": 54,
+    "content.nextTheme": 44,
+    "security": 260,
+    "troubleshooting": 361,
+    "glossary": 169,
+    "title+subtitle": 21,
+    "objectives": 45,
+    "learningOutcomes": 57,
+    "quiz": 190,
+    "flashcards": 80,
+    "mentorQuestions": 131,
+    "exercises": 121,
+    "challenge": 112,
+    "commentedSolution": 140,
+    "references": 38,
+    "linksToOtherCourses": 49,
+    "lab": 675
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 40,
+    "content.exercisesIntro": 21,
+    "content.challengeIntro": 27,
+    "content.solutionIntro": 24,
+    "networkContext": 25,
+    "deepDive": 256,
+    "commonMistakes": 183,
+    "protocolFields": 90,
+    "packetFlow": 72
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 120,
+    "alternativa_5minPasso_maisLeitura": 40.2,
+    "plausivel": false,
+    "palavras": 675
+  },
+  "duracao": {
+    "declarada": "95-135 min",
+    "estimatedStudyTimeMinutes": 135,
+    "M": 115,
+    "T": 120.1,
+    "partes": {
+      "teoria": 17.9,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 40.2
+    },
+    "faixaRecomendada": "100-145 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 17
+  }
+}

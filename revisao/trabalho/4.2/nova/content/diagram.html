@@ -1,0 +1,43 @@
+<section class="lesson-section lesson-section--diagram"><h2>Diagrama</h2>
+<svg class="lesson-svg" viewBox="0 0 980 500" role="img" aria-labelledby="m04l02-title m04l02-desc">
+  <title id="m04l02-title">Estrutura de um endereço IPv4 em quatro octetos</title>
+  <desc id="m04l02-desc">O endereço IPv4 192.168.10.25 é mostrado como 32 bits divididos em quatro octetos de 8 bits, com representação decimal e binária.</desc>
+  <defs>
+    <marker id="m04l02-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
+    </marker>
+  </defs>
+  <rect x="55" y="50" width="870" height="76" rx="16" class="svg-zone" />
+  <text x="490" y="82" text-anchor="middle" class="svg-label">IPv4 = 32 bits = 4 octetos de 8 bits</text>
+  <text x="490" y="110" text-anchor="middle" class="svg-label svg-label--small">Exemplo: 192.168.10.25</text>
+
+  <rect x="80" y="170" width="185" height="110" rx="14" class="svg-node svg-node--client" />
+  <text x="172" y="200" text-anchor="middle" class="svg-label">Octeto 1</text>
+  <text x="172" y="228" text-anchor="middle" class="svg-label svg-label--small">192</text>
+  <text x="172" y="255" text-anchor="middle" class="svg-label svg-label--small">11000000</text>
+
+  <rect x="295" y="170" width="185" height="110" rx="14" class="svg-node svg-node--server" />
+  <text x="387" y="200" text-anchor="middle" class="svg-label">Octeto 2</text>
+  <text x="387" y="228" text-anchor="middle" class="svg-label svg-label--small">168</text>
+  <text x="387" y="255" text-anchor="middle" class="svg-label svg-label--small">10101000</text>
+
+  <rect x="510" y="170" width="185" height="110" rx="14" class="svg-node svg-node--cloud" />
+  <text x="602" y="200" text-anchor="middle" class="svg-label">Octeto 3</text>
+  <text x="602" y="228" text-anchor="middle" class="svg-label svg-label--small">10</text>
+  <text x="602" y="255" text-anchor="middle" class="svg-label svg-label--small">00001010</text>
+
+  <rect x="725" y="170" width="185" height="110" rx="14" class="svg-node svg-node--security" />
+  <text x="817" y="200" text-anchor="middle" class="svg-label">Octeto 4</text>
+  <text x="817" y="228" text-anchor="middle" class="svg-label svg-label--small">25</text>
+  <text x="817" y="255" text-anchor="middle" class="svg-label svg-label--small">00011001</text>
+
+  <line x1="172" y1="300" x2="172" y2="350" class="svg-flow animated-flow" marker-end="url(#m04l02-arrow)" />
+  <line x1="387" y1="300" x2="387" y2="350" class="svg-flow animated-flow" marker-end="url(#m04l02-arrow)" />
+  <line x1="602" y1="300" x2="602" y2="350" class="svg-flow animated-flow" marker-end="url(#m04l02-arrow)" />
+  <line x1="817" y1="300" x2="817" y2="350" class="svg-flow animated-flow" marker-end="url(#m04l02-arrow)" />
+
+  <rect x="80" y="360" width="830" height="82" rx="16" class="svg-boundary" />
+  <text x="490" y="392" text-anchor="middle" class="svg-label">A máscara/CIDR decide quais bits representam a rede e quais representam o host</text>
+  <text x="490" y="420" text-anchor="middle" class="svg-label svg-label--small">O endereço sozinho identifica um valor de 32 bits; o sentido de rede/host vem da máscara.</text>
+</svg>
+</section>

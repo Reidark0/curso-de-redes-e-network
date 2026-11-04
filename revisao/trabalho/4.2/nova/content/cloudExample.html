@@ -1,0 +1,3 @@
+<section class="lesson-section lesson-section--cloud"><h2>Exemplo em cloud</h2>
+<p>Em cloud, o IPv4 aparece como blocos CIDR de VPC, VNet e subnet. Uma VPC <code>10.0.0.0/16</code> pode ser dividida em subnets como <code>10.0.1.0/24</code>, <code>10.0.2.0/24</code> e <code>10.0.10.0/24</code>. Quem não lê os bits costuma criar blocos sobrepostos, desperdiçar endereços ou escolher ranges que conflitam com VPN, filiais e on-premises. Renumerar depois pode exigir recriar subnets, rotas, gateways, endpoints e regras de segurança.</p><p>O mesmo vale para IaC: um octeto errado numa variável Terraform ou numa allowlist de pipeline pode liberar acesso para a rede errada ou bloquear o pipeline inteiro.</p>
+</section>

@@ -1,0 +1,77 @@
+{
+  "id": "4.2",
+  "versao": "nova",
+  "titulo": "Estrutura do endereço IPv4 e octetos",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4119,
+    "invisiveis": 25,
+    "teoriaVisivel": 2119
+  },
+  "porCampoVisivel": {
+    "content.motivation": 92,
+    "content.problem": 134,
+    "content.concept": 172,
+    "content.internals": 449,
+    "content.analogy": 89,
+    "content.simpleExample": 81,
+    "content.enterpriseExample": 79,
+    "content.cloudExample": 91,
+    "content.diagram": 1,
+    "content.summary": 92,
+    "content.nextTheme": 30,
+    "security": 378,
+    "troubleshooting": 283,
+    "glossary": 148,
+    "title+subtitle": 21,
+    "objectives": 45,
+    "learningOutcomes": 57,
+    "quiz": 228,
+    "flashcards": 150,
+    "mentorQuestions": 253,
+    "exercises": 131,
+    "challenge": 112,
+    "commentedSolution": 168,
+    "references": 38,
+    "linksToOtherCourses": 49,
+    "lab": 748
+  },
+  "porCampoInvisivel": {
+    "networkContext": 25
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 30,
+    "alternativa_5minPasso_maisLeitura": 30.8,
+    "plausivel": true,
+    "palavras": 748
+  },
+  "duracao": {
+    "declarada": "85-125 min",
+    "estimatedStudyTimeMinutes": 125,
+    "M": 105,
+    "T": 102.3,
+    "partes": {
+      "teoria": 16.3,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 20,
+      "lab": 30
+    },
+    "faixaRecomendada": "85-125 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 19
+  }
+}
