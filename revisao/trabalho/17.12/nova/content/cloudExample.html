@@ -1,6 +1,6 @@
 <section class="lesson-section lesson-section--exemplo-cloud">
-  <h2>Exemplo em cloud</h2>
-  <p>Na cloud, a empresa tem uma Landing Zone com contas ou subscriptions separadas para segurança, logs, conectividade, produção, homologação e desenvolvimento. A rede usa hub-spoke, firewall central, DNS privado, endpoints privados para serviços gerenciados e flow logs nas subnets críticas.</p>
-  <p>A aplicação web é publicada por DNS público, WAF, Load Balancer e TLS. O backend roda em Kubernetes ou VMs privadas, o banco gerenciado é acessado por Private Endpoint e o egress passa por NAT ou firewall com logs. O pipeline valida que nenhuma subnet de dados tenha rota pública indevida e que nenhum security group exponha administração para a internet.</p>
-  <p>No D07 você justifica os custos: NAT, egress, logs, firewall gerenciado, transit, tráfego entre regiões, WAF e retenção. Segurança sem FinOps vira susto financeiro; economia sem segurança vira risco operacional.</p>
+  <h2>11. Exemplo em cloud</h2>
+  <p>Na cloud, a empresa possui uma Landing Zone com contas ou subscriptions separadas para segurança, logs, conectividade, produção, homologação e desenvolvimento. A rede usa hub-spoke, firewall central, DNS privado, endpoints privados para serviços gerenciados e flow logs habilitados em subnets críticas.</p>
+  <p>Uma aplicação web é publicada por DNS público, WAF, Load Balancer e TLS. O backend roda em Kubernetes ou VMs privadas. O banco gerenciado é acessado por Private Endpoint. O egress passa por NAT ou firewall com logs. O pipeline valida que nenhuma subnet de dados tenha rota pública indevida e que security groups não exponham administração para a internet.</p>
+  <p>O aluno deve justificar custos: NAT, egress, logs, firewall gerenciado, transit, inter-region, WAF e retenção. Segurança sem FinOps vira susto financeiro; economia sem segurança vira risco operacional.</p>
 </section>

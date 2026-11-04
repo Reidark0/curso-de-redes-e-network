@@ -1,0 +1,6 @@
+<section class="lesson-section lesson-section--exemplo-devsecops">
+  <h2>12. Exemplo em DevSecOps</h2>
+  <p>Em DevSecOps, a arquitetura do capstone não é entregue como desenho solto. Ela vira código, política, teste e documentação. Terraform, Bicep, CloudFormation ou módulos equivalentes criam redes, subnets, rotas, SG/NSG, endpoints e logs. Pipelines executam validações antes do merge.</p>
+  <p>Exemplos de guardrails: bloquear porta administrativa pública, exigir flow logs em subnets críticas, exigir tags de dono e custo, impedir CIDR sobreposto, validar que bancos usam endpoints privados, verificar que WAF e TLS estão habilitados para serviços públicos e exigir aprovação para exceções temporárias.</p>
+  <p>O capstone deve incluir um plano de automação: quais componentes seriam versionados, quais políticas seriam testadas, quais evidências o pipeline gera e como o rollback ocorreria se uma mudança quebrasse conectividade.</p>
+</section>

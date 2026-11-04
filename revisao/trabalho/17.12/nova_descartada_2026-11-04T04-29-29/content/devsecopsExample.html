@@ -1,0 +1,6 @@
+<section class="lesson-section lesson-section--exemplo-devsecops">
+  <h2>Exemplo em DevSecOps</h2>
+  <p>Em DevSecOps, a arquitetura não é entregue como desenho solto: ela vira código, política, teste e documentação. Terraform, Bicep, CloudFormation ou módulos equivalentes criam redes, subnets, rotas, SG/NSG, endpoints e logs, e o pipeline executa validações antes do merge.</p>
+  <p>Exemplos de guardrails: bloquear porta administrativa pública, exigir flow logs em subnets críticas, exigir tags de dono e custo, impedir CIDR sobreposto, validar que bancos usam endpoints privados, verificar que WAF e TLS estão habilitados em serviços públicos e exigir aprovação para exceções temporárias.</p>
+  <p>Inclua no dossiê um plano de automação: quais componentes seriam versionados, quais políticas seriam testadas, que evidências o pipeline gera e como seria o rollback se uma mudança quebrasse a conectividade (o rollback entra no D10).</p>
+</section>

@@ -5,7 +5,7 @@
   "tipo": "capstone",
   "palavras": {
     "visiveis": 8337,
-    "invisiveis": 4084,
+    "invisiveis": 3874,
     "teoriaVisivel": 3191
   },
   "porCampoVisivel": {
@@ -54,7 +54,7 @@
     "capstoneEvaluation": 364,
     "capstoneFinalRequirements": 228,
     "accessPolicy": 11,
-    "mentorQuestions.(subcampos ocultos)": 252,
+    "mentorQuestions.(itens em string, não exibidos)": 42,
     "challenge.(ocultos: description,deliverables)": 70,
     "commentedSolution.(ocultos: title,content)": 139
   },
@@ -68,6 +68,7 @@
     "desafio": true
   },
   "lab": {
+    "override": null,
     "estimatedTimeMinutes": 720,
     "alternativa_5minPasso_maisLeitura": 103.9,
     "plausivel": false,

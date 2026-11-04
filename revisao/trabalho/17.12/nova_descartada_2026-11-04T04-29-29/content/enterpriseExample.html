@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--exemplo-empresarial">
+  <h2>Exemplo empresarial</h2>
+  <p>A matriz tem usuários administrativos, equipe de TI, servidores legados, impressoras, Wi-Fi corporativo, Wi-Fi convidado e sistemas internos. A filial precisa acessar só aplicações específicas. O datacenter tem AD/DNS, repositórios, ferramentas de monitoramento e um firewall central.</p>
+  <p>A arquitetura separa zonas por função e criticidade, e cada decisão vira uma linha da matriz de fluxos (D03) e da política (D04):</p>
+  <ul>
+    <li>usuários não acessam bancos diretamente;</li>
+    <li>o Wi-Fi convidado só sai para a internet;</li>
+    <li>a administração usa bastion e MFA;</li>
+    <li>servidores críticos têm fluxos explicitamente documentados;</li>
+    <li>logs de firewall e DNS vão para o SIEM;</li>
+    <li>exceções têm dono e expiração.</li>
+  </ul>
+</section>

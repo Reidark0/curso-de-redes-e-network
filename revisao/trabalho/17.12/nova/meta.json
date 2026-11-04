@@ -4,8 +4,8 @@
   "order": 12,
   "title": "Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta",
   "subtitle": "Construa, defenda e diagnostique uma arquitetura corporativa híbrida, segura, observável e governável, consolidando todo o curso Redes e Network.",
-  "duration": "260-370 min",
-  "estimatedStudyTimeMinutes": 370,
+  "duration": "480-720 min",
+  "estimatedStudyTimeMinutes": 720,
   "difficulty": "avançado",
   "type": "capstone",
   "xp": 650,
@@ -31,6 +31,7 @@
     "matriz de competências",
     "capstone avaliável",
     "critérios de aprovação",
+    "P1-11",
     "entregáveis objetivos",
     "matriz de fluxos",
     "plano DNS",
@@ -85,244 +86,558 @@
     "Produzir um dossiê final auditável com entregáveis rastreáveis e pontuação por rubrica.",
     "Executar uma validação ponta a ponta sem depender de ambiente pago, usando simulação local/documental quando necessário."
   ],
+  "diagram": {
+    "type": "svg-inline",
+    "title": "Capstone final — arquitetura, defesa e diagnóstico ponta a ponta",
+    "description": "Diagrama SVG acessível integrando usuários, rede corporativa, hub cloud, borda pública, workloads privados, serviços gerenciados, telemetria, SOC, governança, custos e melhoria contínua.",
+    "accessibility": {
+      "role": "img",
+      "titleId": "svg-title-17-12",
+      "descId": "svg-desc-17-12",
+      "status": "corrigido no P1-11"
+    }
+  },
   "lab": {
     "id": "lab-17.12",
     "title": "Laboratório Capstone — 12 entregáveis objetivos de arquitetura, defesa e diagnóstico ponta a ponta",
     "labType": "cloud",
     "objective": "Produzir e defender um dossiê final com 12 entregáveis obrigatórios: arquitetura, endereçamento, matriz de fluxos, firewall, DNS, VPN/acesso remoto, cloud, observabilidade, testes, troubleshooting, RCA e rubrica objetiva.",
-    "scenario": "Projeto de arquitetura e investigação: você produz um dossiê com arquitetura alvo, matriz de fluxos, desenho defensivo, plano de observabilidade, playbooks, simulação de incidente, RCA e roadmap de melhoria. O dossiê precisa ser legível para três públicos: um engenheiro de rede, um analista de segurança e um gestor que precisa entender risco, custo e continuidade.",
+    "scenario": "15. Laboratório O laboratório final é um projeto de arquitetura e investigação. Você produzirá um dossiê completo com arquitetura alvo, matriz de fluxos, desenho defensivo, plano de observabilidade, playbooks, simulação de incidente, RCA e roadmap de melhoria. O objetivo é criar evidência profissional. O entregável deve ser legível para três públicos: um engenheiro de rede, um analista de segurança e um gestor que precisa entender risco, custo e continuidade.",
     "topology": "Empresa fictícia com matriz, filial, Wi-Fi corporativo, Wi-Fi convidado, usuários remotos, VPN/link dedicado, hub-spoke cloud, aplicação web publicada, cluster Kubernetes, banco gerenciado via endpoint privado, SOC e pipeline DevSecOps.",
     "architecture": "Arquitetura em camadas: conectividade, segmentação, publicação de serviços, acesso privado, egress control, telemetria, resposta a incidentes, governança e melhoria contínua.",
     "prerequisites": [
-      "Simulado final e relatório de lacunas da aula 17.11 (pacote de entrada do capstone).",
-      "Módulos M14 (cloud networking), M15 (troubleshooting e RCA) e M16 (segurança defensiva)."
+      "Conhecimento das aulas anteriores do módulo.",
+      "Ambiente de laboratório, editor de texto ou ferramenta de desenho."
     ],
     "tools": [
-      "Editor de texto ou planilha para matrizes e tabelas",
-      "Ferramenta de desenho, SVG ou ASCII para os diagramas",
-      "Terminal Linux para os testes e os comandos do runbook",
-      "Ambiente Kubernetes local (opcional)",
-      "Conta cloud de laboratório (opcional; o desenho arquitetural equivalente basta)"
+      "Terminal Linux",
+      "Conta cloud de laboratório ou desenho arquitetural equivalente",
+      "Ambiente Kubernetes local opcional",
+      "Editor de texto, planilha ou ferramenta de desenho"
     ],
-    "estimatedTimeMinutes": 220,
-    "cost": "Zero como desenho, simulação local e dados sintéticos; pago só se você optar por reproduzir partes em cloud real autorizada (veja os cuidados de limpeza abaixo).",
+    "estimatedTimeMinutes": 720,
+    "cost": "zero quando feito como desenho, simulação local e datasets sintéticos; potencialmente pago apenas se o aluno optar por reproduzir partes em cloud real autorizada. Recursos cloud reais devem ser removidos ao final.",
     "safetyNotes": [
-      "Trabalhe com desenho, simulação local e dados sintéticos; não execute ataque nem testes em ambientes de terceiros.",
-      "Não crie recursos cloud reais sem autorização explícita, orçamento e tag de laboratório.",
-      "Se usar cloud real, registre região, recurso, dono, custo estimado e o procedimento de destruição; ao final, remova NAT Gateway, firewall gerenciado, load balancer, IP público, endpoints, clusters, discos e logs temporários.",
-      "Guarde só evidências sanitizadas, sem tokens, chaves, IPs sensíveis, nomes reais de clientes ou dados pessoais."
+      "Execute apenas em laboratório, ambiente autorizado ou como exercício conceitual.",
+      "Não altere ambientes produtivos sem aprovação, janela de mudança, backup e plano de rollback.",
+      "Não colete, exponha ou compartilhe dados sensíveis durante o laboratório.",
+      "Em cloud real, remova os recursos criados ao final para evitar custos recorrentes."
     ],
     "steps": [
       {
         "number": 1,
         "title": "Definir cenário e premissas",
         "instruction": "Descreva a empresa, usuários, localidades, aplicações críticas, requisitos de disponibilidade, restrições de custo, requisitos de compliance e limites do projeto.",
-        "artifact": "Base do D01 e do README do dossiê.",
-        "expectedOutput": "Documento de escopo com premissas explícitas."
+        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "expectedOutput": "Documento de escopo com premissas explícitas.",
+        "explanation": "Este passo ajuda a transformar o conceito da aula “Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta” em evidência prática ou raciocínio verificável."
       },
       {
         "number": 2,
         "title": "Criar inventário e criticidade",
         "instruction": "Liste ativos: usuários, VLANs, subnets, servidores, aplicações, bancos, endpoints privados, contas cloud, clusters, firewalls, DNS, VPN e logs.",
-        "artifact": "Base do D01 e do D02.",
-        "expectedOutput": "Inventário com dono, criticidade, exposição, dependência e evidência esperada."
+        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "expectedOutput": "Inventário com dono, criticidade, exposição, dependência e evidência esperada.",
+        "explanation": "Este passo ajuda a transformar o conceito da aula “Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta” em evidência prática ou raciocínio verificável."
       },
       {
         "number": 3,
         "title": "Desenhar plano CIDR, zonas e segmentação",
-        "instruction": "Defina blocos CIDR, VLANs, subnets cloud, gateways, reservas de crescimento, zonas de segurança e fronteiras entre usuário, gestão, dados, aplicação, convidados, remotos e workloads críticos.",
-        "artifact": "D02 — Plano de endereçamento.",
-        "expectedOutput": "Mapa de zonas e endereçamento sem sobreposição."
+        "instruction": "Defina blocos CIDR, VLANs, subnets cloud, zonas de segurança e fronteiras entre usuário, gestão, dados, aplicação, convidados, remotos e workloads críticos.",
+        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "expectedOutput": "Mapa de zonas e endereçamento sem sobreposição.",
+        "explanation": "Este passo ajuda a transformar o conceito da aula “Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta” em evidência prática ou raciocínio verificável."
       },
       {
         "number": 4,
-        "title": "Montar matriz de fluxos e política de firewall",
-        "instruction": "Crie a matriz com uma linha por fluxo legítimo. Depois derive dela a política de firewall/ACL/SG/NSG/NACL: allowlist, deny explícito, ordem das regras sem shadowing, tráfego de retorno e exceções com dono e expiração.",
-        "command": "Origem | Destino | Protocolo | Porta | Justificativa | Controle | Log esperado | Dono | Criticidade | Risco residual",
-        "artifact": "D03 — Matriz de fluxos e D04 — Política de firewall.",
-        "expectedOutput": "Matriz de fluxos aprovada para a arquitetura alvo e política coerente com ela."
+        "title": "Montar matriz de fluxos",
+        "instruction": "Crie uma tabela com origem, destino, porta, protocolo, justificativa, controle, log esperado, dono, criticidade e risco residual.",
+        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "expectedOutput": "Matriz de fluxos aprovada para a arquitetura alvo.",
+        "explanation": "Este passo ajuda a transformar o conceito da aula “Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta” em evidência prática ou raciocínio verificável."
       },
       {
         "number": 5,
-        "title": "Escrever o plano DNS",
-        "instruction": "Defina zonas públicas e privadas, split-horizon, delegação, registros críticos (como api.interno.corp) e como clientes VPN resolvem nomes internos. Para cada resolução crítica, registre a evidência de troubleshooting que a comprova.",
-        "artifact": "D05 — Plano DNS.",
-        "expectedOutput": "DNS público e privado separados e testáveis."
+        "title": "Desenhar conectividade híbrida e cloud",
+        "instruction": "Inclua VPN ou link dedicado, BGP, route tables, UDR, hub-spoke, firewall central, NAT, Private Endpoint/Private Link, DNS privado e DNS público.",
+        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "expectedOutput": "Arquitetura híbrida com roteamento e DNS coerentes.",
+        "explanation": "Este passo ajuda a transformar o conceito da aula “Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta” em evidência prática ou raciocínio verificável."
       },
       {
         "number": 6,
-        "title": "Definir o acesso remoto/VPN",
-        "instruction": "Especifique autenticação forte (MFA), perfis, rotas entregues ao cliente (split tunnel ou túnel completo), DNS entregue, logs, procedimento de troubleshooting e fallback.",
-        "artifact": "D06 — Plano VPN/acesso remoto.",
-        "expectedOutput": "Acesso remoto com rotas, DNS, MFA, logs e fallback documentados."
+        "title": "Publicar serviço web seguro",
+        "instruction": "Desenhe DNS público, CDN/WAF, Load Balancer, TLS, health checks, Ingress, backend privado e dependências privadas.",
+        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "expectedOutput": "Fluxo de aplicação web publicado com controles e logs.",
+        "explanation": "Este passo ajuda a transformar o conceito da aula “Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta” em evidência prática ou raciocínio verificável."
       },
       {
         "number": 7,
-        "title": "Desenhar conectividade híbrida e cloud",
-        "instruction": "Inclua VPN ou link dedicado, BGP, route tables, UDR, hub-spoke, firewall central, NAT, Private Endpoint/Private Link, DNS privado e DNS público. Estime os custos recorrentes: NAT, egress, logs, firewall, transit e retenção.",
-        "artifact": "D07 — Desenho cloud/híbrido.",
-        "expectedOutput": "Arquitetura híbrida com roteamento, DNS e custos coerentes."
+        "title": "Projetar egress control e detecção",
+        "instruction": "Defina como workloads saem para internet, quais destinos são permitidos, onde ficam proxy/firewall/NAT, quais logs entram no SIEM e quais alertas detectam anomalias.",
+        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "expectedOutput": "Plano de egress control e detecção comportamental.",
+        "explanation": "Este passo ajuda a transformar o conceito da aula “Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta” em evidência prática ou raciocínio verificável."
       },
       {
         "number": 8,
-        "title": "Publicar serviço web seguro",
-        "instruction": "Desenhe DNS público, CDN/WAF, Load Balancer, TLS, health checks, Ingress, backend privado e dependências privadas.",
-        "artifact": "Borda pública do D01 e do D07.",
-        "expectedOutput": "Fluxo da aplicação web publicado com controles e logs."
+        "title": "Definir observabilidade e retenção",
+        "instruction": "Especifique flow logs, DNS logs, firewall, proxy, WAF/LB, VPN, cloud audit, Kubernetes audit, EDR, SIEM, métricas de custo e retenção mínima.",
+        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "expectedOutput": "Plano de evidências para operação, segurança, DFIR e FinOps.",
+        "explanation": "Este passo ajuda a transformar o conceito da aula “Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta” em evidência prática ou raciocínio verificável."
       },
       {
         "number": 9,
-        "title": "Projetar egress control e detecção",
-        "instruction": "Defina como workloads saem para a internet, quais destinos são permitidos, onde ficam proxy/firewall/NAT, quais logs entram no SIEM e quais alertas detectam anomalias.",
-        "artifact": "D07 (egress) e D08 (detecção).",
-        "expectedOutput": "Plano de egress control e detecção comportamental."
+        "title": "Simular incidente documental",
+        "instruction": "Crie uma linha do tempo fictícia com três sintomas: erro intermitente web, lentidão VPN e tráfego anômalo de egress. Não execute ataque; trabalhe com evidências simuladas ou sanitizadas.",
+        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "expectedOutput": "Pacote de incidente com sintomas, horários, logs sintéticos e hipóteses.",
+        "explanation": "Este passo ajuda a transformar o conceito da aula “Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta” em evidência prática ou raciocínio verificável."
       },
       {
         "number": 10,
-        "title": "Definir observabilidade e retenção",
-        "instruction": "Especifique flow logs, DNS logs, firewall, proxy, WAF/LB, VPN, cloud audit, Kubernetes audit, EDR, SIEM, métricas de custo e retenção mínima.",
-        "artifact": "D08 — Plano de observabilidade.",
-        "expectedOutput": "Plano de evidências para operação, segurança, DFIR, auditoria e FinOps."
+        "title": "Executar matriz hipótese-evidência",
+        "instruction": "Monte hipóteses para DNS, rota, firewall, TLS, WAF, LB, Kubernetes, VPN, C2, exfiltração e custo. Relacione cada hipótese a fontes e conclusão.",
+        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "expectedOutput": "Dossiê de investigação com hipóteses classificadas.",
+        "explanation": "Este passo ajuda a transformar o conceito da aula “Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta” em evidência prática ou raciocínio verificável."
       },
       {
         "number": 11,
-        "title": "Planejar e registrar os testes ponta a ponta",
-        "instruction": "Monte a tabela de testes cobrindo DNS, TCP, TLS, HTTP, rota, firewall allow/deny, endpoint privado, VPN, egress, logs e custo estimado. Sem ambiente real, descreva o teste e a saída esperada (simulação documental).",
-        "command": "Teste | Resultado esperado | Resultado obtido | Evidência | Decisão",
-        "artifact": "D09 — Evidências de testes.",
-        "expectedOutput": "Tabela de testes preenchida, com evidência para cada linha."
+        "title": "Criar mitigação, rollback e RCA",
+        "instruction": "Proponha mitigação mínima, plano de rollback, comunicação técnica/executiva, causa técnica, causa sistêmica e ações preventivas.",
+        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "expectedOutput": "RCA completo e plano de melhoria pós-incidente.",
+        "explanation": "Este passo ajuda a transformar o conceito da aula “Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta” em evidência prática ou raciocínio verificável."
       },
       {
         "number": 12,
-        "title": "Simular o incidente",
-        "instruction": "Use o pacote sintético abaixo (todos os registros são fictícios e sanitizados) ou crie o seu com os mesmos três sintomas: erro intermitente web, lentidão VPN e egress anômalo. Não execute ataque; trabalhe só com evidências simuladas ou sanitizadas.",
-        "command": "LINHA DO TEMPO (fictícia)\n08:40  mudança de rota cloud aprovada em janela de laboratório\n09:05  usuários remotos relatam lentidão ao acessar aplicação interna\n09:18  WAF/LB registra aumento de HTTP 503 intermitente\n09:27  flow log mostra egress acima do baseline a partir de workload privado\n09:35  DNS privado dá respostas inconsistentes para serviço interno em uma origem\n09:50  equipe abre war room e cria a matriz hipótese-evidência\n10:20  mitigação reduz impacto sem destruir evidências\n11:00  RCA separa causa técnica, causa sistêmica e ações preventivas\n\nDNS\n2026-07-01T09:34:11Z client=10.20.8.45 query=api.interno.corp type=A answer=10.40.3.21 view=private rcode=NOERROR ttl=30\n2026-07-01T09:34:12Z client=10.88.4.17 query=api.interno.corp type=A answer=198.51.100.44 view=public rcode=NOERROR ttl=300\nFLOW\nstart=2026-07-01T09:27:00Z src=10.40.3.21 dst=203.0.113.80 proto=tcp dport=443 bytes_out=9845120 action=allow tag=egress-anomaly\nstart=2026-07-01T09:28:00Z src=10.40.3.21 dst=203.0.113.80 proto=tcp dport=443 bytes_out=10022744 action=allow tag=egress-anomaly\nWAF\ntime=2026-07-01T09:18:31Z host=app.exemplo.test path=/api/pedidos status=503 upstream_status=unhealthy request_id=req-1712-a\ntime=2026-07-01T09:19:03Z host=app.exemplo.test path=/health status=200 upstream_status=healthy request_id=req-1712-b\nVPN\ntime=2026-07-01T09:05:00Z user=usuario.remoto group=vpn-corp assigned_routes=10.0.0.0/8 dns=10.10.10.10 latency_ms=240 warning=high_latency\ntime=2026-07-01T09:06:30Z user=usuario.remoto split_tunnel=true route_missing=10.40.0.0/16 result=partial_connectivity",
-        "expectedOutput": "Pacote de incidente com sintomas, horários, logs sintéticos e hipóteses iniciais."
+        "title": "Preparar portfólio final",
+        "instruction": "Organize README, diagramas, matrizes, playbooks, RCA, checklist, riscos residuais, custos estimados e aprendizados. Sanitize dados sensíveis.",
+        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "expectedOutput": "Dossiê final publicável ou apresentável em entrevista técnica.",
+        "explanation": "Este passo ajuda a transformar o conceito da aula “Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta” em evidência prática ou raciocínio verificável."
       },
       {
         "number": 13,
-        "title": "Executar a matriz hipótese-evidência",
-        "instruction": "Monte hipóteses para DNS, rota, firewall, TLS, WAF, LB, Kubernetes, VPN, C2, exfiltração e custo, e relacione cada uma a fontes de evidência e a uma conclusão. Depois transforme a matriz em runbook: árvore de decisão, comandos, fontes de log, critérios de decisão, rollback e comunicação.",
-        "command": "Hipótese | Fonte de evidência | Achado | Lacuna | Conclusão (confirmada, descartada ou aberta)",
-        "artifact": "D10 — Runbook de troubleshooting.",
-        "expectedOutput": "Dossiê de investigação com hipóteses classificadas e runbook reutilizável."
+        "title": "Montar matriz de competências da aula",
+        "instruction": "Crie uma tabela com as competências C01, C02, C03, C04, C05, C06, C07, C08. Para cada uma, registre pontuação, confiança, evidência coletada e lacuna principal.",
+        "command": "Tabela sugerida: Competência | Evidência | Pontuação | Confiança | Lacuna | Ação de revisão | Reteste",
+        "expectedOutput": "Matriz preenchida com pelo menos uma evidência por competência avaliada.",
+        "explanation": "A avaliação deixa de ser uma nota única e passa a mostrar exatamente onde o aluno domina ou precisa revisar."
       },
       {
         "number": 14,
-        "title": "Criar mitigação, rollback e RCA",
-        "instruction": "Proponha mitigação mínima, plano de rollback, comunicação técnica e executiva, causa técnica, causa sistêmica e ações preventivas com dono e prazo (backlog preventivo). Escreva o RCA em duas versões: técnica e executiva.",
-        "artifact": "D11 — RCA do incidente simulado.",
-        "expectedOutput": "RCA completo e plano de melhoria pós-incidente."
+        "title": "Classificar erros e hipóteses de aprendizagem",
+        "instruction": "Para cada erro, classifique a causa usando a taxonomia E-CONCEITO, E-CAMADA, E-COMANDO, E-ARQUITETURA, E-SEGURANCA ou E-COMUNICACAO.",
+        "command": "Erro | Resposta dada | Resposta correta | Causa | Competência | Aula de revisão | Evidência nova",
+        "expectedOutput": "Lista de erros convertida em backlog de revisão objetivo.",
+        "explanation": "Erro sem classificação vira repetição. Erro classificado vira plano de estudo e prática."
       },
       {
         "number": 15,
-        "title": "Preparar o portfólio final",
-        "instruction": "Organize README, diagramas, matrizes, playbooks, RCA, checklist, riscos residuais, custos estimados e aprendizados. Sanitize os dados sensíveis.",
-        "expectedOutput": "Dossiê final publicável ou apresentável em entrevista técnica."
+        "title": "Aplicar rubrica e decidir aprovação",
+        "instruction": "Some os critérios da rubrica. A aprovação exige 80% geral e nenhuma competência crítica sem evidência mínima.",
+        "command": "Pontuação final = soma dos critérios; decisão = aprovado, aprovado com ressalvas ou refazer competência crítica",
+        "expectedOutput": "Rubrica preenchida, decisão explícita e justificativa técnica.",
+        "explanation": "O aluno aprende a defender a própria conclusão, como aconteceria em revisão técnica, banca ou auditoria."
       },
       {
         "number": 16,
-        "title": "Preencher a matriz de competências",
-        "instruction": "Preencha a matriz C01–C08 do Conceito: para cada competência, registre pontuação, confiança, evidência coletada e lacuna principal. Registre a confiança antes de conferir a correção e de novo depois.",
-        "command": "Competência | Evidência | Pontuação | Confiança | Lacuna | Ação de revisão | Reteste",
-        "artifact": "D12 (parte 1).",
-        "expectedOutput": "Matriz preenchida com pelo menos uma evidência por competência.",
-        "explanation": "A avaliação deixa de ser uma nota única e mostra onde você domina e onde precisa revisar."
-      },
-      {
-        "number": 17,
-        "title": "Classificar erros e hipóteses de aprendizagem",
-        "instruction": "Para cada erro encontrado na autoavaliação, na rubrica ou na defesa, classifique a causa: E-CONCEITO (decorou o termo, mas não explica por que ele existe ou como funciona); E-CAMADA (confundiu camada 2, camada 3, transporte, aplicação ou controle de segurança); E-COMANDO (não soube escolher o comando, log, métrica ou pacote que confirma a hipótese); E-ARQUITETURA (a solução funciona isolada, mas ignora fluxo, dependência, custo, segurança ou operação); E-SEGURANCA (confundiu conectividade com autorização, ignorou telemetria ou propôs exceção insegura); E-COMUNICACAO (não explicou impacto, decisão, rollback ou risco residual para outro público).",
-        "command": "Erro | Resposta dada | Resposta correta | Causa | Competência | Aula de revisão | Evidência nova",
-        "artifact": "D12 (parte 2).",
-        "expectedOutput": "Lista de erros convertida em backlog de revisão objetivo.",
-        "explanation": "Erro sem classificação vira repetição; erro classificado vira plano de estudo e prática."
-      },
-      {
-        "number": 18,
-        "title": "Aplicar a rubrica e decidir",
-        "instruction": "Some os oito critérios da rubrica de 100 pontos e aplique a regra de decisão do Conceito: aprovado, aprovado com ressalvas ou refazer competência crítica.",
-        "command": "Pontuação final = soma dos critérios; decisão = aprovado | aprovado com ressalvas | refazer competência crítica",
-        "artifact": "D12 (parte 3).",
-        "expectedOutput": "Rubrica preenchida, decisão explícita e justificativa técnica.",
-        "explanation": "Você defende a própria conclusão, como numa revisão técnica, banca ou auditoria."
-      },
-      {
-        "number": 19,
         "title": "Criar trilha de revisão e reteste",
-        "instruction": "Para cada competência abaixo do mínimo, defina: revisão dos módulos da coluna Módulos com recuperação ativa (não releitura passiva), um mini laboratório que gere a evidência esperada da competência, uma questão de reteste e o prazo. Refaça só as questões e tarefas da competência após 24–48 horas, registrando a confiança antes de corrigir.",
+        "instruction": "Para cada competência abaixo do mínimo, defina aula de revisão, mini laboratório, questão de reteste e prazo de nova tentativa.",
         "command": "Competência fraca | Aula de revisão | Mini lab | Reteste | Prazo | Evidência esperada",
-        "artifact": "D12 (parte 4).",
-        "expectedOutput": "Plano de revisão com ações executáveis em vez de releitura genérica."
+        "expectedOutput": "Plano de revisão com ações executáveis em vez de releitura genérica.",
+        "explanation": "A trilha de revisão transforma o M17 em sistema de fechamento do curso, não apenas em simulado final."
       }
     ],
-    "expectedResult": "Dossiê capstone completo e sanitizado com os 12 entregáveis D01–D12, a matriz de competências C01–C08, a rubrica preenchida com a decisão final, os erros classificados e o plano de revisão e reteste.",
+    "expectedResult": "O aluno produz evidências suficientes para demonstrar entendimento prático de “Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta”. O resultado final deve incluir matriz de competências, rubrica, feedback por tema, plano de revisão e evidências de reteste.",
     "validation": [
-      "D01–D12: cada entregável tem evidência, dono e critério de aceite. Se faltar algum, registre a pendência e corrija antes de concluir.",
-      "Nenhum fluxo any-any permanece sem justificativa, expiração e dono.",
-      "DNS público e privado estão separados e testáveis.",
-      "O acesso remoto/VPN tem rotas, DNS, MFA, logs e fallback documentados.",
-      "O desenho cloud/híbrido inclui Private Endpoint/Private Link, egress, route tables, custos e limpeza.",
-      "A observabilidade cobre operação, segurança, DFIR, auditoria e FinOps.",
-      "O RCA tem timeline, causa técnica, causa sistêmica, mitigação e prevenção.",
-      "A matriz C01–C08 tem evidência por competência. Se falhar, volte ao lab ou ao simulado e registre a evidência que falta.",
-      "A rubrica soma 100 pontos e a decisão segue a regra do Conceito (mínimo de 80 pontos). Se falhar, crie a trilha de revisão antes de marcar a aula como concluída.",
-      "Cada lacuna crítica tem ação prática, reteste em 24–48 h e prazo. Se falhar, transforme lacunas genéricas em tarefas concretas.",
-      "Na defesa, você explica decisões, alternativas rejeitadas e riscos residuais.",
-      "O plano de melhoria está priorizado por risco, custo e esforço."
+      {
+        "check": "O aluno consegue defender o projeto para rede, segurança, cloud, DevSecOps e gestão, demonstrando conectividade, proteção, diagnóstico e governança.",
+        "method": "Revisão do artefato ou evidência produzido no passo correspondente",
+        "expected": "O aluno consegue defender o projeto para rede, segurança, cloud, DevSecOps e gestão, demonstrando conectividade, proteção, diagnóstico e governança.",
+        "ifFails": "Revise o passo correspondente, colete nova evidência e corrija a documentação."
+      },
+      {
+        "check": "Matriz de competências preenchida",
+        "command": "verificar tabela de competências",
+        "expected": "C01, C02, C03, C04, C05, C06, C07, C08 avaliadas com evidência",
+        "ifFails": "volte ao simulado/lab e registre evidências por competência"
+      },
+      {
+        "check": "Rubrica aplicada",
+        "command": "somar critérios de avaliação",
+        "expected": "80% mínimo geral e competências críticas acima do mínimo",
+        "ifFails": "criar trilha de revisão antes de marcar a aula como concluída"
+      },
+      {
+        "check": "Reteste planejado",
+        "command": "verificar plano 24-48h",
+        "expected": "cada lacuna crítica possui ação prática e prazo",
+        "ifFails": "transforme lacunas genéricas em tarefas concretas"
+      },
+      {
+        "check": "Critério final: pontuação final mínima de 80%",
+        "command": "revisar dossiê capstone",
+        "expected": "critério atendido com evidência",
+        "ifFails": "registrar pendência no backlog e corrigir antes da conclusão"
+      },
+      {
+        "check": "Critério final: nenhuma competência crítica abaixo de 70%",
+        "command": "revisar dossiê capstone",
+        "expected": "critério atendido com evidência",
+        "ifFails": "registrar pendência no backlog e corrigir antes da conclusão"
+      },
+      {
+        "check": "Critério final: dossiê completo com arquitetura, fluxos, segurança, observabilidade, troubleshooting, RCA e custos",
+        "command": "revisar dossiê capstone",
+        "expected": "critério atendido com evidência",
+        "ifFails": "registrar pendência no backlog e corrigir antes da conclusão"
+      },
+      {
+        "check": "Critério final: defesa técnica capaz de explicar decisões, alternativas rejeitadas e riscos residuais",
+        "command": "revisar dossiê capstone",
+        "expected": "critério atendido com evidência",
+        "ifFails": "registrar pendência no backlog e corrigir antes da conclusão"
+      },
+      {
+        "check": "Critério final: plano de melhoria priorizado por risco, custo e esforço",
+        "command": "revisar dossiê capstone",
+        "expected": "critério atendido com evidência",
+        "ifFails": "registrar pendência no backlog e corrigir antes da conclusão"
+      },
+      {
+        "check": "Entregável 01 concluído",
+        "command": "verificar dossiê: D01",
+        "expected": "D01 — Arquitetura lógica ponta a ponta com matriz, filial, Wi-Fi, acesso remoto, hub cloud, workloads privados, borda pública, telemetria e governança.",
+        "ifFails": "Registrar pendência, corrigir artefato, coletar evidência e atualizar a rubrica antes de concluir o capstone."
+      },
+      {
+        "check": "Entregável 02 concluído",
+        "command": "verificar dossiê: D02",
+        "expected": "D02 — Plano de endereçamento: CIDR, subnets, VLANs, gateways, reservas de crescimento e ausência de sobreposição.",
+        "ifFails": "Registrar pendência, corrigir artefato, coletar evidência e atualizar a rubrica antes de concluir o capstone."
+      },
+      {
+        "check": "Entregável 03 concluído",
+        "command": "verificar dossiê: D03",
+        "expected": "D03 — Matriz de fluxos: origem, destino, protocolo, porta, justificativa, controle, log esperado, dono, criticidade e risco residual.",
+        "ifFails": "Registrar pendência, corrigir artefato, coletar evidência e atualizar a rubrica antes de concluir o capstone."
+      },
+      {
+        "check": "Entregável 04 concluído",
+        "command": "verificar dossiê: D04",
+        "expected": "D04 — Política de firewall/ACL/SG/NSG/NACL: allowlist, deny explícito, ordem de regras, shadowing, retorno e exceções com expiração.",
+        "ifFails": "Registrar pendência, corrigir artefato, coletar evidência e atualizar a rubrica antes de concluir o capstone."
+      },
+      {
+        "check": "Entregável 05 concluído",
+        "command": "verificar dossiê: D05",
+        "expected": "D05 — Plano DNS: público, privado, split-horizon, delegação, registros críticos, resolução em VPN e evidência de troubleshooting.",
+        "ifFails": "Registrar pendência, corrigir artefato, coletar evidência e atualizar a rubrica antes de concluir o capstone."
+      },
+      {
+        "check": "Entregável 06 concluído",
+        "command": "verificar dossiê: D06",
+        "expected": "D06 — Plano VPN/acesso remoto: autenticação forte, rotas, split tunnel, DNS, logs, perfis, troubleshooting e fallback.",
+        "ifFails": "Registrar pendência, corrigir artefato, coletar evidência e atualizar a rubrica antes de concluir o capstone."
+      },
+      {
+        "check": "Entregável 07 concluído",
+        "command": "verificar dossiê: D07",
+        "expected": "D07 — Desenho cloud/híbrido: hub-spoke, route tables, Private Endpoint/Private Link, egress control, NAT/firewall, Kubernetes networking e custos.",
+        "ifFails": "Registrar pendência, corrigir artefato, coletar evidência e atualizar a rubrica antes de concluir o capstone."
+      },
+      {
+        "check": "Entregável 08 concluído",
+        "command": "verificar dossiê: D08",
+        "expected": "D08 — Plano de observabilidade: flow logs, DNS logs, firewall, proxy, WAF/LB, VPN, cloud audit, EDR/NDR/SIEM, métricas e retenção.",
+        "ifFails": "Registrar pendência, corrigir artefato, coletar evidência e atualizar a rubrica antes de concluir o capstone."
+      },
+      {
+        "check": "Entregável 09 concluído",
+        "command": "verificar dossiê: D09",
+        "expected": "D09 — Evidências de testes: DNS, TCP, TLS, HTTP, rota, firewall allow/deny, endpoint privado, VPN, egress, logs e custo estimado.",
+        "ifFails": "Registrar pendência, corrigir artefato, coletar evidência e atualizar a rubrica antes de concluir o capstone."
+      },
+      {
+        "check": "Entregável 10 concluído",
+        "command": "verificar dossiê: D10",
+        "expected": "D10 — Runbook de troubleshooting: árvore hipótese-evidência, comandos, fontes de log, critérios de decisão, rollback e comunicação.",
+        "ifFails": "Registrar pendência, corrigir artefato, coletar evidência e atualizar a rubrica antes de concluir o capstone."
+      },
+      {
+        "check": "Entregável 11 concluído",
+        "command": "verificar dossiê: D11",
+        "expected": "D11 — RCA de incidente simulado: timeline, impacto, causa técnica, causa sistêmica, mitigação, prevenção, riscos residuais e donos.",
+        "ifFails": "Registrar pendência, corrigir artefato, coletar evidência e atualizar a rubrica antes de concluir o capstone."
+      },
+      {
+        "check": "Entregável 12 concluído",
+        "command": "verificar dossiê: D12",
+        "expected": "D12 — Rubrica objetiva preenchida: pontuação por competência, aprovação/reprovação, lacunas, reteste e plano de melhoria contínua.",
+        "ifFails": "Registrar pendência, corrigir artefato, coletar evidência e atualizar a rubrica antes de concluir o capstone."
+      }
     ],
     "troubleshooting": [
-      "A arquitetura ficou grande demais para o tempo disponível: reduza o desenho mantendo pelo menos um fluxo web, um fluxo privado, um fluxo remoto e um fluxo de egress.",
-      "Falta evidência para uma decisão: volte ao plano de observabilidade (D08) antes de concluir o RCA.",
-      "Uma regra ampla parece necessária: documente risco, alternativa, prazo e dono da exceção.",
-      "Os custos ficaram invisíveis: inclua NAT, egress, logs, firewall, transit e retenção no D07.",
-      "O diagnóstico ficou opinativo: reestruture em matriz hipótese-evidência."
+      {
+        "symptom": "Se a arquitetura ficar grande demais, reduza o escopo mantendo ao menos um fluxo web, um fluxo privado, um fluxo remoto e um fluxo de egress.",
+        "probableCause": "Premissa incorreta, coleta incompleta, configuração divergente ou interpretação inconsistente com a evidência.",
+        "howToConfirm": "Compare a evidência coletada com o resultado esperado do passo e registre a divergência encontrada.",
+        "fix": "Corrija o artefato, ajuste a configuração quando aplicável, colete nova evidência e atualize a conclusão técnica."
+      },
+      {
+        "symptom": "Se faltar evidência para uma decisão, volte ao plano de observabilidade antes de concluir o RCA.",
+        "probableCause": "Premissa incorreta, coleta incompleta, configuração divergente ou interpretação inconsistente com a evidência.",
+        "howToConfirm": "Compare a evidência coletada com o resultado esperado do passo e registre a divergência encontrada.",
+        "fix": "Corrija o artefato, ajuste a configuração quando aplicável, colete nova evidência e atualize a conclusão técnica."
+      },
+      {
+        "symptom": "Se uma regra ampla parecer necessária, documente risco, alternativa, prazo e dono da exceção.",
+        "probableCause": "Premissa incorreta, coleta incompleta, configuração divergente ou interpretação inconsistente com a evidência.",
+        "howToConfirm": "Compare a evidência coletada com o resultado esperado do passo e registre a divergência encontrada.",
+        "fix": "Corrija o artefato, ajuste a configuração quando aplicável, colete nova evidência e atualize a conclusão técnica."
+      },
+      {
+        "symptom": "Se os custos ficarem invisíveis, inclua NAT, egress, logs, firewall, transit e retenção no dossiê.",
+        "probableCause": "Premissa incorreta, coleta incompleta, configuração divergente ou interpretação inconsistente com a evidência.",
+        "howToConfirm": "Compare a evidência coletada com o resultado esperado do passo e registre a divergência encontrada.",
+        "fix": "Corrija o artefato, ajuste a configuração quando aplicável, colete nova evidência e atualize a conclusão técnica."
+      },
+      {
+        "symptom": "Se o diagnóstico ficar opinativo, reestruture em matriz hipótese-evidência.",
+        "probableCause": "Premissa incorreta, coleta incompleta, configuração divergente ou interpretação inconsistente com a evidência.",
+        "howToConfirm": "Compare a evidência coletada com o resultado esperado do passo e registre a divergência encontrada.",
+        "fix": "Corrija o artefato, ajuste a configuração quando aplicável, colete nova evidência e atualize a conclusão técnica."
+      }
     ],
     "improvements": [
-      "Versionar o dossiê como repositório de portfólio com README, diagramas SVG e dados sanitizados.",
+      "Converter o dossiê em repositório de portfólio com README e diagramas SVG.",
       "Criar módulos IaC fictícios para rede, logs e controles defensivos.",
-      "Converter a matriz de fluxos e as políticas em testes de policy as code que bloqueiem exposição pública indevida.",
-      "Repetir a simulação de war room periodicamente, com novos sintomas e logs sintéticos.",
-      "Adicionar orçamento FinOps para NAT, egress, firewall, logs, retenção e tráfego entre regiões.",
-      "Dar pesos às competências conforme seu objetivo profissional.",
-      "Repetir a autoavaliação após uma semana para medir a retenção real."
+      "Adicionar testes de policy as code para bloquear exposição pública indevida.",
+      "Criar simulação mensal de war room com novos sintomas.",
+      "Integrar este capstone aos cursos de DevSecOps e IAM da universidade.",
+      "Adicionar pesos por competência conforme objetivo profissional do aluno.",
+      "Repetir o bloco após uma semana para medir retenção real.",
+      "Transformar evidências sanitizadas em portfólio técnico.",
+      "Versionar o dossiê final como repositório de portfólio com dados sanitizados.",
+      "Converter matriz de fluxos e políticas em testes de policy as code.",
+      "Criar uma simulação trimestral de incidente com novos logs sintéticos.",
+      "Adicionar orçamento FinOps para NAT, egress, firewall, logs, retenção e tráfego entre regiões."
     ],
     "evidenceToCollect": [
-      "Os 12 entregáveis D01–D12 (tabela do Conceito).",
-      "Resumo do cenário e das premissas.",
+      "Resumo do cenário e das premissas",
+      "Tabela, diagrama ou artefato produzido",
+      "Resultado das validações",
+      "Lista de problemas encontrados e correções propostas",
+      "Capturas de tela ou saídas de comandos relevantes",
+      "Comprovação de limpeza ou plano para remoção dos recursos cloud",
+      "matriz de competências preenchida",
+      "rubrica com pontuação e justificativa",
+      "lista de erros por taxonomia",
+      "plano de revisão com mini laboratórios",
+      "resultado do reteste ou critério de próxima tentativa",
+      "D01 — Arquitetura lógica ponta a ponta com matriz, filial, Wi-Fi, acesso remoto, hub cloud, workloads privados, borda pública, telemetria e governança.",
+      "D02 — Plano de endereçamento: CIDR, subnets, VLANs, gateways, reservas de crescimento e ausência de sobreposição.",
+      "D03 — Matriz de fluxos: origem, destino, protocolo, porta, justificativa, controle, log esperado, dono, criticidade e risco residual.",
+      "D04 — Política de firewall/ACL/SG/NSG/NACL: allowlist, deny explícito, ordem de regras, shadowing, retorno e exceções com expiração.",
+      "D05 — Plano DNS: público, privado, split-horizon, delegação, registros críticos, resolução em VPN e evidência de troubleshooting.",
+      "D06 — Plano VPN/acesso remoto: autenticação forte, rotas, split tunnel, DNS, logs, perfis, troubleshooting e fallback.",
+      "D07 — Desenho cloud/híbrido: hub-spoke, route tables, Private Endpoint/Private Link, egress control, NAT/firewall, Kubernetes networking e custos.",
+      "D08 — Plano de observabilidade: flow logs, DNS logs, firewall, proxy, WAF/LB, VPN, cloud audit, EDR/NDR/SIEM, métricas e retenção.",
+      "D09 — Evidências de testes: DNS, TCP, TLS, HTTP, rota, firewall allow/deny, endpoint privado, VPN, egress, logs e custo estimado.",
+      "D10 — Runbook de troubleshooting: árvore hipótese-evidência, comandos, fontes de log, critérios de decisão, rollback e comunicação.",
+      "D11 — RCA de incidente simulado: timeline, impacto, causa técnica, causa sistêmica, mitigação, prevenção, riscos residuais e donos.",
+      "D12 — Rubrica objetiva preenchida: pontuação por competência, aprovação/reprovação, lacunas, reteste e plano de melhoria contínua.",
       "Tabela de testes ponta a ponta com resultado esperado, resultado obtido, evidência e decisão.",
-      "Matriz hipótese-evidência do incidente simulado.",
-      "Matriz de competências C01–C08, com a confiança antes e depois da correção.",
-      "Rubrica com pontuação, decisão e justificativa.",
-      "Lista de erros por taxonomia.",
-      "Plano de revisão com mini laboratórios e resultado do reteste (ou critério da próxima tentativa).",
-      "Checklist de limpeza e custo, quando houver qualquer recurso cloud real."
+      "Checklist de limpeza e custo quando houver qualquer recurso cloud real."
     ],
     "questions": [
-      "Qual entregável é o mais fraco e que evidência objetiva falta para aprová-lo?",
-      "Qual fluxo legítimo não está bem justificado na matriz de fluxos?",
-      "Qual controle de firewall ou egress depende de exceção temporária e quem é o dono dela?",
-      "Qual fonte de log provaria ou refutaria a hipótese principal do incidente?",
+      "Qual evidência mostra que o laboratório de “Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta” foi concluído corretamente?",
+      "Qual erro comum este laboratório ajuda a evitar?",
+      "Como este resultado seria usado em um ambiente corporativo real?",
+      "Qual risco de segurança ou operação precisa ser documentado antes de aplicar isso em produção?",
       "Qual competência ficou mais fraca e qual evidência prova isso?",
-      "Qual erro foi conceitual e qual foi falta de diagnóstico por evidência?",
-      "Qual risco residual permanece mesmo após a correção?"
+      "Qual erro foi conceitual e qual erro foi falta de diagnóstico por evidência?",
+      "O que você faria diferente em um ambiente corporativo real?",
+      "Qual risco residual permanece mesmo após a correção?",
+      "Qual entregável é mais fraco e qual evidência objetiva falta para considerá-lo aprovado?",
+      "Qual fluxo legítimo não está bem justificado na matriz de fluxos?",
+      "Qual controle de firewall ou egress depende de exceção temporária e quem é o dono dessa exceção?",
+      "Qual fonte de log provaria ou refutaria a hipótese principal do incidente?"
+    ],
+    "challenge": "Defesa técnica do capstone final Entregue também uma matriz de competências com feedback por tema, pontuação por rubrica e trilha de revisão baseada nos erros.",
+    "solution": "A solução deve justificar decisões, apresentar evidências, validar o resultado e indicar correções para erros comuns. Uma entrega madura não tenta esconder erro: ela mostra pontuação, lacuna, causa, evidência, revisão planejada e reteste. A aprovação só deve ser considerada confiável quando o aluno consegue explicar a resposta correta e demonstrá-la em laboratório ou cenário.",
+    "expectedOutcome": "Dossiê capstone completo com arquitetura, matriz de fluxos, plano defensivo, observabilidade, investigação, RCA, backlog de melhoria e portfólio sanitizado.",
+    "evaluationMode": true,
+    "competencyBased": true,
+    "assessmentReference": "assessment-17.12",
+    "requiredDeliverables": [
+      "D01 — Arquitetura lógica ponta a ponta com matriz, filial, Wi-Fi, acesso remoto, hub cloud, workloads privados, borda pública, telemetria e governança.",
+      "D02 — Plano de endereçamento: CIDR, subnets, VLANs, gateways, reservas de crescimento e ausência de sobreposição.",
+      "D03 — Matriz de fluxos: origem, destino, protocolo, porta, justificativa, controle, log esperado, dono, criticidade e risco residual.",
+      "D04 — Política de firewall/ACL/SG/NSG/NACL: allowlist, deny explícito, ordem de regras, shadowing, retorno e exceções com expiração.",
+      "D05 — Plano DNS: público, privado, split-horizon, delegação, registros críticos, resolução em VPN e evidência de troubleshooting.",
+      "D06 — Plano VPN/acesso remoto: autenticação forte, rotas, split tunnel, DNS, logs, perfis, troubleshooting e fallback.",
+      "D07 — Desenho cloud/híbrido: hub-spoke, route tables, Private Endpoint/Private Link, egress control, NAT/firewall, Kubernetes networking e custos.",
+      "D08 — Plano de observabilidade: flow logs, DNS logs, firewall, proxy, WAF/LB, VPN, cloud audit, EDR/NDR/SIEM, métricas e retenção.",
+      "D09 — Evidências de testes: DNS, TCP, TLS, HTTP, rota, firewall allow/deny, endpoint privado, VPN, egress, logs e custo estimado.",
+      "D10 — Runbook de troubleshooting: árvore hipótese-evidência, comandos, fontes de log, critérios de decisão, rollback e comunicação.",
+      "D11 — RCA de incidente simulado: timeline, impacto, causa técnica, causa sistêmica, mitigação, prevenção, riscos residuais e donos.",
+      "D12 — Rubrica objetiva preenchida: pontuação por competência, aprovação/reprovação, lacunas, reteste e plano de melhoria contínua."
+    ],
+    "cleanupPolicy": [
+      "Não criar recursos cloud reais sem autorização explícita, orçamento e tag de laboratório.",
+      "Se usar cloud real, registrar região, recurso, dono, custo estimado e comando/procedimento de destruição.",
+      "Remover NAT Gateway, firewall gerenciado, load balancer, IP público, endpoints, clusters, discos e logs temporários ao final.",
+      "Guardar apenas evidências sanitizadas, sem tokens, chaves, IPs sensíveis, nomes reais de clientes ou dados pessoais."
+    ]
+  },
+  "capstoneProject": {
+    "scenario": "Empresa híbrida com datacenter, filial, Wi-Fi, acesso remoto, cloud, Kubernetes e aplicação web publicada passando por instabilidade e suspeita de egress anômalo.",
+    "requiredDeliverables": [
+      "D01 — Arquitetura lógica ponta a ponta com matriz, filial, Wi-Fi, acesso remoto, hub cloud, workloads privados, borda pública, telemetria e governança.",
+      "D02 — Plano de endereçamento: CIDR, subnets, VLANs, gateways, reservas de crescimento e ausência de sobreposição.",
+      "D03 — Matriz de fluxos: origem, destino, protocolo, porta, justificativa, controle, log esperado, dono, criticidade e risco residual.",
+      "D04 — Política de firewall/ACL/SG/NSG/NACL: allowlist, deny explícito, ordem de regras, shadowing, retorno e exceções com expiração.",
+      "D05 — Plano DNS: público, privado, split-horizon, delegação, registros críticos, resolução em VPN e evidência de troubleshooting.",
+      "D06 — Plano VPN/acesso remoto: autenticação forte, rotas, split tunnel, DNS, logs, perfis, troubleshooting e fallback.",
+      "D07 — Desenho cloud/híbrido: hub-spoke, route tables, Private Endpoint/Private Link, egress control, NAT/firewall, Kubernetes networking e custos.",
+      "D08 — Plano de observabilidade: flow logs, DNS logs, firewall, proxy, WAF/LB, VPN, cloud audit, EDR/NDR/SIEM, métricas e retenção.",
+      "D09 — Evidências de testes: DNS, TCP, TLS, HTTP, rota, firewall allow/deny, endpoint privado, VPN, egress, logs e custo estimado.",
+      "D10 — Runbook de troubleshooting: árvore hipótese-evidência, comandos, fontes de log, critérios de decisão, rollback e comunicação.",
+      "D11 — RCA de incidente simulado: timeline, impacto, causa técnica, causa sistêmica, mitigação, prevenção, riscos residuais e donos.",
+      "D12 — Rubrica objetiva preenchida: pontuação por competência, aprovação/reprovação, lacunas, reteste e plano de melhoria contínua."
+    ],
+    "rubric": [
+      {
+        "criterion": "Arquitetura e coerência de fluxos",
+        "points": 20,
+        "description": "Fluxos legítimos são claros, documentados e conectáveis sem exposição desnecessária."
+      },
+      {
+        "criterion": "Segurança defensiva",
+        "points": 20,
+        "description": "Segmentação, egress control, identidade, WAF, endpoints privados e menor privilégio reduzem risco."
+      },
+      {
+        "criterion": "Observabilidade e DFIR",
+        "points": 20,
+        "description": "Logs e métricas permitem investigação por hipótese-evidência e preservação de evidências."
+      },
+      {
+        "criterion": "Troubleshooting e RCA",
+        "points": 20,
+        "description": "O incidente é investigado com timeline, hipóteses, mitigação, rollback e causa sistêmica."
+      },
+      {
+        "criterion": "Governança, custo e portfólio",
+        "points": 20,
+        "description": "Exceções, riscos residuais, custos, documentação e sanitização estão tratados."
+      }
+    ],
+    "passingCriteria": "Aprovado com 80 pontos ou mais, nenhum entregável obrigatório ausente e nenhuma competência crítica abaixo do mínimo sem plano de reteste.",
+    "validationChecklist": [
+      "Todos os 12 entregáveis possuem evidência, dono e critério de aceite.",
+      "Nenhum fluxo any-any permanece sem justificativa, expiração e dono.",
+      "DNS público e privado estão separados e testáveis.",
+      "Acesso remoto/VPN possui rotas, DNS, MFA, logs e fallback documentados.",
+      "Cloud/híbrido inclui Private Endpoint/Private Link, egress, route table, custos e limpeza.",
+      "Observabilidade cobre operação, segurança, DFIR, auditoria e FinOps.",
+      "RCA possui timeline, causa técnica, causa sistêmica, mitigação e prevenção.",
+      "Rubrica soma 100 pontos e a aprovação exige mínimo de 80 pontos e competências críticas acima do mínimo."
+    ],
+    "syntheticIncidentPackage": {
+      "title": "Incidente simulado do capstone — lentidão VPN, 503 intermitente e egress anômalo",
+      "timeline": [
+        "08:40 — mudança de rota cloud aprovada em janela de laboratório.",
+        "09:05 — usuários remotos relatam lentidão ao acessar aplicação interna.",
+        "09:18 — WAF/LB registra aumento de HTTP 503 intermitente.",
+        "09:27 — flow log sintético mostra egress acima do baseline a partir de workload privado.",
+        "09:35 — DNS privado apresenta respostas inconsistentes para serviço interno em uma origem.",
+        "09:50 — equipe abre war room e cria matriz hipótese-evidência.",
+        "10:20 — mitigação reduz impacto sem destruir evidências.",
+        "11:00 — RCA separa causa técnica, causa sistêmica e ações preventivas."
+      ],
+      "syntheticLogs": {
+        "dns": [
+          "2026-07-01T09:34:11Z client=10.20.8.45 query=api.interno.corp type=A answer=10.40.3.21 view=private rcode=NOERROR ttl=30",
+          "2026-07-01T09:34:12Z client=10.88.4.17 query=api.interno.corp type=A answer=198.51.100.44 view=public rcode=NOERROR ttl=300"
+        ],
+        "flow": [
+          "start=2026-07-01T09:27:00Z src=10.40.3.21 dst=203.0.113.80 proto=tcp dport=443 bytes_out=9845120 action=allow tag=egress-anomaly",
+          "start=2026-07-01T09:28:00Z src=10.40.3.21 dst=203.0.113.80 proto=tcp dport=443 bytes_out=10022744 action=allow tag=egress-anomaly"
+        ],
+        "waf": [
+          "time=2026-07-01T09:18:31Z host=app.exemplo.test path=/api/pedidos status=503 upstream_status=unhealthy request_id=req-1712-a",
+          "time=2026-07-01T09:19:03Z host=app.exemplo.test path=/health status=200 upstream_status=healthy request_id=req-1712-b"
+        ],
+        "vpn": [
+          "time=2026-07-01T09:05:00Z user=usuario.remoto group=vpn-corp assigned_routes=10.0.0.0/8 dns=10.10.10.10 latency_ms=240 warning=high_latency",
+          "time=2026-07-01T09:06:30Z user=usuario.remoto split_tunnel=true route_missing=10.40.0.0/16 result=partial_connectivity"
+        ]
+      },
+      "safeUse": "Todos os registros são fictícios, sanitizados e servem apenas para análise defensiva, RCA e treinamento."
+    },
+    "gradingRubric": [
+      {
+        "criterion": "Arquitetura, endereçamento e segmentação",
+        "points": 15,
+        "description": "Arquitetura lógica, CIDR, VLANs, subnets, rotas, DNS e zonas coerentes, sem sobreposição e com crescimento reservado."
+      },
+      {
+        "criterion": "Matriz de fluxos e firewall",
+        "points": 15,
+        "description": "Fluxos legítimos documentados, regras justificadas, ordem/shadowing revisados, retorno tratado e exceções com dono/prazo."
+      },
+      {
+        "criterion": "VPN, acesso remoto e identidade",
+        "points": 10,
+        "description": "Acesso remoto com MFA, DNS, rotas, perfis, logs, fallback e menor privilégio."
+      },
+      {
+        "criterion": "Cloud networking e custos",
+        "points": 12,
+        "description": "Hub-spoke, endpoints privados, egress control, route tables, Kubernetes networking, NAT/firewall/logs e limpeza/custo considerados."
+      },
+      {
+        "criterion": "Observabilidade, testes e evidências",
+        "points": 15,
+        "description": "Flow logs, DNS, proxy, WAF/LB, VPN, cloud audit, SIEM, testes e evidências sanitizadas sustentam decisões."
+      },
+      {
+        "criterion": "Troubleshooting e RCA",
+        "points": 15,
+        "description": "Timeline, hipótese-evidência, comandos/fontes, mitigação, rollback, causa técnica, causa sistêmica e prevenção."
+      },
+      {
+        "criterion": "Segurança defensiva, governança e risco residual",
+        "points": 10,
+        "description": "Controles defensivos, escopo autorizado, riscos residuais, exceções, auditoria e backlog priorizado."
+      },
+      {
+        "criterion": "Comunicação, portfólio e melhoria contínua",
+        "points": 8,
+        "description": "Resumo executivo, defesa técnica, rubrica preenchida, lacunas, reteste e portfólio sanitizado."
+      }
     ]
   },
   "quiz": [
     {
-      "id": "q6",
-      "question": "No pacote do incidente, para o mesmo nome api.interno.corp, o cliente 10.20.8.45 recebe 10.40.3.21 (view=private, TTL 30) e o cliente 10.88.4.17 recebe 198.51.100.44 (view=public, TTL 300). Qual hipótese esse par de registros sustenta primeiro?",
+      "question": "Qual é a principal diferença entre uma arquitetura apenas conectável e uma arquitetura profissional?",
       "options": [
-        "Exfiltração confirmada a partir do workload privado",
-        "Certificado TLS expirado no Load Balancer",
-        "Health check do backend mal configurado",
-        "Uma origem está recebendo a view pública do DNS (split-horizon ou resolver errado)"
+        "A profissional sempre usa mais ferramentas",
+        "A profissional também é defensável, diagnosticável, governável e justificável",
+        "A profissional evita qualquer uso de cloud",
+        "A profissional dispensa documentação"
       ],
-      "answer": 3,
-      "explanation": "As duas respostas vêm de views diferentes para o mesmo nome: uma origem resolve o IP público e não alcança o backend privado. O TTL de 300 s mantém a resposta errada em cache por até 5 minutos depois da correção."
+      "answer": 1,
+      "explanation": "Conectividade é apenas um requisito. Arquiteturas profissionais também precisam de controles, evidências, governança, custo e capacidade de diagnóstico."
     },
     {
-      "id": "1",
       "question": "Por que a matriz de fluxos é um entregável central do capstone?",
       "options": [
         "Porque substitui logs",
@@ -334,7 +649,6 @@
       "explanation": "A matriz de fluxos transforma conectividade em decisão auditável e conecta rede, segurança, operação e evidências."
     },
     {
-      "id": "2",
       "question": "Em um erro 503 intermitente em aplicação publicada, qual abordagem é mais profissional?",
       "options": [
         "Desativar WAF e TLS imediatamente",
@@ -346,7 +660,6 @@
       "explanation": "Erros web dependem de uma cadeia. A investigação deve correlacionar componentes antes de alterar controles."
     },
     {
-      "id": "3",
       "question": "Qual decisão reduz exposição de serviços gerenciados em cloud?",
       "options": [
         "Colocar banco com IP público temporariamente",
@@ -358,7 +671,6 @@
       "explanation": "Endpoint privado com DNS privado, IAM e logs reduz exposição e mantém rastreabilidade."
     },
     {
-      "id": "4",
       "question": "O que diferencia um RCA maduro de uma lista de sintomas?",
       "options": [
         "O RCA identifica causa técnica, causa sistêmica, impacto, mitigação, prevenção e evidências",
@@ -370,7 +682,6 @@
       "explanation": "RCA maduro separa fatos, causa técnica, causa sistêmica, ações e prevenção sem cultura de culpa."
     },
     {
-      "id": "5",
       "question": "Por que custos devem aparecer no capstone de redes?",
       "options": [
         "Porque segurança e rede não têm relação com orçamento",
@@ -380,18 +691,6 @@
       ],
       "answer": 1,
       "explanation": "Decisões de rede e observabilidade geram custo recorrente. FinOps faz parte de arquitetura sustentável."
-    },
-    {
-      "id": "q7",
-      "question": "Seu dossiê soma 84 pontos, os 12 entregáveis estão presentes e C08 ficou em 74% (mínimo de C08: 80%). Qual é a decisão?",
-      "options": [
-        "Aprovado sem ressalvas, porque a nota passou de 80",
-        "Refazer o capstone inteiro",
-        "Aprovado com ressalvas: registrar a lacuna de C08 e cumprir o plano de reteste",
-        "Reprovado, porque nenhuma competência pode ficar abaixo de 80%"
-      ],
-      "answer": 2,
-      "explanation": "Nota e entregáveis atendem ao mínimo, mas C08 está abaixo do próprio mínimo (sem cair abaixo de 70%). A regra pede aprovação com ressalvas, lacuna registrada e reteste: nota alta não esconde competência fraca."
     }
   ],
   "flashcards": [
@@ -416,106 +715,114 @@
       "back": "Risco que permanece após controles e é documentado com justificativa, dono, prazo ou aceitação formal."
     },
     {
-      "front": "Taxonomia de erros do capstone",
-      "back": "E-CONCEITO, E-CAMADA, E-COMANDO (evidência), E-ARQUITETURA, E-SEGURANCA e E-COMUNICACAO: classifica a causa de cada erro para virar revisão dirigida e reteste."
+      "front": "Capstone profissional",
+      "back": "Projeto final que integra arquitetura, segurança, operação, diagnóstico, governança, custo e portfólio."
     }
   ],
   "mentorQuestions": [
-    {
-      "type": "reflexão",
-      "question": "Qual parte da sua arquitetura você teria mais dificuldade de defender em uma revisão técnica?",
-      "expectedIdeas": [
-        "Aponte o entregável específico (por exemplo, D04 ou D07) e a evidência que falta nele.",
-        "Diga que alternativa você rejeitou e por quê.",
-        "Proponha o que fortaleceria essa parte antes da banca."
-      ]
-    },
-    {
-      "type": "cenário",
-      "question": "Se amanhã ocorresse um incidente nessa topologia, quais três fontes de evidência seriam indispensáveis?",
-      "expectedIdeas": [
-        "Flow logs das subnets críticas.",
-        "DNS logs com a view (pública ou privada) por origem.",
-        "Logs de WAF/LB com o status do upstream, ou de VPN/firewall, conforme o sintoma.",
-        "Justifique cada fonte pela hipótese que ela confirma ou nega."
-      ]
-    },
-    {
-      "type": "decisão",
-      "question": "Qual risco residual você aceitaria temporariamente e qual você consideraria bloqueador de produção?",
-      "expectedIdeas": [
-        "Risco aceitável temporariamente: tem dono, prazo, monitoramento e mitigação compensatória.",
-        "Bloqueador de produção: dado exposto publicamente, any-any sem dono ou fluxo crítico sem logs.",
-        "Registre a decisão como risco residual no dossiê."
-      ]
-    }
+    "Qual parte da sua arquitetura você teria mais dificuldade de defender em uma revisão técnica?",
+    "Se amanhã ocorresse um incidente nessa topologia, quais três fontes de evidência seriam indispensáveis?",
+    "Qual risco residual você aceitaria temporariamente e qual você consideraria bloqueador de produção?"
   ],
   "exercises": [
     {
-      "type": "arquitetura",
+      "title": "Matriz de fluxos mínima",
       "prompt": "Crie 12 fluxos essenciais para a empresa fictícia, incluindo usuário remoto, aplicação web, banco privado, DNS, egress, administração e logs.",
       "expectedAnswer": "Tabela com origem, destino, porta, protocolo, justificativa, controle, evidência e risco."
     },
     {
-      "type": "observabilidade",
+      "title": "Plano de observabilidade",
       "prompt": "Defina quais logs e métricas seriam necessários para investigar erro 503, lentidão VPN e egress anômalo.",
       "expectedAnswer": "Lista correlacionando WAF/LB/Ingress/app, VPN/firewall/DNS e flow/proxy/EDR/cloud audit/billing."
     },
     {
-      "type": "comunicação",
+      "title": "RCA executivo e técnico",
       "prompt": "Escreva duas versões de RCA: uma para engenharia e outra para gestão.",
       "expectedAnswer": "Versão técnica com evidências e causa raiz; versão executiva com impacto, decisão, risco e prevenção."
     },
     {
-      "type": "DevSecOps",
+      "title": "Guardrails DevSecOps",
       "prompt": "Liste dez validações de pipeline para impedir erros recorrentes de rede e segurança.",
       "expectedAnswer": "Regras sobre CIDR, rotas públicas, SG/NSG, endpoints privados, logs, tags, WAF/TLS, DNS e exceções."
+    },
+    {
+      "id": "ex17.12.competencias",
+      "type": "avaliação por competência",
+      "prompt": "Monte uma matriz de competências para esta aula usando C01, C02, C03, C04, C05, C06, C07, C08. Para cada competência, registre pontuação, evidência, principal erro e ação de revisão.",
+      "expectedAnswer": "A resposta deve conter pelo menos uma linha por competência, com evidência verificável e plano de reteste. Não basta dizer “preciso estudar mais”.",
+      "explanation": "A matriz obriga o aluno a transformar avaliação em melhoria contínua."
     }
   ],
   "challenge": {
     "title": "Defesa técnica do capstone final",
-    "scenario": "Monte e apresente o dossiê final de arquitetura, defesa e diagnóstico ponta a ponta da empresa híbrida (aplicação publicada, workloads privados, usuários remotos, Wi-Fi, cloud, Kubernetes, SOC e incidente simulado). Prepare-se para uma banca que vai perguntar: por que esse CIDR? Por que esse DNS? Por que esse WAF? Por que esse NAT? Como investigar o 503? Como provar que não houve exfiltração? Como reduzir custo sem perder visibilidade? O desafio é de integração, não de memória.",
-    "tasks": [
-      "Apresentar a arquitetura e defender cada decisão diante da banca.",
-      "Responder às perguntas da banca citando o entregável e a evidência que sustentam cada resposta.",
-      "Explicar riscos aceitos, riscos mitigados e próximos investimentos recomendados.",
-      "Aplicar a rubrica de 100 pontos e a matriz de competências, com feedback por tema e por causa de erro.",
-      "Criar trilha de revisão e reteste objetivo para as competências abaixo do mínimo.",
-      "Apresentar a decisão final: aprovado, aprovado com ressalvas ou refazer competência crítica."
-    ],
-    "constraints": [
-      "Sem exploração ofensiva.",
-      "Sem dados reais sensíveis.",
-      "Sem liberar regras amplas como solução definitiva.",
-      "Toda exceção tem dono, prazo e justificativa.",
-      "Toda conclusão cita evidência ou lacuna.",
-      "A aula não está concluída sem a rubrica preenchida.",
-      "Resposta decorada sem evidência técnica não conta.",
-      "Não avançar com competência crítica abaixo do mínimo sem plano de revisão."
-    ],
-    "expectedDeliverables": [
-      "D01 — Arquitetura lógica ponta a ponta (diagrama SVG ou ASCII)",
-      "D02 — Plano de endereçamento",
-      "D03 — Matriz de fluxos",
-      "D04 — Política de firewall/ACL/SG/NSG/NACL",
-      "D05 — Plano DNS",
-      "D06 — Plano VPN/acesso remoto",
-      "D07 — Desenho cloud/híbrido, com custos e checklist de limpeza",
-      "D08 — Plano de observabilidade",
-      "D09 — Evidências de testes",
-      "D10 — Runbook de troubleshooting",
-      "D11 — RCA técnico e executivo do incidente simulado",
-      "D12 — Rubrica e matriz de competências preenchidas, com decisão e plano de reteste",
-      "Feedback por tema: fundamento, diagnóstico, arquitetura, segurança, cloud e comunicação",
-      "Backlog preventivo priorizado por risco, custo e esforço",
+    "description": "Monte e apresente um dossiê final de arquitetura, defesa e diagnóstico ponta a ponta para uma empresa híbrida com aplicação publicada, workloads privados, usuários remotos, Wi-Fi, cloud, Kubernetes, SOC e incidente simulado.",
+    "deliverables": [
+      "Diagrama SVG ou ASCII da arquitetura",
+      "Matriz de fluxos",
+      "Plano CIDR e zonas",
+      "Plano DNS e roteamento",
+      "Plano de controles defensivos",
+      "Plano de observabilidade",
+      "Incidente simulado com timeline",
+      "Matriz hipótese-evidência",
+      "RCA técnico e executivo",
+      "Backlog preventivo",
       "Portfólio sanitizado"
     ],
+    "constraints": [
+      "Sem exploração ofensiva",
+      "Sem dados reais sensíveis",
+      "Sem liberar regras amplas como solução definitiva",
+      "Toda exceção deve ter dono, prazo e justificativa",
+      "Toda conclusão deve citar evidência ou lacuna",
+      "não considerar a aula concluída sem rubrica preenchida",
+      "não usar resposta decorada sem evidência técnica",
+      "não avançar com competência crítica abaixo do mínimo sem plano de revisão"
+    ],
+    "tasks": [
+      "Aplicar a rubrica de avaliação por competência.",
+      "Gerar feedback por tema e por causa de erro.",
+      "Criar trilha de revisão para competências abaixo do mínimo.",
+      "Definir reteste objetivo e evidência esperada.",
+      "Defender a arquitetura como se estivesse em uma banca técnica.",
+      "Apresentar decisão de aprovação do capstone usando a rubrica final de 100 pontos.",
+      "Explicar riscos aceitos, riscos mitigados e próximos investimentos recomendados."
+    ],
+    "expectedDeliverables": [
+      "D01 — Arquitetura lógica ponta a ponta com matriz, filial, Wi-Fi, acesso remoto, hub cloud, workloads privados, borda pública, telemetria e governança.",
+      "D02 — Plano de endereçamento: CIDR, subnets, VLANs, gateways, reservas de crescimento e ausência de sobreposição.",
+      "D03 — Matriz de fluxos: origem, destino, protocolo, porta, justificativa, controle, log esperado, dono, criticidade e risco residual.",
+      "D04 — Política de firewall/ACL/SG/NSG/NACL: allowlist, deny explícito, ordem de regras, shadowing, retorno e exceções com expiração.",
+      "D05 — Plano DNS: público, privado, split-horizon, delegação, registros críticos, resolução em VPN e evidência de troubleshooting.",
+      "D06 — Plano VPN/acesso remoto: autenticação forte, rotas, split tunnel, DNS, logs, perfis, troubleshooting e fallback.",
+      "D07 — Desenho cloud/híbrido: hub-spoke, route tables, Private Endpoint/Private Link, egress control, NAT/firewall, Kubernetes networking e custos.",
+      "D08 — Plano de observabilidade: flow logs, DNS logs, firewall, proxy, WAF/LB, VPN, cloud audit, EDR/NDR/SIEM, métricas e retenção.",
+      "D09 — Evidências de testes: DNS, TCP, TLS, HTTP, rota, firewall allow/deny, endpoint privado, VPN, egress, logs e custo estimado.",
+      "D10 — Runbook de troubleshooting: árvore hipótese-evidência, comandos, fontes de log, critérios de decisão, rollback e comunicação.",
+      "D11 — RCA de incidente simulado: timeline, impacto, causa técnica, causa sistêmica, mitigação, prevenção, riscos residuais e donos.",
+      "D12 — Rubrica objetiva preenchida: pontuação por competência, aprovação/reprovação, lacunas, reteste e plano de melhoria contínua.",
+      "Matriz de competências com pontuação e confiança.",
+      "Rubrica preenchida com justificativa.",
+      "Feedback por tema: fundamento, diagnóstico, arquitetura, segurança, cloud e comunicação.",
+      "Plano de revisão baseado em erros e reteste.",
+      "Checklist de aprovação ou decisão de refazer competência crítica.",
+      "diagrama de arquitetura ponta a ponta",
+      "plano CIDR/subnets/VLANs/rotas/DNS",
+      "matriz de fluxos e políticas",
+      "plano de telemetria: flow logs, DNS, proxy, WAF, firewall, cloud audit, EDR/NDR/SIEM",
+      "cenário de incidente, linha do tempo, hipóteses, evidências, decisão e RCA",
+      "rubrica preenchida por competência",
+      "checklist de limpeza/custos para recursos cloud",
+      "backlog de melhoria contínua"
+    ],
     "successCriteria": [
-      "Os 12 entregáveis estão completos, coerentes entre si e sustentados por evidência.",
-      "Cada competência tem evidência observável e cada erro tem causa classificada.",
-      "A rubrica justifica a decisão: aprovado, aprovado com ressalvas ou refazer competência crítica.",
+      "Cada competência tem evidência observável.",
+      "Cada erro tem causa classificada.",
+      "A rubrica sustenta a decisão de aprovação.",
       "O plano de revisão tem tarefa prática e prazo.",
-      "O dossiê pode ser apresentado como portfólio sem expor dados sensíveis."
+      "Os 12 entregáveis obrigatórios estão completos, coerentes entre si e sustentados por evidência.",
+      "A rubrica justifica a decisão de aprovação, aprovação com ressalvas ou refazer competência crítica.",
+      "O dossiê pode ser apresentado como portfólio sanitizado sem expor dados sensíveis."
     ],
     "gradingRubric": [
       {
@@ -561,15 +868,16 @@
     ]
   },
   "commentedSolution": {
-    "reasoning": "Uma solução madura começa com escopo claro e mapa de ativos. A arquitetura separa matriz, filial, Wi-Fi corporativo, convidados, gestão, servidores, cloud hub, spokes, aplicação web e serviços de dados. O plano CIDR evita sobreposição e deixa crescimento reservado. A aplicação pública usa DNS público, WAF/CDN, Load Balancer, TLS e backends privados. O banco usa endpoint privado e DNS privado. Usuários remotos usam MFA, perfil limitado, DNS interno e rotas específicas. O tráfego de saída passa por controle de egress com logs. A investigação do incidente simulado não assume causa única: compara logs de WAF/LB/Ingress, flow logs, DNS, VPN, firewall, EDR, cloud audit e billing. A mitigação reduz impacto sem destruir evidências. O RCA aponta causa técnica, causa sistêmica, prevenção, dono e prazo. O portfólio final remove dados sensíveis e apresenta decisões, trade-offs e aprendizados. Essa não é a única arquitetura possível, mas mostra o nível esperado: decisões explícitas, trade-offs, riscos residuais, evidências e plano de melhoria. Uma entrega madura também não esconde erro: mostra pontuação, lacuna, causa, evidência, revisão planejada e reteste.",
+    "title": "Modelo de solução madura",
+    "content": "Uma solução madura começa com escopo claro e mapa de ativos. A arquitetura separa matriz, filial, Wi-Fi corporativo, convidados, gestão, servidores, cloud hub, spokes, aplicação web e serviços de dados. O plano CIDR evita sobreposição e deixa crescimento reservado. A aplicação pública usa DNS público, WAF/CDN, Load Balancer, TLS e backends privados. O banco usa endpoint privado e DNS privado. Usuários remotos usam MFA, perfil limitado, DNS interno e rotas específicas. O tráfego de saída passa por controle de egress com logs. A investigação do incidente simulado não assume causa única: compara logs de WAF/LB/Ingress, flow logs, DNS, VPN, firewall, EDR, cloud audit e billing. A mitigação reduz impacto sem destruir evidências. O RCA aponta causa técnica, causa sistêmica, prevenção, dono e prazo. O portfólio final remove dados sensíveis e apresenta decisões, trade-offs e aprendizados.",
+    "reasoning": "A solução comentada deve explicar o raciocínio. Nesta revisão P1-M17, a correção deve ser feita por competência: nota final, por si só, não prova domínio se o aluno não consegue justificar evidência, risco, decisão e próximo passo.",
     "steps": [
-      "Leia o DNS: para o mesmo api.interno.corp, 10.20.8.45 recebe a view privada (10.40.3.21, TTL 30) e 10.88.4.17 recebe a view pública (198.51.100.44, TTL 300). Hipótese: split-horizon ou resolver errado para essa origem; com TTL de 300 s, a resposta errada pode persistir em cache por até 5 minutos depois da correção.",
-      "Leia a VPN: latência de 240 ms e, no segundo registro, split_tunnel=true com route_missing=10.40.0.0/16 e result=partial_connectivity, ou seja, a rota para a subnet do backend não chegou ao cliente. Compare com a mudança de rota cloud das 08:40.",
-      "Leia o WAF/LB: /api/pedidos devolve 503 com upstream_status=unhealthy e, 30 s depois, /health devolve 200 healthy. O backend oscila entre saudável e não saudável: verifique health check, readiness dos pods e a rota alterada antes de mexer em WAF ou TLS.",
-      "Leia o flow log: 10.40.3.21, o mesmo IP privado de api.interno.corp, enviou cerca de 10 MB em cada registro de um minuto para 203.0.113.80:443, com action=allow. Isso é anomalia, não prova de exfiltração: confirme com proxy, DNS, EDR, baseline e dono do processo antes de concluir.",
-      "Mitigue o mínimo e preserve as evidências: exporte os logs antes de alterar, corrija rota ou DNS com rollback definido e contenha o egress de forma proporcional.",
-      "Escreva o RCA separando causa técnica, causa sistêmica (por exemplo, mudança de rota sem teste de DNS e VPN) e ações preventivas com dono e prazo.",
-      "Corrija por competência: separe a nota geral do domínio por competência, classifique os erros pela taxonomia, vincule cada lacuna a aulas e mini laboratórios, refaça o reteste após o intervalo e decida pela regra do Conceito."
+      "Separar nota geral de domínio por competência.",
+      "Classificar erros pela taxonomia de causa.",
+      "Vincular lacunas a aulas e laboratórios específicos.",
+      "Criar mini laboratório ou exercício ativo para cada lacuna crítica.",
+      "Retestar após intervalo e registrar evolução.",
+      "Decidir aprovação, aprovação com ressalvas ou refazer bloco crítico."
     ],
     "commonWrongAnswers": [
       {
@@ -583,13 +891,9 @@
       {
         "answer": "O capstone está bom porque a arquitetura ficou bonita.",
         "whyItIsWrong": "Arquitetura profissional precisa de fluxos, controles, custos, logs, evidências, rollback e justificativa."
-      },
-      {
-        "answer": "O egress anômalo prova exfiltração; vou bloquear tudo e apagar o workload.",
-        "whyItIsWrong": "Anomalia é hipótese. Bloqueio amplo e destruição do workload apagam evidências e podem derrubar serviço legítimo; a contenção precisa ser proporcional e preservar o estado."
       }
     ],
-    "finalAnswer": "O capstone está concluído quando os 12 entregáveis estão no dossiê, a rubrica soma 80 pontos ou mais, a matriz C01–C08 tem evidência por competência e toda competência abaixo do mínimo tem erro classificado e plano de revisão e reteste."
+    "finalAnswer": "A aula está concluída quando o aluno entrega matriz de competências, rubrica, evidências, feedback por erro e plano de revisão/reteste para qualquer competência abaixo do mínimo."
   },
   "glossary": [
     {
@@ -663,10 +967,10 @@
   ],
   "security": {
     "goodPractices": [
+      "Usar simulados para diagnosticar lacunas, não apenas para memorizar respostas.",
       "Executar o capstone em ambiente controlado, documentado e sem impacto em terceiros.",
-      "Usar no dossiê só dados sintéticos ou sanitizados.",
-      "Dar a toda exceção de firewall ou egress um dono, uma justificativa e uma data de expiração.",
-      "Coletar e exportar evidências antes de qualquer mitigação.",
+      "Coletar evidências de arquitetura, validação, logs, decisões e melhorias propostas.",
+      "Revisar erros por tema: camada, protocolo, comando, segurança, cloud e troubleshooting.",
       "Consolidar o portfólio com entregáveis verificáveis e limites éticos claros."
     ],
     "badPractices": [
@@ -674,20 +978,21 @@
       "Ignorar logs e métricas por focar apenas em comandos de conectividade.",
       "Misturar ambientes de teste e produção sem isolamento ou controle de mudança.",
       "Tratar conectividade bem-sucedida como autorização de segurança suficiente.",
-      "Encerrar a investigação quando o serviço volta, sem registrar causa, risco e prevenção."
+      "Encerrar a investigação quando o serviço volta sem registrar causa, risco e prevenção."
     ],
     "commonErrors": [
       "Confundir sintoma com causa raiz confirmada.",
-      "Executar várias mudanças ao mesmo tempo e perder a rastreabilidade.",
+      "Executar múltiplas mudanças ao mesmo tempo e perder rastreabilidade.",
       "Não diferenciar mitigação temporária de correção definitiva.",
-      "Não coletar evidências antes da alteração que pode apagar estado relevante."
+      "Não coletar evidências antes da alteração que pode apagar estado relevante.",
+      "Não relacionar revisão integrada, simulados, estudos de caso, portfólio, capstone e consolidação profissional com impacto operacional, financeiro e de segurança."
     ],
     "vulnerabilities": [
       {
-        "name": "Aprovação sem evidência",
-        "description": "O capstone é aprovado por nota geral ou por um diagrama bem desenhado, sem matriz de fluxos, testes, logs e RCA que sustentem as decisões.",
-        "defensiveExplanation": "Quem só responde definições não demonstra validação operacional; a banca precisa ver diagrama, matriz de fluxos, comandos, logs, RCA e rubrica.",
-        "mitigation": "Exigir os 12 entregáveis, a rubrica de 100 pontos, a matriz C01–C08 com evidências sanitizadas e o plano de reteste antes de concluir."
+        "name": "Risco de avaliação sem evidência — Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta",
+        "description": "Em Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta, o risco principal é transformar revisão, simulado, checklist ou capstone em aprovação subjetiva, sem evidências de arquitetura, fluxo, teste, segurança, troubleshooting e lacunas por domínio.",
+        "defensiveExplanation": "O risco aparece quando o aluno sabe responder definições, mas não consegue demonstrar validação operacional com diagrama, matriz de fluxos, comandos, logs, RCA e rubrica.",
+        "mitigation": "Exigir entregáveis objetivos, simulado por domínio, relatório de lacunas, rubrica de 100 pontos, evidências sanitizadas, revisão das falhas e plano de estudo antes de concluir a trilha."
       },
       {
         "name": "Perda de evidências durante troubleshooting ou laboratório",
@@ -697,68 +1002,62 @@
       }
     ],
     "monitoring": [
-      "Flow logs das subnets críticas, com bytes de saída por workload e destino.",
-      "DNS logs com a view (pública ou privada) e o resolver usados por origem.",
-      "Logs de WAF/LB com status HTTP e saúde do upstream.",
-      "Logs de VPN com rotas atribuídas, DNS entregue e latência.",
-      "Eventos de mudança (deploy, IaC, configuração manual) e custo de NAT/egress correlacionados no tempo."
+      "Logs de firewall, DNS, DHCP, proxy, VPN, balanceadores, endpoints e provedores cloud.",
+      "Métricas de disponibilidade, latência, perda, retransmissões, resets e erros de TLS/HTTP.",
+      "Eventos de mudança, deploy, IaC, configuração manual e alertas correlacionados no tempo."
     ],
     "hardening": [
       "Reduzir acessos any-any e exceções permanentes.",
       "Usar autenticação forte, segregação de funções e revisão periódica de permissões.",
       "Versionar configurações críticas e exigir revisão para mudanças de rede e segurança.",
-      "Padronizar logs mínimos, retenção, alertas e evidências por tipo de incidente."
+      "Padronizar logs mínimos, retenção, alertas e evidências por tipo de incidente.",
+      "Executar laboratórios destrutivos apenas em ambiente isolado."
     ],
     "detectionIdeas": [
-      "Comparar o comportamento atual com o baseline conhecido antes da mudança.",
+      "Comparar comportamento atual com baseline conhecido antes da mudança.",
       "Correlacionar falhas por camada: DNS, rota, porta, TLS, aplicação, identidade e política.",
       "Procurar assimetria: funciona de uma origem e falha de outra, funciona por IP e falha por nome, conecta mas não autoriza.",
-      "Alertar quando um workload privado envia volume acima do baseline para um destino externo novo (como 10.40.3.21 → 203.0.113.80 no incidente)."
+      "Investigar picos de bloqueios, resets, NXDOMAIN, drops, latência ou volume anormal.",
+      "Criar alerta ou consulta específica para sinais relacionados à aula 17.12."
     ]
   },
   "troubleshooting": {
     "symptoms": [
-      "A aplicação web devolve 503 de forma intermitente, mas /health às vezes responde 200.",
-      "Usuários remotos têm lentidão ou alcançam só parte dos serviços internos.",
-      "O mesmo nome interno resolve para IPs diferentes conforme a origem.",
-      "Um workload privado envia volume de saída acima do baseline para um destino externo.",
-      "O dossiê tem diagrama, mas não tem validação nem evidências."
+      "O aluno acerta questões isoladas, mas falha em cenários integrados.",
+      "O projeto final tem diagrama, mas não possui validação ou evidências.",
+      "A solução proposta funciona, mas ignora segurança, custo ou operação.",
+      "O checklist mostra lacunas em fundamentos anteriores.",
+      "A revisão não gera plano de melhoria mensurável."
     ],
     "diagnosticQuestions": [
       "Qual é o sintoma exato, desde quando ocorre e quem é afetado?",
       "Qual fluxo esperado conecta origem, destino, DNS, rota, política, serviço e logs?",
-      "A mudança de rota das 08:40 coincide com o início dos sintomas?",
+      "Houve mudança recente de IaC, firewall, DNS, certificado, identidade, rota ou aplicação?",
       "Quais evidências confirmam ou negam a hipótese principal?",
-      "A mitigação proposta reduz o impacto sem ampliar o risco de segurança nem apagar evidências?"
+      "A mitigação proposta reduz impacto sem ampliar risco de segurança?",
+      "Qual evidência comprova o entendimento da aula 17.12?"
     ],
     "commands": [
       {
-        "platform": "Linux/macOS",
-        "command": "dig +short api.interno.corp @10.10.10.10",
-        "purpose": "Ver o que o resolver entregue pela VPN (dns=10.10.10.10 no pacote) responde para o nome interno.",
-        "expectedObservation": "O IP privado do serviço (10.40.3.21 no pacote do incidente).",
-        "interpretation": "Se vier o IP público (198.51.100.44), o cliente está na view errada: investigue split-horizon, resolver configurado e cache (TTL)."
+        "platform": "Revisão",
+        "command": "preencher checklist de camada, protocolo, comando, segurança, cloud e evidência",
+        "purpose": "Mapear lacunas antes de considerar o curso consolidado.",
+        "expectedObservation": "Tópicos fracos aparecem agrupados por tema.",
+        "interpretation": "A revisão deve orientar reforço dirigido, não repetição aleatória."
       },
       {
-        "platform": "Linux",
-        "command": "ip route get 10.40.3.21",
-        "purpose": "Descobrir por qual interface e gateway o cliente alcança o backend.",
-        "expectedObservation": "Saída pela interface do túnel VPN.",
-        "interpretation": "Se sair pelo gateway local, a rota para 10.40.0.0/16 não foi entregue (split tunnel incompleto): corrija o perfil de rotas da VPN."
+        "platform": "Capstone",
+        "command": "validar DNS, rota, firewall, TLS, logs e evidências do cenário integrado",
+        "purpose": "Comprovar que a arquitetura final funciona e é auditável.",
+        "expectedObservation": "Entregáveis demonstram desenho, validação, riscos e mitigação.",
+        "interpretation": "Sem evidência e rubrica, o projeto final vira texto, não avaliação técnica."
       },
       {
-        "platform": "Linux/macOS",
-        "command": "curl -sv -o /dev/null https://app.exemplo.test/api/pedidos",
-        "purpose": "Separar falha de DNS, TCP, TLS e HTTP numa única chamada.",
-        "expectedObservation": "Handshake TLS concluído e status HTTP 200.",
-        "interpretation": "TLS concluído com status 503 aponta para backend ou health check, não para a rede nem para o certificado: compare com os logs de WAF/LB pelo horário."
-      },
-      {
-        "platform": "Kubernetes",
-        "command": "kubectl get endpoints <serviço> -n <namespace>",
-        "purpose": "Ver se o Service tem pods prontos atrás dele.",
-        "expectedObservation": "Endereços de pods listados na coluna ENDPOINTS.",
-        "interpretation": "Lista vazia ou oscilando indica pods falhando no readiness: o Ingress/LB fica sem backend saudável e devolve 503."
+        "platform": "Portfólio",
+        "command": "organizar diagramas, tabelas, comandos, prints, RCA e decisões arquiteturais",
+        "purpose": "Gerar material revisável e demonstrável.",
+        "expectedObservation": "Artefatos suficientes para explicar raciocínio técnico.",
+        "interpretation": "Portfólio bom mostra processo, não apenas resultado final."
       }
     ],
     "decisionTree": [
@@ -800,6 +1099,549 @@
     },
     "unlocks": []
   },
+  "assessmentBlueprint": {
+    "id": "assessment-17.12",
+    "title": "Avaliação por competência — Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta",
+    "assessmentType": "capstone final",
+    "competencies": [
+      {
+        "id": "C01",
+        "name": "Fundamentos, OSI e encapsulamento",
+        "modules": [
+          "M00",
+          "M01",
+          "M02"
+        ],
+        "minimum": 70,
+        "mastery": 90,
+        "evidence": "explica fluxo de dados por camadas e reconhece onde cada evidência aparece"
+      },
+      {
+        "id": "C02",
+        "name": "Ethernet, ARP, VLAN, switching e camada 2",
+        "modules": [
+          "M03"
+        ],
+        "minimum": 70,
+        "mastery": 90,
+        "evidence": "diagnostica MAC, ARP, VLAN, trunk, STP e domínio de broadcast"
+      },
+      {
+        "id": "C03",
+        "name": "IPv4, subnetting, gateway e roteamento básico",
+        "modules": [
+          "M04",
+          "M05",
+          "M11"
+        ],
+        "minimum": 75,
+        "mastery": 90,
+        "evidence": "calcula redes, identifica rota local/default e justifica escolha de caminho"
+      },
+      {
+        "id": "C04",
+        "name": "TCP, UDP, portas e serviços essenciais",
+        "modules": [
+          "M06",
+          "M07"
+        ],
+        "minimum": 75,
+        "mastery": 90,
+        "evidence": "diferencia conectividade, serviço escutando, firewall, DNS, DHCP, NAT e logs"
+      },
+      {
+        "id": "C05",
+        "name": "HTTP, TLS, proxy, firewall, VPN e publicação segura",
+        "modules": [
+          "M08",
+          "M09",
+          "M10"
+        ],
+        "minimum": 75,
+        "mastery": 90,
+        "evidence": "interpreta erros de aplicação/rede e propõe controles com rollback"
+      },
+      {
+        "id": "C06",
+        "name": "Wireless, segurança defensiva e Blue Team",
+        "modules": [
+          "M12",
+          "M13",
+          "M16"
+        ],
+        "minimum": 75,
+        "mastery": 90,
+        "evidence": "define escopo autorizado, telemetria, detecção, contenção e mitigação"
+      },
+      {
+        "id": "C07",
+        "name": "Cloud Networking, Kubernetes e arquitetura híbrida",
+        "modules": [
+          "M14"
+        ],
+        "minimum": 75,
+        "mastery": 90,
+        "evidence": "projeta VPC/VNet, subnets, rotas, Private Endpoint, DNS privado, egress e custos"
+      },
+      {
+        "id": "C08",
+        "name": "Troubleshooting profissional, RCA e comunicação",
+        "modules": [
+          "M15",
+          "M17"
+        ],
+        "minimum": 80,
+        "mastery": 92,
+        "evidence": "transforma sintomas em hipóteses, coleta evidências, decide, comunica e previne recorrência"
+      }
+    ],
+    "passingCriteria": {
+      "minimumScorePercent": 80,
+      "masteryScorePercent": 92,
+      "requiredEvidence": "dossiê completo, defesa técnica, RCA, matriz de fluxos, rubrica assinada pelo aluno e backlog de melhoria",
+      "mustRedoWhen": "qualquer competência crítica ficar abaixo do mínimo ou quando a resposta correta não puder ser explicada com evidência"
+    },
+    "gradingRubric": [
+      {
+        "criterion": "C01 — Fundamentos, OSI e encapsulamento",
+        "points": 10,
+        "description": "Demonstra domínio mínimo de 70% e produz evidência verificável: explica fluxo de dados por camadas e reconhece onde cada evidência aparece."
+      },
+      {
+        "criterion": "C02 — Ethernet, ARP, VLAN, switching e camada 2",
+        "points": 10,
+        "description": "Demonstra domínio mínimo de 70% e produz evidência verificável: diagnostica MAC, ARP, VLAN, trunk, STP e domínio de broadcast."
+      },
+      {
+        "criterion": "C03 — IPv4, subnetting, gateway e roteamento básico",
+        "points": 10,
+        "description": "Demonstra domínio mínimo de 75% e produz evidência verificável: calcula redes, identifica rota local/default e justifica escolha de caminho."
+      },
+      {
+        "criterion": "C04 — TCP, UDP, portas e serviços essenciais",
+        "points": 10,
+        "description": "Demonstra domínio mínimo de 75% e produz evidência verificável: diferencia conectividade, serviço escutando, firewall, DNS, DHCP, NAT e logs."
+      },
+      {
+        "criterion": "C05 — HTTP, TLS, proxy, firewall, VPN e publicação segura",
+        "points": 10,
+        "description": "Demonstra domínio mínimo de 75% e produz evidência verificável: interpreta erros de aplicação/rede e propõe controles com rollback."
+      },
+      {
+        "criterion": "C06 — Wireless, segurança defensiva e Blue Team",
+        "points": 10,
+        "description": "Demonstra domínio mínimo de 75% e produz evidência verificável: define escopo autorizado, telemetria, detecção, contenção e mitigação."
+      },
+      {
+        "criterion": "C07 — Cloud Networking, Kubernetes e arquitetura híbrida",
+        "points": 10,
+        "description": "Demonstra domínio mínimo de 75% e produz evidência verificável: projeta VPC/VNet, subnets, rotas, Private Endpoint, DNS privado, egress e custos."
+      },
+      {
+        "criterion": "C08 — Troubleshooting profissional, RCA e comunicação",
+        "points": 10,
+        "description": "Demonstra domínio mínimo de 80% e produz evidência verificável: transforma sintomas em hipóteses, coleta evidências, decide, comunica e previne recorrência."
+      },
+      {
+        "criterion": "Evidência e rastreabilidade",
+        "points": 10,
+        "description": "Entrega prints, tabelas, comandos, hipóteses, logs, justificativas e rastreia cada decisão ao requisito correspondente."
+      },
+      {
+        "criterion": "Correção comentada e melhoria contínua",
+        "points": 10,
+        "description": "Transforma erro em plano de revisão, reteste, laboratório curto e melhoria concreta do próprio mapa de conhecimento."
+      }
+    ],
+    "feedbackBands": [
+      {
+        "range": "0-59%",
+        "status": "insuficiente para conclusão",
+        "action": "Não avance. Refaça a revisão guiada, execute laboratórios essenciais e produza nova tentativa com evidências."
+      },
+      {
+        "range": "60-74%",
+        "status": "base parcial",
+        "action": "Revise competências abaixo do mínimo, foque nos erros conceituais e refaça somente os blocos afetados."
+      },
+      {
+        "range": "75-89%",
+        "status": "aprovado com ressalvas",
+        "action": "Avance, mas registre lacunas residuais e execute pelo menos um mini lab de reforço por competência fraca."
+      },
+      {
+        "range": "90-100%",
+        "status": "domínio forte",
+        "action": "Use o resultado como artefato de portfólio, explique decisões em voz alta e ajude outro aluno a revisar o tema."
+      }
+    ],
+    "remediationTracks": [
+      {
+        "competencyId": "C01",
+        "competency": "Fundamentos, OSI e encapsulamento",
+        "trigger": "pontuação abaixo de 70% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M00, M01, M02 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para explica fluxo de dados por camadas e reconhece onde cada evidência aparece",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      },
+      {
+        "competencyId": "C02",
+        "competency": "Ethernet, ARP, VLAN, switching e camada 2",
+        "trigger": "pontuação abaixo de 70% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M03 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para diagnostica MAC, ARP, VLAN, trunk, STP e domínio de broadcast",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      },
+      {
+        "competencyId": "C03",
+        "competency": "IPv4, subnetting, gateway e roteamento básico",
+        "trigger": "pontuação abaixo de 75% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M04, M05, M11 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para calcula redes, identifica rota local/default e justifica escolha de caminho",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      },
+      {
+        "competencyId": "C04",
+        "competency": "TCP, UDP, portas e serviços essenciais",
+        "trigger": "pontuação abaixo de 75% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M06, M07 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para diferencia conectividade, serviço escutando, firewall, DNS, DHCP, NAT e logs",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      },
+      {
+        "competencyId": "C05",
+        "competency": "HTTP, TLS, proxy, firewall, VPN e publicação segura",
+        "trigger": "pontuação abaixo de 75% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M08, M09, M10 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para interpreta erros de aplicação/rede e propõe controles com rollback",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      },
+      {
+        "competencyId": "C06",
+        "competency": "Wireless, segurança defensiva e Blue Team",
+        "trigger": "pontuação abaixo de 75% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M12, M13, M16 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para define escopo autorizado, telemetria, detecção, contenção e mitigação",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      },
+      {
+        "competencyId": "C07",
+        "competency": "Cloud Networking, Kubernetes e arquitetura híbrida",
+        "trigger": "pontuação abaixo de 75% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M14 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para projeta VPC/VNet, subnets, rotas, Private Endpoint, DNS privado, egress e custos",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      },
+      {
+        "competencyId": "C08",
+        "competency": "Troubleshooting profissional, RCA e comunicação",
+        "trigger": "pontuação abaixo de 80% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M15, M17 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para transforma sintomas em hipóteses, coleta evidências, decide, comunica e previne recorrência",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      }
+    ],
+    "evidenceRequired": [
+      "pontuação bruta e pontuação por competência",
+      "lista de erros classificados por causa raiz de aprendizagem",
+      "print ou transcrição dos comandos/labs quando aplicável",
+      "plano de revisão com prazo e reteste",
+      "registro de confiança antes e depois da correção"
+    ]
+  },
+  "adaptiveReview": {
+    "enabled": true,
+    "purpose": "transformar erros de simulado, laboratório ou capstone em trilha de revisão objetiva",
+    "errorTaxonomy": [
+      {
+        "code": "E-CONCEITO",
+        "label": "erro conceitual",
+        "interpretation": "o aluno decorou termo, mas não explicou por que ele existe ou como funciona internamente"
+      },
+      {
+        "code": "E-CAMADA",
+        "label": "erro de camada",
+        "interpretation": "confundiu camada 2, camada 3, transporte, aplicação ou controle de segurança"
+      },
+      {
+        "code": "E-COMANDO",
+        "label": "erro de evidência",
+        "interpretation": "não soube escolher comando, log, métrica ou pacote para confirmar hipótese"
+      },
+      {
+        "code": "E-ARQUITETURA",
+        "label": "erro de desenho",
+        "interpretation": "solução funciona isoladamente, mas ignora fluxo, dependência, custo, segurança ou operação"
+      },
+      {
+        "code": "E-SEGURANCA",
+        "label": "erro de risco",
+        "interpretation": "confundiu conectividade com autorização, ignorou telemetria ou propôs exceção insegura"
+      },
+      {
+        "code": "E-COMUNICACAO",
+        "label": "erro de comunicação",
+        "interpretation": "não conseguiu explicar impacto, decisão, rollback ou risco residual para outro público"
+      }
+    ],
+    "revisionLoop": [
+      "registrar resposta inicial e confiança antes do gabarito",
+      "corrigir e classificar cada erro pela taxonomia",
+      "vincular o erro à competência e às aulas de origem",
+      "executar mini laboratório ou exercício ativo",
+      "refazer questão/tarefa após intervalo",
+      "registrar nova confiança e evidência de melhoria"
+    ],
+    "remediationTracks": [
+      {
+        "competencyId": "C01",
+        "competency": "Fundamentos, OSI e encapsulamento",
+        "trigger": "pontuação abaixo de 70% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M00, M01, M02 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para explica fluxo de dados por camadas e reconhece onde cada evidência aparece",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      },
+      {
+        "competencyId": "C02",
+        "competency": "Ethernet, ARP, VLAN, switching e camada 2",
+        "trigger": "pontuação abaixo de 70% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M03 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para diagnostica MAC, ARP, VLAN, trunk, STP e domínio de broadcast",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      },
+      {
+        "competencyId": "C03",
+        "competency": "IPv4, subnetting, gateway e roteamento básico",
+        "trigger": "pontuação abaixo de 75% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M04, M05, M11 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para calcula redes, identifica rota local/default e justifica escolha de caminho",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      },
+      {
+        "competencyId": "C04",
+        "competency": "TCP, UDP, portas e serviços essenciais",
+        "trigger": "pontuação abaixo de 75% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M06, M07 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para diferencia conectividade, serviço escutando, firewall, DNS, DHCP, NAT e logs",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      },
+      {
+        "competencyId": "C05",
+        "competency": "HTTP, TLS, proxy, firewall, VPN e publicação segura",
+        "trigger": "pontuação abaixo de 75% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M08, M09, M10 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para interpreta erros de aplicação/rede e propõe controles com rollback",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      },
+      {
+        "competencyId": "C06",
+        "competency": "Wireless, segurança defensiva e Blue Team",
+        "trigger": "pontuação abaixo de 75% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M12, M13, M16 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para define escopo autorizado, telemetria, detecção, contenção e mitigação",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      },
+      {
+        "competencyId": "C07",
+        "competency": "Cloud Networking, Kubernetes e arquitetura híbrida",
+        "trigger": "pontuação abaixo de 75% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M14 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para projeta VPC/VNet, subnets, rotas, Private Endpoint, DNS privado, egress e custos",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      },
+      {
+        "competencyId": "C08",
+        "competency": "Troubleshooting profissional, RCA e comunicação",
+        "trigger": "pontuação abaixo de 80% ou erro repetido em cenário prático",
+        "reviewAction": "revisar módulos M15, M17 com recuperação ativa, sem releitura passiva isolada",
+        "labAction": "executar um mini laboratório ou estudo de caso que gere evidência para transforma sintomas em hipóteses, coleta evidências, decide, comunica e previne recorrência",
+        "retestAction": "refazer somente questões/tarefas da competência após 24-48 horas e registrar confiança antes de corrigir"
+      }
+    ]
+  },
+  "capstoneEvaluation": {
+    "title": "Rubrica final de conclusão do curso Redes e Network v2.0",
+    "approvalCriteria": [
+      "pontuação final mínima de 80%",
+      "nenhuma competência crítica abaixo de 70%",
+      "dossiê completo com arquitetura, fluxos, segurança, observabilidade, troubleshooting, RCA e custos",
+      "defesa técnica capaz de explicar decisões, alternativas rejeitadas e riscos residuais",
+      "plano de melhoria priorizado por risco, custo e esforço"
+    ],
+    "requiredDeliverables": [
+      "diagrama de arquitetura ponta a ponta",
+      "plano CIDR/subnets/VLANs/rotas/DNS",
+      "matriz de fluxos e políticas",
+      "plano de telemetria: flow logs, DNS, proxy, WAF, firewall, cloud audit, EDR/NDR/SIEM",
+      "cenário de incidente, linha do tempo, hipóteses, evidências, decisão e RCA",
+      "rubrica preenchida por competência",
+      "checklist de limpeza/custos para recursos cloud",
+      "backlog de melhoria contínua"
+    ],
+    "gradingRubric": [
+      {
+        "criterion": "Arquitetura e segmentação",
+        "points": 15,
+        "description": "CIDR, subnets, VLANs, roteamento, DNS, publicação e acesso privado coerentes."
+      },
+      {
+        "criterion": "Segurança defensiva e governança",
+        "points": 15,
+        "description": "Menor privilégio, escopo autorizado, controles, logs, exceções e riscos residuais documentados."
+      },
+      {
+        "criterion": "Cloud Networking e custos",
+        "points": 12,
+        "description": "NAT Gateway, Private Endpoint, firewall gerenciado, egress, logs e limpeza considerados."
+      },
+      {
+        "criterion": "Troubleshooting e RCA",
+        "points": 15,
+        "description": "Sintomas, hipóteses, comandos, evidências, decisão e causa raiz bem conectados."
+      },
+      {
+        "criterion": "Blue Team, SIEM/NDR e evidências",
+        "points": 12,
+        "description": "Detecções, falsos positivos, telemetria e contenção proporcional."
+      },
+      {
+        "criterion": "DevSecOps e automação",
+        "points": 8,
+        "description": "IaC, mudança segura, rollback, validação e documentação operacional."
+      },
+      {
+        "criterion": "Comunicação executiva e portfólio",
+        "points": 8,
+        "description": "Resumo executivo, impacto, risco, custo, próximos passos e artefatos sanitizados."
+      },
+      {
+        "criterion": "Matriz de competências e melhoria contínua",
+        "points": 15,
+        "description": "Feedback por competência, lacunas, reteste e roadmap pós-curso."
+      }
+    ],
+    "feedbackByCompetency": [
+      {
+        "id": "C01",
+        "name": "Fundamentos, OSI e encapsulamento",
+        "modules": [
+          "M00",
+          "M01",
+          "M02"
+        ],
+        "minimum": 70,
+        "mastery": 90,
+        "evidence": "explica fluxo de dados por camadas e reconhece onde cada evidência aparece"
+      },
+      {
+        "id": "C02",
+        "name": "Ethernet, ARP, VLAN, switching e camada 2",
+        "modules": [
+          "M03"
+        ],
+        "minimum": 70,
+        "mastery": 90,
+        "evidence": "diagnostica MAC, ARP, VLAN, trunk, STP e domínio de broadcast"
+      },
+      {
+        "id": "C03",
+        "name": "IPv4, subnetting, gateway e roteamento básico",
+        "modules": [
+          "M04",
+          "M05",
+          "M11"
+        ],
+        "minimum": 75,
+        "mastery": 90,
+        "evidence": "calcula redes, identifica rota local/default e justifica escolha de caminho"
+      },
+      {
+        "id": "C04",
+        "name": "TCP, UDP, portas e serviços essenciais",
+        "modules": [
+          "M06",
+          "M07"
+        ],
+        "minimum": 75,
+        "mastery": 90,
+        "evidence": "diferencia conectividade, serviço escutando, firewall, DNS, DHCP, NAT e logs"
+      },
+      {
+        "id": "C05",
+        "name": "HTTP, TLS, proxy, firewall, VPN e publicação segura",
+        "modules": [
+          "M08",
+          "M09",
+          "M10"
+        ],
+        "minimum": 75,
+        "mastery": 90,
+        "evidence": "interpreta erros de aplicação/rede e propõe controles com rollback"
+      },
+      {
+        "id": "C06",
+        "name": "Wireless, segurança defensiva e Blue Team",
+        "modules": [
+          "M12",
+          "M13",
+          "M16"
+        ],
+        "minimum": 75,
+        "mastery": 90,
+        "evidence": "define escopo autorizado, telemetria, detecção, contenção e mitigação"
+      },
+      {
+        "id": "C07",
+        "name": "Cloud Networking, Kubernetes e arquitetura híbrida",
+        "modules": [
+          "M14"
+        ],
+        "minimum": 75,
+        "mastery": 90,
+        "evidence": "projeta VPC/VNet, subnets, rotas, Private Endpoint, DNS privado, egress e custos"
+      },
+      {
+        "id": "C08",
+        "name": "Troubleshooting profissional, RCA e comunicação",
+        "modules": [
+          "M15",
+          "M17"
+        ],
+        "minimum": 80,
+        "mastery": 92,
+        "evidence": "transforma sintomas em hipóteses, coleta evidências, decide, comunica e previne recorrência"
+      }
+    ]
+  },
+  "capstoneFinalRequirements": {
+    "id": "capstone-17.12-requirements-p1-11",
+    "updatedAt": "2026-07-02T01:43:59.015Z",
+    "freeAccess": true,
+    "navigationBlocked": false,
+    "requiredDeliverables": [
+      "D01 — Arquitetura lógica ponta a ponta com matriz, filial, Wi-Fi, acesso remoto, hub cloud, workloads privados, borda pública, telemetria e governança.",
+      "D02 — Plano de endereçamento: CIDR, subnets, VLANs, gateways, reservas de crescimento e ausência de sobreposição.",
+      "D03 — Matriz de fluxos: origem, destino, protocolo, porta, justificativa, controle, log esperado, dono, criticidade e risco residual.",
+      "D04 — Política de firewall/ACL/SG/NSG/NACL: allowlist, deny explícito, ordem de regras, shadowing, retorno e exceções com expiração.",
+      "D05 — Plano DNS: público, privado, split-horizon, delegação, registros críticos, resolução em VPN e evidência de troubleshooting.",
+      "D06 — Plano VPN/acesso remoto: autenticação forte, rotas, split tunnel, DNS, logs, perfis, troubleshooting e fallback.",
+      "D07 — Desenho cloud/híbrido: hub-spoke, route tables, Private Endpoint/Private Link, egress control, NAT/firewall, Kubernetes networking e custos.",
+      "D08 — Plano de observabilidade: flow logs, DNS logs, firewall, proxy, WAF/LB, VPN, cloud audit, EDR/NDR/SIEM, métricas e retenção.",
+      "D09 — Evidências de testes: DNS, TCP, TLS, HTTP, rota, firewall allow/deny, endpoint privado, VPN, egress, logs e custo estimado.",
+      "D10 — Runbook de troubleshooting: árvore hipótese-evidência, comandos, fontes de log, critérios de decisão, rollback e comunicação.",
+      "D11 — RCA de incidente simulado: timeline, impacto, causa técnica, causa sistêmica, mitigação, prevenção, riscos residuais e donos.",
+      "D12 — Rubrica objetiva preenchida: pontuação por competência, aprovação/reprovação, lacunas, reteste e plano de melhoria contínua."
+    ],
+    "minimumScore": 80,
+    "criticalCompetencyMinimum": 70,
+    "completionEvidence": [
+      "dossiê final preenchido",
+      "rubrica objetiva preenchida",
+      "matriz de competências C01-C08 preenchida",
+      "plano de reteste para lacunas críticas",
+      "evidências sanitizadas dos testes e do incidente simulado"
+    ]
+  },
   "linksToOtherCourses": [
     {
       "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
@@ -830,6 +1672,29 @@
       "module": "IaC, automação e pipelines",
       "lesson": "Infraestrutura como código, validação em pipeline e GitOps",
       "reason": "As decisões de rede corporativa precisam ser versionadas, revisadas e validadas em automação para reduzir drift e erro operacional."
+    },
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "Observabilidade, SRE e resposta a incidentes",
+      "lesson": "Observabilidade aplicada a serviços, logs, métricas, traces e runbooks",
+      "reason": "Esta aula de redes usa evidências, telemetria, logs, métricas ou playbooks que serão aprofundados em observabilidade e SRE."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "Governança, RBAC e auditoria de acessos",
+      "lesson": "RBAC, políticas, revisão de acessos, trilhas de auditoria e segregação de funções",
+      "reason": "Arquiteturas corporativas exigem que rede, identidade, logs e governança sejam avaliados em conjunto."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "Zero Trust, identidade e acesso corporativo",
+      "lesson": "Identidade, contexto, autorização e menor privilégio em ambientes empresariais",
+      "reason": "Controles de rede não substituem identidade; decisões modernas combinam segmentação, autenticação, autorização e contexto."
     }
-  ]
+  ],
+  "accessPolicy": {
+    "freeAccess": true,
+    "navigationBlocked": false,
+    "note": "P1-11 preserva acesso livre; apenas a conclusão do capstone exige evidências."
+  }
 }
