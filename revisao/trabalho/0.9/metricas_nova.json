@@ -4,9 +4,9 @@
   "titulo": "Laboratório integrador do Módulo 0",
   "tipo": "ligação integradora",
   "palavras": {
-    "visiveis": 5730,
+    "visiveis": 5732,
     "invisiveis": 60,
-    "teoriaVisivel": 2447
+    "teoriaVisivel": 2449
   },
   "porCampoVisivel": {
     "content.motivation": 147,
@@ -21,7 +21,7 @@
     "content.securityExample": 158,
     "content.diagram": 2,
     "content.summary": 106,
-    "content.nextTheme": 36,
+    "content.nextTheme": 38,
     "security": 272,
     "troubleshooting": 295,
     "glossary": 234,

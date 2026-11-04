@@ -180,3 +180,5 @@ Palavras visíveis: 5599 → 5730 (+2%; cortes brutos 697 = 12%, acréscimos 828
   ]
 }
 ```
+
+> **Nota do orquestrador (continuidade do m00):** o `nextTheme` dizia "simulado", mas a 0.10 não tem simulado (o subtítulo dela foi corrigido). Agora diz "quiz de revisão".
