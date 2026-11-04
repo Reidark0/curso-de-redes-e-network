@@ -1,0 +1,80 @@
+{
+  "id": "2.9",
+  "versao": "nova",
+  "titulo": "OSI aplicado à cibersegurança",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5628,
+    "invisiveis": 53,
+    "teoriaVisivel": 3171
+  },
+  "porCampoVisivel": {
+    "content.motivation": 187,
+    "content.problem": 209,
+    "content.concept": 412,
+    "content.internals": 218,
+    "content.architecture": 360,
+    "content.analogy": 118,
+    "content.simpleExample": 94,
+    "content.enterpriseExample": 99,
+    "content.cloudExample": 116,
+    "content.devsecopsExample": 108,
+    "content.securityExample": 143,
+    "content.diagram": 2,
+    "content.summary": 96,
+    "content.nextTheme": 36,
+    "security": 339,
+    "troubleshooting": 336,
+    "glossary": 298,
+    "title+subtitle": 21,
+    "objectives": 63,
+    "learningOutcomes": 77,
+    "quiz": 320,
+    "flashcards": 139,
+    "mentorQuestions": 250,
+    "exercises": 248,
+    "challenge": 152,
+    "commentedSolution": 204,
+    "references": 71,
+    "linksToOtherCourses": 50,
+    "lab": 862
+  },
+  "porCampoInvisivel": {
+    "networkContext": 53
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 8,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 60,
+    "alternativa_5minPasso_maisLeitura": 46.6,
+    "plausivel": true,
+    "palavras": 862
+  },
+  "duracao": {
+    "declarada": "125-175 min",
+    "estimatedStudyTimeMinutes": 175,
+    "M": 150,
+    "T": 146.4,
+    "partes": {
+      "teoria": 24.4,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 60
+    },
+    "faixaRecomendada": "125-175 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 19
+  }
+}

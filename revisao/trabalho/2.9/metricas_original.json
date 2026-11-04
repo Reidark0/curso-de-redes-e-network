@@ -1,0 +1,90 @@
+{
+  "id": "2.9",
+  "versao": "original",
+  "titulo": "OSI aplicado à cibersegurança",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5046,
+    "invisiveis": 704,
+    "teoriaVisivel": 2783
+  },
+  "porCampoVisivel": {
+    "content.motivation": 191,
+    "content.history": 159,
+    "content.problem": 152,
+    "content.evolution": 146,
+    "content.concept": 124,
+    "content.internals": 144,
+    "content.architecture": 133,
+    "content.analogy": 106,
+    "content.simpleExample": 92,
+    "content.enterpriseExample": 99,
+    "content.cloudExample": 117,
+    "content.devsecopsExample": 117,
+    "content.securityExample": 200,
+    "content.diagram": 3,
+    "content.summary": 56,
+    "content.nextTheme": 36,
+    "security": 373,
+    "troubleshooting": 289,
+    "glossary": 246,
+    "title+subtitle": 22,
+    "objectives": 63,
+    "learningOutcomes": 77,
+    "quiz": 272,
+    "flashcards": 122,
+    "mentorQuestions": 165,
+    "exercises": 203,
+    "challenge": 152,
+    "commentedSolution": 180,
+    "references": 71,
+    "linksToOtherCourses": 50,
+    "lab": 886
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 35,
+    "content.exercisesIntro": 17,
+    "content.challengeIntro": 28,
+    "content.solutionIntro": 19,
+    "networkContext": 53,
+    "protocolFields": 68,
+    "packetFlow": 128,
+    "deepDive": 227,
+    "commonMistakes": 129
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 8,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 75,
+    "alternativa_5minPasso_maisLeitura": 46.8,
+    "plausivel": true,
+    "palavras": 886
+  },
+  "duracao": {
+    "declarada": "90-125 min",
+    "estimatedStudyTimeMinutes": 125,
+    "M": 107.5,
+    "T": 158.4,
+    "partes": {
+      "teoria": 21.4,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 75
+    },
+    "faixaRecomendada": "135-190 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 15
+  }
+}
