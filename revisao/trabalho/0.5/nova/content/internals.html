@@ -1,19 +1,37 @@
 
 <section class="lesson-section lesson-section--internals">
-  <h2>6. Funcionamento interno</h2>
+  <h2>Funcionamento interno</h2>
   <p>
-    O funcionamento interno pode ser visto como uma cadeia de transformação. A aplicação produz dados. Esses dados viram bytes. Os bytes viram bits. A placa de rede, transceiver ou rádio transforma bits em símbolos físicos. O meio transporta o sinal. O receptor mede o sinal, tenta reconstruir os símbolos, recupera os bits e entrega para as camadas superiores.
+    Pense numa cadeia de transformação: a aplicação produz dados, os dados viram bytes, os bytes viram bits. A placa de rede, o transceiver ou o rádio transforma os bits em símbolos físicos; o meio transporta o sinal; o receptor mede o sinal, reconstrói os símbolos, recupera os bits e os entrega às camadas superiores.
   </p>
   <ol class="flow-list">
-    <li><strong>Serialização:</strong> os bits precisam ser colocados em uma sequência transmissível.</li>
-    <li><strong>Codificação/modulação:</strong> a sequência é convertida em padrões físicos detectáveis.</li>
+    <li><strong>Serialização:</strong> os bits são colocados numa sequência transmissível.</li>
+    <li><strong>Codificação/modulação:</strong> a sequência vira padrões físicos detectáveis. Não basta “tensão alta = 1, tensão baixa = 0”: padrões modernos usam transições, múltiplos níveis, modulação, temporização e símbolos para reduzir erro e aumentar eficiência.</li>
     <li><strong>Transmissão:</strong> o meio carrega energia elétrica, luz ou rádio.</li>
     <li><strong>Atenuação:</strong> o sinal perde força com distância, conectores, obstáculos ou qualidade do meio.</li>
     <li><strong>Ruído/interferência:</strong> sinais indesejados dificultam distinguir o dado original.</li>
-    <li><strong>Recepção:</strong> o receptor decide quais padrões representam os bits.</li>
-    <li><strong>Verificação:</strong> camadas superiores detectam erros por mecanismos como FCS/CRC, checksums e retransmissões.</li>
+    <li><strong>Recepção:</strong> o receptor decide quais padrões representam os bits. Quanto maior a relação sinal‑ruído (SNR: a potência do sinal comparada à do ruído), mais fácil decidir certo.</li>
+    <li><strong>Verificação:</strong> camadas acima da física detectam erros com FCS/CRC e checksums; o quadro corrompido é descartado, e a perda só é recuperada se algum protocolo retransmitir (o próprio Wi‑Fi ou o TCP, por exemplo).</li>
   </ol>
   <p>
-    Um ponto fundamental: nem todo erro físico aparece como “cabo desconectado”. Muitas vezes o link continua “up”, mas com contadores de erro, quedas ocasionais, renegociação, perda de pacotes, throughput baixo ou Wi‑Fi oscilando. Essa é a diferença entre ausência total de camada física e camada física degradada.
+    Nem todo erro físico aparece como “cabo desconectado”. Muitas vezes o link continua <em>up</em>, mas com contadores de erro, quedas ocasionais, renegociação, perda de pacotes, throughput baixo ou Wi‑Fi oscilando. Essa é a diferença entre <strong>ausência</strong> de camada física e camada física <strong>degradada</strong>.
   </p>
+  <h3>Como a degradação aparece nas ferramentas</h3>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead><tr><th>Evidência</th><th>Onde ver</th><th>O que sugere</th></tr></thead>
+      <tbody>
+        <tr><td><code>NO-CARRIER</code> / <code>state DOWN</code></td><td><code>ip link</code> (Linux)</td><td>Nenhum sinal detectado: cabo solto ou ruim, porta desligada, adaptador desabilitado</td></tr>
+        <tr><td><code>LOWER_UP</code></td><td><code>ip link</code> (Linux)</td><td>Há sinal (carrier) físico detectado</td></tr>
+        <tr><td>Speed abaixo do esperado (100 Mbps em vez de 1 Gbps)</td><td><code>Get-NetAdapter</code>, <code>ethtool</code>, <code>show interfaces status</code></td><td>Cabo inadequado ou defeituoso, porta antiga, problema de autonegociação</td></tr>
+        <tr><td>Duplex inesperado, <em>late collisions</em></td><td><code>ethtool</code>, <code>show interfaces</code></td><td>Negociação de duplex incompatível entre os dois lados</td></tr>
+        <tr><td>CRC / input errors crescendo</td><td><code>show interfaces counters errors</code></td><td>Quadros chegando corrompidos: cabo, conector, patch panel, interferência ou porta defeituosa</td></tr>
+        <tr><td>Link alternando up/down (<em>flapping</em>)</td><td>Logs e status da porta</td><td>Conector frouxo, cabo danificado, porta ou transceiver com defeito</td></tr>
+        <tr><td>Sinal fraco, taxa Wi‑Fi variando</td><td><code>nmcli dev wifi list</code>, <code>netsh wlan show interfaces</code></td><td>Distância, obstáculos, interferência, canal disputado</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout">
+    <strong>Limite do que você vê:</strong> o sistema operacional não mostra todo problema físico. Diagnósticos finos exigem instrumentos profissionais, como certificador de cabos, OTDR (fibra), analisador de espectro e site survey (Wi‑Fi). E como o Wi‑Fi depende do ambiente, um teste isolado pode não representar todos os horários e locais.
+  </div>
 </section>

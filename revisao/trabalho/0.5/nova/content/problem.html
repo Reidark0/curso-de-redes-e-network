@@ -1,20 +1,27 @@
 
 <section class="lesson-section lesson-section--problem">
-  <h2>3. Problema</h2>
+  <h2>Problema</h2>
   <p>
-    O problema central é: <strong>como fazer um receptor distinguir 0 e 1 em um mundo físico imperfeito?</strong> Cabos têm resistência, capacitância e ruído. Fibra sofre atenuação, conectores sujos e perda por curvatura. Rádio sofre interferência, reflexão, obstáculos, colisões, distância, potência baixa e concorrência com outras redes. O receptor não recebe “bits puros”; ele recebe sinais que precisam ser medidos, sincronizados, filtrados e interpretados.
+    O problema central é: <strong>como fazer um receptor distinguir 0 e 1 num mundo físico imperfeito?</strong> Cabos têm resistência, capacitância e ruído. Fibra sofre atenuação, conectores sujos e perda por curvatura. Rádio sofre interferência, reflexão, obstáculos, colisões, distância, potência baixa e concorrência com outras redes. O receptor não recebe “bits puros”: recebe sinais que precisa medir, sincronizar, filtrar e interpretar.
   </p>
   <p>
-    Se o sinal chega forte, limpo e dentro do padrão esperado, a placa de rede consegue reconstruir os bits. Se chega degradado, podem ocorrer erros de quadro, perda, retransmissão, queda de throughput, renegociação de velocidade, latência variável ou desconexão. Isso explica por que uma rede pode ter IP correto e ainda assim funcionar mal.
+    Se o sinal chega forte, limpo e dentro do padrão, a placa de rede reconstrói os bits. Se chega degradado, aparecem erros de quadro, perda, retransmissão, queda de throughput, renegociação de velocidade, latência variável ou desconexão. É por isso que uma rede pode ter IP correto e ainda assim funcionar mal.
   </p>
   <ul class="flow-list">
     <li><strong>Sem sinal adequado:</strong> não há link físico.</li>
     <li><strong>Com sinal fraco:</strong> o link pode subir, mas com erros e retransmissões.</li>
-    <li><strong>Com interferência:</strong> pacotes podem ser perdidos ou precisar ser reenviados.</li>
-    <li><strong>Com meio compartilhado:</strong> throughput real cai conforme mais dispositivos disputam o canal.</li>
-    <li><strong>Com instalação ruim:</strong> problemas aparecem como intermitência difícil de reproduzir.</li>
+    <li><strong>Com interferência:</strong> pacotes se perdem ou precisam ser reenviados.</li>
+    <li><strong>Com meio compartilhado:</strong> o throughput real cai conforme mais dispositivos disputam o canal.</li>
+    <li><strong>Com instalação ruim:</strong> surgem intermitências difíceis de reproduzir.</li>
   </ul>
-  <div class="callout callout--warning">
-    <strong>Erro comum:</strong> pular direto para DNS, firewall ou aplicação sem verificar camada física. Em troubleshooting profissional, link, erros de interface, negociação, cabo, sinal e meio devem ser verificados antes de hipóteses mais altas.
+  <div class="callout warning">
+    <strong>Erros comuns:</strong>
+    <ul>
+      <li><strong>Culpar DNS, firewall ou aplicação antes de olhar o link.</strong> DNS é o erro mais lembrado, e o diagnóstico começa fora da camada certa. Verifique link, erros de interface, negociação, cabo, sinal e perda antes de subir de camada.</li>
+      <li><strong>Ignorar a velocidade negociada.</strong> O usuário só vê “conectado”; um cabo ruim pode deixar em 100 Mbps um link que deveria estar em 1 Gbps.</li>
+      <li><strong>Esperar do Wi‑Fi a estabilidade do cabo.</strong> Os dois mostram o ícone de conexão, mas o rádio depende de distância, obstáculos, canal, banda e quantidade de clientes.</li>
+      <li><strong>Confundir velocidade de link com throughput.</strong> Link de 1 Gbps é a taxa do meio, não a vazão útil da aplicação.</li>
+      <li><strong>Usar a camada física como explicação automática.</strong> Sem evidência de link, erro ou sinal, trocar cabos não resolve um problema que é de DNS, rota ou firewall.</li>
+    </ul>
   </div>
 </section>

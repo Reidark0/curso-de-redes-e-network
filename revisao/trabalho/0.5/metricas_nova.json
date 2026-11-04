@@ -1,0 +1,79 @@
+{
+  "id": "0.5",
+  "versao": "nova",
+  "titulo": "Como sinais físicos carregam dados",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5717,
+    "invisiveis": 34,
+    "teoriaVisivel": 3007
+  },
+  "porCampoVisivel": {
+    "content.motivation": 192,
+    "content.problem": 302,
+    "content.concept": 313,
+    "content.internals": 411,
+    "content.architecture": 108,
+    "content.analogy": 71,
+    "content.simpleExample": 110,
+    "content.enterpriseExample": 100,
+    "content.cloudExample": 116,
+    "content.devsecopsExample": 89,
+    "content.diagram": 33,
+    "content.summary": 116,
+    "content.nextTheme": 39,
+    "security": 389,
+    "troubleshooting": 324,
+    "glossary": 294,
+    "title+subtitle": 24,
+    "objectives": 61,
+    "learningOutcomes": 86,
+    "quiz": 578,
+    "flashcards": 135,
+    "mentorQuestions": 179,
+    "exercises": 270,
+    "challenge": 194,
+    "commentedSolution": 213,
+    "references": 73,
+    "linksToOtherCourses": 55,
+    "lab": 842
+  },
+  "porCampoInvisivel": {
+    "networkContext": 34
+  },
+  "quantidades": {
+    "quiz": 8,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 40,
+    "alternativa_5minPasso_maisLeitura": 41.5,
+    "plausivel": true,
+    "palavras": 842
+  },
+  "duracao": {
+    "declarada": "110-155 min",
+    "estimatedStudyTimeMinutes": 155,
+    "M": 132.5,
+    "T": 127.1,
+    "partes": {
+      "teoria": 23.1,
+      "diagramas": 3,
+      "quiz": 8,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 40
+    },
+    "faixaRecomendada": "110-155 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 21
+  }
+}
