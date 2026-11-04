@@ -558,93 +558,93 @@
   "quiz": [
     {
       "id": "q3.8.1",
-      "type": "conceito",
-      "q": "Qual problema o STP resolve principalmente?",
-      "opts": [
+      "question": "Qual problema o STP resolve principalmente?",
+      "options": [
         "Loops de Camada 2 em topologias Ethernet redundantes",
         "Criptografia de tráfego HTTP",
         "Resolução de nomes DNS",
         "Cálculo de sub-redes IPv4"
       ],
-      "a": 0,
-      "exp": "STP cria uma topologia lógica sem ciclos para evitar loops e broadcast storms em Camada 2.",
+      "answer": 0,
+      "explanation": "STP cria uma topologia lógica sem ciclos para evitar loops e broadcast storms em Camada 2.",
+      "topic": "STP",
       "difficulty": "iniciante",
-      "topic": "STP"
+      "type": "conceito"
     },
     {
       "id": "q3.8.2",
-      "type": "diagnóstico",
-      "q": "Qual sintoma é fortemente associado a loop de Camada 2?",
-      "opts": [
+      "question": "Qual sintoma é fortemente associado a loop de Camada 2?",
+      "options": [
         "MAC flapping e broadcast storm",
         "Erro 404 em uma página específica",
         "Senha expirada no IAM",
         "Certificado TLS vencido"
       ],
-      "a": 0,
-      "exp": "MAC flapping, broadcast alto e instabilidade geral são indícios típicos de problemas de Camada 2.",
+      "answer": 0,
+      "explanation": "MAC flapping, broadcast alto e instabilidade geral são indícios típicos de problemas de Camada 2.",
+      "topic": "troubleshooting",
       "difficulty": "intermediário",
-      "topic": "troubleshooting"
+      "type": "diagnóstico"
     },
     {
       "id": "q3.8.3",
-      "type": "comparação",
-      "q": "Uma porta bloqueada pelo STP deve ser sempre considerada defeito?",
-      "opts": [
+      "question": "Uma porta bloqueada pelo STP deve ser sempre considerada defeito?",
+      "options": [
         "Não; pode ser comportamento esperado para evitar loop",
         "Sim; toda porta conectada deve encaminhar",
         "Sim; STP só bloqueia quando há cabo rompido",
         "Não; mas deve ser removida fisicamente sempre"
       ],
-      "a": 0,
-      "exp": "STP bloqueia portas redundantes para manter a topologia lógica sem ciclos.",
+      "answer": 0,
+      "explanation": "STP bloqueia portas redundantes para manter a topologia lógica sem ciclos.",
+      "topic": "estados STP",
       "difficulty": "iniciante",
-      "topic": "estados STP"
+      "type": "comparação"
     },
     {
       "id": "q3.8.4",
-      "type": "segurança",
-      "q": "Qual controle ajuda a impedir que uma porta de usuário participe indevidamente da topologia STP?",
-      "opts": [
+      "question": "Qual controle ajuda a impedir que uma porta de usuário participe indevidamente da topologia STP?",
+      "options": [
         "BPDU Guard",
         "Base64",
         "NAT overload",
         "DNS recursion"
       ],
-      "a": 0,
-      "exp": "BPDU Guard desabilita ou protege a porta quando recebe BPDU inesperada em porta edge.",
+      "answer": 0,
+      "explanation": "BPDU Guard desabilita ou protege a porta quando recebe BPDU inesperada em porta edge.",
+      "topic": "hardening",
       "difficulty": "intermediário",
-      "topic": "hardening"
+      "type": "segurança"
     },
     {
       "id": "q3.8.5",
-      "type": "arquitetura",
-      "q": "Por que é recomendado definir root bridge primária e secundária?",
-      "opts": [
+      "question": "Por que é recomendado definir root bridge primária e secundária?",
+      "options": [
         "Para tornar previsível o caminho lógico da Camada 2",
         "Para substituir o gateway padrão",
         "Para eliminar a necessidade de VLANs",
         "Para criptografar BPDUs"
       ],
-      "a": 0,
-      "exp": "Root planejada evita que um switch inadequado controle a topologia STP.",
+      "answer": 0,
+      "explanation": "Root planejada evita que um switch inadequado controle a topologia STP.",
+      "topic": "arquitetura",
       "difficulty": "intermediário",
-      "topic": "arquitetura"
+      "type": "arquitetura"
     },
     {
       "id": "q3.8.6",
-      "type": "comando",
-      "q": "Qual comando Cisco é mais diretamente útil para verificar a topologia STP?",
-      "opts": [
+      "question": "Qual comando Cisco é mais diretamente útil para verificar a topologia STP?",
+      "options": [
         "show spanning-tree",
         "show ip nat translations",
         "show crypto ikev2 sa",
         "show users"
       ],
-      "a": 0,
-      "exp": "show spanning-tree mostra root, portas, estados e informações de STP.",
+      "answer": 0,
+      "explanation": "show spanning-tree mostra root, portas, estados e informações de STP.",
+      "topic": "Cisco IOS",
       "difficulty": "iniciante",
-      "topic": "Cisco IOS"
+      "type": "comando"
     }
   ],
   "flashcards": [

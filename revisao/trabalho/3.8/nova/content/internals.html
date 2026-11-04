@@ -1,5 +1,38 @@
-<section class="lesson-section lesson-section--internals"><h2>6. Funcionamento interno</h2>
-<p>O STP funciona por eleição e cálculo de caminho. Switches trocam BPDUs para descobrir a topologia e decidir qual switch será a raiz. A partir da raiz, cada switch escolhe o melhor caminho até ela. Portas que fazem parte da árvore ficam encaminhando. Portas que criariam ciclo ficam bloqueadas ou em estado alternativo.</p>
-<ol class="flow-list"><li><strong>Troca de BPDUs:</strong> switches anunciam Bridge ID, custo e informações de caminho.</li><li><strong>Eleição da root bridge:</strong> o menor Bridge ID vence, considerando prioridade e MAC.</li><li><strong>Escolha da root port:</strong> em cada switch não-raiz, a porta com melhor caminho até a raiz é escolhida.</li><li><strong>Escolha de designated ports:</strong> em cada segmento, uma porta encaminha em direção ao melhor caminho.</li><li><strong>Bloqueio de portas redundantes:</strong> portas que fechariam loop ficam sem encaminhar frames de dados.</li><li><strong>Convergência:</strong> quando há falha, STP recalcula e pode liberar caminho alternativo.</li></ol>
-<p>Em STP clássico, estados como blocking, listening, learning e forwarding ajudam a evitar que uma porta comece a encaminhar antes de a topologia estar estável. Em RSTP, os papéis e transições são otimizados para convergir mais rápido.</p>
+<section class="lesson-section lesson-section--internals"><h2>Funcionamento interno</h2>
+<p>O STP funciona por eleição e cálculo de caminho. Cada BPDU leva os dados que os switches comparam:</p>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Campo</th><th>O que é</th><th>Para que serve</th></tr></thead><tbody>
+<tr><td>Bridge ID</td><td>Prioridade + MAC do switch. A prioridade vai de 0 a 61440, em múltiplos de 4096; o padrão é 32768. Em STP por VLAN, o número da VLAN é somado à prioridade (extended system ID): prioridade 32768 na VLAN 10 aparece como 32778.</td><td>Eleger a root bridge: menor Bridge ID vence (primeiro a prioridade; em empate, o menor MAC).</td></tr>
+<tr><td>Root ID</td><td>Bridge ID da raiz que o remetente conhece.</td><td>Fazer todos convergirem para a mesma raiz.</td></tr>
+<tr><td>Root Path Cost</td><td>Soma dos custos das portas até a raiz. O custo depende da velocidade (no método curto, comum em Cisco: 100 Mbps = 19, 1 Gbps = 4, 10 Gbps = 2).</td><td>Escolher o melhor caminho até a raiz.</td></tr>
+<tr><td>Port ID</td><td>Prioridade da porta (padrão 128) + número da porta.</td><td>Último critério de desempate.</td></tr>
+</tbody></table></div>
+<ol class="flow-list"><li><strong>Troca de BPDUs:</strong> cada switch começa se anunciando como raiz e adota a raiz melhor que ouvir.</li><li><strong>Eleição da root bridge:</strong> o menor Bridge ID vence. Todas as portas da raiz são designated.</li><li><strong>Root port:</strong> cada switch não raiz escolhe uma porta, a de menor custo até a raiz. Em empate, vence a porta que recebe BPDU do vizinho com menor Bridge ID e, depois, com menor Port ID.</li><li><strong>Designated port:</strong> em cada segmento (link), a porta do switch com menor custo até a raiz encaminha; em empate, a do switch com menor Bridge ID.</li><li><strong>Alternate/blocked port:</strong> toda porta que não é root nem designated deixa de encaminhar frames de dados (continua ouvindo BPDUs). É ela que quebra o ciclo.</li><li><strong>Convergência:</strong> se o caminho ativo falha, os switches recalculam e a porta alternativa pode passar a encaminhar.</li></ol>
+<h3>Exemplo resolvido: o triângulo do diagrama</h3>
+<p>Três switches em triângulo, todos os links de 1 Gbps (custo 4). Switch A: prioridade 4096. Switch B: prioridade 32768, MAC 001a.0000.000b. Switch C: prioridade 32768, MAC 001a.0000.000c.</p>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Link</th><th>Decisão</th><th>Por quê</th></tr></thead><tbody>
+<tr><td>A–B</td><td>A: designated · B: root port</td><td>A é a raiz (prioridade 4096). Para B, o link direto custa 4; o caminho via C custa 8.</td></tr>
+<tr><td>A–C</td><td>A: designated · C: root port</td><td>Mesmo raciocínio: caminho direto, custo 4.</td></tr>
+<tr><td>B–C</td><td>B: designated · C: alternate (bloqueada)</td><td>B e C têm o mesmo custo até a raiz (4). Desempate pelo Bridge ID: mesma prioridade, e o MAC de B é menor.</td></tr>
+</tbody></table></div>
+<p>Se o link A–B cair, B passa a chegar à raiz por C (custo 8): a porta de B no link B–C vira root port, e a de C deixa de ser alternate e passa a encaminhar como designated.</p>
+<h3>Estados da porta e PortFast</h3>
+<p>No STP 802.1D, uma porta passa por <strong>blocking</strong> (só ouve BPDUs), <strong>listening</strong> (participa da eleição), <strong>learning</strong> (aprende MACs, ainda sem encaminhar) e <strong>forwarding</strong>. Listening e learning duram um forward delay cada (15 s por padrão), e por isso uma porta leva cerca de 30 s para encaminhar; após certas falhas, a convergência chega a cerca de 50 s. O RSTP simplifica os estados para discarding, learning e forwarding e converge em poucos segundos ou menos em links ponto a ponto.</p>
+<p><strong>PortFast</strong> (no RSTP, porta edge) faz uma porta de usuário ir direto para forwarding quando o link sobe, sem essa espera. É seguro só onde há um único host, nunca um switch. Por isso vem acompanhado de BPDU Guard.</p>
+<h3>Lendo a saída do switch</h3>
+<p>Saída resumida de <code>show spanning-tree vlan 10</code> no Switch C (valores ilustrativos do exemplo acima, Rapid PVST+):</p>
+<pre class="code-block">VLAN0010
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    4106
+             Address     001a.0000.000a
+             Cost        4
+             Port        1 (GigabitEthernet0/1)
+  Bridge ID  Priority    32778  (priority 32768 sys-id-ext 10)
+             Address     001a.0000.000c
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- ----
+Gi0/1            Root FWD 4         128.1    P2p
+Gi0/2            Altn BLK 4         128.2    P2p
+Gi0/3            Desg FWD 4         128.3    P2p Edge</pre>
+<ul><li><strong>Root ID ≠ Bridge ID:</strong> C não é a raiz. Na própria raiz aparece “This bridge is the root” e as portas ficam como Desg.</li><li><strong>Priority 4106:</strong> 4096 configurado + VLAN 10. <strong>Cost 4:</strong> custo de C até a raiz, pela Gi0/1.</li><li><strong>Gi0/1 Root FWD:</strong> root port. <strong>Gi0/2 Altn BLK:</strong> a porta que quebra o ciclo, comportamento esperado. <strong>Gi0/3 … Edge:</strong> porta de host com PortFast.</li></ul>
 </section>

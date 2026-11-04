@@ -1,4 +1,4 @@
-<section class="lesson-section lesson-section--example"><h2>9. Exemplo simples</h2>
-<p>Em uma rede pequena, alguém conecta dois cabos entre os mesmos dois switches domésticos ou de escritório. Sem STP, isso pode criar um loop. Um ARP Request enviado por um notebook pode circular entre os switches, voltar, ser replicado novamente e consumir a rede. Com STP ativo, um dos links fica bloqueado logicamente e só entra em uso se o caminho principal falhar.</p>
-<div class="content-card"><strong>Leitura correta:</strong> dois cabos entre switches não significam automaticamente mais velocidade. Em Ethernet tradicional, sem agregação correta ou protocolo de controle, isso pode significar loop.</div>
+<section class="lesson-section lesson-section--example"><h2>Exemplo simples</h2>
+<p>Alguém liga dois cabos entre os mesmos dois switches de escritório. Sem STP, um único ARP Request de um notebook circula entre os switches, volta, é replicado de novo e consome a rede. Com STP ativo, um dos links fica bloqueado logicamente e só entra em uso se o principal falhar.</p>
+<div class="content-card"><strong>Leitura correta:</strong> dois cabos entre switches não significam mais velocidade. Sem agregação (LACP) ou STP, significam loop.</div>
 </section>

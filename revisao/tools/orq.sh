@@ -12,7 +12,7 @@ case "$1" in
     git add -A . && git commit -qm "revisao: aula $id concluida
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
-Claude-Session: https://claude.ai/code/session_01THuSD8spvgD14VzBCdqQTj" && (git push -q origin claude/focused-pascal-00emu4 || (sleep 2; git push -q origin claude/focused-pascal-00emu4) || (sleep 4; git push -q origin claude/focused-pascal-00emu4))
+Claude-Session: https://claude.ai/code/session_01THuSD8spvgD14VzBCdqQTj" && { for d in 2 4 8 16 0; do git push -q origin claude/focused-pascal-00emu4 && break; [ "$d" = 0 ] && echo "PUSH FALHOU"; sleep $d; done; }
     echo pushed ;;
   proximo)
     id=$(grep -m1 -E '^\| [0-9]+\.[0-9]+ \| [^|]+ \| PENDENTE' revisao/PROGRESSO.md | awk -F'|' '{gsub(/ /,"",$2); gsub(/ /,"",$3); print $2" "$3}')
