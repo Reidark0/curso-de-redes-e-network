@@ -1,17 +1,75 @@
 
 <section class="lesson-section lesson-section--architecture">
-  <h2>7. Arquitetura</h2>
+  <h2>Arquitetura</h2>
   <p>
-    Bits, bytes e bases numéricas aparecem em praticamente todas as camadas de uma arquitetura de redes. Na camada física, bits são transportados como sinais. Na camada de enlace, endereços MAC são exibidos em hexadecimal. Na camada de rede, IPv4 é exibido em decimal pontuado, IPv6 em hexadecimal e máscaras dependem de padrões binários. Na camada de transporte, portas são números de 16 bits. Na aplicação, payloads podem ser texto, JSON, binário, Base64, compactados ou criptografados.
+    Bits, bytes e bases aparecem em todas as camadas. Conhecer o tamanho de cada campo explica os limites que você encontra: um octeto IPv4 vai de 0 a 255, uma porta vai de 0 a 65535, o MAC tem 6 bytes e o IPv6 é muito maior que o IPv4.
   </p>
-  <ul>
-    <li><strong>Camada física:</strong> bits são transportados como sinais elétricos, ópticos ou de rádio.</li>
-    <li><strong>Camada de enlace:</strong> MAC de 48 bits costuma ser exibido como seis bytes em hexadecimal.</li>
-    <li><strong>Camada de rede:</strong> IPv4 tem 32 bits; IPv6 tem 128 bits.</li>
-    <li><strong>Camada de transporte:</strong> portas TCP/UDP têm 16 bits.</li>
-    <li><strong>Camada de aplicação:</strong> payloads são sequências de bytes interpretadas por protocolos e programas.</li>
-  </ul>
+  <div class="responsive-table">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Camada</th>
+        <th>Campo</th>
+        <th>Tamanho</th>
+        <th>Como costuma ser exibido</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Física</td>
+        <td>Bits em trânsito</td>
+        <td>—</td>
+        <td>Sinais elétricos, ópticos ou de rádio</td>
+      </tr>
+      <tr>
+        <td>Enlace</td>
+        <td>Endereço MAC</td>
+        <td>48 bits (6 bytes)</td>
+        <td>Seis pares hexadecimais: <code>3c:52:82:1a:2b:3c</code> (Linux), <code>3C-52-82-1A-2B-3C</code> (Windows), <code>3c52.821a.2b3c</code> (Cisco)</td>
+      </tr>
+      <tr>
+        <td>Enlace</td>
+        <td>EtherType</td>
+        <td>16 bits</td>
+        <td>Hexadecimal: <code>0x0800</code> (IPv4), <code>0x86DD</code> (IPv6)</td>
+      </tr>
+      <tr>
+        <td>Rede</td>
+        <td>Endereço IPv4 e máscara</td>
+        <td>32 bits (4 octetos)</td>
+        <td>Decimal pontuado (<code>192.168.10.50</code>, <code>255.255.255.0</code>) ou prefixo (<code>/24</code>)</td>
+      </tr>
+      <tr>
+        <td>Rede</td>
+        <td>Endereço IPv6</td>
+        <td>128 bits</td>
+        <td>Grupos hexadecimais (<code>fe80::1</code>)</td>
+      </tr>
+      <tr>
+        <td>Transporte</td>
+        <td>Porta TCP/UDP</td>
+        <td>16 bits</td>
+        <td>Decimal (<code>443</code>)</td>
+      </tr>
+      <tr>
+        <td>Transporte</td>
+        <td>Flags TCP</td>
+        <td>1 bit cada</td>
+        <td>Nome da flag ou valor hexadecimal no dump</td>
+      </tr>
+      <tr>
+        <td>Aplicação</td>
+        <td>Payload</td>
+        <td>Sequência de bytes</td>
+        <td>Texto, JSON, Base64, binário, compactado ou criptografado; em dumps, hexadecimal</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p>
+    Repare que o mesmo MAC aparece com separadores diferentes conforme a ferramenta. Os bytes são os mesmos; só muda a forma de exibir.
+  </p>
   <div class="callout callout--security">
-    <strong>Ponto de segurança:</strong> uma ferramenta de segurança quase sempre mostra uma interpretação dos bytes. O analista precisa distinguir valor bruto, representação visual, codificação, compressão, serialização e criptografia antes de tirar conclusões.
+    <strong>Ponto de segurança:</strong> uma ferramenta quase sempre mostra uma <em>interpretação</em> dos bytes. Antes de concluir algo, distinga valor bruto, representação visual, codificação, compressão, serialização e criptografia.
   </div>
 </section>

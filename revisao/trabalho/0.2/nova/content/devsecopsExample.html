@@ -1,10 +1,10 @@
 
 <section class="lesson-section lesson-section--devsecops">
-  <h2>12. Exemplo em DevSecOps</h2>
+  <h2>Exemplo em DevSecOps</h2>
   <p>
-    Em DevSecOps, bits, bytes e hexadecimal aparecem em automação, IaC, pipelines e observabilidade. Um pipeline pode validar se blocos CIDR declarados em Terraform se sobrepõem. Um script pode converter valores para verificar máscaras. Uma política como código pode bloquear criação de sub-redes muito grandes, evitando exposição lateral excessiva. Um teste automatizado pode garantir que ambientes de desenvolvimento, homologação e produção não usem faixas conflitantes.
+    Um pipeline pode validar se os blocos CIDR declarados em Terraform se sobrepõem, ou se desenvolvimento, homologação e produção usam faixas conflitantes. Uma política como código pode bloquear sub-redes grandes demais, que ampliam a exposição lateral.
   </p>
   <p>
-    Também aparecem em análise de artefatos: hashes de imagens de container são exibidos em hexadecimal; fingerprints de certificados usam hexadecimal; tokens podem conter dados codificados; logs podem registrar payloads em bytes; ferramentas de SAST/DAST podem apontar manipulação insegura de encoding. O profissional não precisa virar matemático, mas precisa saber quando está olhando para número, byte, codificação, hash ou criptografia.
+    Hexadecimal também aparece nos artefatos: o digest de uma imagem de container (<code>sha256:…</code>) tem 64 dígitos hexadecimais, ou seja, 32 bytes (256 bits); fingerprints de certificados também são exibidos em hexadecimal. Saber contar bytes a partir dos dígitos ajuda a reconhecer o que você está vendo: um número, um hash, uma codificação ou um dado criptografado.
   </p>
 </section>

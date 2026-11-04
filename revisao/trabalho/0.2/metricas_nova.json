@@ -1,0 +1,81 @@
+{
+  "id": "0.2",
+  "versao": "nova",
+  "titulo": "Bits, bytes, binário e hexadecimal",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5748,
+    "invisiveis": 47,
+    "teoriaVisivel": 3076
+  },
+  "porCampoVisivel": {
+    "content.motivation": 133,
+    "content.history": 200,
+    "content.problem": 132,
+    "content.concept": 334,
+    "content.internals": 393,
+    "content.architecture": 202,
+    "content.analogy": 101,
+    "content.simpleExample": 83,
+    "content.enterpriseExample": 138,
+    "content.cloudExample": 112,
+    "content.devsecopsExample": 95,
+    "content.securityExample": 142,
+    "content.diagram": 25,
+    "content.summary": 109,
+    "content.nextTheme": 27,
+    "security": 316,
+    "troubleshooting": 306,
+    "glossary": 228,
+    "title+subtitle": 23,
+    "objectives": 69,
+    "learningOutcomes": 83,
+    "quiz": 382,
+    "flashcards": 172,
+    "mentorQuestions": 214,
+    "exercises": 242,
+    "challenge": 244,
+    "commentedSolution": 273,
+    "references": 70,
+    "linksToOtherCourses": 51,
+    "lab": 849
+  },
+  "porCampoInvisivel": {
+    "networkContext": 47
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 7,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 35,
+    "alternativa_5minPasso_maisLeitura": 36.5,
+    "plausivel": true,
+    "palavras": 849
+  },
+  "duracao": {
+    "declarada": "105-145 min",
+    "estimatedStudyTimeMinutes": 145,
+    "M": 125,
+    "T": 122.2,
+    "partes": {
+      "teoria": 23.7,
+      "diagramas": 3,
+      "quiz": 7,
+      "flashcards": 3.5,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 35
+    },
+    "faixaRecomendada": "105-145 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 22
+  }
+}

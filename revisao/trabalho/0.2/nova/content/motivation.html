@@ -1,16 +1,13 @@
 
 <section class="lesson-section lesson-section--motivation">
-  <h2>1. Motivação</h2>
+  <h2>Motivação</h2>
   <p>
-    Em algum momento do trabalho com redes, segurança ou infraestrutura, você vai encontrar números que parecem pouco amigáveis: <code>192.168.10.50</code>, <code>255.255.255.0</code>, <code>AA:BB:CC:DD:EE:FF</code>, <code>0x0800</code>, <code>fe80::1</code>, <code>FF</code>, <code>C0 A8 0A 32</code>. Eles aparecem em configurações de rede, dumps do Wireshark, logs de firewall, saídas de roteadores, certificados, hashes, endereços IPv6, endereços MAC, máscaras de rede e payloads.
+    No trabalho com redes e segurança você vai ler valores como <code>192.168.10.50</code>, <code>255.255.255.0</code>, <code>AA:BB:CC:DD:EE:FF</code>, <code>0x0800</code>, <code>fe80::1</code> e <code>C0 A8 0A 32</code>. Eles aparecem em configurações, dumps do Wireshark, logs de firewall, saídas de roteadores, certificados e hashes.
   </p>
   <p>
-    Sem entender bits, bytes, binário e hexadecimal, muitos assuntos viram decoreba. Subnetting vira uma sequência de fórmulas sem sentido. IPv4 parece apenas quatro números separados por pontos. MAC parece uma placa de carro estranha. Wireshark parece uma parede de códigos. E segurança fica perigosa, porque o analista pode confundir dado codificado com dado criptografado, ou interpretar errado um campo de protocolo.
+    Sem entender bits, bytes, binário e hexadecimal, subnetting vira decoreba de fórmulas, o MAC parece uma placa de carro estranha e um dump vira uma parede de códigos. Em segurança, o risco é maior: você pode confundir dado apenas exibido em hexadecimal com dado criptografado, ou ler errado um campo de protocolo.
   </p>
   <div class="callout callout--problem">
-    <strong>Problema real:</strong> um analista vê o valor <code>FF</code> em uma captura e não sabe se aquilo significa 15, 255, erro, criptografia, broadcast ou apenas uma forma compacta de escrever 8 bits. Essa confusão é comum porque sistemas diferentes usam bases numéricas diferentes para representar o mesmo valor.
+    <strong>Problema real:</strong> um analista vê <code>FF</code> em uma captura e não sabe se aquilo significa 15, 255, erro, criptografia, broadcast ou apenas um byte com os 8 bits ligados. A confusão acontece porque ferramentas diferentes usam bases diferentes para escrever o mesmo valor.
   </div>
-  <p>
-    Esta aula existe para construir a base matemática mínima, mas sem transformar isso em aula abstrata de matemática. Aqui, cada conceito será conectado a redes: octetos IPv4, endereços MAC, máscaras, flags, dumps, logs, cloud, automação e segurança defensiva.
-  </p>
 </section>

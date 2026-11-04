@@ -1,20 +1,16 @@
 
 <section class="lesson-section lesson-section--problem">
-  <h2>3. Problema</h2>
+  <h2>Problema</h2>
   <p>
-    O problema técnico é simples: computadores operam com bits, mas humanos precisam configurar, documentar, monitorar e diagnosticar sistemas. Se tudo fosse exibido em binário puro, a operação seria lenta e propensa a erro. Se tudo fosse exibido apenas em decimal, perderíamos a relação direta com grupos de bits, bytes e campos de protocolo.
-  </p>
-  <p>
-    Em redes, muitos campos têm tamanho fixo. Um octeto IPv4 tem 8 bits. Uma porta TCP ou UDP tem 16 bits. Um endereço MAC tem 48 bits. Um endereço IPv6 tem 128 bits. Flags de protocolos podem ocupar bits individuais. Máscaras de rede são padrões de bits. Quando você entende o tamanho desses campos, começa a enxergar por que certos limites existem: por que um octeto IPv4 vai de 0 a 255, por que portas vão de 0 a 65535, por que MAC tem 6 bytes e por que IPv6 é muito maior que IPv4.
+    Computadores operam com bits, mas humanos precisam configurar, documentar e diagnosticar. Exibir tudo em binário deixaria a operação lenta e cheia de erros; exibir tudo em decimal esconderia a relação com bytes e campos de protocolo. Por isso as ferramentas alternam entre bases, e você precisa saber ler as três.
   </p>
   <ul class="flow-list">
-    <li><strong>Sem binário:</strong> subnetting vira decoreba, porque a máscara é essencialmente uma sequência de bits.</li>
-    <li><strong>Sem byte:</strong> fica difícil entender payload, tamanho de pacote, MTU, throughput e armazenamento de logs.</li>
-    <li><strong>Sem hexadecimal:</strong> dumps, MAC, IPv6, EtherType e muitos identificadores ficam difíceis de ler.</li>
-    <li><strong>Sem zeros à esquerda:</strong> octetos e campos fixos ficam ambíguos, principalmente em IPv4, máscaras e binários.</li>
-    <li><strong>Sem contexto:</strong> o aluno pode confundir hexadecimal com criptografia, Base64 com segurança ou hash com encoding.</li>
+    <li><strong>Sem binário:</strong> subnetting vira decoreba, porque a máscara é uma sequência de bits.</li>
+    <li><strong>Sem byte:</strong> fica difícil entender payload, tamanho de pacote, MTU, throughput e volume de logs.</li>
+    <li><strong>Sem hexadecimal:</strong> dumps, MAC, IPv6 e EtherType ficam ilegíveis.</li>
+    <li><strong>Sem zeros à esquerda:</strong> octetos e campos de tamanho fixo ficam ambíguos.</li>
   </ul>
   <div class="callout callout--warning">
-    <strong>Confusão comum:</strong> hexadecimal não é criptografia. Binário não é necessariamente baixo nível ofensivo. Base numérica é apenas uma forma de escrever valores. Segurança depende de propriedades como confidencialidade, integridade, autenticação e autorização, não da base usada para exibir o dado.
+    <strong>Confusão comum:</strong> hexadecimal não é criptografia. A base é só a forma de escrever o valor. Segurança depende de confidencialidade, integridade, autenticação e autorização, não da base usada para exibir o dado.
   </div>
 </section>

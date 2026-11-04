@@ -1,10 +1,10 @@
 
 <section class="lesson-section lesson-section--enterprise">
-  <h2>10. Exemplo empresarial</h2>
+  <h2>Exemplo empresarial</h2>
   <p>
-    Em uma empresa, o time de redes pode receber uma tarefa aparentemente simples: criar uma nova VLAN para estações administrativas usando a rede <code>10.20.30.0/24</code>. O sufixo <code>/24</code> significa que os 24 primeiros bits identificam a rede. A máscara correspondente é <code>255.255.255.0</code>, que em binário é <code>11111111.11111111.11111111.00000000</code>. Sem enxergar os bits, o aluno pode até decorar que /24 é 255.255.255.0, mas terá dificuldade quando chegar em /25, /26, /27 ou VLSM.
+    Em uma empresa, o time de redes pode receber uma tarefa aparentemente simples: criar uma nova VLAN para estações administrativas usando a rede <code>10.20.30.0/24</code>. O sufixo <code>/24</code> significa que os 24 primeiros bits identificam a rede. A máscara correspondente é <code>255.255.255.0</code>, que em binário é <code>11111111.11111111.11111111.00000000</code>. Os 8 bits restantes identificam o host; quando todos eles estão em 1 (último octeto 255, como em <code>10.20.30.255</code>), o endereço é o broadcast da sub-rede e não pode ser atribuído a um host. Sem enxergar os bits, você pode até decorar que /24 é 255.255.255.0, mas vai travar quando chegar em /25, /26, /27 ou VLSM.
   </p>
   <p>
-    O mesmo acontece em segurança. Um analista de firewall pode ver um MAC como <code>00:1A:2B:3C:4D:5E</code>. Cada par é um byte em hexadecimal. Um engenheiro de redes pode verificar EtherType <code>0x0800</code> para IPv4 ou <code>0x86DD</code> para IPv6. Um analista de SOC pode ver bytes suspeitos em payload. Em todos os casos, bases numéricas deixam de ser teoria e viram ferramenta de interpretação operacional.
+    Na operação, um analista de firewall pode ver um MAC como <code>00:1A:2B:3C:4D:5E</code>. Cada par é um byte em hexadecimal. Um engenheiro de redes pode verificar EtherType <code>0x0800</code> para IPv4 ou <code>0x86DD</code> para IPv6.
   </p>
 </section>
