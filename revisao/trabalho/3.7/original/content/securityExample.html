@@ -1,0 +1,9 @@
+<section class="lesson-section lesson-section--security"><h2>13. Exemplo em Segurança</h2>
+<p>Do ponto de vista defensivo, VLANs reduzem exposição lateral, mas não substituem firewall, IAM, autenticação forte, monitoramento ou hardening. Uma VLAN mal configurada pode gerar falsa sensação de segurança.</p>
+<table class="data-table risk-table"><thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead><tbody>
+<tr><td>VLAN plana demais</td><td>Usuários, servidores e IoT juntos.</td><td>Movimento lateral e broadcast amplo.</td><td>Segmentar por função e risco.</td></tr>
+<tr><td>Trunk indevido</td><td>Porta de usuário carregando múltiplas VLANs.</td><td>Exposição de redes internas.</td><td>Portas access por padrão e trunks documentados.</td></tr>
+<tr><td>Native VLAN insegura</td><td>Uso da VLAN padrão para tráfego sensível.</td><td>Risco operacional e confusão.</td><td>Native VLAN dedicada, sem hosts, e boas práticas de trunk.</td></tr>
+<tr><td>Sem política inter-VLAN</td><td>Gateway roteia tudo entre VLANs.</td><td>Segmentação pouco efetiva.</td><td>Firewall/ACL com menor privilégio e logs.</td></tr>
+</tbody></table>
+</section>

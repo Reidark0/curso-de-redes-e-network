@@ -1,0 +1,90 @@
+{
+  "id": "3.7",
+  "versao": "original",
+  "titulo": "VLANs como segmentação de camada 2",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4248,
+    "invisiveis": 676,
+    "teoriaVisivel": 2183
+  },
+  "porCampoVisivel": {
+    "content.motivation": 156,
+    "content.history": 140,
+    "content.problem": 101,
+    "content.evolution": 98,
+    "content.concept": 104,
+    "content.internals": 135,
+    "content.architecture": 85,
+    "content.analogy": 80,
+    "content.simpleExample": 93,
+    "content.enterpriseExample": 79,
+    "content.cloudExample": 83,
+    "content.devsecopsExample": 78,
+    "content.securityExample": 116,
+    "content.diagram": 3,
+    "content.summary": 52,
+    "content.nextTheme": 39,
+    "security": 276,
+    "troubleshooting": 227,
+    "glossary": 238,
+    "title+subtitle": 22,
+    "objectives": 48,
+    "learningOutcomes": 75,
+    "quiz": 263,
+    "flashcards": 88,
+    "mentorQuestions": 139,
+    "exercises": 160,
+    "challenge": 155,
+    "commentedSolution": 186,
+    "references": 47,
+    "linksToOtherCourses": 57,
+    "lab": 825
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 41,
+    "content.exercisesIntro": 19,
+    "content.challengeIntro": 28,
+    "content.solutionIntro": 27,
+    "networkContext": 35,
+    "protocolFields": 102,
+    "packetFlow": 133,
+    "deepDive": 182,
+    "commonMistakes": 109
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 8,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 125,
+    "alternativa_5minPasso_maisLeitura": 46.3,
+    "plausivel": false,
+    "palavras": 825
+  },
+  "duracao": {
+    "declarada": "90-125 min",
+    "estimatedStudyTimeMinutes": 125,
+    "M": 107.5,
+    "T": 125.1,
+    "partes": {
+      "teoria": 16.8,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 46.3
+    },
+    "faixaRecomendada": "105-150 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 16
+  }
+}
