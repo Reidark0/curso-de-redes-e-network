@@ -1,0 +1,90 @@
+{
+  "id": "4.1",
+  "versao": "original",
+  "titulo": "Por que o IPv4 existe",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4562,
+    "invisiveis": 717,
+    "teoriaVisivel": 2551
+  },
+  "porCampoVisivel": {
+    "content.motivation": 173,
+    "content.history": 132,
+    "content.problem": 108,
+    "content.evolution": 128,
+    "content.concept": 79,
+    "content.internals": 250,
+    "content.architecture": 94,
+    "content.analogy": 82,
+    "content.simpleExample": 50,
+    "content.enterpriseExample": 148,
+    "content.cloudExample": 91,
+    "content.devsecopsExample": 75,
+    "content.securityExample": 170,
+    "content.diagram": 3,
+    "content.summary": 52,
+    "content.nextTheme": 40,
+    "security": 247,
+    "troubleshooting": 391,
+    "glossary": 238,
+    "title+subtitle": 24,
+    "objectives": 48,
+    "learningOutcomes": 73,
+    "quiz": 268,
+    "flashcards": 122,
+    "mentorQuestions": 140,
+    "exercises": 149,
+    "challenge": 130,
+    "commentedSolution": 183,
+    "references": 49,
+    "linksToOtherCourses": 53,
+    "lab": 772
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 46,
+    "content.exercisesIntro": 26,
+    "content.challengeIntro": 33,
+    "content.solutionIntro": 29,
+    "networkContext": 22,
+    "deepDive": 242,
+    "commonMistakes": 117,
+    "protocolFields": 104,
+    "packetFlow": 98
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 60,
+    "alternativa_5minPasso_maisLeitura": 35.9,
+    "plausivel": true,
+    "palavras": 772
+  },
+  "duracao": {
+    "declarada": "95-135 min",
+    "estimatedStudyTimeMinutes": 135,
+    "M": 115,
+    "T": 141.6,
+    "partes": {
+      "teoria": 19.6,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 60
+    },
+    "faixaRecomendada": "120-170 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 16
+  }
+}
