@@ -1,0 +1,52 @@
+
+<section class="lesson-section lesson-section--architecture">
+  <h2>Arquitetura</h2>
+  <p>
+    A mesma informação é representada em vários níveis, e cada nível tem quem o interprete e falhas típicas. Esta tabela é um mapa para o troubleshooting:</p>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Nível</th>
+          <th>Exemplo</th>
+          <th>Quem interpreta</th>
+          <th>Falha típica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sinal físico (camada física)</td>
+          <td>Tensão, luz, rádio</td>
+          <td>Placa de rede, transceptor, rádio Wi-Fi</td>
+          <td>Ruído, atenuação, interferência, cabo ruim</td>
+        </tr>
+        <tr>
+          <td>Bit</td>
+          <td>0 ou 1</td>
+          <td>Circuitos digitais</td>
+          <td>Erro de leitura ou bit trocado (bit flip)</td>
+        </tr>
+        <tr>
+          <td>Byte</td>
+          <td>8 bits agrupados</td>
+          <td>CPU, sistema operacional, aplicações</td>
+          <td>Encoding incorreto ou byte inesperado</td>
+        </tr>
+        <tr>
+          <td>Estrutura de protocolo: enlace, rede e transporte</td>
+          <td>Quadro Ethernet (identifica dispositivos locais), pacote IP (endereçamento lógico e caminho entre redes), segmento TCP (portas, estado e controle de fluxo entre processos)</td>
+          <td>Pilha de rede</td>
+          <td>Campo inválido, checksum, MTU, fragmentação</td>
+        </tr>
+        <tr>
+          <td>Dado de aplicação</td>
+          <td>HTTP, JSON, HTML, token, arquivo</td>
+          <td>Aplicação, biblioteca, serviço</td>
+          <td>Formato inválido, codificação errada, parsing inseguro</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Esse mapa evita diagnósticos aleatórios. Se os sinais físicos falham, a aplicação nem recebe dados. Se os bytes chegam, mas são interpretados com o encoding errado, o problema parece de aplicação, não de rede. Se o tráfego está criptografado, o analista vê metadados, mas não o conteúdo. Se a captura mostra payload binário, isso não prova ataque: pode ser compressão, formato binário, serialização ou criptografia legítima.</p>
+</section>

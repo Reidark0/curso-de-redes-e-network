@@ -1,0 +1,50 @@
+
+<section class="lesson-section lesson-section--evolution">
+  <h2>4. Evolução</h2>
+  <p>
+    A evolução da representação digital pode ser entendida como uma busca por confiabilidade, velocidade, densidade e padronização. No começo, representar informação era uma tarefa muito próxima do meio físico: um furo no cartão, uma marca no papel, um pulso elétrico. Com o tempo, surgiram abstrações mais fortes. Hoje, quando você faz uma requisição HTTPS, muitas camadas trabalham sem que você veja: codificação de texto, serialização de dados, criptografia, compressão, segmentação, endereçamento, encapsulamento e transmissão física.</p>
+  <p>
+    Redes modernas dependem dessa evolução. Um byte isolado não diz muita coisa. O significado vem do contexto. O mesmo valor binário pode representar um número, uma letra, uma cor, uma instrução, uma flag TCP, parte de um endereço IP, parte de uma chave criptográfica ou um pedaço de arquivo. Por isso, protocolos são acordos de interpretação.</p>
+  <table class="data-table comparison-table">
+    <thead>
+      <tr>
+        <th>Nível</th>
+        <th>Exemplo</th>
+        <th>Quem interpreta</th>
+        <th>Falha típica</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sinal físico</td>
+        <td>Tensão, luz, rádio</td>
+        <td>Placa de rede, transceptor, rádio Wi-Fi</td>
+        <td>Ruído, atenuação, interferência, cabo ruim</td>
+      </tr>
+      <tr>
+        <td>Bit</td>
+        <td>0 ou 1</td>
+        <td>Circuitos digitais</td>
+        <td>Erro de leitura ou bit flip</td>
+      </tr>
+      <tr>
+        <td>Byte</td>
+        <td>8 bits agrupados</td>
+        <td>CPU, sistema operacional, aplicações</td>
+        <td>Encoding incorreto ou byte inesperado</td>
+      </tr>
+      <tr>
+        <td>Estrutura de protocolo</td>
+        <td>Frame Ethernet, pacote IP, segmento TCP</td>
+        <td>Stack de rede</td>
+        <td>Campo inválido, checksum, MTU, fragmentação</td>
+      </tr>
+      <tr>
+        <td>Dado de aplicação</td>
+        <td>HTTP, JSON, HTML, token, arquivo</td>
+        <td>Aplicação, biblioteca, serviço</td>
+        <td>Formato inválido, codificação errada, parsing inseguro</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

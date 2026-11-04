@@ -29,7 +29,7 @@ const esperadas = L.courseOrder().map((o) => o.constName); res.faltando = espera
       page.on('console', (m) => { if (m.type() === 'error') erros.push(`${atual}: ${m.text().slice(0, 200)}`); });
       page.on('pageerror', (e) => erros.push(`${atual}: ${String(e.message).slice(0, 200)}`));
       await page.goto('file://' + file); await page.waitForTimeout(1500);
-      const quizFalhas = []; const semRender = []; let ok = 0;
+      const quizFalhas = []; const semRender = []; const comFlash = []; let ok = 0;
       for (const o of L.courseOrder()) {
         atual = o.id;
         await page.evaluate((id) => { localStorage.clear(); location.hash = '#lesson-' + id; }, o.id);
@@ -48,9 +48,29 @@ const esperadas = L.courseOrder().map((o) => o.constName); res.faltando = espera
           return { correct, marcado: alvo.classList.contains('is-correct') };
         });
         if (r.semQuiz || !r.marcado) quizFalhas.push(`${o.id}:${JSON.stringify(r)}`); else ok++;
+        if (await page.$('#lesson-container .flashcard, #lesson-container #section-flashcards')) comFlash.push(o.id);
       }
+      // v2: nenhuma aula mostra flashcards; cada módulo mostra os flashcards das aulas, com a origem, e o card vira ao clicar
+      const modulos = []; atual = '(módulos)';
+      for (const mod of [...new Set(L.courseOrder().map((o) => o.mod))]) {
+        await page.evaluate((m) => { localStorage.clear(); location.hash = '#module-' + m; }, mod);
+        await page.reload(); await page.waitForSelector('#module-detail .module-detail-card', { timeout: 15000 }).catch(() => {});
+        const r = await page.evaluate(() => {
+          const cards = [...document.querySelectorAll('.module-flashcards-panel .flashcard')];
+          if (!cards.length) return { cards: 0 };
+          document.querySelector('.module-flashcards-panel details').open = true;
+          const c = cards[0]; c.click();
+          return { cards: cards.length, origem: Boolean(c.querySelector('.badge')?.textContent.startsWith('Aula ')), vira: c.classList.contains('is-flipped') && getComputedStyle(c.querySelector('.flashcard-back')).display !== 'none' };
+        });
+        modulos.push(`${mod}:${r.cards}${r.cards ? (r.origem && r.vira ? '' : ' FALHA') : ''}`);
+      }
+      // busca encontra texto de quiz no formato padronizado
+      const busca = await page.evaluate(() => {
+        const input = document.querySelector('#global-search'); input.value = 'Base64 usuario:senha'; input.dispatchEvent(new Event('input'));
+        return [...document.querySelectorAll('#search-results [data-search-lesson]')].map((e) => e.dataset.searchLesson).slice(0, 5);
+      });
       await browser.close();
-      res.browser = { aulasTestadas: L.courseOrder().length, quizOk: ok, quizFalhas, semRender, errosConsole: erros.slice(0, 50), totalErrosConsole: erros.length };
+      res.browser = { aulasTestadas: L.courseOrder().length, quizOk: ok, quizFalhas, semRender, aulasComFlashcards: comFlash, modulosFlashcards: modulos.join(' '), buscaBase64: busca, errosConsole: erros.slice(0, 50), totalErrosConsole: erros.length };
     }
   }
   console.log(JSON.stringify(res, null, 1));

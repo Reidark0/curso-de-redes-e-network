@@ -1,0 +1,8 @@
+
+<section class="lesson-section lesson-section--security">
+  <h2>Exemplo em Segurança</h2>
+  <p>
+    Controles de segurança interpretam o tempo todo: um WAF interpreta requisições, um antivírus interpreta arquivos, um IDS interpreta tráfego e um parser interpreta a entrada do usuário. Quando a interpretação falha, surgem vulnerabilidades.</p>
+  <p>
+    Um exemplo concreto de “codificação não é proteção”: na autenticação HTTP Basic, o navegador envia o cabeçalho <code>Authorization: Basic dXN1YXJpbzpzZW5oYQ==</code>. Parece embaralhado, mas é só Base64 de <code>usuario:senha</code>, e qualquer pessoa que capture o cabeçalho decodifica a senha em um comando. Por isso esse tipo de autenticação só é aceitável dentro de TLS, que é quem de fato protege o conteúdo em trânsito.</p>
+</section>

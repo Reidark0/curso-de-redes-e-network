@@ -1,0 +1,13 @@
+
+<section class="lesson-section lesson-section--motivation">
+  <h2>1. Motivação</h2>
+  <p>
+    Imagine que você trabalha em Segurança da Informação e recebe um alerta do SOC: uma estação interna enviou dados para um servidor externo. A ferramenta mostra endereços IP, portas, protocolo, tamanho do pacote e alguns bytes do payload. A primeira tentação é olhar aquilo como se fosse apenas uma tela cheia de números. Mas, por trás daquela tela, existe uma cadeia inteira de transformações: uma intenção humana virou dados de aplicação, esses dados viraram bytes, os bytes foram organizados por protocolos, os protocolos foram encapsulados em pacotes e quadros, e tudo isso precisou atravessar algum meio físico como cobre, fibra ou rádio.</p>
+  <p>
+    Antes de estudar IP, Ethernet, DNS, TCP, TLS, firewall, VPN, cloud networking ou Zero Trust, precisamos entender uma ideia básica: computadores não entendem significado humano diretamente. Eles não entendem naturalmente a ideia de uma foto, uma senha, uma requisição HTTP, um token OIDC ou um arquivo PDF. Eles trabalham com representações. Essas representações são construídas a partir de estados físicos controláveis e distinguíveis.</p>
+  <div class="callout callout--problem">
+    <strong>Problema real:</strong> sem compreender representação digital, o aluno pode decorar comandos de rede, mas terá dificuldade para interpretar pacotes, entender codificação, analisar logs, diferenciar texto de binário, diagnosticar corrupção de dados e perceber por que campos de protocolo são medidos em bits e bytes.
+  </div>
+  <p>
+    Esta aula é a base invisível de todo o curso. Quando você estudar endereço MAC, IPv4, subnetting, TCP flags, TLS, Base64, certificados, payloads, logs e análise de tráfego, estará lidando com variações da mesma pergunta: como uma informação foi representada para que pudesse ser armazenada, transmitida, validada e interpretada?</p>
+</section>

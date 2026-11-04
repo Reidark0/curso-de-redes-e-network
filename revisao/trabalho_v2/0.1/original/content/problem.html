@@ -1,0 +1,17 @@
+
+<section class="lesson-section lesson-section--problem">
+  <h2>3. Problema</h2>
+  <p>
+    O problema central é que significado humano não atravessa cabos, fibras ou ondas de rádio diretamente. O que atravessa o meio físico são sinais. Para que uma mensagem seja transmitida, o emissor precisa converter a informação em uma forma física; o receptor precisa reconstruir essa forma física em bits; e o software precisa interpretar os bits como algum tipo de dado.</p>
+  <p>
+    Sem uma representação confiável, cada máquina poderia interpretar a mesma sequência física de forma diferente. Um lado poderia achar que recebeu a letra A, enquanto o outro enviou um número, um comando, um endereço, uma flag ou parte de uma chave criptográfica. Por isso, redes dependem de camadas de interpretação: padrões elétricos, codificação de bits, quadros, pacotes, protocolos de transporte, protocolos de aplicação e formatos de dados.</p>
+  <ul class="flow-list">
+    <li><strong>O que quebra sem esse conceito?</strong> O aluno não entende por que um pacote tem campos em bits, por que endereços são números, por que payloads podem parecer ilegíveis e por que uma captura de rede é uma interpretação.</li>
+    <li><strong>Que confusão ele evita?</strong> Evita misturar dado, codificação, criptografia, compressão, protocolo e sinal físico como se fossem a mesma coisa.</li>
+    <li><strong>Que escala ele permite?</strong> Permite que bilhões de dispositivos diferentes usem padrões comuns para armazenar e transmitir informações.</li>
+    <li><strong>Que risco ele reduz?</strong> Reduz diagnósticos errados, como concluir que todo texto ilegível é criptografia ou que todo erro de aplicação é problema de rede.</li>
+  </ul>
+  <div class="callout callout--warning">
+    <strong>Erro comum:</strong> achar que o computador “envia um site”, “envia uma senha” ou “envia uma imagem” diretamente. Na prática, ele envia sequências de bits organizadas por padrões. O significado só aparece porque origem e destino concordam em como interpretar essas sequências.
+  </div>
+</section>

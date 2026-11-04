@@ -1,0 +1,18 @@
+
+<section class="lesson-section lesson-section--example">
+  <h2>9. Exemplo simples</h2>
+  <p>
+    Suponha que você digite a letra A em um editor de texto. Para você, é uma letra. Para o computador, essa letra precisa virar uma representação numérica. Em uma codificação comum, a letra A pode ser representada pelo valor decimal 65, que em binário é 01000001. Quando esse texto é salvo em um arquivo ou enviado por rede, o sistema não transmite a ideia abstrata de “A”; ele transmite bytes que outro sistema interpreta como A porque usa a mesma convenção.</p>
+  <p>
+    Agora imagine que você envie a palavra “rede”. Essa palavra vira uma sequência de bytes. Se o receptor interpretar os bytes como texto usando a codificação correta, verá “rede”. Se interpretar os mesmos bytes como outro formato, poderá ver caracteres estranhos ou dados aparentemente sem sentido. Essa diferença é essencial para entender problemas de encoding, payloads em APIs, logs quebrados e análise de tráfego.</p>
+  <div class="content-card">
+    <h3>Mini fluxo</h3>
+    <ol class="flow-list">
+      <li>Você digita: rede.</li>
+      <li>O editor armazena caracteres.</li>
+      <li>A codificação transforma caracteres em bytes.</li>
+      <li>O sistema salva ou envia os bytes.</li>
+      <li>Outro sistema lê os bytes e precisa interpretá-los com a regra correta.</li>
+    </ol>
+  </div>
+</section>

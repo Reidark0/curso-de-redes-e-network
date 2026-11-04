@@ -1,0 +1,15 @@
+
+<section class="lesson-section lesson-section--architecture">
+  <h2>7. Arquitetura</h2>
+  <p>
+    A representação da informação aparece em toda a arquitetura computacional. No hardware, transistores armazenam e processam estados. Na memória, bytes ficam em endereços. No sistema operacional, arquivos, processos e sockets manipulam dados. Na rede, interfaces transformam bytes em sinais e sinais em bytes. Na aplicação, bibliotecas interpretam formatos. Na segurança, ferramentas analisam evidências para distinguir comportamento legítimo, erro e abuso.</p>
+  <ul>
+    <li><strong>Camada física:</strong> transporta sinais que representam bits.</li>
+    <li><strong>Camada de enlace:</strong> organiza bytes em quadros e identifica dispositivos locais.</li>
+    <li><strong>Camada de rede:</strong> organiza endereçamento lógico e caminho entre redes.</li>
+    <li><strong>Camada de transporte:</strong> organiza comunicação entre processos usando portas, estado e controle de fluxo.</li>
+    <li><strong>Camada de aplicação:</strong> interpreta bytes como requisições, respostas, arquivos, comandos, tokens e mensagens.</li>
+  </ul>
+  <p>
+    Para troubleshooting, essa arquitetura evita diagnósticos aleatórios. Se os sinais físicos falham, a aplicação nem recebe dados. Se os bytes chegam, mas são interpretados com encoding errado, o problema pode parecer aplicação, não rede. Se o tráfego está criptografado, o analista pode ver metadados, mas não conteúdo. Se a captura mostra payload binário, isso não prova ataque; pode ser compressão, formato binário, serialização ou criptografia legítima.</p>
+</section>

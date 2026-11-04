@@ -1,0 +1,61 @@
+
+<section class="lesson-section lesson-section--diagram">
+  <h2>Diagrama SVG</h2>
+  <svg class="lesson-svg" viewBox="0 0 960 420" role="img" aria-labelledby="m00l01-svg-title m00l01-svg-desc">
+    <title id="m00l01-svg-title">Cadeia de representação da informação em redes</title>
+    <desc id="m00l01-svg-desc">O diagrama mostra uma intenção humana sendo convertida em dado de aplicação, bytes, bits e sinais físicos, que o destino reconstrói e interpreta. Ferramentas de captura, logs, SIEM e flow logs de cloud observam cópias ou resumos desse tráfego, ou seja, representações, não o significado original.</desc>
+    <defs>
+      <marker id="m00l01-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
+      </marker>
+    </defs>
+
+    <rect x="30" y="70" width="130" height="72" rx="12" class="svg-node svg-node--client" />
+    <text x="95" y="101" text-anchor="middle" class="svg-label">Intenção</text>
+    <text x="95" y="124" text-anchor="middle" class="svg-label svg-label--small">abrir um site</text>
+
+    <rect x="205" y="70" width="140" height="72" rx="12" class="svg-node" />
+    <text x="275" y="101" text-anchor="middle" class="svg-label">Aplicação</text>
+    <text x="275" y="124" text-anchor="middle" class="svg-label svg-label--small">HTTP, JSON, texto</text>
+
+    <rect x="390" y="70" width="130" height="72" rx="12" class="svg-node" />
+    <text x="455" y="101" text-anchor="middle" class="svg-label">Bytes</text>
+    <text x="455" y="124" text-anchor="middle" class="svg-label svg-label--small">valores 0-255</text>
+
+    <rect x="565" y="70" width="130" height="72" rx="12" class="svg-node" />
+    <text x="630" y="101" text-anchor="middle" class="svg-label">Bits</text>
+    <text x="630" y="124" text-anchor="middle" class="svg-label svg-label--small">0 e 1</text>
+
+    <rect x="740" y="70" width="170" height="72" rx="12" class="svg-node svg-node--switch" />
+    <text x="825" y="101" text-anchor="middle" class="svg-label">Sinal físico</text>
+    <text x="825" y="124" text-anchor="middle" class="svg-label svg-label--small">tensão, luz, rádio</text>
+
+    <line x1="160" y1="106" x2="205" y2="106" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l01-arrow)" />
+    <line x1="345" y1="106" x2="390" y2="106" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l01-arrow)" />
+    <line x1="520" y1="106" x2="565" y2="106" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l01-arrow)" />
+    <line x1="695" y1="106" x2="740" y2="106" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l01-arrow)" />
+
+    <rect x="740" y="250" width="170" height="72" rx="12" class="svg-node svg-node--server" />
+    <text x="825" y="281" text-anchor="middle" class="svg-label">Destino</text>
+    <text x="825" y="304" text-anchor="middle" class="svg-label svg-label--small">reconstrói e interpreta</text>
+
+    <line x1="825" y1="142" x2="825" y2="250" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l01-arrow)" />
+
+    <rect x="40" y="215" width="600" height="125" rx="12" class="svg-boundary" />
+    <text x="340" y="236" text-anchor="middle" class="svg-label svg-label--small">Observadores: veem representações do tráfego</text>
+
+    <rect x="70" y="250" width="250" height="72" rx="12" class="svg-node svg-node--security" />
+    <text x="195" y="281" text-anchor="middle" class="svg-label">Ferramentas</text>
+    <text x="195" y="304" text-anchor="middle" class="svg-label svg-label--small">Wireshark, logs, SIEM</text>
+
+    <rect x="360" y="250" width="250" height="72" rx="12" class="svg-node svg-node--cloud" />
+    <text x="485" y="281" text-anchor="middle" class="svg-label">Cloud</text>
+    <text x="485" y="304" text-anchor="middle" class="svg-label svg-label--small">flow logs, métricas</text>
+
+    <path d="M825 196 C760 196 700 200 642 236" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m00l01-arrow)" />
+    <text x="735" y="186" text-anchor="middle" class="svg-label svg-label--small">cópias e resumos</text>
+
+    <text x="480" y="378" text-anchor="middle" class="svg-label svg-label--small">O significado não viaja sozinho: ele é reconstruído por camadas de interpretação.</text>
+    <text x="480" y="400" text-anchor="middle" class="svg-label svg-label--small">Captura, log e flow log mostram uma interpretação dos bytes, não a realidade completa.</text>
+  </svg>
+</section>

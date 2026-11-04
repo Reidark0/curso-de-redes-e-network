@@ -1,0 +1,69 @@
+
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <div class="definition-box">
+    <strong>Definição:</strong> representação digital é a conversão de algo significativo para humanos ou aplicações em uma sequência padronizada de bits, que pode ser armazenada, processada, transmitida e reinterpretada por hardware e software.
+  </div>
+  <p>
+    Um <strong>bit</strong> é a menor unidade de informação digital: tem dois estados possíveis, normalmente escritos como 0 e 1. Um <strong>byte</strong> é um grupo de 8 bits. Com esses blocos, computadores representam números, textos, imagens, programas, pacotes de rede, certificados, chaves criptográficas e logs.</p>
+  <p>
+    Separe três ideias: a <strong>informação</strong> é o que se quer comunicar; a <strong>representação</strong> é como essa informação vira bits; a <strong>interpretação</strong> é o processo de atribuir significado aos bits. A sequência <strong>01000001</strong>, por exemplo, pode ser o número 65, a letra A em uma codificação de texto, parte de uma instrução de máquina ou só um byte dentro de um arquivo. Sem contexto, bits são apenas bits.</p>
+  <p>
+    Em redes, esse contexto vem dos protocolos. O Ethernet define como organizar bytes em um quadro local. O IPv4 define como interpretar campos como versão, tamanho, origem e destino. O TCP define portas, sequência, confirmação e flags. O HTTP define mensagens de aplicação. O TLS define como proteger a comunicação. Cada camada dá significado a bytes que, isolados, não explicam a própria função.</p>
+  <h3>Mudar a representação não é o mesmo que proteger</h3>
+  <p>
+    Quando bytes parecem “estranhos”, eles podem ter passado por transformações muito diferentes:</p>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Transformação</th>
+          <th>Para que serve</th>
+          <th>Como se reverte</th>
+          <th>Exemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Codificação</td>
+          <td>Representar dados em outro formato ou alfabeto</td>
+          <td>Qualquer um reverte, sem segredo</td>
+          <td>UTF-8, Base64, hexadecimal</td>
+        </tr>
+        <tr>
+          <td>Serialização</td>
+          <td>Transformar uma estrutura (objeto, lista) em sequência de bytes</td>
+          <td>Lendo com o mesmo formato</td>
+          <td>JSON, ASN.1</td>
+        </tr>
+        <tr>
+          <td>Compressão</td>
+          <td>Reduzir o tamanho</td>
+          <td>Descompactando, sem segredo</td>
+          <td>gzip</td>
+        </tr>
+        <tr>
+          <td>Criptografia</td>
+          <td>Proteger a confidencialidade</td>
+          <td>Só com a chave</td>
+          <td>TLS</td>
+        </tr>
+        <tr>
+          <td>Hash</td>
+          <td>Gerar um resumo de tamanho fixo para verificar integridade</td>
+          <td>Não se reverte</td>
+          <td>SHA-256</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout warning">
+    <strong>Erros comuns:</strong>
+    <ul>
+      <li><strong>Achar que o computador “envia um site”, “uma senha” ou entende texto diretamente.</strong> Ele envia sequências de bits; texto é a interpretação de bytes segundo uma codificação, como UTF-8. O significado só aparece porque origem e destino concordam em como interpretar.</li>
+      <li><strong>Confundir dado com sinal físico.</strong> Dado é a informação representada; sinal é a forma física que transporta os bits. Misturar os dois faz o diagnóstico confundir problema de aplicação com problema de camada física.</li>
+      <li><strong>Concluir que todo payload ilegível é criptografia ou ataque.</strong> Antes, verifique protocolo, formato, compressão, serialização, codificação e contexto.</li>
+      <li><strong>Pular binário e hexadecimal por parecerem teoria demais.</strong> Sem eles, subnetting, MAC, IPv6, flags e dumps viram decoreba.</li>
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,10 @@
+
+<section class="lesson-section lesson-section--cloud">
+  <h2>11. Exemplo em cloud</h2>
+  <p>
+    Em cloud, a infraestrutura é altamente abstrata, mas a representação digital continua existindo. Quando uma aplicação em uma VPC ou VNet envia dados para outra aplicação, o provedor pode encapsular tráfego, aplicar políticas, registrar flow logs, medir bytes, cobrar transferência, criptografar discos, armazenar objetos e entregar métricas. Tudo isso são representações de eventos, estados e tráfego.</p>
+  <p>
+    Um flow log não é o pacote original completo. Ele é uma representação resumida: origem, destino, porta, protocolo, ação, quantidade de bytes, quantidade de pacotes e horário. Isso é excelente para auditoria e custo, mas não substitui captura de pacote quando o problema exige ver payload ou detalhes de handshake. Da mesma forma, métricas de cloud podem indicar aumento de tráfego, mas não necessariamente explicar o conteúdo desse tráfego.</p>
+  <p>
+    Financeiramente, representação também importa. Provedores cobram por armazenamento, transferência de dados, logs ingeridos, métricas, consultas, retenção e processamento. Um erro de configuração que gera logs excessivos não muda apenas a operação; muda o custo. Entender o que está sendo representado ajuda a decidir o que coletar, por quanto tempo reter e como investigar sem gerar custo desnecessário.</p>
+</section>

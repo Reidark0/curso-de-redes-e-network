@@ -1,0 +1,20 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>
+    Por dentro, a representação digital funciona como uma cadeia de transformação e reconstrução. O usuário não digita bits. Ele clica, escreve, grava áudio, tira uma foto ou executa um comando. A aplicação transforma essa ação em dados. O sistema operacional e as bibliotecas organizam esses dados em estruturas. A pilha de rede encapsula os dados em protocolos. A placa de rede transforma bits em sinais. O destino faz o caminho inverso.</p>
+  <ol class="flow-list">
+    <li><strong>Intenção:</strong> uma pessoa ou processo quer realizar algo, como abrir um site, enviar uma mensagem ou consultar uma API.</li>
+    <li><strong>Dado de aplicação:</strong> a aplicação cria uma representação lógica, como uma requisição HTTP, um documento JSON ou um arquivo.</li>
+    <li><strong>Codificação:</strong> textos, números e estruturas são convertidos para bytes segundo regras, como UTF-8, binário próprio, JSON, ASN.1 ou outros formatos.</li>
+    <li><strong>Encapsulamento:</strong> a rede adiciona cabeçalhos e metadados: portas, IPs, endereços MAC, checksums, tamanho, flags e outros campos.</li>
+    <li><strong>Bits:</strong> os bytes são vistos como sequências de 0 e 1.</li>
+    <li><strong>Sinais físicos:</strong> bits são convertidos em variações físicas no meio: tensão elétrica, luz em fibra ou ondas de rádio.</li>
+    <li><strong>Reconstrução:</strong> o receptor mede os sinais, reconstrói bits, agrupa bytes, valida protocolos e entrega dados para a aplicação.</li>
+  </ol>
+  <p>
+    Esse processo precisa lidar com imperfeições físicas. Cabos sofrem interferência. Rádio sofre ruído, reflexão e disputa pelo meio. Fibra sofre atenuação e problemas de conectorização. Hardware real não enxerga zeros e uns abstratos; ele mede fenômenos físicos e decide se aquilo representa 0 ou 1. Por isso existem tolerâncias, sincronização, codificação de linha, checksums, CRCs, retransmissões e protocolos de correção ou detecção de erro.</p>
+  <div class="callout callout--security">
+    <strong>Ligação com segurança:</strong> muitos controles de segurança funcionam porque validam interpretação. Um parser seguro rejeita dados malformados. Um certificado digital ajuda a validar identidade. Um checksum detecta alteração acidental. Um MAC criptográfico detecta alteração maliciosa. Um SIEM interpreta logs para transformar bytes em evidência operacional.
+  </div>
+</section>
