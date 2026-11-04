@@ -1,0 +1,71 @@
+{
+  "id": "2.10",
+  "versao": "nova",
+  "titulo": "Revisão prática do Modelo OSI",
+  "tipo": "ligação/revisão",
+  "palavras": {
+    "visiveis": 3489,
+    "invisiveis": 47,
+    "teoriaVisivel": 2154
+  },
+  "porCampoVisivel": {
+    "content.motivation": 135,
+    "content.problem": 95,
+    "content.concept": 210,
+    "content.internals": 400,
+    "content.architecture": 175,
+    "content.simpleExample": 80,
+    "content.enterpriseExample": 107,
+    "content.cloudExample": 114,
+    "content.devsecopsExample": 75,
+    "content.diagram": 40,
+    "content.summary": 89,
+    "content.nextTheme": 40,
+    "security": 168,
+    "troubleshooting": 237,
+    "glossary": 189,
+    "title+subtitle": 23,
+    "objectives": 50,
+    "learningOutcomes": 50,
+    "quiz": 388,
+    "flashcards": 117,
+    "mentorQuestions": 184,
+    "exercises": 114,
+    "challenge": 135,
+    "commentedSolution": 182,
+    "references": 46,
+    "linksToOtherCourses": 46
+  },
+  "porCampoInvisivel": {
+    "networkContext": 47
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "60-85 min",
+    "estimatedStudyTimeMinutes": 85,
+    "M": 72.5,
+    "T": 72.6,
+    "partes": {
+      "teoria": 16.6,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "60-85 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 27
+  }
+}

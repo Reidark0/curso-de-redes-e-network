@@ -1,0 +1,83 @@
+{
+  "id": "2.10",
+  "versao": "original",
+  "titulo": "Revisão prática do Modelo OSI",
+  "tipo": "ligação/revisão",
+  "palavras": {
+    "visiveis": 3532,
+    "invisiveis": 595,
+    "teoriaVisivel": 2416
+  },
+  "porCampoVisivel": {
+    "content.motivation": 168,
+    "content.history": 174,
+    "content.problem": 115,
+    "content.evolution": 123,
+    "content.concept": 103,
+    "content.internals": 171,
+    "content.architecture": 136,
+    "content.analogy": 108,
+    "content.simpleExample": 91,
+    "content.enterpriseExample": 115,
+    "content.cloudExample": 131,
+    "content.devsecopsExample": 94,
+    "content.securityExample": 144,
+    "content.diagram": 53,
+    "content.summary": 76,
+    "content.nextTheme": 49,
+    "security": 168,
+    "troubleshooting": 208,
+    "glossary": 189,
+    "title+subtitle": 23,
+    "objectives": 50,
+    "learningOutcomes": 50,
+    "quiz": 241,
+    "flashcards": 84,
+    "mentorQuestions": 119,
+    "exercises": 140,
+    "challenge": 135,
+    "commentedSolution": 182,
+    "references": 46,
+    "linksToOtherCourses": 46
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 40,
+    "content.exercisesIntro": 23,
+    "content.challengeIntro": 41,
+    "content.solutionIntro": 33,
+    "networkContext": 47,
+    "protocolFields": 59,
+    "packetFlow": 103,
+    "deepDive": 158,
+    "commonMistakes": 91
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "80-115 min",
+    "estimatedStudyTimeMinutes": 115,
+    "M": 97.5,
+    "T": 80.6,
+    "partes": {
+      "teoria": 18.6,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "70-95 min",
+    "vereditoAutomatico": "INFLADA",
+    "pctTeoria": 27
+  }
+}
