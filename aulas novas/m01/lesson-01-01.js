@@ -4,8 +4,8 @@ export const lesson0101 = {
   "order": 1,
   "title": "O que é uma rede e por que existe",
   "subtitle": "A rede como resposta ao problema de compartilhar informação, serviços e recursos entre pessoas, sistemas e organizações.",
-  "duration": "70-100 min",
-  "estimatedStudyTimeMinutes": 100,
+  "duration": "15-25 min + 30 min de prática extra",
+  "estimatedStudyTimeMinutes": 25,
   "difficulty": "iniciante",
   "type": "fundamental",
   "xp": 185,
@@ -13,13 +13,9 @@ export const lesson0101 = {
     "redes",
     "fundamentos",
     "comunicação",
-    "lan",
-    "wan",
+    "dispositivos",
     "protocolos",
-    "segurança",
-    "troubleshooting",
-    "cloud",
-    "devsecops"
+    "diagnóstico"
   ],
   "prerequisites": [
     {
@@ -31,32 +27,19 @@ export const lesson0101 = {
     }
   ],
   "objectives": [
-    "Explicar por que redes existem antes de decorar equipamentos e protocolos.",
-    "Diferenciar dispositivo final, dispositivo intermediário, meio de transmissão, serviço, protocolo e política.",
-    "Entender rede como sistema sociotécnico: tecnologia, operação, segurança, custo e finalidade.",
-    "Relacionar redes domésticas, corporativas, cloud e DevSecOps.",
-    "Criar um primeiro modelo mental para diagnosticar problemas básicos de conectividade."
-  ],
-  "learningOutcomes": [
-    "Dado um cenário simples, o aluno identifica quem são os participantes da rede e qual problema a rede resolve.",
-    "Dado um incidente inicial, o aluno separa falha de dispositivo, meio, endereço, protocolo, serviço e política.",
-    "Dado um desenho corporativo ou cloud, o aluno explica por que a rede é mais do que cabos e Wi-Fi."
+    "Explicar por que redes existem (compartilhar informação, serviços e recursos) e por que, por isso, também precisam de controle, operação e segurança.",
+    "Identificar numa rede as partes que a compõem: dispositivos finais e intermediários, meios, endereços, protocolos, serviços e políticas.",
+    "Localizar em qual etapa de um acesso (endereçamento, meio, intermediários, destino ou controle) um \"não acessa\" quebrou, sem confundir conectividade com autorização."
   ],
   "content": {
-    "motivation": "\n<section class=\"lesson-section lesson-section--motivation\">\n  <h2>Motivação</h2>\n  <p>Imagine uma empresa pequena onde cada computador trabalha isolado. Um funcionário cria uma planilha no próprio notebook, outro precisa imprimir um contrato, o financeiro precisa acessar um sistema, o suporte precisa atualizar uma máquina e o time de segurança precisa investigar um alerta. Sem rede, cada troca dependeria de pendrive, deslocamento físico, cópia manual ou exposição direta de serviços sem controle.</p>\n  <p>Uma rede existe para resolver esse problema: permitir que participantes diferentes compartilhem informações, serviços e recursos de forma previsível. Endereçamento, protocolos, roteamento, DNS, segmentação, logs e quase todo o resto do curso são partes dessa resposta.</p>\n  <div class=\"callout callout--problem\"><strong>Problema real:</strong> quando alguém diz “a rede caiu”, raramente está dizendo algo preciso. Pode ser cabo, Wi-Fi, DHCP, DNS, gateway, firewall, proxy, autenticação, certificado, servidor, rota, política cloud ou aplicação. A primeira habilidade profissional é entender o que uma rede é para conseguir separar esses componentes.</div>\n</section>\n",
-    "history": "\n<section class=\"lesson-section lesson-section--history\">\n  <h2>História e evolução</h2>\n  <p>As primeiras redes não nasceram para “ter internet”. Computadores eram caros, isolados e centralizados, e os dados circulavam em cartões perfurados, fitas e discos. As redes surgiram para compartilhar recursos caros, como processamento, armazenamento, impressoras e terminais. Depois disso, cada fase resolveu um problema e criou o seguinte, e é isso que explica por que firewalls, NAT, DNS e VPN existem:</p>\n  <div class=\"responsive-table\"><table class=\"data-table comparison-table\">\n    <thead><tr><th>Fase</th><th>Como funcionava</th><th>Limitação</th><th>O que veio depois</th></tr></thead>\n    <tbody>\n      <tr><td>Computadores isolados</td><td>Cada máquina guardava seus próprios dados.</td><td>Baixo compartilhamento e muita cópia manual.</td><td>Redes locais e terminais.</td></tr>\n      <tr><td>Redes locais</td><td>Equipamentos próximos compartilhavam serviços.</td><td>Dificuldade de conectar filiais e outras organizações.</td><td>Roteamento e redes de longa distância.</td></tr>\n      <tr><td>Internet</td><td>Redes diferentes passaram a se interconectar por padrões comuns.</td><td>Exposição, escala, endereçamento e segurança viraram desafios.</td><td>Firewalls, NAT, DNS, TLS, VPN e políticas.</td></tr>\n      <tr><td>Cloud e mobilidade</td><td>Usuários, aplicações e dados deixaram de estar apenas no escritório.</td><td>Perímetro tradicional ficou insuficiente.</td><td>Zero Trust, SDN, SASE, IaC e observabilidade.</td></tr>\n    </tbody>\n  </table></div>\n  <p>Hoje a rede conecta não só computadores, mas também usuários remotos, APIs, containers, funções serverless, dispositivos IoT e ambientes híbridos (parte local, parte em cloud).</p>\n</section>\n",
-    "problem": "\n<section class=\"lesson-section lesson-section--problem\">\n  <h2>Problema</h2>\n  <p>O problema que uma rede resolve não é só “ligar computadores”. É criar um sistema compartilhado de comunicação entre participantes que podem estar em lugares diferentes, usar tecnologias diferentes, pertencer a organizações diferentes e exigir níveis diferentes de confiança. Por isso, toda rede precisa atender a várias exigências ao mesmo tempo:</p>\n  <ul class=\"flow-list\">\n    <li><strong>Compartilhamento:</strong> usuários precisam acessar arquivos, impressoras, sistemas, bancos de dados e aplicações.</li>\n    <li><strong>Comunicação:</strong> máquinas precisam trocar mensagens em formatos compreensíveis.</li>\n    <li><strong>Escala:</strong> a solução precisa funcionar para dois dispositivos, cem usuários, milhares de servidores ou milhões de clientes.</li>\n    <li><strong>Controle:</strong> nem todo mundo deve acessar tudo; conectividade não é autorização.</li>\n    <li><strong>Operação:</strong> quando algo falha, alguém precisa diagnosticar sem adivinhar, e isso exige documentação, monitoramento e controle de mudanças.</li>\n    <li><strong>Segurança:</strong> a mesma rede que permite colaboração também pode permitir abuso, movimento lateral e vazamento.</li>\n    <li><strong>Custo:</strong> switches, roteadores, firewalls, access points, links, licenças e equipe especializada custam dinheiro; em cloud, tráfego, NAT gateway, firewalls gerenciados, load balancers e flow logs geram custo recorrente.</li>\n  </ul>\n  <p>Sem rede, a empresa cria ilhas de informação. Com uma rede mal projetada, cria uma superfície de ataque enorme. E nem tudo deve ser conectado: um sistema pode ficar isolado de propósito quando a segurança ou a regulação exigem, ou quando conectá-lo traria risco sem necessidade operacional.</p>\n</section>\n",
-    "concept": "\n<section class=\"lesson-section lesson-section--concept\">\n  <h2>Conceito</h2>\n  <div class=\"definition-box\"><strong>Definição:</strong> uma rede de computadores é um conjunto de dispositivos, meios de comunicação, protocolos, endereços, serviços e políticas que permite que um participante envie dados para outro, diretamente ou por intermediários, usando regras comuns de comunicação e controles que determinam o que é permitido, observado e protegido.</div>\n  <p>Essa definição é mais útil do que “computadores conectados” porque inclui o que aparece no trabalho real: o cabo ou o Wi-Fi, a placa de rede, o switch, o roteador, o IP, o DNS, o firewall, a aplicação, a identidade, a política e os logs.</p>\n  <p>Ela também mostra que a rede é um <strong>sistema sociotécnico</strong>: além da tecnologia, envolve pessoas que operam e mudam a rede, regras de segurança, custo e uma finalidade de negócio. Uma decisão técnica correta pode ser ruim se não tiver dono, se custar demais ou se abrir acesso a quem não precisa.</p>\n  <div class=\"callout warning\"><strong>O que a rede não garante:</strong>\n    <ul>\n      <li>Ter caminho até o servidor não garante que o serviço esteja funcionando.</li>\n      <li>Mais velocidade contratada não corrige DNS errado, regra bloqueando ou serviço parado.</li>\n      <li>A cloud esconde o cabo, mas não elimina a rede: rotas, filtros e endereços continuam existindo.</li>\n    </ul>\n  </div>\n  <div class=\"callout\"><strong>Erros comuns:</strong>\n    <ul>\n      <li><strong>Achar que rede é só internet.</strong> Em casa, a rede só aparece quando a internet falha. A internet é uma rede de redes; sua LAN e a rede da empresa também são redes, com DNS, gateway e serviços internos próprios.</li>\n      <li><strong>Confundir conectividade com permissão.</strong> Como muitos testes começam com ping ou acesso a uma porta, a pessoa conclui que o acesso deve ser liberado só porque o caminho existe. Conectividade é caminho; autorização é a decisão de quem pode acessar o quê.</li>\n      <li><strong>Chamar tudo de problema de rede.</strong> Sem separar dispositivo, meio, endereço, protocolo, serviço, identidade e política, o troubleshooting vira tentativa e erro.</li>\n    </ul>\n  </div>\n</section>\n",
-    "internals": "\n<section class=\"lesson-section lesson-section--internals\">\n  <h2>Funcionamento interno</h2>\n  <p>Quando um computador acessa um serviço, várias etapas acontecem em sequência. Antes de estudar cada protocolo, enxergue a rede como essa cadeia de dependências:</p>\n  <div class=\"responsive-table\"><table class=\"data-table\">\n    <thead><tr><th>Etapa</th><th>O que acontece</th><th>Exemplo de falha nessa etapa</th></tr></thead>\n    <tbody>\n      <tr><td>1. Origem</td><td>Uma aplicação decide enviar dados, como abrir um site ou acessar um compartilhamento.</td><td>O próprio programa trava ou está mal configurado.</td></tr>\n      <tr><td>2. Formato</td><td>Os dados obedecem a um protocolo, como HTTP, SMB ou DNS.</td><td>Cliente e servidor não falam o mesmo protocolo ou versão.</td></tr>\n      <tr><td>3. Endereçamento</td><td>O sistema descobre para onde enviar os dados (IP, nome via DNS, gateway).</td><td>Host sem IP válido ou nome que não resolve.</td></tr>\n      <tr><td>4. Encapsulamento</td><td>Os dados recebem informações de transporte, rede e enlace.</td><td>Pouco visível neste começo; as camadas são detalhadas no Módulo 2.</td></tr>\n      <tr><td>5. Meio</td><td>Os bits viram sinais elétricos, luz ou rádio.</td><td>Cabo solto, fibra danificada, Wi-Fi fraco.</td></tr>\n      <tr><td>6. Intermediários</td><td>Switches, roteadores, firewalls, proxies e balanceadores tomam decisões de encaminhamento.</td><td>Gateway errado ou interface do roteador desligada.</td></tr>\n      <tr><td>7. Destino</td><td>O serviço recebe, interpreta e responde.</td><td>Serviço parado ou porta fechada.</td></tr>\n      <tr><td>8. Controle</td><td>Políticas de segurança podem permitir, bloquear, registrar ou modificar o fluxo.</td><td>Firewall bloqueia ou o usuário recebe “acesso negado”.</td></tr>\n    </tbody>\n  </table></div>\n  <p>A rede não é um único componente, é uma sequência de dependências. Quando uma delas falha, o sintoma é sempre parecido (“não acessa”), mas a causa pode estar em qualquer etapa. Diagnosticar é descobrir em qual etapa a cadeia quebrou, e a árvore de decisão em <em>Troubleshooting</em> faz isso na ordem: IP, gateway, DNS, porta e política.</p>\n</section>\n",
-    "architecture": "\n<section class=\"lesson-section lesson-section--architecture\">\n  <h2>Arquitetura</h2>\n  <p>Toda rede, de casa à cloud, combina os mesmos papéis:</p>\n  <ul>\n    <li><strong>Dispositivos finais:</strong> notebooks, celulares, servidores, impressoras, câmeras, VMs, containers e aplicações. Consomem ou oferecem serviços.</li>\n    <li><strong>Dispositivos intermediários:</strong> switches, roteadores, firewalls, access points, proxies, load balancers e gateways. Conectam, encaminham, filtram ou controlam tráfego.</li>\n    <li><strong>Meios de transmissão:</strong> cobre, fibra, rádio, links virtuais, túneis e backbones.</li>\n    <li><strong>Protocolos:</strong> regras que definem formato, ordem, tratamento de erro, estado e interpretação das mensagens.</li>\n    <li><strong>Serviços essenciais:</strong> DHCP, DNS, NTP, diretórios, autenticação e observabilidade.</li>\n    <li><strong>Políticas:</strong> regras de firewall, segmentação, roteamento, autenticação, autorização e auditoria.</li>\n  </ul>\n  <p>Alguns elementos acumulam papéis: o DNS é um serviço que roda num servidor (dispositivo final), e o firewall encaminha tráfego e também aplica política. Em cloud, os papéis continuam os mesmos, com outros nomes:</p>\n  <div class=\"responsive-table\"><table class=\"data-table\">\n    <thead><tr><th>Papel</th><th>Nome em cloud</th></tr></thead>\n    <tbody>\n      <tr><td>Rede e segmentos</td><td>VPC (AWS, Google Cloud) ou VNet (Azure), divididas em subnets</td></tr>\n      <tr><td>Roteamento entre redes</td><td>Route table, peering</td></tr>\n      <tr><td>Saída de redes privadas para a internet</td><td>NAT gateway</td></tr>\n      <tr><td>Filtro e política</td><td>Security group, network security group, firewall gerenciado</td></tr>\n      <tr><td>Distribuição de tráfego entre servidores</td><td>Load balancer</td></tr>\n      <tr><td>Acesso privado a um serviço gerenciado</td><td>Private endpoint</td></tr>\n    </tbody>\n  </table></div>\n</section>\n",
-    "analogy": "\n<section class=\"lesson-section lesson-section--analogy\">\n  <h2>Analogia</h2>\n  <p>Pense em uma rede como o sistema de circulação de uma cidade. Casas e prédios são os dispositivos finais; ruas e cruzamentos são os meios e os intermediários; o endereço diz para onde ir; as regras de trânsito são os protocolos; pedágios, bloqueios e fiscais são as políticas; e as câmeras registram o que passou, como os logs.</p>\n  <div class=\"callout callout--warning\"><strong>Limite da analogia:</strong> numa rede, os dados são quebrados em pacotes, encapsulados, filtrados, retransmitidos e criptografados, coisas que o trânsito de uma cidade não representa.</div>\n</section>\n",
-    "simpleExample": "\n<section class=\"lesson-section lesson-section--example\">\n  <h2>Exemplo simples</h2>\n  <p>Em casa, seu celular se conecta ao Wi-Fi do access point, que normalmente fica dentro do próprio roteador. O roteador entrega um endereço IP ao celular (por exemplo, 192.168.0.15, com gateway 192.168.0.1), encaminha o tráfego para a internet e normalmente também faz NAT. Quando você abre um site, o celular usa DNS para descobrir o endereço do servidor, cria uma conexão, negocia criptografia (TLS) e recebe os dados.</p>\n  <p>Só nessa cena já aparecem rádio, senha do Wi-Fi, endereço IP, gateway, DNS, roteamento, NAT, protocolo, criptografia e uma política básica.</p>\n</section>\n",
-    "enterpriseExample": "\n<section class=\"lesson-section lesson-section--enterprise\">\n  <h2>Exemplo empresarial</h2>\n  <p>Em uma empresa, a rede precisa separar usuários, servidores, visitantes, telefonia, câmeras, impressoras e administração. Um notebook corporativo pode precisar acessar internet, sistema interno, servidor de arquivos, VPN, diretório, EDR, proxy e SIEM, e cada acesso envolve caminho, política, identidade e registro.</p>\n  <p>Por isso, redes corporativas usam VLANs, sub-redes, roteadores, firewalls, proxies, NAC, VPN, DNS interno, DHCP controlado, logs e monitoramento. Ali, a rede é parte da operação e também da segurança.</p>\n</section>\n",
-    "cloudExample": "\n<section class=\"lesson-section lesson-section--cloud\">\n  <h2>Exemplo em cloud</h2>\n  <p>Na cloud, a rede deixa de ser um armário com cabos e passa a ser definida por software, mas o raciocínio é o mesmo. Uma aplicação numa subnet privada pode acessar um banco por private endpoint, sair para a internet por NAT gateway, receber tráfego por load balancer e ser protegida por security groups. Um erro nesse desenho pode causar indisponibilidade, exposição indevida ou custo alto de tráfego.</p>\n</section>\n",
-    "devsecopsExample": "\n<section class=\"lesson-section lesson-section--devsecops\">\n  <h2>Exemplo em DevSecOps</h2>\n  <p>Pipelines dependem de rede o tempo todo: o runner precisa alcançar o repositório, o registry, os scanners e o cluster de deploy. Um pipeline pode falhar porque o runner não resolve DNS, não alcança o registry, está bloqueado por proxy ou não tem rota para um cluster privado.</p>\n  <p>Infraestrutura como código também cria redes: VPCs, subnets, route tables, security groups e firewalls. Um erro numa regra pode abrir demais, bloquear o deploy ou impedir a coleta de logs e métricas.</p>\n</section>\n",
-    "securityExample": "\n<section class=\"lesson-section lesson-section--security\">\n  <h2>Exemplo em Segurança</h2>\n  <p>Em segurança, a rede tem quatro papéis ao mesmo tempo: é superfície de ataque, caminho de movimento lateral, fonte de evidência e ponto de controle. Numa rede plana, um notebook comprometido pode tentar alcançar o servidor de arquivos, as câmeras e a administração. Numa rede segmentada, esse alcance cai, mas só se as regras forem mantidas e os logs registrarem as tentativas. Os riscos e as mitigações estão em <em>Segurança</em>.</p>\n</section>\n",
-    "diagram": "\n<section class=\"lesson-section lesson-section--diagram\">\n  <h2>Diagrama</h2>\n  <p>Dois dispositivos finais chegam ao switch/AP da rede local; o roteador (gateway) encaminha o tráfego para um servidor interno ou para fora da rede local.</p>\n  <svg class=\"lesson-svg\" viewBox=\"0 0 980 460\" role=\"img\" aria-labelledby=\"m01l01-title m01l01-desc\">\n  <title id=\"m01l01-title\">Uma rede como sistema de comunicação entre dispositivos</title>\n  <desc id=\"m01l01-desc\">Diagrama mostrando dois dispositivos finais, um switch, um roteador, um serviço interno e uma nuvem externa, destacando endereçamento, meio físico, protocolo, política e observabilidade.</desc>\n  <defs>\n    <marker id=\"m01l01-arrow\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\" markerUnits=\"strokeWidth\">\n      <path d=\"M0,0 L0,6 L9,3 z\" class=\"svg-arrow\" />\n    </marker>\n  </defs>\n  <rect x=\"35\" y=\"70\" width=\"170\" height=\"82\" rx=\"14\" class=\"svg-node svg-node--client\" />\n  <text x=\"120\" y=\"106\" text-anchor=\"middle\" class=\"svg-label\">Notebook</text>\n  <text x=\"120\" y=\"130\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Dispositivo final</text>\n\n  <rect x=\"35\" y=\"270\" width=\"170\" height=\"82\" rx=\"14\" class=\"svg-node svg-node--client\" />\n  <text x=\"120\" y=\"306\" text-anchor=\"middle\" class=\"svg-label\">Celular</text>\n  <text x=\"120\" y=\"330\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Wi-Fi / usuário</text>\n\n  <rect x=\"285\" y=\"170\" width=\"160\" height=\"90\" rx=\"14\" class=\"svg-node svg-node--switch\" />\n  <text x=\"365\" y=\"207\" text-anchor=\"middle\" class=\"svg-label\">Switch/AP</text>\n  <text x=\"365\" y=\"232\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Conecta a rede local</text>\n\n  <rect x=\"525\" y=\"170\" width=\"160\" height=\"90\" rx=\"14\" class=\"svg-node svg-node--router\" />\n  <text x=\"605\" y=\"207\" text-anchor=\"middle\" class=\"svg-label\">Roteador</text>\n  <text x=\"605\" y=\"232\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Encaminha redes</text>\n\n  <rect x=\"760\" y=\"70\" width=\"180\" height=\"82\" rx=\"14\" class=\"svg-node svg-node--server\" />\n  <text x=\"850\" y=\"106\" text-anchor=\"middle\" class=\"svg-label\">Servidor interno</text>\n  <text x=\"850\" y=\"130\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Arquivo / app / AD</text>\n\n  <rect x=\"760\" y=\"270\" width=\"180\" height=\"82\" rx=\"14\" class=\"svg-node svg-node--cloud\" />\n  <text x=\"850\" y=\"306\" text-anchor=\"middle\" class=\"svg-label\">Internet / Cloud</text>\n  <text x=\"850\" y=\"330\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">SaaS / API / VPC</text>\n\n  <line x1=\"205\" y1=\"111\" x2=\"285\" y2=\"194\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m01l01-arrow)\" />\n  <line x1=\"205\" y1=\"311\" x2=\"285\" y2=\"236\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m01l01-arrow)\" />\n  <line x1=\"445\" y1=\"215\" x2=\"525\" y2=\"215\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m01l01-arrow)\" />\n  <line x1=\"685\" y1=\"195\" x2=\"760\" y2=\"125\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m01l01-arrow)\" />\n  <line x1=\"685\" y1=\"235\" x2=\"760\" y2=\"300\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m01l01-arrow)\" />\n\n  <rect x=\"250\" y=\"380\" width=\"480\" height=\"52\" rx=\"12\" class=\"svg-boundary\" />\n  <text x=\"490\" y=\"412\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Rede = dispositivos + meio + endereços + protocolos + políticas + operação</text>\n\n  <text x=\"350\" y=\"155\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">LAN</text>\n  <text x=\"610\" y=\"155\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Gateway</text>\n  <text x=\"850\" y=\"245\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Fora da rede local</text>\n</svg>\n</section>\n",
-    "summary": "\n<section class=\"lesson-section lesson-section--summary\">\n  <h2>Resumo</h2>\n  <ul>\n    <li><strong>Modelo mental:</strong> rede é uma cadeia de comunicação com origem, dados, protocolo, endereço, meio, intermediários, destino, política e evidência.</li>\n    <li><strong>Definição:</strong> rede é um sistema de comunicação entre participantes, feito de dispositivos, meios, endereços, protocolos, serviços e políticas, e que envolve operação, segurança e custo. Não é só cabo ou Wi-Fi.</li>\n    <li><strong>Papéis:</strong> dispositivos finais consomem ou oferecem serviços; intermediários conectam, encaminham, filtram ou controlam. Em cloud, os papéis só mudam de nome (VPC/VNet, subnet, security group).</li>\n    <li><strong>Conectividade não é autorização:</strong> ter caminho não significa ter permissão, nem que o serviço esteja funcionando.</li>\n    <li><strong>Diagnóstico:</strong> “a rede caiu” não é um diagnóstico; descubra em qual etapa a cadeia quebrou (IP, gateway, DNS, porta, política).</li>\n  </ul>\n</section>\n",
+    "motivation": "\n<section class=\"lesson-section lesson-section--motivation\">\n  <h2>Motivação</h2>\n  <p>Você já ouviu, ou disse, “a internet caiu”. O celular mostra o Wi-Fi conectado, mas nenhum site abre. Ou, no trabalho, o e-mail funciona e só o sistema da empresa não entra. A reação comum é reiniciar o roteador, ligar para o provedor e esperar. Às vezes resolve; muitas vezes, não, porque o defeito estava num nome que não foi traduzido em endereço ou numa permissão negada, e nada disso melhora com o roteador reiniciado.</p>\n  <p>“A rede” parece uma coisa só, e é por isso que ela é culpada por tudo. Nesta aula você vai ver de que partes uma rede é feita e em que ordem elas entram quando você acessa algo. Em suporte, infraestrutura ou segurança, separar essas partes antes de mexer em qualquer coisa é a primeira habilidade que se espera de você.</p>\n</section>\n",
+    "problem": "\n<section class=\"lesson-section lesson-section--problem\">\n  <h2>Problema</h2>\n  <p>É isso que acontece quando se trata a rede como um bloco único: ela tem várias partes, e cada uma pode falhar sozinha. Para entender por que há tantas partes, comece pelo motivo de a rede existir.</p>\n  <p>Sem rede, cada computador é uma ilha: arquivos circulam por pendrive e cada máquina precisa da própria impressora. As primeiras redes surgiram para compartilhar recursos caros. Mas compartilhar cria exigências novas: <strong>controle</strong> (nem todo mundo deve acessar tudo), <strong>operação</strong> (achar a causa de uma falha sem adivinhar), <strong>segurança</strong> e <strong>custo</strong>. Numa <strong>rede plana</strong>, em que todos os aparelhos se alcançam, um notebook invadido chega ao servidor de arquivos e às câmeras; esse avanço se chama <strong>movimento lateral</strong>. Por isso, conectar só faz sentido quando há necessidade, e alguns sistemas ficam isolados de propósito. Esta aula mostra as partes que atendem a essas exigências e a ordem em que entram num acesso.</p>\n</section>\n",
+    "concept": "\n<section class=\"lesson-section lesson-section--concept\">\n  <h2>Conceito</h2>\n  <div class=\"definition-box\"><strong>Definição:</strong> uma rede de computadores é um conjunto de dispositivos, meios de transmissão, endereços, protocolos, serviços e políticas que permite a um participante enviar dados a outro, diretamente ou por intermediários, seguindo regras comuns e controles que decidem o que é permitido.</div>\n  <p>Cada parte da definição tem um papel:</p>\n  <ul>\n    <li><strong>Dispositivos finais:</strong> onde a comunicação começa ou termina. Notebook, celular, servidor e impressora consomem ou oferecem serviços.</li>\n    <li><strong>Dispositivos intermediários:</strong> levam a comunicação adiante. O switch liga os aparelhos de uma mesma rede local, o access point é o aparelho que cria o Wi-Fi, o roteador liga redes diferentes e o firewall filtra o que passa.</li>\n    <li><strong>Meios de transmissão:</strong> por onde os bits viajam como sinal: cobre, fibra ou rádio (aula 0.5).</li>\n    <li><strong>Endereços:</strong> para onde enviar. Cada aparelho tem um endereço IP; nomes como <code>www.exemplo.com</code> são traduzidos em IP pelo DNS.</li>\n    <li><strong>Protocolos:</strong> as regras combinadas da conversa (aula 0.7).</li>\n    <li><strong>Serviços:</strong> o que se quer acessar: um site, uma pasta compartilhada, a impressão, o próprio DNS.</li>\n    <li><strong>Políticas:</strong> regras que decidem quem pode acessar o quê, como as do firewall e as permissões de uma pasta.</li>\n  </ul>\n  <p>Alguns elementos acumulam papéis: o DNS é um serviço que roda num servidor, e o firewall encaminha tráfego e também aplica política. A aula 1.2 detalha esses papéis.</p>\n  <div class=\"callout warning\"><strong>Erros comuns</strong>\n    <ul>\n      <li><strong>Achar que rede é só internet.</strong> A internet é uma rede de redes. A rede da sua casa e a da empresa também são redes, com serviços próprios que funcionam mesmo sem internet.</li>\n      <li><strong>Confundir conectividade com autorização.</strong> Conectividade é existir caminho até o destino; autorização é a decisão de quem pode acessar o quê. Chegar ao servidor, por exemplo com um ping que responde, não dá permissão para abrir os arquivos dele.</li>\n      <li><strong>Chamar tudo de problema de rede.</strong> Sem separar dispositivo, meio, endereço, protocolo, serviço e política, o diagnóstico vira tentativa e erro.</li>\n    </ul>\n  </div>\n</section>\n",
+    "internals": "\n<section class=\"lesson-section lesson-section--internals\">\n  <h2>Funcionamento interno</h2>\n  <p>Quando um computador acessa um serviço, as partes da rede entram numa ordem. Enxergue o acesso como uma cadeia de dependências:</p>\n  <div class=\"responsive-table\"><table class=\"data-table\">\n    <thead><tr><th>Etapa</th><th>O que acontece</th><th>Exemplo de falha nessa etapa</th></tr></thead>\n    <tbody>\n      <tr><td>1. Origem</td><td>Uma aplicação decide enviar dados, como abrir um site ou uma pasta compartilhada.</td><td>O próprio programa trava ou está mal configurado.</td></tr>\n      <tr><td>2. Formato</td><td>Os dados seguem um protocolo, como HTTP (sites) ou DNS.</td><td>Cliente e servidor não falam o mesmo protocolo ou versão.</td></tr>\n      <tr><td>3. Endereçamento</td><td>O sistema descobre o IP do destino (pelo DNS, se tiver só o nome) e o gateway, o roteador que leva para fora da rede local.</td><td>Aparelho sem IP válido ou nome que não resolve.</td></tr>\n      <tr><td>4. Meio</td><td>Os bits viram sinais elétricos, luz ou rádio.</td><td>Cabo solto, fibra danificada, Wi-Fi fraco.</td></tr>\n      <tr><td>5. Intermediários</td><td>Switches, access points, roteadores e firewalls levam os dados adiante.</td><td>Gateway errado ou roteador desligado.</td></tr>\n      <tr><td>6. Destino</td><td>O serviço recebe, interpreta e responde.</td><td>Serviço parado.</td></tr>\n      <tr><td>7. Controle</td><td>Políticas permitem, bloqueiam ou registram o acesso.</td><td>Firewall bloqueia ou o usuário recebe “acesso negado”.</td></tr>\n    </tbody>\n  </table></div>\n  <p>Quando qualquer etapa falha, o sintoma parece o mesmo (“não acessa”), mas a causa está em lugares diferentes. Diagnosticar é descobrir em qual etapa a cadeia quebrou, começando pelo seu lado: o aparelho tem IP? Alcança o gateway? O nome resolve? O serviço responde? A política permite? Se o caminho funciona e só a última pergunta falha, o problema não é de conectividade.</p>\n</section>\n",
+    "analogy": "\n<section class=\"lesson-section lesson-section--analogy\">\n  <h2>Analogia</h2>\n  <p>Pense numa rede como a circulação de uma cidade. Casas e prédios são os dispositivos finais; ruas e cruzamentos, os meios e os intermediários; o endereço diz para onde ir e as regras de trânsito são os protocolos. Portarias e bloqueios são as políticas: chegar à porta de um prédio não garante que você possa entrar.</p>\n</section>\n",
+    "simpleExample": "\n<section class=\"lesson-section lesson-section--example\">\n  <h2>Exemplo simples</h2>\n  <p>Em casa, você abre um site no celular. Todas as partes da definição aparecem nessa cena:</p>\n  <ul>\n    <li><strong>Dispositivo final:</strong> o celular, de um lado, e o servidor do site, do outro.</li>\n    <li><strong>Intermediário e meio:</strong> o roteador doméstico, que normalmente já traz o access point dentro; entre ele e o celular, o meio é o rádio do Wi-Fi.</li>\n    <li><strong>Endereços:</strong> o roteador entrega ao celular um IP, por exemplo <code>192.168.0.15</code>, e se apresenta como gateway, <code>192.168.0.1</code>.</li>\n    <li><strong>Serviço:</strong> o DNS traduz o nome do site no IP do servidor; depois, o próprio site responde.</li>\n    <li><strong>Protocolos:</strong> HTTP para pedir a página e TLS para criptografar a conexão (o <code>https://</code>).</li>\n    <li><strong>Política:</strong> a senha do Wi-Fi decide quem entra na rede da casa.</li>\n  </ul>\n  <p>No caso da Motivação, o Wi-Fi conectado mostra que o meio e o access point funcionam. Se nenhum site abre, a falha está em outra parte da lista: o endereço, o gateway ou o DNS.</p>\n</section>\n",
+    "diagram": "\n<section class=\"lesson-section lesson-section--diagram\">\n  <h2>Diagrama</h2>\n  <p>Dois dispositivos finais chegam ao switch/AP da rede local; o roteador (gateway) encaminha o tráfego para um servidor interno ou para fora da rede local.</p>\n  <svg class=\"lesson-svg\" viewBox=\"0 0 980 460\" role=\"img\" aria-labelledby=\"m01l01-title m01l01-desc\">\n  <title id=\"m01l01-title\">Uma rede como sistema de comunicação entre dispositivos</title>\n  <desc id=\"m01l01-desc\">Diagrama mostrando dois dispositivos finais, um switch, um roteador, um serviço interno e uma nuvem externa, e o gateway que separa a rede local do que está fora dela.</desc>\n  <defs>\n    <marker id=\"m01l01-arrow\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\" markerUnits=\"strokeWidth\">\n      <path d=\"M0,0 L0,6 L9,3 z\" class=\"svg-arrow\" />\n    </marker>\n  </defs>\n  <rect x=\"35\" y=\"70\" width=\"170\" height=\"82\" rx=\"14\" class=\"svg-node svg-node--client\" />\n  <text x=\"120\" y=\"106\" text-anchor=\"middle\" class=\"svg-label\">Notebook</text>\n  <text x=\"120\" y=\"130\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Dispositivo final</text>\n\n  <rect x=\"35\" y=\"270\" width=\"170\" height=\"82\" rx=\"14\" class=\"svg-node svg-node--client\" />\n  <text x=\"120\" y=\"306\" text-anchor=\"middle\" class=\"svg-label\">Celular</text>\n  <text x=\"120\" y=\"330\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Wi-Fi / usuário</text>\n\n  <rect x=\"285\" y=\"170\" width=\"160\" height=\"90\" rx=\"14\" class=\"svg-node svg-node--switch\" />\n  <text x=\"365\" y=\"207\" text-anchor=\"middle\" class=\"svg-label\">Switch/AP</text>\n  <text x=\"365\" y=\"232\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Conecta a rede local</text>\n\n  <rect x=\"525\" y=\"170\" width=\"160\" height=\"90\" rx=\"14\" class=\"svg-node svg-node--router\" />\n  <text x=\"605\" y=\"207\" text-anchor=\"middle\" class=\"svg-label\">Roteador</text>\n  <text x=\"605\" y=\"232\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Encaminha redes</text>\n\n  <rect x=\"760\" y=\"70\" width=\"180\" height=\"82\" rx=\"14\" class=\"svg-node svg-node--server\" />\n  <text x=\"850\" y=\"106\" text-anchor=\"middle\" class=\"svg-label\">Servidor interno</text>\n  <text x=\"850\" y=\"130\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Arquivos / sistemas</text>\n\n  <rect x=\"760\" y=\"270\" width=\"180\" height=\"82\" rx=\"14\" class=\"svg-node svg-node--cloud\" />\n  <text x=\"850\" y=\"306\" text-anchor=\"middle\" class=\"svg-label\">Internet / Cloud</text>\n  <text x=\"850\" y=\"330\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Sites / serviços</text>\n\n  <line x1=\"205\" y1=\"111\" x2=\"285\" y2=\"194\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m01l01-arrow)\" />\n  <line x1=\"205\" y1=\"311\" x2=\"285\" y2=\"236\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m01l01-arrow)\" />\n  <line x1=\"445\" y1=\"215\" x2=\"525\" y2=\"215\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m01l01-arrow)\" />\n  <line x1=\"685\" y1=\"195\" x2=\"760\" y2=\"125\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m01l01-arrow)\" />\n  <line x1=\"685\" y1=\"235\" x2=\"760\" y2=\"300\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m01l01-arrow)\" />\n\n  <rect x=\"250\" y=\"380\" width=\"480\" height=\"52\" rx=\"12\" class=\"svg-boundary\" />\n  <text x=\"490\" y=\"412\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Rede = dispositivos + meios + endereços + protocolos + serviços + políticas</text>\n\n  <text x=\"350\" y=\"155\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">LAN</text>\n  <text x=\"610\" y=\"155\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Gateway</text>\n  <text x=\"850\" y=\"245\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Fora da rede local</text>\n</svg>\n</section>\n",
+    "summary": "\n<section class=\"lesson-section lesson-section--summary\">\n  <h2>Resumo</h2>\n  <ul>\n    <li><strong>Ideia central:</strong> rede é um sistema de comunicação feito de dispositivos, meios, endereços, protocolos, serviços e políticas, não só cabo ou Wi-Fi.</li>\n    <li>Redes existem para compartilhar informação, serviços e recursos; por isso também precisam de controle, operação e segurança.</li>\n    <li>Dispositivos finais consomem ou oferecem serviços; intermediários conectam, encaminham ou filtram.</li>\n    <li>“A rede caiu” não é diagnóstico: descubra em qual etapa do acesso a cadeia quebrou.</li>\n    <li>Conectividade não é autorização: ter caminho não dá permissão.</li>\n  </ul>\n  <p><em>Já domina isso? Faça o quiz: com 70% ou mais, você pode seguir.</em></p>\n</section>\n",
     "nextTheme": "\n<section class=\"lesson-section lesson-section--next\">\n  <h2>Próximo tema</h2>\n  <p>A próxima aula, “Dispositivos finais, intermediários e serviços”, detalha os papéis dos participantes da rede, para você não confundir switch, roteador, access point, firewall, servidor e serviço.</p>\n</section>\n"
   },
   "networkContext": {
@@ -100,163 +83,13 @@ export const lesson0101 = {
       "cloud networking"
     ]
   },
-  "troubleshooting": {
-    "symptoms": [
-      "Usuário não acessa internet",
-      "Aplicação interna não abre",
-      "Wi-Fi conecta mas nada navega",
-      "Pipeline não alcança registry",
-      "Servidor responde por IP mas não por nome"
-    ],
-    "diagnosticQuestions": [
-      "O problema afeta um usuário, vários usuários ou todos?",
-      "O dispositivo tem IP?",
-      "Existe gateway padrão?",
-      "DNS resolve?",
-      "O caminho até o destino responde?",
-      "A porta do serviço está acessível?",
-      "Existe firewall, proxy, VPN ou política no meio?"
-    ],
-    "commands": [
-      {
-        "platform": "Windows",
-        "command": "ipconfig /all",
-        "purpose": "Ver endereço IP, máscara, gateway, DNS e informações da interface.",
-        "expectedObservation": "Interface ativa com IPv4, gateway e DNS coerentes.",
-        "interpretation": "Se não houver IP válido ou gateway, o problema pode estar antes da aplicação."
-      },
-      {
-        "platform": "Windows",
-        "command": "ping <gateway> && tracert 8.8.8.8",
-        "purpose": "Testar conectividade local e caminho básico para fora.",
-        "expectedObservation": "Resposta do gateway e saltos no caminho.",
-        "interpretation": "Falha no gateway sugere problema local; falha depois pode envolver roteamento, firewall ou provedor."
-      },
-      {
-        "platform": "Linux",
-        "command": "ip addr && ip route && resolvectl status",
-        "purpose": "Ver endereços, rotas e DNS no Linux.",
-        "expectedObservation": "Interface com IP, rota default e servidor DNS configurado.",
-        "interpretation": "Sem rota default, o host não sabe para onde enviar tráfego fora da rede local."
-      },
-      {
-        "platform": "Linux",
-        "command": "ping -c 4 $(ip route | awk '/default/ {print $3; exit}')",
-        "purpose": "Testar alcance do gateway padrão.",
-        "expectedObservation": "Perda baixa e tempos coerentes na rede local.",
-        "interpretation": "Perda para o gateway indica problema local, Wi-Fi, cabo, switch, VLAN ou firewall local."
-      },
-      {
-        "platform": "Cisco IOS",
-        "command": "show ip interface brief",
-        "purpose": "Ver interfaces, endereços e estado operacional.",
-        "expectedObservation": "Interfaces relevantes em up/up.",
-        "interpretation": "Interface down ou administratively down impede comunicação pelo caminho esperado."
-      }
-    ],
-    "decisionTree": [
-      {
-        "if": "Sem IP válido no host",
-        "then": "Verificar DHCP, cabo, Wi-Fi, VLAN ou configuração manual."
-      },
-      {
-        "if": "Tem IP, mas não pinga gateway",
-        "then": "Verificar meio físico, Wi-Fi, máscara, VLAN, firewall local ou gateway errado."
-      },
-      {
-        "if": "Pinga IP externo, mas nomes falham",
-        "then": "Investigar DNS antes de culpar internet inteira."
-      },
-      {
-        "if": "DNS resolve, mas aplicação falha",
-        "then": "Verificar porta, protocolo, TLS, proxy, autenticação e política."
-      }
-    ]
-  },
-  "security": {
-    "goodPractices": [
-      "Documentar segmentos, gateways, serviços críticos e dependências.",
-      "Separar redes por função e criticidade.",
-      "Registrar eventos em firewall, DNS, VPN, proxy e serviços críticos.",
-      "Aplicar menor privilégio também em fluxos de rede.",
-      "Revisar periodicamente regras e exceções."
-    ],
-    "badPractices": [
-      "Colocar todos os ativos na mesma rede sem segmentação.",
-      "Liberar any-any para resolver problema rápido.",
-      "Expor serviços internos diretamente na internet.",
-      "Não manter inventário de dispositivos e serviços.",
-      "Usar conectividade como substituto de autorização."
-    ],
-    "commonErrors": [
-      "Achar que NAT é firewall suficiente.",
-      "Achar que VPN torna qualquer acesso seguro automaticamente.",
-      "Ignorar logs de DNS e proxy em investigação.",
-      "Não separar rede de aplicação e identidade."
-    ],
-    "vulnerabilities": [
-      {
-        "name": "Movimento lateral por rede plana",
-        "description": "Quando muitos ativos ficam no mesmo segmento, um comprometimento pode alcançar mais sistemas.",
-        "defensiveExplanation": "O risco é a ampliação do impacto após o primeiro comprometimento.",
-        "mitigation": "Segmentação, firewalls internos, autenticação forte, EDR, logs e revisão de acessos."
-      },
-      {
-        "name": "Exposição indevida de serviço",
-        "description": "Serviços administrativos ou internos ficam acessíveis além do necessário.",
-        "defensiveExplanation": "A superfície de ataque aumenta quando portas ficam disponíveis para quem não precisa delas.",
-        "mitigation": "Inventário, regras restritivas, bastion, VPN bem controlada, private endpoints e monitoramento."
-      },
-      {
-        "name": "Fluxos sem registro",
-        "description": "Firewall, DNS, proxy e VPN não registram as conexões, ou os logs não são guardados.",
-        "defensiveExplanation": "Sem registro, não dá para reconstruir o que aconteceu num incidente nem comprovar a causa de uma falha.",
-        "mitigation": "Logs de firewall, DNS, proxy e VPN, flow logs em cloud e retenção definida."
-      }
-    ],
-    "monitoring": [
-      "Logs de firewall e proxy",
-      "DNS queries incomuns",
-      "Flow logs em cloud",
-      "Novos dispositivos na rede"
-    ],
-    "hardening": [
-      "Bloqueio padrão e liberação justificada",
-      "MFA em acessos remotos",
-      "Administração por redes restritas"
-    ],
-    "detectionIdeas": [
-      "Comparar tráfego atual com baseline",
-      "Alertar varreduras internas",
-      "Observar tentativas de acesso entre segmentos",
-      "Monitorar falhas repetidas de DNS, proxy ou VPN"
-    ]
-  },
   "mentorQuestions": [
-    {
-      "type": "reflexão",
-      "question": "Por que uma rede não deve ser definida apenas como computadores conectados?",
-      "hints": [
-        "Pense em protocolos, políticas e serviços.",
-        "Pense em cloud e VPN."
-      ],
-      "expectedIdeas": [
-        "meio",
-        "endereçamento",
-        "protocolos",
-        "serviços",
-        "políticas",
-        "operação",
-        "segurança"
-      ],
-      "explanation": "A definição precisa incluir os elementos que tornam a comunicação útil, controlável e diagnosticável."
-    },
     {
       "type": "diagnóstico",
       "question": "Um usuário diz que 'a rede caiu'. Quais perguntas você faria antes de mexer em firewall ou roteador?",
       "hints": [
-        "Comece pelo escopo.",
-        "Separe IP, DNS, gateway, aplicação e usuário."
+        "Comece pelo escopo: quem é afetado e qual serviço.",
+        "Siga a cadeia: IP, gateway, DNS, serviço e política."
       ],
       "expectedIdeas": [
         "quem é afetado",
@@ -264,18 +97,17 @@ export const lesson0101 = {
         "IP válido",
         "gateway",
         "DNS",
-        "VPN",
-        "erro exato",
-        "horário"
+        "mensagem de erro exata",
+        "desde quando"
       ],
-      "explanation": "Troubleshooting profissional começa reduzindo ambiguidade."
+      "explanation": "Perguntar antes de mexer reduz a ambiguidade: o escopo diz se o problema é de um aparelho ou de muitos, e a cadeia diz em que etapa procurar."
     },
     {
       "type": "cenário real",
       "question": "Uma clínica tem um computador que só controla um equipamento de exame e não precisa de internet nem de acesso remoto. Faz sentido ligá-lo à rede da clínica por padrão? Quando não vale a pena conectar um sistema?",
       "hints": [
         "Pense no que se ganha e no que se arrisca ao conectar.",
-        "Pense em exigências de segurança e de regulação."
+        "Lembre do movimento lateral numa rede plana."
       ],
       "expectedIdeas": [
         "conectar só quando há necessidade operacional",
@@ -304,15 +136,15 @@ export const lesson0101 = {
     },
     {
       "id": "q1.1.2",
-      "question": "Um host tem IP e pinga o gateway, mas não acessa sites por nome. Qual hipótese fica forte?",
+      "question": "Um notebook tem IP e pinga o gateway, mas não abre sites pelo nome. Qual hipótese fica forte?",
       "options": [
         "Cabo de rede rompido.",
-        "Host sem endereço IP.",
+        "Notebook sem endereço IP.",
         "Problema de DNS.",
         "Gateway padrão ausente."
       ],
       "answer": 2,
-      "explanation": "Se o host tem IP e o gateway responde, o meio, o endereço e o caminho local funcionam. A falha só por nome aponta para DNS, embora outras hipóteses ainda possam existir.",
+      "explanation": "Se o aparelho tem IP e o gateway responde, o endereço, o meio e o caminho local funcionam. A falha só por nome aponta para o DNS, que traduz nomes em IP, embora outras hipóteses ainda possam existir.",
       "topic": "dns",
       "difficulty": "iniciante",
       "type": "diagnóstico"
@@ -321,13 +153,13 @@ export const lesson0101 = {
       "id": "q1.1.3",
       "question": "Por que uma rede plana é arriscada?",
       "options": [
-        "Porque um host comprometido pode alcançar muitos outros ativos (movimento lateral).",
+        "Porque um aparelho invadido pode alcançar muitos outros (movimento lateral).",
         "Porque impede o uso de DHCP e DNS.",
         "Porque exige um roteador para cada dispositivo.",
         "Porque só funciona com cabo, não com Wi-Fi."
       ],
       "answer": 0,
-      "explanation": "Numa rede plana, todos os ativos estão no mesmo segmento: um comprometimento alcança mais sistemas e fica difícil aplicar políticas entre grupos de ativos.",
+      "explanation": "Numa rede plana, todos os aparelhos se alcançam: um notebook invadido pode chegar ao servidor de arquivos e às câmeras. É por isso que políticas fazem parte da rede.",
       "topic": "segurança",
       "difficulty": "iniciante",
       "type": "segurança"
@@ -348,36 +180,6 @@ export const lesson0101 = {
       "type": "comparação"
     },
     {
-      "id": "q1.1.5",
-      "question": "Em cloud, qual recurso corresponde à própria rede virtual, dividida em subnets?",
-      "options": [
-        "Security group",
-        "VPC ou VNet",
-        "NAT gateway",
-        "Load balancer"
-      ],
-      "answer": 1,
-      "explanation": "VPC (AWS, Google Cloud) ou VNet (Azure) é a rede virtual. O security group filtra, o NAT gateway dá saída para a internet e o load balancer distribui tráfego.",
-      "topic": "cloud",
-      "difficulty": "iniciante",
-      "type": "cloud"
-    },
-    {
-      "id": "q1.1.6",
-      "question": "Um pipeline não consegue baixar uma imagem do registry. Qual conjunto de causas de rede é plausível?",
-      "options": [
-        "A imagem é grande demais para trafegar pela rede.",
-        "Runners não usam DNS, então o nome do registry é irrelevante.",
-        "O runner não resolve DNS, está bloqueado por proxy ou firewall, ou não tem rota até o registry.",
-        "Registries só aceitam conexões vindas de notebooks de desenvolvedores."
-      ],
-      "answer": 2,
-      "explanation": "Pipelines dependem de rede para DNS, rota, proxy, firewall e TLS até serviços externos ou internos.",
-      "topic": "devsecops",
-      "difficulty": "iniciante-intermediário",
-      "type": "devsecops"
-    },
-    {
       "id": "q1.1.7",
       "question": "O ping para o servidor de arquivos responde, mas, ao abrir a pasta compartilhada, o usuário recebe “acesso negado”. O que isso indica?",
       "options": [
@@ -391,6 +193,21 @@ export const lesson0101 = {
       "topic": "segurança",
       "difficulty": "iniciante",
       "type": "diagnóstico"
+    },
+    {
+      "id": "q1.1.8",
+      "question": "Numa empresa sem rede, os arquivos circulam por pendrive e cada computador tem a própria impressora. Qual problema uma rede resolve nesse caso?",
+      "options": [
+        "Aumenta a velocidade de cada computador.",
+        "Dispensa senhas e permissões, já que todos ficam conectados.",
+        "Permite que os participantes compartilhem informação, serviços e recursos, como arquivos e a impressora.",
+        "Substitui os computadores por equipamentos de rede."
+      ],
+      "answer": 2,
+      "explanation": "Redes existem para compartilhar informação, serviços e recursos. Compartilhar não elimina o controle: pelo contrário, cria a necessidade de políticas que decidam quem acessa o quê.",
+      "topic": "conceito",
+      "difficulty": "iniciante",
+      "type": "conceito"
     }
   ],
   "flashcards": [
@@ -417,7 +234,7 @@ export const lesson0101 = {
     {
       "id": "fc1.1.3",
       "front": "O que é um dispositivo final?",
-      "back": "É um participante que consome ou oferece serviços, como notebook, celular, servidor, VM, container ou impressora.",
+      "back": "É onde a comunicação começa ou termina: um participante que consome ou oferece serviços, como notebook, celular, servidor ou impressora.",
       "tags": [
         "host",
         "endpoint"
@@ -427,7 +244,7 @@ export const lesson0101 = {
     {
       "id": "fc1.1.4",
       "front": "O que é um dispositivo intermediário?",
-      "back": "É um elemento que encaminha, conecta, filtra ou controla tráfego, como switch, roteador, firewall, AP, proxy ou load balancer.",
+      "back": "É um elemento que leva a comunicação adiante: conecta, encaminha ou filtra tráfego, como switch, access point, roteador ou firewall.",
       "tags": [
         "switch",
         "roteador",
@@ -446,12 +263,11 @@ export const lesson0101 = {
       "difficulty": "iniciante"
     },
     {
-      "id": "fc1.1.6",
-      "front": "Por que redes precisam de logs?",
-      "back": "Para diagnosticar falhas, investigar incidentes, auditar acessos e entender fluxos reais.",
+      "id": "fc1.1.7",
+      "front": "\"A rede caiu\" é um diagnóstico?",
+      "back": "Não. É um sintoma. Descubra em qual etapa do acesso a cadeia quebrou: o aparelho tem IP? Alcança o gateway? O nome resolve? O serviço responde? A política permite?",
       "tags": [
-        "logs",
-        "soc",
+        "diagnóstico",
         "troubleshooting"
       ],
       "difficulty": "iniciante"
@@ -459,180 +275,84 @@ export const lesson0101 = {
   ],
   "exercises": [
     {
-      "id": "ex1.1.1",
-      "type": "conceitual",
-      "prompt": "Explique, com suas palavras, por que rede não é apenas internet.",
-      "expectedAnswer": "Porque uma rede é qualquer sistema de comunicação entre participantes, incluindo LAN, rede corporativa, rede cloud e internet. Internet é uma rede pública global composta por muitas redes.",
-      "explanation": "O objetivo é separar o conceito geral do caso mais famoso."
-    },
-    {
       "id": "ex1.1.5",
       "type": "diagnóstico",
-      "prompt": "Para cada sintoma, indique em qual etapa da cadeia (endereçamento, meio, destino ou controle) você investigaria primeiro: (a) o notebook não tem endereço IP válido; (b) o host pinga 8.8.8.8, mas nenhum site abre por nome; (c) o nome resolve, mas a conexão na porta do serviço é recusada; (d) a conexão abre, mas o sistema responde “acesso negado”; (e) o cabo foi trocado e o LED da placa de rede continua apagado.",
-      "expectedAnswer": "(a) Endereçamento: verificar DHCP, cabo, Wi-Fi ou configuração manual. (b) Endereçamento por nome: DNS. (c) Destino: o serviço pode estar parado ou a porta fechada; um firewall no caminho também entra na lista. (d) Controle: autenticação ou autorização; o caminho funciona. (e) Meio: cabo, porta do switch ou placa de rede.",
-      "explanation": "O mesmo “não acessa” tem causas em etapas diferentes. Localizar a etapa evita mexer no firewall quando o problema é DNS, ou trocar cabo quando o problema é permissão."
+      "prompt": "Para cada sintoma, indique em qual etapa da cadeia (endereçamento, meio, destino ou controle) você investigaria primeiro: (a) o notebook não tem endereço IP válido; (b) o aparelho alcança um IP na internet, mas nenhum site abre por nome; (c) o nome resolve, mas o serviço não responde; (d) a conexão abre, mas o sistema responde \"acesso negado\"; (e) o cabo foi trocado e a luz da placa de rede continua apagada.",
+      "expectedAnswer": "(a) Endereçamento: o aparelho não recebeu IP ou foi configurado errado. (b) Endereçamento por nome: DNS. (c) Destino: o serviço pode estar parado; um firewall no caminho também entra na lista. (d) Controle: autorização; o caminho funciona. (e) Meio: cabo, porta do switch ou placa de rede.",
+      "explanation": "O mesmo \"não acessa\" tem causas em etapas diferentes. Localizar a etapa evita mexer no firewall quando o problema é DNS, ou trocar cabo quando o problema é permissão."
     },
     {
       "id": "ex1.1.3",
       "type": "arquitetura",
-      "prompt": "Classifique notebook, switch, roteador, firewall, DNS e aplicação web em papéis de rede.",
-      "expectedAnswer": "Notebook: dispositivo final; switch/roteador/firewall: intermediários; DNS e aplicação web: serviços, embora rodem em dispositivos finais/servidores; firewall também aplica política.",
-      "explanation": "Alguns elementos têm papéis sobrepostos, mas a classificação ajuda o raciocínio."
-    },
-    {
-      "id": "ex1.1.6",
-      "type": "arquitetura",
-      "prompt": "Para cada papel, dê um exemplo numa rede doméstica, numa rede corporativa e em cloud: (1) a rede local ou o segmento; (2) quem leva o tráfego para fora da rede local; (3) quem filtra o tráfego.",
-      "expectedAnswer": "(1) Casa: o Wi-Fi do roteador; empresa: VLANs e sub-redes; cloud: VPC/VNet e subnets. (2) Casa: o roteador doméstico, que também faz NAT; empresa: roteadores e firewalls; cloud: route table e NAT gateway. (3) Casa: o filtro básico do roteador; empresa: firewalls, proxies e NAC; cloud: security groups, network security groups e firewall gerenciado.",
-      "explanation": "Os papéis são os mesmos nos três ambientes; mudam a escala e os nomes. Quem entende o papel reconhece o recurso em qualquer ambiente."
+      "prompt": "Classifique notebook, switch, roteador, firewall, DNS e um site da empresa em dispositivo final, dispositivo intermediário ou serviço. Algum deles tem mais de um papel?",
+      "expectedAnswer": "Notebook: dispositivo final. Switch, roteador e firewall: intermediários; o firewall também aplica política. DNS e o site: serviços, que rodam em servidores (dispositivos finais).",
+      "explanation": "Alguns elementos acumulam papéis, mas classificar pelo papel organiza o raciocínio. A aula 1.2 aprofunda essa classificação."
     }
   ],
   "challenge": {
-    "title": "Desenhe e explique uma rede pequena",
-    "scenario": "Uma pequena empresa tem 8 notebooks, 1 impressora, 1 servidor de arquivos, Wi-Fi de visitantes e acesso à internet. O dono quer colocar tudo no mesmo Wi-Fi porque parece simples.",
+    "title": "Tudo no mesmo Wi-Fi?",
+    "scenario": "Uma pequena empresa tem 8 notebooks, 1 impressora, 1 servidor de arquivos e acesso à internet. Clientes que esperam na recepção pedem a senha do Wi-Fi. O dono quer colocar todos, funcionários e visitantes, no mesmo Wi-Fi, porque parece mais simples.",
     "tasks": [
-      "Identificar dispositivos finais e intermediários.",
-      "Explicar quais serviços existem ou deveriam existir.",
-      "Apontar pelo menos três riscos de colocar tudo junto.",
-      "Sugerir uma separação inicial segura.",
-      "Indicar quais evidências deveriam ser registradas para troubleshooting."
-    ],
-    "constraints": [
-      "Não usar termos avançados sem explicar.",
-      "Não propor produto pago como única solução.",
-      "Separar conectividade de autorização.",
-      "Pensar em crescimento futuro."
+      "Classificar os participantes em dispositivos finais, intermediários e serviços.",
+      "Apontar dois riscos de colocar visitantes e funcionários na mesma rede.",
+      "Propor uma separação inicial e dizer que regra deve existir entre as partes."
     ],
     "expectedDeliverables": [
-      "Mapa textual da rede",
-      "Lista de papéis",
-      "Tabela de riscos e mitigação",
-      "Checklist inicial de diagnóstico"
-    ],
-    "gradingRubric": [
-      {
-        "criterion": "Identificação correta dos papéis",
-        "points": 25,
-        "description": "Diferencia dispositivos finais, intermediários, serviços e políticas."
-      },
-      {
-        "criterion": "Raciocínio de segurança",
-        "points": 25,
-        "description": "Reconhece riscos de rede plana e propõe segmentação inicial."
-      },
-      {
-        "criterion": "Clareza operacional",
-        "points": 25,
-        "description": "Inclui evidências e passos de diagnóstico."
-      },
-      {
-        "criterion": "Explicação acessível",
-        "points": 25,
-        "description": "Explica sem jargão desnecessário e sem simplificar demais."
-      }
+      "Uma lista de papéis e um parágrafo de 5 a 8 linhas com os riscos e a separação proposta."
     ]
   },
   "commentedSolution": {
-    "reasoning": "Primeiro separamos quem participa da rede. Depois identificamos quais equipamentos apenas usam serviços, quais encaminham tráfego, quais aplicam política e quais serviços são críticos. Só então falamos em risco e mitigação.",
+    "reasoning": "Comece pelos participantes e pelo que cada um precisa acessar. Só depois decida o que pode alcançar o quê.",
     "steps": [
-      "Listar notebooks, impressora, servidor, roteador, AP e internet.",
-      "Classificar notebooks, impressora e servidor como dispositivos finais.",
-      "Classificar roteador/AP/switch/firewall como intermediários conforme o ambiente.",
-      "Separar visitantes dos recursos internos.",
-      "Evitar que Wi-Fi de visitantes alcance servidor de arquivos.",
-      "Registrar IPs, gateway, DNS, regras e evidências básicas."
+      "Dispositivos finais: os 8 notebooks, a impressora, o servidor de arquivos e os celulares dos visitantes. Intermediário: o roteador com Wi-Fi (e um switch, se houver cabos). Serviços: o compartilhamento de arquivos, a impressão e o acesso à internet.",
+      "Riscos da rede única: um celular de visitante, ou um notebook invadido, alcança o servidor de arquivos e a impressora (rede plana, movimento lateral); e a senha do Wi-Fi passa de mão em mão, sem controle de quem entra.",
+      "Separação: uma rede para funcionários, com o servidor e a impressora, e outra só para visitantes. Muitos roteadores já oferecem uma rede de convidados separada.",
+      "Regra entre as partes: a rede de visitantes só sai para a internet e não alcança nada da rede interna."
     ],
     "commonWrongAnswers": [
       {
         "answer": "Colocar tudo no mesmo Wi-Fi com uma senha forte.",
-        "whyItIsWrong": "Senha forte ajuda no acesso inicial, mas não resolve segmentação, visitantes, movimento lateral ou política interna."
+        "whyItIsWrong": "A senha controla quem entra na rede, mas quem entrou alcança tudo: o visitante continua chegando ao servidor."
       },
       {
-        "answer": "Comprar mais internet resolve segurança.",
-        "whyItIsWrong": "Banda não substitui arquitetura, segmentação, logs ou controle de acesso."
-      },
-      {
-        "answer": "Se pinga, está autorizado.",
-        "whyItIsWrong": "Ping só indica um tipo limitado de conectividade; autorização é outra camada de decisão."
+        "answer": "Se o visitante consegue pingar o servidor, é porque ele tem permissão.",
+        "whyItIsWrong": "Conectividade não é autorização. Ter caminho até o servidor é justamente o risco que a separação remove."
       }
     ],
-    "finalAnswer": "Uma solução inicial aceitável separa rede corporativa, servidores/impressora e visitantes; documenta gateway, DNS, regras e responsáveis; registra evidências básicas; e evita que visitantes alcancem recursos internos. A rede deve ser explicada como sistema de comunicação com controle, não como um Wi-Fi único."
+    "finalAnswer": "Separe funcionários (com servidor e impressora) e visitantes em redes diferentes, com uma regra que deixa os visitantes sair só para a internet. A rede deixa de ser um Wi-Fi único e passa a ter controle de quem alcança o quê."
   },
   "glossary": [
     {
-      "term": "Rede",
-      "shortDefinition": "Sistema que permite comunicação entre participantes.",
-      "longDefinition": "Conjunto de dispositivos, meios, protocolos, endereços, serviços e políticas que viabiliza troca de dados.",
-      "example": "Uma LAN doméstica, uma rede corporativa e uma VPC em cloud são redes.",
-      "relatedTerms": [
-        "LAN",
-        "WAN",
-        "protocolo",
-        "gateway"
-      ],
+      "term": "Endereço IP",
+      "shortDefinition": "Número que identifica um aparelho na rede e diz para onde enviar os dados.",
+      "example": "192.168.0.15 é um IP típico de um celular numa rede doméstica.",
       "relatedLessons": [
-        "1.1",
-        "1.3",
-        "2.1"
+        "4.1"
       ]
     },
     {
-      "term": "Dispositivo final",
-      "shortDefinition": "Participante que consome ou oferece serviços na rede.",
-      "longDefinition": "Endpoint como notebook, celular, servidor, VM, container, impressora ou câmera.",
-      "example": "Um notebook acessando um sistema web é um dispositivo final.",
-      "relatedTerms": [
-        "host",
-        "endpoint",
-        "servidor"
-      ],
+      "term": "Gateway padrão",
+      "shortDefinition": "O roteador para onde um aparelho envia tudo o que é destinado a fora da sua rede local.",
+      "example": "Numa rede doméstica, o gateway costuma ser o próprio roteador, como 192.168.0.1.",
       "relatedLessons": [
-        "1.2"
+        "4.5"
       ]
     },
     {
-      "term": "Dispositivo intermediário",
-      "shortDefinition": "Elemento que conecta, encaminha, filtra ou controla tráfego.",
-      "longDefinition": "Switches, roteadores, firewalls, APs, proxies e load balancers são exemplos.",
-      "example": "Um roteador encaminha tráfego entre redes diferentes.",
-      "relatedTerms": [
-        "switch",
-        "roteador",
-        "firewall"
-      ],
+      "term": "DNS",
+      "shortDefinition": "Serviço que traduz nomes, como www.exemplo.com, no endereço IP do servidor.",
+      "example": "Se o DNS falha, o site não abre pelo nome, mesmo com a internet funcionando.",
       "relatedLessons": [
-        "1.2",
-        "1.7"
+        "7.1"
       ]
     },
     {
-      "term": "Conectividade",
-      "shortDefinition": "Capacidade de alcançar tecnicamente outro destino.",
-      "longDefinition": "Conectividade indica caminho de comunicação, mas não prova autorização nem funcionamento completo do serviço.",
-      "example": "Ping para o gateway mostra um tipo de conectividade local.",
-      "relatedTerms": [
-        "rota",
-        "gateway",
-        "latência"
-      ],
+      "term": "Ping",
+      "shortDefinition": "Teste que envia uma mensagem curta a um endereço e espera a resposta, para ver se há caminho até ele.",
+      "longDefinition": "Uma resposta ao ping mostra que há caminho, não que o serviço funciona nem que você tem permissão.",
       "relatedLessons": [
-        "0.8",
-        "1.9"
-      ]
-    },
-    {
-      "term": "Política de rede",
-      "shortDefinition": "Regra que permite, bloqueia, registra ou modifica fluxos.",
-      "longDefinition": "Pode existir em firewall, proxy, security group, ACL, NAC, VPN ou controle cloud.",
-      "example": "Permitir HTTPS da rede de usuários para um proxy corporativo.",
-      "relatedTerms": [
-        "firewall",
-        "ACL",
-        "security group"
-      ],
-      "relatedLessons": [
-        "9.1",
-        "14.3"
+        "1.9",
+        "4.8"
       ]
     }
   ],
@@ -650,13 +370,6 @@ export const lesson0101 = {
       "organization": "ISO",
       "url": "",
       "note": "Será aprofundado no Módulo 2."
-    },
-    {
-      "type": "official-doc",
-      "title": "Documentação de redes virtuais em cloud",
-      "organization": "AWS/Azure/Google Cloud",
-      "url": "",
-      "note": "Usar pesquisa oficial quando o curso chegar ao módulo de Cloud Networking."
     }
   ],
   "linksToOtherCourses": [
@@ -676,11 +389,7 @@ export const lesson0101 = {
   "progressRules": {
     "completeWhen": {
       "read": true,
-      "quizScoreAtLeast": 70,
-      "oneOf": [
-        "exerciseDone",
-        "practicalExerciseDone"
-      ]
+      "quizScoreAtLeast": 70
     },
     "accessPolicy": {
       "freeAccess": true,

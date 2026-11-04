@@ -1,0 +1,85 @@
+{
+  "id": "1.1",
+  "versao": "nova",
+  "titulo": "O que é uma rede e por que existe",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 2793,
+    "teoria": 1340,
+    "praticaExtra": 742,
+    "quiz": 430,
+    "flashcards": 145
+  },
+  "porGrupoTeoria": {
+    "introducao": 412,
+    "contexto": 149,
+    "conteudo": 569,
+    "exemplos": 210,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 137,
+    "summary": 88,
+    "problem": 149,
+    "concept": 306,
+    "internals": 237,
+    "diagram": 26,
+    "analogy": 57,
+    "simpleExample": 153,
+    "objectives": 62,
+    "learningOutcomes": 0,
+    "glossary": 125,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 29
+  },
+  "pratica": {
+    "quiz": 430,
+    "flashcards": 145,
+    "lab": 0,
+    "mentorQuestions": 192,
+    "exercises": 214,
+    "challenge": 97,
+    "commentedSolution": 239
+  },
+  "outros": {
+    "title+subtitle": 26,
+    "nextTheme": 29,
+    "references": 31,
+    "linksToOtherCourses": 50
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 4,
+    "exemplosPorAmbiente": []
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "15-25 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 19.3,
+    "nucleoPartes": {
+      "teoria": 10.3,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 31,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-25 min",
+    "praticaExtraArredondada": 30,
+    "recomendada": "15-25 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}
