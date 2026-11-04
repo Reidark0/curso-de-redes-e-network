@@ -3,9 +3,9 @@
   "moduleId": "m00",
   "order": 6,
   "title": "Latência, largura de banda e throughput",
-  "subtitle": "Como separar capacidade, tempo de resposta e vazão real para diagnosticar redes lentas com método profissional.",
-  "duration": "75-105 min",
-  "estimatedStudyTimeMinutes": 105,
+  "subtitle": "Como separar capacidade, tempo de resposta e vazão real para diagnosticar redes lentas.",
+  "duration": "100-145 min",
+  "estimatedStudyTimeMinutes": 145,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 180,
@@ -92,86 +92,6 @@
       "segurança de tráfego"
     ]
   },
-  "deepDive": {
-    "mentalModel": "Lentidão é um sintoma composto. Para diagnosticar, separe tempo de resposta, capacidade, entrega real, perda, variação e filas. Depois descubra em qual trecho do caminho a métrica se degrada.",
-    "keyTerms": [
-      "latência",
-      "RTT",
-      "largura de banda",
-      "throughput",
-      "jitter",
-      "perda",
-      "fila",
-      "bufferbloat",
-      "overhead",
-      "congestionamento",
-      "saturação",
-      "baseline"
-    ],
-    "limitations": [
-      "Ping pode ser bloqueado, priorizado ou tratado diferente de tráfego real de aplicação.",
-      "Traceroute mostra caminho aproximado, mas nem sempre revela todos os dispositivos ou políticas.",
-      "Teste de velocidade mede um cenário específico e não prova que a aplicação corporativa está saudável.",
-      "Throughput medido entre dois pontos não explica sozinho se o gargalo é rede, servidor, disco, CPU, proxy ou aplicação.",
-      "Métricas de cloud podem ter amostragem, atraso ou custo adicional de armazenamento."
-    ],
-    "whenToUse": [
-      "Ao investigar lentidão, chamadas ruins, VPN lenta, backup demorado, API com timeout ou aplicação cloud distante.",
-      "Ao planejar capacidade de links, firewall, proxy, VPN, NAT, Wi‑Fi e egress cloud.",
-      "Ao criar baselines de desempenho antes de mudanças de rede ou aplicação.",
-      "Ao correlacionar alertas de segurança com volume de tráfego, perda e saturação."
-    ],
-    "whenNotToUse": [
-      "Não use apenas ping para declarar uma aplicação saudável.",
-      "Não use teste de velocidade doméstico como prova definitiva em ambiente corporativo.",
-      "Não execute testes de saturação em rede produtiva sem autorização e janela de mudança.",
-      "Não confunda latência de rede com tempo de processamento do servidor sem medir as duas coisas."
-    ],
-    "operationalImpact": [
-      "Exige baseline para saber o que é normal por localidade, horário e aplicação.",
-      "Melhora troubleshooting ao reduzir disputas entre rede, segurança, infraestrutura e desenvolvimento.",
-      "Pode exigir ferramentas como flow logs, APM, métricas de firewall, NetFlow, iperf controlado e monitoramento sintético.",
-      "Aumenta a necessidade de documentação de caminhos críticos e dependências."
-    ],
-    "financialImpact": [
-      "Mais banda pode custar caro e não resolver latência ou aplicação lenta.",
-      "Em cloud, tráfego de saída, NAT, firewalls gerenciados, observabilidade e logs podem gerar custo recorrente.",
-      "Redundância, links dedicados e regiões próximas melhoram previsibilidade, mas aumentam custo.",
-      "Diagnóstico ruim leva a compra desnecessária de link, appliance ou licenças."
-    ],
-    "securityImpact": [
-      "Aumento de throughput de saída pode indicar exfiltração ou backup não autorizado.",
-      "Saturação e perda podem indicar DoS, varreduras, loops, broadcast excessivo ou equipamento sobrecarregado.",
-      "Controles de segurança adicionam processamento e precisam ser dimensionados.",
-      "Logs de rede ajudam detecção, mas precisam de retenção, custo e privacidade bem tratados."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Chamar tudo de velocidade.",
-      "whyItHappens": "Na linguagem comum, qualquer demora vira 'internet lenta'.",
-      "consequence": "Diagnóstico fica genérico e leva a ações erradas.",
-      "correction": "Separe latência, largura de banda, throughput, perda, jitter e tempo de aplicação."
-    },
-    {
-      "mistake": "Comprar mais link sem medir saturação.",
-      "whyItHappens": "Banda é a métrica mais visível em contratos de internet.",
-      "consequence": "Custo aumenta e o problema pode continuar.",
-      "correction": "Verifique utilização, RTT, perda, fila, rota, proxy, VPN e aplicação antes de aumentar capacidade."
-    },
-    {
-      "mistake": "Concluir que ping baixo significa aplicação rápida.",
-      "whyItHappens": "Ping é simples e retorna número fácil de entender.",
-      "consequence": "Problemas de TLS, HTTP, banco ou autenticação passam despercebidos.",
-      "correction": "Combine ping com curl, métricas HTTP, logs de aplicação e observabilidade."
-    },
-    {
-      "mistake": "Ignorar jitter em voz e vídeo.",
-      "whyItHappens": "A média da latência parece aceitável.",
-      "consequence": "Chamadas engasgam mesmo com RTT médio razoável.",
-      "correction": "Observe variação, perda, Wi‑Fi, filas e QoS quando houver tráfego em tempo real."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Página demora para começar a carregar",
@@ -237,18 +157,17 @@
   },
   "security": {
     "goodPractices": [
-      "Manter baseline de tráfego normal por aplicação, localidade e horário.",
+      "Manter baseline de tráfego normal por aplicação, localidade e horário, e registrar métricas antes de mudanças importantes.",
       "Monitorar egress, perda, latência, saturação e erros de interface.",
       "Dimensionar firewalls, proxies, VPNs e WAFs considerando throughput com inspeção ativa.",
       "Correlacionar métricas de rede com logs de autenticação, proxy, DNS, EDR e aplicação.",
-      "Definir limites éticos e autorização para testes de carga e performance."
+      "Tratar logs de rede com retenção, custo e privacidade definidos."
     ],
     "badPractices": [
-      "Executar teste de saturação em produção sem autorização.",
+      "Executar teste de carga ou saturação em produção ou em rede de terceiros sem autorização.",
       "Ignorar anomalias de upload porque o link ainda não caiu.",
       "Usar apenas média de latência e ignorar jitter e perda.",
-      "Desativar inspeção de segurança para ganhar performance sem análise de risco.",
-      "Não registrar métricas antes de mudanças importantes."
+      "Desativar inspeção de segurança para ganhar performance sem análise de risco."
     ],
     "commonErrors": [
       "Confundir conectividade com boa experiência.",
@@ -271,7 +190,7 @@
       },
       {
         "name": "DoS operacional acidental",
-        "description": "Backups, scans ou pipelines podem saturar links e afetar usuários.",
+        "description": "Backups, scans, pipelines ou um loop/broadcast excessivo na LAN podem saturar links e afetar usuários.",
         "defensiveExplanation": "Nem todo DoS é malicioso; automações mal planejadas também degradam disponibilidade.",
         "mitigation": "Janelas de execução, rate limit, QoS, segmentação e observabilidade."
       }
@@ -324,14 +243,12 @@
       "Test-NetConnection ou curl",
       "Opcional: mtr se disponível"
     ],
-    "estimatedTimeMinutes": 105,
+    "estimatedTimeMinutes": 30,
     "cost": "zero",
     "safetyNotes": [
-      "Não execute testes de carga.",
-      "Não use iperf contra servidores públicos sem autorização.",
-      "Não aumente volume de pacotes para tentar saturar links.",
-      "Use apenas medições leves e destinos permitidos.",
-      "Em cloud real, remova os recursos criados ao final para evitar custos recorrentes."
+      "Use apenas medições leves (poucos pacotes, requisições comuns) e destinos permitidos.",
+      "Não execute testes de carga nem aumente o volume de pacotes para tentar saturar links.",
+      "Não use iperf contra servidores públicos sem autorização."
     ],
     "steps": [
       {
@@ -370,7 +287,7 @@
         "number": 5,
         "title": "Registrar interpretação",
         "instruction": "Crie uma tabela simples com métrica, resultado e hipótese.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "analysisTask": "Preencha uma linha para RTT e perda (passo 1), resolução por nome (passo 2), caminho (passo 3) e tempos HTTP ou TCP (passo 4), e anote a condição do acesso (cabo, Wi‑Fi, VPN ou rede corporativa).",
         "expectedOutput": "Tabela com RTT, perda, caminho, conectividade TCP/HTTP e interpretação.",
         "explanation": "Troubleshooting profissional depende de evidência organizada, não apenas de comandos soltos."
       }
@@ -404,7 +321,7 @@
         "fix": "Validar servidor DNS, conectividade com DNS e configuração do cliente."
       },
       {
-        "symptom": "Ping tem perda, mas Wi‑Fi está fraco",
+        "symptom": "Ping tem perda e o Wi‑Fi está fraco",
         "probableCause": "Sinal/interferência ou meio instável",
         "howToConfirm": "Comparar com cabo ou aproximar do AP",
         "fix": "Melhorar sinal, canal, posição, cabo ou infraestrutura."
@@ -502,93 +419,123 @@
   "quiz": [
     {
       "id": "q0.6.1",
-      "type": "conceito",
-      "q": "Qual alternativa melhor define latência?",
-      "opts": [
-        "Tempo para um dado ir e voltar ou chegar ao destino",
+      "question": "Qual alternativa melhor define latência?",
+      "options": [
         "Capacidade máxima contratada do link",
+        "Tempo para um dado ir e voltar ou chegar ao destino",
         "Quantidade de dados úteis entregue por segundo",
-        "Quantidade de bytes em um arquivo"
+        "Variação do tempo de resposta entre pacotes"
       ],
-      "a": 0,
-      "exp": "Latência é tempo de resposta. Em muitos testes aparece como RTT, tempo de ida e volta.",
+      "answer": 1,
+      "explanation": "Latência é tempo de resposta; em muitos testes aparece como RTT, tempo de ida e volta. Capacidade contratada é largura de banda, dados úteis por segundo é throughput e a variação do tempo de resposta é jitter.",
+      "topic": "latência",
       "difficulty": "iniciante",
-      "topic": "latência"
+      "type": "conceito"
     },
     {
       "id": "q0.6.2",
-      "type": "comparação",
-      "q": "Qual diferença principal entre largura de banda e throughput?",
-      "opts": [
-        "Largura de banda é capacidade; throughput é entrega real",
-        "Ambas são sempre iguais",
+      "question": "Qual diferença principal entre largura de banda e throughput?",
+      "options": [
         "Throughput é sempre maior que largura de banda",
+        "Throughput é capacidade; largura de banda é entrega real",
+        "Largura de banda é capacidade; throughput é entrega real",
         "Largura de banda mede tempo de resposta"
       ],
-      "a": 0,
-      "exp": "A capacidade nominal pode ser maior que a taxa útil observada por overhead, perda, congestionamento e limites dos sistemas.",
+      "answer": 2,
+      "explanation": "A capacidade nominal pode ser maior que a taxa útil observada por overhead, perda, congestionamento e limites dos sistemas.",
+      "topic": "throughput",
       "difficulty": "iniciante",
-      "topic": "throughput"
+      "type": "comparação"
     },
     {
       "id": "q0.6.3",
-      "type": "cenário",
-      "q": "Uma chamada de vídeo engasga mesmo com link de alta capacidade. Qual métrica costuma ser especialmente importante?",
-      "opts": [
+      "question": "Uma chamada de vídeo engasga mesmo com link de alta capacidade. Qual métrica costuma ser especialmente importante?",
+      "options": [
         "Jitter e perda",
-        "Tamanho do monitor",
-        "Quantidade de arquivos no disco",
-        "Número de caracteres ASCII"
+        "Largura de banda contratada",
+        "Tamanho médio dos pacotes",
+        "Número de saltos no traceroute"
       ],
-      "a": 0,
-      "exp": "Voz e vídeo em tempo real sofrem com variação de latência e perda, mesmo quando há banda nominal suficiente.",
+      "answer": 0,
+      "explanation": "Voz e vídeo em tempo real sofrem com variação de latência e perda, mesmo quando há banda nominal suficiente. A banda contratada já é alta no cenário, e o número de saltos ou o tamanho dos pacotes não explicam o engasgo.",
+      "topic": "jitter",
       "difficulty": "iniciante",
-      "topic": "jitter"
+      "type": "cenário"
     },
     {
       "id": "q0.6.4",
-      "type": "diagnóstico",
-      "q": "Ping para o gateway local é baixo, mas uma API externa demora. O que isso indica?",
-      "opts": [
-        "A rede local até o gateway parece boa, mas o problema pode estar em outro trecho ou na aplicação",
-        "O problema está resolvido",
-        "DNS sempre está correto",
-        "A largura de banda é infinita"
+      "question": "Ping para o gateway local é baixo, mas uma API externa demora. O que isso indica?",
+      "options": [
+        "A largura de banda do link está saturada",
+        "A rede está saudável e a API está fora do ar",
+        "O problema é do DNS, porque o gateway responde",
+        "A rede local até o gateway parece boa, mas o problema pode estar em outro trecho ou na aplicação"
       ],
-      "a": 0,
-      "exp": "Ping para gateway avalia só o primeiro trecho. A lentidão pode estar em WAN, DNS, TLS, proxy, servidor, banco ou aplicação.",
+      "answer": 3,
+      "explanation": "Ping para gateway avalia só o primeiro trecho. A lentidão pode estar em WAN, DNS, TLS, proxy, servidor, banco ou aplicação.",
+      "topic": "troubleshooting",
       "difficulty": "intermediário",
-      "topic": "troubleshooting"
+      "type": "diagnóstico"
     },
     {
       "id": "q0.6.5",
-      "type": "segurança",
-      "q": "Aumento incomum de throughput de saída para destino externo pode indicar qual risco?",
-      "opts": [
+      "question": "Aumento incomum de throughput de saída para destino externo pode indicar qual risco?",
+      "options": [
+        "Perda de pacotes no Wi‑Fi local",
         "Possível exfiltração ou transferência não autorizada",
-        "Teclado com defeito",
-        "Apenas latência baixa",
-        "Unicode mal configurado"
+        "Aumento de latência por distância até a região cloud",
+        "Jitter alto em chamadas de vídeo"
       ],
-      "a": 0,
-      "exp": "Vazão de saída incomum, combinada com destino e contexto, pode ser sinal de exfiltração ou automação indevida.",
+      "answer": 1,
+      "explanation": "Vazão de saída incomum, combinada com destino e contexto, pode ser sinal de exfiltração ou automação indevida.",
+      "topic": "segurança",
       "difficulty": "intermediário",
-      "topic": "segurança"
+      "type": "segurança"
     },
     {
       "id": "q0.6.6",
-      "type": "pegadinha",
-      "q": "Qual afirmação é mais correta?",
-      "opts": [
-        "Mais banda nem sempre reduz latência",
-        "Mais banda sempre reduz RTT para qualquer destino",
+      "question": "Qual afirmação é mais correta?",
+      "options": [
         "Ping baixo prova que HTTP está rápido",
+        "Mais banda sempre reduz RTT para qualquer destino",
+        "Mais banda nem sempre reduz latência",
         "Traceroute sem asteriscos prova ausência de gargalos"
       ],
-      "a": 0,
-      "exp": "Mais capacidade pode ajudar em saturação, mas não elimina distância, processamento, perda, filas ou lentidão de aplicação.",
+      "answer": 2,
+      "explanation": "Mais capacidade pode ajudar em saturação, mas não elimina distância, processamento, perda, filas ou lentidão de aplicação.",
+      "topic": "boas práticas",
       "difficulty": "intermediário",
-      "topic": "boas práticas"
+      "type": "pegadinha"
+    },
+    {
+      "id": "q0.6.7",
+      "type": "cálculo",
+      "question": "Uma página faz 20 requisições em sequência, e o RTT até o servidor é de 100 ms. O link passa de 100 Mbps para 1 Gbps. O que acontece com o tempo mínimo de espera por respostas?",
+      "options": [
+        "Cai para cerca de 0,2 s, porque a banda aumentou 10 vezes",
+        "Cai pela metade, porque metade do tempo é transmissão",
+        "Dobra, porque o link maior gera mais fila",
+        "Continua em cerca de 2 s, porque mais banda não reduz a propagação nem o RTT"
+      ],
+      "answer": 3,
+      "explanation": "20 × 100 ms = 2 s de espera que dependem do RTT. Mais banda só reduz o tempo de transmissão, que é pequeno para requisições curtas; propagação, processamento e fila continuam iguais.",
+      "difficulty": "intermediário",
+      "topic": "latência"
+    },
+    {
+      "id": "q0.6.8",
+      "type": "diagnóstico",
+      "question": "Um traceroute mostra asteriscos em dois saltos intermediários, mas os saltos seguintes e o destino respondem normalmente. Qual é a interpretação mais adequada?",
+      "options": [
+        "Esses roteadores provavelmente bloqueiam ou despriorizam respostas ICMP; sem outras evidências, isso não indica perda",
+        "Há perda real de pacotes da aplicação nesses saltos",
+        "O destino está inacessível por HTTP",
+        "O link entre esses saltos está saturado"
+      ],
+      "answer": 0,
+      "explanation": "Asteriscos aparecem quando um salto não responde ao TTL excedido, por bloqueio ou baixa prioridade de ICMP. Se os saltos seguintes respondem, o tráfego está passando; confirme com HTTP/TCP antes de concluir algo.",
+      "difficulty": "intermediário",
+      "topic": "troubleshooting"
     }
   ],
   "flashcards": [
@@ -643,6 +590,15 @@
       "back": "Ajuda quando o gargalo é capacidade ou saturação, mas não resolve automaticamente distância, perda, fila, proxy ou aplicação lenta.",
       "tags": [
         "capacity planning"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc0.6.7",
+      "front": "Quais são os quatro componentes da latência?",
+      "back": "Propagação (distância e meio), transmissão (taxa do link e tamanho do dado), processamento (equipamentos e softwares no caminho) e fila (tráfego acima do que o dispositivo encaminha). Mais banda só reduz a transmissão.",
+      "tags": [
+        "latência"
       ],
       "difficulty": "intermediário"
     }

@@ -420,12 +420,12 @@ export const lesson0005 = {
       "id": "q0.5.1",
       "question": "O que a camada física faz em uma rede?",
       "options": [
-        "Converte bits em sinais transportáveis por um meio e sinais de volta em bits.",
         "Traduz nomes DNS em endereços IP.",
+        "Converte bits em sinais transportáveis por um meio e sinais de volta em bits.",
         "Define regras de firewall entre sub-redes.",
         "Escolhe a melhor rota BGP para a Internet."
       ],
-      "answer": 0,
+      "answer": 1,
       "explanation": "A camada física trata da transmissão real de sinais no meio. DNS, firewall e BGP pertencem a camadas/assuntos superiores.",
       "topic": "camada física",
       "difficulty": "iniciante",
@@ -435,12 +435,12 @@ export const lesson0005 = {
       "id": "q0.5.2",
       "question": "Qual alternativa descreve melhor a fibra óptica?",
       "options": [
-        "Usa pulsos de luz e é menos suscetível a interferência eletromagnética.",
-        "Usa ondas de rádio e sempre tem menor latência que cabo.",
         "Usa apenas tensão elétrica em pares de cobre.",
+        "Usa ondas de rádio e sempre tem menor latência que cabo.",
+        "Usa pulsos de luz e é menos suscetível a interferência eletromagnética.",
         "É igual ao Wi‑Fi, mas com conector físico."
       ],
-      "answer": 0,
+      "answer": 2,
       "explanation": "Fibra óptica transporta luz e é útil para distâncias e capacidade, embora exija cuidados próprios.",
       "topic": "fibra",
       "difficulty": "iniciante",
@@ -465,12 +465,12 @@ export const lesson0005 = {
       "id": "q0.5.4",
       "question": "Por que uma tomada de rede ativa em área pública é risco de segurança?",
       "options": [
-        "Pode permitir que um dispositivo não autorizado obtenha conectividade à rede.",
+        "Porque IPv4 não funciona em ambientes públicos.",
         "Porque DNS sempre fica público nessas tomadas.",
         "Porque todo cabo Ethernet transmite senhas em texto claro.",
-        "Porque IPv4 não funciona em ambientes públicos."
+        "Pode permitir que um dispositivo não autorizado obtenha conectividade à rede."
       ],
-      "answer": 0,
+      "answer": 3,
       "explanation": "O risco é acesso físico à rede sem controle adequado. Mitigações incluem desabilitar portas, 802.1X, NAC e monitoramento.",
       "topic": "segurança física",
       "difficulty": "iniciante",
@@ -480,12 +480,12 @@ export const lesson0005 = {
       "id": "q0.5.5",
       "question": "No Wi‑Fi, a taxa cai muito quando o usuário se afasta do AP. Qual explicação é mais provável?",
       "options": [
-        "O sinal de rádio foi degradado por distância, obstáculos ou interferência.",
         "O servidor DHCP trocou o endereço IP do notebook.",
+        "O sinal de rádio foi degradado por distância, obstáculos ou interferência.",
         "O DNS passou a responder mais devagar longe do AP.",
         "A velocidade negociada do cabo do AP caiu para 100 Mbps."
       ],
-      "answer": 0,
+      "answer": 1,
       "explanation": "Wi‑Fi depende do ambiente físico. Distância, paredes e interferência reduzem a qualidade do sinal e a taxa útil. IP, DNS e o cabo do AP não mudam porque o usuário andou.",
       "topic": "wi-fi",
       "difficulty": "iniciante",
@@ -495,12 +495,12 @@ export const lesson0005 = {
       "id": "q0.5.6",
       "question": "Em cloud pública, a camada física deixa de existir?",
       "options": [
-        "Não. Ela é abstraída pelo provedor, mas continua influenciando limites, latência e capacidade.",
-        "Sim. Cloud é puramente lógica e não usa datacenters.",
         "Sim. Apenas DNS existe em cloud.",
+        "Sim. Cloud é puramente lógica e não usa datacenters.",
+        "Não. Ela é abstraída pelo provedor, mas continua influenciando limites, latência e capacidade.",
         "Não, mas o cliente sempre escolhe os cabos físicos."
       ],
-      "answer": 0,
+      "answer": 2,
       "explanation": "Cloud abstrai hardware físico, mas ele continua existindo no datacenter do provedor e aparece indiretamente em limites, métricas e SLAs.",
       "topic": "cloud",
       "difficulty": "intermediário",
@@ -512,10 +512,10 @@ export const lesson0005 = {
       "options": [
         "A porta está desabilitada administrativamente.",
         "Velocidade negociada abaixo do esperado.",
-        "Camada física degradada: o link está up, mas os quadros chegam corrompidos.",
-        "Falha de resolução DNS no cliente."
+        "Falha de resolução DNS no cliente.",
+        "Camada física degradada: o link está up, mas os quadros chegam corrompidos."
       ],
-      "answer": 2,
+      "answer": 3,
       "explanation": "Link up não significa camada física saudável. CRC e input errors crescentes mostram quadros corrompidos no meio (cabo, conector, patch panel ou interferência). A porta não está desabilitada, a velocidade está normal e DNS não gera erro de CRC.",
       "topic": "troubleshooting",
       "difficulty": "intermediário",
@@ -525,12 +525,12 @@ export const lesson0005 = {
       "id": "q0.5.8",
       "question": "Por que o throughput de cada notebook cai quando muitos dispositivos usam o mesmo AP e canal Wi‑Fi?",
       "options": [
-        "Porque cada dispositivo recebe um endereço IP mais lento.",
         "Porque o rádio é um meio compartilhado: os dispositivos disputam o mesmo canal.",
+        "Porque cada dispositivo recebe um endereço IP mais lento.",
         "Porque o Wi‑Fi converte bits em pulsos de luz.",
         "Porque o AP passa a usar half-duplex no cabo de cobre."
       ],
-      "answer": 1,
+      "answer": 0,
       "explanation": "No Wi‑Fi, o canal de rádio é compartilhado. Quanto mais dispositivos disputam o meio, menor a fatia de tempo de cada um e menor o throughput real.",
       "topic": "wi-fi",
       "difficulty": "iniciante",

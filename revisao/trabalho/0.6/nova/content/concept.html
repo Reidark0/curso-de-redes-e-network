@@ -1,16 +1,34 @@
 
 <section class="lesson-section lesson-section--concept">
-  <h2>5. Conceito</h2>
+  <h2>Conceito</h2>
   <div class="definition-box">
     <strong>Definição:</strong> latência é o tempo que um dado leva para ir de um ponto a outro, geralmente observado como RTT, ou tempo de ida e volta. Largura de banda é a capacidade máxima teórica ou contratada de transmissão em um caminho. Throughput é a taxa real de dados úteis entregue em um período.
   </div>
   <p>
-    A diferença é simples, mas profunda. <strong>Largura de banda</strong> responde “quanto caberia por segundo?”. <strong>Throughput</strong> responde “quanto realmente passou por segundo?”. <strong>Latência</strong> responde “quanto tempo demorou para obter resposta?”. Em redes reais, essas respostas raramente são iguais.
+    Em outras palavras: <strong>largura de banda</strong> responde “quanto caberia por segundo?”, <strong>throughput</strong> responde “quanto realmente passou por segundo?” e <strong>latência</strong> responde “quanto tempo demorou para obter resposta?”. Em redes reais, essas respostas raramente coincidem. Um link de 1 Gbps diz que existe capacidade para transmitir até essa quantidade de bits por segundo em condições ideais; ele não garante resposta rápida se o servidor está longe ou se há proxy, VPN, inspeção, filas ou aplicação lenta no caminho.
   </p>
   <p>
-    Um link de 1 Gbps não garante que uma aplicação terá resposta instantânea. Ele diz que, em condições ideais e na camada correta, existe capacidade para transmitir até determinada quantidade de bits por segundo. Se o servidor está longe, se há proxy, VPN, inspeção, filas, congestionamento ou aplicação lenta, a experiência pode continuar ruim.
+    Duas métricas completam o quadro. <strong>Jitter</strong> é a variação da latência: para uma chamada de vídeo, latência moderada e estável pode ser melhor do que latência às vezes baixa e às vezes altíssima. <strong>Perda</strong> é quando pacotes não chegam: em TCP, costuma causar retransmissão e queda de throughput; em UDP, aparece como áudio picotando, vídeo com artefatos ou telemetria incompleta.
   </p>
-  <p>
-    Também é importante entender <strong>jitter</strong> e <strong>perda</strong>. Jitter é a variação da latência. Para uma chamada de vídeo, latência moderada e estável pode ser melhor do que latência às vezes baixa e às vezes altíssima. Perda é quando pacotes não chegam. Em TCP, perda costuma causar retransmissão e queda de throughput. Em UDP, perda pode aparecer como áudio picotando, vídeo com artefatos ou telemetria incompleta.
-  </p>
+  <div class="responsive-table">
+    <table class="data-table comparison-table">
+      <thead><tr><th>Métrica</th><th>O que mede</th><th>Boa para avaliar</th><th>Não prova sozinha</th></tr></thead>
+      <tbody>
+        <tr><td>Latência/RTT</td><td>Tempo de ida e volta</td><td>Resposta e interatividade</td><td>Capacidade total do link</td></tr>
+        <tr><td>Largura de banda</td><td>Capacidade teórica/contratada</td><td>Planejamento de volume</td><td>Taxa útil real</td></tr>
+        <tr><td>Throughput</td><td>Dados úteis por tempo</td><td>Transferências reais</td><td>Latência percebida</td></tr>
+        <tr><td>Jitter</td><td>Variação da latência</td><td>Voz, vídeo e tempo real</td><td>Volume total transferido</td></tr>
+        <tr><td>Perda</td><td>Pacotes não entregues</td><td>Qualidade do caminho</td><td>Causa exata sem correlação</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout warning">
+    <strong>Erros comuns:</strong>
+    <ul>
+      <li><strong>Chamar tudo de velocidade.</strong> Na linguagem comum, qualquer demora vira “internet lenta”, e o diagnóstico fica genérico. Separe latência, largura de banda, throughput, perda, jitter e tempo de aplicação.</li>
+      <li><strong>Comprar mais link sem medir saturação.</strong> Banda é a métrica mais visível no contrato, mas só resolve quando o gargalo é saturação; não resolve distância física, rota ruim, perda, DNS lento, proxy sobrecarregado, banco lento ou autenticação mal desenhada. Meça utilização, RTT, perda e fila antes de aumentar o link.</li>
+      <li><strong>Concluir que ping baixo significa aplicação rápida.</strong> Problemas de TLS, HTTP, banco ou autenticação passam despercebidos. Combine ping com curl, métricas HTTP e logs da aplicação.</li>
+      <li><strong>Ignorar jitter em voz e vídeo.</strong> A média de latência parece aceitável, mas as chamadas engasgam. Observe variação, perda, Wi‑Fi, filas e QoS.</li>
+    </ul>
+  </div>
 </section>

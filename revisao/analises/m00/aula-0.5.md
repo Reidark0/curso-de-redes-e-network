@@ -176,3 +176,6 @@ AVISO do `validar` “gabarito concentrado {0:6, 1:1, 2:1}”: as 6 questões or
   ]
 }
 ```
+
+
+> **Nota do orquestrador (D20):** depois da análise, o `quiz_embaralhar.js` redistribuiu a posição da resposta correta (gabarito antes concentrado no índice 0, agora 2/2/2/2). O texto das questões e opções não mudou. O item "gabarito concentrado" da revisão humana está resolvido.

@@ -223,6 +223,7 @@ Esta seção registra o que o código real impõe e como usar as ferramentas. Mo
 | C | `node revisao/tools/contexto.js <id>` | o que você PODE ver de outras aulas: módulo, títulos e `summary` da anterior e da seguinte |
 | C | `node revisao/tools/frases_repetidas.js <id>` | frases (≥8 palavras) desta aula que se repetem em ≥3 aulas |
 | E | `node revisao/tools/quiz_normalizar.js <id>` | rode ANTES de editar o quiz: converte `nova/meta.json` para o formato padrão, com `answer` numérico |
+| E | `node revisao/tools/quiz_embaralhar.js <id>` | só se o `validar` avisar "gabarito concentrado": redistribui a posição da resposta correta |
 | F | `node revisao/tools/montar.js <id>` | gera `aulas novas/mXX/lesson-XX-YY.js` |
 | G | `node revisao/tools/metricas.js <id> nova` | métricas da versão montada (exige o `montar`) |
 | G/H | `node revisao/tools/comparar.js <id>` | palavras por campo antes → depois, cortes e acréscimos brutos (para a checagem da 11.7) |
@@ -271,7 +272,7 @@ Regra: o markup **novo** usa só classes estilizadas. Exemplos: `<div class="cal
 - Itens de `quiz`, `flashcards`, `mentorQuestions`, `exercises` e `glossary` precisam ser **objetos**. Uma string vira um card vazio no app ("Pergunta" sem texto). O `validar` reprova.
 - Quando houver várias rubricas ou regras de aprovação conflitantes (exibidas e ocultas), consolide-as numa só, na versão exibida (`challenge.gradingRubric`/`successCriteria`), sem baixar a exigência (na dúvida, fique com o critério mais exigente) e registre a consolidação em "Revisão humana".
 - Para conferir perda de conhecimento, rode `node revisao/tools/comparar.js <id> --sumiram` e confira se cada frase que sumiu está coberta de outra forma, foi removida por redundância ou está no inventário como REMOVIDO com motivo.
-- Não reordene as opções das questões que você manteve: a resposta salva do aluno guarda o índice escolhido.
+- **(corrigido em D20)** Pode reordenar as opções: o app calcula a nota pelo `isCorrect` salvo, não pelo índice escolhido, então isso não afeta o progresso. Se o `validar` avisar "gabarito concentrado", rode `node revisao/tools/quiz_embaralhar.js <id>` (troca a opção correta de lugar, de forma determinística) e monte de novo. Confira se nenhuma explicação cita a posição da opção ("a primeira alternativa").
 
 ### 11.7 % de linguiça e escopo da reescrita
 - O % de linguiça é a sua estimativa (palavras visíveis removíveis sem perder informação ÷ visíveis). Confira com os **cortes brutos** e com o **diff por frase** do `comparar` (não com o saldo líquido, que mistura cortes e acréscimos): se a reescrita cortou muito mais do que a linguiça estimada, ou você cortou conhecimento ou a estimativa está errada. Revise.

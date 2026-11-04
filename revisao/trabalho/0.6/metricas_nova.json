@@ -1,0 +1,80 @@
+{
+  "id": "0.6",
+  "versao": "nova",
+  "titulo": "Latência, largura de banda e throughput",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 6042,
+    "invisiveis": 49,
+    "teoriaVisivel": 3319
+  },
+  "porCampoVisivel": {
+    "content.motivation": 208,
+    "content.problem": 181,
+    "content.concept": 387,
+    "content.internals": 460,
+    "content.architecture": 287,
+    "content.analogy": 114,
+    "content.simpleExample": 134,
+    "content.enterpriseExample": 123,
+    "content.cloudExample": 116,
+    "content.devsecopsExample": 84,
+    "content.securityExample": 152,
+    "content.diagram": 2,
+    "content.summary": 107,
+    "content.nextTheme": 28,
+    "security": 355,
+    "troubleshooting": 327,
+    "glossary": 254,
+    "title+subtitle": 19,
+    "objectives": 64,
+    "learningOutcomes": 95,
+    "quiz": 604,
+    "flashcards": 172,
+    "mentorQuestions": 163,
+    "exercises": 167,
+    "challenge": 200,
+    "commentedSolution": 231,
+    "references": 72,
+    "linksToOtherCourses": 77,
+    "lab": 859
+  },
+  "porCampoInvisivel": {
+    "networkContext": 49
+  },
+  "quantidades": {
+    "quiz": 8,
+    "flashcards": 7,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 30,
+    "alternativa_5minPasso_maisLeitura": 31.6,
+    "plausivel": true,
+    "palavras": 859
+  },
+  "duracao": {
+    "declarada": "100-145 min",
+    "estimatedStudyTimeMinutes": 145,
+    "M": 122.5,
+    "T": 120,
+    "partes": {
+      "teoria": 25.5,
+      "diagramas": 3,
+      "quiz": 8,
+      "flashcards": 3.5,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 30
+    },
+    "faixaRecomendada": "100-145 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 24
+  }
+}
