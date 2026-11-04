@@ -1,0 +1,90 @@
+{
+  "id": "3.4",
+  "versao": "original",
+  "titulo": "Domínios de colisão, broadcast e hub vs switch",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3857,
+    "invisiveis": 544,
+    "teoriaVisivel": 2158
+  },
+  "porCampoVisivel": {
+    "content.motivation": 194,
+    "content.history": 154,
+    "content.problem": 121,
+    "content.evolution": 98,
+    "content.concept": 118,
+    "content.internals": 140,
+    "content.architecture": 122,
+    "content.analogy": 85,
+    "content.simpleExample": 92,
+    "content.enterpriseExample": 79,
+    "content.cloudExample": 87,
+    "content.devsecopsExample": 75,
+    "content.securityExample": 117,
+    "content.diagram": 3,
+    "content.summary": 66,
+    "content.nextTheme": 43,
+    "security": 196,
+    "troubleshooting": 177,
+    "glossary": 191,
+    "title+subtitle": 25,
+    "objectives": 46,
+    "learningOutcomes": 75,
+    "quiz": 205,
+    "flashcards": 88,
+    "mentorQuestions": 126,
+    "exercises": 142,
+    "challenge": 118,
+    "commentedSolution": 104,
+    "references": 24,
+    "linksToOtherCourses": 58,
+    "lab": 688
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 40,
+    "content.exercisesIntro": 22,
+    "content.challengeIntro": 31,
+    "content.solutionIntro": 27,
+    "networkContext": 25,
+    "protocolFields": 90,
+    "packetFlow": 91,
+    "deepDive": 141,
+    "commonMistakes": 77
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 120,
+    "alternativa_5minPasso_maisLeitura": 35.3,
+    "plausivel": false,
+    "palavras": 688
+  },
+  "duracao": {
+    "declarada": "85-120 min",
+    "estimatedStudyTimeMinutes": 120,
+    "M": 102.5,
+    "T": 113.9,
+    "partes": {
+      "teoria": 16.6,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 35.3
+    },
+    "faixaRecomendada": "95-135 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 17
+  }
+}

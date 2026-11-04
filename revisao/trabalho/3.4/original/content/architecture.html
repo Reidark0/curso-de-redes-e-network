@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--architecture"><h2>7. Arquitetura</h2>
+<p>Em arquitetura corporativa, domínios de colisão são raramente o limitador principal em switches modernos, mas domínios de broadcast continuam críticos. Uma rede plana com centenas ou milhares de dispositivos na mesma VLAN aumenta ARP, ruído, escopo de falhas e superfície de movimento lateral.</p>
+<ul><li><strong>Acesso:</strong> switches conectam usuários, impressoras, APs, telefones e câmeras.</li><li><strong>Distribuição:</strong> agrega switches de acesso e aplica roteamento, filtros ou políticas.</li><li><strong>Core:</strong> transporta tráfego de alto volume com baixa latência.</li><li><strong>VLANs:</strong> separam domínios de broadcast por função.</li><li><strong>Firewall/roteador:</strong> controla tráfego entre segmentos.</li></ul>
+<p>Em cloud, conceitos parecidos aparecem em subnets, route tables, security groups e domínios de broadcast abstraídos pelo provedor. Você raramente vê broadcast L2 puro em cloud pública, mas ainda precisa entender segmentação e escopo de falha.</p>
+</section>

@@ -1,0 +1,9 @@
+<section class="lesson-section lesson-section--security"><h2>13. Exemplo em Segurança</h2>
+<p>Do ponto de vista defensivo, domínios grandes demais aumentam superfície de movimento lateral, descoberta interna, broadcast storms e impacto de loops. Hubs são inseguros porque expõem tráfego para todos os hosts. Switches reduzem exposição unicast, mas não devem ser confundidos com controles de autorização.</p>
+<table class="data-table risk-table"><thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead><tbody>
+<tr><td>Rede plana</td><td>Todos na mesma VLAN</td><td>Movimento lateral e broadcast amplo</td><td>VLANs, firewall interno, NAC e logs</td></tr>
+<tr><td>Broadcast storm</td><td>Tráfego broadcast excessivo</td><td>Indisponibilidade de LAN</td><td>STP, storm control e loop prevention</td></tr>
+<tr><td>Hub ou mini-switch indevido</td><td>Equipamento não autorizado em porta</td><td>Exposição e loop</td><td>Port security, 802.1X, inspeção física</td></tr>
+<tr><td>Segmentação falsa</td><td>VLAN sem política entre segmentos</td><td>Acesso amplo entre redes</td><td>Roteamento controlado, ACLs e firewall</td></tr>
+</tbody></table>
+</section>

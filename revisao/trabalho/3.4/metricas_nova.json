@@ -1,0 +1,79 @@
+{
+  "id": "3.4",
+  "versao": "nova",
+  "titulo": "Domínios de colisão, broadcast e hub vs switch",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3983,
+    "invisiveis": 25,
+    "teoriaVisivel": 2157
+  },
+  "porCampoVisivel": {
+    "content.motivation": 122,
+    "content.history": 155,
+    "content.problem": 77,
+    "content.concept": 221,
+    "content.internals": 305,
+    "content.architecture": 132,
+    "content.analogy": 83,
+    "content.simpleExample": 154,
+    "content.enterpriseExample": 83,
+    "content.cloudExample": 68,
+    "content.diagram": 1,
+    "content.summary": 80,
+    "content.nextTheme": 46,
+    "security": 241,
+    "troubleshooting": 198,
+    "glossary": 191,
+    "title+subtitle": 28,
+    "objectives": 46,
+    "learningOutcomes": 75,
+    "quiz": 298,
+    "flashcards": 118,
+    "mentorQuestions": 126,
+    "exercises": 199,
+    "challenge": 118,
+    "commentedSolution": 104,
+    "references": 24,
+    "linksToOtherCourses": 58,
+    "lab": 632
+  },
+  "porCampoInvisivel": {
+    "networkContext": 25
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 30,
+    "alternativa_5minPasso_maisLeitura": 29.9,
+    "plausivel": true,
+    "palavras": 632
+  },
+  "duracao": {
+    "declarada": "85-125 min",
+    "estimatedStudyTimeMinutes": 125,
+    "M": 105,
+    "T": 102.6,
+    "partes": {
+      "teoria": 16.6,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 20,
+      "lab": 30
+    },
+    "faixaRecomendada": "85-125 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 19
+  }
+}

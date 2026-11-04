@@ -1,0 +1,18 @@
+<section class="lesson-section lesson-section--concept"><h2>Conceito</h2>
+<p><strong>Domínio de colisão</strong> é o conjunto de dispositivos que compartilham um meio onde transmissões simultâneas podem interferir entre si. Com hubs e links half-duplex, vários hosts ficam no mesmo domínio de colisão. Num switch, cada porta é o seu próprio domínio.</p>
+<p><strong>Domínio de broadcast</strong> é o conjunto de dispositivos que recebem os broadcasts uns dos outros. O switch encaminha broadcast para todas as portas da mesma VLAN, exceto a de entrada; o roteador não encaminha broadcast de Camada 2 para outras redes.</p>
+<div class="definition-box"><strong>Definição prática:</strong> switch reduz domínio de colisão; VLAN e roteador limitam domínio de broadcast.</div>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Equipamento</th><th>Separa colisão?</th><th>Separa broadcast?</th></tr></thead><tbody>
+<tr><td>Hub</td><td>Não: todas as portas num só domínio</td><td>Não</td></tr>
+<tr><td>Switch (uma VLAN)</td><td>Sim: um domínio por porta</td><td>Não: toda a VLAN recebe</td></tr>
+<tr><td>VLANs no switch</td><td>Sim</td><td>Sim: um domínio por VLAN</td></tr>
+<tr><td>Roteador / interface L3</td><td>Sim</td><td>Sim: um domínio por interface</td></tr>
+</tbody></table></div>
+<div class="callout warning"><strong>Erros comuns:</strong>
+<ul>
+<li><strong>Achar que o switch elimina broadcast</strong> e, por isso, projetar VLANs grandes demais.</li>
+<li><strong>Confundir VLAN com firewall.</strong> Com roteamento livre entre VLANs, o acesso continua aberto; use ACLs, firewall e política entre segmentos.</li>
+<li><strong>Culpar colisão por todo problema moderno.</strong> Em switches full-duplex, lentidão local costuma vir de broadcast excessivo, loop ou erro físico. Broadcast em pequena quantidade é normal; o excesso é que exige investigação.</li>
+<li><strong>Ignorar mini-switches domésticos em portas corporativas:</strong> criam loops e expansões não documentadas.</li>
+</ul></div>
+</section>

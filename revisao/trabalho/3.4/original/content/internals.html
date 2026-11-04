@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--internals"><h2>6. Funcionamento interno</h2>
+<p>Para entender a diferença, acompanhe o que acontece em três cenários.</p>
+<ol class="flow-list"><li><strong>Hub:</strong> recebe bits em uma porta e repete para todas. Se dois hosts falam ao mesmo tempo em meio half-duplex, há colisão.</li><li><strong>Switch com unicast conhecido:</strong> recebe frame, consulta tabela MAC e envia apenas para a porta do destino.</li><li><strong>Switch com broadcast:</strong> recebe frame para <code>ff:ff:ff:ff:ff:ff</code> e envia para todas as portas da mesma VLAN, exceto a origem.</li><li><strong>Switch com VLANs:</strong> limita o broadcast à VLAN correta.</li><li><strong>Roteador ou gateway L3:</strong> separa domínios de broadcast e encaminha pacotes entre redes usando IP, não frames broadcast L2.</li></ol>
+<p>O ponto crucial é que um switch não é um roteador. Ele separa colisões por porta e encaminha frames com base em MAC, mas, se todos os hosts estão na mesma VLAN, eles ainda compartilham o mesmo domínio de broadcast.</p>
+</section>

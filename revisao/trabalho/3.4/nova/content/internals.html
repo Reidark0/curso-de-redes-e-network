@@ -1,0 +1,19 @@
+<section class="lesson-section lesson-section--internals"><h2>Funcionamento interno</h2>
+<ol class="flow-list"><li><strong>Hub:</strong> recebe bits em uma porta e repete para todas. Se dois hosts falam ao mesmo tempo em half-duplex, há colisão.</li><li><strong>Switch com unicast conhecido:</strong> consulta a tabela MAC e envia só para a porta do destino.</li><li><strong>Switch com broadcast:</strong> envia para todas as portas da mesma VLAN, exceto a de origem (veja o fluxo abaixo).</li></ol>
+<h3>Por que o switch acaba com as colisões</h3>
+<p>Cada porta do switch é um link ponto a ponto com um único host. Em full-duplex, os dois lados transmitem e recebem ao mesmo tempo sem disputar o meio, e o CSMA/CD fica desativado. Colisões só reaparecem quando algum link opera em half-duplex: hub, equipamento antigo ou negociação de duplex errada.</p>
+<h3>Um ARP Request atravessando a LAN</h3>
+<ol class="flow-list">
+<li><strong>Host A</strong> envia o ARP Request para <code>ff:ff:ff:ff:ff:ff</code>. Numa VLAN grande, muitos broadcasts viram ruído e lentidão.</li>
+<li><strong>Switch</strong> aprende o MAC de origem na porta e VLAN de entrada. MAC flapping ou um MAC desconhecido na porta merecem investigação.</li>
+<li><strong>Switch</strong> replica o frame para todas as portas da VLAN, exceto a de origem; as outras VLANs não recebem. Um loop sem STP multiplica esses broadcasts.</li>
+<li><strong>Gateway</strong> recebe o broadcast (é membro da VLAN), mas não o encaminha para outra rede: entre redes ele encaminha pacotes IP.</li>
+</ol>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Campo</th><th>Tamanho</th><th>Papel aqui</th><th>Observação defensiva</th></tr></thead><tbody>
+<tr><td>Destination MAC <code>ff:ff:ff:ff:ff:ff</code></td><td>48 bits</td><td>Broadcast para a VLAN</td><td>Excesso indica loop, storm ou varredura ruidosa</td></tr>
+<tr><td>Source MAC</td><td>48 bits</td><td>Aprendizado e rastreio da origem por porta/VLAN</td><td>Pode ser falsificado; não é identidade forte</td></tr>
+<tr><td>VLAN ID</td><td>12 bits na tag 802.1Q</td><td>Separa domínios de broadcast no mesmo hardware</td><td>VLAN errada ou trunk permissivo expõe segmentos</td></tr>
+<tr><td>FCS</td><td>32 bits</td><td>Detecta erro no frame</td><td>Erros recorrentes indicam problema físico</td></tr>
+</tbody></table></div>
+<p>O ponto crucial: switch não é roteador. Hosts na mesma VLAN compartilham o mesmo domínio de broadcast, por melhor que seja o switch.</p>
+</section>

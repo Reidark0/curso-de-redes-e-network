@@ -1,0 +1,4 @@
+<section class="lesson-section lesson-section--cloud"><h2>11. Exemplo em cloud</h2>
+<p>Cloud pública normalmente abstrai Camada 2 e evita que o cliente dependa de broadcast Ethernet tradicional. Ainda assim, a lógica de escopo permanece: uma subnet representa um domínio administrativo de endereçamento e política; route tables decidem caminhos; security groups/NSGs controlam portas e origens; firewalls centralizados podem separar zonas.</p>
+<p>O erro equivalente em cloud é criar uma VPC/VNet plana, com subnets públicas demais e regras amplas. Mesmo sem broadcast L2 visível, o problema arquitetural é parecido: escopo grande demais, pouco isolamento e pouca governança.</p>
+</section>

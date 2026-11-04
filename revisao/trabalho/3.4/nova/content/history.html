@@ -1,0 +1,9 @@
+<section class="lesson-section lesson-section--history"><h2>História</h2>
+<p>Na Ethernet original, vários hosts compartilhavam o mesmo meio físico. Se dois transmitiam ao mesmo tempo, os sinais colidiam; cada placa detectava a colisão e tentava de novo depois de um tempo aleatório (CSMA/CD). O hub só tornou o cabeamento mais conveniente (estrela): continuou repetindo tudo e mantendo um único domínio de colisão. O switch isolou cada porta, mas o broadcast continuou existindo, porque protocolos como o ARP do IPv4 precisam alcançar todos os hosts da rede local.</p>
+<table class="data-table comparison-table"><thead><tr><th>Fase</th><th>Como funcionava</th><th>Problema</th><th>O que veio depois</th></tr></thead><tbody>
+<tr><td>Meio compartilhado</td><td>Vários hosts no mesmo meio.</td><td>Colisões e baixa escalabilidade.</td><td>Hubs (estrela física).</td></tr>
+<tr><td>Hub</td><td>Repetia sinais para todas as portas.</td><td>Um único domínio de colisão e tráfego exposto a todos.</td><td>Switch Ethernet.</td></tr>
+<tr><td>Switch</td><td>Aprende MACs e encaminha seletivamente.</td><td>Broadcast ainda alcança toda a VLAN.</td><td>VLANs e roteamento entre segmentos.</td></tr>
+<tr><td>LAN segmentada</td><td>VLANs limitam domínios de broadcast.</td><td>Exige governança, roteamento e políticas.</td><td>Segurança L2, NAC, STP e observabilidade.</td></tr>
+</tbody></table>
+</section>

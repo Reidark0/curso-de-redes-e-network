@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--architecture"><h2>Arquitetura</h2>
+<p>Em redes corporativas com switches modernos, colisão raramente é o limitador; o domínio de broadcast é. Uma rede plana com centenas ou milhares de dispositivos na mesma VLAN aumenta o volume de ARP, o ruído, o escopo de falhas e a superfície de movimento lateral.</p>
+<ul><li><strong>Acesso:</strong> switches conectam usuários, impressoras, APs, telefones e câmeras.</li><li><strong>Distribuição:</strong> agrega os switches de acesso e aplica roteamento, filtros ou políticas.</li><li><strong>Core:</strong> transporta tráfego de alto volume com baixa latência.</li><li><strong>VLANs:</strong> separam domínios de broadcast por função.</li><li><strong>Firewall/roteador:</strong> controla o tráfego entre segmentos.</li></ul>
+<p>Segmentar tem custo operacional: cada VLAN exige documentação e roteamento entre segmentos, e STP e storm control precisam ser monitorados para não virarem fonte de indisponibilidade. A rede plana parece mais barata, mas cobra o preço em incidentes e em troubleshooting mais longo.</p>
+</section>

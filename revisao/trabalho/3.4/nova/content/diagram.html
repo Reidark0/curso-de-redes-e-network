@@ -1,0 +1,43 @@
+<section class="lesson-section lesson-section--diagram"><h2>Diagrama</h2>
+<svg class="lesson-svg" viewBox="0 0 980 540" role="img" aria-labelledby="m03l04-title m03l04-desc">
+<title id="m03l04-title">Hub, switch, domínio de colisão e domínio de broadcast</title>
+<desc id="m03l04-desc">Comparação entre hub repetindo tráfego para todos, switch separando domínios de colisão por porta e broadcast alcançando todas as portas da mesma VLAN.</desc>
+<defs><marker id="m03l04-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" class="svg-arrow" /></marker></defs>
+<rect x="30" y="55" width="420" height="190" rx="18" class="svg-zone" />
+<text x="240" y="85" text-anchor="middle" class="svg-label">Hub: um domínio de colisão compartilhado</text>
+<rect x="190" y="135" width="100" height="55" rx="12" class="svg-node svg-node--switch" />
+<text x="240" y="168" text-anchor="middle" class="svg-label">Hub</text>
+<rect x="60" y="135" width="95" height="55" rx="12" class="svg-node svg-node--client" />
+<text x="108" y="168" text-anchor="middle" class="svg-label">Host A</text>
+<rect x="325" y="95" width="95" height="55" rx="12" class="svg-node svg-node--client" />
+<text x="373" y="128" text-anchor="middle" class="svg-label">Host B</text>
+<rect x="325" y="185" width="95" height="55" rx="12" class="svg-node svg-node--client" />
+<text x="373" y="218" text-anchor="middle" class="svg-label">Host C</text>
+<line x1="155" y1="162" x2="190" y2="162" class="svg-flow svg-flow--blocked animated-flow" marker-end="url(#m03l04-arrow)" />
+<line x1="290" y1="155" x2="325" y2="125" class="svg-flow svg-flow--blocked animated-flow" marker-end="url(#m03l04-arrow)" />
+<line x1="290" y1="170" x2="325" y2="210" class="svg-flow svg-flow--blocked animated-flow" marker-end="url(#m03l04-arrow)" />
+<text x="240" y="222" text-anchor="middle" class="svg-label svg-label--small">Repetição para todos • colisões possíveis</text>
+<rect x="530" y="55" width="420" height="190" rx="18" class="svg-zone" />
+<text x="740" y="85" text-anchor="middle" class="svg-label">Switch: colisão isolada por porta</text>
+<rect x="690" y="135" width="105" height="55" rx="12" class="svg-node svg-node--switch" />
+<text x="742" y="168" text-anchor="middle" class="svg-label">Switch</text>
+<rect x="560" y="135" width="95" height="55" rx="12" class="svg-node svg-node--client" />
+<text x="608" y="168" text-anchor="middle" class="svg-label">Host A</text>
+<rect x="830" y="95" width="95" height="55" rx="12" class="svg-node svg-node--client" />
+<text x="878" y="128" text-anchor="middle" class="svg-label">Host B</text>
+<rect x="830" y="185" width="95" height="55" rx="12" class="svg-node svg-node--client" />
+<text x="878" y="218" text-anchor="middle" class="svg-label">Host C</text>
+<line x1="655" y1="162" x2="690" y2="162" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m03l04-arrow)" />
+<line x1="795" y1="155" x2="830" y2="125" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m03l04-arrow)" />
+<line x1="795" y1="174" x2="830" y2="210" class="svg-flow svg-flow--blocked" marker-end="url(#m03l04-arrow)" />
+<text x="740" y="222" text-anchor="middle" class="svg-label svg-label--small">Unicast conhecido vai só para a porta correta</text>
+<rect x="95" y="315" width="790" height="165" rx="18" class="svg-zone" />
+<text x="490" y="345" text-anchor="middle" class="svg-label">Domínio de broadcast: todos na mesma VLAN recebem broadcasts</text>
+<rect x="180" y="385" width="110" height="55" rx="12" class="svg-node svg-node--client" /><text x="235" y="418" text-anchor="middle" class="svg-label">Host A</text>
+<rect x="435" y="385" width="110" height="55" rx="12" class="svg-node svg-node--switch" /><text x="490" y="418" text-anchor="middle" class="svg-label">Switch</text>
+<rect x="690" y="385" width="110" height="55" rx="12" class="svg-node svg-node--client" /><text x="745" y="418" text-anchor="middle" class="svg-label">Host B/C</text>
+<line x1="290" y1="412" x2="435" y2="412" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m03l04-arrow)" />
+<line x1="545" y1="412" x2="690" y2="412" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m03l04-arrow)" />
+<text x="490" y="465" text-anchor="middle" class="svg-label svg-label--small">ARP Request e outros broadcasts ficam dentro da VLAN, mas alcançam todos os membros dela</text>
+</svg>
+</section>

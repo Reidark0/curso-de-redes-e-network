@@ -37,7 +37,7 @@ Status: PENDENTE · EM ANDAMENTO · CONCLUÍDA · FALHOU. Atualizado pelo orques
 | 3.1 | m03/lesson-03-01.js | CONCLUÍDA | 4897→4818 (-2%) | 85-120 min→100-140 min | ORGANIZADA | MÉDIA 18% | PARCIAL | BOM |
 | 3.2 | m03/lesson-03-02.js | CONCLUÍDA | 4917→5043 (+3%) | 85-120 min→105-145 min | SUBESTIMADA | MÉDIA 17% | PARCIAL | MÉDIO |
 | 3.3 | m03/lesson-03-03.js | CONCLUÍDA | 4909→4873 (-1%) | 90-125 min→95-140 min | SUBESTIMADA | MÉDIA 19% | PARCIAL | MÉDIO |
-| 3.4 | m03/lesson-03-04.js | EM ANDAMENTO |  |  |  |  |  |  |
+| 3.4 | m03/lesson-03-04.js | CONCLUÍDA | 3857→3983 (+3%) | 85-120 min→85-125 min | ORGANIZADA | MÉDIA 18% | PARCIAL | BOM |
 | 3.5 | m03/lesson-03-05.js | PENDENTE |  |  |  |  |  |  |
 | 3.6 | m03/lesson-03-06.js | PENDENTE |  |  |  |  |  |  |
 | 3.7 | m03/lesson-03-07.js | PENDENTE |  |  |  |  |  |  |

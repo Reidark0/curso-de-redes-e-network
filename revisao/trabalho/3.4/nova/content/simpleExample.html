@@ -1,0 +1,11 @@
+<section class="lesson-section lesson-section--example"><h2>Exemplo simples</h2>
+<p>Em casa, notebook, celular, smart TV e impressora costumam estar na mesma rede. Quando o notebook precisa do MAC do gateway, envia um ARP Request em broadcast. Todos os dispositivos da rede recebem esse frame, mas só o gateway responde. Em pequena escala, isso é normal.</p>
+<h3>Contando domínios</h3>
+<p>Um roteador R tem duas interfaces. A G0/0 vai para um switch S1 com 4 hosts; a G0/1 vai para um hub H com 3 hosts.</p>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Trecho</th><th>Domínios de colisão</th><th>Domínios de broadcast</th></tr></thead><tbody>
+<tr><td>S1 (4 portas de host + 1 porta para R)</td><td>5 (um por porta)</td><td>1</td></tr>
+<tr><td>H (3 hosts + interface G0/1 de R)</td><td>1 (o hub inteiro)</td><td>1</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>6</strong></td><td><strong>2</strong> (um por interface de R)</td></tr>
+</tbody></table></div>
+<p>Se você dividir os 4 hosts de S1 em VLAN 10 e VLAN 20, roteadas por R, os domínios de broadcast passam a 3 e os de colisão continuam 6: VLAN mexe no broadcast, não na colisão.</p>
+</section>
