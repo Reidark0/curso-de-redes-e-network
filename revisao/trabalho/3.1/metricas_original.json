@@ -1,0 +1,90 @@
+{
+  "id": "3.1",
+  "versao": "original",
+  "titulo": "Ethernet: a base da rede local cabeada",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4897,
+    "invisiveis": 810,
+    "teoriaVisivel": 2730
+  },
+  "porCampoVisivel": {
+    "content.motivation": 183,
+    "content.history": 140,
+    "content.problem": 163,
+    "content.evolution": 158,
+    "content.concept": 128,
+    "content.internals": 204,
+    "content.architecture": 138,
+    "content.analogy": 120,
+    "content.simpleExample": 112,
+    "content.enterpriseExample": 113,
+    "content.cloudExample": 104,
+    "content.devsecopsExample": 102,
+    "content.securityExample": 147,
+    "content.diagram": 42,
+    "content.summary": 65,
+    "content.nextTheme": 41,
+    "security": 263,
+    "troubleshooting": 257,
+    "glossary": 250,
+    "title+subtitle": 25,
+    "objectives": 64,
+    "learningOutcomes": 70,
+    "quiz": 289,
+    "flashcards": 106,
+    "mentorQuestions": 156,
+    "exercises": 177,
+    "challenge": 159,
+    "commentedSolution": 183,
+    "references": 44,
+    "linksToOtherCourses": 55,
+    "lab": 839
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 63,
+    "content.exercisesIntro": 30,
+    "content.challengeIntro": 39,
+    "content.solutionIntro": 28,
+    "networkContext": 33,
+    "protocolFields": 102,
+    "packetFlow": 150,
+    "deepDive": 240,
+    "commonMistakes": 125
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 45,
+    "alternativa_5minPasso_maisLeitura": 36.5,
+    "plausivel": true,
+    "palavras": 839
+  },
+  "duracao": {
+    "declarada": "85-120 min",
+    "estimatedStudyTimeMinutes": 120,
+    "M": 102.5,
+    "T": 128,
+    "partes": {
+      "teoria": 21,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 45
+    },
+    "faixaRecomendada": "110-155 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 19
+  }
+}
