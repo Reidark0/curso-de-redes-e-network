@@ -1,0 +1,18 @@
+
+<section class="lesson-section lesson-section--security">
+  <h2>Exemplo em Segurança</h2>
+  <p>
+    Um alerta de exfiltração depende de vários fundamentos ao mesmo tempo: volume em bytes, taxa em bits por segundo, destino, protocolo, porta, codificação do payload, padrão de DNS, logs de proxy, autenticação e horário. Um segredo em Base64 parece protegido para quem não entende codificação. Um ping normal pode esconder uma aplicação vulnerável. Um bloqueio de WAF parece erro de rede para o usuário.
+  </p>
+  <div class="responsive-table">
+    <table class="data-table risk-table">
+      <thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead>
+      <tbody>
+        <tr><td>Conclusão por evidência fraca</td><td>"Ping funciona, então não é rede"</td><td>Incidente ou falha real passa despercebida</td><td>Validar por camadas e registrar os limites do teste</td></tr>
+        <tr><td>Segredo codificado exposto</td><td>Token em Base64 no log ou arquivo</td><td>Credencial reutilizada por atacante</td><td>Mascaramento, cofre de segredos e revisão de logs</td></tr>
+        <tr><td>Alteração insegura</td><td>Abrir firewall sem prova da causa</td><td>Ampliação da superfície de ataque</td><td>Mudança controlada, escopo mínimo e evidência</td></tr>
+        <tr><td>Confundir autenticação e autorização</td><td>Usuário loga, mas recebe 403</td><td>Diagnóstico e escalonamento incorretos</td><td>Separar identidade, token, grupos, claims e política</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>

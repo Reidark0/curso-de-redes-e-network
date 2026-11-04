@@ -1,0 +1,103 @@
+{
+  "id": "0.9",
+  "versao": "original",
+  "titulo": "Laboratório integrador do Módulo 0",
+  "tipo": "ligação integradora",
+  "palavras": {
+    "visiveis": 5598,
+    "teoria": 2887,
+    "praticaExtra": 2108,
+    "quiz": 294,
+    "flashcards": 130
+  },
+  "porGrupoTeoria": {
+    "introducao": 654,
+    "contexto": 449,
+    "conteudo": 393,
+    "exemplos": 722,
+    "seguranca_troubleshooting": 669
+  },
+  "porSecao": {
+    "motivation": 211,
+    "summary": 51,
+    "history": 157,
+    "problem": 172,
+    "evolution": 120,
+    "concept": 118,
+    "internals": 142,
+    "architecture": 130,
+    "diagram": 3,
+    "analogy": 138,
+    "simpleExample": 114,
+    "enterpriseExample": 112,
+    "cloudExample": 102,
+    "devsecopsExample": 92,
+    "securityExample": 164,
+    "objectives": 72,
+    "learningOutcomes": 86,
+    "glossary": 234,
+    "security": 328,
+    "troubleshooting": 341,
+    "nextTheme": 53
+  },
+  "pratica": {
+    "quiz": 294,
+    "flashcards": 130,
+    "lab": 1419,
+    "mentorQuestions": 166,
+    "exercises": 175,
+    "challenge": 181,
+    "commentedSolution": 167
+  },
+  "outros": {
+    "title+subtitle": 22,
+    "nextTheme": 53,
+    "references": 56,
+    "linksToOtherCourses": 48
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 12,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 5,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 90,
+    "alternativa_5minPorPasso": 60,
+    "plausivel": true,
+    "override": null,
+    "palavras": 1419
+  },
+  "duracao": {
+    "declarada": "80-120 min",
+    "estimatedStudyTimeMinutes": 120,
+    "nucleo": 31.2,
+    "nucleoPartes": {
+      "teoria": 22.2,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 135,
+    "praticaExtraPartes": {
+      "lab": 90,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 135,
+    "recomendada": "25-35 min + 135 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}
