@@ -1,0 +1,928 @@
+{
+  "id": "3.10",
+  "moduleId": "m03",
+  "order": 10,
+  "title": "Revisão prática: do frame ao gateway",
+  "subtitle": "Como juntar Ethernet, MAC, switch, broadcast, ARP, VLAN, STP e segurança em um fluxo real de diagnóstico.",
+  "duration": "85-120 min",
+  "estimatedStudyTimeMinutes": 120,
+  "difficulty": "iniciante-intermediário",
+  "type": "ligação/revisão",
+  "xp": 225,
+  "tags": [
+    "redes",
+    "ethernet",
+    "camada 2",
+    "mac",
+    "switch",
+    "arp",
+    "vlan",
+    "stp",
+    "gateway",
+    "troubleshooting",
+    "segurança"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m03",
+      "lesson": "3.1",
+      "reason": "É necessário entender Ethernet como base da LAN."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m03",
+      "lesson": "3.5",
+      "reason": "ARP conecta IPv4 ao MAC do próximo salto local."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m03",
+      "lesson": "3.7",
+      "reason": "VLANs definem o domínio de broadcast do fluxo local."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m03",
+      "lesson": "3.9",
+      "reason": "A revisão inclui controles defensivos de Camada 2."
+    }
+  ],
+  "objectives": [
+    "Revisar o caminho de um frame Ethernet do host até o gateway.",
+    "Relacionar MAC, ARP, switch, VLAN, broadcast, STP e controles defensivos em um único raciocínio.",
+    "Criar uma matriz de diagnóstico para problemas de rede local.",
+    "Separar falhas de Camada 2 de falhas de IP, DNS, TLS, HTTP e aplicação.",
+    "Preparar o aluno para o Módulo 4, onde IPv4 e endereçamento serão aprofundados."
+  ],
+  "learningOutcomes": [
+    "Dado um host sem acesso ao gateway, o aluno identifica evidências de L1, L2 e L3 em ordem.",
+    "Dado um endereço IPv4 de destino, o aluno decide se o MAC necessário é do destino local ou do gateway.",
+    "Dado um switch com VLANs, o aluno explica quais broadcasts ficam contidos e onde precisa haver roteamento.",
+    "Dado um incidente de LAN, o aluno lista riscos e controles defensivos de L2.",
+    "Dado um mini-cenário corporativo, o aluno entrega mapa físico, lógico, tabela de evidências e plano de mitigação."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Camada 1",
+      "Camada 2",
+      "Camada 3"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede",
+      "Internet"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "ARP",
+      "STP/RSTP",
+      "802.1Q",
+      "IPv4",
+      "ICMP",
+      "DHCP"
+    ],
+    "dependsOn": [
+      "Ethernet",
+      "MAC",
+      "Switch",
+      "ARP",
+      "VLAN",
+      "STP"
+    ],
+    "enables": [
+      "IPv4",
+      "Gateway padrão",
+      "Roteamento",
+      "Troubleshooting profissional",
+      "Segurança de LAN"
+    ]
+  },
+  "deepDive": {
+    "mentalModel": "Siga o frame até o gateway: destino local ou remoto, MAC necessário, ARP, switch, VLAN, STP, controles e evidências.",
+    "keyTerms": [
+      "frame",
+      "MAC",
+      "ARP",
+      "gateway",
+      "VLAN",
+      "STP",
+      "broadcast",
+      "tabela MAC"
+    ],
+    "limitations": [
+      "O modelo não substitui captura de tráfego ou logs reais.",
+      "Cloud pública abstrai muitos detalhes de L2.",
+      "Alguns ambientes usam virtualização e overlays que mudam a visibilidade."
+    ],
+    "whenToUse": [
+      "Falha de acesso ao gateway.",
+      "Suspeita de VLAN incorreta.",
+      "MAC flapping ou ARP inconsistente.",
+      "Mapeamento de LAN.",
+      "Análise defensiva de portas e switches."
+    ],
+    "whenNotToUse": [
+      "Quando a evidência já mostra erro puramente de aplicação.",
+      "Quando não há autorização para coletar dados da rede.",
+      "Quando mudanças em switch podem causar indisponibilidade sem janela."
+    ],
+    "operationalImpact": [
+      "Exige inventário de portas, VLANs e uplinks.",
+      "Melhora troubleshooting, mas demanda disciplina de documentação.",
+      "Controles como NAC e DAI precisam de implantação gradual."
+    ],
+    "financialImpact": [
+      "Pode exigir switches gerenciáveis, licenças NAC, ferramentas de monitoramento e tempo de equipe.",
+      "Reduz custo de indisponibilidade e investigação longa."
+    ],
+    "securityImpact": [
+      "Reduz movimento lateral e abuso local.",
+      "Aumenta visibilidade de portas, MACs, ARP e VLANs.",
+      "Exige cuidado com logs e evidências sensíveis."
+    ]
+  },
+  "commonMistakes": [
+    {
+      "mistake": "Achar que VLAN é firewall.",
+      "whyItHappens": "VLAN separa broadcast e parece isolamento completo.",
+      "consequence": "Tráfego inter-VLAN pode ficar permitido sem política adequada.",
+      "correction": "Use VLAN para segmentação L2 e firewall/ACL para política de acesso."
+    },
+    {
+      "mistake": "Culpar DNS antes de testar gateway.",
+      "whyItHappens": "DNS é uma causa comum de falha de acesso por nome.",
+      "consequence": "Perde-se tempo quando o problema é ARP, VLAN ou gateway.",
+      "correction": "Valide IP, máscara, gateway, ARP e ping local antes de DNS."
+    },
+    {
+      "mistake": "Limpar cache ARP e declarar problema resolvido.",
+      "whyItHappens": "A limpeza pode mascarar temporariamente o sintoma.",
+      "consequence": "A causa raiz volta depois.",
+      "correction": "Colete evidências de switch, ARP, DHCP, VLAN e logs."
+    }
+  ],
+  "troubleshooting": {
+    "symptoms": [
+      "Gateway não responde.",
+      "ARP incompleto ou inconsistente.",
+      "MAC flapping.",
+      "Host na VLAN errada.",
+      "Broadcast storm.",
+      "Acesso intermitente a serviços locais."
+    ],
+    "diagnosticQuestions": [
+      "O host tem IP, máscara e gateway coerentes?",
+      "O MAC do gateway aparece no cache ARP?",
+      "O switch vê o MAC do host na porta esperada?",
+      "A porta está na VLAN correta?",
+      "O trunk permite a VLAN?",
+      "STP bloqueou alguma porta crítica?",
+      "Há controles L2 bloqueando a comunicação?"
+    ],
+    "commands": [
+      {
+        "platform": "Windows",
+        "command": "ipconfig /all && arp -a && ping <gateway> && tracert <destino>",
+        "purpose": "Ver configuração local, cache ARP e alcance ao gateway.",
+        "expectedObservation": "Gateway configurado, entrada ARP para gateway e resposta de ping quando ICMP permitido.",
+        "interpretation": "Se gateway não responde e ARP está incompleto, investigar L2 antes de DNS."
+      },
+      {
+        "platform": "Linux",
+        "command": "ip addr && ip route && ip neigh && ping -c 4 <gateway>",
+        "purpose": "Ver endereço, rota default, vizinhos ARP e conectividade local.",
+        "expectedObservation": "default via correto e vizinho ARP em estado válido.",
+        "interpretation": "Estado FAILED/INCOMPLETE aponta para problema local ou bloqueio."
+      },
+      {
+        "platform": "Cisco IOS",
+        "command": "show mac address-table dynamic\nshow vlan brief\nshow interfaces trunk\nshow spanning-tree\nshow arp",
+        "purpose": "Validar tabela MAC, VLANs, trunks, STP e ARP no equipamento.",
+        "expectedObservation": "MACs nas portas esperadas, VLAN permitida no trunk e STP estável.",
+        "interpretation": "MAC flapping, VLAN ausente ou porta bloqueada explicam muitos sintomas de LAN."
+      }
+    ],
+    "decisionTree": [
+      {
+        "if": "Host não pinga gateway e ARP está incompleto",
+        "then": "Verificar cabo/Wi-Fi, VLAN da porta, trunk, gateway ativo e controles L2."
+      },
+      {
+        "if": "MAC do gateway muda repetidamente",
+        "then": "Investigar alta disponibilidade legítima, IP duplicado, ARP inconsistente e logs de switch."
+      },
+      {
+        "if": "Mesmo MAC aparece em portas diferentes",
+        "then": "Investigar loop, virtualização, docking, AP bridge ou anomalia."
+      }
+    ]
+  },
+  "security": {
+    "goodPractices": [
+      "Documentar portas, VLANs, uplinks e gateways.",
+      "Desabilitar portas não usadas ou colocá-las em VLAN de quarentena.",
+      "Usar 802.1X/NAC quando viável.",
+      "Habilitar DHCP snooping, DAI, BPDU Guard e storm control com planejamento.",
+      "Sanitizar evidências antes de compartilhar relatórios."
+    ],
+    "badPractices": [
+      "Usar uma rede plana para todos os ativos.",
+      "Deixar trunks permitindo todas as VLANs sem necessidade.",
+      "Confiar apenas em firewall de borda.",
+      "Investigar incidentes mexendo em switch sem janela ou autorização.",
+      "Publicar MACs, IPs e topologia em documentos abertos."
+    ],
+    "commonErrors": [
+      "Confundir isolamento de broadcast com autorização.",
+      "Não correlacionar ARP com tabela MAC.",
+      "Ignorar STP em redes redundantes.",
+      "Tratar MAC como identidade forte."
+    ],
+    "vulnerabilities": [
+      {
+        "name": "Exposição lateral em LAN plana",
+        "description": "Todos os ativos compartilham o mesmo domínio local.",
+        "defensiveExplanation": "Facilita descoberta, broadcast excessivo e alcance lateral.",
+        "mitigation": "VLANs, firewall intersegmento, NAC, monitoramento e menor privilégio."
+      },
+      {
+        "name": "ARP inconsistente",
+        "description": "Associações IP-MAC instáveis ou suspeitas.",
+        "defensiveExplanation": "Pode indicar erro operacional, HA mal entendido ou tentativa de desvio local.",
+        "mitigation": "DAI, DHCP snooping, logs, segmentação e investigação controlada."
+      }
+    ],
+    "monitoring": [
+      "MAC flapping.",
+      "Portas novas ativas.",
+      "Mudança de gateway MAC.",
+      "Broadcast incomum.",
+      "Eventos de STP.",
+      "Bloqueios de DAI/NAC."
+    ],
+    "hardening": [
+      "Port security seletivo.",
+      "802.1X/NAC.",
+      "BPDU Guard em portas de acesso.",
+      "Root Guard onde aplicável.",
+      "Allowed VLANs restritas em trunks.",
+      "Storm control."
+    ],
+    "detectionIdeas": [
+      "Correlacionar logs de switch, DHCP, ARP, NAC, firewall e EDR.",
+      "Alertar para MACs novos em portas críticas.",
+      "Monitorar crescimento de broadcast e MAC moves."
+    ]
+  },
+  "protocolFields": [
+    {
+      "field": "Destination MAC",
+      "size": "48 bits",
+      "purpose": "Identificar o próximo destino local do frame.",
+      "securityObservation": "Pode apontar para gateway, destino local ou broadcast; inconsistências merecem investigação."
+    },
+    {
+      "field": "Source MAC",
+      "size": "48 bits",
+      "purpose": "Identificar a interface que originou o frame naquele enlace.",
+      "securityObservation": "Não deve ser tratado como identidade forte, pois pode mudar ou ser falsificado em alguns cenários."
+    },
+    {
+      "field": "VLAN Tag 802.1Q",
+      "size": "32 bits",
+      "purpose": "Carregar VLAN ID em enlaces trunk.",
+      "securityObservation": "Trunks permissivos ampliam superfície de erro e exposição."
+    },
+    {
+      "field": "ARP Sender/Target",
+      "size": "variável",
+      "purpose": "Associar IPv4 e MAC na rede local.",
+      "securityObservation": "ARP não autentica nativamente a veracidade da associação."
+    }
+  ],
+  "packetFlow": [
+    {
+      "step": 1,
+      "actor": "Host",
+      "action": "Decide se o destino é local ou remoto.",
+      "detail": "Compara IP e máscara; se remoto, usa gateway.",
+      "possibleFailure": "Máscara ou gateway incorreto."
+    },
+    {
+      "step": 2,
+      "actor": "Host",
+      "action": "Consulta cache ARP.",
+      "detail": "Procura MAC do destino local ou gateway.",
+      "possibleFailure": "Entrada ausente, stale, failed ou inconsistente."
+    },
+    {
+      "step": 3,
+      "actor": "Switch",
+      "action": "Aprende MAC de origem e encaminha o frame.",
+      "detail": "Usa tabela MAC por VLAN.",
+      "possibleFailure": "MAC flapping, flooding ou porta errada."
+    },
+    {
+      "step": 4,
+      "actor": "Infraestrutura L2",
+      "action": "Aplica VLAN, trunk e STP.",
+      "detail": "Limita broadcast e evita loops.",
+      "possibleFailure": "VLAN ausente no trunk, STP bloqueando caminho ou loop."
+    },
+    {
+      "step": 5,
+      "actor": "Gateway",
+      "action": "Recebe o frame local e processa o pacote IP.",
+      "detail": "A partir daqui começa o roteamento para outras redes.",
+      "possibleFailure": "Gateway errado, firewall local ou rota ausente."
+    }
+  ],
+  "lab": {
+    "id": "lab-3.10",
+    "title": "Mini-projeto: do frame Ethernet ao gateway",
+    "labType": "security",
+    "objective": "Construir um relatório técnico que explique e valide o caminho local de um host até o gateway, com foco em Ethernet, MAC, ARP, switch, VLAN, STP e controles defensivos.",
+    "scenario": "Você está revisando uma LAN pequena antes de avançar para IPv4. O objetivo é documentar o fluxo local sem executar ações ofensivas e sem alterar equipamentos de produção.",
+    "topology": "Host -> switch de acesso -> trunk/uplink -> gateway/firewall -> outras redes",
+    "architecture": "Rede local com ao menos um host, gateway padrão, domínio de broadcast, switch ou AP e possibilidade de VLAN lógica.",
+    "prerequisites": [
+      "Ter concluído as aulas 3.1 a 3.9.",
+      "Ter autorização para coletar informações no próprio ambiente ou usar laboratório controlado.",
+      "Não executar ataques, spoofing, flooding ou varreduras agressivas."
+    ],
+    "tools": [
+      "Windows PowerShell ou Terminal Linux",
+      "Comandos ipconfig, arp, ping, tracert, ip, ip neigh",
+      "Opcional: acesso read-only a switch Cisco/Packet Tracer",
+      "Editor de texto para relatório"
+    ],
+    "estimatedTimeMinutes": 120,
+    "cost": "zero",
+    "safetyNotes": [
+      "Não altere configurações de switch em ambiente real sem autorização.",
+      "Não execute ARP spoofing, MAC flooding, loops físicos ou ataques de broadcast.",
+      "Remova IPs públicos, MACs completos, nomes internos e topologia sensível antes de compartilhar evidências."
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "title": "Registrar configuração local",
+        "instruction": "Colete IP, máscara, gateway e interface ativa.",
+        "command": "ipconfig /all  # Windows\nip addr && ip route  # Linux",
+        "expectedOutput": "Configuração local com gateway padrão identificado.",
+        "explanation": "Sem IP, máscara e gateway coerentes, o diagnóstico de L2/L3 fica incompleto."
+      },
+      {
+        "number": 2,
+        "title": "Validar ARP do gateway",
+        "instruction": "Verifique se existe associação IP-MAC para o gateway.",
+        "command": "arp -a  # Windows\nip neigh  # Linux",
+        "expectedOutput": "Entrada para o gateway com MAC correspondente.",
+        "explanation": "O host precisa do MAC do gateway para falar com redes externas."
+      },
+      {
+        "number": 3,
+        "title": "Testar alcance local",
+        "instruction": "Teste conectividade com o gateway e registre resultado.",
+        "command": "ping <gateway>",
+        "expectedOutput": "Respostas quando ICMP for permitido.",
+        "explanation": "Falha aqui sugere investigar camada física, VLAN, ARP, controle local ou gateway."
+      },
+      {
+        "number": 4,
+        "title": "Mapear hipótese de switch/VLAN",
+        "instruction": "Descreva em texto qual porta, VLAN e caminho você acredita que o frame percorre. Se tiver Packet Tracer ou acesso read-only, valide com comandos Cisco.",
+        "command": "show mac address-table dynamic\nshow vlan brief\nshow interfaces trunk\nshow spanning-tree",
+        "expectedOutput": "MACs nas portas esperadas, VLAN correta e STP estável.",
+        "explanation": "Essa etapa conecta a visão do host com a visão do switch."
+      },
+      {
+        "number": 5,
+        "title": "Construir matriz de evidências",
+        "instruction": "Monte tabela com camada, hipótese, evidência, comando, interpretação e próximo passo.",
+        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "expectedOutput": "Matriz de diagnóstico do frame ao gateway.",
+        "explanation": "O objetivo é raciocínio estruturado, não volume de comandos."
+      },
+      {
+        "number": 6,
+        "title": "Sanitizar e entregar relatório",
+        "instruction": "Remova dados sensíveis e escreva uma conclusão técnica.",
+        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "expectedOutput": "Relatório sanitizado com fluxo, riscos, evidências e próximos passos.",
+        "explanation": "Documentação segura é parte da prática profissional."
+      }
+    ],
+    "expectedResult": "O aluno deve entregar uma matriz explicando como o frame sai do host, qual MAC é usado, como ARP entra no fluxo, qual papel do switch/VLAN/STP e quais controles defensivos são relevantes.",
+    "validation": [
+      {
+        "check": "Gateway identificado",
+        "command": "ipconfig /all ou ip route",
+        "expected": "Gateway padrão coerente com a rede local.",
+        "ifFails": "Revisar configuração IP, DHCP, interface ativa e VLAN."
+      },
+      {
+        "check": "ARP do gateway presente",
+        "command": "arp -a ou ip neigh",
+        "expected": "Entrada IP-MAC do gateway ou estado válido.",
+        "ifFails": "Testar ping ao gateway e investigar L2."
+      },
+      {
+        "check": "Raciocínio de VLAN documentado",
+        "command": "show vlan brief / documentação lógica",
+        "expected": "VLAN do host e gateway explicadas.",
+        "ifFails": "Revisar porta access, trunk e domínio de broadcast."
+      }
+    ],
+    "troubleshooting": [
+      {
+        "symptom": "Gateway não responde",
+        "probableCause": "VLAN errada, ARP incompleto, cabo/Wi-Fi, controle L2 ou gateway fora.",
+        "howToConfirm": "Comparar IP/gateway, ARP, porta, VLAN e logs.",
+        "fix": "Corrigir causa específica sem liberar regras amplas."
+      },
+      {
+        "symptom": "MAC do gateway muda",
+        "probableCause": "HA legítima, IP duplicado ou inconsistência ARP.",
+        "howToConfirm": "Ver logs, tabela MAC, ARP e desenho de alta disponibilidade.",
+        "fix": "Documentar HA ou investigar anomalia com controles defensivos."
+      },
+      {
+        "symptom": "Broadcast elevado",
+        "probableCause": "Loop, ARP excessivo, rede plana ou storm.",
+        "howToConfirm": "Logs de switch, STP, counters e monitoramento.",
+        "fix": "Corrigir loop, ajustar STP e storm control."
+      }
+    ],
+    "improvements": [
+      "Refazer o lab em Packet Tracer com dois switches e duas VLANs.",
+      "Adicionar firewall inter-VLAN no desenho.",
+      "Criar checklist padronizado para chamados de gateway inacessível.",
+      "Comparar o mesmo fluxo em rede cabeada e Wi-Fi."
+    ],
+    "evidenceToCollect": [
+      "IP/máscara/gateway sanitizados",
+      "Entrada ARP do gateway sanitizada",
+      "Mapa físico/lógico simplificado",
+      "Tabela de hipóteses e evidências",
+      "Riscos e controles defensivos"
+    ],
+    "questions": [
+      "Por que o host usa o MAC do gateway para destinos remotos?",
+      "O que muda quando o destino está na mesma VLAN?",
+      "Como VLAN limita broadcast?",
+      "Por que STP pode bloquear um caminho aparentemente bom?"
+    ],
+    "challenge": "Mapeie uma filial pequena com usuários, impressoras e visitantes, explicando o caminho do frame ao gateway e os controles L2 mínimos.",
+    "solution": "A solução deve separar VLANs por função, identificar gateway por VLAN, restringir trunks, usar STP planejado, proteger portas de acesso, coletar logs e documentar evidências sem expor dados sensíveis."
+  },
+  "mentorQuestions": [
+    {
+      "type": "reflexão",
+      "question": "Por que o frame precisa chegar ao gateway antes de qualquer roteamento para outra rede acontecer?",
+      "hints": [
+        "Pense na diferença entre entrega local e entrega entre redes.",
+        "Pense em MAC de destino."
+      ],
+      "expectedIdeas": [
+        "próximo salto",
+        "MAC do gateway",
+        "ARP",
+        "Camada 2 antes da Camada 3"
+      ],
+      "explanation": "O host entrega localmente ao gateway; só depois o roteador encaminha o pacote para outras redes."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "Um host tem IP e DNS, mas não pinga o gateway. Quais evidências você coleta antes de culpar DNS?",
+      "hints": [
+        "ARP",
+        "VLAN",
+        "porta de switch",
+        "cabo/Wi-Fi"
+      ],
+      "expectedIdeas": [
+        "ipconfig/ip route",
+        "arp -a/ip neigh",
+        "porta/VLAN",
+        "ping gateway",
+        "logs do switch"
+      ],
+      "explanation": "DNS é irrelevante se o gateway local nem é alcançado."
+    },
+    {
+      "type": "cenário real",
+      "question": "Uma empresa quer separar visitantes, usuários e servidores. Que partes do Módulo 3 entram no desenho?",
+      "hints": [
+        "VLAN",
+        "gateway",
+        "firewall",
+        "portas de acesso",
+        "trunks"
+      ],
+      "expectedIdeas": [
+        "segmentação",
+        "domínios de broadcast",
+        "inter-VLAN controlado",
+        "802.1X/NAC",
+        "logs"
+      ],
+      "explanation": "VLANs separam broadcast; políticas precisam de firewall/ACL e controles L2."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q3.10.1",
+      "type": "conceito",
+      "q": "Para acessar um destino fora da rede local, qual MAC normalmente aparece como destino no frame Ethernet inicial?",
+      "opts": [
+        "MAC do gateway padrão",
+        "MAC do servidor remoto",
+        "MAC do DNS público",
+        "MAC de broadcast sempre"
+      ],
+      "a": 0,
+      "exp": "Para destinos remotos, o host entrega o frame local ao gateway padrão.",
+      "difficulty": "iniciante",
+      "topic": "gateway"
+    },
+    {
+      "id": "q3.10.2",
+      "type": "diagnóstico",
+      "q": "Se o ARP para o gateway fica INCOMPLETE/FAILED, qual hipótese deve ser investigada cedo?",
+      "opts": [
+        "Problema local de L2, VLAN, cabo, Wi-Fi ou gateway",
+        "Erro de senha do usuário no sistema",
+        "Certificado TLS expirado",
+        "CORS da aplicação"
+      ],
+      "a": 0,
+      "exp": "Sem ARP resolvido para o gateway, o problema ocorre antes de TLS, HTTP e aplicação.",
+      "difficulty": "iniciante-intermediário",
+      "topic": "ARP"
+    },
+    {
+      "id": "q3.10.3",
+      "type": "segurança",
+      "q": "Qual afirmação sobre VLAN está correta?",
+      "opts": [
+        "VLAN separa domínio de broadcast, mas não substitui firewall",
+        "VLAN criptografa automaticamente todo tráfego",
+        "VLAN elimina necessidade de gateway",
+        "VLAN impede qualquer ataque de L2"
+      ],
+      "a": 0,
+      "exp": "VLAN segmenta L2, mas política entre segmentos exige roteamento controlado, firewall/ACL e monitoramento.",
+      "difficulty": "iniciante",
+      "topic": "VLAN"
+    },
+    {
+      "id": "q3.10.4",
+      "type": "troubleshooting",
+      "q": "MAC flapping normalmente indica o quê?",
+      "opts": [
+        "O mesmo MAC aparecendo em portas diferentes",
+        "DNS lento",
+        "Senha incorreta",
+        "Base64 mal codificado"
+      ],
+      "a": 0,
+      "exp": "MAC flapping é evidência típica de movimento do mesmo MAC entre portas, podendo indicar loop, virtualização ou anomalia.",
+      "difficulty": "intermediário",
+      "topic": "switch"
+    },
+    {
+      "id": "q3.10.5",
+      "type": "arquitetura",
+      "q": "Qual tecnologia evita loops em topologias Ethernet redundantes?",
+      "opts": [
+        "STP/RSTP",
+        "Base64",
+        "HTTP 403",
+        "NAT"
+      ],
+      "a": 0,
+      "exp": "STP/RSTP calcula caminhos e bloqueia portas para evitar loops de L2.",
+      "difficulty": "iniciante",
+      "topic": "STP"
+    },
+    {
+      "id": "q3.10.6",
+      "type": "segurança",
+      "q": "Qual controle ajuda a validar associações ARP usando base confiável de DHCP snooping?",
+      "opts": [
+        "Dynamic ARP Inspection",
+        "Tracert",
+        "UTF-8",
+        "HTTP Keep-Alive"
+      ],
+      "a": 0,
+      "exp": "DAI usa informações confiáveis para reduzir respostas ARP indevidas, quando corretamente planejado.",
+      "difficulty": "intermediário",
+      "topic": "DAI"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc3.10.1",
+      "front": "Para destinos remotos, qual MAC o host usa?",
+      "back": "O MAC do gateway padrão, porque a entrega inicial é local.",
+      "tags": [
+        "gateway",
+        "mac"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc3.10.2",
+      "front": "VLAN substitui firewall?",
+      "back": "Não. VLAN separa broadcast; firewall/ACL aplica política entre redes.",
+      "tags": [
+        "vlan",
+        "segurança"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc3.10.3",
+      "front": "O que é MAC flapping?",
+      "back": "O mesmo MAC aparecendo em portas diferentes em curto intervalo.",
+      "tags": [
+        "switch",
+        "troubleshooting"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc3.10.4",
+      "front": "Por que ARP é crítico?",
+      "back": "Porque resolve IPv4 para MAC dentro da rede local.",
+      "tags": [
+        "arp"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc3.10.5",
+      "front": "O que STP evita?",
+      "back": "Loops de Camada 2 e broadcast storms em topologias redundantes.",
+      "tags": [
+        "stp"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc3.10.6",
+      "front": "Qual é a pergunta central da revisão?",
+      "back": "O frame chegou ao próximo salto correto? Se não, em qual evidência o fluxo quebrou?",
+      "tags": [
+        "revisão"
+      ],
+      "difficulty": "iniciante-intermediário"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex3.10.1",
+      "type": "conceitual",
+      "prompt": "Explique por que um host usa o MAC do gateway para acessar um servidor remoto.",
+      "expectedAnswer": "Porque o servidor remoto não está no domínio local; o host entrega o frame ao gateway, que roteia o pacote.",
+      "explanation": "MAC é usado para entrega local; IP é usado para endereçamento entre redes."
+    },
+    {
+      "id": "ex3.10.2",
+      "type": "diagnóstico",
+      "prompt": "Um host não pinga o gateway e o ARP está incompleto. Liste quatro hipóteses.",
+      "expectedAnswer": "Cabo/Wi-Fi, VLAN errada, gateway fora, porta bloqueada por controle L2, trunk sem VLAN, STP/loop ou firewall local bloqueando ICMP em cenário específico.",
+      "explanation": "A falha acontece antes de DNS e aplicação."
+    },
+    {
+      "id": "ex3.10.3",
+      "type": "arquitetura",
+      "prompt": "Desenhe uma rede com VLAN de usuários, servidores e visitantes, indicando onde o gateway e o firewall entram.",
+      "expectedAnswer": "Cada VLAN tem domínio de broadcast próprio; o gateway/firewall faz roteamento inter-VLAN e política de acesso.",
+      "explanation": "VLAN segmenta L2; política é aplicada no ponto de roteamento/controle."
+    },
+    {
+      "id": "ex3.10.4",
+      "type": "segurança",
+      "prompt": "Monte uma matriz com três riscos L2, evidências e mitigação.",
+      "expectedAnswer": "Ex.: ARP inconsistente -> ARP/logs -> DAI; porta aberta -> MAC novo/NAC -> 802.1X; loop -> STP/logs/broadcast -> BPDU Guard/storm control.",
+      "explanation": "O objetivo é conectar risco, detecção e controle."
+    }
+  ],
+  "challenge": {
+    "title": "Mini-projeto final do Módulo 3: do frame ao gateway",
+    "scenario": "Uma filial possui usuários cabeados, Wi-Fi corporativo, rede de visitantes, impressoras e um firewall que atua como gateway das VLANs. Há reclamações de lentidão e alguns hosts não alcançam o gateway.",
+    "tasks": [
+      "Criar mapa físico e lógico simplificado.",
+      "Explicar o caminho do frame de um usuário até o gateway.",
+      "Listar evidências para validar ARP, MAC table, VLAN e STP.",
+      "Identificar riscos de L2 e controles mínimos.",
+      "Produzir conclusão técnica sanitizada."
+    ],
+    "constraints": [
+      "Não executar ataque ou varredura agressiva.",
+      "Não alterar switch real sem autorização.",
+      "Separar hipótese de evidência.",
+      "Não expor MACs/IPs completos no relatório final."
+    ],
+    "expectedDeliverables": [
+      "Mapa físico/lógico",
+      "Matriz de diagnóstico",
+      "Tabela de riscos e controles",
+      "Plano de validação",
+      "Resumo executivo"
+    ],
+    "gradingRubric": [
+      {
+        "criterion": "Fluxo técnico correto",
+        "points": 30,
+        "description": "Explica destino local/remoto, ARP, MAC, switch, VLAN, STP e gateway."
+      },
+      {
+        "criterion": "Evidências",
+        "points": 25,
+        "description": "Usa comandos e observações coerentes sem extrapolar conclusões."
+      },
+      {
+        "criterion": "Segurança",
+        "points": 25,
+        "description": "Propõe controles defensivos adequados e preserva dados sensíveis."
+      },
+      {
+        "criterion": "Clareza operacional",
+        "points": 20,
+        "description": "Organiza hipóteses, riscos e próximos passos sem mudanças perigosas."
+      }
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "A solução começa identificando o domínio local do host. Se o destino for remoto, o frame deve ir ao gateway. Em seguida validamos ARP, MAC table, VLAN, trunk e STP. Só depois avançamos para IP, DNS, TLS, HTTP ou aplicação.",
+    "steps": [
+      "Registrar IP, máscara e gateway.",
+      "Verificar ARP do gateway.",
+      "Validar se o switch aprende o MAC do host na porta correta.",
+      "Confirmar VLAN da porta e VLAN permitida no trunk.",
+      "Verificar STP, loops e eventos de MAC flapping.",
+      "Listar controles defensivos e evidências sanitizadas.",
+      "Escrever conclusão com causa provável e próximos passos."
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "Liberar tudo no firewall para testar.",
+        "whyItIsWrong": "Se o problema é ARP, VLAN ou STP, mudar firewall não resolve e pode criar risco."
+      },
+      {
+        "answer": "Achar que ping no gateway falhando é DNS.",
+        "whyItIsWrong": "DNS nem entra no fluxo se o gateway local não é alcançado."
+      },
+      {
+        "answer": "Usar VLAN como único controle de segurança.",
+        "whyItIsWrong": "VLAN separa broadcast, mas não substitui política de acesso e monitoramento."
+      }
+    ],
+    "finalAnswer": "Uma resposta madura valida o caminho local primeiro: host configurado, ARP coerente, switch aprendendo MAC, VLAN correta, trunk permitido, STP estável, gateway acessível e controles L2 aplicados sem quebrar a operação."
+  },
+  "glossary": [
+    {
+      "term": "Próximo salto",
+      "shortDefinition": "Dispositivo local para o qual o host entrega o frame quando precisa alcançar outra rede.",
+      "longDefinition": "Normalmente é o gateway padrão da sub-rede. O host precisa do MAC desse dispositivo para enviar o frame Ethernet inicial.",
+      "example": "Para acessar 8.8.8.8, o notebook envia o frame ao MAC do roteador local.",
+      "relatedTerms": [
+        "gateway",
+        "ARP",
+        "MAC"
+      ],
+      "relatedLessons": [
+        "2.5",
+        "3.5",
+        "4.1"
+      ]
+    },
+    {
+      "term": "Fluxo do frame ao gateway",
+      "shortDefinition": "Raciocínio que acompanha a entrega local até o gateway.",
+      "longDefinition": "Inclui IP/máscara, ARP, MAC, switch, VLAN, STP e controles L2.",
+      "example": "Usado para diagnosticar por que um host não alcança o gateway.",
+      "relatedTerms": [
+        "Ethernet",
+        "switch",
+        "VLAN"
+      ],
+      "relatedLessons": [
+        "3.1",
+        "3.7"
+      ]
+    },
+    {
+      "term": "Matriz de diagnóstico",
+      "shortDefinition": "Tabela que organiza hipótese, evidência, comando, interpretação e próximo passo.",
+      "longDefinition": "Ajuda a evitar conclusões precipitadas e documentar troubleshooting profissional.",
+      "example": "Hipótese: VLAN errada; evidência: porta em VLAN 20, host espera VLAN 10.",
+      "relatedTerms": [
+        "troubleshooting",
+        "evidência"
+      ],
+      "relatedLessons": [
+        "2.8",
+        "15.1"
+      ]
+    },
+    {
+      "term": "Controle L2",
+      "shortDefinition": "Mecanismo defensivo aplicado na camada de enlace ou acesso.",
+      "longDefinition": "Inclui port security, 802.1X/NAC, DAI, DHCP snooping, BPDU Guard e storm control.",
+      "example": "BPDU Guard em portas de usuário reduz risco de switch indevido causar loop.",
+      "relatedTerms": [
+        "NAC",
+        "DAI",
+        "BPDU Guard"
+      ],
+      "relatedLessons": [
+        "3.9"
+      ]
+    },
+    {
+      "term": "Relatório sanitizado",
+      "shortDefinition": "Documento técnico que remove dados sensíveis antes de compartilhamento.",
+      "longDefinition": "Evita expor IPs, MACs completos, nomes internos, topologia e controles em detalhes desnecessários.",
+      "example": "Trocar 192.168.10.23 por host usuário A e mascarar MAC completo.",
+      "relatedTerms": [
+        "evidência",
+        "segurança"
+      ],
+      "relatedLessons": [
+        "2.9",
+        "16.1"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "standard",
+      "title": "IEEE 802.3 Ethernet",
+      "organization": "IEEE",
+      "url": "https://standards.ieee.org/",
+      "note": "Referência conceitual para Ethernet."
+    },
+    {
+      "type": "standard",
+      "title": "IEEE 802.1Q VLAN Tagging",
+      "organization": "IEEE",
+      "url": "https://standards.ieee.org/",
+      "note": "Referência conceitual para VLANs."
+    },
+    {
+      "type": "rfc",
+      "title": "RFC 826 — An Ethernet Address Resolution Protocol",
+      "organization": "IETF",
+      "url": "https://www.rfc-editor.org/rfc/rfc826",
+      "note": "Referência histórica do ARP."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Módulo 4",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "IPv4 e endereçamento serão aprofundados no próximo módulo."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "m08",
+      "lesson": "infra-hibrida",
+      "reason": "Runners e clusters on-premises dependem de LAN, VLANs e gateways corretos."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "m01",
+      "lesson": "controles-de-acesso",
+      "reason": "NAC, 802.1X e segmentação se conectam a identidade de dispositivo e usuário."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70,
+      "anyOf": [
+        "quizScoreAtLeast",
+        "checklistDone"
+      ]
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "4.1"
+    ]
+  }
+}

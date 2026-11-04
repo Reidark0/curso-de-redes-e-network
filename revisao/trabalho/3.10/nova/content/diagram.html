@@ -1,0 +1,23 @@
+<section class="lesson-section lesson-section--diagram"><h2>14. Diagrama SVG</h2>
+<svg class="lesson-svg" viewBox="0 0 1040 600" role="img" aria-labelledby="m03l10-title m03l10-desc">
+<title id="m03l10-title">Revisão prática: do frame ao gateway</title>
+<desc id="m03l10-desc">Fluxo didático mostrando um host encapsulando dados em frame Ethernet, consultando ARP, passando pelo switch, VLAN, STP e chegando ao gateway.</desc>
+<defs><marker id="m03l10-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" class="svg-arrow" /></marker></defs>
+<rect x="40" y="120" width="160" height="82" rx="14" class="svg-node svg-node--client"/><text x="120" y="153" text-anchor="middle" class="svg-label">Host</text><text x="120" y="179" text-anchor="middle" class="svg-label svg-label--small">IP + MAC + ARP</text>
+<rect x="300" y="112" width="180" height="98" rx="14" class="svg-node svg-node--switch"/><text x="390" y="148" text-anchor="middle" class="svg-label">Switch acesso</text><text x="390" y="174" text-anchor="middle" class="svg-label svg-label--small">MAC table</text><text x="390" y="196" text-anchor="middle" class="svg-label svg-label--small">VLAN 10</text>
+<rect x="565" y="112" width="180" height="98" rx="14" class="svg-node svg-node--switch"/><text x="655" y="148" text-anchor="middle" class="svg-label">Distribuição</text><text x="655" y="174" text-anchor="middle" class="svg-label svg-label--small">trunk + STP</text><text x="655" y="196" text-anchor="middle" class="svg-label svg-label--small">allowed VLANs</text>
+<rect x="840" y="120" width="160" height="82" rx="14" class="svg-node svg-node--router"/><text x="920" y="153" text-anchor="middle" class="svg-label">Gateway</text><text x="920" y="179" text-anchor="middle" class="svg-label svg-label--small">próximo salto</text>
+<line x1="200" y1="160" x2="300" y2="160" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m03l10-arrow)"/>
+<line x1="480" y1="160" x2="565" y2="160" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m03l10-arrow)"/>
+<line x1="745" y1="160" x2="840" y2="160" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m03l10-arrow)"/>
+<rect x="55" y="300" width="220" height="85" rx="14" class="svg-node svg-node--security"/><text x="165" y="330" text-anchor="middle" class="svg-label">Evidências no host</text><text x="165" y="356" text-anchor="middle" class="svg-label svg-label--small">arp -a · ipconfig · ping</text>
+<rect x="315" y="300" width="220" height="85" rx="14" class="svg-node svg-node--security"/><text x="425" y="330" text-anchor="middle" class="svg-label">Evidências no switch</text><text x="425" y="356" text-anchor="middle" class="svg-label svg-label--small">MAC table · VLAN · STP</text>
+<rect x="575" y="300" width="220" height="85" rx="14" class="svg-node svg-node--security"/><text x="685" y="330" text-anchor="middle" class="svg-label">Controles L2</text><text x="685" y="356" text-anchor="middle" class="svg-label svg-label--small">DAI · snooping · BPDU Guard</text>
+<rect x="835" y="300" width="170" height="85" rx="14" class="svg-node svg-node--security"/><text x="920" y="330" text-anchor="middle" class="svg-label">Gateway</text><text x="920" y="356" text-anchor="middle" class="svg-label svg-label--small">rota + firewall</text>
+<line x1="165" y1="300" x2="120" y2="202" class="svg-flow svg-flow--response" marker-end="url(#m03l10-arrow)"/>
+<line x1="425" y1="300" x2="390" y2="210" class="svg-flow svg-flow--response" marker-end="url(#m03l10-arrow)"/>
+<line x1="685" y1="300" x2="655" y2="210" class="svg-flow svg-flow--response" marker-end="url(#m03l10-arrow)"/>
+<line x1="920" y1="300" x2="920" y2="202" class="svg-flow svg-flow--response" marker-end="url(#m03l10-arrow)"/>
+<rect x="180" y="465" width="700" height="74" rx="14" class="svg-zone"/><text x="530" y="496" text-anchor="middle" class="svg-label">Pergunta da revisão</text><text x="530" y="522" text-anchor="middle" class="svg-label svg-label--small">O frame chegou ao gateway certo? Se não chegou, em qual evidência a hipótese quebrou?</text>
+</svg>
+</section>

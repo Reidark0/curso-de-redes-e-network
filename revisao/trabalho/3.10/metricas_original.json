@@ -1,0 +1,90 @@
+{
+  "id": "3.10",
+  "versao": "original",
+  "titulo": "Revisão prática: do frame ao gateway",
+  "tipo": "ligação/revisão",
+  "palavras": {
+    "visiveis": 4298,
+    "invisiveis": 615,
+    "teoriaVisivel": 2296
+  },
+  "porCampoVisivel": {
+    "content.motivation": 163,
+    "content.history": 127,
+    "content.problem": 138,
+    "content.evolution": 128,
+    "content.concept": 104,
+    "content.internals": 121,
+    "content.architecture": 94,
+    "content.analogy": 110,
+    "content.simpleExample": 99,
+    "content.enterpriseExample": 128,
+    "content.cloudExample": 91,
+    "content.devsecopsExample": 94,
+    "content.securityExample": 124,
+    "content.diagram": 3,
+    "content.summary": 57,
+    "content.nextTheme": 49,
+    "security": 215,
+    "troubleshooting": 248,
+    "glossary": 203,
+    "title+subtitle": 23,
+    "objectives": 63,
+    "learningOutcomes": 86,
+    "quiz": 235,
+    "flashcards": 96,
+    "mentorQuestions": 146,
+    "exercises": 169,
+    "challenge": 158,
+    "commentedSolution": 183,
+    "references": 47,
+    "linksToOtherCourses": 40,
+    "lab": 756
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 34,
+    "content.exercisesIntro": 29,
+    "content.challengeIntro": 29,
+    "content.solutionIntro": 32,
+    "networkContext": 32,
+    "deepDive": 169,
+    "commonMistakes": 97,
+    "protocolFields": 88,
+    "packetFlow": 105
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 120,
+    "alternativa_5minPasso_maisLeitura": 35.8,
+    "plausivel": false,
+    "palavras": 756
+  },
+  "duracao": {
+    "declarada": "85-120 min",
+    "estimatedStudyTimeMinutes": 120,
+    "M": 102.5,
+    "T": 115.5,
+    "partes": {
+      "teoria": 17.7,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 35.8
+    },
+    "faixaRecomendada": "100-140 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 18
+  }
+}
