@@ -40,7 +40,7 @@ Status: PENDENTE · EM ANDAMENTO · CONCLUÍDA · FALHOU. Atualizado pelo orques
 | 3.2 | m03/lesson-03-02.js | CONCLUÍDA | 4917→5043 (+3%) | 85-120 min→105-145 min | SUBESTIMADA | MÉDIA 17% | PARCIAL | MÉDIO | PENDENTE | | |
 | 3.3 | m03/lesson-03-03.js | CONCLUÍDA | 4909→4873 (-1%) | 90-125 min→95-140 min | SUBESTIMADA | MÉDIA 19% | PARCIAL | MÉDIO | PENDENTE | | |
 | 3.4 | m03/lesson-03-04.js | CONCLUÍDA | 3857→3983 (+3%) | 85-120 min→85-125 min | ORGANIZADA | MÉDIA 18% | PARCIAL | BOM | PENDENTE | | |
-| 3.5 | m03/lesson-03-05.js | CONCLUÍDA | 4502→4512 (+0%) | 90-125 min→90-125 min | ORGANIZADA | MÉDIA 18% | FORTE | BOM | PENDENTE | | |
+| 3.5 | m03/lesson-03-05.js | CONCLUÍDA | 4502→4512 (+0%) | 90-125 min→90-125 min | ORGANIZADA | MÉDIA 18% | FORTE | BOM | EM ANDAMENTO |  |  |
 | 3.6 | m03/lesson-03-06.js | CONCLUÍDA | 4765→4959 (+4%) | 90-125 min→100-140 min | SUBESTIMADA | MÉDIA 16% | PARCIAL | MÉDIO | PENDENTE | | |
 | 3.7 | m03/lesson-03-07.js | CONCLUÍDA | 4248→4704 (+11%) | 90-125 min→100-145 min | ORGANIZADA | MÉDIA 16% | PARCIAL | BOM | PENDENTE | | |
 | 3.8 | m03/lesson-03-08.js | CONCLUÍDA | 4778→5465 (+14%) | 90-130 min→95-135 min | DESEQUILIBRADA | MÉDIA 20% | PARCIAL | MÉDIO | PENDENTE | | |

@@ -196,7 +196,7 @@ if (n.lab) {
 const mpath = path.join(L.WORK, id, 'metricas_nova.json');
 if (fs.existsSync(mpath)) { const m = L.readJSON(mpath); if (m.lab && m.lab.palavras > 450 && !L.isProjectType(n.type)) A(`lab com ${m.lab.palavras} palavras (padrão ~300–400)`); }
 const extraPal = L.deepWords([(n.mentorQuestions || []).map((m) => [m.question, m.hints, m.expectedIdeas, m.explanation]), (n.exercises || []).map((e) => [e.prompt, e.expectedAnswer, e.explanation]), n.challenge, n.commentedSolution]);
-if (!L.isProjectType(n.type) && !simulado && extraPal > 450) A(`prática extra (mentor+exercícios+desafio+solução) com ${extraPal} palavras (padrão ~150–250 por bloco; reveja se cada item faz o aluno aplicar)`);
+if (!L.isProjectType(n.type) && !simulado && extraPal > 750) A(`prática extra (mentor+exercícios+desafio+solução) com ${extraPal} palavras (padrão ~150–250 por bloco, ~750 no total; reveja se cada item faz o aluno aplicar)`);
 
 // 11. itens de lista precisam ser objetos; subcampos não exibidos
 for (const k of ['quiz', 'flashcards', 'mentorQuestions', 'exercises', 'glossary', 'references', 'linksToOtherCourses']) (n[k] || []).forEach((x, i) => { if (!x || typeof x !== 'object' || Array.isArray(x)) E(`${k}[${i}]: item não é objeto (o app exibiria um card vazio)`); });
