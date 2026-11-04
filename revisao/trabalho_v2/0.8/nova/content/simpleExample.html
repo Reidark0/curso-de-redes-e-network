@@ -1,0 +1,23 @@
+
+<section class="lesson-section lesson-section--example">
+  <h2>Exemplo simples</h2>
+  <p>
+    Seu notebook não abre um site. Em vez de testar ao acaso, suba as camadas em ordem e só avance quando a anterior estiver confirmada:
+  </p>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead><tr><th>Pergunta</th><th>Camada aproximada</th><th>Como verificar</th></tr></thead>
+      <tbody>
+        <tr><td>Estou conectado ao cabo ou ao Wi-Fi?</td><td>Física/enlace</td><td>Ícone de rede, status da interface</td></tr>
+        <tr><td>Tenho endereço IP e gateway?</td><td>Rede</td><td><code>ipconfig</code> (Windows), <code>ip addr</code> e <code>ip route</code> (Linux)</td></tr>
+        <tr><td>O nome do site resolve?</td><td>Aplicação (DNS)</td><td><code>nslookup</code>, <code>dig</code></td></tr>
+        <tr><td>A porta 443 responde?</td><td>Transporte</td><td><code>Test-NetConnection</code>, <code>curl -v</code></td></tr>
+        <tr><td>O TLS negocia?</td><td>Aplicação (TLS)</td><td><code>curl -v</code> (mostra a negociação e o certificado)</td></tr>
+        <tr><td>A aplicação aceita o pedido?</td><td>Aplicação/identidade</td><td>Código HTTP (200, 401, 403), mensagem de erro</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    A primeira pergunta com resposta “não” mostra onde procurar. Se o nome não resolve, de nada adianta reiniciar o servidor; se a aplicação responde 403, de nada adianta trocar o cabo.
+  </p>
+</section>

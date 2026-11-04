@@ -1,0 +1,10 @@
+
+<section class="lesson-section lesson-section--devsecops">
+  <h2>Exemplo em DevSecOps</h2>
+  <p>
+    Um pipeline que publica uma imagem num registry pode falhar em várias camadas: o runner não resolve o DNS do registry; o firewall bloqueia a porta 443; o proxy exige configuração; o TLS falha por CA ausente; o registry rejeita a autenticação; a política nega push para aquela tag; o scanner bloqueia por vulnerabilidade crítica. Tudo aparece como "falha de pipeline", mas são problemas diferentes.
+  </p>
+  <p>
+    Identificar a camada evita correções ruins, como colocar um segredo estático no pipeline quando o problema era a audience do OIDC incorreta, ou liberar saída irrestrita quando bastava configurar o proxy.
+  </p>
+</section>

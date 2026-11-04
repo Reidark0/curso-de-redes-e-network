@@ -1,0 +1,15 @@
+
+<section class="lesson-section lesson-section--security">
+  <h2>Exemplo em Segurança</h2>
+  <p>
+    Um controle numa camada não substitui os das outras. TLS protege a confidencialidade em trânsito, mas não decide autorização. Firewall reduz exposição, mas não corrige senha fraca. MFA reduz o risco de credencial roubada, mas não corrige servidor exposto. Segmentação reduz movimento lateral, mas não substitui patching e monitoramento.
+  </p>
+  <table class="data-table risk-table">
+    <thead><tr><th>Erro comum</th><th>Confusão de camada</th><th>Risco</th><th>Mitigação</th></tr></thead>
+    <tbody>
+      <tr><td>Achar que NAT é firewall</td><td>Endereçamento vs política</td><td>Exposição acidental</td><td>Usar regras explícitas, logs e menor privilégio</td></tr>
+      <tr><td>Achar que VPN autoriza tudo</td><td>Caminho vs permissão</td><td>Acesso lateral amplo</td><td>ZTNA, segmentação, IAM e auditoria</td></tr>
+      <tr><td>Achar que HTTPS valida o usuário</td><td>Criptografia vs identidade</td><td>Aplicação exposta com sessão fraca</td><td>Autenticação, autorização e gestão de sessão</td></tr>
+    </tbody>
+  </table>
+</section>

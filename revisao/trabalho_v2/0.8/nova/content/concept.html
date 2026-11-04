@@ -1,0 +1,28 @@
+
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <div class="definition-box">
+    <strong>Definição:</strong> pensar em camadas é dividir uma comunicação em responsabilidades separadas, cada uma cumprida por seus próprios protocolos e testada com sua própria evidência.
+  </div>
+  <p>Cada camada responde a uma pergunta diferente:</p>
+  <ul>
+    <li><strong>Física:</strong> existe sinal no cabo, na fibra ou no rádio?</li>
+    <li><strong>Enlace:</strong> os dados chegam ao próximo equipamento da rede local, como o roteador de casa?</li>
+    <li><strong>Rede:</strong> existe endereço e caminho até o destino, mesmo que ele esteja em outra rede?</li>
+    <li><strong>Transporte:</strong> a conversa chega ao programa certo no servidor, identificado pela porta?</li>
+    <li><strong>Aplicação:</strong> as mensagens seguem o protocolo e fazem sentido (DNS, TLS, HTTP)?</li>
+    <li><strong>Identidade e autorização:</strong> quem está pedindo e o que essa pessoa pode fazer?</li>
+  </ul>
+  <h3>Modelos são mapas, não o pacote real</h3>
+  <p>
+    O <strong>modelo OSI</strong> divide a comunicação em sete camadas e é o mapa usado para ensinar e diagnosticar. A <strong>pilha TCP/IP</strong>, com quatro camadas, descreve como a internet foi de fato construída. Identidade e autorização não aparecem em nenhum dos dois, mas causam boa parte das falhas que chegam como “a rede caiu”. Nenhum modelo é a realidade completa: um firewall, por exemplo, pode decidir olhando endereços, portas e até o conteúdo de uma requisição HTTP, ou seja, atua em várias camadas ao mesmo tempo. Use o modelo para organizar hipóteses, nunca para ignorar uma evidência direta.
+  </p>
+  <div class="callout warning">
+    <strong>Erros comuns</strong>
+    <ul>
+      <li><strong>Culpar o DNS por qualquer falha de acesso.</strong> Teste a resolução do nome; se ela funciona, continue subindo: porta, TLS, HTTP.</li>
+      <li><strong>Pedir para liberar o firewall sem saber a camada da falha.</strong> Se o problema era certificado ou permissão, a liberação não resolve e ainda deixa uma porta exposta.</li>
+      <li><strong>Confundir autenticação com autorização.</strong> Autenticação verifica quem é o usuário; autorização decide o que ele pode fazer. Em HTTP, 401 costuma indicar credencial ausente ou inválida; 403 indica que o servidor entendeu o pedido e recusou a ação, o que, para um usuário já autenticado, aponta para autorização.</li>
+    </ul>
+  </div>
+</section>

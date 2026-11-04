@@ -1,0 +1,19 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <p>
+    Na comunicação real, os dados são <strong>encapsulados</strong>: cada camada acrescenta as informações de que precisa para cumprir sua responsabilidade. No destino, o processo acontece no sentido inverso (desencapsulamento). Num acesso HTTPS:
+  </p>
+  <ol class="flow-list">
+    <li><strong>Aplicação:</strong> o navegador monta uma requisição HTTP.</li>
+    <li><strong>Segurança/aplicação:</strong> TLS protege a conversa e valida o certificado.</li>
+    <li><strong>Transporte:</strong> TCP identifica as portas e controla a sessão.</li>
+    <li><strong>Rede:</strong> IP define origem, destino e caminho entre redes.</li>
+    <li><strong>Enlace:</strong> Ethernet ou Wi-Fi entrega ao próximo salto local.</li>
+    <li><strong>Física:</strong> cobre, fibra ou rádio carregam os sinais.</li>
+    <li><strong>Identidade e política:</strong> acima da aplicação, tokens, claims e regras decidem o acesso.</li>
+  </ol>
+  <p>
+    Camadas não são gavetas isoladas: elas se influenciam. Um proxy pode mexer no HTTP. Um firewall pode bloquear o TCP. Um problema físico pode gerar retransmissões. Um certificado TLS inválido pode impedir a aplicação de começar. Uma política de identidade pode negar acesso mesmo com todo o caminho de rede saudável.
+  </p>
+</section>

@@ -1,0 +1,32 @@
+
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <div class="definition-box">
+    <strong>Definição:</strong> pensamento em camadas é um modelo mental de arquitetura e troubleshooting que organiza protocolos, componentes e evidências por responsabilidade, sem misturar problemas físicos, lógicos, de aplicação, de identidade e de segurança.
+  </div>
+  <p>
+    Cada camada responde a uma pergunta diferente. A física: existe sinal? O enlace: há comunicação local? A rede: existe endereçamento e caminho? O transporte: há conversa entre processos (portas)? A aplicação: a mensagem faz sentido? Acima disso, identidade e segurança perguntam quem é o solicitante, o que ele pode fazer e como isso será registrado.
+  </p>
+  <h3>Modelos são mapas, não o pacote real</h3>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead><tr><th>Modelo</th><th>Para que serve</th><th>Limitação</th></tr></thead>
+      <tbody>
+        <tr><td>Modelo OSI</td><td>Separar responsabilidades em sete camadas; ótimo para ensino e troubleshooting</td><td>Nem todo protocolo real se encaixa perfeitamente</td></tr>
+        <tr><td>Pilha TCP/IP</td><td>Representar a internet real; ótima para a operação</td><td>Menos detalhada didaticamente</td></tr>
+        <tr><td>Camadas operacionais (identidade, política, observabilidade, automação)</td><td>Cobrir os problemas que acontecem acima do transporte, comuns em cloud, DevSecOps e segurança</td><td>Exigem visão interdisciplinar</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Nenhum desses modelos é a realidade completa. Alguns componentes atuam em várias camadas ao mesmo tempo, como proxies, firewalls de próxima geração, WAFs e service meshes. E as camadas ajudam a pensar, mas não substituem logs, captura de tráfego, métricas e documentação: não force todo problema moderno a caber no OSI nem use o modelo para ignorar uma evidência direta.
+  </p>
+  <div class="callout warning">
+    <strong>Erros comuns:</strong>
+    <ul>
+      <li><strong>Achar que ping bem-sucedido prova que o sistema funciona.</strong> Ping é rápido, mas não testa porta, TLS, HTTP, autenticação, autorização nem a aplicação. Use-o como evidência parcial e continue subindo.</li>
+      <li><strong>Culpar o DNS por qualquer falha de acesso.</strong> DNS aparece em muitos sintomas, mas o problema pode ser firewall, TLS, token ou aplicação. Teste a resolução e depois valide porta, certificado, HTTP e logs.</li>
+      <li><strong>Confundir autenticação com autorização.</strong> Autenticação verifica quem é o usuário; autorização decide o que ele pode fazer. Em HTTP, 401 costuma indicar credencial ausente ou inválida; 403 indica que o servidor entendeu o pedido e recusou a ação, o que, para um usuário já autenticado, aponta para autorização.</li>
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <p>
+    Quando você abre <code>https://sistema.empresa.local</code>, os dados descem pelas camadas na origem. Cada camada acrescenta aos dados que recebeu de cima as informações de que precisa para cumprir sua responsabilidade: isso é o <strong>encapsulamento</strong>. No destino, cada camada lê e retira a sua parte e entrega o resto à camada de cima (desencapsulamento).
+  </p>
+  <ol class="flow-list">
+    <li><strong>Aplicação:</strong> o navegador monta a requisição HTTP, o pedido da página.</li>
+    <li><strong>TLS:</strong> protege a conversa com criptografia e confere o certificado do servidor.</li>
+    <li><strong>Transporte:</strong> o TCP acrescenta as portas, que indicam qual programa recebe os dados, e controla a conversa.</li>
+    <li><strong>Rede:</strong> o IP acrescenta os endereços de origem e destino, usados para achar o caminho entre redes.</li>
+    <li><strong>Enlace:</strong> Ethernet ou Wi-Fi entrega os dados ao próximo equipamento da rede local.</li>
+    <li><strong>Física:</strong> cobre, fibra ou rádio transportam os bits como sinais.</li>
+  </ol>
+  <p>
+    Só quando tudo isso funciona o servidor recebe o pedido. Aí entram duas camadas que não fazem parte dos protocolos de rede: a identidade (quem está pedindo) e a autorização (o que essa pessoa pode fazer).
+  </p>
+  <p>
+    Essa ordem dá a regra do diagnóstico: <strong>um teste que passa prova a sua camada e as de baixo, nunca as de cima</strong>. Uma resposta 403 prova que sinal, caminho, porta e TLS funcionaram, porque o servidor recebeu o pedido e o recusou. Já um ping respondendo prova só que o servidor é alcançável pela rede; porta, TLS e aplicação continuam sem teste.
+  </p>
+  <p>
+    As camadas também se influenciam: um cabo com defeito pode causar perdas que deixam a aplicação lenta, e um firewall pode bloquear uma porta mesmo com o caminho funcionando.
+  </p>
+</section>

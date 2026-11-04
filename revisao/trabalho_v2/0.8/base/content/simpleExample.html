@@ -1,0 +1,18 @@
+
+<section class="lesson-section lesson-section--example">
+  <h2>Exemplo simples</h2>
+  <p>
+    Seu notebook não abre um site. Em vez de alterar o DNS sem motivo, suba as camadas em ordem e só avance quando a anterior estiver confirmada:
+  </p>
+  <table class="data-table">
+    <thead><tr><th>Pergunta</th><th>Camada aproximada</th><th>Ferramenta</th></tr></thead>
+    <tbody>
+      <tr><td>Estou conectado ao meio?</td><td>Física/enlace</td><td>Ícone de rede, status da interface</td></tr>
+      <tr><td>Tenho IP e gateway?</td><td>Rede</td><td><code>ipconfig</code>, <code>ip addr</code>, <code>ip route</code></td></tr>
+      <tr><td>O nome resolve?</td><td>Aplicação/serviço essencial</td><td><code>nslookup</code>, <code>dig</code></td></tr>
+      <tr><td>A porta responde?</td><td>Transporte</td><td><code>Test-NetConnection</code>, <code>curl -v</code></td></tr>
+      <tr><td>O TLS negocia?</td><td>Segurança/aplicação</td><td><code>curl -v</code> (mostra o handshake e o certificado)</td></tr>
+      <tr><td>A aplicação aceita?</td><td>Aplicação/identidade</td><td>Status HTTP, logs, token, sessão</td></tr>
+    </tbody>
+  </table>
+</section>

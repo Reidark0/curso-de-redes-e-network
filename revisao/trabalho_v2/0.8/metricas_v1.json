@@ -1,0 +1,95 @@
+{
+  "id": "0.8",
+  "versao": "v1",
+  "titulo": "Como pensar em camadas",
+  "tipo": "ligação",
+  "palavras": {
+    "visiveis": 4182,
+    "teoria": 2677,
+    "praticaExtra": 687,
+    "quiz": 480,
+    "flashcards": 163
+  },
+  "porGrupoTeoria": {
+    "introducao": 669,
+    "contexto": 146,
+    "conteudo": 557,
+    "exemplos": 684,
+    "seguranca_troubleshooting": 621
+  },
+  "porSecao": {
+    "motivation": 213,
+    "summary": 107,
+    "problem": 146,
+    "concept": 329,
+    "internals": 148,
+    "architecture": 78,
+    "diagram": 2,
+    "analogy": 114,
+    "simpleExample": 89,
+    "enterpriseExample": 110,
+    "cloudExample": 160,
+    "devsecopsExample": 99,
+    "securityExample": 112,
+    "objectives": 73,
+    "learningOutcomes": 84,
+    "glossary": 192,
+    "security": 266,
+    "troubleshooting": 355,
+    "nextTheme": 33
+  },
+  "pratica": {
+    "quiz": 480,
+    "flashcards": 163,
+    "lab": 0,
+    "mentorQuestions": 237,
+    "exercises": 151,
+    "challenge": 164,
+    "commentedSolution": 135
+  },
+  "outros": {
+    "title+subtitle": 22,
+    "nextTheme": 33,
+    "references": 81,
+    "linksToOtherCourses": 39
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 5,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "65-90 min",
+    "estimatedStudyTimeMinutes": 90,
+    "nucleo": 30.6,
+    "nucleoPartes": {
+      "teoria": 20.6,
+      "diagramas": 3,
+      "quiz": 7
+    },
+    "praticaExtra": 39,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 40,
+    "recomendada": "25-35 min + 40 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

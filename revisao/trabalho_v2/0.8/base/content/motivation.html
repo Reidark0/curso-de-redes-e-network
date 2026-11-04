@@ -1,0 +1,16 @@
+
+<section class="lesson-section lesson-section--motivation">
+  <h2>Motivação</h2>
+  <p>
+    Um usuário abre chamado dizendo: <strong>"o sistema não funciona"</strong>. Isso pode ser notebook sem Wi-Fi, cabo ruim, IP errado, gateway ausente, DNS quebrado, porta bloqueada, TLS inválido, proxy exigindo autenticação, API fora do ar, token expirado, usuário sem permissão ou regra de WAF bloqueando a requisição.
+  </p>
+  <p>
+    Sem método, você pula de hipótese em hipótese: testa DNS, culpa o firewall, reinicia o serviço, troca o cabo, altera uma regra. Às vezes acerta por sorte. Em empresas, cloud e segurança, essa tentativa e erro custa tempo, aumenta o risco e pode mascarar incidentes.
+  </p>
+  <div class="callout callout--problem">
+    <strong>Problema real:</strong> uma aplicação interna está inacessível. O ping para o servidor responde, mas o login falha. Um analista conclui que "a rede está funcionando"; outro, que "é problema de senha". O diagnóstico em camadas mostra que o ping testa só uma parte pequena do caminho: o login ainda depende de DNS, rota, porta, TLS, HTTP, sessão, provedor de identidade, token, autorização e aplicação.
+  </div>
+  <p>
+    Pensar em camadas é subir uma escada de perguntas: o sinal chega? O enlace está ativo? Existe endereço? Existe rota? A porta responde? O protocolo negocia? A aplicação entende? A identidade é válida? A política permite? É esse método que você vai usar no Modelo OSI, no TCP/IP, em cloud networking, em IAM e no troubleshooting profissional.
+  </p>
+</section>

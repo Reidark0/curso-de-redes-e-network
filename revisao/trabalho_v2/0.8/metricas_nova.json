@@ -1,0 +1,85 @@
+{
+  "id": "0.8",
+  "versao": "nova",
+  "titulo": "Como pensar em camadas",
+  "tipo": "ligação",
+  "palavras": {
+    "visiveis": 2838,
+    "teoria": 1321,
+    "praticaExtra": 713,
+    "quiz": 474,
+    "flashcards": 153
+  },
+  "porGrupoTeoria": {
+    "introducao": 426,
+    "contexto": 122,
+    "conteudo": 576,
+    "exemplos": 197,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 143,
+    "summary": 86,
+    "problem": 122,
+    "concept": 312,
+    "internals": 262,
+    "diagram": 2,
+    "analogy": 62,
+    "simpleExample": 135,
+    "objectives": 70,
+    "learningOutcomes": 0,
+    "glossary": 127,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 35
+  },
+  "pratica": {
+    "quiz": 474,
+    "flashcards": 153,
+    "lab": 0,
+    "mentorQuestions": 216,
+    "exercises": 197,
+    "challenge": 105,
+    "commentedSolution": 195
+  },
+  "outros": {
+    "title+subtitle": 22,
+    "nextTheme": 35,
+    "references": 81,
+    "linksToOtherCourses": 39
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 5,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 4,
+    "exemplosPorAmbiente": []
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "15-25 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 19.2,
+    "nucleoPartes": {
+      "teoria": 10.2,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 31,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-25 min",
+    "praticaExtraArredondada": 30,
+    "recomendada": "15-25 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

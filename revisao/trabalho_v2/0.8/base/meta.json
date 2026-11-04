@@ -1,0 +1,679 @@
+{
+  "id": "0.8",
+  "moduleId": "m00",
+  "order": 8,
+  "title": "Como pensar em camadas",
+  "subtitle": "O método mental que separa problema físico, endereçamento, transporte, aplicação, identidade e segurança sem transformar troubleshooting em adivinhação.",
+  "duration": "65-90 min",
+  "estimatedStudyTimeMinutes": 90,
+  "difficulty": "iniciante",
+  "type": "ligação",
+  "xp": 140,
+  "tags": [
+    "fundamentos",
+    "camadas",
+    "modelo osi",
+    "tcp/ip",
+    "troubleshooting",
+    "arquitetura",
+    "segurança",
+    "cloud",
+    "devsecops"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.1",
+      "reason": "É necessário entender que toda comunicação digital começa com informação representada em bits."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.5",
+      "reason": "Pensar em camadas exige reconhecer que existe uma base física carregando os sinais."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.6",
+      "reason": "Latência, perda, throughput e jitter ajudam a diferenciar falhas de caminho, capacidade e aplicação."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.7",
+      "reason": "Protocolos são contratos; o pensamento em camadas organiza esses contratos por responsabilidade."
+    }
+  ],
+  "objectives": [
+    "Explicar por que pensar em camadas reduz confusão em redes, cloud, segurança e DevSecOps.",
+    "Diferenciar camada física, enlace, rede, transporte, aplicação, identidade e políticas de segurança em um diagnóstico.",
+    "Entender que modelos em camadas são mapas mentais, não a realidade completa do pacote.",
+    "Aplicar uma sequência simples de troubleshooting em camadas antes de culpar DNS, firewall ou aplicação.",
+    "Preparar o aluno para o Módulo 1 e para o Modelo OSI do Módulo 2."
+  ],
+  "learningOutcomes": [
+    "Dado um sintoma como 'não acessa o sistema', o aluno consegue separar hipóteses por camada antes de executar comandos aleatórios.",
+    "Dado um desenho de arquitetura, o aluno consegue apontar onde entram cabo, Wi-Fi, switch, IP, rota, porta, TLS, HTTP, identidade e autorização.",
+    "Dado um erro de pipeline, API ou cloud, o aluno consegue diferenciar falha de rede, falha de protocolo, falha de autenticação e falha de permissão.",
+    "Dado um incidente de segurança, o aluno consegue organizar evidências de pacotes, fluxos, logs, identidade e política."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Modelo mental preparatório para todas as camadas OSI"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede",
+      "Internet",
+      "Transporte",
+      "Aplicação"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "IPv4",
+      "TCP",
+      "UDP",
+      "DNS",
+      "TLS",
+      "HTTP",
+      "OIDC"
+    ],
+    "dependsOn": [
+      "bits",
+      "sinais físicos",
+      "latência",
+      "largura de banda",
+      "throughput",
+      "protocolo"
+    ],
+    "enables": [
+      "Modelo OSI",
+      "troubleshooting estruturado",
+      "arquitetura de redes",
+      "cloud networking",
+      "segurança em camadas"
+    ]
+  },
+  "troubleshooting": {
+    "symptoms": [
+      "Usuário diz que o sistema não abre",
+      "API retorna timeout",
+      "Login funciona mas acesso é negado",
+      "Pipeline não consegue publicar artefato",
+      "Aplicação funciona na rede local mas falha via VPN"
+    ],
+    "diagnosticQuestions": [
+      "Existe link físico ou associação Wi-Fi?",
+      "O host recebeu IP, máscara, gateway e DNS?",
+      "O nome resolve para o destino esperado?",
+      "Existe rota até o destino?",
+      "A porta está acessível?",
+      "TLS negocia com certificado válido?",
+      "A aplicação retorna código de erro?",
+      "A identidade foi autenticada?",
+      "A autorização permite a ação?",
+      "Há logs correlacionáveis?"
+    ],
+    "commands": [
+      {
+        "platform": "Windows",
+        "command": "ipconfig /all\nroute print\nnslookup sistema.empresa.local\nTest-NetConnection sistema.empresa.local -Port 443",
+        "purpose": "Coletar evidências de interface, rota, DNS e porta TCP.",
+        "expectedObservation": "IP válido, gateway, DNS, rota e teste de porta coerente.",
+        "interpretation": "Se DNS falha, investigue resolução. Se porta falha, investigue rota, firewall ou serviço. Se porta abre, suba para TLS/HTTP/aplicação."
+      },
+      {
+        "platform": "Linux",
+        "command": "ip addr\nip route\ndig sistema.empresa.local\ncurl -v https://sistema.empresa.local",
+        "purpose": "Coletar evidências de endereço, rota, DNS, TLS e HTTP.",
+        "expectedObservation": "Interface com IP, rota default, DNS resolvendo e resposta HTTP/TLS interpretável.",
+        "interpretation": "curl -v mostra em qual etapa a conversa falha: resolução, conexão, TLS ou HTTP. Não use -k (--insecure) no diagnóstico: ele desliga a validação do certificado e esconde justamente a falha de TLS."
+      },
+      {
+        "platform": "Cisco IOS",
+        "command": "show ip interface brief\nshow ip route\nshow access-lists",
+        "purpose": "Verificar estado de interfaces, rotas e políticas básicas no caminho.",
+        "expectedObservation": "Interfaces up/up, rota esperada e ACL sem bloqueio indevido.",
+        "interpretation": "Se rede e ACL estão corretas, a falha pode estar acima: transporte, TLS, aplicação ou identidade."
+      }
+    ],
+    "decisionTree": [
+      {
+        "if": "Não há link físico ou Wi-Fi associado",
+        "then": "Investigue camada física/enlace antes de DNS ou aplicação."
+      },
+      {
+        "if": "Há IP, mas não há gateway ou rota default",
+        "then": "Corrija configuração de rede antes de testar aplicação."
+      },
+      {
+        "if": "DNS resolve, mas porta 443 não conecta",
+        "then": "Investigue rota, firewall, security group, proxy ou serviço parado."
+      },
+      {
+        "if": "Porta conecta, mas TLS falha",
+        "then": "Investigue certificado, SNI, CA, inspeção TLS ou versão incompatível."
+      },
+      {
+        "if": "HTTP responde 401",
+        "then": "Investigue autenticação: credencial ausente ou inválida, token expirado, sessão ou provedor de identidade."
+      },
+      {
+        "if": "HTTP responde 403",
+        "then": "O servidor entendeu o pedido e recusou a ação: com o usuário já autenticado, investigue grupos, claims, papéis e políticas de autorização; confira também regras de WAF ou política que bloqueiam por origem."
+      }
+    ]
+  },
+  "security": {
+    "goodPractices": [
+      "Aplicar defesa em profundidade em múltiplas camadas.",
+      "Registrar evidências de rede, aplicação, identidade e política com correlação temporal.",
+      "Separar conectividade, autenticação e autorização nos diagnósticos.",
+      "Documentar fluxos permitidos, portas, protocolos, identidades e responsáveis.",
+      "Usar menor privilégio em rede, cloud e IAM."
+    ],
+    "badPractices": [
+      "Abrir tráfego any-any para resolver chamado sem diagnóstico.",
+      "Desativar validação TLS ou WAF sem plano de reversão.",
+      "Coletar logs sem mascarar segredos."
+    ],
+    "commonErrors": [
+      "Confundir bloqueio de firewall com bloqueio de IAM.",
+      "Confundir token expirado com falha de rede.",
+      "Confundir perda física com lentidão de aplicação.",
+      "Confundir erro 403 com indisponibilidade."
+    ],
+    "vulnerabilities": [
+      {
+        "name": "Falsa sensação de segurança por camada única",
+        "description": "A organização implementa um controle, como firewall ou TLS, e assume que isso cobre todos os riscos.",
+        "defensiveExplanation": "Um controle protege uma responsabilidade específica, mas não substitui autenticação, autorização, hardening, logs e monitoramento.",
+        "mitigation": "Defesa em profundidade, revisão de arquitetura, logs correlacionados e testes por camada."
+      },
+      {
+        "name": "Liberação excessiva durante troubleshooting",
+        "description": "Para resolver um incidente rapidamente, alguém libera tráfego amplo sem entender a camada da falha.",
+        "defensiveExplanation": "A correção pode criar exposição lateral e permanecer esquecida.",
+        "mitigation": "Mudanças temporárias com expiração, aprovação, evidência, logging e revisão pós-incidente."
+      }
+    ],
+    "monitoring": [
+      "Fluxos negados em firewall ou security group",
+      "Erros TLS",
+      "Códigos HTTP 401/403/404/429/5xx",
+      "Falhas de autenticação e autorização",
+      "Mudanças em regras de rede e IAM",
+      "Aumento de tentativas laterais entre segmentos"
+    ],
+    "hardening": [
+      "Segmentar redes por função",
+      "Restringir portas e origens",
+      "Aplicar TLS moderno",
+      "Usar IAM com menor privilégio",
+      "Ativar logs em pontos de controle",
+      "Definir runbooks de troubleshooting em camadas"
+    ],
+    "detectionIdeas": [
+      "Correlacionar falhas de conexão com mudanças de firewall",
+      "Correlacionar 403 com alterações de grupo ou policy",
+      "Comparar perda/jitter com erros de aplicação",
+      "Alertar para mudanças que abrem tráfego amplo"
+    ]
+  },
+  "mentorQuestions": [
+    {
+      "type": "reflexão",
+      "question": "Por que modelos em camadas ajudam mais no diagnóstico do que uma lista solta de comandos?",
+      "hints": [
+        "Pense em hipótese e evidência.",
+        "Pense em responsabilidades diferentes."
+      ],
+      "expectedIdeas": [
+        "organização",
+        "redução de tentativa e erro",
+        "separação de responsabilidades",
+        "comunicação entre equipes"
+      ],
+      "explanation": "Comandos sem modelo mental podem gerar dados sem interpretação. Camadas ajudam a saber o que cada comando confirma ou não confirma."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "Uma aplicação abre normalmente na rede do escritório, mas falha quando o mesmo usuário está na VPN. Quais camadas mudam entre os dois caminhos e por onde você começaria?",
+      "hints": [
+        "O usuário, a senha e a aplicação são os mesmos.",
+        "Pense no que a VPN altera: DNS, rota e políticas no caminho."
+      ],
+      "expectedIdeas": [
+        "DNS interno resolvido pela VPN",
+        "rota até a rede da aplicação",
+        "firewall ou segmentação da VPN/ZTNA",
+        "política de acesso por grupo",
+        "teste de porta e TLS a partir da VPN",
+        "logs da VPN e do firewall"
+      ],
+      "explanation": "Como identidade e aplicação são as mesmas nos dois casos, a diferença está no caminho. Compare DNS, rota, porta e políticas da VPN antes de mexer na aplicação ou nas credenciais."
+    },
+    {
+      "type": "cenário real",
+      "question": "Em cloud, uma VM privada não acessa uma API externa. Quais camadas você verificaria antes de pedir liberação ampla de firewall?",
+      "hints": [
+        "Pense em DNS, rota, NAT, security group e proxy.",
+        "Pense em porta e TLS."
+      ],
+      "expectedIdeas": [
+        "DNS",
+        "route table",
+        "NAT",
+        "security group",
+        "porta 443",
+        "TLS",
+        "proxy",
+        "logs"
+      ],
+      "explanation": "Liberação ampla é arriscada. O diagnóstico em camadas busca evidência do ponto exato da falha."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q0.8.1",
+      "question": "Qual é a melhor descrição de pensamento em camadas?",
+      "options": [
+        "Um método para organizar responsabilidades e evidências de comunicação",
+        "Uma lista fixa de comandos que deve ser executada sempre na mesma ordem",
+        "Uma regra para começar todo diagnóstico pela camada de aplicação",
+        "Um modelo que descreve exatamente os cabeçalhos de cada pacote real"
+      ],
+      "answer": 0,
+      "explanation": "Camadas são um modelo mental para separar responsabilidades e investigar com evidências. Não são uma receita fixa de comandos nem uma descrição exata dos pacotes reais.",
+      "topic": "conceito",
+      "difficulty": "iniciante",
+      "type": "conceito"
+    },
+    {
+      "id": "q0.8.2",
+      "question": "Ping para um servidor responde, mas o site HTTPS não abre. O que é correto concluir?",
+      "options": [
+        "Toda a aplicação está saudável",
+        "Há alguma conectividade, mas ainda é preciso testar porta, TLS e aplicação",
+        "DNS obrigatoriamente está quebrado",
+        "O problema só pode ser físico"
+      ],
+      "answer": 1,
+      "explanation": "Ping é uma evidência limitada. HTTP/TLS pode falhar mesmo com ICMP funcionando.",
+      "topic": "troubleshooting",
+      "difficulty": "iniciante",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q0.8.3",
+      "question": "Qual frase representa melhor defesa em profundidade?",
+      "options": [
+        "Um firewall substitui IAM",
+        "HTTPS substitui autorização",
+        "Controles diferentes protegem responsabilidades diferentes",
+        "VPN torna segmentação desnecessária"
+      ],
+      "answer": 2,
+      "explanation": "Defesa em profundidade usa camadas complementares, não substituições perigosas.",
+      "topic": "segurança",
+      "difficulty": "iniciante",
+      "type": "segurança"
+    },
+    {
+      "id": "q0.8.4",
+      "question": "Uma API retorna 403. Qual hipótese deve ser considerada antes de alterar rota ou firewall?",
+      "options": [
+        "Cabo rompido entre o usuário e o switch",
+        "Autorização: policy, grupo, claim ou permissão",
+        "Rota ausente até a sub-rede da API",
+        "Security group bloqueando a porta 443"
+      ],
+      "answer": 1,
+      "explanation": "Um 403 é uma resposta HTTP: a requisição atravessou cabo, rota e security group e chegou a um controle de aplicação ou política, que a negou. Por isso a hipótese inicial é autorização.",
+      "topic": "cloud",
+      "difficulty": "iniciante",
+      "type": "cloud"
+    },
+    {
+      "id": "q0.8.5",
+      "question": "Por que o modelo OSI é útil mesmo que a internet real use a pilha TCP/IP?",
+      "options": [
+        "Porque é um mapa didático para separar responsabilidades",
+        "Porque todos os pacotes carregam exatamente sete cabeçalhos OSI",
+        "Porque substitui documentação de rede",
+        "Porque descreve exatamente como os sistemas operacionais implementam a pilha"
+      ],
+      "answer": 0,
+      "explanation": "O OSI é muito útil como modelo pedagógico e de diagnóstico, mesmo quando a implementação real não encaixa perfeitamente em sete camadas rígidas.",
+      "topic": "modelos",
+      "difficulty": "iniciante",
+      "type": "comparação"
+    },
+    {
+      "id": "q0.8.6",
+      "question": "Um usuário recebe 401 em uma API; outro, já autenticado, recebe 403 na mesma API. Qual leitura é a mais adequada?",
+      "options": [
+        "Os dois casos indicam falha de rede entre cliente e API",
+        "401 indica falta de permissão e 403 indica token ausente",
+        "Os dois códigos significam que o serviço está indisponível",
+        "401 aponta para autenticação; 403 aponta para autorização"
+      ],
+      "answer": 3,
+      "explanation": "401 costuma indicar credencial ausente ou inválida (autenticação). 403 indica que o servidor entendeu o pedido e recusou a ação; para um usuário já autenticado, isso aponta para autorização. Em ambos os casos a rede entregou a requisição.",
+      "topic": "identidade",
+      "difficulty": "iniciante",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q0.8.7",
+      "question": "Num acesso HTTPS, qual sequência descreve o encapsulamento, da aplicação até o meio físico?",
+      "options": [
+        "TCP, HTTP, IP, TLS, Ethernet/Wi-Fi, sinal",
+        "HTTP, IP, TLS, TCP, Ethernet/Wi-Fi, sinal",
+        "HTTP, TLS, TCP, IP, Ethernet/Wi-Fi, sinal",
+        "Ethernet/Wi-Fi, IP, TCP, TLS, HTTP, sinal"
+      ],
+      "answer": 2,
+      "explanation": "A requisição HTTP é protegida pelo TLS, carregada pelo TCP (portas), endereçada pelo IP, entregue ao próximo salto por Ethernet ou Wi-Fi e transmitida como sinal. No destino, o caminho inverso é o desencapsulamento.",
+      "topic": "encapsulamento",
+      "difficulty": "iniciante",
+      "type": "conceito"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc0.8.1",
+      "front": "O que significa pensar em camadas?",
+      "back": "Separar uma comunicação em responsabilidades testáveis, como meio físico, enlace, rede, transporte, aplicação, identidade e política.",
+      "tags": [
+        "camadas"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.8.6",
+      "front": "A porta 443 conecta, mas o TLS falha. Onde investigar?",
+      "back": "Certificado (validade, nome, CA confiável), SNI, inspeção TLS no caminho ou versão incompatível. A rede até a porta já funcionou.",
+      "tags": [
+        "troubleshooting",
+        "tls"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.8.3",
+      "front": "Qual é a diferença entre autenticação e autorização?",
+      "back": "Autenticação verifica quem é o usuário ou sistema. Autorização decide o que essa identidade pode fazer.",
+      "tags": [
+        "iam",
+        "segurança"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.8.4",
+      "front": "Por que camadas ajudam em cloud?",
+      "back": "Porque cloud separa rota, security group, DNS, endpoint, load balancer, WAF, API e IAM, cada um com evidências próprias.",
+      "tags": [
+        "cloud"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.8.5",
+      "front": "O que é defesa em profundidade?",
+      "back": "Uso de controles complementares em várias camadas para reduzir risco caso um controle falhe ou seja insuficiente.",
+      "tags": [
+        "segurança"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.8.7",
+      "front": "Por que dizemos que modelos em camadas são mapas, não a realidade?",
+      "back": "Porque nem todo protocolo se encaixa perfeitamente e alguns componentes, como proxies, firewalls de próxima geração, WAFs e service meshes, atuam em várias camadas ao mesmo tempo.",
+      "tags": [
+        "modelos"
+      ],
+      "difficulty": "iniciante"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex0.8.1",
+      "type": "conceitual",
+      "prompt": "Explique por que 'a rede está lenta' não é diagnóstico suficiente.",
+      "expectedAnswer": "Porque lentidão pode vir de latência, perda, throughput, DNS, proxy, TLS, servidor, banco, aplicação, identidade ou endpoint. É preciso separar hipóteses por camada e coletar evidências.",
+      "explanation": "Termos vagos não apontam causa. Camadas transformam sintoma em perguntas testáveis."
+    },
+    {
+      "id": "ex0.8.2",
+      "type": "diagnóstico",
+      "prompt": "Um usuário acessa uma aplicação, faz login, mas recebe 403. Liste três evidências que você coletaria.",
+      "expectedAnswer": "Logs da aplicação, logs do provedor de identidade, grupos/claims/permissões do usuário, rota da requisição e código HTTP completo com horário de correlação.",
+      "explanation": "A tela de login e autenticação indicam que o foco inicial deve subir para autorização e aplicação."
+    },
+    {
+      "id": "ex0.8.3",
+      "type": "arquitetura",
+      "prompt": "Desenhe uma pilha simples para acesso a uma API cloud contendo rede, transporte, TLS, HTTP, API Gateway e IAM.",
+      "expectedAnswer": "Uma resposta adequada mostra cliente, DNS/rede/rota, TCP 443, TLS, HTTP, API Gateway, validação de token/IAM e backend.",
+      "explanation": "O objetivo é visualizar responsabilidades, não desenhar todos os detalhes do provedor."
+    }
+  ],
+  "challenge": {
+    "title": "Runbook de primeira resposta em camadas",
+    "scenario": "Sua equipe recebe chamados frequentes de 'sistema fora'. Cada analista testa uma coisa diferente e as escalas para rede, segurança, plataforma e aplicação ficam confusas.",
+    "tasks": [
+      "Criar um checklist com pelo menos seis camadas",
+      "Definir uma pergunta por camada",
+      "Definir uma evidência ou comando por camada",
+      "Indicar quando escalar para rede, segurança, IAM, plataforma ou aplicação",
+      "Definir quais dados não devem ser expostos nos prints ou logs"
+    ],
+    "constraints": [
+      "Não usar testes ofensivos",
+      "Não pedir liberação ampla de firewall como primeira ação",
+      "Separar autenticação de autorização",
+      "Incluir pelo menos um ponto de cloud e um ponto de segurança"
+    ],
+    "expectedDeliverables": [
+      "Checklist em camadas",
+      "Tabela de evidências",
+      "Critério de escalonamento",
+      "Cuidados de segurança e privacidade"
+    ],
+    "gradingRubric": [
+      {
+        "criterion": "Separação correta de camadas",
+        "points": 30,
+        "description": "O checklist diferencia meio, rede, transporte, aplicação, identidade e política."
+      },
+      {
+        "criterion": "Evidências verificáveis",
+        "points": 30,
+        "description": "Cada hipótese possui comando, log ou fonte de evidência."
+      },
+      {
+        "criterion": "Segurança",
+        "points": 20,
+        "description": "Evita exposição de segredos e mudanças perigosas sem autorização."
+      },
+      {
+        "criterion": "Aplicabilidade corporativa",
+        "points": 20,
+        "description": "O runbook pode ser usado por NOC, SOC, suporte, plataforma e aplicação."
+      }
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "A solução deve começar definindo que 'sistema fora' é sintoma, não causa. Em seguida, organiza o diagnóstico em camadas para evitar saltos lógicos.",
+    "steps": [
+      "Validar interface, link ou Wi-Fi",
+      "Validar IP, gateway e DNS",
+      "Validar resolução do nome",
+      "Validar rota e porta",
+      "Validar TLS e HTTP",
+      "Validar autenticação",
+      "Validar autorização",
+      "Correlacionar logs de aplicação, IAM, proxy, WAF e firewall",
+      "Registrar evidências e escalar com contexto"
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "Liberar any-any no firewall para testar",
+        "whyItIsWrong": "Cria risco e não identifica a camada exata da falha."
+      },
+      {
+        "answer": "Dizer que não é rede porque ping responde",
+        "whyItIsWrong": "Ping não valida portas, TLS, HTTP, aplicação ou identidade."
+      },
+      {
+        "answer": "Redefinir senha quando há erro 403",
+        "whyItIsWrong": "403 tende a indicar autorização, não necessariamente autenticação."
+      }
+    ],
+    "finalAnswer": "Um runbook adequado separa link/interface, IP/rota, DNS, porta/transporte, TLS/HTTP, aplicação, autenticação, autorização e logs. Cada etapa tem evidência própria e critérios claros de escalonamento."
+  },
+  "glossary": [
+    {
+      "term": "Camada",
+      "shortDefinition": "Responsabilidade lógica em um modelo de comunicação.",
+      "longDefinition": "Uma camada agrupa funções parecidas para facilitar arquitetura, interoperabilidade e troubleshooting.",
+      "example": "A camada de transporte lida com portas e comunicação entre processos.",
+      "relatedTerms": [
+        "modelo OSI",
+        "TCP/IP",
+        "encapsulamento"
+      ],
+      "relatedLessons": [
+        "0.8",
+        "2.1"
+      ]
+    },
+    {
+      "term": "Encapsulamento",
+      "shortDefinition": "Processo de colocar dados de uma camada dentro da estrutura da camada inferior.",
+      "longDefinition": "Quando uma mensagem de aplicação passa pela pilha, cada camada adiciona informações necessárias para sua responsabilidade.",
+      "example": "HTTP é carregado por TLS/TCP/IP/Ethernet em muitos acessos web.",
+      "relatedTerms": [
+        "pacote",
+        "quadro",
+        "segmento"
+      ],
+      "relatedLessons": [
+        "0.8",
+        "2.4"
+      ]
+    },
+    {
+      "term": "Troubleshooting em camadas",
+      "shortDefinition": "Método de diagnóstico que testa hipóteses por responsabilidade.",
+      "longDefinition": "Evita conclusões precipitadas ao separar sintomas físicos, lógicos, de transporte, aplicação, identidade e política.",
+      "example": "Testar IP, DNS, porta, TLS e HTTP em sequência.",
+      "relatedTerms": [
+        "evidência",
+        "hipótese"
+      ],
+      "relatedLessons": [
+        "0.8",
+        "15.1"
+      ]
+    },
+    {
+      "term": "Defesa em profundidade",
+      "shortDefinition": "Uso de controles complementares em várias camadas.",
+      "longDefinition": "Uma falha em um controle não deve expor completamente o ambiente, porque outros controles reduzem impacto.",
+      "example": "Segmentação, firewall, TLS, MFA, autorização e logs atuando juntos.",
+      "relatedTerms": [
+        "segurança em camadas",
+        "menor privilégio"
+      ],
+      "relatedLessons": [
+        "0.8",
+        "13.1"
+      ]
+    },
+    {
+      "term": "Autorização",
+      "shortDefinition": "Decisão sobre o que uma identidade pode fazer.",
+      "longDefinition": "Depois de autenticar quem é o usuário ou sistema, a autorização verifica permissões, grupos, claims, papéis e políticas.",
+      "example": "Usuário logado recebe 403 por não pertencer ao grupo correto.",
+      "relatedTerms": [
+        "autenticação",
+        "IAM",
+        "claims"
+      ],
+      "relatedLessons": [
+        "0.8"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "internal-course",
+      "title": "Redes e Network — Módulo 0, aulas 0.1 a 0.7",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Fundamentos necessários para o pensamento em camadas."
+    },
+    {
+      "type": "standard",
+      "title": "ISO/IEC 7498-1 — Open Systems Interconnection Basic Reference Model",
+      "organization": "ISO/IEC",
+      "url": "",
+      "note": "Referência conceitual clássica para o modelo OSI."
+    },
+    {
+      "type": "internal-course",
+      "title": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "O pensamento em camadas será usado em CI/CD, Kubernetes, proxies, ingress e observabilidade."
+    },
+    {
+      "type": "internal-course",
+      "title": "Enterprise Identity, IAM e Segurança de Acessos",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Autenticação, autorização, claims e políticas são camadas modernas acima da conectividade."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "m00",
+      "lesson": "base",
+      "reason": "Pipelines, containers e Kubernetes exigem separar rede, plataforma, API, identidade e política."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "m00",
+      "lesson": "base",
+      "reason": "A aula diferencia conectividade, autenticação e autorização, base para IAM."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70,
+      "anyOf": [
+        "quizScoreAtLeast",
+        "checklistDone"
+      ]
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "0.9"
+    ]
+  }
+}

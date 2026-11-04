@@ -1,0 +1,97 @@
+{
+  "id": "0.8",
+  "versao": "original",
+  "titulo": "Como pensar em camadas",
+  "tipo": "ligação",
+  "palavras": {
+    "visiveis": 3973,
+    "teoria": 2769,
+    "praticaExtra": 631,
+    "quiz": 259,
+    "flashcards": 118
+  },
+  "porGrupoTeoria": {
+    "introducao": 631,
+    "contexto": 414,
+    "conteudo": 383,
+    "exemplos": 764,
+    "seguranca_troubleshooting": 577
+  },
+  "porSecao": {
+    "motivation": 231,
+    "summary": 51,
+    "history": 153,
+    "problem": 142,
+    "evolution": 119,
+    "concept": 120,
+    "internals": 168,
+    "architecture": 92,
+    "diagram": 3,
+    "analogy": 136,
+    "simpleExample": 105,
+    "enterpriseExample": 114,
+    "cloudExample": 141,
+    "devsecopsExample": 122,
+    "securityExample": 146,
+    "objectives": 73,
+    "learningOutcomes": 84,
+    "glossary": 192,
+    "security": 281,
+    "troubleshooting": 296,
+    "nextTheme": 54
+  },
+  "pratica": {
+    "quiz": 259,
+    "flashcards": 118,
+    "lab": 0,
+    "mentorQuestions": 181,
+    "exercises": 151,
+    "challenge": 164,
+    "commentedSolution": 135
+  },
+  "outros": {
+    "title+subtitle": 22,
+    "nextTheme": 54,
+    "references": 81,
+    "linksToOtherCourses": 39
+  },
+  "quantidades": {
+    "quiz": 5,
+    "flashcards": 5,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 5,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "55-80 min",
+    "estimatedStudyTimeMinutes": 80,
+    "nucleo": 29.3,
+    "nucleoPartes": {
+      "teoria": 21.3,
+      "diagramas": 3,
+      "quiz": 5
+    },
+    "praticaExtra": 39,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 40,
+    "recomendada": "25-35 min + 40 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}
