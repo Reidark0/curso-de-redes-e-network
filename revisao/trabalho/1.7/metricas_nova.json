@@ -1,0 +1,73 @@
+{
+  "id": "1.7",
+  "versao": "nova",
+  "titulo": "Equipamentos de rede: NIC, hub, switch, roteador, AP e firewall",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4590,
+    "invisiveis": 45,
+    "teoriaVisivel": 2928
+  },
+  "porCampoVisivel": {
+    "content.motivation": 163,
+    "content.problem": 113,
+    "content.evolution": 190,
+    "content.concept": 104,
+    "content.internals": 472,
+    "content.architecture": 183,
+    "content.analogy": 95,
+    "content.simpleExample": 103,
+    "content.enterpriseExample": 107,
+    "content.cloudExample": 129,
+    "content.devsecopsExample": 73,
+    "content.diagram": 2,
+    "content.summary": 98,
+    "content.nextTheme": 34,
+    "security": 476,
+    "troubleshooting": 297,
+    "glossary": 289,
+    "title+subtitle": 25,
+    "objectives": 66,
+    "learningOutcomes": 74,
+    "quiz": 522,
+    "flashcards": 191,
+    "mentorQuestions": 147,
+    "exercises": 165,
+    "challenge": 152,
+    "commentedSolution": 206,
+    "references": 62,
+    "linksToOtherCourses": 52
+  },
+  "porCampoInvisivel": {
+    "networkContext": 45
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 7,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "75-105 min",
+    "estimatedStudyTimeMinutes": 105,
+    "M": 90,
+    "T": 86,
+    "partes": {
+      "teoria": 22.5,
+      "diagramas": 3,
+      "quiz": 7,
+      "flashcards": 3.5,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "75-105 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 30
+  }
+}

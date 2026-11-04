@@ -4,8 +4,8 @@
   "order": 7,
   "title": "Equipamentos de rede: NIC, hub, switch, roteador, AP e firewall",
   "subtitle": "Como entender o papel de cada equipamento antes de configurar, diagnosticar ou proteger uma rede.",
-  "duration": "80-115 min",
-  "estimatedStudyTimeMinutes": 115,
+  "duration": "75-105 min",
+  "estimatedStudyTimeMinutes": 105,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 195,
@@ -102,108 +102,6 @@
       "troubleshooting"
     ]
   },
-  "deepDive": {
-    "mentalModel": "Para entender um equipamento, pergunte: qual problema ele resolve, em que camada atua, que informação lê, que tabela mantém, que decisão toma, que falhas produz e que evidências registra.",
-    "keyTerms": [
-      "NIC",
-      "MAC",
-      "hub",
-      "switch",
-      "tabela MAC",
-      "roteador",
-      "tabela de rotas",
-      "access point",
-      "SSID",
-      "firewall",
-      "zona",
-      "política"
-    ],
-    "limitations": [
-      "Equipamentos modernos podem acumular papéis, então o nome comercial da caixa nem sempre revela tudo que ela faz.",
-      "Um firewall não corrige arquitetura ruim se as regras forem permissivas demais.",
-      "Um switch não substitui roteamento, ainda que alguns switches L3 também roteiem.",
-      "Um AP não resolve problemas de WAN, DNS ou serviço remoto.",
-      "Cloud abstrai equipamentos físicos, mas não elimina os papéis de rede."
-    ],
-    "whenToUse": [
-      "Use switches para conectar múltiplos dispositivos em uma LAN de forma eficiente.",
-      "Use roteadores ou funções de roteamento para interligar redes IP diferentes.",
-      "Use APs para acesso sem fio controlado e planejado.",
-      "Use firewalls para aplicar política entre zonas, redes, usuários, aplicações ou ambientes.",
-      "Use inventário de NICs e interfaces para rastrear dispositivos finais."
-    ],
-    "whenNotToUse": [
-      "Não use hub em produção moderna, salvo em laboratório didático controlado.",
-      "Não use roteador como substituto conceitual de firewall sem políticas adequadas.",
-      "Não coloque AP doméstico sem controle dentro de rede corporativa.",
-      "Não trate security group como firewall completo sem entender seus limites.",
-      "Não diagnostique aplicação antes de validar interface, rota e política básica quando os sintomas indicam rede."
-    ],
-    "operationalImpact": [
-      "Separar papéis facilita troubleshooting e reduz mudanças arriscadas.",
-      "Mais equipamentos aumentam visibilidade, mas também exigem documentação, backup de configuração e monitoramento.",
-      "Equipamentos gerenciáveis geram logs e métricas melhores que dispositivos domésticos ou não gerenciáveis.",
-      "Padronizar marcas e modelos simplifica suporte, atualização e reposição."
-    ],
-    "financialImpact": [
-      "Switches gerenciáveis, firewalls e APs corporativos custam mais, mas reduzem risco operacional.",
-      "Firewalls avançados podem envolver licenças de inspeção, suporte e atualização de inteligência de ameaças.",
-      "Em cloud, NAT gateway, firewall gerenciado, load balancer e tráfego entre zonas podem gerar custo recorrente.",
-      "Equipamentos baratos podem gerar custo oculto em indisponibilidade, retrabalho e falta de logs."
-    ],
-    "securityImpact": [
-      "Equipamentos são controles e fontes de evidência para investigação.",
-      "Má configuração pode criar falsa sensação de segurança.",
-      "Portas físicas, SSIDs e regras de firewall devem seguir menor privilégio.",
-      "A documentação de rede é sensível e deve ser protegida."
-    ],
-    "decisionTable": [
-      {
-        "situation": "Usuário tem link físico, mas não acessa outra rede",
-        "recommendedChoice": "Verificar gateway, rota e firewall",
-        "why": "Switch local pode estar funcionando, mas tráfego entre redes depende de camada 3 e política",
-        "risk": "Culpar cabo ou AP sem evidência"
-      },
-      {
-        "situation": "Vários usuários cabeados na mesma sala caem ao mesmo tempo",
-        "recommendedChoice": "Investigar switch de acesso, uplink ou energia",
-        "why": "Falha coletiva sugere equipamento intermediário compartilhado",
-        "risk": "Analisar cada host isoladamente e perder tempo"
-      },
-      {
-        "situation": "Usuários Wi‑Fi reclamam de instabilidade, cabeados não",
-        "recommendedChoice": "Investigar AP, rádio, canal, interferência e autenticação Wi‑Fi",
-        "why": "Sintoma restrito ao meio sem fio aponta para AP ou RF",
-        "risk": "Comprar mais banda de internet sem resolver"
-      }
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Achar que switch e roteador fazem a mesma coisa.",
-      "whyItHappens": "Em roteadores domésticos, switch e roteador ficam na mesma caixa.",
-      "consequence": "Diagnóstico errado entre problema local de LAN e problema entre redes.",
-      "correction": "Switch comuta quadros por MAC dentro da LAN; roteador encaminha pacotes por IP entre redes."
-    },
-    {
-      "mistake": "Achar que firewall é apenas roteador com bloqueio.",
-      "whyItHappens": "Muitos firewalls também roteiam.",
-      "consequence": "Regras, zonas, estado e logs são ignorados.",
-      "correction": "Firewall é ponto de política e inspeção; roteamento é apenas parte do caminho."
-    },
-    {
-      "mistake": "Tratar AP como sinônimo de internet.",
-      "whyItHappens": "Para usuários, Wi‑Fi e internet parecem a mesma coisa.",
-      "consequence": "Problemas de DNS, rota ou firewall são atribuídos ao rádio sem análise.",
-      "correction": "AP conecta cliente sem fio à rede; acesso à internet depende de outros componentes."
-    },
-    {
-      "mistake": "Ignorar NIC e driver no troubleshooting.",
-      "whyItHappens": "A interface é invisível quando funciona.",
-      "consequence": "Falhas locais de driver, energia, velocidade ou MAC passam despercebidas.",
-      "correction": "Comece verificando interface, link, IP, gateway, DNS e logs locais."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Sem link físico",
@@ -250,7 +148,7 @@
       },
       {
         "if": "Todos os hosts do mesmo switch falham",
-        "then": "Verificar switch, uplink, energia, VLAN, STP e porta de distribuição."
+        "then": "Verificar switch, uplink, energia, VLAN, STP e porta de distribuição. Falha coletiva aponta para equipamento compartilhado: não analise host por host."
       },
       {
         "if": "Somente tráfego para outra rede falha",
@@ -258,7 +156,7 @@
       },
       {
         "if": "Somente Wi‑Fi falha",
-        "then": "Verificar AP, SSID, autenticação, rádio, interferência e VLAN associada."
+        "then": "Verificar AP, SSID, autenticação, rádio, interferência e VLAN associada. Comprar mais banda de internet não resolve falha restrita ao rádio."
       }
     ]
   },
@@ -269,20 +167,24 @@
       "Separar redes por função e aplicar firewall entre zonas.",
       "Manter firmware de switches, roteadores, APs e firewalls atualizado.",
       "Registrar logs de firewall, APs e equipamentos críticos em local centralizado.",
-      "Proteger documentação de rede e backups de configuração."
+      "Proteger documentação de rede e backups de configuração.",
+      "Inventariar NICs e interfaces, físicas e virtuais, para rastrear dispositivos finais e não deixar interfaces expostas sem necessidade."
     ],
     "badPractices": [
       "Usar AP doméstico não autorizado em rede corporativa.",
       "Manter firewall com regra any-any sem justificativa e revisão.",
       "Conectar switches não gerenciáveis em áreas críticas sem inventário.",
       "Não trocar senhas padrão de equipamentos.",
-      "Não saber qual equipamento fornece evidência em incidente."
+      "Não saber qual equipamento fornece evidência em incidente.",
+      "Deixar porta de switch em VLAN indevida, dando ao dispositivo acesso a uma rede que ele não deveria alcançar.",
+      "Usar hub em produção (ele só tem lugar em laboratório didático controlado)."
     ],
     "commonErrors": [
       "Confundir conectividade com autorização.",
       "Achar que NAT substitui firewall.",
       "Achar que SSID oculto é controle de segurança suficiente.",
-      "Achar que cloud não tem rede porque não há equipamento físico visível."
+      "Achar que cloud não tem rede porque não há equipamento físico visível.",
+      "Achar que o firewall compensa uma arquitetura ruim mesmo com regras permissivas demais."
     ],
     "vulnerabilities": [
       {
@@ -302,6 +204,18 @@
         "description": "Um access point conectado sem controle pode criar ponte insegura para a rede cabeada.",
         "defensiveExplanation": "Usuários ou atacantes próximos podem tentar acessar a rede por rádio.",
         "mitigation": "Inventário, detecção de rogue AP, 802.1X, segmentação e políticas físicas."
+      },
+      {
+        "name": "AP mal configurado",
+        "description": "Senha fraca, SSID inadequado ou falta de isolamento entre clientes expõem a rede sem fio.",
+        "defensiveExplanation": "Quem está ao alcance do rádio pode entrar na rede ou alcançar outros clientes conectados.",
+        "mitigation": "WPA3 ou WPA2-Enterprise, rede de visitantes segmentada e isolada, e monitoramento de associações."
+      },
+      {
+        "name": "Roteamento incorreto",
+        "description": "Uma rota errada ou não documentada faz o tráfego passar por um caminho não previsto.",
+        "defensiveExplanation": "O tráfego pode ficar indisponível ou atravessar um trecho sem a inspeção e o registro esperados.",
+        "mitigation": "Controlar e documentar rotas, validar cada mudança e monitorar rotas criadas para destinos inesperados."
       }
     ],
     "monitoring": [
@@ -383,103 +297,118 @@
   "quiz": [
     {
       "id": "q1.7.1",
-      "type": "conceito",
-      "q": "Qual é o papel principal de uma NIC?",
-      "opts": [
+      "question": "Qual é o papel principal de uma NIC?",
+      "options": [
+        "Escolher o próximo salto para alcançar outra rede",
         "Conectar o dispositivo final à rede",
-        "Aplicar regras de firewall entre zonas",
-        "Traduzir nomes DNS",
-        "Armazenar logs do SIEM"
+        "Aprender MACs e encaminhar quadros entre portas da LAN",
+        "Aplicar regras de política entre zonas"
       ],
-      "a": 0,
-      "exp": "A NIC é a interface de rede do dispositivo final, com MAC, driver e link físico ou sem fio.",
+      "answer": 1,
+      "explanation": "A NIC é a interface de rede do dispositivo final, com MAC, driver e link físico ou sem fio. Próximo salto é decisão do roteador, tabela MAC é do switch e política entre zonas é do firewall.",
+      "topic": "NIC",
       "difficulty": "iniciante",
-      "topic": "NIC"
+      "type": "conceito"
     },
     {
       "id": "q1.7.2",
-      "type": "comparação",
-      "q": "Qual afirmação diferencia melhor switch e roteador?",
-      "opts": [
-        "Switch comuta quadros por MAC; roteador encaminha pacotes por IP",
-        "Switch sempre usa internet; roteador sempre usa Wi‑Fi",
-        "Switch criptografa; roteador descriptografa",
-        "Não há diferença técnica"
+      "question": "Qual afirmação diferencia melhor switch e roteador?",
+      "options": [
+        "Switch encaminha pelo IP de destino; roteador encaminha pelo MAC de destino",
+        "Switch repete o sinal para todas as portas; roteador aprende MACs",
+        "Switch aplica política entre zonas; roteador conecta clientes Wi‑Fi",
+        "Switch comuta quadros por MAC na LAN; roteador encaminha pacotes por IP entre redes"
       ],
-      "a": 0,
-      "exp": "Switch atua principalmente em camada 2 usando MAC. Roteador atua em camada 3 usando IP e tabela de rotas.",
+      "answer": 3,
+      "explanation": "Switch atua principalmente em camada 2, usando MAC e tabela MAC. Roteador atua em camada 3, usando IP de destino e tabela de rotas. Repetir para todas as portas é comportamento de hub.",
+      "topic": "switch vs roteador",
       "difficulty": "iniciante",
-      "topic": "switch vs roteador"
+      "type": "comparação"
     },
     {
       "id": "q1.7.3",
-      "type": "segurança",
-      "q": "Qual prática reduz risco de conexão indevida em uma tomada de rede pública?",
-      "opts": [
-        "802.1X ou porta desativada/VLAN restrita",
-        "Trocar o papel de parede do desktop",
-        "Aumentar brilho do monitor",
-        "Usar Base64 no SSID"
+      "question": "Qual prática reduz risco de conexão indevida em uma tomada de rede pública?",
+      "options": [
+        "Ocultar o SSID da rede corporativa",
+        "Ativar NAT no roteador de borda",
+        "Usar 802.1X ou desativar a porta/colocá-la em VLAN restrita",
+        "Trocar o switch da sala por um hub"
       ],
-      "a": 0,
-      "exp": "Portas físicas expostas exigem controle de acesso, desativação ou segmentação restrita.",
+      "answer": 2,
+      "explanation": "Porta física exposta exige controle de acesso (802.1X), desativação ou segmentação restrita. SSID oculto e NAT não controlam quem se conecta a uma tomada cabeada, e hub só piora a privacidade.",
+      "topic": "segurança física",
       "difficulty": "iniciante-intermediário",
-      "topic": "segurança física"
+      "type": "segurança"
     },
     {
       "id": "q1.7.4",
-      "type": "diagnóstico",
-      "q": "Usuários cabeados funcionam, mas usuários Wi‑Fi oscilam. Qual componente deve ganhar prioridade na investigação?",
-      "opts": [
+      "question": "Usuários cabeados funcionam, mas usuários Wi‑Fi oscilam. Qual componente deve ganhar prioridade na investigação?",
+      "options": [
+        "Link do provedor de internet",
         "AP, rádio, canal, interferência e autenticação Wi‑Fi",
-        "Somente o cabo do servidor",
-        "A tabela Unicode",
-        "A pinagem T568A do datacenter remoto"
+        "Regras do firewall de borda",
+        "Tabela de rotas do roteador de borda"
       ],
-      "a": 0,
-      "exp": "Quando a falha é restrita ao Wi‑Fi, AP e radiofrequência são hipóteses fortes.",
+      "answer": 1,
+      "explanation": "Os usuários cabeados usam o mesmo provedor, firewall e roteador de borda e funcionam. Quando a falha é restrita ao Wi‑Fi, AP e radiofrequência são as hipóteses mais fortes.",
+      "topic": "Wi‑Fi",
       "difficulty": "iniciante",
-      "topic": "Wi‑Fi"
+      "type": "diagnóstico"
     },
     {
       "id": "q1.7.5",
-      "type": "cloud",
-      "q": "Em cloud, qual elemento se parece conceitualmente com uma regra de firewall aplicada a uma instância ou interface?",
-      "opts": [
-        "Security group ou NSG",
-        "Fonte do terminal",
-        "Tabela ASCII",
-        "Patch cord RJ‑45"
+      "question": "Em cloud, qual elemento se parece conceitualmente com uma regra de firewall aplicada a uma instância ou interface?",
+      "options": [
+        "Route table da VPC",
+        "NAT gateway",
+        "Load balancer",
+        "Security group ou NSG"
       ],
-      "a": 0,
-      "exp": "Security groups e NSGs aplicam políticas de tráfego em recursos virtuais.",
+      "answer": 3,
+      "explanation": "Security groups e NSGs aplicam políticas de tráfego a recursos virtuais. Route table decide caminho, NAT gateway traduz endereços para saída e load balancer distribui conexões.",
+      "topic": "cloud",
       "difficulty": "iniciante-intermediário",
-      "topic": "cloud"
+      "type": "cloud"
     },
     {
       "id": "q1.7.6",
-      "type": "pegadinha",
-      "q": "Por que hub é pouco usado em redes modernas de produção?",
-      "opts": [
-        "Porque repete tráfego sem inteligência, criando limitações de desempenho e privacidade",
-        "Porque usa endereços IPv6 obrigatoriamente",
-        "Porque só funciona em fibra óptica",
-        "Porque substitui firewalls avançados"
+      "question": "Por que hub é pouco usado em redes modernas de produção?",
+      "options": [
+        "Porque repete o tráfego para todas as portas, sem tabela MAC",
+        "Porque exige um endereço IP configurado em cada porta",
+        "Porque bloqueia broadcast entre as portas",
+        "Porque só funciona com fibra óptica"
       ],
-      "a": 0,
-      "exp": "Hubs repetem sinais para todas as portas e não aprendem MACs, ao contrário de switches.",
+      "answer": 0,
+      "explanation": "Hubs repetem sinais para todas as portas e não aprendem MACs: todos disputam o mesmo meio, o desempenho cai e qualquer porta vê o tráfego das outras. Switches resolveram isso.",
+      "topic": "hub",
       "difficulty": "iniciante",
-      "topic": "hub"
+      "type": "pegadinha"
+    },
+    {
+      "id": "q1.7.7",
+      "question": "Um switch recebe um quadro para um MAC de destino que ainda não está na tabela MAC. O que ele faz?",
+      "options": [
+        "Descarta o quadro e registra um log",
+        "Envia o quadro por todas as portas da VLAN, exceto a de origem",
+        "Consulta a tabela de rotas e envia ao gateway",
+        "Devolve o quadro para a porta de origem"
+      ],
+      "answer": 1,
+      "explanation": "Sem entrada para o destino, o switch inunda o quadro pelas portas da mesma VLAN, exceto a de entrada. Quando o destino responde, o switch aprende o MAC dele pela origem do quadro de resposta.",
+      "topic": "switch",
+      "difficulty": "iniciante-intermediário",
+      "type": "mecanismo"
     }
   ],
   "flashcards": [
     {
-      "id": "fc1.7.1",
-      "front": "O que é uma NIC?",
-      "back": "É a interface de rede do dispositivo final, responsável por conectar o host ao meio de comunicação.",
+      "id": "fc1.7.8",
+      "front": "O que a NIC negocia e de que ela depende?",
+      "back": "Negocia link, velocidade e duplex e tem um endereço MAC. Depende de driver e da configuração do sistema operacional; por isso falhas de driver, energia ou velocidade aparecem como “sem rede”.",
       "tags": [
         "NIC",
-        "fundamentos"
+        "troubleshooting"
       ],
       "difficulty": "iniciante"
     },
@@ -524,14 +453,26 @@
       "difficulty": "iniciante-intermediário"
     },
     {
-      "id": "fc1.7.6",
-      "front": "Por que hubs são legados?",
-      "back": "Porque apenas repetem sinais para todas as portas, sem tabela MAC, filtragem ou eficiência moderna.",
+      "id": "fc1.7.9",
+      "front": "Hub, switch e roteador: o que cada um faz com domínios de colisão e de broadcast?",
+      "back": "Hub: todas as portas num único domínio de colisão. Switch: cada porta é um domínio de colisão, mas a VLAN inteira é um domínio de broadcast. Roteador: separa domínios de broadcast.",
       "tags": [
         "hub",
-        "legado"
+        "switch",
+        "roteador",
+        "domínios"
       ],
-      "difficulty": "iniciante"
+      "difficulty": "iniciante-intermediário"
+    },
+    {
+      "id": "fc1.7.7",
+      "front": "NAT substitui firewall?",
+      "back": "Não. NAT altera endereçamento; política explícita, inspeção e registro são papel do firewall.",
+      "tags": [
+        "NAT",
+        "firewall"
+      ],
+      "difficulty": "iniciante-intermediário"
     }
   ],
   "exercises": [
@@ -656,7 +597,7 @@
     {
       "term": "Switch",
       "shortDefinition": "Equipamento que comuta quadros em uma LAN usando endereços MAC.",
-      "longDefinition": "Dispositivo de camada 2 que aprende MACs por porta e encaminha quadros dentro da rede local.",
+      "longDefinition": "Dispositivo de camada 2 que aprende MACs por porta e encaminha quadros dentro da rede local; quando não conhece o destino, envia o quadro por todas as portas da VLAN, exceto a de origem.",
       "example": "Um switch de acesso conecta computadores, impressoras e APs em uma sala.",
       "relatedTerms": [
         "MAC",
@@ -719,7 +660,7 @@
     {
       "term": "Hub",
       "shortDefinition": "Equipamento legado que repete sinais para todas as portas.",
-      "longDefinition": "Repetidor multiporta sem inteligência de comutação, sem tabela MAC e com limitações importantes de desempenho e privacidade.",
+      "longDefinition": "Repetidor multiporta sem inteligência de comutação e sem tabela MAC: todas as portas formam um único domínio de colisão, com limitações importantes de desempenho e privacidade.",
       "example": "Um hub em laboratório pode ajudar a demonstrar repetição, mas não deve ser usado em produção moderna.",
       "relatedTerms": [
         "repetidor",
