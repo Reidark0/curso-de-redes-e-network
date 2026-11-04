@@ -1,0 +1,7 @@
+<section class="lesson-section lesson-section--motivation"><h2>1. Motivação</h2>
+
+<p>Depois de aprender CIDR, rede, broadcast, hosts e bloco mágico, você começa a perceber que muitos ambientes reais usam sempre alguns prefixos repetidos. Uma VLAN de usuários costuma aparecer como <code>/24</code>. Uma pequena DMZ pode aparecer como <code>/28</code>. Um enlace ponto a ponto pode aparecer como <code>/30</code> ou <code>/31</code>. Uma rota extremamente específica pode aparecer como <code>/32</code>.</p>
+<p>O problema é que decorar esses prefixos sem entender o contexto cria decisões ruins. Um <code>/24</code> pode ser confortável demais e desperdiçar endereços. Um <code>/29</code> pode parecer eficiente, mas não suportar crescimento. Um <code>/32</code> pode ser perfeito para liberar um host específico no firewall, mas péssimo se aplicado como se fosse uma rede de usuários.</p>
+<div class="callout callout--problem"><strong>Motivação central:</strong> prefixos comuns são atalhos operacionais. Eles aceleram desenho, troubleshooting e firewall, mas só são seguros quando você entende capacidade, uso típico, exceções e impacto em segurança.</div>
+
+</section>

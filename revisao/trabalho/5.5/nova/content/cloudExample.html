@@ -1,0 +1,10 @@
+<section class="lesson-section lesson-section--cloud"><h2>Exemplo em cloud</h2>
+
+<p>Em cloud, prefixos aparecem em VPCs/VNets, subnets, route tables, security groups, NSGs, endpoints privados e clusters Kubernetes. Dois cuidados são específicos:</p>
+<ul>
+<li><strong>Reservas do provedor:</strong> AWS e Azure reservam 5 endereços em cada subnet (os quatro primeiros e o último). Numa subnet <code>/28</code> sobram 16 − 5 = 11 IPs, e não os 14 da regra tradicional. Load balancers, endpoints privados e nós de cluster também consomem IPs da subnet. Por isso <code>/30</code> não serve em subnet cloud: a AWS aceita no mínimo <code>/28</code> e o Azure, <code>/29</code>.</li>
+<li><strong>Sobreposição:</strong> o bloco da VPC/VNet não pode colidir com redes locais, VPNs, outras contas ou regiões com que ela precise conversar.</li>
+</ul>
+<div class="callout warning"><strong>Boa prática em cloud:</strong> não dimensione subnets no limite. Considere as reservas do provedor, autoscaling, endpoints privados e integração híbrida.</div>
+
+</section>

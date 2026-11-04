@@ -18,4 +18,11 @@ for (const tipo of ['porCampoVisivel', 'porCampoInvisivel']) {
   }
 }
 console.log(linhas.join('\n'));
+// diff por frase (texto visível de content): frases do original que não existem mais na nova
+const frases = (obj) => { const t = Object.entries(obj.content || {}).filter(([k]) => L.VISIBLE_CONTENT.includes(k)).map(([, v]) => L.stripHtml(L.stripSvg(v))).join(' ');
+  return new Set(t.split(/(?<=[.!?:])\s+/).map((x) => x.trim().toLowerCase()).filter((x) => x.split(/\s+/).length >= 5)); };
+const fo = frases(L.loadOriginal(id).obj); const fn = frases(L.loadNew(id).obj);
+const sumiram = [...fo].filter((x) => !fn.has(x)); const novas = [...fn].filter((x) => !fo.has(x));
+const pal = (a) => a.reduce((s2, x) => s2 + x.split(/\s+/).length, 0);
+console.log(`content: frases do original ausentes na nova ${sumiram.length}/${fo.size} (${pal(sumiram)} palavras) | frases novas/reescritas ${novas.length} (${pal(novas)} palavras)`);
 console.log(`Visíveis: ${o.palavras.visiveis} → ${n.palavras.visiveis} | cortes brutos ${cortes} (${Math.round(cortes / o.palavras.visiveis * 100)}%) | acréscimos brutos ${acrescimos} | T ${o.duracao.T} → ${n.duracao.T} min`);

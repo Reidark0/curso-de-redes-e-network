@@ -1,0 +1,9 @@
+<section class="lesson-section lesson-section--summary"><h2>Resumo</h2>
+<ul>
+<li>Cada bit a mais no prefixo divide o bloco ao meio: <code>/24</code> = 256 endereços, <code>/25</code> = 128 … <code>/32</code> = 1.</li>
+<li>Hosts úteis = <code>2^(32 − prefixo) − 2</code>, exceto <code>/31</code> (2 usáveis em ponto a ponto, RFC 3021) e <code>/32</code> (um único host).</li>
+<li>Usos típicos: <code>/24</code>–<code>/25</code> VLANs de usuários; <code>/26</code>–<code>/27</code> departamentos e servidores; <code>/28</code>–<code>/29</code> DMZ, gestão e appliances; <code>/30</code>–<code>/31</code> enlaces; <code>/32</code> host, loopback, rota e allowlist.</li>
+<li>Escolha pelo requisito (hosts + reservas + crescimento) e depois valide segurança, sobreposição e registro no IPAM.</li>
+<li>Em firewall, use o menor CIDR que cobre a necessidade: um <code>/16</code> libera 65.536 origens; um <code>/32</code>, uma.</li>
+</ul>
+</section>

@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--enterprise"><h2>Exemplo empresarial</h2>
+
+<p>Uma empresa pode usar prefixos diferentes por função:</p>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Segmento</th><th>Prefixo</th><th>Motivo</th><th>Política esperada</th></tr></thead><tbody>
+<tr><td>Usuários do administrativo</td><td><code>10.10.10.0/24</code></td><td>Muitos notebooks e crescimento</td><td>Acesso controlado a serviços internos</td></tr>
+<tr><td>Servidores internos</td><td><code>10.10.20.0/26</code></td><td>Menos hosts, maior controle</td><td>Firewall restritivo</td></tr>
+<tr><td>DMZ</td><td><code>10.10.30.0/28</code></td><td>Poucos serviços expostos</td><td>Permitir apenas portas necessárias</td></tr>
+<tr><td>Gerenciamento</td><td><code>10.10.40.0/28</code></td><td>Switches, firewalls, controladoras</td><td>Acesso apenas por bastion/VPN</td></tr>
+<tr><td>Links entre roteadores</td><td><code>10.10.255.0/30</code></td><td>Dois endpoints por enlace</td><td>Roteamento e monitoramento</td></tr>
+</tbody></table></div>
+<p>O prefixo é parte do desenho, mas não substitui firewall, autenticação, logs nem monitoramento.</p>
+
+</section>

@@ -1,0 +1,10 @@
+<section class="lesson-section lesson-section--internals"><h2>Funcionamento interno</h2>
+
+<p>Todos os prefixos de <code>/24</code> a <code>/32</code> são divisões dos 32 bits do IPv4: bits de host = 32 − prefixo, e endereços totais = <code>2^bits_de_host</code>. Em <code>/24</code> sobram 8 bits de host; em <code>/32</code>, nenhum. Como cada passo divide o bloco ao meio, um <code>/24</code> contém dois <code>/25</code>, quatro <code>/26</code>, oito <code>/27</code> e dezesseis <code>/28</code>.</p>
+<p>A regra tradicional <code>hosts úteis = 2^bits_de_host - 2</code> desconta o endereço de rede (o primeiro) e o broadcast (o último). Há duas exceções operacionais:</p>
+<ul>
+<li><strong><code>/31</code>:</strong> a fórmula daria 2 − 2 = 0, e quem a aplica sem contexto acha que o prefixo não serve. Num enlace ponto a ponto não há outros hosts para receber broadcast, e a RFC 3021 permite usar os dois endereços, um por ponta, se os dois equipamentos suportarem.</li>
+<li><strong><code>/32</code>:</strong> fixa os 32 bits e representa um único endereço. Não é rede de usuários (não tem gateway nem faixa de DHCP): serve para loopbacks, rotas para um host e regras de firewall.</li>
+</ul>
+
+</section>

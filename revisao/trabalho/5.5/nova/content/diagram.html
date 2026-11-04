@@ -1,0 +1,21 @@
+<section class="lesson-section lesson-section--diagram"><h2>Diagrama</h2>
+
+<svg class="lesson-svg" viewBox="0 0 960 430" role="img" aria-labelledby="m05l05-title m05l05-desc">
+<title id="m05l05-title">Prefixos IPv4 comuns de /24 a /32</title>
+<desc id="m05l05-desc">Diagrama comparando prefixos comuns, capacidade e usos típicos em LAN, DMZ, links ponto a ponto e regras específicas.</desc>
+<defs><marker id="m05l05-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" class="svg-flow"></path></marker></defs>
+<rect x="35" y="35" width="890" height="355" rx="18" class="svg-zone"></rect>
+<text x="60" y="70" class="svg-label">Quanto maior o prefixo, menor o bloco</text>
+<g class="svg-node svg-node--client"><rect x="70" y="105" width="150" height="92" rx="14"></rect><text x="96" y="137" class="svg-label">/24</text><text x="92" y="164" class="svg-label--small">254 hosts</text><text x="92" y="187" class="svg-label--small">LAN comum</text></g>
+<g class="svg-node svg-node--switch"><rect x="245" y="105" width="150" height="92" rx="14"></rect><text x="271" y="137" class="svg-label">/26</text><text x="267" y="164" class="svg-label--small">62 hosts</text><text x="267" y="187" class="svg-label--small">segmento</text></g>
+<g class="svg-node svg-node--firewall"><rect x="420" y="105" width="150" height="92" rx="14"></rect><text x="446" y="137" class="svg-label">/28</text><text x="442" y="164" class="svg-label--small">14 hosts</text><text x="442" y="187" class="svg-label--small">DMZ pequena</text></g>
+<g class="svg-node svg-node--router"><rect x="595" y="105" width="150" height="92" rx="14"></rect><text x="621" y="137" class="svg-label">/30 ou /31</text><text x="617" y="164" class="svg-label--small">enlace</text><text x="617" y="187" class="svg-label--small">ponto a ponto</text></g>
+<g class="svg-node svg-node--security"><rect x="770" y="105" width="120" height="92" rx="14"></rect><text x="795" y="137" class="svg-label">/32</text><text x="790" y="164" class="svg-label--small">1 host</text><text x="790" y="187" class="svg-label--small">rota/allowlist</text></g>
+<line x1="220" y1="151" x2="245" y2="151" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m05l05-arrow)"></line>
+<line x1="395" y1="151" x2="420" y2="151" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m05l05-arrow)"></line>
+<line x1="570" y1="151" x2="595" y2="151" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m05l05-arrow)"></line>
+<line x1="745" y1="151" x2="770" y2="151" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m05l05-arrow)"></line>
+<g class="svg-node svg-node--cloud"><rect x="85" y="245" width="790" height="82" rx="14"></rect><text x="110" y="278" class="svg-label">Escolha de prefixo = capacidade + crescimento + segurança + rotas + documentação</text><text x="110" y="306" class="svg-label--small">Nunca escolha CIDR apenas porque é fácil de lembrar. Valide função, hosts, reservas, cloud, VPN, firewall e IPAM.</text></g>
+</svg>
+
+</section>

@@ -136,6 +136,15 @@ if (!simulado) { between(n.flashcards, 5, 8, 'flashcards'); between(n.mentorQues
 const corpo = L.stripHtml(Object.values(n.content || {}).join(' ')).toLowerCase() + ' ' + L.deepText([n.lab, n.quiz, n.exercises, n.security, n.troubleshooting]).toLowerCase();
 (n.glossary || []).forEach((g) => { const t = String(g.term || '').toLowerCase().split(/[\s(/]/)[0]; if (t && t.length > 2 && !corpo.includes(t)) A(`glossário: termo "${g.term}" não aparece no corpo`); });
 
+// 8b. subcampos que o app não mostra
+const SUBV = { mentorQuestions: ['id', 'type', 'question', 'hints', 'expectedIdeas', 'explanation'], exercises: ['id', 'type', 'prompt', 'title', 'expectedAnswer', 'explanation', 'difficulty'],
+  flashcards: ['id', 'front', 'back', 'tags', 'difficulty'], glossary: ['term', 'shortDefinition', 'definition', 'longDefinition', 'example', 'relatedTerms', 'relatedLessons'] };
+for (const [k, keys] of Object.entries(SUBV)) { const extra = [...new Set((n[k] || []).flatMap((x) => Object.keys(x || {}).filter((kk) => !keys.includes(kk))))]; if (extra.length) A(`${k}: subcampos que o app não mostra: ${extra.join(', ')}`); }
+for (const [k, keys] of Object.entries({ challenge: ['title', 'scenario', 'tasks', 'constraints', 'expectedDeliverables', 'successCriteria', 'gradingRubric', 'difficulty', 'estimatedTimeMinutes'], commentedSolution: ['reasoning', 'steps', 'commonWrongAnswers', 'commonMistakes', 'finalAnswer'], security: ['goodPractices', 'badPractices', 'commonErrors', 'vulnerabilities', 'monitoring', 'hardening', 'detectionIdeas', 'detection'], troubleshooting: ['symptoms', 'diagnosticQuestions', 'commands', 'decisionTree'] })) {
+  const extra = Object.keys(n[k] || {}).filter((kk) => !keys.includes(kk)); if (extra.length) A(`${k}: subcampos que o app não mostra: ${extra.join(', ')}`); }
+(n.troubleshooting?.commands || []).forEach((c, i) => { const vaz = ['platform', 'command', 'purpose', 'expectedObservation', 'interpretation'].filter((kk) => !c[kk]); if (vaz.length) A(`troubleshooting.commands[${i}]: campos vazios exibidos com rótulo: ${vaz.join(', ')}`); });
+(n.security?.vulnerabilities || []).forEach((v, i) => { const vaz = ['name', 'description', 'mitigation'].filter((kk) => !v[kk]); if (!v.defensiveExplanation && !v.exploitationIdea) vaz.push('defensiveExplanation'); if (vaz.length) A(`security.vulnerabilities[${i}]: campos vazios: ${vaz.join(', ')}`); });
+
 // 9. métricas
 for (const v of ['original', 'nova']) if (!fs.existsSync(path.join(L.REV, 'trabalho', id, `metricas_${v}.json`))) E(`metricas_${v}.json não calculado (rode metricas ${id} ${v})`);
 

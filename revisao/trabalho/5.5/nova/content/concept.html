@@ -1,0 +1,17 @@
+<section class="lesson-section lesson-section--concept"><h2>Conceito</h2>
+
+<p>Um <strong>prefixo comum</strong> é um tamanho de rede que se repete porque resolve um problema recorrente. Ele não é obrigatório: é um ponto de partida para desenho e troubleshooting.</p>
+<div class="definition-box"><strong>Regra base:</strong> quanto maior o número do prefixo, mais bits de rede existem e menos endereços restam para hosts. Cada bit a mais divide o bloco ao meio.</div>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Prefixo</th><th>Máscara</th><th>Bits de host</th><th>Endereços totais</th><th>Hosts úteis tradicionais</th><th>Uso típico</th></tr></thead><tbody>
+<tr><td><code>/24</code></td><td><code>255.255.255.0</code></td><td>8</td><td><code>2^8</code> = 256</td><td>254</td><td>LAN/VLAN comum</td></tr>
+<tr><td><code>/25</code></td><td><code>255.255.255.128</code></td><td>7</td><td><code>2^7</code> = 128</td><td>126</td><td>VLAN média</td></tr>
+<tr><td><code>/26</code></td><td><code>255.255.255.192</code></td><td>6</td><td><code>2^6</code> = 64</td><td>62</td><td>Departamento, laboratório, Wi-Fi segmentado</td></tr>
+<tr><td><code>/27</code></td><td><code>255.255.255.224</code></td><td>5</td><td><code>2^5</code> = 32</td><td>30</td><td>Servidores, infraestrutura, pequena DMZ</td></tr>
+<tr><td><code>/28</code></td><td><code>255.255.255.240</code></td><td>4</td><td><code>2^4</code> = 16</td><td>14</td><td>DMZ pequena, rede de gerenciamento</td></tr>
+<tr><td><code>/29</code></td><td><code>255.255.255.248</code></td><td>3</td><td><code>2^3</code> = 8</td><td>6</td><td>Pequeno bloco de appliances</td></tr>
+<tr><td><code>/30</code></td><td><code>255.255.255.252</code></td><td>2</td><td><code>2^2</code> = 4</td><td>2</td><td>Enlace ponto a ponto clássico</td></tr>
+<tr><td><code>/31</code></td><td><code>255.255.255.254</code></td><td>1</td><td><code>2^1</code> = 2</td><td>2, só em enlace ponto a ponto (caso especial)</td><td>Enlace ponto a ponto moderno, quando os dois lados suportam</td></tr>
+<tr><td><code>/32</code></td><td><code>255.255.255.255</code></td><td>0</td><td><code>2^0</code> = 1</td><td>1, o próprio host</td><td>Host específico, loopback, rota, allowlist</td></tr>
+</tbody></table></div>
+
+</section>

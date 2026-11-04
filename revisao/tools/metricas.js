@@ -63,6 +63,13 @@ for (const k of Object.keys(o)) {
   if (RENDERED_TOP.includes(k) || ['id', 'moduleId', 'order', 'prerequisites', 'progressRules', 'estimatedStudyTimeMinutes'].includes(k)) continue;
   porCampoInvisivel[k] = W(o[k]);
 }
+const SUB = { mentorQuestions: ['id', 'type', 'question', 'hints', 'expectedIdeas', 'explanation'], exercises: ['id', 'type', 'prompt', 'title', 'expectedAnswer', 'explanation', 'difficulty'],
+  flashcards: ['id', 'front', 'back', 'tags', 'difficulty'], glossary: ['term', 'shortDefinition', 'definition', 'longDefinition', 'example', 'relatedTerms', 'relatedLessons'],
+  references: ['type', 'title', 'organization', 'url', 'note'], linksToOtherCourses: ['course', 'module', 'lesson', 'reason'] };
+const SUBOBJ = { challenge: ['title', 'scenario', 'tasks', 'constraints', 'expectedDeliverables', 'successCriteria', 'gradingRubric', 'difficulty', 'estimatedTimeMinutes'],
+  commentedSolution: ['reasoning', 'steps', 'commonWrongAnswers', 'commonMistakes', 'finalAnswer'] };
+for (const [k, keys] of Object.entries(SUB)) { const inv = (o[k] || []).flatMap((x) => Object.keys(x || {}).filter((kk) => !keys.includes(kk)).map((kk) => x[kk])); if (inv.length) porCampoInvisivel[`${k}.(subcampos ocultos)`] = W(inv); }
+for (const [k, keys] of Object.entries(SUBOBJ)) { const x = o[k] || {}; const inv = Object.keys(x).filter((kk) => !keys.includes(kk)); if (inv.length) porCampoInvisivel[`${k}.(ocultos: ${inv.join(',')})`] = W(inv.map((kk) => x[kk])); }
 const visiveis = Object.values(porCampoVisivel).reduce((a, b) => a + b, 0);
 const invisiveis = Object.values(porCampoInvisivel).reduce((a, b) => a + b, 0);
 

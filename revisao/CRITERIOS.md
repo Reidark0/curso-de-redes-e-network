@@ -263,8 +263,14 @@ Regra: o markup **novo** usa só classes estilizadas. Exemplos: `<div class="cal
 - O veredito automático não detecta DESEQUILIBRADA: esse julgamento é seu (ex.: 70% de leitura numa aula prática).
 - A nova `duration` sai da `faixaRecomendada` da **nova** versão. É normal que ela suba em relação à original quando a original estava SUBESTIMADA: a fórmula é fixa e vale para todas as aulas.
 
+### 11.6b Aproveitamento e campos exibidos com rótulo
+- A % de aproveitamento (6.5) é medida contra o **T da fórmula da versão original**. Se ela for muito diferente contra a duração declarada, diga isso no comentário.
+- Em `troubleshooting.commands`, o app mostra os rótulos "Finalidade", "Esperado" e "Interpretação" mesmo vazios: preencha `purpose`, `expectedObservation` e `interpretation`. Em `security.vulnerabilities`, preencha `name`, `description`, `defensiveExplanation` e `mitigation`, coerentes entre si.
+- Subcampos que o app não mostra (ex.: `mentorQuestions[].expectedAnswer`, `challenge.deliverables`, `commentedSolution.summary`) são invisíveis: MOVA o conteúdo para o subcampo exibido equivalente (`expectedIdeas`, `expectedDeliverables`, `reasoning`/`finalAnswer`) e remova o subcampo. O `validar` avisa quando encontra um.
+- Não reordene as opções das questões que você manteve: a resposta salva do aluno guarda o índice escolhido.
+
 ### 11.7 % de linguiça e escopo da reescrita
-- O % de linguiça é a sua estimativa (palavras visíveis removíveis sem perder informação ÷ visíveis). Confira com os **cortes brutos** do `comparar` (não com o saldo líquido, que mistura cortes e acréscimos): se a reescrita cortou muito mais do que a linguiça estimada, ou você cortou conhecimento ou a estimativa está errada. Revise.
+- O % de linguiça é a sua estimativa (palavras visíveis removíveis sem perder informação ÷ visíveis). Confira com os **cortes brutos** e com o **diff por frase** do `comparar` (não com o saldo líquido, que mistura cortes e acréscimos): se a reescrita cortou muito mais do que a linguiça estimada, ou você cortou conhecimento ou a estimativa está errada. Revise.
 - Conteúdo movido de campos invisíveis **aumenta** as palavras visíveis; isso é esperado e não conta contra a meta.
 - Corte primeiro: seções-padrão vazias de sentido, repetição entre seções, meta-texto, ritual de lab, exemplos por ambiente genéricos. Depois torne a explicação mais direta. Nunca corte mecanismo, número, campo, comando, caso de borda ou erro comum específico.
 

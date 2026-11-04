@@ -1,0 +1,17 @@
+<section class="lesson-section lesson-section--concept"><h2>5. Conceito</h2>
+
+<p>Um <strong>prefixo comum</strong> é um tamanho de rede que aparece com frequência porque resolve um tipo de problema recorrente. Ele não é obrigatório, mas serve como padrão mental para desenho e troubleshooting.</p>
+<div class="definition-box"><strong>Definição:</strong> prefixos comuns de <code>/24</code> a <code>/32</code> representam blocos cada vez menores. Quanto maior o número do prefixo, mais bits de rede existem e menos endereços restam para hosts.</div>
+<table class="data-table"><thead><tr><th>Prefixo</th><th>Máscara</th><th>Endereços totais</th><th>Hosts úteis tradicionais</th><th>Uso típico</th></tr></thead><tbody>
+<tr><td><code>/24</code></td><td><code>255.255.255.0</code></td><td>256</td><td>254</td><td>LAN/VLAN comum</td></tr>
+<tr><td><code>/25</code></td><td><code>255.255.255.128</code></td><td>128</td><td>126</td><td>VLAN média</td></tr>
+<tr><td><code>/26</code></td><td><code>255.255.255.192</code></td><td>64</td><td>62</td><td>Departamento, laboratório, Wi-Fi segmentado</td></tr>
+<tr><td><code>/27</code></td><td><code>255.255.255.224</code></td><td>32</td><td>30</td><td>Servidores, infraestrutura, pequena DMZ</td></tr>
+<tr><td><code>/28</code></td><td><code>255.255.255.240</code></td><td>16</td><td>14</td><td>DMZ pequena, rede de gerenciamento</td></tr>
+<tr><td><code>/29</code></td><td><code>255.255.255.248</code></td><td>8</td><td>6</td><td>Pequeno bloco de appliances</td></tr>
+<tr><td><code>/30</code></td><td><code>255.255.255.252</code></td><td>4</td><td>2</td><td>Enlace ponto a ponto clássico</td></tr>
+<tr><td><code>/31</code></td><td><code>255.255.255.254</code></td><td>2</td><td>2 em uso ponto a ponto específico</td><td>Enlace ponto a ponto moderno quando suportado</td></tr>
+<tr><td><code>/32</code></td><td><code>255.255.255.255</code></td><td>1</td><td>1 host/rota específica</td><td>Host específico, loopback, rota, allowlist</td></tr>
+</tbody></table>
+
+</section>

@@ -1,0 +1,73 @@
+{
+  "id": "5.5",
+  "versao": "nova",
+  "titulo": "Prefixos comuns na prática: /24 a /32",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3642,
+    "invisiveis": 59,
+    "teoriaVisivel": 2163
+  },
+  "porCampoVisivel": {
+    "content.motivation": 107,
+    "content.problem": 210,
+    "content.concept": 176,
+    "content.internals": 159,
+    "content.architecture": 142,
+    "content.analogy": 76,
+    "content.simpleExample": 70,
+    "content.enterpriseExample": 80,
+    "content.cloudExample": 129,
+    "content.devsecopsExample": 79,
+    "content.securityExample": 104,
+    "content.diagram": 1,
+    "content.summary": 99,
+    "content.nextTheme": 40,
+    "security": 264,
+    "troubleshooting": 338,
+    "glossary": 89,
+    "title+subtitle": 26,
+    "objectives": 99,
+    "learningOutcomes": 79,
+    "quiz": 344,
+    "flashcards": 118,
+    "mentorQuestions": 172,
+    "exercises": 248,
+    "challenge": 96,
+    "commentedSolution": 192,
+    "references": 73,
+    "linksToOtherCourses": 32
+  },
+  "porCampoInvisivel": {
+    "networkContext": 59
+  },
+  "quantidades": {
+    "quiz": 8,
+    "flashcards": 8,
+    "mentor": 4,
+    "exercicios": 5,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "75-110 min",
+    "estimatedStudyTimeMinutes": 110,
+    "M": 92.5,
+    "T": 89.6,
+    "partes": {
+      "teoria": 16.6,
+      "diagramas": 3,
+      "quiz": 8,
+      "flashcards": 4,
+      "mentor": 8,
+      "exercicios": 30,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "75-110 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 22
+  }
+}

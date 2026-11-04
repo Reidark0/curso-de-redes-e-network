@@ -58,7 +58,7 @@ Status: PENDENTE · EM ANDAMENTO · CONCLUÍDA · FALHOU. Atualizado pelo orques
 | 5.2 | m05/lesson-05-02.js | PENDENTE |  |  |  |  |  |  |
 | 5.3 | m05/lesson-05-03.js | PENDENTE |  |  |  |  |  |  |
 | 5.4 | m05/lesson-05-04.js | PENDENTE |  |  |  |  |  |  |
-| 5.5 | m05/lesson-05-05.js | EM ANDAMENTO |  |  |  |  |  |  |
+| 5.5 | m05/lesson-05-05.js | CONCLUÍDA | 3096→3642 (+18%) | 100-140 min→75-110 min | INFLADA | MÉDIA 20% | PARCIAL | BOM |
 | 5.6 | m05/lesson-05-06.js | PENDENTE |  |  |  |  |  |  |
 | 5.7 | m05/lesson-05-07.js | PENDENTE |  |  |  |  |  |  |
 | 5.8 | m05/lesson-05-08.js | PENDENTE |  |  |  |  |  |  |
@@ -193,6 +193,6 @@ Status: PENDENTE · EM ANDAMENTO · CONCLUÍDA · FALHOU. Atualizado pelo orques
 | 17.9 | m17/lesson-17-09.js | PENDENTE |  |  |  |  |  |  |
 | 17.10 | m17/lesson-17-10.js | PENDENTE |  |  |  |  |  |  |
 | 17.11 | m17/lesson-17-11.js | PENDENTE |  |  |  |  |  |  |
-| 17.12 | m17/lesson-17-12.js | PENDENTE |  |  |  |  |  |  |
+| 17.12 | m17/lesson-17-12.js | EM ANDAMENTO |  |  |  |  |  |  |
 
 ## Resumos por módulo

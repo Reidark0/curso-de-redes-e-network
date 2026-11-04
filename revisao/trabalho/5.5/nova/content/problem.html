@@ -1,0 +1,14 @@
+<section class="lesson-section lesson-section--problem"><h2>Problema</h2>
+
+<p>O <code>/24</code> virou padrão porque é fácil de ler: a máscara termina no terceiro octeto e o último octeto vai de 0 a 255, com 254 hosts úteis. Quando as redes passaram a ser segmentadas por função e por segurança, e a se conectar com cloud e VPN, o "<code>/24</code> para tudo" deixou de servir.</p>
+<p>O problema operacional não é calcular um prefixo, e sim escolher o prefixo errado para o cenário. O erro aparece meses depois: falta de IP, DHCP esgotado, sobreposição de VPN, firewall amplo demais, subnet cloud sem espaço ou visitantes misturados com a rede interna.</p>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Escolha ruim</th><th>Por que parece boa</th><th>Problema real</th><th>Consequência</th></tr></thead><tbody>
+<tr><td><code>/24</code> para tudo</td><td>Fácil de ler e configurar</td><td>Redes grandes demais</td><td>Mais broadcast, menor isolamento e desperdício</td></tr>
+<tr><td><code>/29</code> no limite</td><td>Parece econômico</td><td>Não sobra espaço para crescimento</td><td>Mudança emergencial de endereçamento</td></tr>
+<tr><td><code>/16</code> em allowlist</td><td>Evita chamados futuros</td><td>Libera 65.536 endereços sem necessidade</td><td>Violação de menor privilégio</td></tr>
+<tr><td><code>/32</code> sem documentação</td><td>Muito específico</td><td>Vira exceção invisível</td><td>Firewall difícil de auditar</td></tr>
+<tr><td><code>/32</code> usado como rede de usuários</td><td>Parece "uma rede bem pequena"</td><td>Só existe o próprio endereço: sem gateway nem DHCP</td><td>Erro de gateway, DHCP e troubleshooting</td></tr>
+<tr><td><code>/30</code> usado cegamente</td><td>Tradicional para ponto a ponto</td><td>Desperdiça endereços onde <code>/31</code> é suportado</td><td>Plano menos eficiente</td></tr>
+</tbody></table></div>
+
+</section>

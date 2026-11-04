@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--architecture"><h2>Arquitetura</h2>
+
+<p>O prefixo define o tamanho do domínio IPv4 do segmento; a VLAN separa a Camada 2; o gateway liga o segmento às outras redes; o firewall decide que tráfego passa entre eles. Quando uma regra usa o CIDR do segmento, todos os hosts do bloco herdam a mesma permissão, então o tamanho do prefixo também é uma decisão de segurança.</p>
+<h3>Como escolher um prefixo</h3>
+<ol>
+<li><strong>Levante o requisito:</strong> hosts atuais + IPs reservados (gateway, appliances, DHCP, provedor cloud) + crescimento esperado.</li>
+<li><strong>Escolha o menor bloco que comporta esse total com folga</strong>, sem usar a margem como desculpa para um bloco enorme.</li>
+<li><strong>Separe por função de segurança:</strong> usuários, servidores, DMZ, gestão, IoT, convidados e laboratório não dividem prefixo por conveniência.</li>
+<li><strong>Em cloud ou rede híbrida,</strong> confira sobreposição com outras VPCs/VNets, sites, VPNs e peerings.</li>
+<li><strong>Documente no IPAM:</strong> prefixo, finalidade, capacidade, dono, ambiente e política associada.</li>
+</ol>
+
+</section>

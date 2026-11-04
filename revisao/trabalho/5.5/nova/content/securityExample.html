@@ -1,0 +1,11 @@
+<section class="lesson-section lesson-section--security"><h2>Exemplo em Segurança</h2>
+
+<p>Em allowlists, o prefixo é o tamanho da porta aberta. Um <code>/32</code> libera exatamente um host. Um <code>/24</code> libera 256 endereços. Uma regra com <code>10.0.0.0/8</code> libera 16.777.216 endereços privados, inclusive qualquer host interno comprometido.</p>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Cenário</th><th>Escolha perigosa</th><th>Melhor abordagem</th><th>Controle complementar</th></tr></thead><tbody>
+<tr><td>Acesso administrativo</td><td>Liberar <code>10.0.0.0/8</code></td><td>Liberar o bastion <code>/32</code> ou uma subnet de gestão pequena</td><td>MFA, VPN, logs, PAM</td></tr>
+<tr><td>DMZ</td><td>Usar <code>/24</code> sem necessidade</td><td>Usar <code>/28</code> ou o prefixo calculado pela demanda</td><td>Firewall e WAF</td></tr>
+<tr><td>Cloud SG/NSG</td><td><code>0.0.0.0/0</code> em porta sensível</td><td>CIDR mínimo necessário</td><td>Revisão por IaC e alerta</td></tr>
+<tr><td>VPN site-to-site</td><td>Blocos sobrepostos</td><td>Plano global de endereçamento</td><td>IPAM e change management</td></tr>
+</tbody></table></div>
+
+</section>

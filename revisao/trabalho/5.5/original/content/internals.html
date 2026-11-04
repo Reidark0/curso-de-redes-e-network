@@ -1,0 +1,17 @@
+<section class="lesson-section lesson-section--internals"><h2>6. Funcionamento interno</h2>
+
+<p>Internamente, todos os prefixos de <code>/24</code> a <code>/32</code> continuam sendo apenas divisões dos 32 bits do IPv4. A diferença está em quantos bits ficam para host. Em <code>/24</code>, sobram 8 bits de host. Em <code>/25</code>, sobram 7. Em <code>/26</code>, sobram 6. Esse padrão segue até <code>/32</code>, onde não sobra nenhum bit variável para host.</p>
+<table class="data-table"><thead><tr><th>Prefixo</th><th>Bits de host</th><th>Cálculo total</th><th>Total</th><th>Hosts tradicionais</th></tr></thead><tbody>
+<tr><td><code>/24</code></td><td>8</td><td><code>2^8</code></td><td>256</td><td>254</td></tr>
+<tr><td><code>/25</code></td><td>7</td><td><code>2^7</code></td><td>128</td><td>126</td></tr>
+<tr><td><code>/26</code></td><td>6</td><td><code>2^6</code></td><td>64</td><td>62</td></tr>
+<tr><td><code>/27</code></td><td>5</td><td><code>2^5</code></td><td>32</td><td>30</td></tr>
+<tr><td><code>/28</code></td><td>4</td><td><code>2^4</code></td><td>16</td><td>14</td></tr>
+<tr><td><code>/29</code></td><td>3</td><td><code>2^3</code></td><td>8</td><td>6</td></tr>
+<tr><td><code>/30</code></td><td>2</td><td><code>2^2</code></td><td>4</td><td>2</td></tr>
+<tr><td><code>/31</code></td><td>1</td><td><code>2^1</code></td><td>2</td><td>caso especial ponto a ponto</td></tr>
+<tr><td><code>/32</code></td><td>0</td><td><code>2^0</code></td><td>1</td><td>host/rota específica</td></tr>
+</tbody></table>
+<p>A regra tradicional <code>hosts úteis = 2^bits_de_host - 2</code> desconta endereço de rede e broadcast. Porém, <code>/31</code> e <code>/32</code> são exceções operacionais: <code>/31</code> pode ser usado em enlaces ponto a ponto em equipamentos compatíveis, e <code>/32</code> representa um único endereço, muito comum em rotas, loopbacks e regras específicas.</p>
+
+</section>

@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--devsecops"><h2>Exemplo em DevSecOps</h2>
+
+<p>Em Terraform, Ansible ou Helm, um CIDR é só uma string num pull request, e uma edição pequena muda muito: trocar a origem de uma regra de <code>10.20.8.15/32</code> para <code>10.20.0.0/16</code> faz o número de endereços permitidos passar de 1 para 65.536. Por isso, um pipeline maduro valida automaticamente se a nova subnet sobrepõe blocos existentes, se alguma regra usa <code>0.0.0.0/0</code> indevidamente, se o CIDR está registrado no IPAM e se o prefixo comporta a capacidade esperada.</p>
+
+</section>

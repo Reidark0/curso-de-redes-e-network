@@ -1,0 +1,12 @@
+<section class="lesson-section lesson-section--architecture"><h2>7. Arquitetura</h2>
+
+<p>Na arquitetura real, prefixos não vivem isolados. Eles aparecem junto com VLANs, gateways, DHCP, firewall, roteadores, VRFs, NAT, VPN, cloud e observabilidade. Um prefixo define o tamanho do domínio IPv4 daquele segmento; a VLAN separa a Camada 2; o gateway conecta o segmento a outras redes; o firewall controla o tráfego permitido.</p>
+<table class="comparison-table"><thead><tr><th>Prefixo</th><th>Arquitetura comum</th><th>Vantagem</th><th>Cuidado</th></tr></thead><tbody>
+<tr><td><code>/24</code></td><td>VLAN de usuários</td><td>Simples e espaçoso</td><td>Não usar como desculpa para rede plana</td></tr>
+<tr><td><code>/26</code></td><td>Departamento ou Wi-Fi por andar</td><td>Segmentação melhor</td><td>Planejar crescimento</td></tr>
+<tr><td><code>/28</code></td><td>DMZ pequena ou gestão</td><td>Reduz exposição</td><td>Não dimensionar sem folga</td></tr>
+<tr><td><code>/30</code></td><td>Roteador a roteador</td><td>Clássico e compatível</td><td>Pode desperdiçar quando /31 é suportado</td></tr>
+<tr><td><code>/32</code></td><td>Loopback, rota específica, allowlist</td><td>Precisão máxima</td><td>Exige documentação e automação</td></tr>
+</tbody></table>
+
+</section>

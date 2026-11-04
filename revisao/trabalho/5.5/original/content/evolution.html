@@ -1,0 +1,11 @@
+<section class="lesson-section lesson-section--evolution"><h2>4. Evolução</h2>
+
+<p>A evolução natural do planejamento IPv4 passa por quatro fases. Primeiro, redes grandes e simples, geralmente <code>/24</code>, porque eram fáceis de operar. Depois, segmentação por função: usuários, servidores, voz, Wi-Fi, impressoras, convidados e gerenciamento. Em seguida, segmentação por segurança, com firewalls, ACLs, NAC e políticas entre redes. Por fim, ambientes híbridos e cloud exigem que cada bloco seja pensado também contra sobreposição, rotas, VPNs e reservas do provedor.</p>
+<table class="comparison-table"><thead><tr><th>Fase</th><th>Como se planejava</th><th>Limitação</th><th>Prática moderna</th></tr></thead><tbody>
+<tr><td>Rede simples</td><td>Um <code>/24</code> para todos</td><td>Rede plana</td><td>Segmentar por função</td></tr>
+<tr><td>Segmentação básica</td><td>VLANs com prefixos parecidos</td><td>Crescimento pouco previsto</td><td>IPAM e capacidade planejada</td></tr>
+<tr><td>Segurança</td><td>Firewall entre segmentos críticos</td><td>Regras amplas demais</td><td>Menor privilégio por CIDR</td></tr>
+<tr><td>Cloud/híbrido</td><td>Blocos privados reutilizados sem controle</td><td>Sobreposição em VPN/peering</td><td>Plano global de endereçamento</td></tr>
+</tbody></table>
+
+</section>

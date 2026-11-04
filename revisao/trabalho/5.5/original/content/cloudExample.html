@@ -1,0 +1,7 @@
+<section class="lesson-section lesson-section--cloud"><h2>11. Exemplo em cloud</h2>
+
+<p>Em cloud, prefixos aparecem em VPC, VNet, subnets, route tables, security groups, NSGs, NAT gateways, private endpoints, clusters Kubernetes e links híbridos. O cuidado principal é não criar blocos que sobreponham redes locais, VPNs, outras contas ou outras regiões.</p>
+<p>Outro detalhe importante: provedores de cloud podem reservar endereços dentro de cada subnet. Portanto, o número de hosts realmente disponíveis pode ser menor que a regra tradicional. Uma subnet muito pequena pode ficar sem espaço para load balancer, endpoints, nós de cluster, appliances, gateways ou crescimento automático.</p>
+<div class="callout callout--warning"><strong>Boa prática em cloud:</strong> não dimensione subnets no limite. Considere reservas do provedor, autoscaling, endpoints privados, crescimento regional, peering e integração híbrida.</div>
+
+</section>

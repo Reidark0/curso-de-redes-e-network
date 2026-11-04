@@ -1,0 +1,631 @@
+{
+  "id": "5.5",
+  "moduleId": "m05",
+  "order": 5,
+  "title": "Prefixos comuns na prática: /24 a /32",
+  "subtitle": "Como escolher, interpretar e auditar os prefixos IPv4 mais usados em redes reais, de LANs /24 até hosts /32 e enlaces /31.",
+  "duration": "100-140 min",
+  "estimatedStudyTimeMinutes": 140,
+  "difficulty": "iniciante-intermediário",
+  "type": "fundamental",
+  "xp": 235,
+  "tags": [
+    "redes",
+    "ipv4",
+    "subnetting",
+    "cidr",
+    "prefixos",
+    "/24",
+    "/25",
+    "/26",
+    "/27",
+    "/28",
+    "/29",
+    "/30",
+    "/31",
+    "/32",
+    "ipam",
+    "firewall",
+    "cloud",
+    "devsecops",
+    "segurança"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m05",
+      "lesson": "5.1",
+      "reason": "A aula 5.1 explicou por que subnetting existe e como ele resolve problemas de escala, organização e segurança."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m05",
+      "lesson": "5.2",
+      "reason": "A aula 5.2 ensinou CIDR, máscara e quantidade de hosts, base para comparar prefixos."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m05",
+      "lesson": "5.3",
+      "reason": "A aula 5.3 ensinou rede, broadcast, primeiro host e último host."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m05",
+      "lesson": "5.4",
+      "reason": "A aula 5.4 ensinou o método do bloco mágico para calcular rapidamente os limites de uma sub-rede."
+    }
+  ],
+  "objectives": [
+    "Reconhecer rapidamente os prefixos IPv4 mais usados em redes reais, de /24 a /32.",
+    "Relacionar cada prefixo com máscara decimal, endereços totais e hosts úteis tradicionais.",
+    "Explicar quando usar /24, /25, /26, /27, /28, /29, /30, /31 e /32.",
+    "Diferenciar prefixos para LAN, VLAN, DMZ, Wi-Fi, enlace ponto a ponto, loopback e rota específica.",
+    "Entender exceções operacionais de /31 e /32 sem confundir com redes comuns de usuários.",
+    "Aplicar menor privilégio em firewall, VPN, cloud e allowlists usando prefixos adequados.",
+    "Evitar escolhas perigosas como /16 por preguiça, /24 para tudo, /30 em cloud sem necessidade ou /32 sem documentação."
+  ],
+  "learningOutcomes": [
+    "Dado um prefixo entre /24 e /32, o aluno identifica máscara, capacidade e uso típico.",
+    "Dado um cenário de VLAN, o aluno escolhe um prefixo coerente com número de hosts e crescimento.",
+    "Dado um enlace ponto a ponto, o aluno explica quando /30 ou /31 faz sentido.",
+    "Dada uma regra de firewall, o aluno avalia se o CIDR está amplo demais ou específico demais.",
+    "Dado um plano de cloud, o aluno reconhece reservas adicionais e evita dimensionamento no limite."
+  ],
+  "networkContext": {
+    "whereItFits": "Esta aula consolida os prefixos IPv4 mais usados antes de entrar em VLSM e planejamento corporativo.",
+    "previousConcepts": [
+      "CIDR",
+      "máscara",
+      "bits de host",
+      "rede",
+      "broadcast",
+      "bloco mágico",
+      "hosts úteis"
+    ],
+    "nextConcepts": [
+      "VLSM",
+      "endereçamento corporativo",
+      "IPAM",
+      "Packet Tracer",
+      "subnetting para cloud e segurança"
+    ],
+    "realWorldUseCases": [
+      "dimensionar VLANs",
+      "criar subnets cloud",
+      "revisar firewall",
+      "planejar DMZ",
+      "definir enlaces ponto a ponto",
+      "criar allowlists específicas",
+      "auditar VPN e rotas"
+    ]
+  },
+  "protocolFields": [
+    {
+      "field": "Prefixo CIDR",
+      "meaning": "Quantidade de bits de rede no endereço IPv4.",
+      "example": "/27"
+    },
+    {
+      "field": "Máscara decimal",
+      "meaning": "Representação decimal do prefixo.",
+      "example": "255.255.255.224"
+    },
+    {
+      "field": "Bits de host",
+      "meaning": "Quantidade de bits restantes para endereços dentro da rede.",
+      "example": "5 bits em /27"
+    },
+    {
+      "field": "Endereços totais",
+      "meaning": "Quantidade total de endereços no bloco.",
+      "example": "32 em /27"
+    },
+    {
+      "field": "Hosts úteis tradicionais",
+      "meaning": "Total menos rede e broadcast em redes comuns.",
+      "example": "30 em /27"
+    },
+    {
+      "field": "Uso típico",
+      "meaning": "Função operacional mais comum para aquele prefixo.",
+      "example": "/32 para host específico"
+    }
+  ],
+  "packetFlow": [
+    {
+      "step": 1,
+      "title": "Levantar requisito",
+      "description": "Identificar quantos hosts, gateways, reservas, appliances e crescimento são esperados."
+    },
+    {
+      "step": 2,
+      "title": "Escolher prefixo candidato",
+      "description": "Comparar /24 a /32 com capacidade e função do segmento."
+    },
+    {
+      "step": 3,
+      "title": "Validar segurança",
+      "description": "Verificar se o bloco está amplo demais para firewall, DMZ, VPN ou allowlist."
+    },
+    {
+      "step": 4,
+      "title": "Validar operação",
+      "description": "Checar DHCP, gateway, reservas, IPAM, monitoramento e documentação."
+    },
+    {
+      "step": 5,
+      "title": "Validar cloud/híbrido",
+      "description": "Checar reservas do provedor, sobreposição, peering, VPN e crescimento."
+    },
+    {
+      "step": 6,
+      "title": "Documentar decisão",
+      "description": "Registrar prefixo, motivo, capacidade, uso, dono, ambiente e política associada."
+    }
+  ],
+  "deepDive": {
+    "title": "Como escolher prefixo sem cair em decoração cega",
+    "points": [
+      "Comece pelo requisito de hosts reais, não pelo prefixo que você gosta.",
+      "Adicione margem de crescimento, mas não use margem como desculpa para blocos enormes.",
+      "Separe função de segurança: usuário, servidor, DMZ, gestão, IoT, convidado e laboratório não devem cair no mesmo domínio por conveniência.",
+      "Em cloud, considere reservas automáticas e crescimento de recursos gerenciados.",
+      "Em firewall, escolha o menor CIDR que representa a necessidade real.",
+      "Em VLSM, aloque primeiro as maiores redes e depois as menores para evitar fragmentação."
+    ]
+  },
+  "commonMistakes": [
+    {
+      "mistake": "Usar /24 para tudo.",
+      "impact": "Desperdício, rede plana e políticas amplas.",
+      "fix": "Escolher prefixo conforme função, capacidade e segurança."
+    },
+    {
+      "mistake": "Confundir /32 com uma pequena rede comum.",
+      "impact": "Erro em gateway, DHCP e troubleshooting.",
+      "fix": "Tratar /32 como host/rota específica, não como LAN de usuários."
+    },
+    {
+      "mistake": "Aplicar hosts úteis tradicionais em /31 sem contexto.",
+      "impact": "Achar que /31 não serve para nada.",
+      "fix": "Entender que /31 é caso especial para ponto a ponto quando suportado."
+    },
+    {
+      "mistake": "Dimensionar cloud subnet no limite.",
+      "impact": "Falta de IP para recursos gerenciados ou autoscaling.",
+      "fix": "Considerar reservas do provedor e crescimento."
+    },
+    {
+      "mistake": "Liberar CIDR amplo em firewall por conveniência.",
+      "impact": "Aumento da superfície de ataque.",
+      "fix": "Usar menor privilégio, revisão e automação de política."
+    }
+  ],
+  "troubleshooting": {
+    "symptoms": [
+      "DHCP esgota endereços em uma VLAN",
+      "Firewall libera mais hosts que o esperado",
+      "Subnet cloud fica sem IP durante autoscaling",
+      "VPN não sobe por sobreposição de CIDR",
+      "Rota específica /32 resolve um host mas não uma rede inteira"
+    ],
+    "method": [
+      "Coletar requisito de hosts e crescimento",
+      "Identificar prefixo atual",
+      "Calcular capacidade total e útil",
+      "Comparar com reservas, gateways e DHCP",
+      "Verificar regras de firewall e rotas",
+      "Checar sobreposição com cloud/VPN",
+      "Registrar proposta corrigida no IPAM"
+    ],
+    "commands": [
+      {
+        "platform": "Windows",
+        "command": "ipconfig /all && route print",
+        "purpose": "Ver IP, máscara, gateway e rotas locais."
+      },
+      {
+        "platform": "Linux",
+        "command": "ip addr && ip route",
+        "purpose": "Ver prefixo da interface e rotas."
+      },
+      {
+        "platform": "Cisco IOS",
+        "command": "show ip interface brief && show running-config | include ip address",
+        "purpose": "Ver endereços e máscaras configurados."
+      },
+      {
+        "platform": "Linux opcional",
+        "command": "ipcalc 192.168.10.0/27",
+        "purpose": "Validar rede, broadcast e hosts com ferramenta auxiliar."
+      },
+      {
+        "platform": "Cloud/IaC",
+        "command": "terraform plan",
+        "purpose": "Revisar mudanças de CIDR antes de aplicar."
+      }
+    ],
+    "evidenceToCollect": [
+      "CIDR atual",
+      "máscara",
+      "uso do segmento",
+      "número de hosts",
+      "reservas",
+      "gateway",
+      "pool DHCP",
+      "regras de firewall",
+      "rotas",
+      "sobreposições conhecidas"
+    ],
+    "diagnosticQuestions": [
+      "Qual é o sintoma exato, o horário de início e o impacto?",
+      "Qual é o fluxo esperado entre origem, destino, DNS, rota, política e serviço?",
+      "Quais evidências confirmam ou negam a hipótese principal?"
+    ],
+    "decisionTree": [
+      {
+        "if": "Funciona por IP, mas falha por nome",
+        "then": "Investigar DNS, cache, split-horizon, resolver e registros privados/públicos."
+      }
+    ]
+  },
+  "security": {
+    "badPractices": [
+      "Liberar blocos amplos para evitar chamados",
+      "Tratar IP privado como sinônimo de seguro",
+      "Criar subnets cloud pequenas demais",
+      "Misturar redes de convidados com redes internas",
+      "Deixar exceções /32 sem dono e validade"
+    ],
+    "vulnerabilities": [
+      {
+        "name": "exposição excessiva por CIDR amplo",
+        "description": "Risco relacionado à aula 5.5 — Prefixos comuns na prática: /24 a /32.",
+        "defensiveExplanation": "Deve ser tratado em contexto defensivo, com monitoramento, evidência e mitigação.",
+        "mitigation": "segmentação"
+      },
+      {
+        "name": "movimento lateral em rede plana",
+        "description": "Risco relacionado à aula 5.5 — Prefixos comuns na prática: /24 a /32.",
+        "defensiveExplanation": "Deve ser tratado em contexto defensivo, com monitoramento, evidência e mitigação.",
+        "mitigation": "firewall por função"
+      },
+      {
+        "name": "sobreposição que força NAT de emergência",
+        "description": "Risco relacionado à aula 5.5 — Prefixos comuns na prática: /24 a /32.",
+        "defensiveExplanation": "Deve ser tratado em contexto defensivo, com monitoramento, evidência e mitigação.",
+        "mitigation": "NAC"
+      },
+      {
+        "name": "regras órfãs de firewall",
+        "description": "Risco relacionado à aula 5.5 — Prefixos comuns na prática: /24 a /32.",
+        "defensiveExplanation": "Deve ser tratado em contexto defensivo, com monitoramento, evidência e mitigação.",
+        "mitigation": "IPAM"
+      },
+      {
+        "name": "falta de rastreabilidade em IPAM",
+        "description": "Risco relacionado à aula 5.5 — Prefixos comuns na prática: /24 a /32.",
+        "defensiveExplanation": "Deve ser tratado em contexto defensivo, com monitoramento, evidência e mitigação.",
+        "mitigation": "revisão de IaC"
+      }
+    ],
+    "mitigations": [
+      "segmentação",
+      "firewall por função",
+      "NAC",
+      "IPAM",
+      "revisão de IaC",
+      "logs",
+      "SIEM",
+      "expiração de exceções",
+      "bastion e PAM para administração"
+    ],
+    "goodPractices": [
+      "Usar menor CIDR possível em allowlists",
+      "Separar gestão, usuários, servidores, IoT e convidados",
+      "Documentar dono e finalidade de cada prefixo",
+      "Validar sobreposição antes de VPN ou peering",
+      "Revisar regras amplas como /16, /8 e 0.0.0.0/0",
+      "Automatizar validação de CIDR em IaC"
+    ],
+    "commonErrors": [
+      "Confundir sintoma com causa raiz.",
+      "Alterar várias variáveis ao mesmo tempo.",
+      "Não relacionar redes corporativas com segurança e operação."
+    ],
+    "monitoring": [
+      "Logs de firewall, DNS, DHCP, proxy, VPN, autenticação, flow logs e eventos de mudança quando aplicável."
+    ],
+    "hardening": [
+      "segmentação",
+      "firewall por função",
+      "NAC",
+      "IPAM",
+      "revisão de IaC",
+      "logs",
+      "SIEM",
+      "expiração de exceções",
+      "bastion e PAM para administração"
+    ],
+    "detectionIdeas": [
+      "Comparar comportamento atual com baseline conhecido."
+    ]
+  },
+  "mentorQuestions": [
+    {
+      "question": "Por que /24 é comum, mas nem sempre é a melhor escolha?",
+      "expectedAnswer": "Porque é simples e oferece 254 hosts úteis tradicionais, mas pode ser amplo demais para segurança, broadcast e organização."
+    },
+    {
+      "question": "Quando /32 é útil?",
+      "expectedAnswer": "Quando se quer representar um único host, rota específica, loopback ou allowlist muito restritiva."
+    },
+    {
+      "question": "Por que /31 não segue a fórmula tradicional de hosts úteis?",
+      "expectedAnswer": "Porque pode ser usado como caso especial em enlaces ponto a ponto, onde os dois endereços representam endpoints."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q5-5-1",
+      "question": "Quantos hosts úteis tradicionais existem em um /24?",
+      "options": [
+        "256",
+        "255",
+        "254",
+        "128"
+      ],
+      "answer": "254",
+      "explanation": "/24 tem 8 bits de host, 256 endereços totais e, na regra tradicional, 254 hosts úteis."
+    },
+    {
+      "id": "q5-5-2",
+      "question": "Qual prefixo representa exatamente um endereço IPv4?",
+      "options": [
+        "/30",
+        "/31",
+        "/32",
+        "/29"
+      ],
+      "answer": "/32",
+      "explanation": "/32 fixa todos os 32 bits e representa um único endereço."
+    },
+    {
+      "id": "q5-5-3",
+      "question": "Qual prefixo é clássico para enlaces ponto a ponto com dois hosts úteis tradicionais?",
+      "options": [
+        "/24",
+        "/28",
+        "/30",
+        "/32"
+      ],
+      "answer": "/30",
+      "explanation": "/30 tem 4 endereços totais e 2 hosts úteis tradicionais."
+    },
+    {
+      "id": "q5-5-4",
+      "question": "Qual é um risco de liberar 10.0.0.0/8 em firewall?",
+      "options": [
+        "Bloquear hosts demais",
+        "Permitir um bloco privado enorme",
+        "Representar apenas um host",
+        "Eliminar necessidade de logs"
+      ],
+      "answer": "Permitir um bloco privado enorme",
+      "explanation": "10.0.0.0/8 cobre milhões de endereços privados e normalmente é amplo demais."
+    },
+    {
+      "id": "q5-5-5",
+      "question": "Qual prefixo costuma ser razoável para uma pequena DMZ com poucos serviços, dependendo do crescimento?",
+      "options": [
+        "/8",
+        "/28",
+        "/32",
+        "/1"
+      ],
+      "answer": "/28",
+      "explanation": "/28 oferece 16 endereços totais e 14 hosts úteis tradicionais, comum em pequenos segmentos controlados."
+    },
+    {
+      "id": "q5-5-6",
+      "question": "Em cloud, por que não dimensionar subnets exatamente no limite?",
+      "options": [
+        "Porque CIDR não funciona em cloud",
+        "Porque provedores podem reservar IPs e workloads podem crescer",
+        "Porque /32 sempre é obrigatório",
+        "Porque gateway não existe em cloud"
+      ],
+      "answer": "Porque provedores podem reservar IPs e workloads podem crescer",
+      "explanation": "Cloud costuma ter reservas internas e crescimento dinâmico, então é preciso margem."
+    }
+  ],
+  "flashcards": [
+    {
+      "front": "/24",
+      "back": "Máscara 255.255.255.0, 256 endereços totais, 254 hosts úteis tradicionais; comum em LAN/VLAN."
+    },
+    {
+      "front": "/26",
+      "back": "64 endereços totais, 62 hosts úteis tradicionais; útil para segmentos menores."
+    },
+    {
+      "front": "/28",
+      "back": "16 endereços totais, 14 hosts úteis tradicionais; comum em DMZ pequena ou gestão."
+    },
+    {
+      "front": "/30",
+      "back": "4 endereços totais, 2 hosts úteis tradicionais; clássico para ponto a ponto."
+    },
+    {
+      "front": "/31",
+      "back": "2 endereços; caso especial para ponto a ponto quando suportado."
+    },
+    {
+      "front": "/32",
+      "back": "Um único endereço; usado em rota específica, loopback ou allowlist."
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex5-5-1",
+      "prompt": "Complete a tabela: /24, /25, /26, /27, /28, /29, /30, /31 e /32 com máscara e capacidade.",
+      "expectedAnswer": "Tabela coerente com máscaras e totais de endereços."
+    },
+    {
+      "id": "ex5-5-2",
+      "prompt": "Escolha um prefixo para 50 hosts com margem moderada e justifique.",
+      "expectedAnswer": "/26 pode atender 62 hosts úteis tradicionais; /25 pode ser escolhido se a margem for maior."
+    },
+    {
+      "id": "ex5-5-3",
+      "prompt": "Explique por que /32 é adequado para uma allowlist de bastion.",
+      "expectedAnswer": "Porque libera exatamente um endereço, seguindo menor privilégio."
+    },
+    {
+      "id": "ex5-5-4",
+      "prompt": "Compare /30 e /31 para enlace ponto a ponto.",
+      "expectedAnswer": "/30 é clássico e compatível; /31 economiza endereços quando ambos os lados suportam."
+    },
+    {
+      "id": "ex5.5.v2-final-pratica-equivalente",
+      "type": "prático",
+      "prompt": "Produza uma evidência curta do aprendizado desta aula: cálculo, tabela, matriz de decisão, desenho lógico ou explicação de troubleshooting relacionada ao tema.",
+      "expectedAnswer": "A resposta deve conter artefato verificável, como tabela de sub-redes, cálculo de bloco, matriz de requisitos, justificativa de prefixo ou diagnóstico de erro comum.",
+      "explanation": "Na versão v2.0, esta aula usa prática equivalente no lugar de laboratório independente para evitar laboratório genérico e concentrar execução nos labs integradores do módulo."
+    }
+  ],
+  "challenge": {
+    "title": "Revisar prefixos de uma empresa pequena",
+    "scenario": "Uma empresa propôs /24 para DMZ com 5 servidores, /29 para Wi-Fi de 80 visitantes, /16 para acesso administrativo e /32 para cada servidor de aplicação em regras específicas. Revise o plano.",
+    "tasks": [
+      "Identificar escolhas inadequadas",
+      "Propor prefixos melhores",
+      "Justificar capacidade e segurança",
+      "Sugerir controles complementares",
+      "Registrar riscos residuais"
+    ],
+    "deliverables": [
+      "Tabela revisada",
+      "Justificativa por segmento",
+      "Riscos",
+      "Mitigações",
+      "Observações de cloud/VPN"
+    ],
+    "rubric": [
+      "Capacidade correta",
+      "Menor privilégio",
+      "Clareza de justificativa",
+      "Consideração de crescimento",
+      "Consistência com IPAM e firewall"
+    ],
+    "expectedDeliverables": [
+      "Evidência prática equivalente em vez de lab independente"
+    ]
+  },
+  "commentedSolution": {
+    "summary": "A DMZ com 5 servidores provavelmente não precisa de /24; /28 pode ser suficiente com margem. Wi-Fi com 80 visitantes não cabe em /29; /25 ou /24 pode ser necessário conforme crescimento. Acesso administrativo via /16 é amplo demais; bastion /32 ou subnet pequena de gestão é melhor. Regras /32 para servidores podem ser boas, desde que documentadas e automatizadas.",
+    "steps": [
+      "Calcule a capacidade real de cada prefixo.",
+      "Compare hosts atuais e crescimento esperado.",
+      "Avalie se o prefixo amplia superfície de ataque.",
+      "Use /32 para hosts específicos quando o requisito for exatamente um host.",
+      "Use segmentos menores para DMZ e gestão, com margem documentada.",
+      "Registre o plano no IPAM e vincule regras de firewall a donos e validade."
+    ],
+    "finalAnswer": "O plano corrigido deve trocar o /29 do Wi-Fi por um bloco maior, reduzir o /24 da DMZ se não houver crescimento que justifique, substituir o /16 administrativo por acesso via bastion ou subnet de gestão restrita e manter /32 apenas com documentação e expiração quando for exceção."
+  },
+  "glossary": [
+    {
+      "term": "/24",
+      "definition": "Prefixo IPv4 com 8 bits de host, comum em LANs e VLANs."
+    },
+    {
+      "term": "/30",
+      "definition": "Prefixo com 4 endereços totais e 2 hosts úteis tradicionais, comum em ponto a ponto clássico."
+    },
+    {
+      "term": "/31",
+      "definition": "Prefixo especial com 2 endereços usado em ponto a ponto quando suportado."
+    },
+    {
+      "term": "/32",
+      "definition": "Prefixo que representa exatamente um endereço IPv4."
+    },
+    {
+      "term": "Allowlist",
+      "definition": "Lista de origens permitidas, frequentemente expressa por IP ou CIDR."
+    },
+    {
+      "term": "Menor privilégio",
+      "definition": "Princípio de conceder apenas o acesso estritamente necessário."
+    }
+  ],
+  "references": [
+    {
+      "title": "RFC 4632 — Classless Inter-domain Routing",
+      "type": "standard",
+      "note": "Base conceitual de CIDR."
+    },
+    {
+      "title": "RFC 3021 — Using 31-Bit Prefixes on IPv4 Point-to-Point Links",
+      "type": "standard",
+      "note": "Referência sobre uso de /31 em enlaces ponto a ponto."
+    },
+    {
+      "title": "Cisco — IP Addressing and Subnetting for New Users",
+      "type": "vendor-doc",
+      "note": "Referência operacional sobre subnetting IPv4."
+    },
+    {
+      "title": "Documentação de VPC/VNet do provedor cloud usado no laboratório",
+      "type": "cloud-doc",
+      "note": "Validar reservas e limitações específicas do provedor."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "Cloud networking",
+      "reason": "Subnets cloud e IaC usam CIDR diretamente."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Identidades",
+      "module": "Acesso administrativo",
+      "reason": "Allowlists e bastions dependem de prefixos bem definidos."
+    }
+  ],
+  "progressRules": {
+    "markCompleteWhen": [
+      "contentRead",
+      "labReviewed",
+      "quizPassed",
+      "challengeSubmitted"
+    ],
+    "minimumQuizScore": 70,
+    "requiredInteractions": [
+      "diagramViewed",
+      "flashcardsReviewed",
+      "mentorQuestionsAnswered"
+    ],
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70,
+      "oneOf": [
+        "practicalExerciseDone",
+        "exerciseDone"
+      ]
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false
+    },
+    "unlocks": [
+      "5.6"
+    ]
+  }
+}

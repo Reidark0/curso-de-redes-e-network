@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--problem"><h2>3. Problema</h2>
+
+<p>O problema operacional não é calcular um prefixo isolado. O problema é escolher o prefixo errado para o cenário. Quando isso acontece, o erro aparece meses depois como falta de IP, sobreposição de VPN, firewall amplo demais, DHCP mal dimensionado, sub-rede cloud sem espaço para crescimento ou rede de visitantes misturada com rede interna.</p>
+<table class="data-table"><thead><tr><th>Escolha ruim</th><th>Por que parece boa</th><th>Problema real</th><th>Consequência</th></tr></thead><tbody>
+<tr><td><code>/24</code> para tudo</td><td>Fácil de ler e configurar</td><td>Pode criar redes grandes demais</td><td>Mais broadcast, menor isolamento e desperdício</td></tr>
+<tr><td><code>/29</code> no limite</td><td>Parece econômico</td><td>Não sobra espaço para crescimento</td><td>Mudança emergencial de endereçamento</td></tr>
+<tr><td><code>/16</code> em allowlist</td><td>Evita abrir chamados futuros</td><td>Permite milhares de endereços sem necessidade</td><td>Violação de menor privilégio</td></tr>
+<tr><td><code>/32</code> sem documentação</td><td>Muito específico</td><td>Pode virar exceção invisível</td><td>Firewall difícil de auditar</td></tr>
+<tr><td><code>/30</code> usado cegamente</td><td>Tradicional para ponto a ponto</td><td>Pode desperdiçar endereços em ambientes que suportam /31</td><td>Plano menos eficiente</td></tr>
+</tbody></table>
+<div class="callout callout--warning"><strong>Problema central:</strong> o prefixo correto não é apenas matemática. Ele depende de função da rede, número de hosts, crescimento, segurança, operação, cloud, rotas e documentação.</div>
+
+</section>

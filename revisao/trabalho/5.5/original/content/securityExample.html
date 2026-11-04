@@ -1,0 +1,11 @@
+<section class="lesson-section lesson-section--security"><h2>13. Exemplo em Segurança</h2>
+
+<p>Segurança em IPv4 depende muito de prefixos bem escolhidos. Uma allowlist <code>/32</code> libera exatamente um host. Uma allowlist <code>/24</code> libera até 256 endereços totais. Uma regra <code>10.0.0.0/8</code> pode liberar milhões de endereços privados. A diferença de risco é enorme.</p>
+<table class="risk-table"><thead><tr><th>Cenário</th><th>Escolha perigosa</th><th>Melhor abordagem</th><th>Controle complementar</th></tr></thead><tbody>
+<tr><td>Acesso administrativo</td><td>Liberar <code>10.0.0.0/8</code></td><td>Liberar bastion <code>/32</code> ou subnet de gestão pequena</td><td>MFA, VPN, logs, PAM</td></tr>
+<tr><td>DMZ</td><td>Usar <code>/24</code> sem necessidade</td><td>Usar <code>/28</code> ou prefixo calculado</td><td>Firewall e WAF</td></tr>
+<tr><td>Cloud SG/NSG</td><td><code>0.0.0.0/0</code> em porta sensível</td><td>CIDR mínimo necessário</td><td>Revisão por IaC e alerta</td></tr>
+<tr><td>VPN site-to-site</td><td>Blocos sobrepostos</td><td>Plano global de endereçamento</td><td>IPAM e change management</td></tr>
+</tbody></table>
+
+</section>
