@@ -1,0 +1,17 @@
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <div class="definition-box"><strong>Definição:</strong> Camada 3 (Rede) é a camada que usa endereços lógicos, como o IP, para levar pacotes entre redes diferentes por meio de roteadores, gateways e tabelas de rotas. Em TCP/IP, o protocolo dessa função é o IP (IPv4 e IPv6).</div>
+  <p>O host não precisa conhecer os caminhos da internet. Ele precisa saber quatro coisas: seu IP, sua máscara (que define qual é a rede local), seu gateway padrão (para onde mandar o que não é local) e, se houver, outras rotas locais. Cada roteador no caminho consulta a própria tabela de rotas e decide só o <strong>próximo salto</strong>.</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Peça</th><th>O que é</th><th>Exemplo</th></tr></thead>
+    <tbody>
+      <tr><td>IP</td><td>Endereço lógico do host</td><td><code>192.168.1.50</code></td></tr>
+      <tr><td>Máscara</td><td>Define quantos bits são da rede; separa local de remoto</td><td><code>/24</code> = <code>255.255.255.0</code></td></tr>
+      <tr><td>Rede local</td><td>IP + máscara</td><td><code>192.168.1.0/24</code></td></tr>
+      <tr><td>Gateway padrão</td><td>Roteador usado para destinos fora da rede local</td><td><code>192.168.1.1</code></td></tr>
+      <tr><td>Rota default</td><td>Rota usada quando nenhuma outra combina; aponta para o gateway</td><td><code>0.0.0.0/0 via 192.168.1.1</code></td></tr>
+      <tr><td>TTL</td><td>Contador de vida do pacote, decrementado a cada roteador</td><td>Chegou a 0: descarte</td></tr>
+    </tbody>
+  </table></div>
+  <p>Dois limites para guardar desde já: o IP <strong>não garante entrega</strong> (isso fica com a Camada 4 e acima), e <strong>roteamento não é autorização</strong>: alcançar uma rede não significa ter permissão para acessar seus serviços.</p>
+</section>

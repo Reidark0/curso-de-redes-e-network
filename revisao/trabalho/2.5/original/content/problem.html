@@ -1,0 +1,12 @@
+<section class="lesson-section lesson-section--problem">
+  <h2>3. Problema</h2>
+  <p>A Camada 2 entrega quadros dentro de uma rede local, mas não foi criada para encontrar caminhos entre redes diferentes. Se todos os dispositivos do mundo dependessem apenas de MAC e broadcast, a rede global seria inviável: haveria excesso de broadcast, falta de hierarquia, ausência de sumarização e dificuldade de controle.</p>
+  <ul class="flow-list">
+    <li><strong>Endereçamento global lógico:</strong> identificar redes e hosts de forma organizada.</li>
+    <li><strong>Decisão de caminho:</strong> escolher para onde enviar pacotes destinados a outras redes.</li>
+    <li><strong>Separação de redes:</strong> permitir sub-redes, filiais, datacenters, cloud e internet.</li>
+    <li><strong>Controle de loops:</strong> evitar que pacotes circulem indefinidamente com TTL.</li>
+    <li><strong>Troubleshooting:</strong> diferenciar problema local, gateway, rota, firewall e destino.</li>
+  </ul>
+  <p>Sem Camada 3, teríamos redes locais isoladas. Com Camada 3 mal configurada, temos sintomas clássicos: host acessa a LAN, mas não sai para a internet; duas sub-redes não se comunicam; VPN conecta, mas não alcança sistemas; cloud VNet existe, mas rotas e security groups impedem o fluxo.</p>
+</section>

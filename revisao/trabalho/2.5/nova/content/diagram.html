@@ -1,0 +1,55 @@
+<section class="lesson-section lesson-section--diagram">
+  <h2>Diagrama</h2>
+  <svg class="lesson-svg" viewBox="0 0 980 560" role="img" aria-labelledby="m02l05-title m02l05-desc">
+    <title id="m02l05-title">Camada 3: IP, roteamento, gateway e TTL</title>
+    <desc id="m02l05-desc">Um host envia pacote IP para outra rede usando gateway, roteador, tabela de rotas e redução de TTL a cada salto.</desc>
+    <defs>
+      <marker id="m02l05-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow"></path>
+      </marker>
+    </defs>
+
+    <rect x="35" y="80" width="250" height="330" rx="18" class="svg-zone"></rect>
+    <text x="160" y="115" text-anchor="middle" class="svg-label">Rede local 192.168.10.0/24</text>
+
+    <rect x="70" y="165" width="150" height="72" rx="12" class="svg-node svg-node--client"></rect>
+    <text x="145" y="195" text-anchor="middle" class="svg-label">Host</text>
+    <text x="145" y="217" text-anchor="middle" class="svg-label svg-label--small">192.168.10.50</text>
+
+    <rect x="90" y="295" width="150" height="72" rx="12" class="svg-node svg-node--switch"></rect>
+    <text x="165" y="326" text-anchor="middle" class="svg-label">Switch</text>
+    <text x="165" y="348" text-anchor="middle" class="svg-label svg-label--small">Camada 2</text>
+
+    <rect x="350" y="180" width="165" height="95" rx="14" class="svg-node svg-node--router"></rect>
+    <text x="432" y="214" text-anchor="middle" class="svg-label">Gateway</text>
+    <text x="432" y="238" text-anchor="middle" class="svg-label svg-label--small">192.168.10.1</text>
+    <text x="432" y="260" text-anchor="middle" class="svg-label svg-label--small">Rota default</text>
+
+    <rect x="590" y="170" width="165" height="110" rx="14" class="svg-node svg-node--router"></rect>
+    <text x="672" y="205" text-anchor="middle" class="svg-label">Roteador</text>
+    <text x="672" y="229" text-anchor="middle" class="svg-label svg-label--small">Tabela de rotas</text>
+    <text x="672" y="252" text-anchor="middle" class="svg-label svg-label--small">TTL -1</text>
+
+    <rect x="805" y="145" width="135" height="90" rx="14" class="svg-node svg-node--server"></rect>
+    <text x="872" y="179" text-anchor="middle" class="svg-label">Servidor</text>
+    <text x="872" y="203" text-anchor="middle" class="svg-label svg-label--small">203.0.113.20</text>
+
+    <line x1="220" y1="200" x2="350" y2="222" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m02l05-arrow)"></line>
+    <line x1="515" y1="225" x2="590" y2="225" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m02l05-arrow)"></line>
+    <line x1="755" y1="218" x2="805" y2="195" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m02l05-arrow)"></line>
+
+    <line x1="805" y1="215" x2="755" y2="245" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m02l05-arrow)"></line>
+    <line x1="590" y1="252" x2="515" y2="252" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m02l05-arrow)"></line>
+    <line x1="350" y1="250" x2="220" y2="220" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m02l05-arrow)"></line>
+
+    <rect x="330" y="340" width="450" height="145" rx="16" class="content-card"></rect>
+    <text x="555" y="370" text-anchor="middle" class="svg-label">Decisões da Camada 3</text>
+    <text x="360" y="402" class="svg-label svg-label--small">1. Destino está na minha rede?</text>
+    <text x="360" y="428" class="svg-label svg-label--small">2. Se não estiver, qual é o próximo salto?</text>
+    <text x="360" y="454" class="svg-label svg-label--small">3. Qual rota da tabela combina melhor?</text>
+    <text x="360" y="480" class="svg-label svg-label--small">4. Reduzir TTL e encaminhar ou descartar.</text>
+
+    <text x="145" y="455" text-anchor="middle" class="svg-label svg-label--small">Camada 2 entrega ao MAC do gateway.</text>
+    <text x="650" y="330" text-anchor="middle" class="svg-label svg-label--small">Camada 3 escolhe caminhos entre redes.</text>
+  </svg>
+</section>

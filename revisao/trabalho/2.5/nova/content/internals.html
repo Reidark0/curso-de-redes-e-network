@@ -1,0 +1,53 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <h3>O caminho de um pacote, passo a passo</h3>
+  <ol class="flow-list">
+    <li>O host aplica a máscara ao próprio IP e ao IP de destino para saber se o destino está na mesma sub-rede. <em>Falha típica: máscara errada faz o host tratar destino remoto como local, ou local como remoto.</em></li>
+    <li>Destino na mesma sub-rede: entrega local, via ARP e Camada 2.</li>
+    <li>Destino fora da sub-rede: o host consulta as próprias rotas; na maioria dos hosts só existe a default, que envia o pacote ao gateway padrão. Para isso ainda precisa do MAC do gateway, descoberto via ARP. <em>Falha típica: gateway ausente ou errado impede a saída da rede local.</em></li>
+    <li>O gateway recebe o frame, remove o encapsulamento de Camada 2 e analisa o pacote IP.</li>
+    <li>O roteador consulta a tabela de rotas e escolhe a rota <strong>mais específica</strong> (maior prefixo) que combina com o destino. <em>Falha típica: rota ausente ou errada manda o tráfego para o caminho indevido.</em></li>
+    <li>O TTL é decrementado. Se chegar a zero, o pacote é descartado e o roteador pode devolver um ICMP Time Exceeded. <em>Falha típica: loop de roteamento gera perda e respostas de TTL expirado.</em></li>
+    <li>O roteador reencapsula o pacote num novo frame de Camada 2 para o próximo salto.</li>
+    <li>O processo se repete até a rede de destino, ou até o descarte por rota ausente, política ou falha. A resposta faz o caminho inverso e precisa de <strong>rota de retorno</strong>. <em>Falha típica: a ida funciona, mas a rota ou o firewall de volta falha.</em></li>
+  </ol>
+  <p>Ponto-chave: os IPs de origem e destino normalmente permanecem de ponta a ponta, enquanto os MACs mudam a cada enlace.</p>
+
+  <h3>Campos do cabeçalho IPv4 usados nessas decisões</h3>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Campo</th><th>Tamanho</th><th>Função</th><th>Observação de segurança</th></tr></thead>
+    <tbody>
+      <tr><td>Source IP</td><td>32 bits</td><td>Endereço lógico de origem</td><td>Pode ser falsificado em alguns cenários; filtros anti-spoofing reduzem o risco.</td></tr>
+      <tr><td>Destination IP</td><td>32 bits</td><td>Endereço lógico de destino; base da decisão de rota</td><td>Firewalls e roteamento avaliam este campo.</td></tr>
+      <tr><td>TTL</td><td>8 bits</td><td>Limita a vida do pacote e evita loops infinitos</td><td>Viabiliza o traceroute, mas também revela parte do caminho.</td></tr>
+      <tr><td>Protocol</td><td>8 bits</td><td>Indica o protocolo acima: TCP, UDP ou ICMP</td><td>Usado em filtros, logs e investigação.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Lendo uma tabela de rotas</h3>
+  <p>Exemplo de saída de <code>ip route</code> num host Linux com IP <code>192.168.1.50/24</code>:</p>
+  <pre class="code-block"><code>default via 192.168.1.1 dev eth0
+10.0.0.0/8 via 192.168.1.254 dev eth0
+192.168.1.0/24 dev eth0 proto kernel scope link src 192.168.1.50</code></pre>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Destino</th><th>Rotas que combinam</th><th>Escolhida (mais específica)</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr><td><code>192.168.1.80</code></td><td>/24 e default</td><td><code>192.168.1.0/24</code></td><td>Entrega local (rede conectada)</td></tr>
+      <tr><td><code>10.20.30.40</code></td><td>/8 e default</td><td><code>10.0.0.0/8</code></td><td>Envia para <code>192.168.1.254</code></td></tr>
+      <tr><td><code>8.8.8.8</code></td><td>só a default</td><td><code>0.0.0.0/0</code></td><td>Envia para o gateway <code>192.168.1.1</code></td></tr>
+    </tbody>
+  </table></div>
+  <p>No Windows, o equivalente é <code>route print</code> (a default aparece como destino <code>0.0.0.0</code> com máscara <code>0.0.0.0</code>); no Cisco IOS, <code>show ip route</code>, que mostra rotas conectadas, estáticas e dinâmicas.</p>
+
+  <h3>Como o traceroute usa o TTL</h3>
+  <p>O traceroute (<code>tracert</code> no Windows) envia sondas com TTL 1, depois 2, depois 3, e assim por diante. Cada roteador em que o TTL chega a zero devolve um ICMP Time Exceeded, e assim aparece como um salto na lista. Um asterisco significa só que aquele salto não respondeu: ele pode filtrar ICMP. Por isso o traceroute é evidência parcial: pode ser bloqueado, incompleto ou assimétrico (a volta pode seguir outro caminho), e em cloud parte do caminho físico é abstraída pelo provedor.</p>
+
+  <div class="callout warning"><strong>Erros comuns</strong>
+    <ul>
+      <li><strong>"Pinguei o gateway, então a internet funciona."</strong> O gateway é o primeiro salto e costuma responder mesmo quando as rotas externas falham. Valide em etapas: gateway, rota, caminho, DNS, porta e aplicação.</li>
+      <li><strong>Confundir gateway com DNS.</strong> Os dois aparecem juntos na configuração, mas o gateway encaminha tráfego e o DNS traduz nomes. Trocar um quando o problema é o outro não resolve.</li>
+      <li><strong>Esquecer a rota de retorno.</strong> O teste foca a ida; o pacote chega, mas a resposta não volta. Valide rotas e políticas nos dois sentidos.</li>
+      <li><strong>Tratar o traceroute como mapa absoluto.</strong> Ele é evidência parcial, como visto acima.</li>
+    </ul>
+  </div>
+</section>

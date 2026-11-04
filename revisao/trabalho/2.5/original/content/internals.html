@@ -1,0 +1,16 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>O funcionamento da Camada 3 começa antes do pacote sair do host.</p>
+  <ol class="flow-list">
+    <li>O host compara o IP de destino com sua própria rede usando IP e máscara.</li>
+    <li>Se o destino estiver na mesma sub-rede, a entrega é local e dependerá de ARP/Camada 2.</li>
+    <li>Se o destino estiver fora da sub-rede local, o host envia o pacote ao gateway padrão.</li>
+    <li>Para entregar ao gateway, o host ainda precisa descobrir o MAC do gateway via ARP.</li>
+    <li>O gateway recebe o frame local, remove o encapsulamento de Camada 2 e analisa o pacote IP.</li>
+    <li>O roteador consulta sua tabela de rotas e escolhe a rota mais específica compatível com o destino.</li>
+    <li>O TTL é decrementado. Se chegar a zero, o pacote é descartado e pode gerar ICMP Time Exceeded.</li>
+    <li>O roteador reencapsula o pacote em um novo frame de Camada 2 para o próximo salto.</li>
+    <li>O processo se repete até o pacote chegar à rede de destino ou ser descartado por rota ausente, política ou falha.</li>
+  </ol>
+  <p>Essa separação é essencial: o endereço IP de origem e destino normalmente permanece de ponta a ponta, enquanto os MACs mudam a cada enlace local.</p>
+</section>

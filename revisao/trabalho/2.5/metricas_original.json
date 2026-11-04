@@ -1,0 +1,90 @@
+{
+  "id": "2.5",
+  "versao": "original",
+  "titulo": "Camada 3 — Rede: IP, roteamento, gateway e TTL",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4642,
+    "invisiveis": 759,
+    "teoriaVisivel": 2567
+  },
+  "porCampoVisivel": {
+    "content.motivation": 157,
+    "content.history": 151,
+    "content.problem": 151,
+    "content.evolution": 135,
+    "content.concept": 114,
+    "content.internals": 191,
+    "content.architecture": 124,
+    "content.analogy": 118,
+    "content.simpleExample": 81,
+    "content.enterpriseExample": 99,
+    "content.cloudExample": 117,
+    "content.devsecopsExample": 85,
+    "content.securityExample": 133,
+    "content.diagram": 3,
+    "content.summary": 64,
+    "content.nextTheme": 41,
+    "security": 274,
+    "troubleshooting": 302,
+    "glossary": 227,
+    "title+subtitle": 28,
+    "objectives": 59,
+    "learningOutcomes": 86,
+    "quiz": 249,
+    "flashcards": 107,
+    "mentorQuestions": 147,
+    "exercises": 145,
+    "challenge": 165,
+    "commentedSolution": 196,
+    "references": 66,
+    "linksToOtherCourses": 47,
+    "lab": 780
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 32,
+    "content.exercisesIntro": 17,
+    "content.challengeIntro": 35,
+    "content.solutionIntro": 22,
+    "networkContext": 29,
+    "protocolFields": 102,
+    "packetFlow": 136,
+    "deepDive": 250,
+    "commonMistakes": 136
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 120,
+    "alternativa_5minPasso_maisLeitura": 36,
+    "plausivel": false,
+    "palavras": 780
+  },
+  "duracao": {
+    "declarada": "85-120 min",
+    "estimatedStudyTimeMinutes": 120,
+    "M": 102.5,
+    "T": 117.7,
+    "partes": {
+      "teoria": 19.7,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 36
+    },
+    "faixaRecomendada": "100-140 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 19
+  }
+}

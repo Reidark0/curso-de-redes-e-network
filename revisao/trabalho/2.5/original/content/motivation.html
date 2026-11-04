@@ -1,0 +1,6 @@
+<section class="lesson-section lesson-section--motivation">
+  <h2>1. Motivação</h2>
+  <p>Até agora você viu que bits precisam de sinais físicos, que a Camada 2 organiza esses bits em quadros e que switches entregam tráfego dentro de uma rede local. Mas isso ainda não explica como um notebook em uma LAN acessa um servidor em outra rede, um site na internet, uma API em cloud ou um serviço interno em outra filial.</p>
+  <p>A Camada 3, chamada de camada de Rede, existe para resolver exatamente esse problema: permitir comunicação entre redes diferentes. Ela introduz endereçamento lógico, decisão de caminho, roteamento, gateway padrão e controle de vida do pacote por TTL.</p>
+  <div class="callout callout--problem"><strong>Problema real:</strong> um usuário consegue pingar o gateway local, mas não acessa sistemas em outra filial. A placa de rede está funcionando, a VLAN parece correta e o switch aprendeu o MAC. O problema agora provavelmente não é Camada 1 nem Camada 2: é preciso investigar IP, máscara, gateway, tabela de rotas, firewall ou caminho entre redes.</div>
+</section>

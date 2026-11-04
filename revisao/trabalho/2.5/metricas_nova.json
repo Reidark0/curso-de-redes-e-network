@@ -1,0 +1,79 @@
+{
+  "id": "2.5",
+  "versao": "nova",
+  "titulo": "Camada 3 — Rede: IP, roteamento, gateway e TTL",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5109,
+    "invisiveis": 29,
+    "teoriaVisivel": 2637
+  },
+  "porCampoVisivel": {
+    "content.motivation": 112,
+    "content.problem": 141,
+    "content.concept": 204,
+    "content.internals": 649,
+    "content.architecture": 128,
+    "content.analogy": 94,
+    "content.simpleExample": 87,
+    "content.enterpriseExample": 90,
+    "content.cloudExample": 116,
+    "content.devsecopsExample": 75,
+    "content.diagram": 1,
+    "content.summary": 114,
+    "content.nextTheme": 37,
+    "security": 353,
+    "troubleshooting": 308,
+    "glossary": 128,
+    "title+subtitle": 24,
+    "objectives": 59,
+    "learningOutcomes": 86,
+    "quiz": 484,
+    "flashcards": 125,
+    "mentorQuestions": 235,
+    "exercises": 222,
+    "challenge": 165,
+    "commentedSolution": 196,
+    "references": 66,
+    "linksToOtherCourses": 47,
+    "lab": 763
+  },
+  "porCampoInvisivel": {
+    "networkContext": 29
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 30,
+    "alternativa_5minPasso_maisLeitura": 30.9,
+    "plausivel": true,
+    "palavras": 763
+  },
+  "duracao": {
+    "declarada": "90-130 min",
+    "estimatedStudyTimeMinutes": 130,
+    "M": 110,
+    "T": 106.3,
+    "partes": {
+      "teoria": 20.3,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 20,
+      "lab": 30
+    },
+    "faixaRecomendada": "90-130 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 22
+  }
+}
