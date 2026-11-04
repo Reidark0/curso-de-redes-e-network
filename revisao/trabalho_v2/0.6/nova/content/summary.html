@@ -2,10 +2,11 @@
 <section class="lesson-section lesson-section--summary">
   <h2>Resumo</h2>
   <ul>
-    <li><strong>Ideia central:</strong> lentidão é um sintoma composto. Separe tempo de resposta, capacidade, entrega real, perda, variação e filas; depois descubra em qual trecho do caminho a métrica se degrada.</li>
-    <li><strong>O que lembrar:</strong> largura de banda é capacidade; throughput é entrega real; latência é tempo de resposta (propagação + transmissão + processamento + fila).</li>
-    <li><strong>Erro comum:</strong> tentar resolver tudo comprando mais link; mais banda reduz apenas o tempo de transmissão e ajuda quando o gargalo é saturação.</li>
-    <li><strong>Como medir:</strong> ping, traceroute, curl e métricas de aplicação, cada um vendo uma parte, comparados com um baseline.</li>
-    <li><strong>Segurança:</strong> anomalias de vazão e degradação podem indicar exfiltração, DoS ou controle de segurança subdimensionado.</li>
+    <li><strong>Ideia central:</strong> largura de banda é quanto cabe; throughput é quanto passa; latência (RTT) é quanto a resposta demora.</li>
+    <li>Jitter é a variação da latência; perda são pacotes que não chegam. Ambos derrubam chamadas e jogos.</li>
+    <li>Latência = propagação + transmissão + processamento + fila.</li>
+    <li>Mais banda só reduz a transmissão; não encurta a distância nem acelera o servidor.</li>
+    <li>Ping mede o caminho, não o servidor: meça por partes.</li>
   </ul>
+  <p><em>Já domina isso? Faça o quiz: com 70% ou mais, você pode seguir.</em></p>
 </section>

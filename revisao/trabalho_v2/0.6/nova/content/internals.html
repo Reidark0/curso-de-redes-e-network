@@ -2,39 +2,32 @@
 <section class="lesson-section lesson-section--internals">
   <h2>Funcionamento interno</h2>
   <p>
-    Quando uma aplicação envia dados, eles atravessam várias etapas, e cada uma pode acrescentar tempo, overhead, fila ou erro:
+    Entre você e o servidor há vários trechos: o Wi‑Fi ou o cabo, o roteador de casa, a rede do provedor, a internet e a rede onde o servidor está. Em cada trecho, na ida e na volta, o tempo gasto é a soma de quatro parcelas, e a latência total soma todos os trechos:
   </p>
-  <ol class="flow-list">
-    <li><strong>Aplicação gera dados:</strong> uma página, arquivo, requisição API, stream ou backup.</li>
-    <li><strong>Pilha de rede encapsula:</strong> o sistema operacional organiza os dados em segmentos, pacotes e quadros; os headers de protocolo aumentam o tamanho total transmitido.</li>
-    <li><strong>Interface coloca no meio:</strong> cabo, fibra ou rádio transportam sinais.</li>
-    <li><strong>Dispositivos intermediários encaminham:</strong> switches, roteadores, firewalls, proxies, NAT, VPN e WAF podem processar ou enfileirar.</li>
-    <li><strong>Destino processa:</strong> servidor, aplicação, banco e autenticação adicionam tempo.</li>
-    <li><strong>Resposta volta:</strong> o caminho de retorno também pode ter gargalos diferentes.</li>
-  </ol>
-  <h3>Do que a latência é feita</h3>
   <div class="responsive-table">
     <table class="data-table">
-      <thead><tr><th>Componente</th><th>Depende de</th><th>Ordem de grandeza</th></tr></thead>
+      <thead><tr><th>Parcela</th><th>Depende de</th><th>Ordem de grandeza</th></tr></thead>
       <tbody>
         <tr><td>Propagação</td><td>Distância e meio físico</td><td>Na fibra, a luz percorre cerca de 200.000 km/s: aproximadamente 5 ms a cada 1.000 km, só de ida. Um destino a 6.000 km soma cerca de 60 ms de RTT, com qualquer banda.</td></tr>
         <tr><td>Transmissão</td><td>Taxa do link e tamanho do dado</td><td>Um pacote de 1.500 bytes (12.000 bits) leva 12 µs para sair em 1 Gbps e 1,2 ms em 10 Mbps.</td></tr>
-        <tr><td>Processamento</td><td>Equipamentos e softwares no caminho</td><td>Inspeção TLS, VPN, proxy e WAF acrescentam tempo em cada pacote ou conexão.</td></tr>
-        <tr><td>Fila</td><td>Tráfego maior do que o dispositivo encaminha naquele momento</td><td>Cresce e diminui com a carga; é a parcela mais variável e a principal fonte de jitter.</td></tr>
+        <tr><td>Processamento</td><td>Equipamentos e programas no caminho e no destino</td><td>Roteadores, firewalls e o próprio servidor gastam tempo para examinar e tratar cada pacote ou pedido.</td></tr>
+        <tr><td>Fila</td><td>Tráfego maior do que o equipamento consegue encaminhar naquele momento</td><td>Cresce e diminui com a carga; é a parcela mais variável e a principal fonte de jitter.</td></tr>
       </tbody>
     </table>
   </div>
+  <h3>Por que mais banda nem sempre ajuda</h3>
   <p>
-    A tabela mostra por que mais banda nem sempre ajuda: ela só reduz o tempo de <strong>transmissão</strong>. Propagação, processamento e fila continuam iguais. Uma página que faz 20 requisições em sequência com RTT de 100 ms gasta pelo menos 2 s só esperando respostas, seja o link de 50 Mbps ou de 1 Gbps.
+    Mais banda só reduz a parcela de <strong>transmissão</strong>. Propagação e processamento continuam iguais, e a fila só diminui se o problema era excesso de tráfego. Uma página que faz 20 requisições (pedidos ao servidor) em sequência, com RTT de 100 ms, gasta pelo menos 2 s só esperando respostas, seja o link de 50 Mbps ou de 1 Gbps. Já um arquivo grande depende muito da transmissão: aí mais banda ajuda.
   </p>
   <p>
-    Quando um buffer grande acumula pacotes demais em vez de descartar ou controlar o excesso, a latência sobe muito sob carga. Esse efeito se chama <strong>bufferbloat</strong>: durante um upload pesado, a navegação fica lenta porque o roteador está com a fila cheia.
+    A fila explica um caso comum em casa: durante um upload ou download pesado (enviar um vídeo grande para a nuvem, por exemplo), o roteador de casa ou o do provedor acumula pacotes à espera de saída, o RTT sobe de 20 ms para centenas de milissegundos e a navegação fica lenta. Esse efeito de buffers grandes demais tem nome: <strong>bufferbloat</strong>.
   </p>
-  <h3>O que limita o throughput</h3>
+  <h3>O que deixa o throughput abaixo da banda</h3>
   <p>
-    Throughput real é afetado por overhead, janela TCP, perda, controle de congestionamento, qualidade do meio, CPU dos endpoints, criptografia, inspeção, tamanho de arquivo, paralelismo e limites do servidor. A janela TCP liga throughput e latência: o emissor só pode ter uma janela de dados sem confirmação em trânsito, então uma conexão rende no máximo janela ÷ RTT. Com janela de 64 KB e RTT de 100 ms, isso dá cerca de 5,2 Mbps por conexão, mesmo num link de 1 Gbps. Sistemas modernos usam escala de janela para permitir janelas maiores, mas perda e RTT alto continuam derrubando a vazão de uma única conexão.
+    O throughput fica abaixo da largura de banda por vários motivos: o overhead dos protocolos (aula 0.4), os pacotes perdidos que precisam ser reenviados, o Wi‑Fi negociando uma taxa menor (aula 0.5), outros dispositivos dividindo o mesmo link e o limite do próprio servidor. A latência também pesa: em muitas transferências o emissor espera a confirmação do destino antes de mandar mais dados, então um RTT alto pode reduzir a vazão de uma única transferência (detalhes na aula 6.4).
   </p>
+  <h3>Medir por partes</h3>
   <p>
-    Por isso, medir throughput exige contexto: um download lento pode ser limite do servidor, da rota, do firewall, do Wi‑Fi, do disco, do antivírus, da VPN ou da aplicação.
+    O <strong>ping</strong> mede o RTT até um destino: só o caminho, sem o tempo que um servidor gasta para preparar uma página. Por isso um ping baixo até o roteador ou até a internet só inocenta aquele trecho; a demora pode estar mais adiante ou no servidor. Ferramentas como o <code>curl</code> separam o tempo de rede do tempo de resposta do servidor, como o laboratório mostra.
   </p>
 </section>

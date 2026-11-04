@@ -1,0 +1,91 @@
+{
+  "id": "0.6",
+  "versao": "nova",
+  "titulo": "Latência, largura de banda e throughput",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3666,
+    "teoria": 1513,
+    "praticaExtra": 1211,
+    "quiz": 570,
+    "flashcards": 186
+  },
+  "porGrupoTeoria": {
+    "introducao": 430,
+    "contexto": 128,
+    "conteudo": 745,
+    "exemplos": 210,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 146,
+    "summary": 79,
+    "problem": 128,
+    "concept": 264,
+    "internals": 479,
+    "diagram": 2,
+    "analogy": 66,
+    "simpleExample": 144,
+    "objectives": 65,
+    "learningOutcomes": 0,
+    "glossary": 140,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 28
+  },
+  "pratica": {
+    "quiz": 570,
+    "flashcards": 186,
+    "lab": 435,
+    "mentorQuestions": 240,
+    "exercises": 213,
+    "challenge": 131,
+    "commentedSolution": 192
+  },
+  "outros": {
+    "title+subtitle": 19,
+    "nextTheme": 28,
+    "references": 62,
+    "linksToOtherCourses": 77
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 7,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 3,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 4,
+    "exemplosPorAmbiente": []
+  },
+  "lab": {
+    "estimatedTimeMinutes": 15,
+    "alternativa_5minPorPasso": 15,
+    "plausivel": true,
+    "override": null,
+    "palavras": 435
+  },
+  "duracao": {
+    "declarada": "20-25 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 20.6,
+    "nucleoPartes": {
+      "teoria": 11.6,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 46,
+    "praticaExtraPartes": {
+      "lab": 15,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "20-25 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "20-25 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}
