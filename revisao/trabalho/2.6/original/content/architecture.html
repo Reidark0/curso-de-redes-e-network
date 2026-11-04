@@ -1,0 +1,12 @@
+<section class="lesson-section lesson-section--architecture">
+  <h2>7. Arquitetura</h2>
+  <p>Em arquitetura, a Camada 4 aparece em clientes, servidores, sistemas operacionais, firewalls, NAT, load balancers, proxies, service meshes, security groups, Kubernetes Services, Ingress controllers, NetworkPolicies e ferramentas de observabilidade.</p>
+  <ul class="flow-list">
+    <li><strong>Cliente:</strong> usa uma porta efêmera local para iniciar comunicação.</li>
+    <li><strong>Servidor:</strong> escuta uma porta conhecida ou configurada.</li>
+    <li><strong>Firewall:</strong> permite ou nega tráfego por protocolo, porta, origem, destino e estado.</li>
+    <li><strong>Load balancer:</strong> recebe conexões em uma porta e encaminha para backends saudáveis.</li>
+    <li><strong>Kubernetes:</strong> expõe pods por Service, targetPort, port e nodePort, criando abstrações de Camada 4/7.</li>
+    <li><strong>Cloud:</strong> security groups, NSGs e firewalls gerenciados controlam portas como código.</li>
+  </ul>
+</section>

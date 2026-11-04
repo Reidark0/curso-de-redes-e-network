@@ -1,0 +1,90 @@
+{
+  "id": "2.6",
+  "versao": "original",
+  "titulo": "Camada 4 — Transporte: TCP, UDP, portas e conexões",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4680,
+    "invisiveis": 780,
+    "teoriaVisivel": 2542
+  },
+  "porCampoVisivel": {
+    "content.motivation": 166,
+    "content.history": 143,
+    "content.problem": 134,
+    "content.evolution": 171,
+    "content.concept": 113,
+    "content.internals": 161,
+    "content.architecture": 96,
+    "content.analogy": 91,
+    "content.simpleExample": 76,
+    "content.enterpriseExample": 81,
+    "content.cloudExample": 101,
+    "content.devsecopsExample": 89,
+    "content.securityExample": 127,
+    "content.diagram": 3,
+    "content.summary": 70,
+    "content.nextTheme": 40,
+    "security": 327,
+    "troubleshooting": 331,
+    "glossary": 222,
+    "title+subtitle": 24,
+    "objectives": 65,
+    "learningOutcomes": 93,
+    "quiz": 282,
+    "flashcards": 96,
+    "mentorQuestions": 149,
+    "exercises": 176,
+    "challenge": 145,
+    "commentedSolution": 207,
+    "references": 58,
+    "linksToOtherCourses": 53,
+    "lab": 790
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 34,
+    "content.exercisesIntro": 19,
+    "content.challengeIntro": 31,
+    "content.solutionIntro": 22,
+    "networkContext": 31,
+    "protocolFields": 113,
+    "packetFlow": 114,
+    "deepDive": 277,
+    "commonMistakes": 139
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 55,
+    "alternativa_5minPasso_maisLeitura": 41.1,
+    "plausivel": true,
+    "palavras": 790
+  },
+  "duracao": {
+    "declarada": "90-125 min",
+    "estimatedStudyTimeMinutes": 125,
+    "M": 107.5,
+    "T": 136.6,
+    "partes": {
+      "teoria": 19.6,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 55
+    },
+    "faixaRecomendada": "115-165 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 17
+  }
+}

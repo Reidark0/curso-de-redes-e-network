@@ -1,0 +1,15 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>O funcionamento interno da Camada 4 depende do protocolo. TCP é orientado à conexão; UDP é baseado em datagramas.</p>
+  <ol class="flow-list">
+    <li>Uma aplicação cliente solicita ao sistema operacional uma conexão ou envio para IP, protocolo e porta de destino.</li>
+    <li>O sistema escolhe uma porta local efêmera para representar aquele fluxo do cliente.</li>
+    <li>No TCP, o cliente envia SYN para iniciar o three-way handshake.</li>
+    <li>O servidor responde SYN-ACK se estiver escutando e se políticas permitirem.</li>
+    <li>O cliente envia ACK e a conexão fica estabelecida.</li>
+    <li>Durante a transferência, TCP usa números de sequência, confirmações, janelas e retransmissões.</li>
+    <li>Ao encerrar, podem aparecer FIN, ACK e, em alguns casos, RST para resetar a conexão.</li>
+    <li>No UDP, não há handshake nativo. A aplicação envia datagramas e decide como lidar com ausência de resposta.</li>
+  </ol>
+  <p>Firewalls stateful aproveitam esses estados para permitir respostas a conexões iniciadas de dentro, bloquear tráfego inesperado e registrar eventos. Porém, estado também consome memória e pode virar gargalo sob carga ou ataque.</p>
+</section>

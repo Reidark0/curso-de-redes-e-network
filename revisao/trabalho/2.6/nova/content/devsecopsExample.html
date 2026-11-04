@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--devsecops">
+  <h2>12. Exemplo em DevSecOps</h2>
+  <p>Em pipelines e plataformas internas, portas aparecem em runners, registries, scanners, webhooks, APIs, bancos, clusters Kubernetes, Ingress, Service e NetworkPolicy. Um deploy pode falhar porque a aplicação escuta em <code>8080</code>, mas o Service aponta para <code>80</code>; ou porque o health check tenta TCP/8080, mas a aplicação só responde HTTP em outro path.</p>
+  <p>Infraestrutura como código deve declarar portas com intenção clara. Regras temporárias devem ter prazo e justificativa. Testes de conectividade em pipeline devem diferenciar DNS, rota, TCP, TLS e resposta HTTP, evitando diagnósticos genéricos.</p>
+</section>
