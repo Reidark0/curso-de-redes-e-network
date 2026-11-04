@@ -1,0 +1,952 @@
+{
+  "id": "3.3",
+  "moduleId": "m03",
+  "order": 3,
+  "title": "Switches: aprendizado MAC, forwarding e flooding",
+  "subtitle": "Como o switch decide para qual porta enviar um frame e por que, às vezes, ele precisa inundar a LAN.",
+  "duration": "90-125 min",
+  "estimatedStudyTimeMinutes": 125,
+  "difficulty": "iniciante-intermediário",
+  "type": "fundamental",
+  "xp": 215,
+  "tags": [
+    "redes",
+    "ethernet",
+    "switch",
+    "tabela MAC",
+    "forwarding",
+    "flooding",
+    "camada 2",
+    "broadcast",
+    "segurança",
+    "troubleshooting"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m03",
+      "lesson": "3.1",
+      "reason": "É necessário entender Ethernet como base da LAN antes de estudar o comportamento do switch."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m03",
+      "lesson": "3.2",
+      "reason": "O switch toma decisões lendo endereços MAC em frames Ethernet."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m02",
+      "lesson": "2.4",
+      "reason": "A aula depende do entendimento de Camada 2, frames e domínio de broadcast."
+    }
+  ],
+  "objectives": [
+    "Explicar por que switches existem e qual problema resolveram em relação a hubs e redes compartilhadas.",
+    "Descrever como o switch aprende endereços MAC a partir do MAC de origem dos frames.",
+    "Diferenciar forwarding, filtering, flooding e broadcast.",
+    "Interpretar tabela MAC, porta, VLAN e aging time em troubleshooting defensivo.",
+    "Relacionar aprendizado MAC com segurança de Camada 2, loops, MAC flooding, port security e segmentação."
+  ],
+  "learningOutcomes": [
+    "Dado um frame entrando em uma porta, o aluno explica como o switch aprende o MAC de origem.",
+    "Dado um MAC de destino conhecido, o aluno identifica que o switch faz forwarding seletivo para a porta aprendida.",
+    "Dado um MAC de destino desconhecido, o aluno explica por que o switch faz flooding dentro da VLAN.",
+    "Dado um problema de LAN, o aluno coleta tabela MAC, porta, VLAN e contadores para montar hipótese defensiva.",
+    "Dado um cenário de segurança, o aluno propõe controles como port security, 802.1X, segmentação, logs e monitoramento."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Camada 2"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "ARP",
+      "802.1Q",
+      "STP"
+    ],
+    "dependsOn": [
+      "Frame Ethernet",
+      "Endereço MAC",
+      "Camada 2",
+      "VLAN"
+    ],
+    "enables": [
+      "Switching",
+      "Forwarding",
+      "Flooding controlado",
+      "Tabela MAC",
+      "Port security",
+      "Troubleshooting L2"
+    ]
+  },
+  "protocolFields": [
+    {
+      "field": "Source MAC",
+      "size": "48 bits",
+      "purpose": "Permitir que o switch aprenda em qual porta e VLAN aquele MAC está alcançável.",
+      "securityObservation": "MAC de origem pode ser falsificado; use como evidência, não como identidade absoluta."
+    },
+    {
+      "field": "Destination MAC",
+      "size": "48 bits",
+      "purpose": "Permitir que o switch decida se faz forwarding, filtering ou flooding.",
+      "securityObservation": "Destino desconhecido gera flooding; excesso pode indicar anomalia ou topologia mal planejada."
+    },
+    {
+      "field": "VLAN ID",
+      "size": "12 bits no tag 802.1Q quando presente",
+      "purpose": "Separar domínios lógicos no mesmo switch ou trunk.",
+      "securityObservation": "VLAN errada pode causar exposição, isolamento indevido ou bypass operacional."
+    },
+    {
+      "field": "EtherType",
+      "size": "16 bits",
+      "purpose": "Indicar o protocolo carregado no payload.",
+      "securityObservation": "Ajuda em filtros e investigação, mas não substitui inspeção de camadas superiores."
+    }
+  ],
+  "packetFlow": [
+    {
+      "step": 1,
+      "actor": "Host A",
+      "action": "Envia frame para Host B.",
+      "detail": "O frame entra no switch pela porta 1 com Source MAC A e Destination MAC B.",
+      "possibleFailure": "Interface down, cabo ruim ou VLAN errada."
+    },
+    {
+      "step": 2,
+      "actor": "Switch",
+      "action": "Aprende o MAC de origem.",
+      "detail": "Registra MAC A associado à porta 1 e à VLAN correspondente.",
+      "possibleFailure": "Tabela saturada, MAC flapping ou port security bloqueando."
+    },
+    {
+      "step": 3,
+      "actor": "Switch",
+      "action": "Procura o MAC de destino.",
+      "detail": "Consulta a tabela MAC por MAC B dentro da mesma VLAN.",
+      "possibleFailure": "MAC B desconhecido, aging expirado ou destino em outra VLAN."
+    },
+    {
+      "step": 4,
+      "actor": "Switch",
+      "action": "Encaminha ou inunda.",
+      "detail": "Se MAC B é conhecido, encaminha para a porta aprendida; se desconhecido, faz flooding na VLAN.",
+      "possibleFailure": "Flooding excessivo, loop ou domínio de broadcast grande."
+    },
+    {
+      "step": 5,
+      "actor": "Host B",
+      "action": "Recebe o frame se estiver no domínio correto.",
+      "detail": "Depois que Host B responde, o switch também aprende MAC B pela porta de entrada.",
+      "possibleFailure": "Host desligado, porta bloqueada, VLAN errada ou política de segurança."
+    }
+  ],
+  "deepDive": {
+    "mentalModel": "O switch é uma central de entrega local: aprende remetentes, consulta destinatários e só abre o leque quando ainda não sabe onde entregar.",
+    "keyTerms": [
+      "switch",
+      "tabela MAC",
+      "CAM table",
+      "forwarding",
+      "filtering",
+      "flooding",
+      "aging time",
+      "MAC flapping",
+      "VLAN"
+    ],
+    "limitations": [
+      "Switch L2 não roteia entre redes sem função L3.",
+      "MAC não é identidade forte.",
+      "Flooding normal pode ocorrer antes do aprendizado.",
+      "Tabela MAC dinâmica pode expirar ou ser afetada por loops.",
+      "Sem VLANs, redes grandes ficam ruidosas e inseguras."
+    ],
+    "whenToUse": [
+      "Diagnosticar conectividade local.",
+      "Mapear porta de um dispositivo.",
+      "Investigar flooding, MAC flapping e loops.",
+      "Planejar segmentação e segurança de acesso."
+    ],
+    "whenNotToUse": [
+      "Para substituir firewall de Camada 3/4/7.",
+      "Para provar identidade de usuário sem NAC/IAM.",
+      "Para diagnosticar sozinho erro HTTP, TLS ou aplicação.",
+      "Para concluir incidente sem correlação."
+    ],
+    "operationalImpact": [
+      "Requer documentação de portas, VLANs, uplinks e dispositivos conectados.",
+      "Exige monitoramento de eventos como link flap, MAC move, err-disable e STP changes.",
+      "Ajuda muito em troubleshooting, mas aumenta complexidade quando há trunks, virtualização e switches em cascata."
+    ],
+    "financialImpact": [
+      "Switches gerenciáveis custam mais que equipamentos simples, mas reduzem tempo de diagnóstico e aumentam controle.",
+      "Recursos como 802.1X, NAC e monitoramento podem exigir licenças ou plataforma adicional.",
+      "Falhas de L2 podem gerar custo indireto alto por indisponibilidade."
+    ],
+    "securityImpact": [
+      "Switches reduzem exposição em relação a hubs, mas precisam de port security, 802.1X, segmentação e logs para segurança robusta.",
+      "Portas físicas não controladas podem permitir acesso inicial.",
+      "MAC flooding e loops podem afetar confidencialidade e disponibilidade."
+    ]
+  },
+  "commonMistakes": [
+    {
+      "mistake": "Achar que switch envia tudo para todos como um hub.",
+      "whyItHappens": "Ambos têm várias portas e conectam dispositivos.",
+      "consequence": "O aluno interpreta errado capturas e riscos.",
+      "correction": "Switch encaminha seletivamente quando conhece o MAC de destino; hub repete tudo."
+    },
+    {
+      "mistake": "Achar que flooding é sempre ataque.",
+      "whyItHappens": "O termo parece negativo.",
+      "consequence": "Incidentes normais viram falsos positivos.",
+      "correction": "Flooding pode ser comportamento normal quando o destino é desconhecido; o problema é excesso, persistência ou contexto suspeito."
+    },
+    {
+      "mistake": "Usar MAC como prova definitiva de identidade.",
+      "whyItHappens": "MAC parece único e ligado ao hardware.",
+      "consequence": "Investigações podem culpar errado ou ignorar virtualização/spoofing.",
+      "correction": "Correlacione MAC com porta, VLAN, DHCP, NAC, inventário, EDR e horário."
+    },
+    {
+      "mistake": "Ignorar VLAN ao olhar tabela MAC.",
+      "whyItHappens": "Muitos exemplos didáticos mostram uma LAN plana.",
+      "consequence": "A equipe interpreta porta ou MAC fora de contexto.",
+      "correction": "Sempre verifique MAC, porta e VLAN juntos."
+    }
+  ],
+  "troubleshooting": {
+    "symptoms": [
+      "Host local não comunica com outro host na mesma VLAN.",
+      "MAC aparece alternando entre portas.",
+      "Tráfego broadcast/flooding elevado.",
+      "Porta entra em err-disabled.",
+      "Switch aprende muitos MACs em porta de usuário."
+    ],
+    "diagnosticQuestions": [
+      "A porta está up/up?",
+      "A VLAN da porta está correta?",
+      "O MAC do host aparece na tabela MAC?",
+      "O MAC aparece em mais de uma porta?",
+      "Há mudanças recentes de STP ou link flap?",
+      "A porta é de usuário, trunk, uplink ou AP?"
+    ],
+    "commands": [
+      {
+        "platform": "Windows",
+        "command": "getmac /v\narp -a\nipconfig /all",
+        "purpose": "Coletar MAC local, vizinhos ARP e configuração de rede.",
+        "expectedObservation": "MAC da interface ativa, gateway e entradas ARP.",
+        "interpretation": "Ajuda a relacionar host, gateway e evidências locais antes de consultar o switch."
+      },
+      {
+        "platform": "Linux",
+        "command": "ip link\nip neigh\nip route",
+        "purpose": "Ver interfaces, MACs, vizinhos de enlace e rota default.",
+        "expectedObservation": "Interface up, endereço link/ether e vizinho do gateway.",
+        "interpretation": "Confirma evidências locais de Camada 2 e Camada 3."
+      },
+      {
+        "platform": "Cisco IOS",
+        "command": "show mac address-table dynamic\nshow mac address-table interface <interface>\nshow interfaces status\nshow interfaces counters errors\nshow logging",
+        "purpose": "Ver MACs aprendidos, portas, VLANs, estado e eventos.",
+        "expectedObservation": "MAC associado a uma porta/VLAN esperada, sem erros ou flapping anormal.",
+        "interpretation": "Permite confirmar aprendizado, forwarding e anomalias de L2."
+      }
+    ],
+    "decisionTree": [
+      {
+        "if": "MAC do host não aparece na tabela do switch",
+        "then": "Verificar link físico, VLAN da porta, autenticação 802.1X/NAC, cabo, NIC e se o host enviou tráfego recente."
+      },
+      {
+        "if": "Mesmo MAC aparece alternando entre portas",
+        "then": "Investigar loop, bridge indevida, VM, docking, uplink, STP e logs de MAC move."
+      },
+      {
+        "if": "Muitos MACs aparecem em porta de usuário",
+        "then": "Verificar se é AP, telefone IP, mini-switch não autorizado, hypervisor ou comportamento suspeito."
+      },
+      {
+        "if": "Flooding é persistente e alto",
+        "then": "Avaliar tabela MAC, aging, loops, storm control, broadcast domain e tráfego anômalo."
+      }
+    ]
+  },
+  "security": {
+    "goodPractices": [
+      "Documentar porta, VLAN, dispositivo esperado e dono do ponto.",
+      "Desabilitar portas não usadas ou colocá-las em VLAN de quarentena.",
+      "Usar 802.1X/NAC quando possível.",
+      "Configurar port security de forma proporcional e testada.",
+      "Monitorar MAC flapping, link flap, STP changes e muitos MACs por porta.",
+      "Separar usuários, servidores, visitantes, gestão e IoT em VLANs adequadas."
+    ],
+    "badPractices": [
+      "Deixar portas de parede ativas sem controle.",
+      "Usar uma LAN plana para tudo.",
+      "Confiar em MAC como autenticação forte.",
+      "Bloquear portas em produção sem entender impacto.",
+      "Ignorar logs de switch em investigação."
+    ],
+    "commonErrors": [
+      "Confundir flooding normal inicial com incidente.",
+      "Não considerar trunks e APs ao contar MACs por porta.",
+      "Tratar MAC virtual de VM/container como equipamento físico.",
+      "Esquecer que tabela MAC expira."
+    ],
+    "vulnerabilities": [
+      {
+        "name": "MAC flooding",
+        "description": "Grande quantidade de MACs pode pressionar a tabela do switch e aumentar flooding.",
+        "defensiveExplanation": "Monitore volume de MACs por porta, limite MACs em portas de usuário, use NAC e investigue origem antes de agir.",
+        "mitigation": "Port security, storm control, 802.1X/NAC, segmentação, logs e resposta proporcional."
+      },
+      {
+        "name": "Porta física não controlada",
+        "description": "Pontos de rede ativos podem permitir conexão de dispositivos não autorizados.",
+        "defensiveExplanation": "Controle físico e lógico deve complementar o switch; endereço MAC sozinho não basta.",
+        "mitigation": "Desabilitar portas ociosas, NAC, VLAN de quarentena, inventário e inspeções."
+      },
+      {
+        "name": "MAC flapping",
+        "description": "Mesmo MAC aparece em portas diferentes de forma rápida.",
+        "defensiveExplanation": "Pode indicar loop, bridge indevida, virtualização, erro de cabeamento ou comportamento malicioso.",
+        "mitigation": "Investigar STP, topologia, logs, uplinks, APs, hypervisors e aplicar contenção proporcional."
+      }
+    ],
+    "monitoring": [
+      "Alertas de MAC move/flapping.",
+      "Quantidade de MACs por porta.",
+      "Portas em err-disabled.",
+      "Eventos de STP topology change.",
+      "Broadcast/flooding elevado.",
+      "Mudanças fora de janela em VLAN/trunk."
+    ],
+    "hardening": [
+      "Port security em portas de acesso.",
+      "802.1X/NAC.",
+      "Storm control.",
+      "BPDU Guard onde aplicável.",
+      "Desabilitar DTP em ambientes Cisco quando não usado.",
+      "Documentação e revisão periódica de portas."
+    ],
+    "detectionIdeas": [
+      "Comparar MACs aprendidos com inventário.",
+      "Gerar alerta quando porta de usuário tiver muitos MACs.",
+      "Correlacionar MAC, VLAN, DHCP, NAC e autenticação.",
+      "Monitorar mudanças de STP e link flap."
+    ]
+  },
+  "lab": {
+    "id": "lab-3.3",
+    "title": "Observando aprendizado MAC, forwarding e flooding de forma defensiva",
+    "labType": "security",
+    "objective": "Entender como um switch aprende MACs, quando encaminha seletivamente e quando faz flooding, usando evidências seguras e sem executar ataques.",
+    "scenario": "Você recebeu a tarefa de explicar por que um host aparece em determinada porta do switch e por que alguns frames de descoberta/broadcast aparecem para vários dispositivos na mesma VLAN.",
+    "topology": "Host A -> Switch -> Host B/Gateway; opcionalmente Host C na mesma VLAN para raciocinar sobre flooding.",
+    "architecture": "Rede local Ethernet com switch de acesso, portas access em uma VLAN e gateway local. O laboratório pode ser conceitual, local, Packet Tracer, GNS3 ou switch real autorizado.",
+    "prerequisites": [
+      "Ter concluído as aulas 3.1 e 3.2.",
+      "Ter acesso a terminal Windows/Linux.",
+      "Opcional: Packet Tracer, GNS3 ou switch gerenciável autorizado."
+    ],
+    "tools": [
+      "Windows PowerShell ou Prompt",
+      "Terminal Linux",
+      "Opcional: Cisco Packet Tracer",
+      "Opcional: switch gerenciável autorizado",
+      "Opcional: Wireshark apenas em ambiente permitido"
+    ],
+    "estimatedTimeMinutes": 60,
+    "cost": "zero",
+    "safetyNotes": [
+      "Não execute MAC flooding, spoofing ou ataques em redes reais.",
+      "Não altere VLANs, portas ou configurações de switch sem autorização.",
+      "Sanitize MACs, IPs, nomes de host e identificadores ao documentar.",
+      "Em rede corporativa, apenas observe comandos autorizados ou simule em laboratório."
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "title": "Coletar MAC local",
+        "instruction": "Identifique o MAC da interface ativa do seu computador.",
+        "command": "Windows: getmac /v\nLinux: ip link",
+        "expectedOutput": "Endereço MAC/link da interface ativa.",
+        "explanation": "Esse MAC é o que o switch poderá aprender como origem quando seu host enviar frames."
+      },
+      {
+        "number": 2,
+        "title": "Gerar tráfego local seguro",
+        "instruction": "Faça um ping para o gateway para gerar tráfego local comum.",
+        "command": "Windows: ping <gateway>\nLinux: ping -c 4 <gateway>",
+        "expectedOutput": "Respostas ou, se ICMP for bloqueado, pelo menos tentativa de tráfego para o gateway.",
+        "explanation": "Ao enviar tráfego, o host força a rede a usar ARP e frames Ethernet."
+      },
+      {
+        "number": 3,
+        "title": "Observar vizinhos locais",
+        "instruction": "Veja a tabela ARP/neighbor do host.",
+        "command": "Windows: arp -a\nLinux: ip neigh",
+        "expectedOutput": "Entrada do gateway com IP e MAC correspondente.",
+        "explanation": "A tabela local mostra a associação entre IP do próximo salto e MAC local usado na entrega Ethernet."
+      },
+      {
+        "number": 4,
+        "title": "Raciocinar como o switch",
+        "instruction": "Desenhe uma tabela com MAC de origem, porta de entrada, VLAN e ação esperada do switch.",
+        "command": "Conceitual: MAC A -> porta 1 -> VLAN 10; MAC B desconhecido -> flooding na VLAN 10",
+        "expectedOutput": "Tabela simples de aprendizado e decisão.",
+        "explanation": "Mesmo sem acesso ao switch, você pode modelar a decisão: aprender origem e consultar destino."
+      },
+      {
+        "number": 5,
+        "title": "Opcional Cisco: consultar tabela MAC",
+        "instruction": "Em switch autorizado ou simulador, observe a tabela MAC dinâmica.",
+        "command": "show mac address-table dynamic\nshow mac address-table interface <interface>",
+        "expectedOutput": "MACs associados a VLANs e portas.",
+        "explanation": "Essa é a evidência direta do aprendizado MAC no switch."
+      },
+      {
+        "number": 6,
+        "title": "Analisar anomalias hipotéticas",
+        "instruction": "Liste o que você investigaria se o mesmo MAC aparecesse em duas portas alternando.",
+        "command": "show logging\nshow spanning-tree detail\nshow interfaces status",
+        "expectedOutput": "Plano de investigação com logs, STP, portas, uplinks e inventário.",
+        "explanation": "MAC flapping exige correlação; não conclua causa sem evidência."
+      }
+    ],
+    "expectedResult": "O aluno deve produzir uma tabela explicando aprendizado MAC, forwarding e flooding, além de um pequeno relatório de evidências e hipóteses defensivas.",
+    "validation": [
+      {
+        "check": "MAC local identificado",
+        "command": "getmac /v ou ip link",
+        "expected": "MAC da interface ativa documentado de forma sanitizada.",
+        "ifFails": "Verificar interface correta, Wi-Fi/Ethernet ativa e permissões."
+      },
+      {
+        "check": "Gateway ou vizinho local observado",
+        "command": "arp -a ou ip neigh",
+        "expected": "Entrada do gateway ou vizinho local.",
+        "ifFails": "Gerar tráfego para o gateway e verificar configuração IP."
+      },
+      {
+        "check": "Tabela conceitual de switch preenchida",
+        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "expected": "Origem aprendida, destino consultado e ação descrita.",
+        "ifFails": "Revisar diferença entre MAC de origem e MAC de destino."
+      },
+      {
+        "check": "Opcional Cisco validado",
+        "command": "show mac address-table dynamic",
+        "expected": "MACs associados a VLANs e portas.",
+        "ifFails": "Gerar tráfego, verificar VLAN, link e modo da porta."
+      }
+    ],
+    "troubleshooting": [
+      {
+        "symptom": "MAC não aparece no switch",
+        "probableCause": "Host não enviou tráfego, porta errada, VLAN errada ou aging expirado.",
+        "howToConfirm": "Gerar tráfego e consultar tabela MAC por interface/VLAN.",
+        "fix": "Validar link, VLAN, interface e tráfego recente."
+      },
+      {
+        "symptom": "MAC aparece em várias portas",
+        "probableCause": "Loop, bridge, VM, docking, uplink ou MAC flapping.",
+        "howToConfirm": "Ver logs, STP, topologia física e histórico de MAC moves.",
+        "fix": "Corrigir topologia, remover bridge indevida ou aplicar controles apropriados."
+      },
+      {
+        "symptom": "Flooding alto",
+        "probableCause": "Destino desconhecido persistente, tabela saturada, loop ou broadcast domain grande.",
+        "howToConfirm": "Analisar contadores, storm control, tabela MAC e captura autorizada.",
+        "fix": "Segmentar, corrigir loop, ajustar controles e investigar origem."
+      }
+    ],
+    "improvements": [
+      "Repetir em Packet Tracer com três hosts e um switch.",
+      "Criar tabela de MACs esperados por porta em laboratório.",
+      "Adicionar VLANs na próxima etapa para entender separação por domínio.",
+      "Comparar comportamento de hub e switch na aula 3.4."
+    ],
+    "evidenceToCollect": [
+      "MAC local sanitizado",
+      "Gateway sanitizado",
+      "Tabela ARP/neighbor",
+      "Tabela conceitual de aprendizado MAC",
+      "Opcional: saída sanitizada de show mac address-table",
+      "Hipóteses e limitações"
+    ],
+    "questions": [
+      "Por que o switch aprende pelo MAC de origem e não pelo MAC de destino?",
+      "Quando flooding é comportamento normal?",
+      "Por que VLAN precisa fazer parte da leitura da tabela MAC?",
+      "Por que MAC não prova identidade de usuário?"
+    ],
+    "challenge": "Explique como investigaria MAC flapping entre duas portas sem interromper produção desnecessariamente.",
+    "solution": "Coletaria logs de MAC move, tabela MAC por VLAN, estado das interfaces, STP, topologia física, inventário e contexto de uplinks/APs/virtualização. Só aplicaria bloqueio ou mudança após evidência proporcional, priorizando contenção segura e janela controlada."
+  },
+  "mentorQuestions": [
+    {
+      "type": "reflexão",
+      "question": "Por que um switch precisa aprender MACs dinamicamente em vez de exigir configuração manual?",
+      "hints": [
+        "Pense em mobilidade de hosts.",
+        "Pense em operação diária."
+      ],
+      "expectedIdeas": [
+        "escala",
+        "automação",
+        "mudança de porta",
+        "redução de configuração manual"
+      ],
+      "explanation": "O aprendizado dinâmico permite que a LAN funcione mesmo com dispositivos mudando de porta, desde que controles de segurança complementem esse comportamento."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "Um MAC aparece alternando entre duas portas. Quais hipóteses você levantaria antes de agir?",
+      "hints": [
+        "Pense em loop.",
+        "Pense em virtualização e bridge.",
+        "Pense em uplink e AP."
+      ],
+      "expectedIdeas": [
+        "MAC flapping",
+        "loop",
+        "bridge",
+        "VM",
+        "AP",
+        "uplink",
+        "STP"
+      ],
+      "explanation": "A resposta madura separa causa física, lógica, virtual e de segurança antes de aplicar contenção."
+    },
+    {
+      "type": "cenário real",
+      "question": "Uma porta de usuário aprende 80 MACs em poucos minutos. Isso é sempre ataque?",
+      "hints": [
+        "Pense em AP, telefone IP, mini-switch e hypervisor.",
+        "Pense em inventário."
+      ],
+      "expectedIdeas": [
+        "pode ser anormal",
+        "precisa de contexto",
+        "validar função da porta",
+        "correlacionar logs"
+      ],
+      "explanation": "Muitos MACs em porta de usuário podem indicar risco, mas o contexto define se é AP autorizado, trunk mal configurado, virtualização ou abuso."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q3.3.1",
+      "type": "conceito",
+      "q": "Qual campo o switch usa para aprender que um MAC está em determinada porta?",
+      "opts": [
+        "MAC de origem do frame",
+        "MAC de destino do frame",
+        "Endereço IP público",
+        "Nome DNS do host"
+      ],
+      "a": 0,
+      "exp": "O switch aprende observando o MAC de origem do frame que entra em uma porta.",
+      "difficulty": "iniciante",
+      "topic": "aprendizado MAC"
+    },
+    {
+      "id": "q3.3.2",
+      "type": "diagnóstico",
+      "q": "Quando o switch recebe um frame unicast para um MAC de destino desconhecido, o comportamento esperado é:",
+      "opts": [
+        "Descartar sempre",
+        "Fazer flooding dentro da VLAN",
+        "Enviar ao roteador automaticamente",
+        "Converter para broadcast IP"
+      ],
+      "a": 1,
+      "exp": "Unknown unicast flooding é o comportamento esperado quando o destino ainda não está na tabela MAC.",
+      "difficulty": "iniciante-intermediário",
+      "topic": "flooding"
+    },
+    {
+      "id": "q3.3.3",
+      "type": "comparação",
+      "q": "Qual é a principal diferença entre hub e switch?",
+      "opts": [
+        "Hub roteia IP; switch não",
+        "Hub repete para todos; switch aprende MAC e encaminha seletivamente",
+        "Hub criptografa tráfego; switch descriptografa",
+        "Switch só funciona com Wi-Fi"
+      ],
+      "a": 1,
+      "exp": "Hub repete sinais; switch usa tabela MAC para encaminhar frames de forma seletiva.",
+      "difficulty": "iniciante",
+      "topic": "hub vs switch"
+    },
+    {
+      "id": "q3.3.4",
+      "type": "segurança",
+      "q": "Por que MAC não deve ser tratado como identidade forte?",
+      "opts": [
+        "Porque pode ser virtualizado, alterado ou clonado",
+        "Porque sempre atravessa a internet",
+        "Porque é criptografado por padrão",
+        "Porque switches ignoram MAC"
+      ],
+      "a": 0,
+      "exp": "MAC é evidência útil, mas pode ser alterado/virtualizado e precisa de correlação com outros controles.",
+      "difficulty": "intermediário",
+      "topic": "segurança"
+    },
+    {
+      "id": "q3.3.5",
+      "type": "troubleshooting",
+      "q": "Mesmo MAC alternando entre duas portas indica principalmente qual tipo de investigação?",
+      "opts": [
+        "MAC flapping, loop, bridge ou virtualização",
+        "Erro de senha HTTP",
+        "Expiração de certificado TLS",
+        "Problema exclusivo de DNS externo"
+      ],
+      "a": 0,
+      "exp": "MAC flapping é evidência de Camada 2 e deve levar a investigar loop, bridge, uplinks, virtualização e logs.",
+      "difficulty": "intermediário",
+      "topic": "MAC flapping"
+    },
+    {
+      "id": "q3.3.6",
+      "type": "arquitetura",
+      "q": "Por que a VLAN precisa ser considerada ao ler a tabela MAC?",
+      "opts": [
+        "Porque o aprendizado MAC é contextual ao domínio/VLAN",
+        "Porque VLAN substitui endereço MAC",
+        "Porque VLAN é sempre Camada 7",
+        "Porque VLAN impede qualquer broadcast"
+      ],
+      "a": 0,
+      "exp": "A tabela MAC deve ser lida junto com VLAN e porta; a mesma porta pode carregar múltiplas VLANs em trunks.",
+      "difficulty": "intermediário",
+      "topic": "VLAN"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc3.3.1",
+      "front": "Como um switch aprende MACs?",
+      "back": "Observando o MAC de origem dos frames que entram em suas portas e associando MAC, porta e VLAN.",
+      "tags": [
+        "switch",
+        "mac"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc3.3.2",
+      "front": "O que é forwarding?",
+      "back": "É o encaminhamento seletivo de um frame para a porta onde o MAC de destino é conhecido.",
+      "tags": [
+        "forwarding"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc3.3.3",
+      "front": "O que é flooding?",
+      "back": "É o envio de um frame para várias portas da mesma VLAN quando o destino é desconhecido ou quando o frame é broadcast/multicast conforme o caso.",
+      "tags": [
+        "flooding"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc3.3.4",
+      "front": "O que é MAC flapping?",
+      "back": "É quando o mesmo MAC aparece alternando entre portas, podendo indicar loop, bridge, uplink, virtualização ou anomalia.",
+      "tags": [
+        "troubleshooting",
+        "segurança"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc3.3.5",
+      "front": "Por que MAC não é identidade forte?",
+      "back": "Porque pode ser alterado, clonado, virtualizado ou compartilhado em cenários específicos; precisa de correlação.",
+      "tags": [
+        "segurança"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc3.3.6",
+      "front": "O que é aging time da tabela MAC?",
+      "back": "É o tempo após o qual uma entrada MAC dinâmica expira se não houver tráfego renovando o aprendizado.",
+      "tags": [
+        "tabela MAC"
+      ],
+      "difficulty": "intermediário"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex3.3.1",
+      "type": "conceitual",
+      "prompt": "Explique por que o switch aprende usando MAC de origem e encaminha usando MAC de destino.",
+      "expectedAnswer": "O MAC de origem informa de onde veio o frame e permite aprender a porta do remetente; o MAC de destino informa para onde o frame deve ser entregue.",
+      "explanation": "Essa separação é a base de aprendizado e decisão de encaminhamento."
+    },
+    {
+      "id": "ex3.3.2",
+      "type": "diagnóstico",
+      "prompt": "Um switch mostra o MAC 00:11:22:33:44:55 alternando entre Gi0/3 e Gi0/7. Liste quatro hipóteses.",
+      "expectedAnswer": "Loop, dispositivo em bridge, AP/uplink, VM/hypervisor, docking station, erro de cabeamento ou comportamento suspeito.",
+      "explanation": "MAC flapping é sintoma; a causa precisa de evidências adicionais."
+    },
+    {
+      "id": "ex3.3.3",
+      "type": "arquitetura",
+      "prompt": "Desenhe uma tabela com três hosts, suas portas, VLANs e ação esperada do switch para destino conhecido e desconhecido.",
+      "expectedAnswer": "Tabela contendo MAC A/porta/VLAN, MAC B/porta/VLAN, MAC C/porta/VLAN; destino conhecido gera forwarding; desconhecido gera flooding na VLAN.",
+      "explanation": "O exercício força a pensar no switch como tabela e decisão."
+    },
+    {
+      "id": "ex3.3.4",
+      "type": "segurança",
+      "prompt": "Uma porta de usuário aprende 40 MACs. O que você verificaria antes de bloquear?",
+      "expectedAnswer": "Função da porta, se é AP, telefone, mini-switch, hypervisor, trunk, logs, inventário, NAC, VLAN e horário da mudança.",
+      "explanation": "A resposta correta evita indisponibilidade e separa contexto legítimo de risco."
+    }
+  ],
+  "challenge": {
+    "title": "Flooding e MAC flapping em uma VLAN administrativa",
+    "scenario": "Durante a manhã, usuários relatam lentidão intermitente. O switch de acesso mostra aumento de flooding, eventos de MAC move e uma porta de usuário aprendendo muitos MACs.",
+    "tasks": [
+      "Montar hipóteses defensivas.",
+      "Listar evidências necessárias.",
+      "Separar ações imediatas de ações de correção definitiva.",
+      "Propor controles preventivos.",
+      "Escrever um resumo técnico sanitizado."
+    ],
+    "constraints": [
+      "Não executar ataques.",
+      "Não desligar portas críticas sem validação.",
+      "Considerar AP, telefone IP, mini-switch, VM e loop.",
+      "Separar fato, hipótese e recomendação."
+    ],
+    "expectedDeliverables": [
+      "Matriz de hipóteses.",
+      "Lista de comandos e evidências.",
+      "Plano de contenção proporcional.",
+      "Plano de prevenção.",
+      "Relatório sanitizado."
+    ],
+    "gradingRubric": [
+      {
+        "criterion": "Raciocínio de Camada 2",
+        "points": 30,
+        "description": "Usa tabela MAC, VLAN, porta, aging, STP e logs."
+      },
+      {
+        "criterion": "Segurança defensiva",
+        "points": 25,
+        "description": "Propõe controles sem instrução ofensiva perigosa."
+      },
+      {
+        "criterion": "Operação segura",
+        "points": 25,
+        "description": "Evita ações disruptivas sem evidência."
+      },
+      {
+        "criterion": "Comunicação técnica",
+        "points": 20,
+        "description": "Produz relatório claro e sanitizado."
+      }
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "O caso não deve começar com conclusões. Flooding e MAC flapping são sintomas de Camada 2. A investigação deve identificar porta, VLAN, histórico, função da porta, STP, contadores e mudanças recentes antes de aplicar contenção.",
+    "steps": [
+      "Coletar show mac address-table e logs de MAC move.",
+      "Verificar interface, VLAN, trunk/access e descrição da porta.",
+      "Checar STP topology changes e link flap.",
+      "Comparar número de MACs por porta com inventário.",
+      "Identificar se a porta é AP, telefone, uplink, hypervisor ou usuário final.",
+      "Aplicar contenção proporcional: isolar porta suspeita, mover para quarentena ou agendar correção.",
+      "Recomendar port security, 802.1X, storm control, BPDU Guard e documentação."
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "Desligar todos os switches da área.",
+        "whyItIsWrong": "É ação desproporcional e causa indisponibilidade ampla sem evidência suficiente."
+      },
+      {
+        "answer": "Ignorar porque flooding é normal.",
+        "whyItIsWrong": "Flooding inicial pode ser normal, mas aumento persistente com MAC flapping exige investigação."
+      },
+      {
+        "answer": "Concluir que é ataque apenas porque há muitos MACs.",
+        "whyItIsWrong": "Pode ser AP, hypervisor, telefone IP, mini-switch ou trunk mal documentado."
+      }
+    ],
+    "finalAnswer": "Uma resposta madura coleta evidências de switch, STP, VLAN, portas, inventário e logs; classifica hipóteses; aplica contenção proporcional; e recomenda controles preventivos. O relatório deve separar fatos observados, hipóteses e ações recomendadas."
+  },
+  "glossary": [
+    {
+      "term": "Tabela MAC",
+      "shortDefinition": "Tabela usada pelo switch para associar MACs a portas e VLANs.",
+      "longDefinition": "Estrutura dinâmica ou estática que permite ao switch encaminhar frames com base no MAC de destino.",
+      "example": "MAC A aprendido na porta Gi0/1 da VLAN 10.",
+      "relatedTerms": [
+        "switch",
+        "forwarding",
+        "VLAN"
+      ],
+      "relatedLessons": [
+        "3.2",
+        "3.3",
+        "3.7"
+      ]
+    },
+    {
+      "term": "Forwarding",
+      "shortDefinition": "Encaminhamento seletivo de frame para a porta correta.",
+      "longDefinition": "Acontece quando o switch conhece o MAC de destino dentro da VLAN e envia o frame apenas pela porta associada.",
+      "example": "Frame para MAC B sai apenas pela porta onde MAC B foi aprendido.",
+      "relatedTerms": [
+        "switch",
+        "tabela MAC"
+      ],
+      "relatedLessons": [
+        "3.3"
+      ]
+    },
+    {
+      "term": "Flooding",
+      "shortDefinition": "Envio de frame para múltiplas portas da VLAN.",
+      "longDefinition": "Acontece com broadcast, alguns multicast e unicast desconhecido, respeitando o domínio de broadcast/VLAN.",
+      "example": "ARP Request é enviado para várias portas da VLAN.",
+      "relatedTerms": [
+        "broadcast",
+        "unknown unicast"
+      ],
+      "relatedLessons": [
+        "3.3",
+        "3.4",
+        "3.5"
+      ]
+    },
+    {
+      "term": "MAC flapping",
+      "shortDefinition": "Mesmo MAC alternando rapidamente entre portas.",
+      "longDefinition": "Sintoma que pode indicar loop, bridge indevida, virtualização, uplink mal documentado ou anomalia.",
+      "example": "O switch registra MAC X ora na porta 5, ora na porta 7.",
+      "relatedTerms": [
+        "loop",
+        "STP",
+        "troubleshooting"
+      ],
+      "relatedLessons": [
+        "3.3",
+        "3.8",
+        "3.9"
+      ]
+    },
+    {
+      "term": "Aging time",
+      "shortDefinition": "Tempo de expiração de uma entrada MAC dinâmica.",
+      "longDefinition": "Se o switch não vê tráfego daquele MAC por certo período, remove a entrada da tabela.",
+      "example": "Após expirar, um novo frame para o destino pode gerar flooding até reaprender.",
+      "relatedTerms": [
+        "tabela MAC",
+        "flooding"
+      ],
+      "relatedLessons": [
+        "3.3"
+      ]
+    },
+    {
+      "term": "CAM table",
+      "shortDefinition": "Nome comum para a tabela de encaminhamento MAC em switches.",
+      "longDefinition": "Tabela de memória associativa usada para decisões rápidas de encaminhamento por MAC.",
+      "example": "Alguns materiais chamam tabela MAC de CAM table.",
+      "relatedTerms": [
+        "tabela MAC",
+        "switch"
+      ],
+      "relatedLessons": [
+        "3.3",
+        "3.9"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "standard",
+      "title": "IEEE 802.3 Ethernet",
+      "organization": "IEEE",
+      "url": "https://standards.ieee.org/standard/802_3-2022.html",
+      "note": "Referência normativa principal para Ethernet."
+    },
+    {
+      "type": "internal-course",
+      "title": "Frame Ethernet e endereço MAC",
+      "organization": "Deixando de ser TBN",
+      "url": "internal://redes/m03/lesson-03-02",
+      "note": "Aula base para entender o que o switch lê em cada frame."
+    },
+    {
+      "type": "internal-course",
+      "title": "Camada 2 — Enlace",
+      "organization": "Deixando de ser TBN",
+      "url": "internal://redes/m02/lesson-02-04",
+      "note": "Base conceitual do Modelo OSI para switching."
+    },
+    {
+      "type": "official-doc",
+      "title": "Cisco Catalyst Switch Software Configuration Guides",
+      "organization": "Cisco",
+      "url": "https://www.cisco.com/",
+      "note": "Referência prática para comandos e recursos de switching em equipamentos Cisco."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "redes de laboratório e virtualização",
+      "lesson": "a definir",
+      "reason": "Bridges, vSwitches, runners e laboratórios com VMs dependem do entendimento de switching e aprendizado MAC."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "controles de acesso de rede",
+      "lesson": "a definir",
+      "reason": "802.1X/NAC complementa o controle de acesso em portas de switch e evita confiar apenas em MAC."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70,
+      "oneOf": [
+        "labMarkedDone",
+        "practicalExerciseDone"
+      ]
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "3.4"
+    ]
+  }
+}

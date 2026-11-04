@@ -1,0 +1,90 @@
+{
+  "id": "3.3",
+  "versao": "original",
+  "titulo": "Switches: aprendizado MAC, forwarding e flooding",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4909,
+    "invisiveis": 766,
+    "teoriaVisivel": 2686
+  },
+  "porCampoVisivel": {
+    "content.motivation": 192,
+    "content.history": 163,
+    "content.problem": 148,
+    "content.evolution": 123,
+    "content.concept": 135,
+    "content.internals": 172,
+    "content.architecture": 147,
+    "content.analogy": 101,
+    "content.simpleExample": 97,
+    "content.enterpriseExample": 115,
+    "content.cloudExample": 92,
+    "content.devsecopsExample": 99,
+    "content.securityExample": 169,
+    "content.diagram": 3,
+    "content.summary": 79,
+    "content.nextTheme": 34,
+    "security": 311,
+    "troubleshooting": 272,
+    "glossary": 234,
+    "title+subtitle": 26,
+    "objectives": 63,
+    "learningOutcomes": 90,
+    "quiz": 292,
+    "flashcards": 143,
+    "mentorQuestions": 164,
+    "exercises": 184,
+    "challenge": 131,
+    "commentedSolution": 187,
+    "references": 62,
+    "linksToOtherCourses": 58,
+    "lab": 823
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 44,
+    "content.exercisesIntro": 27,
+    "content.challengeIntro": 30,
+    "content.solutionIntro": 27,
+    "networkContext": 26,
+    "protocolFields": 106,
+    "packetFlow": 145,
+    "deepDive": 231,
+    "commonMistakes": 130
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 60,
+    "alternativa_5minPasso_maisLeitura": 36.3,
+    "plausivel": true,
+    "palavras": 823
+  },
+  "duracao": {
+    "declarada": "90-125 min",
+    "estimatedStudyTimeMinutes": 125,
+    "M": 107.5,
+    "T": 142.7,
+    "partes": {
+      "teoria": 20.7,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 60
+    },
+    "faixaRecomendada": "120-170 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 17
+  }
+}

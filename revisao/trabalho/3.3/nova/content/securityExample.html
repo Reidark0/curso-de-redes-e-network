@@ -1,0 +1,10 @@
+<section class="lesson-section lesson-section--security"><h2>13. Exemplo em Segurança</h2>
+<p>Do ponto de vista defensivo, switches reduzem exposição em comparação com hubs, mas não tornam a LAN automaticamente segura. A tabela MAC pode ser abusada, portas físicas podem ser usadas indevidamente, flooding pode aumentar visibilidade de tráfego e loops podem causar indisponibilidade.</p>
+<table class="data-table risk-table"><thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação defensiva</th></tr></thead><tbody>
+<tr><td>MAC flooding</td><td>Muitos MACs diferentes aparecem rapidamente em uma porta.</td><td>Saturação da tabela e flooding anormal.</td><td>Port security, limites de MAC, 802.1X, monitoramento e resposta proporcional.</td></tr>
+<tr><td>MAC flapping</td><td>Mesmo MAC alterna entre portas.</td><td>Instabilidade, loop ou bridge indevida.</td><td>Investigar cabos, STP, uplinks, virtualização e logs.</td></tr>
+<tr><td>Porta física exposta</td><td>Dispositivo não autorizado conectado.</td><td>Acesso inicial à LAN.</td><td>802.1X, NAC, VLAN de quarentena, bloqueio de portas não usadas.</td></tr>
+<tr><td>Flooding excessivo</td><td>Unicast desconhecido e broadcast crescem.</td><td>Ruído, perda de desempenho e exposição.</td><td>Segmentação, correção de loops, STP, storm control e análise de causa.</td></tr>
+</tbody></table>
+<p>O foco aqui é defensivo: entender os conceitos para detectar, mitigar e documentar. Não execute testes de abuso em redes reais sem autorização explícita e ambiente controlado.</p>
+</section>

@@ -1,0 +1,32 @@
+<section class="lesson-section lesson-section--diagram"><h2>14. Diagrama SVG</h2>
+<svg class="lesson-svg" viewBox="0 0 980 520" role="img" aria-labelledby="m03l03-title m03l03-desc">
+<title id="m03l03-title">Switch aprendendo MAC, fazendo forwarding e flooding</title>
+<desc id="m03l03-desc">Diagrama mostra três hosts conectados a um switch. O switch aprende MAC de origem, consulta tabela MAC e decide entre encaminhar para uma porta conhecida ou inundar a VLAN quando o destino é desconhecido.</desc>
+<defs><marker id="m03l03-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" class="svg-arrow" /></marker></defs>
+<rect x="390" y="190" width="210" height="110" rx="16" class="svg-node svg-node--switch" />
+<text x="495" y="225" text-anchor="middle" class="svg-label">Switch L2</text>
+<text x="495" y="250" text-anchor="middle" class="svg-label svg-label--small">Tabela MAC</text>
+<text x="495" y="274" text-anchor="middle" class="svg-label svg-label--small">MAC A → porta 1</text>
+<rect x="70" y="70" width="180" height="80" rx="14" class="svg-node svg-node--client" />
+<text x="160" y="105" text-anchor="middle" class="svg-label">Host A</text>
+<text x="160" y="128" text-anchor="middle" class="svg-label svg-label--small">MAC A / porta 1</text>
+<rect x="730" y="70" width="180" height="80" rx="14" class="svg-node svg-node--server" />
+<text x="820" y="105" text-anchor="middle" class="svg-label">Host B</text>
+<text x="820" y="128" text-anchor="middle" class="svg-label svg-label--small">MAC B / porta 2</text>
+<rect x="70" y="360" width="180" height="80" rx="14" class="svg-node svg-node--client" />
+<text x="160" y="395" text-anchor="middle" class="svg-label">Host C</text>
+<text x="160" y="418" text-anchor="middle" class="svg-label svg-label--small">MAC C / porta 3</text>
+<rect x="720" y="350" width="210" height="100" rx="14" class="svg-node svg-node--security" />
+<text x="825" y="384" text-anchor="middle" class="svg-label">Controles</text>
+<text x="825" y="408" text-anchor="middle" class="svg-label svg-label--small">Port security • 802.1X</text>
+<text x="825" y="430" text-anchor="middle" class="svg-label svg-label--small">Logs • Storm control</text>
+<line x1="250" y1="110" x2="390" y2="220" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m03l03-arrow)" />
+<text x="300" y="145" class="svg-label svg-label--small">1. aprende origem</text>
+<line x1="600" y1="220" x2="730" y2="110" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m03l03-arrow)" />
+<text x="640" y="145" class="svg-label svg-label--small">2. destino conhecido</text>
+<line x1="390" y1="270" x2="250" y2="400" class="svg-flow svg-flow--blocked" marker-end="url(#m03l03-arrow)" />
+<text x="280" y="340" class="svg-label svg-label--small">flooding se desconhecido</text>
+<line x1="600" y1="285" x2="720" y2="395" class="svg-flow" marker-end="url(#m03l03-arrow)" />
+<text x="650" y="335" class="svg-label svg-label--small">monitorar anomalias</text>
+</svg>
+</section>

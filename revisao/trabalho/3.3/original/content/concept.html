@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--concept"><h2>5. Conceito</h2>
+<p>Um <strong>switch Ethernet</strong> é um dispositivo de Camada 2 que recebe frames em portas, aprende endereços MAC de origem, registra esses MACs em uma tabela associada a portas e VLANs, e usa essa tabela para encaminhar frames de forma seletiva.</p>
+<div class="definition-box"><strong>Definição:</strong> aprendizado MAC é o processo pelo qual o switch observa o MAC de origem de um frame e registra que aquele MAC está alcançável pela porta onde o frame entrou.</div>
+<p>Quando o switch conhece o MAC de destino, ele faz <strong>forwarding</strong> para a porta correta. Quando o destino está na mesma porta de entrada, ele pode filtrar e não reenviar. Quando não conhece o destino, faz <strong>flooding</strong> dentro daquela VLAN. Quando o destino é broadcast, como <code>ff:ff:ff:ff:ff:ff</code>, ele também envia para todas as portas relevantes da VLAN, exceto a porta de entrada.</p>
+</section>
