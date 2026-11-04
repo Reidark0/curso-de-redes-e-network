@@ -1,0 +1,10 @@
+
+<section class="lesson-section lesson-section--devsecops">
+  <h2>12. Exemplo em DevSecOps</h2>
+  <p>
+    Em DevSecOps, pipelines transformam código, configuração e evidências em artefatos digitais. Um commit vira diff. Um build vira imagem de container. Uma política vira resultado de validação. Um teste vira relatório. Um segredo mal tratado pode virar string exposta em log. Um token OIDC usado em pipeline é uma estrutura de dados codificada, assinada e interpretada por serviços de identidade.</p>
+  <p>
+    Quando uma pipeline envia uma imagem para um registry, a imagem não é uma “caixa mágica”. Ela é um conjunto de camadas, manifestos, hashes e blobs. Quando o Kubernetes baixa essa imagem, ele valida referências, baixa bytes e monta o filesystem do container. Quando uma ferramenta SAST ou IaC scanner aponta uma falha, ela está interpretando arquivos e estruturas segundo regras.</p>
+  <p>
+    Esta aula prepara o aluno para não tratar automação como magia. Cada etapa do pipeline recebe, transforma e entrega representações. Erros de encoding, serialização, escaping, truncamento de log, formatação YAML, Base64 em secrets e manipulação incorreta de variáveis são falhas comuns em ambientes automatizados.</p>
+</section>

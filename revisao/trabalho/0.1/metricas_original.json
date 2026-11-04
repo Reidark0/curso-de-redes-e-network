@@ -1,0 +1,87 @@
+{
+  "id": "0.1",
+  "versao": "original",
+  "titulo": "Como computadores representam informação",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 6802,
+    "invisiveis": 646,
+    "teoriaVisivel": 3993
+  },
+  "porCampoVisivel": {
+    "content.motivation": 260,
+    "content.history": 282,
+    "content.problem": 273,
+    "content.evolution": 214,
+    "content.concept": 239,
+    "content.internals": 306,
+    "content.architecture": 183,
+    "content.analogy": 161,
+    "content.simpleExample": 182,
+    "content.enterpriseExample": 193,
+    "content.cloudExample": 186,
+    "content.devsecopsExample": 169,
+    "content.securityExample": 189,
+    "content.diagram": 3,
+    "content.summary": 78,
+    "content.nextTheme": 55,
+    "security": 419,
+    "troubleshooting": 321,
+    "glossary": 280,
+    "title+subtitle": 27,
+    "objectives": 77,
+    "learningOutcomes": 101,
+    "quiz": 347,
+    "flashcards": 139,
+    "mentorQuestions": 200,
+    "exercises": 247,
+    "challenge": 197,
+    "commentedSolution": 296,
+    "references": 76,
+    "linksToOtherCourses": 57,
+    "lab": 1045
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 58,
+    "content.exercisesIntro": 34,
+    "content.challengeIntro": 34,
+    "content.solutionIntro": 35,
+    "networkContext": 40,
+    "deepDive": 285,
+    "commonMistakes": 160
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "estimatedTimeMinutes": 35,
+    "alternativa_5minPasso_maisLeitura": 43,
+    "plausivel": true,
+    "palavras": 1045
+  },
+  "duracao": {
+    "declarada": "55-80 min",
+    "estimatedStudyTimeMinutes": 80,
+    "M": 67.5,
+    "T": 127.7,
+    "partes": {
+      "teoria": 30.7,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 35
+    },
+    "faixaRecomendada": "110-155 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 26
+  }
+}

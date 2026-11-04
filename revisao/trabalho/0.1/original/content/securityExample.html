@@ -1,0 +1,45 @@
+
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>
+    Segurança da Informação depende profundamente de representação correta. Um controle de acesso precisa interpretar identidade e permissões. Um WAF precisa interpretar requisições. Um antivírus precisa interpretar arquivos. Um IDS precisa interpretar tráfego. Um parser de aplicação precisa interpretar entradas de usuário. Se a interpretação falha, surgem vulnerabilidades.</p>
+  <table class="data-table risk-table">
+    <thead>
+      <tr>
+        <th>Risco</th>
+        <th>Como aparece</th>
+        <th>Impacto</th>
+        <th>Mitigação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Confundir codificação com criptografia</td>
+        <td>Base64 tratado como se protegesse segredo</td>
+        <td>Exposição de tokens, senhas ou dados sensíveis</td>
+        <td>Usar criptografia real, controle de acesso e gestão segura de segredos</td>
+      </tr>
+      <tr>
+        <td>Parsing inseguro</td>
+        <td>Aplicação interpreta entrada malformada de modo inesperado</td>
+        <td>Falhas de validação, bypass ou execução indevida</td>
+        <td>Validar entrada, usar parsers seguros e testar casos malformados</td>
+      </tr>
+      <tr>
+        <td>Logs incompletos</td>
+        <td>Eventos críticos não são representados nos logs</td>
+        <td>Investigação lenta ou inconclusiva</td>
+        <td>Definir modelo de logging, campos obrigatórios e retenção adequada</td>
+      </tr>
+      <tr>
+        <td>Interpretação precipitada de payload</td>
+        <td>Bytes ilegíveis classificados automaticamente como ataque</td>
+        <td>Falso positivo e perda de confiança na monitoração</td>
+        <td>Verificar protocolo, formato, compressão, encoding e contexto</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout callout--security">
+    <strong>Limite ético:</strong> nesta aula, a análise de representação é usada para diagnóstico, defesa, auditoria e compreensão. Não há instruções para explorar sistemas reais. Laboratórios devem ser feitos apenas em ambiente próprio e controlado.
+  </div>
+</section>
