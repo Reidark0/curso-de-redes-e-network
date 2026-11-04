@@ -4,7 +4,7 @@
   <p>Dois dispositivos finais chegam ao switch/AP da rede local; o roteador (gateway) encaminha o tráfego para um servidor interno ou para fora da rede local.</p>
   <svg class="lesson-svg" viewBox="0 0 980 460" role="img" aria-labelledby="m01l01-title m01l01-desc">
   <title id="m01l01-title">Uma rede como sistema de comunicação entre dispositivos</title>
-  <desc id="m01l01-desc">Diagrama mostrando dois dispositivos finais, um switch, um roteador, um serviço interno e uma nuvem externa, destacando endereçamento, meio físico, protocolo, política e observabilidade.</desc>
+  <desc id="m01l01-desc">Diagrama mostrando dois dispositivos finais, um switch, um roteador, um serviço interno e uma nuvem externa, e o gateway que separa a rede local do que está fora dela.</desc>
   <defs>
     <marker id="m01l01-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
       <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
@@ -28,11 +28,11 @@
 
   <rect x="760" y="70" width="180" height="82" rx="14" class="svg-node svg-node--server" />
   <text x="850" y="106" text-anchor="middle" class="svg-label">Servidor interno</text>
-  <text x="850" y="130" text-anchor="middle" class="svg-label svg-label--small">Arquivo / app / AD</text>
+  <text x="850" y="130" text-anchor="middle" class="svg-label svg-label--small">Arquivos / sistemas</text>
 
   <rect x="760" y="270" width="180" height="82" rx="14" class="svg-node svg-node--cloud" />
   <text x="850" y="306" text-anchor="middle" class="svg-label">Internet / Cloud</text>
-  <text x="850" y="330" text-anchor="middle" class="svg-label svg-label--small">SaaS / API / VPC</text>
+  <text x="850" y="330" text-anchor="middle" class="svg-label svg-label--small">Sites / serviços</text>
 
   <line x1="205" y1="111" x2="285" y2="194" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l01-arrow)" />
   <line x1="205" y1="311" x2="285" y2="236" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l01-arrow)" />
@@ -41,7 +41,7 @@
   <line x1="685" y1="235" x2="760" y2="300" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m01l01-arrow)" />
 
   <rect x="250" y="380" width="480" height="52" rx="12" class="svg-boundary" />
-  <text x="490" y="412" text-anchor="middle" class="svg-label svg-label--small">Rede = dispositivos + meio + endereços + protocolos + políticas + operação</text>
+  <text x="490" y="412" text-anchor="middle" class="svg-label svg-label--small">Rede = dispositivos + meios + endereços + protocolos + serviços + políticas</text>
 
   <text x="350" y="155" text-anchor="middle" class="svg-label svg-label--small">LAN</text>
   <text x="610" y="155" text-anchor="middle" class="svg-label svg-label--small">Gateway</text>
