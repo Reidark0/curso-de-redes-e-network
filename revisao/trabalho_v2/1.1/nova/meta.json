@@ -37,11 +37,6 @@
     "Relacionar redes domésticas, corporativas, cloud e DevSecOps.",
     "Criar um primeiro modelo mental para diagnosticar problemas básicos de conectividade."
   ],
-  "learningOutcomes": [
-    "Dado um cenário simples, o aluno identifica quem são os participantes da rede e qual problema a rede resolve.",
-    "Dado um incidente inicial, o aluno separa falha de dispositivo, meio, endereço, protocolo, serviço e política.",
-    "Dado um desenho corporativo ou cloud, o aluno explica por que a rede é mais do que cabos e Wi-Fi."
-  ],
   "networkContext": {
     "osiLayers": [
       "Visão geral de todas as camadas"
@@ -81,138 +76,6 @@
       "firewalls",
       "VPN",
       "cloud networking"
-    ]
-  },
-  "troubleshooting": {
-    "symptoms": [
-      "Usuário não acessa internet",
-      "Aplicação interna não abre",
-      "Wi-Fi conecta mas nada navega",
-      "Pipeline não alcança registry",
-      "Servidor responde por IP mas não por nome"
-    ],
-    "diagnosticQuestions": [
-      "O problema afeta um usuário, vários usuários ou todos?",
-      "O dispositivo tem IP?",
-      "Existe gateway padrão?",
-      "DNS resolve?",
-      "O caminho até o destino responde?",
-      "A porta do serviço está acessível?",
-      "Existe firewall, proxy, VPN ou política no meio?"
-    ],
-    "commands": [
-      {
-        "platform": "Windows",
-        "command": "ipconfig /all",
-        "purpose": "Ver endereço IP, máscara, gateway, DNS e informações da interface.",
-        "expectedObservation": "Interface ativa com IPv4, gateway e DNS coerentes.",
-        "interpretation": "Se não houver IP válido ou gateway, o problema pode estar antes da aplicação."
-      },
-      {
-        "platform": "Windows",
-        "command": "ping <gateway> && tracert 8.8.8.8",
-        "purpose": "Testar conectividade local e caminho básico para fora.",
-        "expectedObservation": "Resposta do gateway e saltos no caminho.",
-        "interpretation": "Falha no gateway sugere problema local; falha depois pode envolver roteamento, firewall ou provedor."
-      },
-      {
-        "platform": "Linux",
-        "command": "ip addr && ip route && resolvectl status",
-        "purpose": "Ver endereços, rotas e DNS no Linux.",
-        "expectedObservation": "Interface com IP, rota default e servidor DNS configurado.",
-        "interpretation": "Sem rota default, o host não sabe para onde enviar tráfego fora da rede local."
-      },
-      {
-        "platform": "Linux",
-        "command": "ping -c 4 $(ip route | awk '/default/ {print $3; exit}')",
-        "purpose": "Testar alcance do gateway padrão.",
-        "expectedObservation": "Perda baixa e tempos coerentes na rede local.",
-        "interpretation": "Perda para o gateway indica problema local, Wi-Fi, cabo, switch, VLAN ou firewall local."
-      },
-      {
-        "platform": "Cisco IOS",
-        "command": "show ip interface brief",
-        "purpose": "Ver interfaces, endereços e estado operacional.",
-        "expectedObservation": "Interfaces relevantes em up/up.",
-        "interpretation": "Interface down ou administratively down impede comunicação pelo caminho esperado."
-      }
-    ],
-    "decisionTree": [
-      {
-        "if": "Sem IP válido no host",
-        "then": "Verificar DHCP, cabo, Wi-Fi, VLAN ou configuração manual."
-      },
-      {
-        "if": "Tem IP, mas não pinga gateway",
-        "then": "Verificar meio físico, Wi-Fi, máscara, VLAN, firewall local ou gateway errado."
-      },
-      {
-        "if": "Pinga IP externo, mas nomes falham",
-        "then": "Investigar DNS antes de culpar internet inteira."
-      },
-      {
-        "if": "DNS resolve, mas aplicação falha",
-        "then": "Verificar porta, protocolo, TLS, proxy, autenticação e política."
-      }
-    ]
-  },
-  "security": {
-    "goodPractices": [
-      "Documentar segmentos, gateways, serviços críticos e dependências.",
-      "Separar redes por função e criticidade.",
-      "Registrar eventos em firewall, DNS, VPN, proxy e serviços críticos.",
-      "Aplicar menor privilégio também em fluxos de rede.",
-      "Revisar periodicamente regras e exceções."
-    ],
-    "badPractices": [
-      "Colocar todos os ativos na mesma rede sem segmentação.",
-      "Liberar any-any para resolver problema rápido.",
-      "Expor serviços internos diretamente na internet.",
-      "Não manter inventário de dispositivos e serviços.",
-      "Usar conectividade como substituto de autorização."
-    ],
-    "commonErrors": [
-      "Achar que NAT é firewall suficiente.",
-      "Achar que VPN torna qualquer acesso seguro automaticamente.",
-      "Ignorar logs de DNS e proxy em investigação.",
-      "Não separar rede de aplicação e identidade."
-    ],
-    "vulnerabilities": [
-      {
-        "name": "Movimento lateral por rede plana",
-        "description": "Quando muitos ativos ficam no mesmo segmento, um comprometimento pode alcançar mais sistemas.",
-        "defensiveExplanation": "O risco é a ampliação do impacto após o primeiro comprometimento.",
-        "mitigation": "Segmentação, firewalls internos, autenticação forte, EDR, logs e revisão de acessos."
-      },
-      {
-        "name": "Exposição indevida de serviço",
-        "description": "Serviços administrativos ou internos ficam acessíveis além do necessário.",
-        "defensiveExplanation": "A superfície de ataque aumenta quando portas ficam disponíveis para quem não precisa delas.",
-        "mitigation": "Inventário, regras restritivas, bastion, VPN bem controlada, private endpoints e monitoramento."
-      },
-      {
-        "name": "Fluxos sem registro",
-        "description": "Firewall, DNS, proxy e VPN não registram as conexões, ou os logs não são guardados.",
-        "defensiveExplanation": "Sem registro, não dá para reconstruir o que aconteceu num incidente nem comprovar a causa de uma falha.",
-        "mitigation": "Logs de firewall, DNS, proxy e VPN, flow logs em cloud e retenção definida."
-      }
-    ],
-    "monitoring": [
-      "Logs de firewall e proxy",
-      "DNS queries incomuns",
-      "Flow logs em cloud",
-      "Novos dispositivos na rede"
-    ],
-    "hardening": [
-      "Bloqueio padrão e liberação justificada",
-      "MFA em acessos remotos",
-      "Administração por redes restritas"
-    ],
-    "detectionIdeas": [
-      "Comparar tráfego atual com baseline",
-      "Alertar varreduras internas",
-      "Observar tentativas de acesso entre segmentos",
-      "Monitorar falhas repetidas de DNS, proxy ou VPN"
     ]
   },
   "mentorQuestions": [
@@ -659,11 +522,7 @@
   "progressRules": {
     "completeWhen": {
       "read": true,
-      "quizScoreAtLeast": 70,
-      "oneOf": [
-        "exerciseDone",
-        "practicalExerciseDone"
-      ]
+      "quizScoreAtLeast": 70
     },
     "accessPolicy": {
       "freeAccess": true,

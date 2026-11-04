@@ -1,19 +1,18 @@
 
 <section class="lesson-section lesson-section--internals">
   <h2>Funcionamento interno</h2>
-  <p>Quando um computador acessa um serviço, várias etapas acontecem em sequência. Antes de estudar cada protocolo, enxergue a rede como essa cadeia de dependências:</p>
+  <p>Quando um computador acessa um serviço, as partes da rede entram numa ordem. Enxergue o acesso como uma cadeia de dependências:</p>
   <div class="responsive-table"><table class="data-table">
     <thead><tr><th>Etapa</th><th>O que acontece</th><th>Exemplo de falha nessa etapa</th></tr></thead>
     <tbody>
-      <tr><td>1. Origem</td><td>Uma aplicação decide enviar dados, como abrir um site ou acessar um compartilhamento.</td><td>O próprio programa trava ou está mal configurado.</td></tr>
-      <tr><td>2. Formato</td><td>Os dados obedecem a um protocolo, como HTTP, SMB ou DNS.</td><td>Cliente e servidor não falam o mesmo protocolo ou versão.</td></tr>
-      <tr><td>3. Endereçamento</td><td>O sistema descobre para onde enviar os dados (IP, nome via DNS, gateway).</td><td>Host sem IP válido ou nome que não resolve.</td></tr>
-      <tr><td>4. Encapsulamento</td><td>Os dados recebem informações de transporte, rede e enlace.</td><td>Pouco visível neste começo; as camadas são detalhadas no Módulo 2.</td></tr>
-      <tr><td>5. Meio</td><td>Os bits viram sinais elétricos, luz ou rádio.</td><td>Cabo solto, fibra danificada, Wi-Fi fraco.</td></tr>
-      <tr><td>6. Intermediários</td><td>Switches, roteadores, firewalls, proxies e balanceadores tomam decisões de encaminhamento.</td><td>Gateway errado ou interface do roteador desligada.</td></tr>
-      <tr><td>7. Destino</td><td>O serviço recebe, interpreta e responde.</td><td>Serviço parado ou porta fechada.</td></tr>
-      <tr><td>8. Controle</td><td>Políticas de segurança podem permitir, bloquear, registrar ou modificar o fluxo.</td><td>Firewall bloqueia ou o usuário recebe “acesso negado”.</td></tr>
+      <tr><td>1. Origem</td><td>Uma aplicação decide enviar dados, como abrir um site ou uma pasta compartilhada.</td><td>O próprio programa trava ou está mal configurado.</td></tr>
+      <tr><td>2. Formato</td><td>Os dados seguem um protocolo, como HTTP (sites) ou DNS.</td><td>Cliente e servidor não falam o mesmo protocolo ou versão.</td></tr>
+      <tr><td>3. Endereçamento</td><td>O sistema descobre o IP do destino (pelo DNS, se tiver só o nome) e o gateway, o roteador que leva para fora da rede local.</td><td>Aparelho sem IP válido ou nome que não resolve.</td></tr>
+      <tr><td>4. Meio</td><td>Os bits viram sinais elétricos, luz ou rádio.</td><td>Cabo solto, fibra danificada, Wi-Fi fraco.</td></tr>
+      <tr><td>5. Intermediários</td><td>Switches, access points, roteadores e firewalls levam os dados adiante.</td><td>Gateway errado ou roteador desligado.</td></tr>
+      <tr><td>6. Destino</td><td>O serviço recebe, interpreta e responde.</td><td>Serviço parado.</td></tr>
+      <tr><td>7. Controle</td><td>Políticas permitem, bloqueiam ou registram o acesso.</td><td>Firewall bloqueia ou o usuário recebe “acesso negado”.</td></tr>
     </tbody>
   </table></div>
-  <p>A rede não é um único componente, é uma sequência de dependências. Quando uma delas falha, o sintoma é sempre parecido (“não acessa”), mas a causa pode estar em qualquer etapa. Diagnosticar é descobrir em qual etapa a cadeia quebrou, e a árvore de decisão em <em>Troubleshooting</em> faz isso na ordem: IP, gateway, DNS, porta e política.</p>
+  <p>Quando qualquer etapa falha, o sintoma parece o mesmo (“não acessa”), mas a causa está em lugares diferentes. Diagnosticar é descobrir em qual etapa a cadeia quebrou, começando pelo seu lado: o aparelho tem IP? Alcança o gateway? O nome resolve? O serviço responde? A política permite? Se o caminho funciona e só a última pergunta falha, o problema não é de conectividade.</p>
 </section>

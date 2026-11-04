@@ -4,8 +4,8 @@
   "titulo": "ASCII, Unicode, UTF-8 e Base64",
   "tipo": "fundamental",
   "palavras": {
-    "visiveis": 3264,
-    "teoria": 1439,
+    "visiveis": 3283,
+    "teoria": 1458,
     "praticaExtra": 1110,
     "quiz": 409,
     "flashcards": 129
@@ -14,7 +14,7 @@
     "introducao": 334,
     "contexto": 147,
     "conteudo": 763,
-    "exemplos": 195,
+    "exemplos": 214,
     "seguranca_troubleshooting": 0
   },
   "porSecao": {
@@ -25,7 +25,7 @@
     "internals": 529,
     "diagram": 1,
     "analogy": 62,
-    "simpleExample": 133,
+    "simpleExample": 152,
     "objectives": 72,
     "learningOutcomes": 0,
     "glossary": 40,
@@ -70,9 +70,9 @@
   "duracao": {
     "declarada": "15-25 min + 50 min de prática extra",
     "estimatedStudyTimeMinutes": 25,
-    "nucleo": 20.1,
+    "nucleo": 20.2,
     "nucleoPartes": {
-      "teoria": 11.1,
+      "teoria": 11.2,
       "diagramas": 3,
       "quiz": 6
     },

@@ -16,6 +16,6 @@
     </table>
   </div>
   <p>
-    O <code>ç</code> e o <code>ã</code> ocupam 2 bytes cada, então o nome tem 11 bytes e não cabe. Se o sistema simplesmente cortar no 10º byte, sobra <code>C3</code> sozinho no fim, metade do <code>ã</code>, e a tela mostra <code>Conceiç�</code>. O erro não está no nome da cliente: está em medir em caracteres um limite que é em bytes.
+    O <code>ç</code> e o <code>ã</code> ocupam 2 bytes cada, então o nome tem 11 bytes e não cabe. Se o sistema simplesmente guardar só os 10 primeiros bytes, o nome vira <code>Conceiçã</code>, sem o <code>o</code> final, e ninguém percebe. Com um limite de 9 bytes seria pior: sobraria <code>C3</code> sozinho, metade do <code>ã</code>, e a tela mostraria <code>Conceiç�</code>. O erro não está no nome da cliente: está em medir em caracteres um limite que é em bytes.
   </p>
 </section>

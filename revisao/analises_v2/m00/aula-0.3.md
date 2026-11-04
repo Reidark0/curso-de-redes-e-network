@@ -15,7 +15,7 @@ Base: v1 · Tipo: fundamental · Módulo: m00 (Fundamentos da Computação)
 | Diagrama mantido/corrigido | corrigido | cadeia Olá → U+… → 4F 6C C3 A1 → rede mantida; caixas "Logs/SIEM" e "Risco" trocadas por "Lido como UTF-8: Olá" e "Lido como Latin-1: OlÃ¡"; Base64 mostra o valor real T2zDoQ== |
 | Erros comuns ≤3, sem repetição | cumpre | 2: 1 caractere = 1 byte; textos iguais na tela com bytes diferentes (U+00E1 × a + U+0301) |
 | Termos avançados cortados ou no glossário | cumpre | saíram HMAC, hash, assinatura digital, PEM, JWT, NFC, mojibake, SIEM, WAF, QUIC, IaC, Kubernetes Secret, UTF-16/32 |
-| Exemplo (1 bom) e analogia (opcional, 2–3 frases) | cumpre | simpleExample novo: coluna de 10 bytes, Francisco (9 bytes) × Conceição (11 bytes), corte no 10º byte vira "Conceiç�"; analogia (envelopes/caixa) em 2 frases, sem "limite da analogia" |
+| Exemplo (1 bom) e analogia (opcional, 2–3 frases) | cumpre | simpleExample novo: coluna de 10 bytes, Francisco (9 bytes) × Conceição (11 bytes), os 10 primeiros bytes viram "Conceiçã" (com limite de 9 bytes, "Conceiç�"); analogia (envelopes/caixa) em 2 frases, sem "limite da analogia" |
 | Exemplos por ambiente (só se o tema é o ambiente) | cumpre | enterprise, cloud e devsecops removidos |
 | Segurança / Troubleshooting (3.5) | cumpre | removidos (módulo 0) |
 | Quiz 5–6, respondível pela aula | cumpre | 6; saiu q0.3.5 (Kubernetes Secret); quiz respondível pela aula: sim |
@@ -68,7 +68,7 @@ Verificação do quiz contra a aula v2: q0.3.1 (papel do UTF-8) → tabela do Co
 ## 4. Acréscimos
 - Motivação nova (João → "JoÃ£o" e anexo de 20 MB recusado num limite de 25 MB) e o fechamento do segundo caso no Funcionamento interno ("anexos de e-mail viajam em Base64… cerca de 27 MB").
 - Funcionamento interno: valores numéricos dos 64 caracteres (A–Z 0–25, a–z 26–51, 0–9 52–61, + 62, / 63), necessários para o aluno refazer o exemplo do Hel e o ex0.3.7; "ç (C3 A7) vira Ã§".
-- simpleExample novo: Francisco × Conceição numa coluna de 10 bytes, com o corte no 10º byte mostrando "Conceiç�" (bytes conferidos com `od`).
+- simpleExample novo: Francisco × Conceição numa coluna de 10 bytes, com os 10 primeiros bytes mostrando "Conceiçã" e, num limite de 9 bytes, "Conceiç�" (corrigido após o revisor independente do m00: a versão anterior dizia que o corte no 10º byte deixava "Conceiç�", o que estava errado; conferido com `printf 'Conceição' | head -c 10 | od -An -tx1`).
 - Diagrama: receptores UTF-8 × Latin-1 e o Base64 real de Olá (T2zDoQ==, conferido).
 - Lab: passo do iconv (vinha do troubleshooting da v1), € na contagem de bytes, passo Hel/Hello (saídas conferidas no terminal Linux).
 - Mentor novo: compatibilidade ASCII/UTF-8 e o byte Latin-1 E1; valor dGVzdGU6MTIz sem = (conferido: teste:123).

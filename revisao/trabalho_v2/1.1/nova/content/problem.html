@@ -1,15 +1,6 @@
 
 <section class="lesson-section lesson-section--problem">
   <h2>Problema</h2>
-  <p>O problema que uma rede resolve não é só “ligar computadores”. É criar um sistema compartilhado de comunicação entre participantes que podem estar em lugares diferentes, usar tecnologias diferentes, pertencer a organizações diferentes e exigir níveis diferentes de confiança. Por isso, toda rede precisa atender a várias exigências ao mesmo tempo:</p>
-  <ul class="flow-list">
-    <li><strong>Compartilhamento:</strong> usuários precisam acessar arquivos, impressoras, sistemas, bancos de dados e aplicações.</li>
-    <li><strong>Comunicação:</strong> máquinas precisam trocar mensagens em formatos compreensíveis.</li>
-    <li><strong>Escala:</strong> a solução precisa funcionar para dois dispositivos, cem usuários, milhares de servidores ou milhões de clientes.</li>
-    <li><strong>Controle:</strong> nem todo mundo deve acessar tudo; conectividade não é autorização.</li>
-    <li><strong>Operação:</strong> quando algo falha, alguém precisa diagnosticar sem adivinhar, e isso exige documentação, monitoramento e controle de mudanças.</li>
-    <li><strong>Segurança:</strong> a mesma rede que permite colaboração também pode permitir abuso, movimento lateral e vazamento.</li>
-    <li><strong>Custo:</strong> switches, roteadores, firewalls, access points, links, licenças e equipe especializada custam dinheiro; em cloud, tráfego, NAT gateway, firewalls gerenciados, load balancers e flow logs geram custo recorrente.</li>
-  </ul>
-  <p>Sem rede, a empresa cria ilhas de informação. Com uma rede mal projetada, cria uma superfície de ataque enorme. E nem tudo deve ser conectado: um sistema pode ficar isolado de propósito quando a segurança ou a regulação exigem, ou quando conectá-lo traria risco sem necessidade operacional.</p>
+  <p>É isso que acontece quando se trata a rede como um bloco único: ela é um sistema com várias partes, e cada uma pode falhar sozinha. Para entender por que existem tantas partes, comece pelo motivo de a rede existir.</p>
+  <p>Sem rede, cada computador é uma ilha: arquivos circulam por pendrive, cada máquina precisa da própria impressora e um sistema só é usado por quem está sentado na frente dele. As primeiras redes surgiram justamente para compartilhar recursos caros. Compartilhar, porém, cria novas exigências: <strong>controle</strong> (nem todo mundo deve acessar tudo), <strong>operação</strong> (quando algo falha, alguém precisa achar a causa sem adivinhar), <strong>segurança</strong> e <strong>custo</strong>. Numa <strong>rede plana</strong>, em que todos os aparelhos se alcançam, um notebook invadido pode chegar ao servidor de arquivos e às câmeras; esse avanço de um sistema para outro se chama <strong>movimento lateral</strong>. Por isso, conectar só faz sentido quando há necessidade, e alguns sistemas ficam isolados de propósito.</p>
 </section>

@@ -1,6 +1,14 @@
 
 <section class="lesson-section lesson-section--example">
   <h2>Exemplo simples</h2>
-  <p>Em casa, seu celular se conecta ao Wi-Fi do access point, que normalmente fica dentro do próprio roteador. O roteador entrega um endereço IP ao celular (por exemplo, 192.168.0.15, com gateway 192.168.0.1), encaminha o tráfego para a internet e normalmente também faz NAT. Quando você abre um site, o celular usa DNS para descobrir o endereço do servidor, cria uma conexão, negocia criptografia (TLS) e recebe os dados.</p>
-  <p>Só nessa cena já aparecem rádio, senha do Wi-Fi, endereço IP, gateway, DNS, roteamento, NAT, protocolo, criptografia e uma política básica.</p>
+  <p>Em casa, você abre um site no celular. Todas as partes da definição aparecem nessa cena:</p>
+  <ul>
+    <li><strong>Dispositivo final:</strong> o celular, de um lado, e o servidor do site, do outro.</li>
+    <li><strong>Intermediário e meio:</strong> o roteador doméstico, que normalmente já traz o access point dentro; entre ele e o celular, o meio é o rádio do Wi-Fi.</li>
+    <li><strong>Endereços:</strong> o roteador entrega ao celular um IP, por exemplo <code>192.168.0.15</code>, e se apresenta como gateway, <code>192.168.0.1</code>.</li>
+    <li><strong>Serviço:</strong> o DNS traduz o nome do site no IP do servidor; depois, o próprio site responde.</li>
+    <li><strong>Protocolos:</strong> HTTP para pedir a página e TLS para criptografar a conexão (o <code>https://</code>).</li>
+    <li><strong>Política:</strong> a senha do Wi-Fi decide quem entra na rede da casa.</li>
+  </ul>
+  <p>Se o Wi-Fi conecta mas nenhum site abre, essa lista vira o roteiro: o celular recebeu IP? Alcança o <code>192.168.0.1</code>? O nome resolve?</p>
 </section>
