@@ -1,6 +1,24 @@
 <section class="lesson-section lesson-section--concept">
-  <h2>5. Conceito</h2>
-  <p>Cloud networking é o conjunto de conceitos, serviços e práticas usados para conectar, isolar, publicar, proteger, observar e operar workloads em ambientes de cloud. Ele traduz fundamentos de rede para objetos controlados por software: VPC/VNet, subnets, tabelas de rota, gateways, security groups, NSGs, NACLs, firewalls gerenciados, load balancers, endpoints privados, VPNs, circuitos dedicados, DNS privado e logs de fluxo.</p>
-  <div class="definition-box"><strong>Definição:</strong> cloud networking é a aplicação de redes de computadores em ambientes de cloud, onde endereçamento, segmentação, roteamento, exposição, segurança e observabilidade são declarados como recursos lógicos, geralmente consumidos por API e integrados a IAM, billing, automação e auditoria.</div>
-  <p>O ponto essencial é que a cloud não elimina IP, rota, porta, DNS, TLS, firewall ou latência. Ela muda onde esses controles vivem, como são configurados, como são cobrados e como são auditados.</p>
+  <h2>Conceito</h2>
+  <div class="definition-box"><strong>Definição:</strong> cloud networking é a rede de computadores aplicada à cloud: endereçamento, segmentação, rotas, filtros, publicação e logs viram objetos lógicos que você cria por API e que o provedor transforma em tráfego real sobre o hardware dele.</div>
+  <p>Para ver por que isso existe, compare três jeitos de construir uma rede:</p>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead><tr><th>Modelo</th><th>Como você cria a rede</th><th>Limitação</th></tr></thead>
+      <tbody>
+        <tr><td>Rede física</td><td>Compra switches, roteadores e firewalls e passa cabos.</td><td>Cada mudança leva dias ou semanas.</td></tr>
+        <tr><td>Datacenter virtualizado</td><td>Roda máquinas virtuais, com switches virtuais dentro dos servidores.</td><td>Mais ágil, mas o prédio e o hardware continuam sendo seus.</td></tr>
+        <tr><td>Cloud</td><td>Declara rede, subnets, rotas e regras por console, linha de comando ou código.</td><td>Rápida, mas cobrada por uso e fácil de errar em escala.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A cloud não elimina IP, CIDR, rota, NAT, porta, firewall nem DNS. Ela muda onde esses controles vivem (em objetos do provedor, não em caixas no rack), como são configurados (por API), como são cobrados (por hora e por volume de tráfego) e como são auditados (cada mudança fica registrada).</p>
+  <h3>Quem cuida do quê</h3>
+  <p>O provedor opera os prédios, os servidores, os cabos e a camada que isola a sua rede das redes de outros clientes no mesmo hardware. O desenho continua com você: quais endereços usar, o que fica público, quais fluxos as regras permitem, por onde o tráfego sai e se os logs estão ligados.</p>
+  <div class="callout warning"><strong>Erros comuns</strong>
+    <ul>
+      <li>Dar IP público a cada recurso para ele acessar a internet: para só sair, basta o NAT; para receber clientes, basta o balanceador ter endereço público.</li>
+      <li>Ignorar o custo do tráfego: NAT Gateway, load balancer, tráfego de saída para a internet (chamado de egress) e logs são cobrados por hora ou por GB e, em alguns casos, custam mais do que as máquinas.</li>
+    </ul>
+  </div>
 </section>

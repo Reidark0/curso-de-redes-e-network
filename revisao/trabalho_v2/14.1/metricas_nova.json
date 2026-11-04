@@ -1,0 +1,87 @@
+{
+  "id": "14.1",
+  "versao": "nova",
+  "titulo": "Por que Cloud Networking existe",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3054,
+    "teoria": 1489,
+    "praticaExtra": 634,
+    "quiz": 438,
+    "flashcards": 139
+  },
+  "porGrupoTeoria": {
+    "introducao": 364,
+    "contexto": 118,
+    "conteudo": 575,
+    "exemplos": 242,
+    "seguranca_troubleshooting": 190
+  },
+  "porSecao": {
+    "motivation": 142,
+    "summary": 87,
+    "problem": 118,
+    "concept": 294,
+    "internals": 234,
+    "diagram": 47,
+    "analogy": 62,
+    "cloudExample": 180,
+    "objectives": 73,
+    "learningOutcomes": 0,
+    "glossary": 62,
+    "security": 190,
+    "troubleshooting": 0,
+    "nextTheme": 43
+  },
+  "pratica": {
+    "quiz": 438,
+    "flashcards": 139,
+    "lab": 0,
+    "mentorQuestions": 150,
+    "exercises": 162,
+    "challenge": 131,
+    "commentedSolution": 191
+  },
+  "outros": {
+    "title+subtitle": 21,
+    "nextTheme": 43,
+    "references": 96,
+    "linksToOtherCourses": 194
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 3,
+    "exemplosPorAmbiente": [
+      "cloudExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "15-25 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 20.5,
+    "nucleoPartes": {
+      "teoria": 11.5,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 31,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-25 min",
+    "praticaExtraArredondada": 30,
+    "recomendada": "15-25 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

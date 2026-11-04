@@ -1,14 +1,13 @@
 <section class="lesson-section lesson-section--internals">
-  <h2>6. Funcionamento interno</h2>
-  <p>Por baixo da interface simples do console, o provedor mantém uma infraestrutura física e uma camada de virtualização de rede. O cliente não manipula diretamente switches físicos do provedor; ele manipula objetos lógicos que o plano de controle transforma em comportamento de rede.</p>
+  <h2>Funcionamento interno</h2>
+  <p>Por baixo do console existe hardware compartilhado por muitos clientes. Você não configura esses switches: cria objetos lógicos, e o <strong>plano de controle</strong> do provedor (o software que guarda a sua configuração e a aplica nos servidores físicos) os transforma em comportamento de rede. Uma rede cloud mínima nasce assim:</p>
   <ol class="flow-list">
-    <li><strong>Você declara uma rede virtual:</strong> cria uma VPC, VNet ou VPC Network com um ou mais blocos CIDR.</li>
-    <li><strong>Você divide o espaço:</strong> cria subnets para workloads públicos, privados, dados, gestão ou serviços compartilhados.</li>
-    <li><strong>Você define caminhos:</strong> tabelas de rota indicam se o destino vai para internet gateway, NAT, VPN, peering, transit, firewall ou rede local.</li>
-    <li><strong>Você aplica controles:</strong> security groups, NSGs, NACLs, firewalls e políticas decidem quais fluxos são permitidos.</li>
-    <li><strong>Você publica serviços:</strong> load balancers e DNS expõem aplicações de forma controlada.</li>
-    <li><strong>Você restringe serviços internos:</strong> private endpoints e DNS privado evitam tráfego desnecessário pela internet.</li>
-    <li><strong>Você observa:</strong> flow logs, métricas, logs de auditoria e tracing ajudam a provar o que aconteceu.</li>
+    <li><strong>Rede virtual:</strong> uma VPC (ou VNet) com um bloco CIDR, como <code>10.40.0.0/16</code>, isolada das redes de outros clientes mesmo que eles usem os mesmos endereços.</li>
+    <li><strong>Subnets:</strong> o bloco dividido por função, como uma subnet para a entrada pública e outra para a aplicação.</li>
+    <li><strong>Rotas:</strong> cada subnet usa uma tabela de rotas. Na pública, <code>0.0.0.0/0</code> aponta para o internet gateway, a porta da VPC para a internet. Na privada, aponta para um NAT Gateway, que deixa a aplicação sair sem receber conexões de fora.</li>
+    <li><strong>Filtros:</strong> security groups (AWS) e NSGs (Azure) dizem quais fluxos passam, por origem, destino, porta e protocolo.</li>
+    <li><strong>Publicação:</strong> um balanceador de carga (load balancer) na subnet pública recebe os clientes e repassa as conexões à aplicação privada.</li>
+    <li><strong>Registros:</strong> os flow logs anotam cada fluxo (origem, destino, portas, protocolo, aceito ou recusado), como o log de um firewall.</li>
   </ol>
-  <p>A diferença operacional é que esses passos podem ser feitos por console, CLI, SDK, Terraform, Pulumi, Bicep, CloudFormation, Crossplane ou pipelines GitOps. Isso torna a rede versionável, mas também torna erros de rede replicáveis em vários ambientes se não houver revisão, validação e guardrails.</p>
+  <p>Tudo isso pode ser feito no console ou escrito como código (infraestrutura como código, com ferramentas como o Terraform). A rede passa a ser versionada e revisável, mas um erro no código também se repete em todo ambiente criado a partir dele.</p>
 </section>

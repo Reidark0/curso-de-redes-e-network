@@ -1,14 +1,25 @@
 <section class="lesson-section lesson-section--cloud">
-  <h2>11. Exemplo em cloud</h2>
-  <p>Em AWS, o bloco central é a Amazon VPC. Em Azure, é a Azure Virtual Network. Em Google Cloud, é a VPC Network. Os nomes mudam, mas os problemas são parecidos: criar isolamento lógico, dividir subnets, controlar rotas, filtrar tráfego, publicar serviços, conectar redes e observar fluxos.</p>
-  <table class="comparison-table">
-    <thead><tr><th>Conceito</th><th>AWS</th><th>Azure</th><th>Google Cloud</th></tr></thead>
-    <tbody>
-      <tr><td>Rede virtual</td><td>VPC</td><td>Virtual Network / VNet</td><td>VPC Network</td></tr>
-      <tr><td>Sub-rede</td><td>Subnet em zona de disponibilidade</td><td>Subnet dentro de VNet</td><td>Subnet regional</td></tr>
-      <tr><td>Filtro de instância/subnet</td><td>Security Group e NACL</td><td>NSG</td><td>Firewall policies/rules</td></tr>
-      <tr><td>Saída privada para internet</td><td>NAT Gateway</td><td>NAT Gateway</td><td>Cloud NAT</td></tr>
-      <tr><td>Observabilidade</td><td>VPC Flow Logs</td><td>VNet/NSG Flow Logs</td><td>VPC Flow Logs</td></tr>
-    </tbody>
-  </table>
+  <h2>Exemplo em cloud</h2>
+  <p>Uma loja virtual pequena vai para a AWS. A rede fica assim:</p>
+  <ul>
+    <li><strong>VPC</strong> <code>10.40.0.0/16</code>.</li>
+    <li><strong>Subnet pública</strong> <code>10.40.1.0/24</code>: só o load balancer, com endereço público, recebendo HTTPS (porta 443).</li>
+    <li><strong>Subnet privada</strong> <code>10.40.2.0/24</code>: a aplicação, sem IP público; o security group aceita a porta 443 só vindo do load balancer.</li>
+    <li><strong>Subnet privada</strong> <code>10.40.3.0/24</code>: o banco PostgreSQL gerenciado pelo provedor, sem IP público, aceitando a porta 5432 só vindo da aplicação.</li>
+    <li><strong>Saída e registros:</strong> a aplicação sai para a internet pelo NAT Gateway; flow logs ligados desde o primeiro dia.</li>
+  </ul>
+  <p>Em Azure ou Google Cloud, o desenho seria o mesmo; mudariam os nomes:</p>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead><tr><th>Função</th><th>AWS</th><th>Azure</th><th>Google Cloud</th></tr></thead>
+      <tbody>
+        <tr><td>Rede virtual isolada</td><td>VPC</td><td>Virtual Network (VNet)</td><td>VPC Network</td></tr>
+        <tr><td>Tabela de rotas</td><td>Route table</td><td>Route table</td><td>Rotas da VPC Network</td></tr>
+        <tr><td>Filtro de tráfego</td><td>Security group</td><td>Network Security Group (NSG)</td><td>Regras de firewall da VPC</td></tr>
+        <tr><td>Saída de recursos privados</td><td>NAT Gateway</td><td>NAT Gateway</td><td>Cloud NAT</td></tr>
+        <tr><td>Logs de fluxo</td><td>VPC Flow Logs</td><td>Virtual network flow logs</td><td>VPC Flow Logs</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Entender o papel de cada objeto vale nos três provedores; decorar só os nomes, não.</p>
 </section>

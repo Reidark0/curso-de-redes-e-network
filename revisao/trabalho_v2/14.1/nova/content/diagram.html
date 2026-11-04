@@ -1,9 +1,9 @@
 <section class="lesson-section lesson-section--diagram">
-  <h2>14. Diagrama SVG</h2>
-  <p>O diagrama mostra a mudança principal: no datacenter tradicional, a rede era construída como equipamentos físicos e cabos. Na cloud, você continua desenhando isolamento, rotas, publicação, segurança e observabilidade, mas faz isso por APIs e objetos lógicos do provedor.</p>
+  <h2>Diagrama SVG</h2>
+  <p>À esquerda, a rede feita de equipamentos; à direita, as mesmas funções como objetos lógicos dentro de uma VPC: a entrada pública chega pelo gateway ao load balancer, a aplicação fica na subnet privada e sai pelo NAT, e os flow logs registram os fluxos.</p>
   <svg class="lesson-svg" viewBox="0 0 960 520" role="img" aria-labelledby="cloud-net-title cloud-net-desc">
     <title id="cloud-net-title">Do datacenter físico à rede virtual em cloud</title>
-    <desc id="cloud-net-desc">Datacenter tradicional com switches e firewall conectado a uma VPC ou VNet com sub-redes pública e privada, gateway, NAT, load balancer, security groups e flow logs.</desc>
+    <desc id="cloud-net-desc">Datacenter tradicional com switch, firewall, servidor e banco, ao lado de uma VPC ou VNet com subnet pública (load balancer), subnet privada (aplicação), gateway e NAT para entrada e saída, e flow logs registrando os fluxos.</desc>
     <defs>
       <marker id="arrow-cloud-1401" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
         <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
@@ -53,8 +53,9 @@
     <line x1="390" y1="260" x2="430" y2="260" class="svg-flow svg-flow--request animated-flow" marker-end="url(#arrow-cloud-1401)" />
     <line x1="620" y1="193" x2="735" y2="193" class="svg-flow svg-flow--request animated-flow" marker-end="url(#arrow-cloud-1401)" />
     <line x1="800" y1="216" x2="800" y2="300" class="svg-flow svg-flow--response" marker-end="url(#arrow-cloud-1401)" />
-    <line x1="560" y1="300" x2="560" y2="245" class="svg-flow svg-flow--blocked" marker-end="url(#arrow-cloud-1401)" />
+    <line x1="560" y1="300" x2="560" y2="245" class="svg-flow svg-flow--request animated-flow" marker-end="url(#arrow-cloud-1401)" />
+    <line x1="750" y1="216" x2="655" y2="320" class="svg-flow svg-flow--response" marker-end="url(#arrow-cloud-1401)" />
 
-    <text x="480" y="480" class="svg-label svg-label--small">Cloud networking não elimina redes: transforma redes em objetos versionáveis, auditáveis e cobrados por uso.</text>
+    <text x="480" y="495" text-anchor="middle" class="svg-label svg-label--small">Cloud networking não elimina redes: transforma redes em objetos versionáveis, auditáveis e cobrados por uso.</text>
   </svg>
 </section>
