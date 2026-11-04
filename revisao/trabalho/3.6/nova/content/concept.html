@@ -1,0 +1,25 @@
+<section class="lesson-section lesson-section--concept"><h2>Conceito</h2>
+<div class="definition-box"><strong>Cache ARP</strong> é a tabela local que guarda, por tempo limitado, associações entre endereços IPv4 e endereços MAC resolvidos por ARP. Em vez de perguntar em broadcast toda vez que precisa falar com o gateway ou com outro host da mesma rede, o sistema consulta essa tabela.</div>
+<p>O cache só contém vizinhos da mesma sub-rede: hosts locais e o gateway. ARP não atravessa roteadores, então você nunca verá ali o IP de um site externo. Para destinos fora da sub-rede, a entrada que importa é a do gateway.</p>
+<p>Uma entrada pode ser <strong>dinâmica</strong> (aprendida automaticamente e com expiração) ou <strong>estática</strong> (configurada manualmente). Entradas estáticas são difíceis de manter e propensas a erro; use-as só em casos específicos e documentados. Uma entrada também pode estar <strong>completa</strong> (há IP e MAC) ou <strong>incompleta</strong> (o host perguntou e ainda não recebeu resposta).</p>
+<p>Cada entrada traz o IPv4 do vizinho (32 bits), o MAC associado (48 bits em Ethernet), o tipo ou estado e a interface por onde foi aprendida. Uma entrada numa interface inesperada pode indicar rota, VPN, bridge ou configuração incorreta.</p>
+<h3>Lendo a saída</h3>
+<p>Windows (<code>arp -a</code>; em sistemas em português, as colunas e os tipos aparecem traduzidos):</p>
+<pre class="code-block"><code>Interface: 192.168.1.50 --- 0x5
+  Internet Address      Physical Address      Type
+  192.168.1.1           a4-2b-b0-11-22-33     dynamic
+  192.168.1.255         ff-ff-ff-ff-ff-ff     static</code></pre>
+<p>A primeira linha é o gateway, aprendido por ARP. A segunda é o broadcast da sub-rede, criado pelo próprio sistema: estático não quer dizer que alguém o configurou à mão.</p>
+<p>Linux (<code>ip neigh</code>):</p>
+<pre class="code-block"><code>192.168.1.1 dev wlan0 lladdr a4:2b:b0:11:22:33 REACHABLE
+192.168.1.20 dev wlan0 lladdr 3c:52:82:aa:10:20 STALE
+192.168.1.77 dev wlan0  INCOMPLETE
+192.168.1.88 dev wlan0  FAILED</code></pre>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Estado (Linux; os nomes variam por sistema)</th><th>Significado</th><th>Preocupa?</th></tr></thead><tbody>
+<tr><td>REACHABLE</td><td>Associação confirmada recentemente.</td><td>Não.</td></tr>
+<tr><td>STALE</td><td>MAC conhecido, mas sem confirmação recente; será reverificado no próximo uso.</td><td>Não, é o estado normal de vizinhos pouco usados.</td></tr>
+<tr><td>INCOMPLETE</td><td>ARP Request enviado, resposta ainda não chegou.</td><td>Sim, se persistir para o gateway.</td></tr>
+<tr><td>FAILED</td><td>As tentativas acabaram sem resposta.</td><td>Sim: a resolução local falhou.</td></tr>
+<tr><td>PERMANENT</td><td>Entrada estática configurada manualmente.</td><td>Só se não estiver documentada.</td></tr>
+</tbody></table></div>
+</section>

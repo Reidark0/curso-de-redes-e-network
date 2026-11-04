@@ -1,0 +1,4 @@
+<section class="lesson-section lesson-section--cloud"><h2>11. Exemplo em cloud</h2>
+<p>Em cloud pública, o provedor abstrai muitos detalhes de Ethernet e ARP. Você normalmente não enxerga broadcast ARP como em uma LAN física. Mesmo assim, o modelo mental continua útil: instâncias possuem interfaces virtuais, há próximo salto, route tables, gateways, appliances virtuais, balanceadores e controles de segurança. Em ambientes híbridos, firewalls virtuais e appliances podem manter tabelas ARP dentro de segmentos conectados.</p>
+<p>O erro comum é tentar aplicar cegamente comandos de LAN física em cloud. A investigação deve usar as evidências do provedor: tabela de rotas, security groups/NSGs, flow logs, interfaces, subnets, NACLs, peering, private endpoints e logs do appliance. A pergunta continua semelhante: “qual é o próximo salto e a camada local consegue entregá-lo?”</p>
+</section>

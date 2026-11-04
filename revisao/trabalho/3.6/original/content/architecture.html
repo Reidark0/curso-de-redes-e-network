@@ -1,0 +1,4 @@
+<section class="lesson-section lesson-section--architecture"><h2>7. Arquitetura</h2>
+<p>Em uma arquitetura corporativa, cache ARP existe em hosts, servidores, appliances, roteadores, firewalls, switches L3, balanceadores e hypervisors. Cada equipamento observa o mundo local do seu ponto de vista. Por isso, troubleshooting maduro correlaciona várias tabelas: ARP no host, tabela MAC no switch, ARP no gateway, DHCP lease, logs de NAC e documentação de VLAN.</p>
+<ul><li><strong>Host:</strong> mostra se conseguiu resolver o MAC do gateway.</li><li><strong>Switch L2:</strong> mostra em qual porta o MAC aparece.</li><li><strong>Gateway/firewall:</strong> mostra quais IPs foram resolvidos em cada interface ou VLAN.</li><li><strong>DHCP:</strong> ajuda a confirmar quem deveria usar determinado IP.</li><li><strong>NAC/802.1X:</strong> relaciona identidade, porta, MAC e política.</li><li><strong>SIEM/NMS:</strong> correlaciona mudanças, flaps e alertas.</li></ul>
+</section>

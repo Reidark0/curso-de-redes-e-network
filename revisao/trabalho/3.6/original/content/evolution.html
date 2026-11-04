@@ -1,0 +1,10 @@
+<section class="lesson-section lesson-section--evolution"><h2>4. Evolução</h2>
+<p>O tratamento do cache ARP evoluiu conforme as redes deixaram de ser pequenas LANs e passaram a envolver VLANs, switches gerenciáveis, virtualização, firewalls redundantes e cloud híbrida.</p>
+<table class="data-table comparison-table"><thead><tr><th>Fase</th><th>Como funcionava</th><th>Limitação</th><th>Prática moderna</th></tr></thead><tbody>
+<tr><td>ARP manual/estático</td><td>Associações podiam ser fixadas manualmente.</td><td>Difícil de manter e propenso a erro.</td><td>Uso raro, apenas em casos muito específicos e documentados.</td></tr>
+<tr><td>Cache ARP dinâmico</td><td>Host aprende e guarda IP-MAC por tempo limitado.</td><td>Não valida identidade do respondente.</td><td>Monitoramento e controles de switch.</td></tr>
+<tr><td>Switches gerenciáveis</td><td>MAC table, ARP table em L3 e logs ajudam a correlacionar porta, VLAN e MAC.</td><td>Exige documentação e acesso operacional.</td><td>Inventário, NAC, port security e alertas.</td></tr>
+<tr><td>Alta disponibilidade</td><td>Gateways virtuais podem usar MAC virtual.</td><td>MAC mudando pode parecer suspeito sem contexto.</td><td>Documentar HSRP, VRRP, clusters e VIPs.</td></tr>
+<tr><td>Cloud/virtualização</td><td>O provedor ou hypervisor abstrai parte da Camada 2.</td><td>O aluno vê menos ARP diretamente.</td><td>Entender ENI, próximo salto, route table e overlays.</td></tr>
+</tbody></table>
+</section>

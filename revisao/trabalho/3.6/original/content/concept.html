@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--concept"><h2>5. Conceito</h2>
+<p><strong>Cache ARP</strong> é a tabela local que armazena associações temporárias entre endereços IPv4 e endereços MAC resolvidos por ARP. Em vez de perguntar em broadcast toda vez que precisa falar com o gateway ou com outro host da mesma rede, o sistema consulta essa tabela.</p>
+<div class="definition-box"><strong>Definição prática:</strong> cache ARP é a memória temporária do host sobre “qual MAC corresponde a qual IPv4 nesta rede local”. Ele acelera a comunicação, reduz broadcast e vira evidência de troubleshooting.</div>
+<p>Uma entrada ARP pode ser dinâmica, quando aprendida automaticamente, ou estática, quando configurada manualmente. Pode aparecer completa, quando há IP e MAC, ou incompleta, quando o host tentou resolver mas não recebeu resposta. O significado exato varia por sistema operacional, mas o raciocínio é o mesmo: a tabela revela o estado da resolução local.</p>
+</section>

@@ -1,0 +1,9 @@
+<section class="lesson-section lesson-section--security"><h2>Exemplo em Segurança</h2>
+<p>Como ARP não autentica respostas, uma rede sem segmentação e sem controles de switch fica exposta a manipulações locais. O foco aqui é defensivo: reconhecer os sinais e aplicar controles.</p>
+<div class="responsive-table"><table class="data-table risk-table"><thead><tr><th>Risco</th><th>Sinal defensivo</th><th>Impacto</th><th>Mitigação</th></tr></thead><tbody>
+<tr><td>ARP spoofing</td><td>MAC do gateway muda sem janela planejada.</td><td>Intercepção local ou negação de serviço.</td><td>Dynamic ARP Inspection, DHCP snooping, 802.1X, segmentação e monitoramento.</td></tr>
+<tr><td>IP duplicado</td><td>Mesmo IP associado a MACs diferentes.</td><td>Conectividade intermitente.</td><td>DHCP controlado, reservas, inventário e alerta de conflito.</td></tr>
+<tr><td>MAC flapping</td><td>MAC aparece alternando portas.</td><td>Instabilidade e possível loop.</td><td>Verificar cabeamento, trunks, loops, STP e equipamentos indevidos.</td></tr>
+<tr><td>Evidência sensível</td><td>Prints de ARP expõem IPs, MACs e gateways.</td><td>Vazamento de topologia.</td><td>Sanitizar evidências antes de compartilhar.</td></tr>
+</tbody></table></div>
+</section>

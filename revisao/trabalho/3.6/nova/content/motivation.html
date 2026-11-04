@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--motivation"><h2>Motivação</h2>
+<p>Um usuário abre chamado: “a internet caiu”. O computador tem IP, máscara, gateway e DNS, o Wi-Fi aparece conectado e o cabo está encaixado, mas nada abre, nem sistemas internos nem sites externos. Se você testar só DNS ou aplicação, pode perder a causa real: o host talvez não consiga entregar frames ao gateway porque a associação IP-MAC local está ausente, errada, duplicada ou instável.</p>
+<p>O cache ARP mostra quais endereços IPv4 o host conseguiu resolver para MAC dentro da LAN. Ler essa tabela é uma das formas mais rápidas de separar falha local (Camada 2, gateway, VLAN) de falha em DNS ou aplicação.</p>
+<div class="callout callout--problem"><strong>Problema real:</strong> um notebook obtém IP por DHCP, mas alterna entre momentos em que pinga o gateway e momentos em que falha. O cache ARP mostra o mesmo IP do gateway associado a MACs diferentes ao longo do tempo. Isso é evidência forte de erro operacional, IP duplicado, gateway redundante mal entendido ou possível abuso de ARP.</div>
+</section>

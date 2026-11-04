@@ -1,0 +1,4 @@
+<section class="lesson-section lesson-section--example"><h2>9. Exemplo simples</h2>
+<p>Em casa, seu notebook tem IP <code>192.168.1.50</code> e gateway <code>192.168.1.1</code>. Quando você acessa um site, o destino final não está na sua LAN. O notebook precisa enviar o pacote ao roteador. Para isso, consulta o cache ARP procurando o MAC de <code>192.168.1.1</code>. Se não encontrar, pergunta em broadcast. Após receber resposta, guarda a associação por algum tempo.</p>
+<p>Se o cache ARP não tiver o gateway, e o ARP Request não receber resposta, você pode ter cabo desconectado, Wi-Fi isolado, VLAN errada, gateway desligado, firewall local incomum ou problema físico. Se o gateway aparece com MAC diferente a cada minuto, é necessário investigar contexto antes de concluir: pode ser HA legítimo, troca de equipamento, IP duplicado ou comportamento suspeito.</p>
+</section>

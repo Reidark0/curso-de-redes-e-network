@@ -1,0 +1,18 @@
+<section class="lesson-section lesson-section--internals"><h2>Funcionamento interno</h2>
+<p>Cada passo do envio pode falhar de um jeito diferente, e o cache ARP mostra em qual deles o problema está.</p>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>#</th><th>O que acontece</th><th>O que pode falhar</th></tr></thead><tbody>
+<tr><td>1</td><td>A aplicação gera tráfego para um IP e a pilha IP escolhe o próximo salto: o próprio destino, se estiver na sub-rede, ou o gateway.</td><td>Máscara incorreta faz o host procurar ARP para o destino errado ou usar o gateway indevidamente.</td></tr>
+<tr><td>2</td><td>O host consulta o cache ARP pelo IP do próximo salto. Se há entrada válida, monta o frame Ethernet com aquele MAC.</td><td>Entrada antiga, incompleta ou inconsistente causa falha local ou intermitência.</td></tr>
+<tr><td>3</td><td>Sem entrada, o host envia ARP Request em broadcast para a VLAN; enquanto espera, a entrada aparece como incompleta.</td><td>VLAN errada, isolamento de Wi-Fi, gateway fora do ar ou broadcast bloqueado impedem a resposta.</td></tr>
+<tr><td>4</td><td>O gateway ou o destino local responde com ARP Reply; o host atualiza o cache e passa a enviar frames unicast.</td><td>Resposta com MAC inesperado exige correlação com switch, DHCP, NAC e HA.</td></tr>
+<tr><td>5</td><td>A entrada expira depois de um tempo ou é substituída por uma resposta mais nova.</td><td>Uma resposta nova sobrescreve a antiga sem autenticação: é aí que conflitos e abusos aparecem.</td></tr>
+</tbody></table></div>
+<p>Essa mecânica explica por que limpar o cache ARP às vezes “resolve” o problema por alguns minutos, mas raramente resolve a causa raiz. Se a causa é IP duplicado, VLAN errada, loop, ARP spoofing, gateway em HA mal documentado ou switch instável, a entrada problemática volta.</p>
+<div class="callout warning"><strong>Erros comuns</strong><ul>
+<li><strong>Confundir ARP com DNS:</strong> DNS resolve nome para IP; ARP resolve o IP do próximo salto local (normalmente o gateway) para MAC. Se o gateway não responde, culpar o DNS é olhar para a camada errada.</li>
+<li><strong>Limpar o cache e encerrar o chamado:</strong> limpar é um teste controlado, não a solução. Colete a tabela antes de limpar, ou a evidência some.</li>
+<li><strong>Tratar MAC como identidade forte:</strong> políticas baseadas só em MAC são frágeis, porque o MAC pode ser alterado.</li>
+<li><strong>Ignorar alta disponibilidade:</strong> em HSRP/VRRP o MAC do gateway pode mudar legitimamente. Documente o MAC virtual esperado para não gerar falso positivo.</li>
+<li><strong>Mexer em firewall ou DNS cedo demais:</strong> colete em ordem IP, rota, vizinhos ARP, DNS, porta TCP, TLS e resposta HTTP, e só altere algo depois de provar que a LAN e o gateway funcionam.</li>
+</ul></div>
+</section>

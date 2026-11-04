@@ -1,0 +1,90 @@
+{
+  "id": "3.6",
+  "versao": "original",
+  "titulo": "Cache ARP e troubleshooting de rede local",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4765,
+    "invisiveis": 740,
+    "teoriaVisivel": 2675
+  },
+  "porCampoVisivel": {
+    "content.motivation": 207,
+    "content.history": 168,
+    "content.problem": 117,
+    "content.evolution": 152,
+    "content.concept": 132,
+    "content.internals": 171,
+    "content.architecture": 108,
+    "content.analogy": 115,
+    "content.simpleExample": 121,
+    "content.enterpriseExample": 125,
+    "content.cloudExample": 119,
+    "content.devsecopsExample": 110,
+    "content.securityExample": 145,
+    "content.diagram": 3,
+    "content.summary": 73,
+    "content.nextTheme": 54,
+    "security": 265,
+    "troubleshooting": 287,
+    "glossary": 203,
+    "title+subtitle": 28,
+    "objectives": 61,
+    "learningOutcomes": 85,
+    "quiz": 277,
+    "flashcards": 96,
+    "mentorQuestions": 149,
+    "exercises": 164,
+    "challenge": 147,
+    "commentedSolution": 163,
+    "references": 48,
+    "linksToOtherCourses": 52,
+    "lab": 820
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 46,
+    "content.exercisesIntro": 26,
+    "content.challengeIntro": 32,
+    "content.solutionIntro": 34,
+    "networkContext": 36,
+    "protocolFields": 104,
+    "packetFlow": 140,
+    "deepDive": 201,
+    "commonMistakes": 121
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 60,
+    "alternativa_5minPasso_maisLeitura": 36.3,
+    "plausivel": true,
+    "palavras": 820
+  },
+  "duracao": {
+    "declarada": "90-125 min",
+    "estimatedStudyTimeMinutes": 125,
+    "M": 107.5,
+    "T": 142.6,
+    "partes": {
+      "teoria": 20.6,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 60
+    },
+    "faixaRecomendada": "120-170 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 17
+  }
+}

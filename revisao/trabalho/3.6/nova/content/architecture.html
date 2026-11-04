@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--architecture"><h2>Arquitetura</h2>
+<p>Hosts, servidores, roteadores, firewalls, switches L3, balanceadores e hypervisors mantêm cada um o seu cache ARP, e cada um vê a rede local do seu ponto de vista. Por isso o troubleshooting correlaciona várias fontes:</p>
+<ul><li><strong>Host:</strong> mostra se conseguiu resolver o MAC do gateway.</li><li><strong>Switch L2:</strong> mostra em qual porta e VLAN o MAC aparece (tabela MAC).</li><li><strong>Gateway/firewall:</strong> mostra quais IPs foram resolvidos em cada interface ou VLAN.</li><li><strong>DHCP:</strong> confirma quem deveria usar determinado IP (lease ou reserva).</li><li><strong>NAC/802.1X:</strong> relaciona identidade, porta, MAC e política.</li><li><strong>SIEM/NMS:</strong> correlaciona mudanças, flaps e alertas no tempo.</li></ul>
+<p>Em alta disponibilidade (HSRP, VRRP, clusters de firewall), os hosts usam um gateway virtual cujo MAC virtual pode passar de um equipamento para outro num failover. Sem essa informação documentada, um MAC mudando parece suspeito.</p>
+</section>

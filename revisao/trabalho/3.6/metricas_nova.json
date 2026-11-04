@@ -1,0 +1,79 @@
+{
+  "id": "3.6",
+  "versao": "nova",
+  "titulo": "Cache ARP e troubleshooting de rede local",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4959,
+    "invisiveis": 36,
+    "teoriaVisivel": 2580
+  },
+  "porCampoVisivel": {
+    "content.motivation": 162,
+    "content.problem": 96,
+    "content.concept": 334,
+    "content.internals": 389,
+    "content.architecture": 129,
+    "content.analogy": 96,
+    "content.simpleExample": 120,
+    "content.enterpriseExample": 125,
+    "content.cloudExample": 83,
+    "content.securityExample": 116,
+    "content.diagram": 2,
+    "content.summary": 113,
+    "content.nextTheme": 35,
+    "security": 281,
+    "troubleshooting": 296,
+    "glossary": 203,
+    "title+subtitle": 27,
+    "objectives": 61,
+    "learningOutcomes": 85,
+    "quiz": 438,
+    "flashcards": 119,
+    "mentorQuestions": 209,
+    "exercises": 265,
+    "challenge": 147,
+    "commentedSolution": 163,
+    "references": 48,
+    "linksToOtherCourses": 52,
+    "lab": 765
+  },
+  "porCampoInvisivel": {
+    "networkContext": 36
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 35,
+    "alternativa_5minPasso_maisLeitura": 35.9,
+    "plausivel": true,
+    "palavras": 765
+  },
+  "duracao": {
+    "declarada": "100-140 min",
+    "estimatedStudyTimeMinutes": 140,
+    "M": 120,
+    "T": 116.8,
+    "partes": {
+      "teoria": 19.8,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 35
+    },
+    "faixaRecomendada": "100-140 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 20
+  }
+}

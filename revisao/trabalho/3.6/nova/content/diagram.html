@@ -1,0 +1,28 @@
+<section class="lesson-section lesson-section--diagram"><h2>Diagrama SVG</h2>
+<svg class="lesson-svg" viewBox="0 0 1040 460" role="img" aria-labelledby="arp-cache-title arp-cache-desc">
+  <title id="arp-cache-title">Cache ARP e troubleshooting de rede local</title>
+  <desc id="arp-cache-desc">Um host consulta o cache ARP antes de enviar frames ao gateway. A investigação correlaciona cache ARP, tabela MAC do switch e ARP do gateway.</desc>
+  <defs><marker id="m03l06-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" class="svg-arrow" /></marker></defs>
+  <rect x="40" y="78" width="180" height="90" rx="14" class="svg-node svg-node--client" />
+  <text x="130" y="112" text-anchor="middle" class="svg-label">Host</text>
+  <text x="130" y="138" text-anchor="middle" class="svg-label svg-label--small">Consulta cache ARP</text>
+  <rect x="300" y="60" width="200" height="130" rx="14" class="svg-node svg-node--security" />
+  <text x="400" y="92" text-anchor="middle" class="svg-label">Cache ARP</text>
+  <text x="400" y="120" text-anchor="middle" class="svg-label svg-label--small">192.168.10.1 → bb:bb</text>
+  <text x="400" y="145" text-anchor="middle" class="svg-label svg-label--small">dinâmica / expira</text>
+  <text x="400" y="170" text-anchor="middle" class="svg-label svg-label--small">incompleta = investigar</text>
+  <rect x="590" y="78" width="180" height="90" rx="14" class="svg-node svg-node--switch" />
+  <text x="680" y="112" text-anchor="middle" class="svg-label">Switch</text>
+  <text x="680" y="138" text-anchor="middle" class="svg-label svg-label--small">MAC table / porta</text>
+  <rect x="840" y="78" width="170" height="90" rx="14" class="svg-node svg-node--router" />
+  <text x="925" y="112" text-anchor="middle" class="svg-label">Gateway</text>
+  <text x="925" y="138" text-anchor="middle" class="svg-label svg-label--small">ARP / rota</text>
+  <line x1="220" y1="122" x2="300" y2="122" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m03l06-arrow)" />
+  <line x1="500" y1="122" x2="590" y2="122" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m03l06-arrow)" />
+  <line x1="770" y1="122" x2="840" y2="122" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m03l06-arrow)" />
+  <rect x="90" y="280" width="860" height="98" rx="14" class="svg-zone" />
+  <text x="520" y="312" text-anchor="middle" class="svg-label">Matriz de evidências</text>
+  <text x="520" y="340" text-anchor="middle" class="svg-label svg-label--small">Host: arp -a / ip neigh → Switch: show mac address-table → Gateway: show arp → DHCP/NAC/SIEM</text>
+  <text x="520" y="365" text-anchor="middle" class="svg-label svg-label--small">Se o MAC muda sem contexto, investigue HA, IP duplicado, VLAN, loop ou abuso defensivo de ARP</text>
+</svg>
+</section>

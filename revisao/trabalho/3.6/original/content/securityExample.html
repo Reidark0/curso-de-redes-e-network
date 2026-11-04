@@ -1,0 +1,9 @@
+<section class="lesson-section lesson-section--security"><h2>13. Exemplo em Segurança</h2>
+<p>Do ponto de vista defensivo, cache ARP é uma fonte de evidência e também uma área de risco. ARP não autentica nativamente respostas, então um ambiente sem segmentação e sem controles de switch pode ser vulnerável a manipulações locais. A aula não ensina ataque; o foco é reconhecer sinais, reduzir impacto e usar controles preventivos e detectivos.</p>
+<table class="data-table risk-table"><thead><tr><th>Risco</th><th>Sinal defensivo</th><th>Impacto</th><th>Mitigação</th></tr></thead><tbody>
+<tr><td>ARP spoofing conceitual</td><td>MAC do gateway muda sem janela planejada.</td><td>Intercepção local ou negação de serviço.</td><td>Dynamic ARP Inspection, DHCP snooping, 802.1X, segmentação e monitoramento.</td></tr>
+<tr><td>IP duplicado</td><td>Mesmo IP associado a MACs diferentes.</td><td>Conectividade intermitente.</td><td>DHCP controlado, reservas, inventário e alerta de conflito.</td></tr>
+<tr><td>MAC flapping</td><td>MAC aparece alternando portas.</td><td>Instabilidade e possível loop.</td><td>Verificar cabeamento, trunks, loops, STP e equipamentos indevidos.</td></tr>
+<tr><td>Evidência sensível</td><td>Prints de ARP expõem IPs, MACs e gateways.</td><td>Vazamento de topologia.</td><td>Sanitizar evidências antes de compartilhar.</td></tr>
+</tbody></table>
+</section>
