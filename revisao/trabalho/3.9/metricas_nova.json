@@ -1,0 +1,77 @@
+{
+  "id": "3.9",
+  "versao": "nova",
+  "titulo": "Segurança em L2: ARP spoofing, MAC flooding e defesas",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4879,
+    "invisiveis": 36,
+    "teoriaVisivel": 2720
+  },
+  "porCampoVisivel": {
+    "content.motivation": 133,
+    "content.problem": 111,
+    "content.concept": 220,
+    "content.internals": 404,
+    "content.architecture": 406,
+    "content.analogy": 89,
+    "content.simpleExample": 143,
+    "content.enterpriseExample": 109,
+    "content.diagram": 2,
+    "content.summary": 118,
+    "content.nextTheme": 30,
+    "security": 391,
+    "troubleshooting": 327,
+    "glossary": 237,
+    "title+subtitle": 23,
+    "objectives": 68,
+    "learningOutcomes": 73,
+    "quiz": 437,
+    "flashcards": 143,
+    "mentorQuestions": 183,
+    "exercises": 206,
+    "challenge": 143,
+    "commentedSolution": 160,
+    "references": 63,
+    "linksToOtherCourses": 48,
+    "lab": 612
+  },
+  "porCampoInvisivel": {
+    "networkContext": 36
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 40,
+    "alternativa_5minPasso_maisLeitura": 39.7,
+    "plausivel": true,
+    "palavras": 612
+  },
+  "duracao": {
+    "declarada": "100-140 min",
+    "estimatedStudyTimeMinutes": 140,
+    "M": 120,
+    "T": 116.9,
+    "partes": {
+      "teoria": 20.9,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 20,
+      "lab": 40
+    },
+    "faixaRecomendada": "100-140 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 20
+  }
+}

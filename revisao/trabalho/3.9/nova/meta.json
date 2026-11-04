@@ -3,9 +3,9 @@
   "moduleId": "m03",
   "order": 9,
   "title": "Segurança em L2: ARP spoofing, MAC flooding e defesas",
-  "subtitle": "Como proteger a rede local contra abusos de ARP, MAC, VLAN, portas físicas e mecanismos de switch.",
-  "duration": "90-130 min",
-  "estimatedStudyTimeMinutes": 130,
+  "subtitle": "Como reconhecer e reduzir abusos de ARP, tabela MAC, VLAN, trunks e portas físicas.",
+  "duration": "100-140 min",
+  "estimatedStudyTimeMinutes": 140,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 220,
@@ -100,149 +100,6 @@
       "Troubleshooting de acesso"
     ]
   },
-  "protocolFields": [
-    {
-      "field": "Source MAC",
-      "size": "48 bits",
-      "purpose": "Permitir ao switch aprender origem e porta.",
-      "securityObservation": "Mudanças rápidas podem indicar MAC flapping, virtualização, redundância ou comportamento suspeito."
-    },
-    {
-      "field": "Destination MAC",
-      "size": "48 bits",
-      "purpose": "Indicar o destino local do frame.",
-      "securityObservation": "Broadcasts e unknown unicasts excessivos devem ser monitorados."
-    },
-    {
-      "field": "ARP Sender Protocol Address",
-      "size": "32 bits no IPv4",
-      "purpose": "Indicar o IP anunciado pelo remetente ARP.",
-      "securityObservation": "Associações IP-MAC inconsistentes são sinal de risco ou erro operacional."
-    },
-    {
-      "field": "VLAN ID",
-      "size": "12 bits no 802.1Q",
-      "purpose": "Identificar domínio lógico de Camada 2.",
-      "securityObservation": "Trunks permissivos e native VLAN insegura ampliam superfície de ataque e erro."
-    },
-    {
-      "field": "BPDU",
-      "size": "Variável",
-      "purpose": "Controlar topologia STP.",
-      "securityObservation": "BPDUs em portas de usuário podem indicar switch indevido ou loop potencial."
-    }
-  ],
-  "packetFlow": [
-    {
-      "step": 1,
-      "actor": "Host",
-      "action": "Envia frame para o switch.",
-      "detail": "O switch aprende o Source MAC na porta e VLAN de entrada.",
-      "possibleFailure": "Porta sem controle permite dispositivo não autorizado."
-    },
-    {
-      "step": 2,
-      "actor": "Switch",
-      "action": "Consulta tabela MAC/CAM.",
-      "detail": "Se o destino é conhecido, encaminha; se não, faz flooding dentro da VLAN.",
-      "possibleFailure": "MAC flooding ou tabela instável aumenta flooding e dificulta investigação."
-    },
-    {
-      "step": 3,
-      "actor": "Host IPv4",
-      "action": "Usa ARP para descobrir MAC local ou do gateway.",
-      "detail": "ARP Request é broadcast; ARP Reply informa associação IP-MAC.",
-      "possibleFailure": "ARP inconsistente pode desviar ou interromper tráfego local."
-    },
-    {
-      "step": 4,
-      "actor": "Controles L2",
-      "action": "Validam comportamento esperado.",
-      "detail": "DAI, DHCP snooping, port security, BPDU Guard e NAC bloqueiam ou alertam anomalias.",
-      "possibleFailure": "Controles sem planejamento podem causar indisponibilidade."
-    },
-    {
-      "step": 5,
-      "actor": "SOC/NOC",
-      "action": "Correlaciona evidências.",
-      "detail": "Logs de switch, ARP, DHCP, SIEM, NAC e firewall ajudam a confirmar causa raiz.",
-      "possibleFailure": "Sem logging centralizado, a investigação vira suposição."
-    }
-  ],
-  "deepDive": {
-    "mentalModel": "Segurança em L2 é o controle da porta de entrada local da rede: quem pode conectar, qual VLAN recebe, quais MACs são esperados, quais ARPs são válidos e quais anomalias precisam virar alerta.",
-    "keyTerms": [
-      "ARP spoofing",
-      "MAC flooding",
-      "port security",
-      "DHCP snooping",
-      "Dynamic ARP Inspection",
-      "BPDU Guard",
-      "802.1X",
-      "NAC",
-      "storm control"
-    ],
-    "limitations": [
-      "VLAN não substitui firewall.",
-      "Port security não substitui identidade forte.",
-      "DAI depende de base confiável, normalmente DHCP snooping.",
-      "802.1X exige planejamento de dispositivos legados e exceções.",
-      "Controles mal aplicados podem derrubar produção."
-    ],
-    "whenToUse": [
-      "Redes corporativas com portas físicas acessíveis.",
-      "Ambientes com visitantes, IoT, impressoras, câmeras ou BYOD.",
-      "Segmentos críticos como servidores, administração, produção e laboratórios.",
-      "Ambientes que precisam de evidência para SOC/NOC."
-    ],
-    "whenNotToUse": [
-      "Não habilitar controles em massa sem piloto.",
-      "Não aplicar DAI sem entender DHCP snooping e IPs estáticos.",
-      "Não usar port security como única barreira de segurança.",
-      "Não tratar VLAN como autorização de acesso à aplicação."
-    ],
-    "operationalImpact": [
-      "Exige inventário de portas, MACs, VLANs, exceções e dispositivos legados.",
-      "Pode aumentar chamados no início se houver dispositivos fora do padrão.",
-      "Exige integração entre rede, segurança, service desk e operação."
-    ],
-    "financialImpact": [
-      "Pode exigir switches gerenciáveis, licenças NAC, suporte de SIEM e tempo de equipe.",
-      "Reduz custo de incidentes e indisponibilidade quando bem implementado.",
-      "Equipamentos baratos sem recursos de L2 security podem gerar dívida operacional."
-    ],
-    "securityImpact": [
-      "Reduz acesso não autorizado e manipulação local.",
-      "Aumenta visibilidade de anomalias na LAN.",
-      "Diminui movimento lateral dentro de redes planas, quando combinado com segmentação e firewall."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Achar que VLAN é firewall.",
-      "whyItHappens": "VLAN separa broadcast e parece isolamento suficiente.",
-      "consequence": "Tráfego entre VLANs pode ficar liberado no gateway sem política adequada.",
-      "correction": "Usar VLAN para segmentação L2 e firewall/ACL para política de acesso."
-    },
-    {
-      "mistake": "Habilitar DAI sem planejar DHCP snooping e IPs estáticos.",
-      "whyItHappens": "O controle parece simples, mas depende de base confiável.",
-      "consequence": "Dispositivos legítimos podem perder conectividade.",
-      "correction": "Pilotar, mapear exceções e documentar bindings estáticos quando necessário."
-    },
-    {
-      "mistake": "Ignorar portas físicas em salas públicas.",
-      "whyItHappens": "A atenção fica no firewall, VPN e cloud.",
-      "consequence": "Dispositivo não autorizado pode entrar na LAN interna.",
-      "correction": "Desabilitar portas não usadas, usar 802.1X/NAC ou VLAN quarentena."
-    },
-    {
-      "mistake": "Confundir MAC flapping com ataque imediatamente.",
-      "whyItHappens": "O sintoma é associado a comportamento suspeito.",
-      "consequence": "Investigação pode culpar segurança quando a causa é loop, virtualização ou redundância.",
-      "correction": "Coletar evidências de STP, porta, VLAN, hypervisor e logs antes de concluir."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Gateway muda de MAC no ARP",
@@ -264,28 +121,28 @@
         "platform": "Windows",
         "command": "arp -a\nipconfig /all\ngetmac /v",
         "purpose": "Ver ARP local, configuração IP e MACs das interfaces.",
-        "expectedObservation": "Gateway com MAC consistente e interface correta.",
+        "expectedObservation": "Gateway com MAC consistente com o inventário e interface correta.",
         "interpretation": "Mudanças inesperadas exigem correlação com logs de switch e gateway."
       },
       {
         "platform": "Linux",
-        "command": "ip neigh\nip link\nip route\nss -tulpen",
-        "purpose": "Ver vizinhos ARP, interfaces, rotas e serviços locais.",
-        "expectedObservation": "Gateway em REACHABLE/STALE sem conflito evidente.",
-        "interpretation": "FAILED/INCOMPLETE pode indicar falha local, VLAN, gateway ou ARP."
+        "command": "ip neigh\nip link\nip route",
+        "purpose": "Ver vizinhos ARP, interfaces e rotas.",
+        "expectedObservation": "Gateway em REACHABLE/STALE com o MAC do inventário e nenhum outro IP com o mesmo MAC.",
+        "interpretation": "FAILED/INCOMPLETE pode indicar falha local, VLAN, gateway ou ARP; dois IPs com o mesmo MAC pedem correlação com a tabela MAC do switch."
       },
       {
         "platform": "Cisco IOS",
-        "command": "show mac address-table\nshow arp\nshow interfaces status\nshow interfaces counters errors\nshow port-security interface\nshow ip dhcp snooping binding",
-        "purpose": "Coletar evidências de MAC, ARP, portas, erros, port security e bindings DHCP.",
-        "expectedObservation": "MACs coerentes com portas e VLANs esperadas.",
-        "interpretation": "Muitos MACs por porta, flapping ou binding ausente podem indicar problema ou risco."
+        "command": "show mac address-table\nshow arp\nshow interfaces status\nshow interfaces counters errors\nshow interfaces trunk\nshow port-security interface\nshow ip dhcp snooping binding",
+        "purpose": "Coletar evidências de MAC, ARP, portas, erros, trunks, port security e bindings DHCP.",
+        "expectedObservation": "MACs coerentes com portas e VLANs esperadas; trunks só com as VLANs necessárias.",
+        "interpretation": "Muitos MACs por porta, flapping, VLANs demais no trunk ou binding ausente indicam problema ou risco a investigar."
       }
     ],
     "decisionTree": [
       {
         "if": "MAC do gateway muda no host",
-        "then": "Verificar se há HSRP/VRRP/GLBP legítimo, comparar com ARP do switch e logs do gateway."
+        "then": "Verificar se há HSRP/VRRP/GLBP legítimo (MAC virtual aprendido no uplink), comparar com a tabela MAC do switch e os logs do gateway."
       },
       {
         "if": "Muitos MACs aparecem em uma porta de usuário",
@@ -298,6 +155,10 @@
       {
         "if": "Broadcast sobe rapidamente",
         "then": "Verificar loops, STP, storm control, MAC flapping e mudanças físicas recentes."
+      },
+      {
+        "if": "Porta entra em err-disabled logo após ligar um equipamento novo",
+        "then": "Verificar no log se foi BPDU Guard ou port security, identificar o equipamento (switch, hub, telefone IP) e só reativar depois de corrigir a causa."
       }
     ]
   },
@@ -305,71 +166,69 @@
     "goodPractices": [
       "Desabilitar portas não utilizadas.",
       "Usar VLANs por função e política inter-VLAN no gateway/firewall.",
-      "Restringir VLANs permitidas em trunks.",
-      "Aplicar BPDU Guard e PortFast em portas de acesso quando apropriado.",
-      "Usar DHCP snooping e Dynamic ARP Inspection em ambientes compatíveis.",
-      "Adotar 802.1X/NAC de forma planejada.",
-      "Centralizar logs de switches, NAC, DHCP e firewall."
+      "Centralizar logs de switches, NAC, DHCP e firewall.",
+      "Implantar controles de L2 em piloto, com janela e plano de rollback."
     ],
     "badPractices": [
-      "Deixar todas as portas em VLAN interna ativa.",
+      "Deixar todas as portas ativas na VLAN interna.",
       "Usar VLAN 1 como rede operacional padrão.",
-      "Permitir todas as VLANs em todos os trunks sem necessidade.",
-      "Habilitar controles sem piloto e sem plano de rollback.",
-      "Tratar NAT, VLAN ou firewall de borda como proteção suficiente para a LAN interna."
+      "Permitir todas as VLANs em todos os trunks sem necessidade."
     ],
     "commonErrors": [
-      "Confundir ARP com DNS.",
-      "Confundir MAC com identidade confiável.",
-      "Ignorar dispositivos legados e IoT.",
-      "Não sanitizar PCAPs e outputs com topologia interna."
+      "Tratar VLAN como firewall: o tráfego entre VLANs é roteado e fica liberado se o gateway não tiver política; use firewall/ACL.",
+      "Ignorar portas de salas públicas por focar em firewall, VPN e cloud; desabilite-as ou use 802.1X/NAC ou VLAN de quarentena.",
+      "Concluir ataque ao ver MAC flapping: pode ser loop, virtualização ou redundância; colete STP, porta, VLAN e hypervisor antes.",
+      "Confundir ARP (IP para MAC no segmento local) com DNS (nome para IP).",
+      "Ignorar legados e IoT ao planejar 802.1X ou DAI.",
+      "Compartilhar PCAPs e outputs sem sanitizar a topologia interna."
     ],
     "vulnerabilities": [
       {
         "name": "ARP spoofing",
-        "description": "Manipulação de associações IP-MAC em redes locais IPv4.",
-        "defensiveExplanation": "O risco aparece quando hosts aceitam associações ARP indevidas e passam a enviar tráfego ao MAC errado.",
-        "mitigation": "DAI, DHCP snooping, segmentação, monitoramento, TLS e resposta rápida."
+        "description": "Associação IP-MAC falsa anunciada por um host da mesma VLAN.",
+        "defensiveExplanation": "Como o ARP não autentica, as vítimas enviam ao MAC errado o tráfego do gateway.",
+        "mitigation": "DAI com DHCP snooping, segmentação, TLS e monitoramento de ARP."
       },
       {
         "name": "MAC flooding",
-        "description": "Geração ou presença anormal de muitos MACs que pressiona a tabela do switch.",
-        "defensiveExplanation": "Pode causar instabilidade ou flooding anormal; também pode indicar loop, hypervisor mal configurado ou dispositivo indevido.",
-        "mitigation": "Port security, limites por porta, logs, investigação e desenho correto."
+        "description": "Excesso de MACs de origem que enche a tabela MAC.",
+        "defensiveExplanation": "Com a tabela cheia, o switch inunda a VLAN; loop ou hypervisor mal configurado geram sintoma parecido.",
+        "mitigation": "Port security com limite por porta, logs e investigação da causa."
       },
       {
         "name": "Porta física não controlada",
-        "description": "Porta de switch acessível permite conexão de dispositivo desconhecido.",
-        "defensiveExplanation": "A LAN passa a depender da boa-fé de quem acessa fisicamente o ambiente.",
-        "mitigation": "802.1X/NAC, portas desabilitadas, VLAN quarentena, controle físico e inventário."
+        "description": "Porta de switch acessível aceita dispositivo desconhecido.",
+        "defensiveExplanation": "A LAN passa a depender da boa-fé de quem tem acesso físico.",
+        "mitigation": "802.1X/NAC, portas desabilitadas, VLAN de quarentena e inventário."
       },
       {
         "name": "Trunk permissivo",
         "description": "Trunk carrega VLANs desnecessárias.",
-        "defensiveExplanation": "Aumenta risco de erro operacional e exposição de domínios indevidos.",
-        "mitigation": "Allowed VLANs mínimas, native VLAN não usada, documentação e revisão de mudança."
+        "defensiveExplanation": "Leva domínios de broadcast aonde não deveriam chegar e facilita erro operacional.",
+        "mitigation": "Allowed VLANs mínimas, native VLAN sem uso e revisão de mudança."
       }
     ],
     "monitoring": [
       "Alertas de MAC flapping",
-      "Número de MACs por porta",
+      "MACs por porta",
       "Mudanças de VLAN",
-      "Eventos de port security",
+      "Eventos de port security e err-disabled",
       "BPDUs em portas de acesso",
-      "ARP inconsistentes",
+      "ARP inconsistente",
       "Broadcast/storm control",
-      "Logs de NAC e DHCP"
+      "Logs de NAC e DHCP",
+      "Syslog, SNMP/telemetria e NetFlow dos switches enviados ao SIEM"
     ],
     "hardening": [
       "Port security onde fizer sentido",
       "DHCP snooping",
       "Dynamic ARP Inspection",
       "IP Source Guard",
-      "BPDU Guard",
+      "PortFast com BPDU Guard em portas de acesso",
       "Root Guard",
       "Storm control",
-      "802.1X/NAC",
-      "Trunks restritos"
+      "802.1X/NAC planejado",
+      "Trunks com allowed VLANs restritas"
     ],
     "detectionIdeas": [
       "Comparar ARP de hosts críticos com tabela do gateway.",
@@ -397,20 +256,18 @@
       "Planilha ou markdown para matriz",
       "Opcional: Wireshark apenas em rede própria"
     ],
-    "estimatedTimeMinutes": 90,
+    "estimatedTimeMinutes": 40,
     "cost": "zero",
     "safetyNotes": [
-      "Não execute ARP spoofing, MAC flooding ou testes de negação de serviço em redes reais.",
+      "Não execute ARP spoofing, MAC flooding ou testes de negação de serviço em redes reais: faça só inventário, validação e raciocínio defensivo.",
       "Não colete PCAPs de terceiros sem autorização.",
-      "Sanitize MACs, IPs, nomes de host e topologia antes de compartilhar evidências.",
-      "Faça apenas inventário, validação e raciocínio defensivo."
+      "Sanitize MACs, IPs, nomes de host e topologia antes de compartilhar evidências."
     ],
     "steps": [
       {
         "number": 1,
         "title": "Definir escopo da LAN",
         "instruction": "Liste segmentos lógicos: usuários, visitantes, impressoras, IoT, servidores e administração.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
         "expectedOutput": "Lista de VLANs ou grupos funcionais.",
         "explanation": "Não há defesa sem saber o que deve existir."
       },
@@ -426,15 +283,13 @@
         "number": 3,
         "title": "Mapear riscos por mecanismo",
         "instruction": "Crie linhas para ARP, MAC table, porta física, trunk, VLAN, STP e broadcast.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
-        "expectedOutput": "Matriz com risco, impacto e evidência possível.",
+        "expectedOutput": "Matriz com mecanismo, risco, impacto e evidência possível.",
         "explanation": "A matriz evita conclusões vagas como 'melhorar segurança'."
       },
       {
         "number": 4,
         "title": "Associar controles",
-        "instruction": "Para cada risco, associe controles preventivos, detectivos e corretivos.",
-        "command": "Exemplos: DAI, DHCP snooping, port security, BPDU Guard, storm control, 802.1X/NAC.",
+        "instruction": "Para cada risco, associe controles preventivos, detectivos e corretivos (ex.: DAI, DHCP snooping, port security, BPDU Guard, storm control, 802.1X/NAC), com o impacto operacional de cada um.",
         "expectedOutput": "Controles mapeados por risco.",
         "explanation": "Controles precisam ter motivo, escopo e impacto operacional."
       },
@@ -442,7 +297,7 @@
         "number": 5,
         "title": "Planejar evidências de switch",
         "instruction": "Liste comandos que seriam usados em Cisco IOS ou equivalente gerenciado.",
-        "command": "show mac address-table\nshow arp\nshow interfaces status\nshow port-security\nshow spanning-tree\nshow ip dhcp snooping binding",
+        "command": "show mac address-table\nshow arp\nshow interfaces status\nshow interfaces trunk\nshow port-security\nshow spanning-tree\nshow ip dhcp snooping binding",
         "expectedOutput": "Plano de coleta de evidências.",
         "explanation": "Mesmo sem equipamento real, você deve saber o que procuraria."
       },
@@ -450,7 +305,6 @@
         "number": 6,
         "title": "Criar plano de implantação seguro",
         "instruction": "Defina piloto, janela, rollback e comunicação para controles de L2.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
         "expectedOutput": "Plano com ordem de implantação e validação.",
         "explanation": "Segurança de L2 mal implantada pode derrubar produção."
       },
@@ -496,19 +350,12 @@
         "probableCause": "802.1X/NAC ou DAI sem exceções planejadas.",
         "howToConfirm": "Listar impressoras, câmeras, telefones IP e IoT.",
         "fix": "Usar piloto, MAB controlado, VLAN quarentena ou exceção documentada."
-      },
-      {
-        "symptom": "Muitos MACs em uma porta.",
-        "probableCause": "Mini-switch, telefone IP, hypervisor, bridge ou comportamento anômalo.",
-        "howToConfirm": "Correlacionar inventário, CDP/LLDP, logs e tabela MAC.",
-        "fix": "Classificar causa antes de bloquear."
       }
     ],
     "improvements": [
-      "Adicionar integração com SIEM.",
+      "Integrar os logs ao SIEM.",
       "Criar baseline de MACs por porta.",
       "Definir alertas de MAC flapping.",
-      "Usar NAC em portas críticas.",
       "Revisar trunks e allowed VLANs trimestralmente."
     ],
     "evidenceToCollect": [
@@ -520,13 +367,10 @@
       "Relatório sanitizado"
     ],
     "questions": [
-      "Por que VLAN não substitui firewall?",
       "Quando port security ajuda e quando atrapalha?",
       "Quais evidências indicam ARP inconsistente?",
-      "Como implantar 802.1X sem derrubar operação?"
-    ],
-    "challenge": "Crie uma matriz defensiva para uma LAN com usuários, visitantes, VoIP, impressoras e servidores locais, escolhendo controles progressivos para cada segmento.",
-    "solution": "Uma solução madura separa VLANs por função, restringe trunks, protege portas de usuário com BPDU Guard e NAC/802.1X quando possível, usa DHCP snooping e DAI onde compatível, monitora MAC flapping e broadcast, centraliza logs e implanta controles primeiro em piloto com rollback documentado."
+      "Como implantar 802.1X sem derrubar a operação?"
+    ]
   },
   "mentorQuestions": [
     {
@@ -548,20 +392,19 @@
     },
     {
       "type": "diagnóstico",
-      "question": "Um gateway aparece com dois MACs diferentes em hosts do mesmo segmento. O que você investigaria antes de concluir ataque?",
+      "question": "Logo após ativar port security com limite de 1 MAC, várias portas de usuário entraram em err-disabled. Que dispositivos legítimos explicam isso e como ajustar sem abrir mão do controle?",
       "hints": [
-        "Pense em alta disponibilidade.",
-        "Pense em logs de switch e ARP."
+        "Pense no que fica conectado atrás do telefone IP.",
+        "Pense em virtualização e docks."
       ],
       "expectedIdeas": [
-        "HSRP/VRRP/GLBP",
-        "ARP",
-        "MAC table",
-        "logs",
-        "duplicidade",
-        "DAI"
+        "telefone IP com PC atrás",
+        "VMs em bridge e docks",
+        "limite por perfil de porta",
+        "registrar antes de desligar",
+        "inventário, piloto e rollback"
       ],
-      "explanation": "MAC virtual legítimo pode existir. Investigar antes de concluir evita falso positivo."
+      "explanation": "O limite precisa refletir o que cada porta realmente atende; port security sem inventário e sem piloto vira incidente operacional."
     },
     {
       "type": "cenário real",
@@ -583,94 +426,94 @@
   ],
   "quiz": [
     {
-      "id": "q3.9.1",
-      "type": "conceito",
-      "q": "Qual afirmação melhor descreve segurança em Camada 2?",
-      "opts": [
-        "Conjunto de controles para proteger mecanismos locais como MAC, ARP, VLAN, STP e portas físicas.",
-        "Criptografia de todos os pacotes IP na internet.",
-        "Substituto completo para firewall e IAM.",
-        "Apenas configuração de DNS seguro."
+      "id": "q3.9.8",
+      "question": "Milhares de MACs de origem falsos, vindos de uma porta, enchem a tabela MAC do switch. Qual é o efeito mais provável?",
+      "options": [
+        "O switch passa a rotear entre as VLANs.",
+        "Frames para destinos não aprendidos são inundados em toda a VLAN.",
+        "O switch descarta todos os broadcasts da VLAN.",
+        "Os hosts da VLAN apagam o cache ARP."
       ],
-      "a": 0,
-      "exp": "L2 security protege a base local da LAN; não substitui controles de camadas superiores.",
-      "difficulty": "iniciante",
-      "topic": "conceito"
+      "answer": 1,
+      "explanation": "Sem espaço para aprender os MACs legítimos, o switch trata os destinos como desconhecidos e faz flooding na VLAN: instabilidade e tráfego exposto.",
+      "topic": "mac",
+      "difficulty": "intermediário",
+      "type": "conceito"
     },
     {
       "id": "q3.9.2",
-      "type": "segurança",
-      "q": "Por que ARP spoofing é relevante defensivamente?",
-      "opts": [
-        "Porque ARP não autentica nativamente associações IP-MAC.",
-        "Porque ARP substitui TLS.",
-        "Porque ARP funciona apenas na internet pública.",
-        "Porque ARP define rotas BGP."
+      "question": "Por que um host passa a enviar ao MAC errado o tráfego destinado ao gateway?",
+      "options": [
+        "Porque o ARP não autentica respostas e o host aceita até respostas que não pediu.",
+        "Porque o switch entrega o ARP Reply só ao gateway, que repassa a associação errada.",
+        "Porque o DHCP reescreve o cache ARP a cada renovação.",
+        "Porque o ARP usa TCP sem criptografia."
       ],
-      "a": 0,
-      "exp": "ARP é local e não possui autenticação nativa; por isso é importante monitorar e mitigar inconsistências.",
+      "answer": 0,
+      "explanation": "ARP não tem autenticação nativa: quem responde é aceito. Daí a necessidade de DAI, segmentação e monitoramento de ARP.",
+      "topic": "arp",
       "difficulty": "iniciante",
-      "topic": "arp"
+      "type": "segurança"
     },
     {
       "id": "q3.9.3",
-      "type": "diagnóstico",
-      "q": "Muitos MACs aparecem em uma única porta de usuário. Qual hipótese NÃO deve ser descartada sem análise?",
-      "opts": [
-        "Mini-switch, telefone IP, hypervisor ou comportamento anômalo.",
-        "Sempre é problema de DNS.",
-        "Sempre significa TLS expirado.",
-        "É necessariamente falha de BGP."
+      "question": "Uma porta de usuário mostra 3 MACs na tabela do switch. O que fazer antes de bloquear?",
+      "options": [
+        "Concluir MAC flooding e desligar a porta.",
+        "Considerar telefone IP com PC, mini-switch, hypervisor ou anomalia e correlacionar com inventário, CDP/LLDP e logs.",
+        "Concluir loop de STP, pois só loops geram vários MACs por porta.",
+        "Concluir ARP spoofing: cada MAC extra é um IP falsificado."
       ],
-      "a": 0,
-      "exp": "Muitos MACs por porta podem ser legítimos ou anômalos; precisam de correlação.",
+      "answer": 1,
+      "explanation": "Vários MACs numa porta podem ser legítimos ou anômalos; classifique a causa com evidência antes de bloquear.",
+      "topic": "mac",
       "difficulty": "intermediário",
-      "topic": "mac"
+      "type": "diagnóstico"
     },
     {
       "id": "q3.9.4",
-      "type": "arquitetura",
-      "q": "Qual controle ajuda a validar ARP com base em informações confiáveis do DHCP?",
-      "opts": [
-        "Dynamic ARP Inspection combinado com DHCP snooping.",
-        "Apenas mudar a senha do Wi-Fi.",
-        "Somente NAT.",
-        "Apenas aumentar MTU."
+      "question": "Qual controle valida mensagens ARP com os bindings IP-MAC aprendidos do DHCP?",
+      "options": [
+        "IP Source Guard, sem DHCP snooping.",
+        "BPDU Guard nas portas de acesso.",
+        "Storm control com limiar de broadcast.",
+        "Dynamic ARP Inspection com DHCP snooping."
       ],
-      "a": 0,
-      "exp": "DAI costuma usar informações de DHCP snooping para validar ARP em switches compatíveis.",
+      "answer": 3,
+      "explanation": "DAI confere o ARP de portas não confiáveis com os bindings do DHCP snooping. IP Source Guard filtra tráfego IP, não ARP.",
+      "topic": "defesa",
       "difficulty": "intermediário",
-      "topic": "defesa"
+      "type": "arquitetura"
     },
     {
       "id": "q3.9.5",
-      "type": "boas práticas",
-      "q": "Qual é uma boa prática para trunks?",
-      "opts": [
-        "Permitir somente VLANs necessárias.",
-        "Permitir todas as VLANs sempre.",
-        "Usar VLAN 1 para tudo.",
-        "Desativar logs para reduzir ruído."
+      "question": "Qual configuração reduz o risco de trunk permissivo?",
+      "options": [
+        "Permitir todas as VLANs para evitar falhas após mudanças.",
+        "Usar a VLAN 1 como native e como rede operacional.",
+        "Permitir só as VLANs necessárias, com native VLAN sem uso.",
+        "Ativar BPDU Guard no trunk entre switches."
       ],
-      "a": 0,
-      "exp": "Trunks devem carregar o mínimo necessário e ser documentados.",
+      "answer": 2,
+      "explanation": "O trunk deve carregar o mínimo necessário, com native VLAN sem uso. BPDU Guard num trunk entre switches derrubaria o link.",
+      "topic": "vlan",
       "difficulty": "iniciante",
-      "topic": "vlan"
+      "type": "boas práticas"
     },
     {
-      "id": "q3.9.6",
-      "type": "ética",
-      "q": "Qual prática é adequada para laboratório desta aula?",
-      "opts": [
-        "Criar matriz defensiva e coletar evidências em ambiente próprio/autorizado.",
-        "Executar MAC flooding na rede da empresa sem autorização.",
-        "Capturar tráfego de terceiros em Wi-Fi público.",
-        "Testar ARP spoofing em rede alheia."
+      "id": "q3.9.7",
+      "question": "Após ativar DAI numa VLAN, impressoras com IP fixo perdem conectividade, mas PCs com DHCP funcionam. Causa mais provável?",
+      "options": [
+        "Sem binding de DHCP snooping para os IPs fixos, o DAI descarta os ARPs das impressoras.",
+        "BPDU Guard desligou as portas das impressoras.",
+        "Storm control bloqueou o broadcast de ARP.",
+        "O trunk deixou de carregar a VLAN das impressoras."
       ],
-      "a": 0,
-      "exp": "O laboratório é defensivo e restrito a ambiente próprio ou autorizado.",
-      "difficulty": "iniciante",
-      "topic": "ética"
+      "answer": 0,
+      "explanation": "IP fixo não gera binding no DHCP snooping; cadastre binding estático antes de ativar o DAI.",
+      "topic": "defesa",
+      "difficulty": "intermediário",
+      "type": "diagnóstico"
     }
   ],
   "flashcards": [
@@ -685,11 +528,11 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc3.9.2",
-      "front": "O que é DAI?",
-      "back": "Dynamic ARP Inspection é um controle de switch que valida ARP com base em informações confiáveis, normalmente DHCP snooping.",
+      "id": "fc3.9.8",
+      "front": "O que o DHCP snooping faz numa porta não confiável?",
+      "back": "Descarta respostas de servidor DHCP vindas dela e grava bindings IP-MAC-VLAN-porta, usados por DAI e IP Source Guard.",
       "tags": [
-        "arp",
+        "dhcp",
         "dai"
       ],
       "difficulty": "intermediário"
@@ -697,7 +540,7 @@
     {
       "id": "fc3.9.3",
       "front": "O que é MAC flooding em visão defensiva?",
-      "back": "Condição anômala com muitos MACs que pode pressionar a tabela do switch e gerar flooding/instabilidade.",
+      "back": "Excesso de MACs de origem (falsos ou anômalos) que enche a tabela MAC; o switch passa a inundar na VLAN os frames de destinos não aprendidos.",
       "tags": [
         "mac",
         "switch"
@@ -724,22 +567,23 @@
       "difficulty": "intermediário"
     },
     {
-      "id": "fc3.9.6",
-      "front": "Por que sanitizar outputs de switch?",
-      "back": "Porque IPs, MACs, nomes de hosts, VLANs e topologia podem revelar informações sensíveis.",
+      "id": "fc3.9.7",
+      "front": "O que BPDU Guard faz e onde usar?",
+      "back": "Desliga (err-disabled) a porta de acesso que receber BPDU. Use em portas PortFast de usuário, nunca em uplinks entre switches.",
       "tags": [
-        "evidência"
+        "stp",
+        "switch"
       ],
-      "difficulty": "iniciante"
+      "difficulty": "intermediário"
     }
   ],
   "exercises": [
     {
-      "id": "ex3.9.1",
-      "type": "conceitual",
-      "prompt": "Explique por que VLAN não deve ser tratada como substituto de firewall.",
-      "expectedAnswer": "VLAN separa broadcast e organiza Camada 2, mas tráfego entre VLANs pode ser roteado. Política de acesso precisa ser aplicada em gateway, firewall, ACL ou controle equivalente.",
-      "explanation": "Segmentação e autorização são conceitos diferentes."
+      "id": "ex3.9.5",
+      "type": "diagnóstico",
+      "prompt": "O switch gera alerta de port security e mostra centenas de MACs na porta Gi1/0/20, numa sala de treinamento; usuários da mesma VLAN relatam lentidão. Separe sua resposta em detecção, contenção, erradicação e prevenção.",
+      "expectedAnswer": "Detecção: log de port security e show mac address-table/show port-security interface confirmam porta, VLAN e volume de MACs (descartar mini-switch ou hypervisor legítimo). Contenção: porta em err-disabled ou quarentena, com logs preservados. Erradicação: retirar o dispositivo e confirmar que tabela MAC e flooding normalizaram. Prevenção: limite por perfil de porta, 802.1X/NAC na sala, portas sem uso desabilitadas e alerta de MACs por porta no SIEM.",
+      "explanation": "Separar as fases evita dois erros: bloquear sem evidência e restaurar o serviço sem corrigir a causa."
     },
     {
       "id": "ex3.9.2",
@@ -747,13 +591,6 @@
       "prompt": "Um host mostra o gateway com MAC diferente do esperado. Liste três hipóteses defensivas antes de concluir ataque.",
       "expectedAnswer": "Alta disponibilidade com MAC virtual, troca legítima de equipamento/gateway, erro de inventário, ARP inconsistente, IP duplicado ou comportamento suspeito.",
       "explanation": "Nem toda anomalia é ataque; evidências evitam falso positivo."
-    },
-    {
-      "id": "ex3.9.3",
-      "type": "arquitetura",
-      "prompt": "Proponha controles para portas de sala de reunião usadas por visitantes ocasionais.",
-      "expectedAnswer": "Portas desabilitadas por padrão ou VLAN de visitantes/quarentena, 802.1X/NAC quando possível, logging, limitação de acesso e processo de liberação temporária.",
-      "explanation": "Portas públicas exigem menor privilégio e rastreabilidade."
     },
     {
       "id": "ex3.9.4",

@@ -1,5 +1,17 @@
-<section class="lesson-section lesson-section--internals"><h2>6. Funcionamento interno</h2>
-<p>Para entender as defesas, é preciso entender os mecanismos internos que podem falhar:</p>
-<ol class="flow-list"><li><strong>Aprendizado MAC:</strong> o switch observa o MAC de origem dos frames e associa esse MAC à porta e à VLAN.</li><li><strong>Forwarding:</strong> se o MAC de destino está na tabela, o switch encaminha para a porta correta.</li><li><strong>Flooding:</strong> se o destino é desconhecido, broadcast ou multicast, o switch replica dentro da VLAN.</li><li><strong>ARP:</strong> hosts IPv4 perguntam quem possui determinado IP e armazenam a resposta no cache ARP.</li><li><strong>Trunks:</strong> carregam múltiplas VLANs entre switches, APs, hypervisors e firewalls.</li><li><strong>STP:</strong> evita loops bloqueando caminhos redundantes de L2.</li><li><strong>Controles:</strong> port security limita MACs, DHCP snooping cria base confiável, DAI valida ARP, BPDU Guard protege portas de acesso, 802.1X/NAC controla identidade do dispositivo.</li></ol>
-<p>O ponto central é que uma falha em L2 pode aparecer como problema de IP, DNS, aplicação ou autenticação. Por isso a investigação deve coletar evidências em várias camadas.</p>
+<section class="lesson-section lesson-section--internals"><h2>Funcionamento interno</h2>
+<p>Cada risco abusa de um passo normal do caminho do frame:</p>
+<ol class="flow-list"><li><strong>Host envia o frame:</strong> o switch aprende o MAC de origem e o associa à porta e à VLAN de entrada. <em>Onde falha:</em> porta sem controle aceita qualquer dispositivo.</li><li><strong>Switch consulta a tabela MAC (CAM):</strong> destino conhecido vai para a porta certa; destino desconhecido, broadcast ou multicast é replicado (flooding) dentro da VLAN. <em>Onde falha:</em> MAC flooding aumenta o flooding.</li><li><strong>Host IPv4 usa ARP:</strong> o ARP Request é broadcast; o ARP Reply informa a associação IP-MAC, que o host guarda no cache ARP. <em>Onde falha:</em> ARP falso desvia ou interrompe o tráfego local.</li><li><strong>Trunks e STP:</strong> trunks carregam várias VLANs entre switches, APs, hypervisors e firewalls; o STP bloqueia caminhos redundantes. <em>Onde falha:</em> trunk com VLANs demais, BPDU em porta de usuário, loop.</li></ol>
+<h3>MAC flooding: quando o switch volta a se comportar como hub</h3>
+<p>Normalmente, cada porta recebe só o tráfego destinado a ela, mais broadcast, multicast e unknown unicast. A tabela MAC, porém, é finita. Se uma porta injeta milhares de MACs de origem falsos, a tabela enche, MACs legítimos que expiram não são reaprendidos e os frames para eles passam a ser inundados para todas as portas da VLAN. Resultado: instabilidade e tráfego exposto a qualquer host daquela VLAN.</p>
+<h3>ARP spoofing: o cache acredita em quem responde</h3>
+<p>O ARP não autentica respostas, e o host atualiza o cache mesmo com respostas que não pediu. Um dispositivo na mesma VLAN pode anunciar "o IP do gateway está no meu MAC": as vítimas passam a mandar para ele o tráfego que iria ao gateway. O risco fica restrito ao domínio de broadcast, o que explica por que segmentar reduz o alcance, e o TLS protege o conteúdo mesmo se o tráfego for desviado.</p>
+<h3>Campos que você observa nas evidências</h3>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Campo</th><th>O que observar</th></tr></thead><tbody>
+<tr><td>Source MAC (48 bits)</td><td>Mudança rápida de porta (MAC flapping): virtualização, redundância, loop ou comportamento suspeito.</td></tr>
+<tr><td>Destination MAC (48 bits)</td><td>Broadcast e unknown unicast em excesso.</td></tr>
+<tr><td>ARP Sender Protocol Address (32 bits no IPv4)</td><td>IP anunciado associado a um MAC inesperado: risco ou erro operacional.</td></tr>
+<tr><td>VLAN ID (12 bits no 802.1Q)</td><td>VLANs demais no trunk ou native VLAN insegura.</td></tr>
+<tr><td>BPDU (controle do STP)</td><td>BPDU em porta de usuário: switch indevido ou loop potencial.</td></tr>
+</tbody></table></div>
+<p>Uma falha de L2 costuma se disfarçar de problema de IP, DNS, aplicação ou autenticação; por isso colete evidências em várias camadas, com logs centralizados.</p>
 </section>

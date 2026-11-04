@@ -1,4 +1,12 @@
-<section class="lesson-section lesson-section--example"><h2>9. Exemplo simples</h2>
-<p>Em casa, um roteador Wi-Fi normalmente acumula papéis: switch, AP, roteador, firewall simples e servidor DHCP. Se alguém conecta um mini-switch barato a uma porta LAN e depois cria um loop acidental, a rede doméstica pode ficar instável. Se a senha do Wi-Fi é fraca, um dispositivo desconhecido pode entrar no mesmo domínio local e tentar descobrir outros hosts.</p>
-<p>Mesmo em casa, boas práticas existem: usar WPA2/WPA3, separar rede de visitantes, atualizar firmware, não deixar portas expostas sem necessidade e não conectar equipamentos desconhecidos.</p>
+<section class="lesson-section lesson-section--example"><h2>Exemplo simples</h2>
+<p>Um host Linux na VLAN 10 perde acesso intermitente aos sistemas internos. O cache ARP (valores fictícios) mostra:</p>
+<pre class="code-block"><code>$ ip neigh
+192.168.10.1  dev eth0 lladdr aa:bb:cc:11:22:33 REACHABLE
+192.168.10.57 dev eth0 lladdr aa:bb:cc:11:22:33 STALE</code></pre>
+<p>O gateway (192.168.10.1) e a estação 192.168.10.57 aparecem com o <strong>mesmo MAC</strong>, e o inventário registra outro MAC para o gateway. No switch, você procura onde esse MAC está:</p>
+<pre class="code-block"><code>switch# show mac address-table address aabb.cc11.2233
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+  10    aabb.cc11.2233    DYNAMIC     Gi1/0/12</code></pre>
+<p>Interpretação: o MAC que responde pelo gateway está numa porta de usuário (Gi1/0/12), não no uplink do gateway. Antes de concluir ARP spoofing, descarte a explicação legítima: um gateway com HSRP/VRRP usa MAC virtual (0000.0c07.acXX no HSRP, 0000.5e00.01XX no VRRP), aprendido no uplink, não numa porta de acesso. Aqui a evidência aponta para associação ARP indevida; o controle que faltou é DAI com DHCP snooping.</p>
 </section>

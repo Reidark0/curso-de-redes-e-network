@@ -1,4 +1,4 @@
-<section class="lesson-section lesson-section--enterprise"><h2>10. Exemplo empresarial</h2>
-<p>Em uma empresa, a Camada 2 aparece em cada tomada de rede, porta de switch, AP corporativo, VLAN de usuários, VLAN de voz, VLAN de impressoras, VLAN de câmeras e rede de visitantes. Um erro simples, como deixar uma porta de sala de reunião em VLAN interna sem autenticação, pode permitir que um dispositivo não autorizado entre na LAN.</p>
-<p>Um desenho defensivo inclui inventário de portas, VLAN por função, 802.1X/NAC quando possível, port security em cenários específicos, DHCP snooping, DAI, BPDU Guard em portas de usuário, storm control e logs centralizados.</p>
+<section class="lesson-section lesson-section--enterprise"><h2>Exemplo empresarial</h2>
+<p>Numa empresa com VLANs de usuários, voz, impressoras, câmeras e visitantes, uma porta de sala de reunião ficou na VLAN interna, sem 802.1X. Um notebook desconhecido é ligado nela e o SOC recebe alerta de ARP inconsistente para o gateway. A resposta separa quatro fases:</p>
+<ol><li><strong>Detecção:</strong> o alerta e o <code>show mac address-table</code> identificam porta, VLAN e MAC fora do inventário.</li><li><strong>Contenção:</strong> desligar a porta ou movê-la para a VLAN de quarentena, preservando antes os logs do switch.</li><li><strong>Erradicação:</strong> retirar o dispositivo e limpar os caches ARP dos hosts afetados.</li><li><strong>Prevenção:</strong> desabilitar portas sem uso, aplicar 802.1X/NAC nas salas públicas e DAI com DHCP snooping na VLAN.</li></ol>
 </section>

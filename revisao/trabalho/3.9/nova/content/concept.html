@@ -1,5 +1,12 @@
-<section class="lesson-section lesson-section--concept"><h2>5. Conceito</h2>
-<p>Segurança em Camada 2 é o conjunto de práticas, controles e evidências usados para proteger a rede local contra abuso de mecanismos Ethernet, ARP, VLAN, switches e portas físicas.</p>
-<div class="definition-box"><strong>Definição:</strong> em redes Ethernet, segurança de L2 significa reduzir a chance de um dispositivo não autorizado, mal configurado ou comprometido manipular o domínio local, causar indisponibilidade, observar tráfego indevido, alterar caminhos locais ou facilitar movimento lateral.</div>
-<p>Ela não substitui firewall, EDR, IAM, TLS ou segmentação de Camada 3/4. Ela sustenta esses controles. Uma empresa madura combina controles de L2 com roteamento, firewall interno, autenticação forte, observabilidade, gestão de vulnerabilidades e resposta a incidentes.</p>
+<section class="lesson-section lesson-section--concept"><h2>Conceito</h2>
+<div class="definition-box"><strong>Definição:</strong> segurança de Camada 2 é o conjunto de controles e evidências que reduz a chance de um dispositivo não autorizado, mal configurado ou comprometido manipular o domínio local, causar indisponibilidade, observar tráfego indevido, alterar caminhos locais ou facilitar movimento lateral.</div>
+<p>Ela não substitui firewall, EDR, IAM, TLS ou segmentação de Camada 3/4: sustenta esses controles. Sinais se sobrepõem (MAC flapping pode ser loop ou virtualização), então o diagnóstico começa pela evidência.</p>
+<h3>Os cinco riscos que você precisa diferenciar</h3>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Risco</th><th>Mecanismo explorado</th><th>Como aparece</th><th>Impacto</th></tr></thead><tbody>
+<tr><td>ARP spoofing (envenenamento ARP)</td><td>ARP aceita respostas sem autenticação.</td><td>Gateway muda de MAC no cache ARP; dois IPs com o mesmo MAC; alertas de IP duplicado.</td><td>Desvio, interceptação local ou interrupção do tráfego.</td></tr>
+<tr><td>MAC flooding</td><td>A tabela MAC (CAM) tem tamanho limitado.</td><td>Centenas de MACs numa porta de usuário; tabela instável; flooding anormal.</td><td>Instabilidade e exposição de tráfego dentro da VLAN.</td></tr>
+<tr><td>Porta não autorizada</td><td>Porta física ativa sem autenticação.</td><td>Dispositivo fora do inventário numa porta ativa.</td><td>Acesso indevido à LAN e movimento lateral.</td></tr>
+<tr><td>Trunk permissivo</td><td>Trunk com VLANs demais; native VLAN ou VLAN 1 em uso operacional.</td><td>VLANs atravessando uplinks sem necessidade.</td><td>Exposição de domínios indevidos e erro operacional.</td></tr>
+<tr><td>Loop de L2</td><td>Frame Ethernet não tem TTL; STP sem proteção nas portas de acesso.</td><td>Broadcast storm, MAC flapping e CPU alta no switch.</td><td>Indisponibilidade.</td></tr>
+</tbody></table></div>
 </section>
