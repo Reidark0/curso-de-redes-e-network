@@ -1,0 +1,15 @@
+
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <div class="definition-box"><strong>Definição:</strong> <strong>dispositivo final</strong> é uma origem ou destino de comunicação; <strong>dispositivo intermediário</strong> é um elemento que encaminha, comuta, filtra, traduz, concentra ou inspeciona tráfego; <strong>serviço</strong> é uma função exposta pela rede para ser consumida por clientes ou outros sistemas. Um quarto papel atravessa os três: a <strong>política</strong>, a regra que decide o que pode trafegar.</div>
+  <p>Classifique pelo <strong>papel no fluxo analisado</strong>, não pelo nome do equipamento, porque um mesmo elemento pode acumular papéis. Um servidor é dispositivo final quando recebe tráfego, hospeda vários serviços ao mesmo tempo e pode até atuar como proxy (intermediário) para outros fluxos. Um firewall é intermediário para o tráfego dos outros, mas é destino quando você acessa a interface de administração dele ou a VPN que ele oferece. Um access point é intermediário para os clientes Wi-Fi e também oferece gerenciamento, logs e autenticação.</p>
+  <p>A classificação é o primeiro mapa mental, não um diagnóstico: ela não substitui a análise por camada e não prova a causa de uma falha. Ela organiza as hipóteses e indica quem é o dono de cada uma (endpoint, rede, segurança, sistemas ou aplicação).</p>
+  <div class="callout warning"><strong>Erros comuns:</strong>
+    <ul>
+      <li><strong>Confundir servidor com serviço.</strong> “O servidor caiu” costuma querer dizer “o sistema não responde”, e a equipe reinicia o host errado sem verificar se o serviço está escutando. Servidor é o equipamento ou workload; serviço é a função exposta (HTTP, DNS, SSH, banco de dados).</li>
+      <li><strong>Chamar todo equipamento de rede de roteador.</strong> Em casa, o roteador Wi-Fi acumula AP, switch, roteador, NAT e DHCP. Separe as funções: comutar na LAN, rotear entre redes, oferecer Wi-Fi, distribuir IP, filtrar tráfego.</li>
+      <li><strong>Deixar impressoras, câmeras e IoT fora da conta.</strong> Como não parecem computadores, ficam sem inventário, patching e monitoramento. Todo dispositivo com IP, serviço, firmware ou credencial é ativo de rede.</li>
+      <li><strong>Achar que o intermediário só transporta.</strong> Intermediários podem encaminhar, bloquear, traduzir (NAT), registrar, inspecionar e até modificar tráfego (proxy, WAF, inspeção TLS, balanceador).</li>
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,81 @@
+{
+  "id": "1.2",
+  "versao": "original",
+  "titulo": "Dispositivos finais, intermediários e serviços",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4018,
+    "invisiveis": 564,
+    "teoriaVisivel": 2760
+  },
+  "porCampoVisivel": {
+    "content.motivation": 166,
+    "content.history": 147,
+    "content.problem": 129,
+    "content.evolution": 159,
+    "content.concept": 107,
+    "content.internals": 215,
+    "content.architecture": 158,
+    "content.analogy": 97,
+    "content.simpleExample": 96,
+    "content.enterpriseExample": 119,
+    "content.cloudExample": 105,
+    "content.devsecopsExample": 96,
+    "content.securityExample": 151,
+    "content.diagram": 3,
+    "content.summary": 58,
+    "content.nextTheme": 46,
+    "security": 312,
+    "troubleshooting": 380,
+    "glossary": 216,
+    "title+subtitle": 21,
+    "objectives": 55,
+    "learningOutcomes": 67,
+    "quiz": 240,
+    "flashcards": 134,
+    "mentorQuestions": 160,
+    "exercises": 176,
+    "challenge": 141,
+    "commentedSolution": 163,
+    "references": 56,
+    "linksToOtherCourses": 45
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 40,
+    "content.exercisesIntro": 20,
+    "content.challengeIntro": 26,
+    "content.solutionIntro": 25,
+    "networkContext": 48,
+    "deepDive": 227,
+    "commonMistakes": 178
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "75-105 min",
+    "estimatedStudyTimeMinutes": 105,
+    "M": 90,
+    "T": 83.2,
+    "partes": {
+      "teoria": 21.2,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "70-100 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 29
+  }
+}

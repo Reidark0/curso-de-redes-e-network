@@ -1,0 +1,12 @@
+
+<section class="lesson-section lesson-section--cloud">
+  <h2>Exemplo em cloud</h2>
+  <p>Na cloud, os nomes mudam, mas os papéis continuam:</p>
+  <ul>
+    <li><strong>Dispositivo final / workload:</strong> VM, função serverless, container ou pod.</li>
+    <li><strong>Intermediário:</strong> load balancer; NAT Gateway (intermedeia a saída); route table (define o caminho).</li>
+    <li><strong>Política:</strong> security group ou NSG.</li>
+    <li><strong>Serviço:</strong> DNS privado, banco gerenciado.</li>
+  </ul>
+  <p>Erro comum: achar que um “serviço gerenciado” não tem rede. Tem, mas abstraída: você ainda precisa saber origem, destino, porta, protocolo, rota, política e identidade. E os intermediários gerenciados (load balancer, NAT gateway, firewall) costumam ter cobrança recorrente, inclusive pelo tráfego que passa por eles.</p>
+</section>
