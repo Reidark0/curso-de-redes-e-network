@@ -1,0 +1,81 @@
+{
+  "id": "1.1",
+  "versao": "original",
+  "titulo": "O que é uma rede e por que existe",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3598,
+    "invisiveis": 444,
+    "teoriaVisivel": 2354
+  },
+  "porCampoVisivel": {
+    "content.motivation": 163,
+    "content.history": 137,
+    "content.problem": 154,
+    "content.evolution": 145,
+    "content.concept": 113,
+    "content.internals": 156,
+    "content.architecture": 105,
+    "content.analogy": 92,
+    "content.simpleExample": 83,
+    "content.enterpriseExample": 76,
+    "content.cloudExample": 88,
+    "content.devsecopsExample": 90,
+    "content.securityExample": 118,
+    "content.diagram": 24,
+    "content.summary": 59,
+    "content.nextTheme": 49,
+    "security": 239,
+    "troubleshooting": 290,
+    "glossary": 173,
+    "title+subtitle": 27,
+    "objectives": 52,
+    "learningOutcomes": 55,
+    "quiz": 252,
+    "flashcards": 122,
+    "mentorQuestions": 135,
+    "exercises": 176,
+    "challenge": 148,
+    "commentedSolution": 176,
+    "references": 51,
+    "linksToOtherCourses": 50
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 40,
+    "content.exercisesIntro": 25,
+    "content.challengeIntro": 28,
+    "content.solutionIntro": 27,
+    "networkContext": 41,
+    "deepDive": 177,
+    "commonMistakes": 106
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "75-105 min",
+    "estimatedStudyTimeMinutes": 105,
+    "M": 90,
+    "T": 80.1,
+    "partes": {
+      "teoria": 18.1,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "70-95 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 26
+  }
+}
