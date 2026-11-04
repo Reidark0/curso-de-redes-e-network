@@ -1,0 +1,78 @@
+{
+  "id": "1.6",
+  "versao": "nova",
+  "titulo": "Cabeamento estruturado e padrões RJ-45",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 6187,
+    "invisiveis": 28,
+    "teoriaVisivel": 3332
+  },
+  "porCampoVisivel": {
+    "content.motivation": 119,
+    "content.problem": 265,
+    "content.concept": 395,
+    "content.internals": 701,
+    "content.architecture": 183,
+    "content.analogy": 62,
+    "content.simpleExample": 104,
+    "content.enterpriseExample": 105,
+    "content.cloudExample": 78,
+    "content.diagram": 2,
+    "content.summary": 121,
+    "content.nextTheme": 37,
+    "security": 374,
+    "troubleshooting": 363,
+    "glossary": 423,
+    "title+subtitle": 28,
+    "objectives": 66,
+    "learningOutcomes": 70,
+    "quiz": 658,
+    "flashcards": 187,
+    "mentorQuestions": 144,
+    "exercises": 306,
+    "challenge": 192,
+    "commentedSolution": 244,
+    "references": 50,
+    "linksToOtherCourses": 49,
+    "lab": 861
+  },
+  "porCampoInvisivel": {
+    "networkContext": 28
+  },
+  "quantidades": {
+    "quiz": 8,
+    "flashcards": 7,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 8,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 60,
+    "alternativa_5minPasso_maisLeitura": 46.6,
+    "plausivel": true,
+    "palavras": 861
+  },
+  "duracao": {
+    "declarada": "130-180 min",
+    "estimatedStudyTimeMinutes": 180,
+    "M": 155,
+    "T": 150.1,
+    "partes": {
+      "teoria": 25.6,
+      "diagramas": 3,
+      "quiz": 8,
+      "flashcards": 3.5,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 60
+    },
+    "faixaRecomendada": "130-180 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 19
+  }
+}

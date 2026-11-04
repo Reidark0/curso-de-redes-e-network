@@ -3,9 +3,9 @@
   "moduleId": "m01",
   "order": 6,
   "title": "Cabeamento estruturado e padrões RJ-45",
-  "subtitle": "Como organizar a rede física de forma padronizada, documentada, testável e segura — do patch panel até a tomada de rede.",
-  "duration": "80-115 min",
-  "estimatedStudyTimeMinutes": 115,
+  "subtitle": "Como organizar a rede física de forma padronizada, documentada, testável e segura, da tomada de rede até o patch panel e o switch.",
+  "duration": "130-180 min",
+  "estimatedStudyTimeMinutes": 180,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 195,
@@ -81,99 +81,6 @@
       "inventário de rede"
     ]
   },
-  "deepDive": {
-    "mentalModel": "Cabeamento estruturado é a disciplina que transforma fios individuais em uma infraestrutura rastreável. Antes de culpar IP ou aplicação, confirme o caminho físico, a identificação, a porta, a velocidade negociada, os erros e a documentação.",
-    "keyTerms": [
-      "RJ-45",
-      "T568A",
-      "T568B",
-      "patch panel",
-      "patch cord",
-      "keystone",
-      "cabo horizontal",
-      "rack",
-      "PoE",
-      "certificação de cabo"
-    ],
-    "limitations": [
-      "Cabeamento estruturado não substitui segmentação lógica, firewall ou autenticação.",
-      "Um cabo funcionando em continuidade simples pode ainda falhar em desempenho ou estabilidade.",
-      "Documentação física fica obsoleta se mudanças não forem registradas.",
-      "Padrões corretos reduzem risco, mas não eliminam erro humano."
-    ],
-    "whenToUse": [
-      "Em qualquer ambiente corporativo com múltiplos pontos de rede.",
-      "Em salas, escritórios, racks, datacenters, laboratórios e escolas.",
-      "Quando houver necessidade de expansão, auditoria, rastreabilidade ou suporte recorrente.",
-      "Quando APs, câmeras e telefones IP dependem de PoE."
-    ],
-    "whenNotToUse": [
-      "Não faz sentido montar infraestrutura permanente para um teste temporário muito pequeno sem risco operacional.",
-      "Não use cabeamento improvisado como solução definitiva em produção.",
-      "Não mantenha portas ativas sem necessidade em áreas não controladas."
-    ],
-    "operationalImpact": [
-      "Reduz tempo de diagnóstico, mas exige documentação e disciplina de mudança.",
-      "Melhora previsibilidade de manutenção e expansão.",
-      "Exige etiquetas, inventário, organização de rack e controle de patching."
-    ],
-    "financialImpact": [
-      "A instalação inicial pode custar mais que cabos improvisados, mas reduz custo de manutenção e indisponibilidade.",
-      "Certificadores, patch panels, racks e mão de obra qualificada têm custo.",
-      "PoE e switches adequados podem exigir investimento, especialmente para APs, câmeras e telefonia IP."
-    ],
-    "securityImpact": [
-      "Permite rastrear pontos físicos envolvidos em incidentes.",
-      "Reduz exposição ao desativar portas ociosas e controlar racks.",
-      "Documentação sensível deve ser protegida porque revela caminhos físicos e lógicos."
-    ],
-    "decisionTable": [
-      {
-        "situation": "Mesa nova em área administrativa",
-        "recommendedChoice": "Criar ponto identificado no patch panel e no inventário",
-        "why": "Permite manutenção e rastreabilidade",
-        "risk": "Sem identificação, incidentes e mudanças ficam lentos"
-      },
-      {
-        "situation": "Access point no teto",
-        "recommendedChoice": "Cabo estruturado com PoE dimensionado",
-        "why": "Reduz fonte externa e simplifica instalação",
-        "risk": "Sem orçamento PoE, AP pode reiniciar ou não ligar"
-      },
-      {
-        "situation": "Porta em recepção",
-        "recommendedChoice": "Manter desativada ou colocar em VLAN restrita com autenticação",
-        "why": "Área pública aumenta risco de conexão indevida",
-        "risk": "Acesso físico pode virar acesso lógico"
-      }
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Achar que qualquer cabo com conector RJ-45 serve para qualquer velocidade.",
-      "whyItHappens": "Visualmente muitos cabos parecem iguais.",
-      "consequence": "Negociação em velocidade menor, erros, queda de link e troubleshooting confuso.",
-      "correction": "Verificar categoria, estado físico, distância, terminação e evidências de porta."
-    },
-    {
-      "mistake": "Misturar T568A e T568B sem saber o motivo.",
-      "whyItHappens": "A pessoa decora cores sem entender padrão de ponta a ponta.",
-      "consequence": "Cabos cruzados acidentais, falhas e manutenção difícil.",
-      "correction": "Adotar e documentar um padrão; para cabo direto comum, manter o mesmo padrão nas duas pontas."
-    },
-    {
-      "mistake": "Não identificar patch panel e tomadas.",
-      "whyItHappens": "A rede pequena parece simples no começo.",
-      "consequence": "Cada mudança vira tentativa e erro.",
-      "correction": "Criar padrão de etiquetas e atualizar inventário em toda mudança."
-    },
-    {
-      "mistake": "Deixar portas físicas ativas em áreas públicas.",
-      "whyItHappens": "Conveniência operacional.",
-      "consequence": "Aumenta risco de acesso indevido.",
-      "correction": "Desativar portas ociosas, usar 802.1X, port security e VLANs restritas."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Link apagado",
@@ -243,11 +150,11 @@
       },
       {
         "if": "Link sobe em velocidade menor",
-        "then": "Verificar categoria do cabo, conector, comprimento, patch cord, porta e negociação."
+        "then": "Suspeitar dos pares azul e marrom (1 Gbps usa os quatro pares): verificar conector, patch cord, categoria, comprimento do canal (até 100 m), porta e negociação; trocar o patch cord e conferir de novo."
       },
       {
         "if": "Há muitos CRC",
-        "then": "Suspeitar de cabo/conector/interferência/porta e testar substituição controlada."
+        "then": "Suspeitar de cabo, conector, par destrançado ou dividido, interferência ou porta; testar substituição controlada e, em ponto crítico, certificar o cabo."
       },
       {
         "if": "PoE não liga dispositivo",
@@ -257,19 +164,19 @@
   },
   "security": {
     "goodPractices": [
-      "Manter racks trancados e com controle de acesso.",
+      "Manter racks e salas técnicas trancados e com controle de acesso.",
       "Identificar tomadas, portas de patch panel e portas de switch.",
       "Desativar portas não utilizadas.",
-      "Usar autenticação 802.1X quando aplicável.",
-      "Separar portas de visitantes, IoT, câmeras e usuários corporativos em políticas adequadas.",
-      "Registrar mudanças físicas de patching."
+      "Usar autenticação 802.1X ou port security quando aplicável.",
+      "Separar portas de visitantes, IoT, câmeras e usuários corporativos em VLANs e políticas por função.",
+      "Registrar mudanças físicas de patching e revisar a documentação periodicamente."
     ],
     "badPractices": [
-      "Deixar cabos e switches soltos em áreas públicas.",
+      "Deixar cabos, switches de mesa e cabos de câmera acessíveis em áreas públicas.",
       "Manter portas ativas sem inventário.",
       "Misturar cabos sem categoria conhecida em produção.",
       "Não registrar alterações de patch panel.",
-      "Compartilhar diagramas físicos sensíveis sem controle."
+      "Compartilhar diagramas físicos sensíveis sem controle: eles revelam caminhos físicos e lógicos."
     ],
     "commonErrors": [
       "Confundir link físico com autorização de acesso.",
@@ -291,31 +198,29 @@
       },
       {
         "name": "Sabotagem ou erro humano no rack",
-        "description": "Patch cords sem organização aumentam risco de desconexão acidental ou alteração não autorizada.",
+        "description": "Rack aberto e patch cords sem organização permitem desconexão acidental, alteração não autorizada ou espelhamento físico de tráfego.",
         "defensiveExplanation": "Ambientes bagunçados dificultam detectar o que foi alterado.",
         "mitigation": "Controle físico, guias de cabos, lacres quando necessário, registro de acesso e revisão."
+      },
+      {
+        "name": "PoE sem planejamento",
+        "description": "Quando o orçamento PoE do switch se esgota, câmeras e APs desligam ou reiniciam.",
+        "defensiveExplanation": "Câmera sem energia é perda de visibilidade de segurança, e AP reiniciando derruba usuários; o efeito parece ataque ou falha lógica, mas a causa é física.",
+        "mitigation": "Dimensionar o orçamento PoE somando o consumo de cada dispositivo, monitorar o consumo com show power inline e reservar margem para expansão."
       }
     ],
     "monitoring": [
       "Mudança inesperada de status de porta",
-      "Porta ociosa que passa a ter link",
       "Mudança de velocidade negociada",
       "Aumento de CRC/input errors",
       "Eventos de autenticação 802.1X",
       "Consumo PoE anormal"
     ],
-    "hardening": [
-      "Desativar portas não usadas",
-      "Aplicar port security ou 802.1X",
-      "Padronizar VLANs por função",
-      "Proteger racks e salas técnicas",
-      "Documentar patching e revisar periodicamente"
-    ],
     "detectionIdeas": [
-      "Alertas de link up em portas não autorizadas",
-      "Relatórios periódicos de portas ativas sem dono",
+      "Alertas de link up em portas não autorizadas ou ociosas",
+      "Relatórios periódicos de portas ativas sem dono no inventário",
       "Comparação entre inventário e estado real do switch",
-      "Correlação entre porta física, MAC address e autenticação"
+      "Correlação entre porta física, MAC address e autenticação 802.1X"
     ]
   },
   "lab": {
@@ -328,8 +233,7 @@
     "architecture": "Ambiente de acesso cabeado com pelo menos um dispositivo conectado por Ethernet. Pode ser casa, laboratório, empresa com autorização ou simulação desenhada.",
     "prerequisites": [
       "Ter estudado as aulas 1.4 e 1.5.",
-      "Ter autorização para observar o ambiente físico, se for corporativo.",
-      "Não desconectar cabos de produção sem autorização."
+      "Ter autorização para observar o ambiente físico, se for corporativo."
     ],
     "tools": [
       "Windows PowerShell ou terminal Linux",
@@ -343,15 +247,13 @@
     "safetyNotes": [
       "Não desconecte cabos de produção sem autorização.",
       "Não fotografe racks ou etiquetas sensíveis sem permissão.",
-      "Remova informações sensíveis antes de compartilhar evidências.",
-      "O laboratório é defensivo e de documentação, não de bypass de controles físicos."
+      "Remova informações sensíveis antes de compartilhar evidências."
     ],
     "steps": [
       {
         "number": 1,
         "title": "Escolher um ponto de rede",
         "instruction": "Escolha um dispositivo cabeado que possa ser observado com segurança.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
         "expectedOutput": "Dispositivo e ponto escolhidos.",
         "explanation": "Começar por um ponto controlado evita interferir em serviços críticos."
       },
@@ -369,14 +271,13 @@
         "instruction": "Colete evidência de link e velocidade negociada.",
         "command": "Get-NetAdapter | Format-Table Name, Status, LinkSpeed  # Windows\nip link show && ethtool <interface>  # Linux, se disponível",
         "expectedOutput": "Interface ativa e velocidade negociada.",
-        "explanation": "Velocidade inesperada pode indicar problema físico ou limitação de porta/equipamento."
+        "explanation": "Velocidade inesperada pode indicar problema físico ou limitação de porta/equipamento. 100 Mbps numa placa de 1 Gbps sugere par azul ou marrom com defeito, patch cord ruim ou porta limitada."
       },
       {
         "number": 4,
         "title": "Mapear caminho físico visível",
-        "instruction": "Descreva, sem desconectar, o caminho entre dispositivo e tomada, e da tomada ao rack se houver acesso autorizado.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
-        "expectedOutput": "Descrição textual do caminho físico.",
+        "instruction": "Descreva, sem desconectar, o caminho entre dispositivo e tomada, e da tomada ao rack se houver acesso autorizado. Se o conector do patch cord for transparente, observe o fio do pino 1 (com a trava para baixo e os contatos virados para você, o pino 1 fica à esquerda): branco-laranja indica T568B; branco-verde indica T568A.",
+        "expectedOutput": "Descrição textual do caminho físico e, se visível, o padrão de terminação do patch cord.",
         "explanation": "Nem toda evidência é comando; documentação visual/textual é parte do trabalho de redes."
       },
       {
@@ -399,7 +300,6 @@
         "number": 7,
         "title": "Avaliar segurança do ponto",
         "instruction": "Classifique se a tomada fica em área controlada, pública, de visitante, estoque ou sala técnica.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
         "expectedOutput": "Classificação de risco físico.",
         "explanation": "O mesmo cabo pode ser aceitável em sala interna e arriscado em recepção pública."
       },
@@ -407,7 +307,6 @@
         "number": 8,
         "title": "Produzir inventário resumido",
         "instruction": "Monte uma tabela com ponto, local, dispositivo, porta, velocidade, VLAN conhecida, riscos e evidências.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
         "expectedOutput": "Tabela de inventário do ponto escolhido.",
         "explanation": "O objetivo final é transformar observação em documentação útil para operação e segurança."
       }
@@ -454,11 +353,9 @@
       }
     ],
     "improvements": [
-      "Criar padrão de nomenclatura para pontos.",
-      "Registrar portas ociosas e desativá-las.",
-      "Adicionar campo de VLAN e responsável no inventário.",
-      "Planejar certificação de cabos críticos.",
-      "Correlacionar inventário físico com ferramenta de monitoramento."
+      "Criar padrão de nomenclatura para pontos e registrar portas ociosas para desativá-las.",
+      "Adicionar campos de VLAN e responsável no inventário.",
+      "Planejar certificação dos cabos críticos e correlacionar o inventário físico com a ferramenta de monitoramento."
     ],
     "evidenceToCollect": [
       "Tabela de inventário do ponto",
@@ -504,6 +401,7 @@
         "patch cord",
         "categoria",
         "conector",
+        "pares azul e marrom (1 Gbps usa os quatro pares)",
         "porta",
         "velocidade negociada",
         "erros físicos"
@@ -530,105 +428,126 @@
   "quiz": [
     {
       "id": "q1.6.1",
-      "type": "conceito",
-      "q": "Qual é a melhor definição de cabeamento estruturado?",
-      "opts": [
-        "Infraestrutura planejada e documentada para conexão física de rede",
-        "Qualquer cabo com conector RJ-45",
-        "Um protocolo de roteamento",
-        "Um software de monitoramento"
+      "question": "Qual é a melhor definição de cabeamento estruturado?",
+      "options": [
+        "A instalação de cabos da categoria mais alta disponível em todos os pontos",
+        "Infraestrutura física planejada, identificada, documentada e testada que liga as áreas de trabalho ao rack",
+        "A ligação direta de cada equipamento ao switch com cabos cortados sob medida",
+        "O conjunto de VLANs e regras de firewall que separa os setores da empresa"
       ],
-      "a": 0,
-      "exp": "Cabeamento estruturado envolve infraestrutura física, componentes, identificação, documentação e validação.",
+      "answer": 1,
+      "explanation": "Cabeamento estruturado é organização e padrão: componentes, identificação, documentação e testes. Categoria alta sem documentação não é estruturado, e VLAN/firewall são controles lógicos.",
+      "topic": "conceito",
       "difficulty": "iniciante",
-      "topic": "conceito"
+      "type": "conceito"
     },
     {
       "id": "q1.6.2",
-      "type": "diagnóstico",
-      "q": "Uma porta deveria negociar 1 Gbps, mas aparece em 100 Mbps. Qual hipótese física é plausível?",
-      "opts": [
-        "Cabo ou conector inadequado/danificado",
-        "DNS público fora do ar",
-        "Senha do usuário expirada",
-        "Navegador desatualizado"
+      "question": "Uma porta deveria negociar 1 Gbps, mas aparece em 100 Mbps. Qual hipótese física é plausível?",
+      "options": [
+        "Gateway padrão configurado errado na estação",
+        "Escopo do servidor DHCP sem endereços livres",
+        "Cabo ou conector com um dos pares azul ou marrom danificado",
+        "VLAN errada configurada na porta do switch"
       ],
-      "a": 0,
-      "exp": "Velocidade de link é evidência de camada física/enlace, não de DNS ou aplicação.",
+      "answer": 2,
+      "explanation": "Velocidade de link é negociada na camada física. 1 Gbps usa os quatro pares; com um par azul ou marrom com defeito o link pode subir só a 100 Mbps. DHCP, gateway e VLAN afetam endereço e alcance, não a velocidade negociada.",
+      "topic": "troubleshooting",
       "difficulty": "iniciante",
-      "topic": "troubleshooting"
+      "type": "diagnóstico"
     },
     {
       "id": "q1.6.3",
-      "type": "comparação",
-      "q": "Para um cabo direto comum, qual prática reduz confusão operacional?",
-      "opts": [
-        "Usar o mesmo padrão de terminação nas duas pontas",
-        "Misturar T568A e T568B aleatoriamente",
-        "Remover etiquetas para segurança",
-        "Nunca documentar patch panel"
+      "question": "Para um cabo direto comum, qual prática reduz confusão operacional?",
+      "options": [
+        "Usar o mesmo padrão de terminação nas duas pontas e documentá-lo",
+        "Usar T568A numa ponta e T568B na outra",
+        "Escolher o padrão de cada ponta conforme a cor do cabo",
+        "Terminar o patch panel em T568B e a tomada no padrão que o instalador preferir"
       ],
-      "a": 0,
-      "exp": "O mesmo padrão nas duas pontas e documentação reduzem erro humano.",
+      "answer": 0,
+      "explanation": "Cabo direto tem o mesmo padrão nas duas pontas. A numa ponta e B na outra forma um cabo cruzado; padrão escolhido ponto a ponto impede a manutenção previsível.",
+      "topic": "T568A/T568B",
       "difficulty": "iniciante",
-      "topic": "T568A/T568B"
+      "type": "comparação"
     },
     {
       "id": "q1.6.4",
-      "type": "segurança",
-      "q": "Qual risco existe em manter tomadas ativas em áreas públicas?",
-      "opts": [
-        "Conexão indevida à rede",
-        "Aumento automático de criptografia",
-        "Redução de latência",
-        "Melhora de throughput"
+      "question": "Qual risco existe em manter tomadas ativas em áreas públicas?",
+      "options": [
+        "Esgotamento imediato do orçamento PoE do switch",
+        "Queda da velocidade negociada nas outras portas do switch",
+        "Aumento de erros CRC no cabo horizontal",
+        "Conexão indevida de um dispositivo à rede interna"
       ],
-      "a": 0,
-      "exp": "Portas físicas ativas podem permitir conexão indevida se não houver controles lógicos.",
+      "answer": 3,
+      "explanation": "Uma porta ativa sem controle lógico (802.1X, port security, VLAN restrita) permite que qualquer pessoa ligue um dispositivo na rede. Ela não afeta velocidade, CRC ou PoE das outras portas por estar ativa.",
+      "topic": "segurança",
       "difficulty": "intermediário",
-      "topic": "segurança"
+      "type": "segurança"
     },
     {
       "id": "q1.6.5",
-      "type": "operação",
-      "q": "Qual componente normalmente concentra a terminação dos cabos horizontais no rack?",
-      "opts": [
+      "question": "Qual componente normalmente concentra a terminação dos cabos horizontais no rack?",
+      "options": [
+        "Keystone",
         "Patch panel",
-        "Navegador",
-        "Servidor DNS",
-        "Token JWT"
+        "Patch cord de rack",
+        "Switch de acesso"
       ],
-      "a": 0,
-      "exp": "O patch panel organiza a chegada dos pontos físicos no rack.",
+      "answer": 1,
+      "explanation": "Os cabos horizontais terminam no patch panel. O keystone fica na ponta da área de trabalho, o patch cord de rack liga patch panel e switch, e o switch é o equipamento ativo.",
+      "topic": "componentes",
       "difficulty": "iniciante",
-      "topic": "componentes"
+      "type": "operação"
     },
     {
       "id": "q1.6.6",
-      "type": "cenário",
-      "q": "Um AP no teto reinicia várias vezes ao dia. Qual item de cabeamento/infra deve ser verificado?",
-      "opts": [
-        "Orçamento PoE e qualidade do cabo",
-        "Formato do JSON da API",
-        "Base64 do token",
-        "Cache do navegador"
+      "question": "Um AP no teto reinicia várias vezes ao dia. Qual item de cabeamento/infra deve ser verificado?",
+      "options": [
+        "Escopo DHCP da VLAN dos APs",
+        "Canal Wi-Fi configurado no AP",
+        "Orçamento PoE do switch e qualidade do cabo",
+        "Padrão T568A ou T568B usado nas duas pontas do cabo"
       ],
-      "a": 0,
-      "exp": "APs dependem de energia e dados; PoE insuficiente ou cabo ruim pode causar reinicializações.",
+      "answer": 2,
+      "explanation": "O AP recebe energia e dados pelo cabo; PoE insuficiente ou cabo ruim faz o equipamento reiniciar. Canal e DHCP não desligam o AP, e A–A ou B–B funcionam igualmente.",
+      "topic": "PoE",
       "difficulty": "intermediário",
-      "topic": "PoE"
+      "type": "cenário"
+    },
+    {
+      "id": "q1.6.7",
+      "question": "Qual é a diferença entre os padrões T568A e T568B?",
+      "options": [
+        "Os pares azul e marrom trocam de posição; laranja e verde ficam nos mesmos pinos",
+        "T568B usa os quatro pares e T568A usa apenas dois",
+        "T568A é para cabo Cat5e e T568B é para Cat6",
+        "Os pares laranja e verde trocam de posição; azul e marrom ficam nos mesmos pinos"
+      ],
+      "answer": 3,
+      "explanation": "Os dois padrões são eletricamente equivalentes e usam os mesmos 8 fios; só os pares laranja e verde mudam de lugar. O padrão não depende da categoria do cabo.",
+      "topic": "T568A/T568B",
+      "difficulty": "iniciante",
+      "type": "conceito"
+    },
+    {
+      "id": "q1.6.8",
+      "question": "Um cabo com o par marrom rompido dá link a 100 Mbps, mas não a 1 Gbps. Por quê?",
+      "options": [
+        "10/100 Mbps usa só os pinos 1, 2, 3 e 6, enquanto 1000BASE-T precisa dos quatro pares",
+        "O par marrom transporta a energia PoE que o 1 Gbps exige",
+        "O par marrom é o único que tem trançado, e sem ele a interferência limita a velocidade",
+        "O switch reduz a velocidade de propósito para economizar energia quando falta um par"
+      ],
+      "answer": 0,
+      "explanation": "Em 10/100 Mbps os pares azul e marrom não são usados, então o link sobe. 1 Gbps transmite pelos quatro pares e não funciona com um deles rompido.",
+      "topic": "pares e velocidade",
+      "difficulty": "intermediário",
+      "type": "diagnóstico"
     }
   ],
   "flashcards": [
-    {
-      "id": "fc1.6.1",
-      "front": "O que é cabeamento estruturado?",
-      "back": "Infraestrutura física padronizada, identificada, documentada e testável para conexão de rede.",
-      "tags": [
-        "cabeamento"
-      ],
-      "difficulty": "iniciante"
-    },
     {
       "id": "fc1.6.2",
       "front": "O que é patch panel?",
@@ -636,16 +555,6 @@
       "tags": [
         "rack",
         "patch panel"
-      ],
-      "difficulty": "iniciante"
-    },
-    {
-      "id": "fc1.6.3",
-      "front": "Qual regra prática para T568A/B em cabo direto?",
-      "back": "Use o mesmo padrão nas duas pontas e documente o padrão adotado.",
-      "tags": [
-        "T568A",
-        "T568B"
       ],
       "difficulty": "iniciante"
     },
@@ -659,15 +568,6 @@
       "difficulty": "intermediário"
     },
     {
-      "id": "fc1.6.5",
-      "front": "Qual risco de uma porta ativa em área pública?",
-      "back": "Ela pode permitir conexão indevida se não houver controles como 802.1X, port security ou VLAN restrita.",
-      "tags": [
-        "segurança física"
-      ],
-      "difficulty": "intermediário"
-    },
-    {
       "id": "fc1.6.6",
       "front": "O que PoE adiciona ao cabeamento?",
       "back": "Além de dados, a porta fornece energia para dispositivos como APs, câmeras e telefones IP.",
@@ -675,6 +575,42 @@
         "PoE"
       ],
       "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.6.7",
+      "front": "Ordem dos fios no T568B (pinos 1 a 8)?",
+      "back": "Branco-laranja, laranja, branco-verde, azul, branco-azul, verde, branco-marrom, marrom. No T568A, laranja e verde trocam de lugar.",
+      "tags": [
+        "T568B"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.6.8",
+      "front": "Qual é o limite de comprimento de um canal de par trançado?",
+      "back": "100 m: até 90 m de cabo horizontal fixo mais até 10 m somados de patch cords.",
+      "tags": [
+        "distância"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.6.9",
+      "front": "O que é par dividido (split pair) e por que o testador de continuidade não pega?",
+      "back": "Os fios de um sinal estão em pares diferentes; cada pino chega ao pino certo, então a continuidade passa, mas o trançado não cancela ruído e surgem erros. Só a certificação (diafonia) detecta.",
+      "tags": [
+        "certificação"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc1.6.10",
+      "front": "O que é Auto-MDI-X?",
+      "back": "Recurso da porta que detecta se transmissão e recepção precisam ser cruzadas e corrige sozinho, dispensando o cabo crossover.",
+      "tags": [
+        "crossover"
+      ],
+      "difficulty": "intermediário"
     }
   ],
   "exercises": [
@@ -693,18 +629,18 @@
       "explanation": "CRC errors são indícios físicos/enlace e merecem investigação de cabo, porta e ambiente."
     },
     {
-      "id": "ex1.6.3",
-      "type": "segurança",
-      "prompt": "Proponha três controles para tomadas em sala de reunião usada por visitantes.",
-      "expectedAnswer": "Portas desativadas quando ociosas, VLAN visitante/restrita, 802.1X ou port security, monitoramento de link up.",
-      "explanation": "Áreas compartilhadas exigem menor confiança física."
+      "id": "ex1.6.5",
+      "type": "pinagem",
+      "prompt": "Uma ponta de um cabo está em T568B. Na outra, a ordem dos fios do pino 1 ao 8 é: branco-verde, verde, branco-laranja, azul, branco-azul, laranja, branco-marrom, marrom. Que padrão é essa ponta, que tipo de cabo resulta e o que você faz com ele num ambiente que padronizou T568B?",
+      "expectedAnswer": "A outra ponta está em T568A, então o cabo é cruzado (crossover). Com Auto-MDI-X ele provavelmente funciona, mas foge do padrão documentado: refaça a ponta em T568B para ter um cabo direto B–B.",
+      "explanation": "Pino 1 branco-verde identifica T568A. Funcionar não basta: um cabo fora do padrão confunde a manutenção e o próximo diagnóstico."
     },
     {
-      "id": "ex1.6.4",
-      "type": "arquitetura",
-      "prompt": "Desenhe textualmente o caminho entre um notebook e o switch em cabeamento estruturado.",
-      "expectedAnswer": "Notebook -> patch cord -> tomada/keystone -> cabo horizontal -> patch panel -> patch cord de rack -> switch.",
-      "explanation": "Esse caminho será usado em troubleshooting e documentação."
+      "id": "ex1.6.6",
+      "type": "cálculo",
+      "prompt": "Um AP fica a 95 m de cabo horizontal do rack. Ele usa 2 m de patch cord no teto e 2 m no rack. O canal está dentro do padrão? Se não estiver, que alternativas você propõe?",
+      "expectedAnswer": "Não. O canal tem 99 m no total, mas o cabo horizontal passa do limite de 90 m para o trecho fixo. Alternativas: reposicionar o AP para encurtar o trecho horizontal ou instalar um switch de acesso mais perto (com uplink adequado, por exemplo em fibra).",
+      "explanation": "O limite de 100 m é do canal inteiro, com no máximo 90 m de cabo fixo. Fora dele a atenuação aumenta e surgem erros, velocidade menor ou falha de PoE."
     }
   ],
   "challenge": {
@@ -712,8 +648,9 @@
     "scenario": "Uma empresa com 20 usuários, 3 APs, 6 câmeras IP e 2 impressoras usa cabos improvisados. O dono quer reduzir quedas e melhorar segurança sem gastar com datacenter completo.",
     "tasks": [
       "Propor organização de rack e patch panel.",
-      "Criar padrão de identificação de tomadas.",
-      "Definir quais portas devem usar PoE.",
+      "Escolher a categoria de cabo e conferir se os pontos respeitam o limite de 100 m por canal.",
+      "Criar padrão de identificação de tomadas e definir o padrão de terminação (T568A ou T568B).",
+      "Definir quais portas devem usar PoE e estimar o orçamento PoE.",
       "Indicar controles para portas ociosas e áreas públicas.",
       "Criar plano mínimo de validação e documentação."
     ],
@@ -756,14 +693,14 @@
   "commentedSolution": {
     "reasoning": "O problema não é apenas trocar cabos. Primeiro identificamos os tipos de ponto, depois organizamos terminação no rack, criamos padrão de identificação, definimos PoE e tratamos riscos físicos.",
     "steps": [
-      "Listar todos os pontos necessários.",
-      "Separar usuários, APs, câmeras e impressoras.",
-      "Criar padrão de etiquetas por sala e número.",
+      "Listar todos os pontos necessários e separar usuários, APs, câmeras e impressoras.",
+      "Escolher a categoria (Cat6 cobre 1 Gbps com folga; Cat6A se houver plano de 10 Gbps) e medir as distâncias até o rack.",
+      "Criar padrão de etiquetas por sala e número e adotar um único padrão de terminação.",
       "Terminar cabos horizontais em patch panel.",
       "Ligar patch panel ao switch com patch cords curtos e organizados.",
-      "Dimensionar PoE para APs e câmeras.",
+      "Dimensionar PoE para APs e câmeras somando o consumo de cada um.",
       "Desativar portas ociosas e proteger áreas públicas.",
-      "Validar link, velocidade e documentação."
+      "Validar link, velocidade, PoE e documentação."
     ],
     "commonWrongAnswers": [
       {
@@ -779,7 +716,7 @@
         "whyItIsWrong": "Documentação deve ser protegida, não eliminada; sem ela a operação e resposta a incidentes pioram."
       }
     ],
-    "finalAnswer": "Uma solução adequada cria rack organizado com patch panel, padrão de identificação por sala/ponto, portas PoE dimensionadas para APs e câmeras, portas ociosas desativadas, controle físico do rack e inventário que correlaciona tomada, patch panel, switch, VLAN futura e responsável. A validação inclui link, velocidade, PoE, ausência de erros físicos e revisão de documentação."
+    "finalAnswer": "Uma solução adequada cria rack organizado com patch panel, cabo de categoria compatível (Cat6 ou superior) dentro de 100 m por canal, padrão de identificação por sala/ponto, um único padrão de terminação, portas PoE dimensionadas para APs e câmeras, portas ociosas desativadas, controle físico do rack e inventário que correlaciona tomada, patch panel, switch, VLAN futura e responsável. A validação inclui link, velocidade, PoE, ausência de erros físicos e revisão de documentação."
   },
   "glossary": [
     {
@@ -791,26 +728,17 @@
         "patch panel",
         "rack",
         "RJ-45"
-      ],
-      "relatedLessons": [
-        "1.4",
-        "1.5",
-        "1.7"
       ]
     },
     {
       "term": "RJ-45",
       "shortDefinition": "Nome comum do conector usado em Ethernet de par trançado.",
-      "longDefinition": "Conector modular de oito posições associado no uso prático ao cabeamento Ethernet de cobre.",
+      "longDefinition": "Nome popular do conector modular de oito posições e oito contatos (8P8C) usado no cabeamento Ethernet de cobre.",
       "example": "Patch cord Ethernet com conectores RJ-45 nas duas pontas.",
       "relatedTerms": [
         "T568A",
         "T568B",
         "Ethernet"
-      ],
-      "relatedLessons": [
-        "1.5",
-        "3.1"
       ]
     },
     {
@@ -822,38 +750,27 @@
         "rack",
         "patch cord",
         "cabo horizontal"
-      ],
-      "relatedLessons": [
-        "1.6",
-        "1.7"
       ]
     },
     {
       "term": "T568A/T568B",
       "shortDefinition": "Padrões de ordem dos fios no conector.",
-      "longDefinition": "Esquemas de terminação para pares de fios em conectores de rede. O ponto central é adotar padrão consistente e documentado.",
+      "longDefinition": "Duas ordens padronizadas dos 8 fios nos pinos do conector. São eletricamente equivalentes; só os pares laranja e verde trocam de lugar. O ponto central é adotar um padrão consistente e documentado.",
       "example": "Um cabo direto comum usa o mesmo padrão nas duas pontas.",
       "relatedTerms": [
         "pinagem",
         "RJ-45"
-      ],
-      "relatedLessons": [
-        "1.6"
       ]
     },
     {
       "term": "PoE",
       "shortDefinition": "Energia elétrica entregue pelo cabo de rede.",
-      "longDefinition": "Power over Ethernet permite alimentar dispositivos como APs, telefones IP e câmeras pelo mesmo cabo usado para dados.",
+      "longDefinition": "Power over Ethernet permite alimentar APs, telefones IP e câmeras pelo mesmo cabo usado para dados. Padrões IEEE 802.3af (até 15,4 W por porta), 802.3at (até 30 W) e 802.3bt (até 60 W ou 90 W).",
       "example": "Um access point no teto recebe dados e energia pela porta PoE do switch.",
       "relatedTerms": [
         "switch",
         "AP",
         "câmera IP"
-      ],
-      "relatedLessons": [
-        "1.5",
-        "1.7"
       ]
     },
     {
@@ -865,26 +782,43 @@
         "tomada",
         "keystone",
         "patch panel"
-      ],
-      "relatedLessons": [
-        "1.6"
+      ]
+    },
+    {
+      "term": "Patch cord",
+      "shortDefinition": "Cabo flexível e curto com conectores nas duas pontas.",
+      "longDefinition": "Liga o equipamento à tomada na área de trabalho, ou a porta do patch panel à porta do switch no rack. Os patch cords somados entram no limite de 10 m do canal.",
+      "example": "Patch cord de 1,5 m entre o patch panel PP1 porta 34 e o switch SW-AC-01 porta 18.",
+      "relatedTerms": [
+        "patch panel",
+        "cabo horizontal"
+      ]
+    },
+    {
+      "term": "Certificação de cabo",
+      "shortDefinition": "Teste que mede se o ponto atende aos limites da categoria.",
+      "longDefinition": "Feita com certificador, mede comprimento, perda, diafonia (NEXT) e perda de retorno. Vai além do teste de continuidade, que só confere se cada fio chega ao pino certo.",
+      "example": "Um ponto passa no testador de continuidade, mas reprova na certificação por diafonia causada por par dividido.",
+      "relatedTerms": [
+        "categoria",
+        "par dividido"
       ]
     }
   ],
   "references": [
     {
       "type": "standard",
-      "title": "Structured Cabling Standards",
-      "organization": "TIA/EIA",
+      "title": "ANSI/TIA-568 (série de normas de cabeamento de telecomunicações)",
+      "organization": "TIA",
       "url": "",
-      "note": "Referência conceitual para organização e padronização de cabeamento estruturado."
+      "note": "Norma de cabeamento estruturado; define os padrões de terminação T568A/T568B, categorias e limites de distância."
     },
     {
       "type": "standard",
       "title": "IEEE 802.3 Ethernet",
       "organization": "IEEE",
       "url": "",
-      "note": "Base conceitual para Ethernet em meios físicos de rede."
+      "note": "Padrão Ethernet: 10/100/1000BASE-T, 10GBASE-T e PoE (802.3af/at/bt)."
     },
     {
       "type": "internal-course",

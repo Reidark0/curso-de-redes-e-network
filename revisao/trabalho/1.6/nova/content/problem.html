@@ -1,11 +1,14 @@
 <section class="lesson-section lesson-section--problem">
-  <h2>3. Problema</h2>
-  <p>O problema do cabeamento não é apenas “fazer o cabo funcionar”. O problema é construir uma infraestrutura física que continue funcionando depois de mudanças, expansões, incidentes, auditorias, substituição de equipamentos e crescimento da empresa.</p>
-  <ul class="flow-list">
-    <li><strong>Sem padronização:</strong> cabos podem ser terminados com pinagens diferentes, dificultando manutenção e gerando falhas intermitentes.</li>
-    <li><strong>Sem documentação:</strong> ninguém sabe qual tomada corresponde a qual porta do patch panel ou do switch.</li>
-    <li><strong>Sem certificação:</strong> o cabo pode “dar link”, mas não suportar a taxa esperada de forma confiável.</li>
-    <li><strong>Sem organização física:</strong> racks viram emaranhados, ventilação piora, troca de equipamentos fica arriscada e erros humanos aumentam.</li>
-    <li><strong>Sem segurança física:</strong> portas ativas em locais públicos podem permitir conexão indevida à rede interna.</li>
-  </ul>
+  <h2>Problema</h2>
+  <p>Nos primeiros ambientes de rede, cada cabo era instalado de forma pontual: um para o computador, outro para a impressora, outro improvisado para a sala nova. Isso funciona enquanto a rede é pequena. O problema aparece quando ela precisa crescer, passar para outra equipe, ser auditada ou ser diagnosticada com pressa. O desafio não é "fazer o cabo funcionar", e sim ter uma infraestrutura física que continue funcionando depois de mudanças, expansões, incidentes e troca de equipamentos. A instalação estruturada custa mais no início (rack, patch panels, certificação, mão de obra qualificada), mas reduz o custo de manutenção e de indisponibilidade; só um teste temporário e pequeno, sem risco operacional, dispensa esse investimento.</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Sem…</th><th>O que acontece</th><th>O que o cabeamento estruturado faz</th></tr></thead>
+    <tbody>
+      <tr><td>Padronização</td><td>Cabos terminados com pinagens diferentes, falhas intermitentes e manutenção difícil</td><td>Um padrão de terminação (T568A ou T568B) adotado e documentado no ambiente inteiro</td></tr>
+      <tr><td>Documentação</td><td>Ninguém sabe qual tomada corresponde a qual porta do patch panel ou do switch</td><td>Etiquetas iguais na tomada e no patch panel, e inventário ligando ponto, porta, VLAN e responsável</td></tr>
+      <tr><td>Certificação</td><td>O cabo "dá link", mas não sustenta a taxa esperada; o teste de continuidade só mostra se os fios têm contato</td><td>Teste com certificador que mede parâmetros físicos (perda, diafonia, comprimento)</td></tr>
+      <tr><td>Organização física</td><td>Rack vira emaranhado, ventilação piora e a troca de equipamento arrisca desligar serviço crítico</td><td>Cabeamento horizontal terminado em patch panel, guias de cabos e patch cords curtos</td></tr>
+      <tr><td>Segurança física</td><td>Qualquer tomada aceita qualquer dispositivo: portas ativas em local público permitem conexão indevida</td><td>Portas ociosas desativadas, 802.1X, VLANs por função e port security</td></tr>
+    </tbody>
+  </table></div>
 </section>
