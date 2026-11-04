@@ -1,11 +1,21 @@
 <section class="lesson-section lesson-section--internals">
-  <h2>6. Funcionamento interno</h2>
-  <p>O funcionamento interno varia por meio, mas o ciclo mental é parecido: o transmissor codifica bits em um sinal, o meio propaga esse sinal, o receptor tenta interpretar a variação recebida e os equipamentos superiores validam quadros, erros e retransmissões.</p>
+  <h2>Funcionamento interno</h2>
+  <p>O ciclo é o mesmo nos três meios: o transmissor codifica bits em um sinal, o meio o propaga, o receptor tenta interpretar a variação recebida e as camadas superiores validam quadros, detectam erros e retransmitem.</p>
   <ol class="flow-list">
-    <li><strong>Cobre:</strong> a placa ou porta de switch transforma bits em variações elétricas nos pares de fios. O trançamento ajuda a reduzir interferência, mas não elimina problemas de distância, blindagem, conector e ruído.</li>
-    <li><strong>Fibra:</strong> transceptores convertem sinais elétricos em pulsos de luz. A luz viaja pela fibra até outro transceptor, que converte de volta para sinal elétrico.</li>
-    <li><strong>Rádio:</strong> o rádio modula informação em ondas eletromagnéticas. O receptor precisa distinguir sinal útil de ruído, interferência e reflexões.</li>
-    <li><strong>Validação:</strong> se o sinal chega degradado, quadros podem ter erro, pacotes podem ser perdidos, protocolos superiores retransmitem e o usuário percebe lentidão ou queda.</li>
+    <li><strong>Cobre:</strong> a placa ou a porta do switch transforma bits em variações elétricas nos pares de fios. O trançamento reduz interferência, mas não elimina problemas de distância, blindagem, conector e ruído. O 1000BASE-T (1 Gbps) usa os quatro pares; o 100BASE-TX (100 Mbps), dois. Por isso um par danificado pode fazer a porta negociar 100 Mbps, ou nem subir o link.</li>
+    <li><strong>Fibra:</strong> transceptores convertem sinais elétricos em pulsos de luz, e o transceptor da outra ponta converte a luz de volta em sinal elétrico.</li>
+    <li><strong>Rádio:</strong> o rádio modula a informação em ondas eletromagnéticas. O receptor precisa distinguir o sinal útil de ruído, interferência e reflexões.</li>
+    <li><strong>Validação:</strong> se o sinal chega degradado, o quadro falha na verificação de CRC e é descartado, os protocolos superiores retransmitem e o usuário percebe lentidão ou queda.</li>
   </ol>
-  <p>Esse é o motivo pelo qual um problema físico pode aparecer como problema de aplicação. TCP retransmite, TLS demora, HTTP parece lento e o usuário diz apenas “o sistema caiu”.</p>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead><tr><th>Fenômeno</th><th>O que é</th><th>Exemplo</th><th>Como reduzir</th></tr></thead>
+      <tbody>
+        <tr><td>Atenuação</td><td>Perda de intensidade do sinal ao longo do meio; cresce com a distância</td><td>Cabo longo demais, conector de fibra sujo, cliente longe do AP</td><td>Respeitar a distância, limpar conectores, reposicionar APs</td></tr>
+        <tr><td>Ruído e interferência</td><td>Energia indesejada somada ao sinal. SNR (relação sinal-ruído) baixa = mais bits errados e, no Wi‑Fi, taxa menor</td><td>Cobre mal instalado perto de fonte elétrica; muitos APs no mesmo canal</td><td>Certificação de cabos; planejamento de canais e análise de espectro</td></tr>
+        <tr><td>Meio compartilhado</td><td>No rádio, quem está no mesmo canal disputa o tempo de transmissão</td><td>AP sobrecarregado, perda em horário de pico</td><td>Planejar densidade, separar canais, cabear o que é fixo</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>É por isso que um problema físico aparece como problema de aplicação: o TCP retransmite, o TLS demora, o HTTP parece lento e o usuário diz apenas “o sistema caiu”.</p>
 </section>

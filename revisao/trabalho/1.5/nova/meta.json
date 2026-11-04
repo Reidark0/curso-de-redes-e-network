@@ -3,9 +3,9 @@
   "moduleId": "m01",
   "order": 5,
   "title": "Meios de transmissão: cobre, fibra e rádio",
-  "subtitle": "Como sinais atravessam cabos metálicos, fibras ópticas e o ar — e como isso muda desempenho, custo, risco e troubleshooting.",
-  "duration": "75-110 min",
-  "estimatedStudyTimeMinutes": 110,
+  "subtitle": "Como sinais atravessam cabos metálicos, fibras ópticas e o ar, e como isso muda desempenho, custo, risco e troubleshooting.",
+  "duration": "70-100 min",
+  "estimatedStudyTimeMinutes": 100,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 190,
@@ -78,84 +78,6 @@
       "segurança de portas"
     ]
   },
-  "deepDive": {
-    "mentalModel": "Antes de culpar um protocolo, pergunte: o sinal chega bem? O meio escolhido é adequado para distância, ambiente, interferência, mobilidade, custo e risco?",
-    "keyTerms": [
-      "cobre",
-      "fibra óptica",
-      "rádio",
-      "atenuação",
-      "interferência",
-      "ruído",
-      "SNR",
-      "CRC",
-      "PoE",
-      "transceptor",
-      "canal"
-    ],
-    "limitations": [
-      "Cobre é prático, mas tem distância e sensibilidade a instalação ruim.",
-      "Fibra oferece alcance e taxa, mas exige cuidado com conectores, curvatura e transceptores.",
-      "Rádio oferece mobilidade, mas é meio compartilhado e exposto ao ambiente.",
-      "Cloud abstrai o meio físico, mas não elimina distância, latência e dependência de interconexão."
-    ],
-    "whenToUse": [
-      "Use cobre para acesso cabeado comum e PoE dentro de limites adequados.",
-      "Use fibra para backbone, interligação de racks, prédios, datacenters e enlaces longos.",
-      "Use rádio para mobilidade, visitantes, ambientes sem cabeamento e dispositivos móveis.",
-      "Use redundância quando o meio for crítico para operação."
-    ],
-    "whenNotToUse": [
-      "Não use Wi‑Fi como substituto automático de cabo para sistemas críticos sem avaliação.",
-      "Não use cobre para distâncias fora da especificação.",
-      "Não use fibra sem controle físico, limpeza, documentação e transceptores compatíveis.",
-      "Não deixe portas de rede ativas em áreas públicas sem controle."
-    ],
-    "operationalImpact": [
-      "Meios mal documentados aumentam tempo de troubleshooting.",
-      "Cobre facilita suporte local, mas exige organização de rack e certificação de cabos.",
-      "Fibra reduz interferência, mas exige equipe preparada para manuseio e diagnóstico.",
-      "Wi‑Fi exige planejamento de canais, potência, densidade e autenticação."
-    ],
-    "financialImpact": [
-      "Cobre costuma ter menor custo por ponto de acesso local.",
-      "Fibra pode custar mais em transceptores, instalação e manutenção, mas viabiliza backbone robusto.",
-      "Wi‑Fi reduz cabeamento para usuários móveis, mas exige APs, controladora ou gestão, site survey e manutenção.",
-      "Redundância física aumenta custo, mas reduz impacto financeiro de indisponibilidade."
-    ],
-    "securityImpact": [
-      "Portas físicas expostas aumentam risco de acesso indevido.",
-      "Wi‑Fi ultrapassa paredes e exige autenticação e segmentação fortes.",
-      "Racks e fibras críticas precisam de controle físico.",
-      "Monitorar mudanças de link e portas ajuda a detectar conexões não autorizadas."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Achar que cabo conectado significa link saudável.",
-      "whyItHappens": "A luz da porta acende e parece suficiente.",
-      "consequence": "Erros físicos e retransmissões continuam ocultos.",
-      "correction": "Verificar velocidade negociada, duplex, contadores de erro e histórico de flaps."
-    },
-    {
-      "mistake": "Tratar Wi‑Fi como se fosse cabo invisível.",
-      "whyItHappens": "O usuário só vê que está conectado.",
-      "consequence": "Mobilidade, interferência, canal e densidade são ignorados.",
-      "correction": "Planejar cobertura, canal, potência, autenticação e capacidade."
-    },
-    {
-      "mistake": "Escolher fibra apenas por ser mais rápida.",
-      "whyItHappens": "Fibra é associada a alto desempenho.",
-      "consequence": "Pode haver custo e complexidade desnecessários.",
-      "correction": "Justificar fibra por distância, backbone, imunidade a ruído, taxa ou isolamento elétrico."
-    },
-    {
-      "mistake": "Ignorar segurança física.",
-      "whyItHappens": "O foco fica em firewall e senha.",
-      "consequence": "Um atacante interno ou visitante pode conectar equipamento indevido.",
-      "correction": "Aplicar controle de portas, NAC, 802.1X, inventário e travamento físico."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "link cai e volta",
@@ -178,43 +100,50 @@
         "platform": "Windows",
         "command": "Get-NetAdapter | Select-Object Name, Status, LinkSpeed",
         "purpose": "Ver adaptadores e velocidade negociada.",
-        "expectedObservation": "Interface ativa com velocidade coerente com o ambiente.",
+        "expectedObservation": "Status Up e LinkSpeed coerente com o ambiente (ex.: 1 Gbps).",
         "interpretation": "Velocidade abaixo do esperado pode indicar cabo, porta, driver ou negociação."
       },
       {
         "platform": "Windows",
         "command": "netsh wlan show interfaces",
-        "purpose": "Ver informações do Wi‑Fi, sinal, rádio e SSID.",
-        "expectedObservation": "Sinal e taxa coerentes com a distância do AP.",
+        "purpose": "Ver SSID, canal, sinal e taxas do Wi‑Fi.",
+        "expectedObservation": "Sinal e taxas coerentes com a distância do AP.",
         "interpretation": "Sinal baixo ou taxa instável sugerem problema sem fio."
       },
       {
         "platform": "Linux",
         "command": "ip link show && ethtool <interface>",
         "purpose": "Ver estado do link e detalhes de negociação em interface cabeada.",
-        "expectedObservation": "Link detected: yes e speed esperada.",
+        "expectedObservation": "Link detected: yes, com Speed e Duplex esperados.",
         "interpretation": "Ausência de link ou speed inesperada aponta para camada física ou driver."
       },
       {
         "platform": "Linux",
         "command": "iw dev && iw dev <interface> link",
         "purpose": "Ver interface Wi‑Fi, SSID, sinal e taxa.",
-        "expectedObservation": "Sinal em dBm e informações de link.",
+        "expectedObservation": "Sinal em dBm e taxa do link.",
         "interpretation": "Sinal muito fraco ou taxa baixa indica problema de rádio."
       },
       {
         "platform": "Cisco IOS",
         "command": "show interfaces status",
         "purpose": "Ver portas, VLAN, duplex e speed.",
-        "expectedObservation": "Portas conectadas com speed/duplex esperados.",
+        "expectedObservation": "Portas connected com speed/duplex esperados.",
         "interpretation": "Speed/duplex anormais sugerem cabo, endpoint ou configuração."
       },
       {
         "platform": "Cisco IOS",
         "command": "show interfaces counters errors",
-        "purpose": "Ver erros físicos e de quadros.",
-        "expectedObservation": "Contadores de erro baixos ou zerados.",
-        "interpretation": "CRC, input errors e drops ajudam a detectar problema físico."
+        "purpose": "Ver erros físicos e de quadros por porta.",
+        "expectedObservation": "Contadores baixos ou zerados, sem crescer entre duas leituras.",
+        "interpretation": "FCS-Err (CRC inválido) e Rcv-Err crescendo apontam cabo, conector, porta ou interferência; em show interfaces <porta> aparecem como CRC e input errors."
+      },
+      {
+        "platform": "Cisco IOS",
+        "command": "show interfaces transceiver",
+        "purpose": "Ver potência óptica de Tx e Rx em transceptores com monitoramento digital (DOM).",
+        "expectedObservation": "Tx e Rx dentro da faixa do módulo.",
+        "interpretation": "Rx baixo sugere atenuação: conector sujo, curvatura, distância excessiva ou transceptor incompatível."
       }
     ],
     "decisionTree": [
@@ -239,68 +168,58 @@
   "security": {
     "goodPractices": [
       "Desativar portas não utilizadas.",
-      "Usar 802.1X/NAC quando possível.",
+      "Usar 802.1X/NAC quando possível, com VLAN de quarentena para dispositivos não autenticados.",
       "Separar Wi‑Fi corporativo e visitante.",
-      "Proteger racks, patch panels e salas técnicas.",
-      "Documentar enlaces críticos e rotas físicas.",
-      "Monitorar mudanças de link e conexões inesperadas."
+      "Proteger racks, patch panels e salas técnicas e registrar quem pode acessá-los.",
+      "Etiquetar e documentar cabos, fibras, enlaces críticos e rotas físicas."
     ],
     "badPractices": [
       "Deixar pontos de rede ativos em áreas públicas.",
       "Compartilhar senha única de Wi‑Fi corporativo por anos.",
       "Misturar visitantes e rede interna.",
-      "Não etiquetar cabos e fibras.",
       "Ignorar erros físicos recorrentes."
     ],
     "commonErrors": [
       "Confundir disponibilidade de link com autorização de acesso.",
       "Achar que Wi‑Fi com senha simples equivale a rede segura.",
-      "Não registrar quem pode acessar rack e sala técnica.",
       "Ignorar logs de switch e controladora sem fio."
     ],
     "vulnerabilities": [
       {
         "name": "Acesso físico indevido",
-        "description": "Portas de rede ou racks acessíveis permitem conexão de equipamentos não autorizados.",
+        "description": "Portas de rede ativas em áreas públicas ou racks destrancados permitem conectar equipamentos não autorizados.",
         "defensiveExplanation": "O risco não depende de exploração sofisticada; basta uma porta ativa e ausência de controle.",
-        "mitigation": "Desativar portas, usar NAC/802.1X, inventário, alertas e segurança física."
+        "mitigation": "Desativar portas sem uso, 802.1X/NAC, VLAN de quarentena, inventário, alertas e segurança física."
       },
       {
         "name": "Wi‑Fi exposto além do perímetro",
-        "description": "Sinal sem fio atravessa paredes e pode ser alcançado de áreas externas.",
-        "defensiveExplanation": "O atacante não precisa entrar fisicamente para tentar associação ou capturar metadados.",
-        "mitigation": "Usar autenticação forte, segmentação, senha robusta, controle de potência e monitoramento."
+        "description": "O sinal atravessa paredes e alcança áreas externas; senha compartilhada, WPA antigo ou rede visitante sem isolamento ampliam o risco.",
+        "defensiveExplanation": "O atacante não precisa entrar no prédio para tentar associação ou capturar metadados; uma rede visitante sem isolamento abre caminho para movimento lateral.",
+        "mitigation": "WPA3/WPA2-Enterprise quando possível, rede visitante isolada, rotação de credenciais, controle de potência e monitoramento."
       },
       {
         "name": "Indisponibilidade por meio único",
-        "description": "Um único cabo, fibra ou rádio crítico sem redundância cria ponto único de falha.",
-        "defensiveExplanation": "Falhas físicas podem derrubar serviços mesmo com aplicações corretas.",
-        "mitigation": "Redundância, rotas físicas distintas, monitoramento e testes de failover."
+        "description": "Um único cabo, fibra ou rádio crítico, sem proteção física nem redundância, é ponto único de falha.",
+        "defensiveExplanation": "Falhas físicas derrubam serviços mesmo com aplicações corretas.",
+        "mitigation": "Redundância, rotas físicas distintas, documentação, monitoramento e testes de failover."
       }
     ],
     "monitoring": [
-      "Eventos de link up/down",
-      "mudança de velocidade de porta",
-      "erros CRC",
-      "clientes Wi‑Fi desconhecidos",
-      "APs rogue",
-      "alterações de MAC em portas",
-      "perda em enlaces críticos"
+      "Eventos de link up/down e flaps de interface",
+      "Mudança de velocidade de porta",
+      "Erros CRC e perda em enlaces críticos",
+      "Clientes Wi‑Fi desconhecidos",
+      "Alterações de MAC em portas"
     ],
     "hardening": [
       "Port-security quando aplicável",
-      "802.1X",
-      "NAC",
-      "VLAN de quarentena",
-      "WPA2/WPA3-Enterprise",
-      "controle físico de rack",
-      "etiquetagem e documentação"
+      "WPA2/WPA3-Enterprise no Wi‑Fi corporativo",
+      "Controle físico de rack e sala técnica"
     ],
     "detectionIdeas": [
-      "Alertar porta ativa fora de horário",
-      "Comparar inventário de MACs esperados",
-      "Monitorar flaps de interface",
-      "Auditar SSIDs e APs não autorizados",
+      "Alertar porta que fica ativa fora do expediente",
+      "Comparar os MACs vistos nas portas com o inventário",
+      "Auditar SSIDs e APs não autorizados (rogue)",
       "Revisar contadores de erro periodicamente"
     ]
   },
@@ -359,93 +278,108 @@
   "quiz": [
     {
       "id": "q1.5.1",
-      "type": "conceito",
-      "q": "Qual alternativa descreve corretamente a diferença entre cobre, fibra e rádio?",
-      "opts": [
+      "question": "Qual alternativa descreve corretamente a diferença entre cobre, fibra e rádio?",
+      "options": [
+        "Cobre e fibra usam sinais elétricos; só o rádio usa ondas eletromagnéticas.",
         "Cobre usa sinais elétricos, fibra usa luz e rádio usa ondas eletromagnéticas.",
-        "Todos usam exatamente o mesmo tipo de sinal.",
-        "Fibra é sempre sem fio.",
-        "Rádio só funciona dentro de cabos blindados."
+        "Fibra usa ondas de rádio guiadas; cobre usa pulsos de luz.",
+        "Os três usam o mesmo sinal elétrico; muda só o conector."
       ],
-      "a": 0,
-      "exp": "Cada meio transporta o sinal de forma diferente, com vantagens e limitações próprias.",
+      "answer": 1,
+      "explanation": "Cobre leva variações elétricas, a fibra leva pulsos de luz gerados por transceptores e o rádio modula ondas eletromagnéticas no ar.",
+      "topic": "meios",
       "difficulty": "iniciante",
-      "topic": "meios"
+      "type": "conceito"
     },
     {
       "id": "q1.5.2",
-      "type": "diagnóstico",
-      "q": "Uma porta de switch mostra muitos erros CRC. Qual hipótese deve ser considerada?",
-      "opts": [
-        "Problema físico, cabo, conector ou interferência.",
-        "Erro de senha do usuário.",
-        "Falha exclusiva de DNS.",
+      "question": "Uma porta de switch mostra muitos erros CRC. Qual hipótese deve ser considerada?",
+      "options": [
+        "DNS respondendo com o endereço errado.",
+        "Senha incorreta do usuário na aplicação.",
+        "Problema físico: cabo, conector, porta ou interferência.",
         "Certificado TLS expirado."
       ],
-      "a": 0,
-      "exp": "CRC aponta para quadros corrompidos, frequentemente relacionados ao meio físico ou porta.",
+      "answer": 2,
+      "explanation": "CRC inválido significa quadro corrompido no caminho, quase sempre por meio físico ou porta. Senha, DNS e TLS ficam em camadas acima e não corrompem quadros.",
+      "topic": "troubleshooting",
       "difficulty": "iniciante-intermediário",
-      "topic": "troubleshooting"
+      "type": "diagnóstico"
     },
     {
       "id": "q1.5.3",
-      "type": "comparação",
-      "q": "Qual é uma vantagem comum da fibra óptica?",
-      "opts": [
+      "question": "Qual é uma vantagem comum da fibra óptica?",
+      "options": [
         "Maior alcance e menor suscetibilidade a interferência eletromagnética.",
-        "Não precisa de conectores.",
-        "É sempre mais barata que cobre.",
-        "Elimina a necessidade de documentação."
+        "Dispensa transceptores nas portas do switch.",
+        "Custa menos que o cobre por ponto de usuário.",
+        "Tolera curvatura e conector sujo sem perder sinal."
       ],
-      "a": 0,
-      "exp": "Fibra é forte para backbone e longas distâncias, mas exige conectores, transceptores e documentação.",
+      "answer": 0,
+      "explanation": "A fibra é forte em backbone e longas distâncias, mas exige transceptores, conectores limpos, cuidado com a curvatura e custa mais por ponto.",
+      "topic": "fibra",
       "difficulty": "iniciante",
-      "topic": "fibra"
+      "type": "comparação"
     },
     {
       "id": "q1.5.4",
-      "type": "segurança",
-      "q": "Qual prática reduz risco de portas físicas expostas?",
-      "opts": [
-        "Desativar portas não usadas e usar NAC/802.1X quando possível.",
-        "Deixar todas as portas na VLAN interna.",
-        "Usar senha fraca no Wi‑Fi.",
-        "Não monitorar link up/down."
+      "question": "Qual prática reduz risco de portas físicas expostas?",
+      "options": [
+        "Trocar os cabos por Wi‑Fi com uma senha única para todos.",
+        "Deixar as portas ativas na VLAN interna para facilitar o suporte.",
+        "Confiar que só funcionários usam as tomadas da recepção.",
+        "Desativar portas não usadas e usar NAC/802.1X quando possível."
       ],
-      "a": 0,
-      "exp": "Controle de porta e autenticação ajudam a impedir conexão indevida.",
+      "answer": 3,
+      "explanation": "Com a porta desativada, ou exigindo autenticação de porta (802.1X/NAC), um equipamento qualquer não ganha acesso só por estar conectado. Link ativo não é autorização.",
+      "topic": "segurança",
       "difficulty": "intermediário",
-      "topic": "segurança"
+      "type": "segurança"
     },
     {
       "id": "q1.5.5",
-      "type": "cenário",
-      "q": "Por que Wi‑Fi não deve ser tratado como cabo invisível?",
-      "opts": [
+      "question": "Por que Wi‑Fi não deve ser tratado como cabo invisível?",
+      "options": [
+        "Porque o Wi‑Fi não usa protocolos de camada 2.",
         "Porque rádio é meio compartilhado, sujeito a interferência, obstáculos e variação de sinal.",
-        "Porque Wi‑Fi não usa protocolos.",
-        "Porque Wi‑Fi não transporta bits.",
-        "Porque Wi‑Fi sempre é mais seguro que cabo."
+        "Porque o Wi‑Fi sempre entrega mais banda que o cabo.",
+        "Porque o sinal do Wi‑Fi fica restrito à sala do AP."
       ],
-      "a": 0,
-      "exp": "Wi‑Fi oferece mobilidade, mas o meio de rádio muda a previsibilidade e o risco.",
+      "answer": 1,
+      "explanation": "Clientes do mesmo canal disputam o tempo de transmissão, o sinal varia com distância e obstáculos e atravessa paredes. Wi‑Fi exige planejar canal, potência, densidade e autenticação.",
+      "topic": "wi-fi",
       "difficulty": "iniciante-intermediário",
-      "topic": "wi-fi"
+      "type": "cenário"
     },
     {
       "id": "q1.5.6",
-      "type": "cloud",
-      "q": "Em cloud, por que ainda importa entender meios físicos?",
-      "opts": [
-        "Porque regiões, zonas, interconexões e latência dependem de infraestrutura física real.",
-        "Porque cloud elimina completamente distância.",
-        "Porque VPCs são cabos de cobre visíveis.",
-        "Porque TLS substitui enlaces físicos."
+      "question": "Em cloud, por que ainda importa entender meios físicos?",
+      "options": [
+        "Porque uma arquitetura multi-região elimina a dependência de enlaces físicos.",
+        "Porque na VPC você escolhe a categoria do cabo de cada instância.",
+        "Porque regiões, zonas, links dedicados e latência dependem de infraestrutura física real.",
+        "Porque a VPN site-to-site dispensa o circuito físico até o provedor."
       ],
-      "a": 0,
-      "exp": "Cloud abstrai, mas não remove limites físicos como distância, interconexão e disponibilidade.",
+      "answer": 2,
+      "explanation": "A VPC abstrai switches e fibras, mas não remove distância nem dependência de interconexão. Multi-região distribui a dependência física; não a elimina.",
+      "topic": "cloud",
       "difficulty": "intermediário",
-      "topic": "cloud"
+      "type": "cloud"
+    },
+    {
+      "id": "q1.5.7",
+      "question": "Uma câmera IP está ligada ao switch por um cabo de par trançado de 130 m, e o link cai e volta várias vezes ao dia. Qual é a causa mais provável?",
+      "options": [
+        "O servidor DNS está respondendo devagar.",
+        "O canal Wi‑Fi do local está congestionado.",
+        "O firewall bloqueia a câmera em alguns horários.",
+        "O cabo passa do limite de 100 m do par trançado, e a atenuação deixa o sinal no limite."
+      ],
+      "answer": 3,
+      "explanation": "O canal Ethernet em par trançado vai até 100 m; acima disso a atenuação gera erros, renegociação e flaps. DNS e firewall não derrubam o link físico, e a câmera está cabeada.",
+      "topic": "cobre",
+      "difficulty": "iniciante-intermediário",
+      "type": "diagnóstico"
     }
   ],
   "flashcards": [
@@ -477,23 +411,33 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc1.5.4",
-      "front": "Por que rádio é mais variável?",
-      "back": "Porque usa o ar como meio, sujeito a interferência, obstáculos, distância, ruído e compartilhamento de canal.",
+      "id": "fc1.5.7",
+      "front": "O que é atenuação?",
+      "back": "Perda de intensidade do sinal ao longo do meio. Cresce com a distância e com meio ruim (cabo longo, conector sujo, curvatura na fibra).",
+      "tags": [
+        "atenuação"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.5.8",
+      "front": "O que significa SNR baixa?",
+      "back": "O sinal útil está pouco acima do ruído: o receptor erra mais bits e, no Wi‑Fi, a taxa cai.",
+      "tags": [
+        "rádio",
+        "interferência"
+      ],
+      "difficulty": "iniciante-intermediário"
+    },
+    {
+      "id": "fc1.5.9",
+      "front": "Por que o rádio é um meio compartilhado?",
+      "back": "Porque os dispositivos de um mesmo canal disputam o tempo de transmissão; mais clientes significam menos tempo de ar para cada um.",
       "tags": [
         "rádio",
         "wi-fi"
       ],
       "difficulty": "iniciante-intermediário"
-    },
-    {
-      "id": "fc1.5.5",
-      "front": "O que erros CRC podem indicar?",
-      "back": "Quadros corrompidos, muitas vezes associados a cabo, porta, interferência ou problema físico.",
-      "tags": [
-        "troubleshooting"
-      ],
-      "difficulty": "intermediário"
     },
     {
       "id": "fc1.5.6",
@@ -517,7 +461,7 @@
       "id": "ex1.5.2",
       "type": "diagnóstico",
       "prompt": "Um desktop cabeado negocia a 100 Mbps em uma rede esperada de 1 Gbps. Liste três hipóteses.",
-      "expectedAnswer": "Cabo inadequado ou danificado, porta limitada, conector ruim, driver/configuração, patch panel ou equipamento intermediário limitado.",
+      "expectedAnswer": "Cabo inadequado ou danificado (um par ruim pode fazer o link cair para 100BASE-TX, que usa só dois pares), conector mal crimpado, porta limitada, patch panel ou equipamento intermediário limitado, driver ou configuração de negociação.",
       "explanation": "Velocidade negociada abaixo do esperado costuma apontar para camada física ou capacidade do equipamento."
     },
     {
@@ -530,9 +474,9 @@
     {
       "id": "ex1.5.4",
       "type": "arquitetura",
-      "prompt": "Uma empresa tem dois prédios e precisa interligá-los com baixa latência e alta disponibilidade. Que meio você avaliaria e que cuidado adicionaria?",
-      "expectedAnswer": "Fibra óptica, com redundância, rotas físicas distintas quando possível, documentação, monitoramento e transceptores compatíveis.",
-      "explanation": "Fibra atende distância e capacidade, mas disponibilidade depende de desenho e operação."
+      "prompt": "Uma empresa vai interligar dois prédios por fibra óptica e precisa de baixa latência e alta disponibilidade. Que cuidados de desenho e operação você adicionaria ao enlace?",
+      "expectedAnswer": "Redundância com rotas físicas distintas quando possível, transceptores compatíveis com a fibra, documentação e etiquetagem, monitoramento de link e potência óptica e testes de failover.",
+      "explanation": "A fibra atende distância e capacidade, mas a disponibilidade depende de desenho e operação: uma única fibra é ponto único de falha."
     }
   ],
   "challenge": {
@@ -651,6 +595,20 @@
       "relatedLessons": [
         "1.5",
         "12.1"
+      ]
+    },
+    {
+      "term": "SNR",
+      "shortDefinition": "Relação sinal-ruído: quanto o sinal útil está acima do ruído.",
+      "longDefinition": "Quanto menor a SNR, mais difícil para o receptor distinguir o sinal, mais bits errados e, no Wi‑Fi, menor a taxa negociada.",
+      "example": "Um notebook longe do AP, com muitos APs vizinhos no mesmo canal, tem SNR baixa e taxa instável.",
+      "relatedTerms": [
+        "ruído",
+        "interferência",
+        "rádio"
+      ],
+      "relatedLessons": [
+        "1.5"
       ]
     },
     {
