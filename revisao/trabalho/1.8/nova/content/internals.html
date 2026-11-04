@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>Por dentro, cada métrica nasce de um mecanismo diferente. É por isso que uma ferramenta só raramente responde tudo.</p>
+  <ol class="flow-list">
+    <li><strong>Latência:</strong> inclui tempo de transmissão, propagação no meio, processamento em equipamentos, filas, inspeção de firewall, negociação de protocolo e resposta do serviço.</li>
+    <li><strong>RTT:</strong> round-trip time mede ida e volta. Um ping geralmente mostra RTT, não apenas ida.</li>
+    <li><strong>Jitter:</strong> aparece quando pacotes sucessivos têm latências diferentes. Filas, Wi‑Fi instável, congestionamento e QoS ruim aumentam jitter.</li>
+    <li><strong>Perda:</strong> ocorre quando pacotes são descartados por erro físico, fila cheia, política, congestionamento, rádio ruim, MTU, firewall ou falha de caminho.</li>
+    <li><strong>Throughput:</strong> depende da menor capacidade efetiva do caminho, overhead, janela TCP, perda, latência, processamento, criptografia e limitações do serviço.</li>
+    <li><strong>Disponibilidade:</strong> é calculada ao longo do tempo. Um serviço pode ter boa latência quando está no ar, mas disponibilidade ruim se cai várias vezes ao dia.</li>
+  </ol>
+  <p>Um detalhe importante: médias escondem problemas. Uma latência média de 40 ms pode parecer boa, mas se alguns usuários sofrem picos de 2 segundos, a experiência será ruim. Por isso, em ambientes profissionais, é comum olhar percentis, como p95 e p99, além da média.</p>
+</section>

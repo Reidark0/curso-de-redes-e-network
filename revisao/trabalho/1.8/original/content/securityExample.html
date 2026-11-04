@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>Métricas também são sinais de segurança. Aumento súbito de throughput de saída pode indicar exfiltração ou backup legítimo. Picos de conexão com baixa taxa útil podem indicar varredura, falha de autenticação em massa ou serviço degradado. Perda e latência podem aparecer durante DDoS, saturação de firewall, ataque volumétrico ou erro de roteamento.</p>
+  <table class="data-table risk-table">
+    <thead><tr><th>Sinal</th><th>Como aparece</th><th>Risco</th><th>Mitigação</th></tr></thead>
+    <tbody>
+      <tr><td>Throughput de saída anormal</td><td>Grande volume para destino incomum</td><td>Possível exfiltração ou uso indevido</td><td>Baselines, DLP, egress filtering, investigação de identidade e endpoint</td></tr>
+      <tr><td>Perda e latência no firewall</td><td>Sessões caindo e CPU alta</td><td>Degradação ou ataque volumétrico</td><td>Rate limit, proteção DDoS, escala, regras otimizadas e observabilidade</td></tr>
+      <tr><td>Jitter em voz corporativa</td><td>Áudio picotado em horários específicos</td><td>Fila, QoS ausente ou congestão</td><td>QoS, priorização, análise de link e ajuste de tráfego concorrente</td></tr>
+      <tr><td>Disponibilidade intermitente</td><td>Quedas curtas recorrentes</td><td>Falha parcial, rota instável ou mudança mal controlada</td><td>Monitoramento sintético, change management e análise por trecho</td></tr>
+    </tbody>
+  </table>
+</section>

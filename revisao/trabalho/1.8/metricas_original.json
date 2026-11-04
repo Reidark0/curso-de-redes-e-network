@@ -1,0 +1,88 @@
+{
+  "id": "1.8",
+  "versao": "original",
+  "titulo": "Métricas: latência, jitter, perda, throughput e disponibilidade",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4970,
+    "invisiveis": 782,
+    "teoriaVisivel": 2784
+  },
+  "porCampoVisivel": {
+    "content.motivation": 167,
+    "content.history": 173,
+    "content.problem": 141,
+    "content.evolution": 136,
+    "content.concept": 135,
+    "content.internals": 186,
+    "content.architecture": 148,
+    "content.analogy": 102,
+    "content.simpleExample": 101,
+    "content.enterpriseExample": 117,
+    "content.cloudExample": 111,
+    "content.devsecopsExample": 99,
+    "content.securityExample": 152,
+    "content.diagram": 23,
+    "content.summary": 69,
+    "content.nextTheme": 40,
+    "security": 367,
+    "troubleshooting": 306,
+    "glossary": 211,
+    "title+subtitle": 23,
+    "objectives": 70,
+    "learningOutcomes": 65,
+    "quiz": 255,
+    "flashcards": 127,
+    "mentorQuestions": 153,
+    "exercises": 223,
+    "challenge": 157,
+    "commentedSolution": 175,
+    "references": 65,
+    "linksToOtherCourses": 51,
+    "lab": 822
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 43,
+    "content.exercisesIntro": 30,
+    "content.challengeIntro": 25,
+    "content.solutionIntro": 20,
+    "networkContext": 46,
+    "deepDive": 478,
+    "commonMistakes": 140
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 45,
+    "alternativa_5minPasso_maisLeitura": 36.3,
+    "plausivel": true,
+    "palavras": 822
+  },
+  "duracao": {
+    "declarada": "80-115 min",
+    "estimatedStudyTimeMinutes": 115,
+    "M": 97.5,
+    "T": 128.4,
+    "partes": {
+      "teoria": 21.4,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 45
+    },
+    "faixaRecomendada": "110-155 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 19
+  }
+}
