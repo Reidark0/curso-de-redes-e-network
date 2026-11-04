@@ -1,0 +1,81 @@
+{
+  "id": "1.5",
+  "versao": "original",
+  "titulo": "Meios de transmissão: cobre, fibra e rádio",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3693,
+    "invisiveis": 551,
+    "teoriaVisivel": 2450
+  },
+  "porCampoVisivel": {
+    "content.motivation": 166,
+    "content.history": 136,
+    "content.problem": 128,
+    "content.evolution": 145,
+    "content.concept": 107,
+    "content.internals": 172,
+    "content.architecture": 114,
+    "content.analogy": 84,
+    "content.simpleExample": 87,
+    "content.enterpriseExample": 83,
+    "content.cloudExample": 77,
+    "content.devsecopsExample": 87,
+    "content.securityExample": 141,
+    "content.diagram": 3,
+    "content.summary": 59,
+    "content.nextTheme": 42,
+    "security": 280,
+    "troubleshooting": 299,
+    "glossary": 240,
+    "title+subtitle": 26,
+    "objectives": 55,
+    "learningOutcomes": 46,
+    "quiz": 291,
+    "flashcards": 117,
+    "mentorQuestions": 157,
+    "exercises": 167,
+    "challenge": 126,
+    "commentedSolution": 174,
+    "references": 36,
+    "linksToOtherCourses": 48
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 40,
+    "content.exercisesIntro": 18,
+    "content.challengeIntro": 28,
+    "content.solutionIntro": 19,
+    "networkContext": 29,
+    "deepDive": 297,
+    "commonMistakes": 120
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "75-110 min",
+    "estimatedStudyTimeMinutes": 110,
+    "M": 92.5,
+    "T": 80.8,
+    "partes": {
+      "teoria": 18.8,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "70-95 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 27
+  }
+}

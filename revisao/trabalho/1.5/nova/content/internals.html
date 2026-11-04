@@ -1,0 +1,11 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>O funcionamento interno varia por meio, mas o ciclo mental é parecido: o transmissor codifica bits em um sinal, o meio propaga esse sinal, o receptor tenta interpretar a variação recebida e os equipamentos superiores validam quadros, erros e retransmissões.</p>
+  <ol class="flow-list">
+    <li><strong>Cobre:</strong> a placa ou porta de switch transforma bits em variações elétricas nos pares de fios. O trançamento ajuda a reduzir interferência, mas não elimina problemas de distância, blindagem, conector e ruído.</li>
+    <li><strong>Fibra:</strong> transceptores convertem sinais elétricos em pulsos de luz. A luz viaja pela fibra até outro transceptor, que converte de volta para sinal elétrico.</li>
+    <li><strong>Rádio:</strong> o rádio modula informação em ondas eletromagnéticas. O receptor precisa distinguir sinal útil de ruído, interferência e reflexões.</li>
+    <li><strong>Validação:</strong> se o sinal chega degradado, quadros podem ter erro, pacotes podem ser perdidos, protocolos superiores retransmitem e o usuário percebe lentidão ou queda.</li>
+  </ol>
+  <p>Esse é o motivo pelo qual um problema físico pode aparecer como problema de aplicação. TCP retransmite, TLS demora, HTTP parece lento e o usuário diz apenas “o sistema caiu”.</p>
+</section>
