@@ -1,11 +1,11 @@
 <section class="lesson-section lesson-section--architecture">
-  <h2>7. Arquitetura</h2>
-  <p>A arquitetura do mini-projeto do Módulo 1 deve separar quatro visões complementares:</p>
+  <h2>Arquitetura</h2>
+  <p>O mini-projeto separa quatro visões complementares da mesma rede:</p>
   <ul>
     <li><strong>Visão física:</strong> cabos, Wi-Fi, rack, patch panel, AP, switch, roteador, firewall e links.</li>
     <li><strong>Visão lógica:</strong> IPs, gateway, DNS, serviços, redes envolvidas, caminho provável e políticas.</li>
     <li><strong>Visão operacional:</strong> métricas, sintomas, comandos executados, resultados e evidências.</li>
     <li><strong>Visão de segurança:</strong> riscos, exposição, ativos desconhecidos, portas, Wi-Fi, documentação e mitigação.</li>
   </ul>
-  <p>Essas quatro visões preparam o aluno para o Módulo 2, onde o Modelo OSI será usado para organizar ainda melhor o raciocínio por camadas.</p>
+  <p>Em cloud, a visão física quase desaparece: VPC ou VNet, subnets, route tables, security groups ou NSGs, NAT Gateway, load balancer, DNS privado, VPN e peering são objetos lógicos. O hábito de separar as quatro visões continua valendo. Em ambientes maiores, o inventário vem de ferramentas de descoberta (SNMP, agentes, logs, sempre com permissão) e de documentação como código; aqui você faz a versão manual, com comandos.</p>
 </section>

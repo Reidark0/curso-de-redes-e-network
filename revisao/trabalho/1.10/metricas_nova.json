@@ -1,0 +1,78 @@
+{
+  "id": "1.10",
+  "versao": "nova",
+  "titulo": "Revisão e mini-projeto: mapear sua rede",
+  "tipo": "ligação/revisão",
+  "palavras": {
+    "visiveis": 4252,
+    "invisiveis": 50,
+    "teoriaVisivel": 2123
+  },
+  "porCampoVisivel": {
+    "content.motivation": 138,
+    "content.problem": 177,
+    "content.concept": 186,
+    "content.internals": 249,
+    "content.architecture": 123,
+    "content.analogy": 77,
+    "content.simpleExample": 173,
+    "content.enterpriseExample": 90,
+    "content.securityExample": 119,
+    "content.diagram": 2,
+    "content.summary": 101,
+    "content.nextTheme": 46,
+    "security": 207,
+    "troubleshooting": 280,
+    "glossary": 155,
+    "title+subtitle": 26,
+    "objectives": 49,
+    "learningOutcomes": 61,
+    "quiz": 320,
+    "flashcards": 114,
+    "mentorQuestions": 139,
+    "exercises": 199,
+    "challenge": 170,
+    "commentedSolution": 170,
+    "references": 50,
+    "linksToOtherCourses": 43,
+    "lab": 788
+  },
+  "porCampoInvisivel": {
+    "networkContext": 50
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 10,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 60,
+    "alternativa_5minPasso_maisLeitura": 56.1,
+    "plausivel": true,
+    "palavras": 788
+  },
+  "duracao": {
+    "declarada": "120-165 min",
+    "estimatedStudyTimeMinutes": 165,
+    "M": 142.5,
+    "T": 138.3,
+    "partes": {
+      "teoria": 16.3,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 60
+    },
+    "faixaRecomendada": "120-165 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 14
+  }
+}

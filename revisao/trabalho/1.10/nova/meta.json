@@ -4,8 +4,8 @@
   "order": 10,
   "title": "Revisão e mini-projeto: mapear sua rede",
   "subtitle": "Consolide os fundamentos do Módulo 1 criando um mapa físico e lógico com inventário, evidências, métricas, riscos e próximos passos.",
-  "duration": "70-105 min",
-  "estimatedStudyTimeMinutes": 105,
+  "duration": "120-165 min",
+  "estimatedStudyTimeMinutes": 165,
   "difficulty": "iniciante-intermediário",
   "type": "ligação/revisão",
   "xp": 205,
@@ -99,78 +99,6 @@
       "cloud networking"
     ]
   },
-  "deepDive": {
-    "mentalModel": "Um mapa de rede é uma hipótese documentada e evidenciada sobre como a comunicação acontece. Ele deve mostrar o que se sabe, como se sabe e quais limites ainda existem.",
-    "keyTerms": [
-      "mapa físico",
-      "mapa lógico",
-      "inventário",
-      "evidência",
-      "risco",
-      "dependência",
-      "ponto de falha"
-    ],
-    "limitations": [
-      "Comandos locais não mostram todas as políticas de firewall.",
-      "tracert pode omitir saltos que não respondem ICMP.",
-      "ARP só mostra vizinhança local recente.",
-      "Mapas ficam obsoletos se não forem atualizados."
-    ],
-    "whenToUse": [
-      "Ao iniciar suporte em uma rede desconhecida.",
-      "Antes de redesenhar uma infraestrutura.",
-      "Antes de propor segmentação ou firewall.",
-      "Após incidentes para entender exposição e dependências.",
-      "Antes de migrar serviços para cloud."
-    ],
-    "whenNotToUse": [
-      "Não use mapeamento como varredura não autorizada.",
-      "Não compartilhe mapas internos sem sanitização.",
-      "Não trate o mapa como verdade absoluta sem data e evidências."
-    ],
-    "operationalImpact": [
-      "Reduz tempo de diagnóstico.",
-      "Melhora comunicação entre suporte, redes, segurança e aplicação.",
-      "Exige atualização periódica.",
-      "Ajuda a criar runbooks e checklists."
-    ],
-    "financialImpact": [
-      "Evita compras desnecessárias de banda ou equipamentos.",
-      "Pode revelar necessidade real de switches, APs, cabeamento ou links redundantes.",
-      "Reduz custo de incidentes repetidos."
-    ],
-    "securityImpact": [
-      "Revela ativos desconhecidos e pontos de exposição.",
-      "Ajuda a priorizar segmentação e controles.",
-      "Pode vazar informação sensível se compartilhado sem cuidado."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Fazer apenas um desenho bonito sem evidências.",
-      "whyItHappens": "Ferramentas de diagrama dão sensação de documentação completa.",
-      "consequence": "O mapa não ajuda no troubleshooting real.",
-      "correction": "Anexar comandos, data, fonte e limitações."
-    },
-    {
-      "mistake": "Misturar topologia física e lógica sem distinguir.",
-      "whyItHappens": "Ambas falam de caminhos e conexões.",
-      "consequence": "O aluno acha que o cabo físico determina sozinho o caminho do tráfego.",
-      "correction": "Criar seções separadas para físico e lógico."
-    },
-    {
-      "mistake": "Compartilhar IPs, nomes internos e prints sem sanitização.",
-      "whyItHappens": "O foco fica só na resolução do problema.",
-      "consequence": "Vazamento de informações úteis para atacantes.",
-      "correction": "Mascarar dados sensíveis antes de compartilhar."
-    },
-    {
-      "mistake": "Concluir causa raiz com uma única evidência.",
-      "whyItHappens": "O primeiro comando parece confirmar a hipótese favorita.",
-      "consequence": "Correção errada ou incompleta.",
-      "correction": "Cruzar evidências: configuração, alcance, DNS, caminho e métricas."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Mapa não fecha com a realidade observada.",
@@ -190,24 +118,24 @@
     "commands": [
       {
         "platform": "Windows",
-        "command": "ipconfig /all && arp -a && tracert 8.8.8.8 && nslookup exemplo.com",
+        "command": "ipconfig /all\narp -a\ntracert 8.8.8.8\nnslookup exemplo.com",
         "purpose": "Coletar configuração, vizinhança local, caminho e DNS.",
         "expectedObservation": "IP, gateway, DNS, entradas ARP, saltos e resolução de nome.",
-        "interpretation": "Use como evidência inicial, não como conclusão absoluta."
+        "interpretation": "Compare com o mapa esperado: gateway ou DNS diferente, gateway ausente do ARP ou nome que não resolve apontam a etapa a investigar. É evidência inicial, não conclusão."
       },
       {
         "platform": "Linux",
         "command": "ip addr; ip route; ip neigh; tracepath 8.8.8.8; nslookup exemplo.com",
         "purpose": "Coletar informações equivalentes no Linux.",
         "expectedObservation": "Interface ativa, rota default, vizinhos locais, caminho e DNS.",
-        "interpretation": "Compare com a documentação esperada."
+        "interpretation": "default via indica o gateway; compare interface, rota, vizinhos e DNS com o mapa esperado."
       },
       {
         "platform": "Cisco IOS",
         "command": "show ip interface brief\nshow mac address-table\nshow arp\nshow cdp neighbors\nshow ip route",
         "purpose": "Coletar evidências de interfaces, MACs, ARP, vizinhos e rotas em equipamento autorizado.",
         "expectedObservation": "Interfaces up/up, tabelas coerentes e vizinhos conhecidos.",
-        "interpretation": "Use apenas em equipamentos sob autorização."
+        "interpretation": "Interface down, MAC inesperado ou vizinho CDP desconhecido indicam divergência entre mapa e realidade. Rode apenas em equipamento sob sua autorização."
       }
     ],
     "decisionTree": [
@@ -233,16 +161,13 @@
     "goodPractices": [
       "Sanitizar evidências antes de compartilhar.",
       "Registrar data, origem e limitação do mapa.",
-      "Separar Wi-Fi visitante da rede interna.",
       "Documentar ativos desconhecidos como pendência de segurança.",
       "Guardar mapas internos em repositório ou ferramenta com controle de acesso."
     ],
     "badPractices": [
       "Publicar mapa interno em canal aberto.",
-      "Varredura sem autorização para completar inventário.",
-      "Assumir que NAT substitui firewall.",
-      "Ignorar dispositivos não identificados.",
-      "Manter racks e patch panels sem controle físico."
+      "Fazer varredura sem autorização para completar o inventário.",
+      "Assumir que NAT substitui firewall."
     ],
     "commonErrors": [
       "Confundir conectividade com autorização.",
@@ -271,16 +196,14 @@
       "Conexões entre redes que deveriam ser isoladas."
     ],
     "hardening": [
-      "Controle físico de racks.",
+      "Controle físico de racks e patch panels.",
       "Segmentação inicial.",
-      "Wi-Fi visitante isolado.",
-      "Logs de DHCP, DNS e firewall.",
-      "Documentação com controle de acesso."
+      "Wi-Fi visitante isolado da rede interna.",
+      "Logs de DHCP, DNS e firewall."
     ],
     "detectionIdeas": [
       "Comparar inventário esperado com dispositivos observados.",
       "Revisar leases DHCP.",
-      "Conferir DNS usado por estações.",
       "Procurar APs não autorizados.",
       "Correlacionar queixas de usuários com métricas."
     ]
@@ -305,13 +228,12 @@
       "Ferramenta de desenho opcional",
       "Cisco Packet Tracer opcional"
     ],
-    "estimatedTimeMinutes": 105,
+    "estimatedTimeMinutes": 60,
     "cost": "zero",
     "safetyNotes": [
       "Não execute varreduras agressivas em redes de terceiros.",
       "Não compartilhe prints com IPs públicos, nomes internos ou MACs sem sanitizar.",
-      "Não altere configurações de roteadores, switches ou firewalls sem autorização.",
-      "Este laboratório é defensivo e documental."
+      "Não altere configurações de roteadores, switches ou firewalls sem autorização."
     ],
     "steps": [
       {
@@ -325,7 +247,7 @@
       {
         "number": 2,
         "title": "Coletar configuração local",
-        "instruction": "Registre IP, máscara, gateway, DNS e interface.",
+        "instruction": "Registre IP, máscara, gateway, DNS e interface, com data e hora da coleta.",
         "command": "Windows: ipconfig /all\nLinux: ip addr; ip route",
         "expectedOutput": "Configuração local da interface ativa.",
         "explanation": "Essa é a base do mapa lógico."
@@ -343,7 +265,7 @@
         "title": "Testar alcance básico",
         "instruction": "Teste gateway, DNS conhecido e um destino autorizado.",
         "command": "ping <gateway>\nping 8.8.8.8",
-        "expectedOutput": "Respostas ou falhas documentadas.",
+        "expectedOutput": "Respostas ou falhas documentadas, com latência média e perda.",
         "explanation": "Ajuda a separar falha local de falha externa, lembrando que ICMP pode ser bloqueado."
       },
       {
@@ -366,7 +288,7 @@
         "number": 7,
         "title": "Desenhar visão física",
         "instruction": "Descreva meio usado, roteador/AP, switch se houver, cabos e local físico aproximado.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "analysisTask": "Liste cada equipamento com o meio (cabo ou Wi-Fi) e o local aproximado, e classifique cada item como dispositivo final, intermediário ou serviço.",
         "expectedOutput": "Mapa físico simples.",
         "explanation": "A visão física ajuda a diagnosticar cabo, Wi-Fi, distância e energia."
       },
@@ -381,7 +303,7 @@
       {
         "number": 9,
         "title": "Registrar riscos e lacunas",
-        "instruction": "Liste riscos iniciais e o que você ainda não sabe.",
+        "instruction": "Liste riscos iniciais e lacunas (o que você ainda não confirmou), separando fato de hipótese.",
         "command": "Exemplos: Wi-Fi fraco, DNS desconhecido, ativo sem dono, falta de documentação.",
         "expectedOutput": "Tabela com risco, evidência, impacto e próxima ação.",
         "explanation": "Documentação madura inclui limites e pendências."
@@ -406,7 +328,7 @@
       {
         "check": "Há evidências de configuração local",
         "command": "ipconfig /all ou ip addr/ip route",
-        "expected": "IP, gateway e DNS registrados",
+        "expected": "IP, gateway e DNS registrados, com data da coleta",
         "ifFails": "Repita a coleta no host correto."
       },
       {
@@ -444,7 +366,6 @@
     ],
     "improvements": [
       "Criar versão visual em SVG ou ferramenta de diagrama.",
-      "Adicionar data de atualização ao mapa.",
       "Criar tabela de ownership dos dispositivos.",
       "Adicionar evidências de DHCP, DNS e firewall quando autorizado.",
       "Comparar rede cabeada e Wi-Fi."
@@ -460,13 +381,10 @@
     ],
     "questions": [
       "Qual evidência prova o gateway usado?",
-      "Qual parte do mapa é física?",
-      "Qual parte do mapa é lógica?",
+      "Que parte do seu mapa é hipótese, e não fato?",
       "Que dado você não deve compartilhar publicamente?",
-      "Que risco merece ação primeiro?"
-    ],
-    "challenge": "Transforme seu relatório em uma página de documentação técnica para um time de suporte, redes ou segurança.",
-    "solution": "Uma boa solução apresenta escopo autorizado, inventário mínimo, visão física, visão lógica, evidências sanitizadas, riscos priorizados e próximos passos realistas. Ela não promete ter descoberto tudo e não expõe informações sensíveis."
+      "Que risco merece ação primeiro, e por quê?"
+    ]
   },
   "mentorQuestions": [
     {
@@ -519,93 +437,93 @@
   "quiz": [
     {
       "id": "q1.10.1",
-      "type": "conceito",
-      "q": "Qual é a melhor definição de mapa de rede no contexto deste módulo?",
-      "opts": [
+      "question": "Qual é a melhor definição de mapa de rede no contexto deste módulo?",
+      "options": [
         "Um desenho decorativo da internet",
         "Um documento com visão física, lógica, serviços, evidências, métricas e riscos",
         "Uma lista de senhas de roteadores",
         "Um comando que descobre tudo automaticamente"
       ],
-      "a": 1,
-      "exp": "Mapa útil combina várias visões e evidências, não apenas desenho.",
+      "answer": 1,
+      "explanation": "Mapa útil combina várias visões e evidências, não apenas desenho.",
+      "topic": "mapeamento",
       "difficulty": "iniciante",
-      "topic": "mapeamento"
+      "type": "conceito"
     },
     {
       "id": "q1.10.2",
-      "type": "comparação",
-      "q": "Qual item pertence mais claramente à visão física?",
-      "opts": [
+      "question": "Qual item pertence mais claramente à visão física?",
+      "options": [
         "DNS primário",
         "Cabo entre tomada e switch",
         "Regra de firewall",
         "Nome FQDN de aplicação"
       ],
-      "a": 1,
-      "exp": "Cabos, portas, rack, patch panel e APs fazem parte da visão física.",
+      "answer": 1,
+      "explanation": "Cabos, portas, rack, patch panel e APs fazem parte da visão física.",
+      "topic": "topologia",
       "difficulty": "iniciante",
-      "topic": "topologia"
+      "type": "comparação"
     },
     {
-      "id": "q1.10.3",
-      "type": "diagnóstico",
-      "q": "Qual comando ajuda a identificar gateway e DNS no Windows?",
-      "opts": [
-        "ipconfig /all",
-        "format c:",
-        "whoami",
-        "mkdir"
+      "id": "q1.10.7",
+      "question": "No seu mapa, o host tem IP válido, mas o ping para o gateway falha. Onde a investigação deve começar?",
+      "options": [
+        "No servidor DNS configurado",
+        "No provedor de internet",
+        "Na aplicação que o usuário tentou abrir",
+        "No meio, VLAN, switch/AP, gateway ou firewall local"
       ],
-      "a": 0,
-      "exp": "ipconfig /all mostra configuração IP detalhada no Windows.",
-      "difficulty": "iniciante",
-      "topic": "comandos"
+      "answer": 3,
+      "explanation": "Sem alcançar o gateway, o problema está antes dele. DNS, provedor e aplicação só entram depois que o gateway responde.",
+      "topic": "troubleshooting",
+      "difficulty": "intermediário",
+      "type": "diagnóstico"
     },
     {
       "id": "q1.10.4",
-      "type": "segurança",
-      "q": "Por que mapas de rede devem ser protegidos?",
-      "opts": [
+      "question": "Por que mapas de rede devem ser protegidos?",
+      "options": [
         "Porque sempre consomem muita CPU",
         "Porque podem revelar IPs, caminhos, nomes internos e controles",
         "Porque impedem DHCP",
         "Porque substituem firewall"
       ],
-      "a": 1,
-      "exp": "Mapas internos ajudam defesa, mas também podem ajudar reconhecimento ofensivo se vazarem.",
+      "answer": 1,
+      "explanation": "Mapas internos ajudam defesa, mas também podem ajudar reconhecimento ofensivo se vazarem.",
+      "topic": "segurança",
       "difficulty": "intermediário",
-      "topic": "segurança"
+      "type": "segurança"
     },
     {
       "id": "q1.10.5",
-      "type": "cenário",
-      "q": "Um tracert mostra asteriscos em alguns saltos. Qual interpretação é mais correta?",
-      "opts": [
+      "question": "Um tracert mostra asteriscos em alguns saltos. Qual interpretação é mais correta?",
+      "options": [
         "A internet inteira caiu",
         "Asteriscos sempre indicam invasão",
         "Alguns dispositivos podem não responder ICMP ou filtrar respostas",
         "O DNS está sempre incorreto"
       ],
-      "a": 2,
-      "exp": "Ausência de resposta em um salto não prova queda; pode ser política de resposta ICMP.",
+      "answer": 2,
+      "explanation": "Ausência de resposta em um salto não prova queda; pode ser política de resposta ICMP.",
+      "topic": "troubleshooting",
       "difficulty": "intermediário",
-      "topic": "troubleshooting"
+      "type": "cenário"
     },
     {
-      "id": "q1.10.6",
-      "type": "arquitetura",
-      "q": "Qual é o próximo assunto natural após mapear fundamentos de rede?",
-      "opts": [
-        "Modelo OSI",
-        "Design gráfico",
-        "Criptomoedas",
-        "Edição de vídeo"
+      "id": "q1.10.8",
+      "question": "Você rodou arp -a no notebook e o servidor de arquivos, que fica em outra rede, não aparece na lista. O que registrar no mapa?",
+      "options": [
+        "Uma lacuna: ARP só mostra a vizinhança local recente",
+        "Que o servidor de arquivos está desligado",
+        "Que o switch bloqueou o servidor",
+        "Que a tabela ARP está corrompida"
       ],
-      "a": 0,
-      "exp": "O Modelo OSI organiza o diagnóstico e a arquitetura por camadas.",
-      "difficulty": "iniciante",
-      "topic": "próximo módulo"
+      "answer": 0,
+      "explanation": "Para falar com um servidor de outra rede, o host usa o gateway; por isso o servidor nunca aparece no ARP local, e a ausência não prova nada sobre ele.",
+      "topic": "evidências",
+      "difficulty": "intermediário",
+      "type": "cenário"
     }
   ],
   "flashcards": [
@@ -637,13 +555,13 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc1.10.4",
-      "front": "Mapa de rede é documento sensível?",
-      "back": "Sim. Pode revelar ativos, caminhos, controles, nomes internos e IPs.",
+      "id": "fc1.10.7",
+      "front": "Como sanitizar 192.168.1.23 e servidor-financeiro.empresa.local antes de compartilhar?",
+      "back": "Mascare: 192.168.x.23 e servidor-A (ou host-A). Faça o mesmo com MACs, domínios e nomes de usuário.",
       "tags": [
         "segurança"
       ],
-      "difficulty": "intermediário"
+      "difficulty": "iniciante"
     },
     {
       "id": "fc1.10.5",
@@ -655,22 +573,22 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc1.10.6",
-      "front": "Qual módulo vem depois do Módulo 1?",
-      "back": "Modelo OSI, para organizar o raciocínio por camadas.",
+      "id": "fc1.10.8",
+      "front": "No mapa, qual a diferença entre fato, hipótese e lacuna?",
+      "back": "Fato: confirmado por evidência com data e origem. Hipótese: deduzido, como o caminho provável. Lacuna: o que ainda não foi confirmado.",
       "tags": [
-        "roadmap"
+        "documentação"
       ],
       "difficulty": "iniciante"
     }
   ],
   "exercises": [
     {
-      "id": "ex1.10.1",
-      "type": "conceitual",
-      "prompt": "Explique a diferença entre mapa físico e mapa lógico usando uma rede doméstica como exemplo.",
-      "expectedAnswer": "Mapa físico descreve cabos, Wi-Fi, roteador e posição dos equipamentos. Mapa lógico descreve IP, gateway, DNS, serviços e caminhos.",
-      "explanation": "A separação evita confundir infraestrutura visível com comportamento do tráfego."
+      "id": "ex1.10.5",
+      "type": "classificação",
+      "prompt": "Classifique cada item como dispositivo final, intermediário, serviço ou meio, e diga se ele entra na visão física, na lógica ou nas duas: notebook, AP, roteador doméstico, servidor DNS, impressora, cabo do notebook até o switch.",
+      "expectedAnswer": "Notebook e impressora: finais, físicos e lógicos (têm IP). AP: intermediário, físico. Roteador doméstico: intermediário que acumula gateway, AP e NAT, físico e lógico. Servidor DNS: serviço, lógico. Cabo: meio, só físico.",
+      "explanation": "Classifique por papel, não pelo nome comercial: o mesmo aparelho doméstico pode ser roteador, AP e switch ao mesmo tempo."
     },
     {
       "id": "ex1.10.2",
@@ -695,16 +613,15 @@
     }
   ],
   "challenge": {
-    "title": "Documente uma rede pequena para apresentação técnica",
-    "scenario": "Você recebeu a tarefa de documentar uma rede pequena antes de uma melhoria de segurança. O gestor quer um documento claro, sem excesso, mas útil para suporte, redes e segurança.",
+    "title": "Transforme o relatório do laboratório em documentação técnica",
+    "scenario": "Antes de uma melhoria de segurança, o gestor de uma rede pequena quer um documento claro, sem excesso, útil para suporte, redes e segurança. Parta do relatório do laboratório (ou de outra rede autorizada) e transforme-o nesse documento.",
     "tasks": [
-      "Definir escopo",
-      "Criar inventário mínimo",
-      "Desenhar mapa físico",
-      "Desenhar mapa lógico",
-      "Coletar evidências sanitizadas",
+      "Revisar escopo e inventário mínimo, classificando dispositivos finais, intermediários e serviços",
+      "Apresentar mapa físico e mapa lógico separados",
+      "Marcar cada afirmação como fato (com evidência e data), hipótese ou lacuna",
       "Listar métricas observadas",
-      "Apontar riscos e próximos passos"
+      "Priorizar os riscos e propor próximos passos",
+      "Sanitizar tudo antes de entregar"
     ],
     "constraints": [
       "Não usar rede sem autorização",
@@ -773,7 +690,7 @@
         "whyItIsWrong": "Pode vazar IPs, nomes internos e detalhes de segurança."
       }
     ],
-    "finalAnswer": "Um bom relatório de Módulo 1 deve permitir que outro técnico entenda a rede básica, saiba quais evidências foram coletadas, reconheça limitações e veja quais riscos devem ser tratados primeiro."
+    "finalAnswer": "Um bom relatório de Módulo 1 permite que outro técnico entenda a rede básica, saiba quais evidências foram coletadas, reconheça as limitações e veja quais riscos tratar primeiro. Ele não promete ter descoberto tudo: o que não foi confirmado aparece como lacuna, e nada sensível fica exposto."
   },
   "glossary": [
     {

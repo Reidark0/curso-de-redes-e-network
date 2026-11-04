@@ -1,13 +1,14 @@
 <section class="lesson-section lesson-section--security">
-  <h2>13. Exemplo em Segurança</h2>
-  <p>Para segurança, o mapa inicial revela superfície de ataque. Ele mostra portas físicas expostas, Wi-Fi visitante mal separado, dispositivos desconhecidos, serviços sem dono, DNS suspeito, caminho sem firewall, ausência de logs ou dependência crítica sem redundância.</p>
-  <table class="data-table risk-table">
+  <h2>Exemplo em Segurança</h2>
+  <p>Para segurança, o mapa inicial revela a superfície de ataque. Os riscos mais comuns e como eles aparecem:</p>
+  <div class="responsive-table"><table class="data-table risk-table">
     <thead><tr><th>Risco</th><th>Como aparece no mapa</th><th>Impacto</th><th>Mitigação inicial</th></tr></thead>
     <tbody>
       <tr><td>Rede plana</td><td>Todos os dispositivos no mesmo segmento</td><td>Movimento lateral facilitado</td><td>Planejar segmentação e políticas</td></tr>
       <tr><td>Ativo desconhecido</td><td>Dispositivo sem dono ou função</td><td>Risco de comprometimento invisível</td><td>Inventário, NAC e validação</td></tr>
       <tr><td>Wi-Fi visitante mal isolado</td><td>Visitantes acessam recursos internos</td><td>Exposição indevida</td><td>SSID separado, VLAN e firewall</td></tr>
+      <tr><td>Caminho sem controle</td><td>Tráfego entre redes sem firewall, sem logs ou dependência crítica sem redundância</td><td>Ataque ou falha sem detecção</td><td>Firewall entre segmentos, logs e redundância planejada</td></tr>
       <tr><td>Evidência vazada</td><td>Mapa com IPs e nomes internos compartilhado sem controle</td><td>Vazamento de informação</td><td>Sanitização e classificação documental</td></tr>
     </tbody>
-  </table>
+  </table></div>
 </section>
