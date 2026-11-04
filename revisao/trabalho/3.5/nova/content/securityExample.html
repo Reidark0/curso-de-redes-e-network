@@ -1,9 +1,0 @@
-<section class="lesson-section lesson-section--security"><h2>13. Exemplo em Segurança</h2>
-<p>ARP não autentica nativamente quem responde. Isso cria riscos defensivos importantes. Em um ataque conceitual de ARP spoofing, um agente malicioso tenta convencer hosts de que seu MAC corresponde ao IP do gateway ou de outro host. O impacto pode ser negação de serviço, interceptação em redes sem criptografia adequada ou redirecionamento indevido.</p>
-<table class="data-table risk-table"><thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead><tbody>
-<tr><td>ARP spoofing</td><td>MAC do gateway muda de forma inesperada.</td><td>Interceptação ou indisponibilidade local.</td><td>Segmentação, DAI, DHCP snooping, 802.1X, criptografia ponta a ponta e monitoramento.</td></tr>
-<tr><td>IP duplicado</td><td>Dois hosts respondem pelo mesmo IP.</td><td>Conectividade intermitente.</td><td>DHCP controlado, reserva documentada e alerta de duplicidade.</td></tr>
-<tr><td>Rede plana</td><td>ARP alcança muitos hosts.</td><td>Maior ruído e superfície lateral.</td><td>VLANs, roteamento controlado e menor privilégio.</td></tr>
-<tr><td>PCAP sensível</td><td>Captura revela IPs, MACs e topologia.</td><td>Vazamento de informações internas.</td><td>Sanitização e controle de acesso a evidências.</td></tr>
-</tbody></table>
-</section>

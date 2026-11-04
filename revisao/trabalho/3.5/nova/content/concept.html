@@ -1,5 +1,16 @@
-<section class="lesson-section lesson-section--concept"><h2>5. Conceito</h2>
-<p><strong>ARP</strong>, Address Resolution Protocol, é o protocolo usado no IPv4 para descobrir o endereço MAC associado a um endereço IPv4 dentro da rede local. Ele não resolve nomes como DNS, não roteia pacotes como um roteador e não protege a comunicação. Ele apenas responde a uma pergunta local: “qual MAC devo usar para entregar este frame ao próximo salto?”</p>
-<div class="definition-box"><strong>Definição prática:</strong> ARP conecta o mundo lógico do IPv4 ao mundo local da Ethernet, permitindo que um host transforme o IP do destino local ou do gateway em um MAC de destino para o frame Ethernet.</div>
-<p>A frase “ARP transforma IPv4 em MAC” é útil, mas deve ser entendida com cuidado. Se o destino está fora da rede local, ARP não procura o MAC do servidor final na internet. Ele procura o MAC do gateway padrão. O gateway então recebe o frame local, remove a Camada 2, analisa o pacote IP e decide o próximo salto.</p>
+<section class="lesson-section lesson-section--concept"><h2>Conceito</h2>
+<div class="definition-box"><strong>ARP</strong> é o protocolo usado no IPv4 para descobrir o endereço MAC associado a um endereço IPv4 <strong>dentro da rede local</strong>. Ele responde a uma única pergunta: "qual MAC devo usar para entregar este frame ao próximo salto?"</div>
+<p>O ARP não resolve nomes (isso é DNS), não roteia pacotes (isso é o roteador), não protege a comunicação e não atravessa roteadores: ele fica restrito ao domínio de broadcast, ou seja, à VLAN. No IPv6 não existe ARP clássico; o mesmo problema é resolvido pelo Neighbor Discovery (NDP), sobre ICMPv6.</p>
+<p>A frase "ARP transforma IPv4 em MAC" exige um cuidado: o IP que o ARP resolve é o do <strong>próximo salto</strong>, que nem sempre é o destino final.</p>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Host <code>192.168.1.50/24</code> quer falar com…</th><th>Mesma sub-rede?</th><th>Próximo salto</th><th>ARP pergunta por</th></tr></thead><tbody>
+<tr><td><code>192.168.1.80</code> (impressora)</td><td>Sim</td><td>O próprio destino</td><td>MAC de <code>192.168.1.80</code></td></tr>
+<tr><td><code>203.0.113.10</code> (site externo)</td><td>Não</td><td>Gateway <code>192.168.1.1</code></td><td>MAC de <code>192.168.1.1</code>, nunca o do site</td></tr>
+</tbody></table></div>
+<p>No segundo caso, o gateway recebe o frame local, remove a Camada 2, analisa o pacote IP e decide o próximo salto seguinte.</p>
+<div class="callout warning"><strong>Erros comuns:</strong>
+<ul>
+<li><strong>Confundir ARP com DNS:</strong> você trata uma falha local como falha de nomes e investiga o lugar errado.</li>
+<li><strong>Tratar MAC como identidade forte:</strong> o MAC parece único e físico, mas pode ser falsificado; controle de acesso exige autenticação, NAC e logs.</li>
+<li><strong>Ignorar IP duplicado:</strong> o sintoma é intermitente e parece aleatório; verifique alertas, DHCP e mudança de MAC para o mesmo IP.</li>
+</ul></div>
 </section>

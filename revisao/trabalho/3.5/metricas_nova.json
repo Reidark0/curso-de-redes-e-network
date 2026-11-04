@@ -1,0 +1,78 @@
+{
+  "id": "3.5",
+  "versao": "nova",
+  "titulo": "ARP: transformando IPv4 em MAC na rede local",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4512,
+    "invisiveis": 32,
+    "teoriaVisivel": 2443
+  },
+  "porCampoVisivel": {
+    "content.motivation": 114,
+    "content.problem": 142,
+    "content.concept": 239,
+    "content.internals": 438,
+    "content.architecture": 106,
+    "content.analogy": 83,
+    "content.simpleExample": 90,
+    "content.enterpriseExample": 96,
+    "content.cloudExample": 153,
+    "content.diagram": 1,
+    "content.summary": 108,
+    "content.nextTheme": 30,
+    "security": 334,
+    "troubleshooting": 294,
+    "glossary": 215,
+    "title+subtitle": 22,
+    "objectives": 41,
+    "learningOutcomes": 79,
+    "quiz": 367,
+    "flashcards": 125,
+    "mentorQuestions": 257,
+    "exercises": 213,
+    "challenge": 111,
+    "commentedSolution": 151,
+    "references": 48,
+    "linksToOtherCourses": 60,
+    "lab": 595
+  },
+  "porCampoInvisivel": {
+    "networkContext": 32
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 30,
+    "alternativa_5minPasso_maisLeitura": 29.6,
+    "plausivel": true,
+    "palavras": 595
+  },
+  "duracao": {
+    "declarada": "90-125 min",
+    "estimatedStudyTimeMinutes": 125,
+    "M": 107.5,
+    "T": 104.8,
+    "partes": {
+      "teoria": 18.8,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 20,
+      "lab": 30
+    },
+    "faixaRecomendada": "90-125 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 21
+  }
+}
