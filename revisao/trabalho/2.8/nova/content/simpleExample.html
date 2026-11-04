@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--example">
+  <h2>9. Exemplo simples</h2>
+  <p>Seu notebook não acessa um site. Um diagnóstico por camadas poderia ser:</p>
+  <ol class="flow-list">
+    <li>Verificar se o Wi-Fi está conectado e com sinal adequado.</li>
+    <li>Verificar se recebeu IP, máscara, gateway e DNS.</li>
+    <li>Ping para o gateway local.</li>
+    <li>Resolver o nome com DNS.</li>
+    <li>Testar conexão TCP/443.</li>
+    <li>Usar navegador ou <code>curl -I</code> para observar HTTP/TLS.</li>
+  </ol>
+  <p>Se o gateway responde, mas nomes não resolvem, o problema não é camada física. Se nomes resolvem e TCP conecta, mas HTTP retorna 403, a falha provavelmente está na camada de aplicação ou política.</p>
+</section>

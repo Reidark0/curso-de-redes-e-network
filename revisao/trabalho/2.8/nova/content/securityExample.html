@@ -1,0 +1,10 @@
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>Em segurança, diagnóstico por camadas reduz impacto e evita respostas erradas. Um pico de tráfego pode ser backup legítimo, exfiltração, DDoS, loop, varredura interna ou aplicação em retry. Cada hipótese aparece em camadas e evidências diferentes.</p>
+  <table class="data-table risk-table"><thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead><tbody>
+    <tr><td>Coleta excessiva de evidências</td><td>Prints com IPs, tokens, cookies e nomes internos.</td><td>Vazamento de informação sensível.</td><td>Sanitizar evidências e limitar compartilhamento.</td></tr>
+    <tr><td>Conclusão precipitada</td><td>Bloquear tráfego sem provar a camada afetada.</td><td>Indisponibilidade e falso positivo.</td><td>Usar hipótese, evidência e validação por camada.</td></tr>
+    <tr><td>Firewall permissivo como correção</td><td>Regra any-any para "testar".</td><td>Aumento de superfície de ataque.</td><td>Teste controlado, janela, rollback e menor privilégio.</td></tr>
+    <tr><td>Logs sem contexto</td><td>Alertas isolados sem origem, destino, horário e camada.</td><td>Investigação lenta ou inconclusiva.</td><td>Correlacionar rede, aplicação, IAM e endpoint.</td></tr>
+  </tbody></table>
+</section>

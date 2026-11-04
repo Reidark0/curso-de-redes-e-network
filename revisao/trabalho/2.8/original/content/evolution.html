@@ -1,0 +1,10 @@
+<section class="lesson-section lesson-section--evolution">
+  <h2>4. Evolução</h2>
+  <p>O troubleshooting evoluiu de inspeção física e comandos isolados para investigação orientada por evidências, observabilidade e correlação entre camadas.</p>
+  <table class="data-table comparison-table"><thead><tr><th>Abordagem</th><th>Como funcionava</th><th>Limitação</th><th>Evolução</th></tr></thead><tbody>
+    <tr><td>Tentativa e erro</td><td>Reiniciar equipamento, trocar cabo, liberar regra e testar de novo.</td><td>Pode mascarar a causa raiz e criar risco operacional.</td><td>Checklist por camada e coleta de evidências antes de alterar.</td></tr>
+    <tr><td>Comandos isolados</td><td>Executar ping, nslookup ou tracert sem hipótese clara.</td><td>Resultado correto em um comando não prova que tudo funciona.</td><td>Interpretação por camada e correlação entre comandos.</td></tr>
+    <tr><td>Logs locais</td><td>Olhar apenas no host ou servidor.</td><td>Perde evidências de firewall, proxy, WAF, cloud e IAM.</td><td>Observabilidade distribuída, SIEM, métricas, traces e logs centralizados.</td></tr>
+    <tr><td>Cloud e Zero Trust</td><td>Fluxos passam por políticas, identidades e serviços gerenciados.</td><td>Falhas de identidade podem parecer rede; falhas de rede podem parecer aplicação.</td><td>Diagnóstico por camadas + política + identidade + telemetria.</td></tr>
+  </tbody></table>
+</section>
