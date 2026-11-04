@@ -1,19 +1,19 @@
 
 <section class="lesson-section lesson-section--internals">
-  <h2>6. Funcionamento interno</h2>
+  <h2>Funcionamento interno</h2>
   <p>
-    Em uma comunicação real, dados são encapsulados. A aplicação produz uma mensagem. O transporte adiciona informações para identificar processos e controlar a conversa. A rede adiciona endereços para atravessar caminhos. O enlace prepara a entrega local. A camada física transforma tudo em sinal. No destino, o processo ocorre no sentido inverso.
+    Na comunicação real, os dados são <strong>encapsulados</strong>: cada camada acrescenta as informações de que precisa para cumprir sua responsabilidade. No destino, o processo acontece no sentido inverso (desencapsulamento). Num acesso HTTPS:
   </p>
   <ol class="flow-list">
     <li><strong>Aplicação:</strong> o navegador monta uma requisição HTTP.</li>
-    <li><strong>Segurança/aplicação:</strong> TLS protege a conversa e valida certificado.</li>
-    <li><strong>Transporte:</strong> TCP identifica portas e controla sessão.</li>
+    <li><strong>Segurança/aplicação:</strong> TLS protege a conversa e valida o certificado.</li>
+    <li><strong>Transporte:</strong> TCP identifica as portas e controla a sessão.</li>
     <li><strong>Rede:</strong> IP define origem, destino e caminho entre redes.</li>
-    <li><strong>Enlace:</strong> Ethernet ou Wi-Fi entrega para o próximo salto local.</li>
-    <li><strong>Física:</strong> cobre, fibra ou rádio carregam sinais.</li>
-    <li><strong>Identidade e política:</strong> acima da aplicação, tokens, claims e regras decidem acesso.</li>
+    <li><strong>Enlace:</strong> Ethernet ou Wi-Fi entrega ao próximo salto local.</li>
+    <li><strong>Física:</strong> cobre, fibra ou rádio carregam os sinais.</li>
+    <li><strong>Identidade e política:</strong> acima da aplicação, tokens, claims e regras decidem o acesso.</li>
   </ol>
   <p>
-    O ponto mais importante: camadas não são gavetas isoladas. Elas se influenciam. Um proxy pode mexer em HTTP. Um firewall pode bloquear TCP. Um problema físico pode gerar retransmissões. Um certificado TLS pode impedir a aplicação de começar. Uma política de identidade pode negar acesso mesmo quando todo o caminho de rede está saudável.
+    Camadas não são gavetas isoladas: elas se influenciam. Um proxy pode mexer no HTTP. Um firewall pode bloquear o TCP. Um problema físico pode gerar retransmissões. Um certificado TLS inválido pode impedir a aplicação de começar. Uma política de identidade pode negar acesso mesmo com todo o caminho de rede saudável.
   </p>
 </section>

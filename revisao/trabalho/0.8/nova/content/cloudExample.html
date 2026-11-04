@@ -1,13 +1,13 @@
 
 <section class="lesson-section lesson-section--cloud">
-  <h2>11. Exemplo em cloud</h2>
+  <h2>Exemplo em cloud</h2>
   <p>
-    Em cloud, muitas falhas parecem iguais para o usuário: "não acessa". Mas a causa pode estar em uma route table, security group, NSG, DNS privado, endpoint privado, NAT Gateway, load balancer, certificado, WAF, API Gateway, IAM ou política da aplicação.
+    Em cloud, falhas muito diferentes aparecem para o usuário como "não acessa". A causa pode estar em route table, security group, NSG, DNS privado, endpoint privado, NAT Gateway, load balancer, certificado, WAF, API Gateway, IAM ou política da aplicação. Os nomes parecem os da rede tradicional, mas cada serviço tem regras e evidências próprias.
   </p>
   <p>
-    Um exemplo: uma VM em subnet privada precisa chamar uma API externa. Se não há rota para NAT, o tráfego nem sai. Se o security group nega saída, a conexão falha. Se o DNS resolve para endpoint privado errado, vai para outro caminho. Se TLS falha, a porta pode até abrir, mas a aplicação não negocia. Se a API retorna 403, a rede funcionou, mas a autorização negou.
+    Exemplo: uma VM em subnet privada precisa chamar uma API externa. Se não há rota para o NAT, o tráfego nem sai. Se o security group nega a saída, a conexão falha. Se o DNS resolve para o endpoint privado errado, o tráfego vai por outro caminho. Se o TLS falha, a porta pode até abrir, mas a aplicação não negocia. Se a API retorna 403, a rede funcionou e a autorização negou.
   </p>
   <div class="callout callout--security">
-    <strong>Regra prática:</strong> em cloud, conectividade, exposição e permissão são coisas diferentes. Abrir caminho de rede não significa conceder acesso legítimo; negar IAM não significa que a rede esteja quebrada.
+    <strong>Regra prática:</strong> em cloud, conectividade, exposição e permissão são coisas diferentes. Abrir caminho de rede não concede acesso legítimo; uma negação de IAM não significa que a rede esteja quebrada.
   </div>
 </section>

@@ -4,8 +4,8 @@
   "order": 8,
   "title": "Como pensar em camadas",
   "subtitle": "O método mental que separa problema físico, endereçamento, transporte, aplicação, identidade e segurança sem transformar troubleshooting em adivinhação.",
-  "duration": "55-80 min",
-  "estimatedStudyTimeMinutes": 80,
+  "duration": "65-90 min",
+  "estimatedStudyTimeMinutes": 90,
   "difficulty": "iniciante",
   "type": "ligação",
   "xp": 140,
@@ -99,75 +99,6 @@
       "segurança em camadas"
     ]
   },
-  "deepDive": {
-    "mentalModel": "Não trate 'rede' como uma caixa preta. Transforme cada sintoma em uma pergunta por responsabilidade: meio, enlace, endereço, rota, porta, protocolo, aplicação, identidade, política e evidência.",
-    "keyTerms": [
-      "camada",
-      "encapsulamento",
-      "desencapsulamento",
-      "pilha",
-      "responsabilidade",
-      "evidência",
-      "hipótese"
-    ],
-    "limitations": [
-      "Modelos em camadas simplificam a realidade e nem sempre representam exatamente como uma implementação funciona.",
-      "Alguns componentes atuam em múltiplas camadas, como proxies, firewalls de próxima geração, service meshes e WAFs.",
-      "Camadas ajudam a pensar, mas não substituem logs, captura de tráfego, métricas e documentação."
-    ],
-    "whenToUse": [
-      "Ao investigar chamados vagos como 'sistema fora', 'internet lenta' ou 'login não funciona'.",
-      "Ao desenhar arquitetura de rede, cloud, plataforma ou IAM.",
-      "Ao explicar incidentes para equipes diferentes.",
-      "Ao criar checklists de operação e resposta a incidentes."
-    ],
-    "whenNotToUse": [
-      "Não use camadas como dogma para ignorar evidências diretas.",
-      "Não force todo problema moderno a caber perfeitamente no OSI.",
-      "Não use o modelo para empurrar responsabilidade para outra equipe sem validação."
-    ],
-    "operationalImpact": [
-      "Melhora a triagem de incidentes e reduz tentativa e erro.",
-      "Exige documentação de caminhos, dependências, portas, DNS, identidade e políticas.",
-      "Facilita comunicação entre rede, segurança, plataforma, cloud e aplicação."
-    ],
-    "financialImpact": [
-      "Diagnóstico melhor reduz tempo de indisponibilidade e evita compras erradas de banda, appliances ou licenças.",
-      "Em cloud, evita liberar recursos caros ou abrir arquiteturas inseguras por diagnóstico incorreto.",
-      "Exige investimento em observabilidade, logs e treinamento."
-    ],
-    "securityImpact": [
-      "Ajuda a aplicar defesa em profundidade.",
-      "Evita confundir criptografia com autorização ou conectividade com permissão.",
-      "Melhora investigação de movimento lateral, exfiltração, bloqueios e falhas de identidade."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Achar que ping bem-sucedido prova que o sistema funciona.",
-      "whyItHappens": "Ping é fácil e dá resposta rápida.",
-      "consequence": "Ignora portas, TLS, HTTP, autenticação, autorização e aplicação.",
-      "correction": "Use ping apenas como evidência parcial de conectividade e continue subindo as camadas."
-    },
-    {
-      "mistake": "Culpar DNS para qualquer falha de acesso.",
-      "whyItHappens": "DNS aparece em muitos sintomas.",
-      "consequence": "Perde tempo quando o problema é firewall, TLS, token ou aplicação.",
-      "correction": "Teste resolução, mas depois valide porta, certificado, HTTP e logs."
-    },
-    {
-      "mistake": "Confundir autenticação com autorização.",
-      "whyItHappens": "Ambas aparecem no login.",
-      "consequence": "Usuário autenticado pode continuar sem acesso e o diagnóstico fica errado.",
-      "correction": "Separe quem é o usuário de quais ações ele pode executar."
-    },
-    {
-      "mistake": "Tratar cloud networking como rede tradicional simples.",
-      "whyItHappens": "Termos como subnet, rota e firewall parecem familiares.",
-      "consequence": "Ignora security groups, identidade, endpoints privados, load balancers e políticas gerenciadas.",
-      "correction": "Mapeie camadas cloud específicas e evidências de cada serviço."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Usuário diz que o sistema não abre",
@@ -198,10 +129,10 @@
       },
       {
         "platform": "Linux",
-        "command": "ip addr\nip route\ndig sistema.empresa.local\ncurl -vk https://sistema.empresa.local",
+        "command": "ip addr\nip route\ndig sistema.empresa.local\ncurl -v https://sistema.empresa.local",
         "purpose": "Coletar evidências de endereço, rota, DNS, TLS e HTTP.",
         "expectedObservation": "Interface com IP, rota default, DNS resolvendo e resposta HTTP/TLS interpretável.",
-        "interpretation": "curl -v mostra em qual etapa a conversa falha: resolução, conexão, TLS ou HTTP."
+        "interpretation": "curl -v mostra em qual etapa a conversa falha: resolução, conexão, TLS ou HTTP. Não use -k (--insecure) no diagnóstico: ele desliga a validação do certificado e esconde justamente a falha de TLS."
       },
       {
         "platform": "Cisco IOS",
@@ -229,8 +160,12 @@
         "then": "Investigue certificado, SNI, CA, inspeção TLS ou versão incompatível."
       },
       {
-        "if": "HTTP responde 401 ou 403",
-        "then": "Investigue autenticação, token, sessão, grupos e autorização."
+        "if": "HTTP responde 401",
+        "then": "Investigue autenticação: credencial ausente ou inválida, token expirado, sessão ou provedor de identidade."
+      },
+      {
+        "if": "HTTP responde 403",
+        "then": "O servidor entendeu o pedido e recusou a ação: com o usuário já autenticado, investigue grupos, claims, papéis e políticas de autorização; confira também regras de WAF ou política que bloqueiam por origem."
       }
     ]
   },
@@ -244,8 +179,6 @@
     ],
     "badPractices": [
       "Abrir tráfego any-any para resolver chamado sem diagnóstico.",
-      "Assumir que VPN significa autorização ampla.",
-      "Assumir que HTTPS torna uma aplicação segura por completo.",
       "Desativar validação TLS ou WAF sem plano de reversão.",
       "Coletar logs sem mascarar segredos."
     ],
@@ -310,20 +243,20 @@
     },
     {
       "type": "diagnóstico",
-      "question": "Um usuário consegue abrir a tela de login, autentica com sucesso, mas recebe 403. Você começaria por cabo, DNS, firewall ou autorização?",
+      "question": "Uma aplicação abre normalmente na rede do escritório, mas falha quando o mesmo usuário está na VPN. Quais camadas mudam entre os dois caminhos e por onde você começaria?",
       "hints": [
-        "A tela abriu.",
-        "A autenticação funcionou.",
-        "403 indica negação de acesso pela aplicação ou política."
+        "O usuário, a senha e a aplicação são os mesmos.",
+        "Pense no que a VPN altera: DNS, rota e políticas no caminho."
       ],
       "expectedIdeas": [
-        "autorização",
-        "grupos",
-        "claims",
-        "permissão",
-        "logs da aplicação/IAM"
+        "DNS interno resolvido pela VPN",
+        "rota até a rede da aplicação",
+        "firewall ou segmentação da VPN/ZTNA",
+        "política de acesso por grupo",
+        "teste de porta e TLS a partir da VPN",
+        "logs da VPN e do firewall"
       ],
-      "explanation": "A conectividade básica e parte da aplicação funcionaram. O foco inicial deve ser autorização, sem ignorar logs correlacionados."
+      "explanation": "Como identidade e aplicação são as mesmas nos dois casos, a diferença está no caminho. Compare DNS, rota, porta e políticas da VPN antes de mexer na aplicação ou nas credenciais."
     },
     {
       "type": "cenário real",
@@ -348,78 +281,108 @@
   "quiz": [
     {
       "id": "q0.8.1",
-      "type": "conceito",
-      "q": "Qual é a melhor descrição de pensamento em camadas?",
-      "opts": [
+      "question": "Qual é a melhor descrição de pensamento em camadas?",
+      "options": [
         "Um método para organizar responsabilidades e evidências de comunicação",
-        "Uma regra que substitui todos os comandos de diagnóstico",
-        "Uma técnica para sempre culpar o firewall",
-        "Um modelo usado apenas por fabricantes de hardware"
+        "Uma lista fixa de comandos que deve ser executada sempre na mesma ordem",
+        "Uma regra para começar todo diagnóstico pela camada de aplicação",
+        "Um modelo que descreve exatamente os cabeçalhos de cada pacote real"
       ],
-      "a": 0,
-      "exp": "Camadas são um modelo mental para separar responsabilidades e investigar com evidências.",
+      "answer": 0,
+      "explanation": "Camadas são um modelo mental para separar responsabilidades e investigar com evidências. Não são uma receita fixa de comandos nem uma descrição exata dos pacotes reais.",
+      "topic": "conceito",
       "difficulty": "iniciante",
-      "topic": "conceito"
+      "type": "conceito"
     },
     {
       "id": "q0.8.2",
-      "type": "diagnóstico",
-      "q": "Ping para um servidor responde, mas o site HTTPS não abre. O que é correto concluir?",
-      "opts": [
+      "question": "Ping para um servidor responde, mas o site HTTPS não abre. O que é correto concluir?",
+      "options": [
         "Toda a aplicação está saudável",
         "Há alguma conectividade, mas ainda é preciso testar porta, TLS e aplicação",
         "DNS obrigatoriamente está quebrado",
         "O problema só pode ser físico"
       ],
-      "a": 1,
-      "exp": "Ping é uma evidência limitada. HTTP/TLS pode falhar mesmo com ICMP funcionando.",
+      "answer": 1,
+      "explanation": "Ping é uma evidência limitada. HTTP/TLS pode falhar mesmo com ICMP funcionando.",
+      "topic": "troubleshooting",
       "difficulty": "iniciante",
-      "topic": "troubleshooting"
+      "type": "diagnóstico"
     },
     {
       "id": "q0.8.3",
-      "type": "segurança",
-      "q": "Qual frase representa melhor defesa em profundidade?",
-      "opts": [
+      "question": "Qual frase representa melhor defesa em profundidade?",
+      "options": [
         "Um firewall substitui IAM",
         "HTTPS substitui autorização",
         "Controles diferentes protegem responsabilidades diferentes",
         "VPN torna segmentação desnecessária"
       ],
-      "a": 2,
-      "exp": "Defesa em profundidade usa camadas complementares, não substituições perigosas.",
+      "answer": 2,
+      "explanation": "Defesa em profundidade usa camadas complementares, não substituições perigosas.",
+      "topic": "segurança",
       "difficulty": "iniciante",
-      "topic": "segurança"
+      "type": "segurança"
     },
     {
       "id": "q0.8.4",
-      "type": "cloud",
-      "q": "Uma API retorna 403. Qual hipótese deve ser considerada antes de alterar rota ou firewall?",
-      "opts": [
-        "Autorização, policy, grupo, claim ou permissão",
-        "Cabo rompido no datacenter do usuário",
-        "Máscara de rede sempre errada",
-        "Velocidade do monitor"
+      "question": "Uma API retorna 403. Qual hipótese deve ser considerada antes de alterar rota ou firewall?",
+      "options": [
+        "Cabo rompido entre o usuário e o switch",
+        "Autorização: policy, grupo, claim ou permissão",
+        "Rota ausente até a sub-rede da API",
+        "Security group bloqueando a porta 443"
       ],
-      "a": 0,
-      "exp": "403 normalmente indica que a requisição chegou a algum controle de aplicação ou política, mas foi negada.",
+      "answer": 1,
+      "explanation": "Um 403 é uma resposta HTTP: a requisição atravessou cabo, rota e security group e chegou a um controle de aplicação ou política, que a negou. Por isso a hipótese inicial é autorização.",
+      "topic": "cloud",
       "difficulty": "iniciante",
-      "topic": "cloud"
+      "type": "cloud"
     },
     {
       "id": "q0.8.5",
-      "type": "comparação",
-      "q": "Por que o modelo OSI é útil mesmo que a internet real use a pilha TCP/IP?",
-      "opts": [
+      "question": "Por que o modelo OSI é útil mesmo que a internet real use a pilha TCP/IP?",
+      "options": [
         "Porque é um mapa didático para separar responsabilidades",
         "Porque todos os pacotes carregam exatamente sete cabeçalhos OSI",
         "Porque substitui documentação de rede",
-        "Porque elimina necessidade de logs"
+        "Porque descreve exatamente como os sistemas operacionais implementam a pilha"
       ],
-      "a": 0,
-      "exp": "O OSI é muito útil como modelo pedagógico e de diagnóstico, mesmo quando a implementação real não encaixa perfeitamente em sete camadas rígidas.",
+      "answer": 0,
+      "explanation": "O OSI é muito útil como modelo pedagógico e de diagnóstico, mesmo quando a implementação real não encaixa perfeitamente em sete camadas rígidas.",
+      "topic": "modelos",
       "difficulty": "iniciante",
-      "topic": "modelos"
+      "type": "comparação"
+    },
+    {
+      "id": "q0.8.6",
+      "question": "Um usuário recebe 401 em uma API; outro, já autenticado, recebe 403 na mesma API. Qual leitura é a mais adequada?",
+      "options": [
+        "Os dois casos indicam falha de rede entre cliente e API",
+        "401 indica falta de permissão e 403 indica token ausente",
+        "Os dois códigos significam que o serviço está indisponível",
+        "401 aponta para autenticação; 403 aponta para autorização"
+      ],
+      "answer": 3,
+      "explanation": "401 costuma indicar credencial ausente ou inválida (autenticação). 403 indica que o servidor entendeu o pedido e recusou a ação; para um usuário já autenticado, isso aponta para autorização. Em ambos os casos a rede entregou a requisição.",
+      "topic": "identidade",
+      "difficulty": "iniciante",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q0.8.7",
+      "question": "Num acesso HTTPS, qual sequência descreve o encapsulamento, da aplicação até o meio físico?",
+      "options": [
+        "TCP, HTTP, IP, TLS, Ethernet/Wi-Fi, sinal",
+        "HTTP, IP, TLS, TCP, Ethernet/Wi-Fi, sinal",
+        "HTTP, TLS, TCP, IP, Ethernet/Wi-Fi, sinal",
+        "Ethernet/Wi-Fi, IP, TCP, TLS, HTTP, sinal"
+      ],
+      "answer": 2,
+      "explanation": "A requisição HTTP é protegida pelo TLS, carregada pelo TCP (portas), endereçada pelo IP, entregue ao próximo salto por Ethernet ou Wi-Fi e transmitida como sinal. No destino, o caminho inverso é o desencapsulamento.",
+      "topic": "encapsulamento",
+      "difficulty": "iniciante",
+      "type": "conceito"
     }
   ],
   "flashcards": [
@@ -433,11 +396,12 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc0.8.2",
-      "front": "Ping bem-sucedido prova que a aplicação funciona?",
-      "back": "Não. Ele indica alguma conectividade, mas não valida porta, TLS, HTTP, autenticação, autorização ou lógica da aplicação.",
+      "id": "fc0.8.6",
+      "front": "A porta 443 conecta, mas o TLS falha. Onde investigar?",
+      "back": "Certificado (validade, nome, CA confiável), SNI, inspeção TLS no caminho ou versão incompatível. A rede até a porta já funcionou.",
       "tags": [
-        "troubleshooting"
+        "troubleshooting",
+        "tls"
       ],
       "difficulty": "iniciante"
     },
@@ -466,6 +430,15 @@
       "back": "Uso de controles complementares em várias camadas para reduzir risco caso um controle falhe ou seja insuficiente.",
       "tags": [
         "segurança"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.8.7",
+      "front": "Por que dizemos que modelos em camadas são mapas, não a realidade?",
+      "back": "Porque nem todo protocolo se encaixa perfeitamente e alguns componentes, como proxies, firewalls de próxima geração, WAFs e service meshes, atuam em várias camadas ao mesmo tempo.",
+      "tags": [
+        "modelos"
       ],
       "difficulty": "iniciante"
     }
