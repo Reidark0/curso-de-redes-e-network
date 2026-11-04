@@ -4,7 +4,7 @@ Status: PENDENTE · EM ANDAMENTO · CONCLUÍDA · FALHOU. Atualizado pelo orques
 
 | id | arquivo | status | palavras visíveis antes→depois | duração declarada→nova | duração | linguiça | útil | aproveitamento |
 |---|---|---|---|---|---|---|---|---|
-| 0.1 | m00/lesson-00-01.js | CONCLUÍDA | 6802→6455 (-5%) | 55-80 min→105-150 min | SUBESTIMADA | MÉDIA 20% | PARCIAL | BOM |
+| 0.1 | m00/lesson-00-01.js | CONCLUÍDA | 6802→6462 (-5%) | 55-80 min→105-150 min | SUBESTIMADA | MÉDIA 20% | PARCIAL | BOM |
 | 0.2 | m00/lesson-00-02.js | CONCLUÍDA | 5802→5748 (-1%) | 65-90 min→105-145 min | SUBESTIMADA | MÉDIA 15% | FORTE | BOM |
 | 0.3 | m00/lesson-00-03.js | CONCLUÍDA | 5882→6035 (+3%) | 70-95 min→100-145 min | SUBESTIMADA | MÉDIA 16% | FORTE | MÉDIO |
 | 0.4 | m00/lesson-00-04.js | CONCLUÍDA | 4927→4934 (+0%) | 60-85 min→75-110 min | ORGANIZADA | MÉDIA 15% | FORTE | BOM |
@@ -196,3 +196,5 @@ Status: PENDENTE · EM ANDAMENTO · CONCLUÍDA · FALHOU. Atualizado pelo orques
 | 17.12 | m17/lesson-17-12.js | CONCLUÍDA | 8337→9075 (+9%) | 480-720 min→490-695 min | ORGANIZADA | MÉDIA 27% | PARCIAL | MÉDIO |
 
 ## Resumos por módulo
+
+**m00 — Fundamentos da Computação (10/10 CONCLUÍDAS).** As palavras visíveis ficaram praticamente iguais (54.979 → 56.055): a linguiça cortada (12–18% por aula) foi compensada pelo conteúdo de `deepDive`/`commonMistakes` que passou a aparecer (invisíveis ~6.200 → ~450) e por valores concretos que faltavam. A duração declarada subiu em 7 de 10 aulas pela fórmula 6.2 (o original estava SUBESTIMADO), e o `estimatedHours` do módulo foi de 14 para 23. `requiredLabs` perdeu lab-0.4, lab-0.8 e lab-0.10, que não existem. Erros técnicos corrigidos: diagrama da 0.1, broadcast chamado de host na 0.2, `ss -tulpen` na 0.7, `curl -vk` na 0.8. Controle de qualidade: 0.2 aprovada; 0.1 reprovada por um erro pontual (Base64 com CR LF), já corrigido (D22).

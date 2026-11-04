@@ -313,7 +313,7 @@ export const lesson0001 = {
         "fix": "Usar hexdump -C m00-aula01.txt como alternativa."
       },
       {
-        "symptom": "A saída hexadecimal mostra um byte 0a (ou 0d 0a) a mais no final, e o Base64 vira cmVkZQo=.",
+        "symptom": "A saída hexadecimal mostra um byte 0a (ou 0d 0a) a mais no final, e o Base64 vira cmVkZQo= (com 0a) ou cmVkZQ0K (com 0d 0a).",
         "probableCause": "O arquivo foi criado com quebra de linha (0a é LF; 0d 0a é CR LF, padrão do Windows). A diferença também aparece quando o mesmo texto é gravado em sistemas diferentes.",
         "howToConfirm": "Comparar a criação com e sem -NoNewline no Windows, ou usar printf em vez de echo no Linux.",
         "fix": "Recriar o arquivo sem quebra de linha se quiser observar apenas os bytes da palavra."

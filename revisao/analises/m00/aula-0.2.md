@@ -185,3 +185,5 @@ Pela 11.7: os cortes brutos (704, 12%) ficam abaixo da linguiça estimada (~15%)
   ]
 }
 ```
+
+> **Controle de qualidade do m00 (revisor independente):** APROVADA. Quiz e cálculos novos conferidos. Perdas menores aceitas: no `problem`, "confundir hash com encoding" (a tabela de transformações da 0.1 cobre) e "binário não é necessariamente baixo nível ofensivo".

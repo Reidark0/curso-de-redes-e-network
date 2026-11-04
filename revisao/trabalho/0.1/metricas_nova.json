@@ -4,7 +4,7 @@
   "titulo": "Como computadores representam informação",
   "tipo": "fundamental",
   "palavras": {
-    "visiveis": 6455,
+    "visiveis": 6462,
     "invisiveis": 40,
     "teoriaVisivel": 3378
   },
@@ -37,7 +37,7 @@
     "commentedSolution": 296,
     "references": 76,
     "linksToOtherCourses": 57,
-    "lab": 1065
+    "lab": 1072
   },
   "porCampoInvisivel": {
     "networkContext": 40
@@ -52,10 +52,11 @@
     "desafio": true
   },
   "lab": {
+    "override": null,
     "estimatedTimeMinutes": 35,
     "alternativa_5minPasso_maisLeitura": 43.2,
     "plausivel": true,
-    "palavras": 1065
+    "palavras": 1072
   },
   "duracao": {
     "declarada": "105-150 min",

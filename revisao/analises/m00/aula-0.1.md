@@ -190,3 +190,5 @@ A redução líquida (−5%) é menor que a linguiça estimada (~20%) porque, se
   ]
 }
 ```
+
+> **Controle de qualidade do m00 (revisor independente):** REPROVADA por um erro introduzido: `lab.troubleshooting[1]` dizia que o Base64 com o byte extra "0d 0a" também vira `cmVkZQo=`, quando o certo é `cmVkZQ0K` (conferido: `printf "rede\r\n" | base64`). Correção aplicada pelo orquestrador (passos E–H: editar `nova/meta.json`, montar, métricas, validar), ver DECISOES D22. Perdas menores apontadas e aceitas por não afetarem os objetivos: o caso de investigação de vazamento e os campos de proxy no `enterpriseExample`, SAST/IaC no `devsecopsExample` e o parágrafo hardware/SO/sockets em `architecture`.

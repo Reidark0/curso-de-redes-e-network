@@ -334,93 +334,93 @@
   "quiz": [
     {
       "id": "q1.1.1",
-      "type": "conceito",
-      "q": "Qual definição é mais útil para uma rede em contexto profissional?",
-      "opts": [
+      "question": "Qual definição é mais útil para uma rede em contexto profissional?",
+      "options": [
         "Um conjunto de dispositivos, meios, protocolos, endereços, serviços e políticas que permite comunicação.",
         "Apenas o cabo que liga computadores.",
         "Apenas a internet fornecida pelo provedor.",
         "Qualquer computador com Wi-Fi ligado."
       ],
-      "a": 0,
-      "exp": "Rede envolve comunicação e controle, não apenas o meio físico ou a internet.",
+      "answer": 0,
+      "explanation": "Rede envolve comunicação e controle, não apenas o meio físico ou a internet.",
+      "topic": "conceito",
       "difficulty": "iniciante",
-      "topic": "conceito"
+      "type": "conceito"
     },
     {
       "id": "q1.1.2",
-      "type": "diagnóstico",
-      "q": "Um host tem IP e pinga o gateway, mas não acessa sites por nome. Qual hipótese fica forte?",
-      "opts": [
+      "question": "Um host tem IP e pinga o gateway, mas não acessa sites por nome. Qual hipótese fica forte?",
+      "options": [
         "Problema de DNS.",
         "Cabo necessariamente rompido.",
         "Fonte do monitor queimada.",
         "Switch inexistente."
       ],
-      "a": 0,
-      "exp": "Se o gateway responde, conectividade local existe. Falha por nome sugere DNS, embora outras hipóteses ainda possam existir.",
+      "answer": 0,
+      "explanation": "Se o gateway responde, conectividade local existe. Falha por nome sugere DNS, embora outras hipóteses ainda possam existir.",
+      "topic": "dns",
       "difficulty": "iniciante",
-      "topic": "dns"
+      "type": "diagnóstico"
     },
     {
       "id": "q1.1.3",
-      "type": "segurança",
-      "q": "Por que rede plana é arriscada?",
-      "opts": [
+      "question": "Por que rede plana é arriscada?",
+      "options": [
         "Porque facilita movimento lateral entre ativos.",
         "Porque sempre impede acesso à internet.",
         "Porque elimina a necessidade de firewall.",
         "Porque reduz todos os custos a zero."
       ],
-      "a": 0,
-      "exp": "Rede plana amplia o alcance de um comprometimento e dificulta políticas finas.",
+      "answer": 0,
+      "explanation": "Rede plana amplia o alcance de um comprometimento e dificulta políticas finas.",
+      "topic": "segurança",
       "difficulty": "iniciante",
-      "topic": "segurança"
+      "type": "segurança"
     },
     {
       "id": "q1.1.4",
-      "type": "comparação",
-      "q": "Qual item é um dispositivo intermediário?",
-      "opts": [
+      "question": "Qual item é um dispositivo intermediário?",
+      "options": [
         "Switch",
         "Notebook do usuário",
         "Arquivo PDF",
         "Senha do Wi-Fi"
       ],
-      "a": 0,
-      "exp": "Switch encaminha comunicação dentro da rede; notebook é dispositivo final.",
+      "answer": 0,
+      "explanation": "Switch encaminha comunicação dentro da rede; notebook é dispositivo final.",
+      "topic": "papéis",
       "difficulty": "iniciante",
-      "topic": "papéis"
+      "type": "comparação"
     },
     {
       "id": "q1.1.5",
-      "type": "cloud",
-      "q": "Em cloud, qual recurso se aproxima de uma rede virtual?",
-      "opts": [
+      "question": "Em cloud, qual recurso se aproxima de uma rede virtual?",
+      "options": [
         "VPC ou VNet",
         "Planilha local",
         "Teclado USB",
         "Arquivo Base64"
       ],
-      "a": 0,
-      "exp": "VPC/VNet representam redes virtuais em provedores cloud.",
+      "answer": 0,
+      "explanation": "VPC/VNet representam redes virtuais em provedores cloud.",
+      "topic": "cloud",
       "difficulty": "iniciante",
-      "topic": "cloud"
+      "type": "cloud"
     },
     {
       "id": "q1.1.6",
-      "type": "devsecops",
-      "q": "Um pipeline não consegue baixar uma imagem do registry. Qual causa de rede é plausível?",
-      "opts": [
+      "question": "Um pipeline não consegue baixar uma imagem do registry. Qual causa de rede é plausível?",
+      "options": [
         "DNS, proxy, firewall ou rota bloqueando o acesso.",
         "O conceito de byte deixou de existir.",
         "O monitor não suporta 4K.",
         "O usuário digitou um emoji."
       ],
-      "a": 0,
-      "exp": "Pipelines dependem de rede para DNS, conexão, proxy, TLS e acesso a serviços externos ou internos.",
+      "answer": 0,
+      "explanation": "Pipelines dependem de rede para DNS, conexão, proxy, TLS e acesso a serviços externos ou internos.",
+      "topic": "devsecops",
       "difficulty": "iniciante-intermediário",
-      "topic": "devsecops"
+      "type": "devsecops"
     }
   ],
   "flashcards": [
