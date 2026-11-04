@@ -185,3 +185,5 @@ Palavras visíveis: 4909 → 4873 (−0,7%; cortes brutos 834, ~17%; acréscimos
   ]
 }
 ```
+
+> **Controle de qualidade do m03 (revisor independente):** APROVADA. Todo o conteúdo de switching foi conferido (aprendizado, aging, forwarding, filtering, flooding, MAC flooding) e o gabarito está correto. Menor aceito: no `problem`, saiu "desperdício de banda".

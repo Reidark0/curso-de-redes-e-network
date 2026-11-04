@@ -181,3 +181,5 @@ Palavras visíveis: 4298 → 4536 (+5,5%; cortes brutos 772 = 18%, acréscimos 1
   ]
 }
 ```
+
+> **Controle de qualidade do m03 (revisor independente):** APROVADA. Fatos novos e gabarito conferidos. Ajustes menores aplicados pelo orquestrador na matriz do `concept`: "ARP resolvido + ping falhando" agora pede para conferir se o MAC é o esperado (cache antigo ou IP duplicado dão o mesmo sintoma), e `traceroute` (Linux) entrou ao lado do `tracert`.

@@ -6,8 +6,8 @@
 <tr><td>L1</td><td>A interface tem link?</td><td><code>ip addr</code> (state DOWN, NO-CARRIER) ou <code>ipconfig /all</code> (mídia desconectada)</td><td>Cabo, porta, Wi-Fi</td></tr>
 <tr><td>Config. local</td><td>IP, máscara e gateway coerentes?</td><td><code>ipconfig /all</code>, <code>ip route</code></td><td>DHCP, configuração, VLAN da porta</td></tr>
 <tr><td>L2</td><td>O MAC do gateway foi resolvido?</td><td><code>arp -a</code>, <code>ip neigh</code> (INCOMPLETE/FAILED = não)</td><td>VLAN da porta, trunk, gateway ativo, controles L2</td></tr>
-<tr><td>L2 → gateway</td><td>O gateway responde?</td><td><code>ping &lt;gateway&gt;</code></td><td>Com ARP resolvido e ping falhando, o L2 provavelmente está ok: veja se o gateway ou um firewall local filtra ICMP</td></tr>
-<tr><td>L3 além do gateway</td><td>Um IP remoto responde?</td><td><code>ping &lt;IP remoto&gt;</code>, <code>tracert</code></td><td>Rota e firewall (Módulo 4 em diante)</td></tr>
+<tr><td>L2 → gateway</td><td>O gateway responde?</td><td><code>ping &lt;gateway&gt;</code></td><td>Com ARP resolvido para o MAC esperado do gateway e ping falhando, o L2 provavelmente está ok: veja se o gateway ou um firewall local filtra ICMP. Se o MAC for inesperado, investigue ARP inconsistente (troca de roteador, IP duplicado)</td></tr>
+<tr><td>L3 além do gateway</td><td>Um IP remoto responde?</td><td><code>ping &lt;IP remoto&gt;</code>, <code>tracert</code> (Windows) / <code>traceroute</code> (Linux)</td><td>Rota e firewall (Módulo 4 em diante)</td></tr>
 <tr><td>DNS</td><td>Funciona por IP e falha por nome?</td><td>Mesmo destino testado por IP e por nome</td><td>Resolução de nomes</td></tr>
 <tr><td>TLS / HTTP / aplicação</td><td>Conecta, mas dá erro de certificado, HTTP ou login?</td><td>Mensagem do navegador, logs da aplicação</td><td>Certificado, aplicação, autenticação</td></tr>
 </tbody></table></div>

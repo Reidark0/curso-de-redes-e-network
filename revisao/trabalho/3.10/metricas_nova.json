@@ -4,14 +4,14 @@
   "titulo": "Revisão prática: do frame ao gateway",
   "tipo": "ligação/revisão",
   "palavras": {
-    "visiveis": 4536,
+    "visiveis": 4558,
     "invisiveis": 32,
-    "teoriaVisivel": 2277
+    "teoriaVisivel": 2299
   },
   "porCampoVisivel": {
     "content.motivation": 143,
     "content.problem": 207,
-    "content.concept": 425,
+    "content.concept": 447,
     "content.internals": 258,
     "content.architecture": 76,
     "content.simpleExample": 95,
@@ -59,9 +59,9 @@
     "declarada": "90-130 min",
     "estimatedStudyTimeMinutes": 130,
     "M": 110,
-    "T": 108.5,
+    "T": 108.7,
     "partes": {
-      "teoria": 17.5,
+      "teoria": 17.7,
       "diagramas": 3,
       "quiz": 6,
       "flashcards": 3,
