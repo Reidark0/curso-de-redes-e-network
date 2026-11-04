@@ -1,0 +1,79 @@
+{
+  "id": "0.1",
+  "versao": "nova",
+  "titulo": "Como computadores representam informação",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 6444,
+    "invisiveis": 40,
+    "teoriaVisivel": 3375
+  },
+  "porCampoVisivel": {
+    "content.motivation": 150,
+    "content.problem": 226,
+    "content.concept": 412,
+    "content.internals": 294,
+    "content.architecture": 199,
+    "content.analogy": 105,
+    "content.simpleExample": 238,
+    "content.enterpriseExample": 105,
+    "content.cloudExample": 110,
+    "content.devsecopsExample": 103,
+    "content.securityExample": 99,
+    "content.diagram": 2,
+    "content.summary": 144,
+    "content.nextTheme": 33,
+    "security": 405,
+    "troubleshooting": 330,
+    "glossary": 420,
+    "title+subtitle": 26,
+    "objectives": 77,
+    "learningOutcomes": 101,
+    "quiz": 482,
+    "flashcards": 191,
+    "mentorQuestions": 200,
+    "exercises": 306,
+    "challenge": 192,
+    "commentedSolution": 296,
+    "references": 76,
+    "linksToOtherCourses": 57,
+    "lab": 1065
+  },
+  "porCampoInvisivel": {
+    "networkContext": 40
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 7,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "estimatedTimeMinutes": 35,
+    "alternativa_5minPasso_maisLeitura": 43.2,
+    "plausivel": true,
+    "palavras": 1065
+  },
+  "duracao": {
+    "declarada": "105-150 min",
+    "estimatedStudyTimeMinutes": 150,
+    "M": 127.5,
+    "T": 124.5,
+    "partes": {
+      "teoria": 26,
+      "diagramas": 3,
+      "quiz": 7,
+      "flashcards": 3.5,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 35
+    },
+    "faixaRecomendada": "105-150 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 23
+  }
+}

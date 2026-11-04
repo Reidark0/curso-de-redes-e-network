@@ -3,9 +3,9 @@
   "moduleId": "m00",
   "order": 1,
   "title": "Como computadores representam informação",
-  "subtitle": "Antes de existir IP, porta, firewall ou cloud, existe uma pergunta mais básica: como uma máquina transforma o mundo real em bits transportáveis?",
-  "duration": "55-80 min",
-  "estimatedStudyTimeMinutes": 80,
+  "subtitle": "Antes de IP, porta, firewall ou cloud: como uma máquina transforma o mundo real em bits que podem ser transportados e interpretados?",
+  "duration": "105-150 min",
+  "estimatedStudyTimeMinutes": 150,
   "difficulty": "iniciante",
   "type": "fundamental",
   "xp": 150,
@@ -62,83 +62,13 @@
       "análise de payloads"
     ]
   },
-  "deepDive": {
-    "mentalModel": "Redes são uma cadeia de traduções: intenção humana vira dado, dado vira bytes, bytes viram bits, bits viram sinais, sinais viram bits novamente e os bits só ganham significado quando interpretados pelo protocolo correto.",
-    "keyTerms": [
-      "informação",
-      "dado",
-      "representação digital",
-      "bit",
-      "byte",
-      "sinal físico",
-      "codificação",
-      "interpretação",
-      "protocolo"
-    ],
-    "limitations": [
-      "Entender representação digital não substitui o estudo posterior de eletrônica, modulação, protocolos ou criptografia.",
-      "Um byte isolado raramente explica seu próprio significado sem contexto.",
-      "Ferramentas de rede mostram interpretações, não a realidade completa do sistema observado."
-    ],
-    "whenToUse": [
-      "Ao interpretar capturas de tráfego, logs, payloads, arquivos, tokens, cabeçalhos e métricas.",
-      "Ao diferenciar encoding, compressão, criptografia, serialização e formato binário.",
-      "Ao diagnosticar corrupção de dados, caracteres quebrados, payload ilegível ou diferença entre tamanho lógico e tamanho transmitido."
-    ],
-    "whenNotToUse": [
-      "Não usar o conceito como substituto para análise protocolar detalhada.",
-      "Não concluir que algo é malicioso apenas porque os bytes não são legíveis como texto.",
-      "Não ignorar camadas superiores quando o meio físico está saudável e os bytes chegam corretamente."
-    ],
-    "operationalImpact": [
-      "Melhora a qualidade do troubleshooting porque separa problema físico, problema de codificação, problema de protocolo e problema de aplicação.",
-      "Exige documentação de formatos, logs e protocolos usados em integrações críticas.",
-      "Ajuda times de rede, segurança e desenvolvimento a falarem a mesma linguagem ao analisar tráfego e evidências."
-    ],
-    "financialImpact": [
-      "Coletar, armazenar e consultar representações como logs, métricas e capturas tem custo de armazenamento e processamento.",
-      "Em cloud, tráfego, flow logs, observabilidade e retenção de eventos podem gerar cobrança recorrente.",
-      "Diagnósticos ruins custam tempo de equipe e podem levar à compra desnecessária de ferramentas ou appliances."
-    ],
-    "securityImpact": [
-      "Ajuda a evitar exposição de dados por confundir codificação com proteção.",
-      "Melhora análise defensiva de payloads, logs, alertas e artefatos.",
-      "Reduz falso positivo e falso negativo ao exigir interpretação contextual dos bytes observados."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Achar que computadores entendem texto diretamente.",
-      "whyItHappens": "Interfaces gráficas escondem a conversão entre caracteres, bytes e bits.",
-      "consequence": "O aluno tem dificuldade com encoding, payloads, logs e análise de tráfego.",
-      "correction": "Texto é uma interpretação de bytes segundo uma codificação, como UTF-8."
-    },
-    {
-      "mistake": "Confundir dado com sinal físico.",
-      "whyItHappens": "No uso cotidiano, dizemos que enviamos um arquivo pela rede, mas não vemos a transformação em sinais.",
-      "consequence": "O diagnóstico mistura problema de aplicação com problema de camada física.",
-      "correction": "Dado é a informação representada; sinal é a forma física usada para transportar bits."
-    },
-    {
-      "mistake": "Concluir que todo payload ilegível é criptografia ou ataque.",
-      "whyItHappens": "Ferramentas exibem bytes que podem não ser texto humano legível.",
-      "consequence": "Gera falsos positivos e investigações mal direcionadas.",
-      "correction": "Verificar protocolo, formato, compressão, serialização, encoding e contexto antes de concluir."
-    },
-    {
-      "mistake": "Pular binário e hexadecimal por parecerem teoria demais.",
-      "whyItHappens": "O aluno quer chegar logo em IP, firewall e cloud.",
-      "consequence": "Subnetting, MAC, IPv6, flags e dumps ficam parecendo decoreba.",
-      "correction": "Tratar bases numéricas como ferramenta prática de leitura de redes."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
-      "Caracteres especiais aparecem quebrados em logs ou aplicação.",
-      "Ferramenta de captura mostra payload aparentemente ilegível.",
-      "Arquivo chega corrompido, incompleto ou com tamanho inesperado.",
+      "Caracteres especiais aparecem quebrados em logs ou na aplicação.",
+      "A ferramenta de captura mostra payload aparentemente ilegível.",
+      "Um arquivo chega corrompido, incompleto ou com tamanho inesperado.",
       "Métricas de bytes transferidos não batem com o tamanho percebido pelo usuário.",
-      "Time confunde falha de aplicação com falha de rede física."
+      "O time não sabe dizer se a falha é da aplicação ou da rede física."
     ],
     "diagnosticQuestions": [
       "O dado original era texto, binário, compactado, criptografado ou serializado?",
@@ -198,8 +128,8 @@
         "then": "Verificar formato esperado, parser, escaping, charset, tamanho e validação."
       },
       {
-        "if": "Logs não permitem investigação",
-        "then": "Revisar modelo de eventos, campos obrigatórios, encoding, retenção e normalização."
+        "if": "Os logs não permitem investigar",
+        "then": "Revisar campos obrigatórios, encoding, timezone, retenção e normalização dos eventos."
       }
     ]
   },
@@ -207,20 +137,17 @@
     "goodPractices": [
       "Diferenciar claramente codificação, compressão, criptografia e hashing.",
       "Registrar logs com campos estruturados, encoding consistente e dados suficientes para auditoria.",
-      "Validar entradas de usuário antes de interpretar dados em parsers, APIs e integrações.",
-      "Tratar dados sensíveis como sensíveis mesmo quando estiverem codificados em Base64 ou hexadecimal.",
+      "Validar entradas de usuário antes de interpretá-las em parsers, APIs e integrações.",
       "Coletar evidências técnicas preservando contexto: horário, origem, destino, protocolo, ferramenta e formato."
     ],
     "badPractices": [
-      "Armazenar segredo em Base64 achando que está criptografado.",
-      "Copiar bytes ou payloads de produção sem avaliar exposição de dados sensíveis.",
-      "Classificar tráfego como malicioso apenas porque não é legível como texto.",
-      "Ignorar erros de encoding em logs de autenticação, auditoria ou transações críticas.",
-      "Executar testes de payload em sistemas reais sem autorização."
+      "Armazenar ou transmitir segredo em Base64 ou hexadecimal achando que está protegido.",
+      "Copiar bytes ou payloads de produção sem avaliar a exposição de dados sensíveis.",
+      "Classificar tráfego como malicioso só porque não é legível como texto: gera falso positivo e perda de confiança na monitoração.",
+      "Ignorar erros de encoding em logs de autenticação, auditoria ou transações críticas."
     ],
     "commonErrors": [
       "Confundir representação com significado.",
-      "Confundir codificação reversível com proteção criptográfica.",
       "Ignorar que ferramentas podem truncar, resumir ou interpretar dados.",
       "Não documentar o formato esperado em integrações entre sistemas."
     ],
@@ -245,7 +172,6 @@
       }
     ],
     "monitoring": [
-      "Monitorar aumento incomum de bytes transferidos por host, usuário ou aplicação.",
       "Observar falhas de parsing, erros de encoding, payload rejeitado e mensagens de formato inválido.",
       "Correlacionar flow logs, logs de aplicação, autenticação e eventos de endpoint.",
       "Detectar segredos aparentes em logs, artefatos de build e variáveis de ambiente."
@@ -258,10 +184,10 @@
       "Definir política de retenção e acesso a logs e capturas."
     ],
     "detectionIdeas": [
-      "Alertar quando logs contiverem padrões de chaves, tokens ou credenciais codificadas.",
-      "Criar consultas para volume anormal de bytes enviados para destinos externos.",
+      "Alertar quando logs contiverem padrões de chaves, tokens ou credenciais codificadas (por exemplo, cabeçalhos Authorization: Basic).",
+      "Criar consultas para volume anormal de bytes enviados por host, usuário ou aplicação para destinos externos.",
       "Investigar erros repetidos de encoding ou parser em endpoints expostos.",
-      "Comparar tamanho esperado e tamanho real de artefatos transferidos."
+      "Comparar o tamanho esperado com o tamanho real de artefatos transferidos."
     ]
   },
   "lab": {
@@ -271,7 +197,7 @@
     "objective": "Demonstrar que uma informação simples, como uma palavra, precisa ser representada como bytes antes de ser armazenada, transmitida ou analisada por ferramentas de rede e segurança.",
     "scenario": "Você é um analista iniciante investigando por que payloads e logs aparecem como texto, hexadecimal ou Base64. Antes de analisar pacotes reais, irá observar localmente como uma palavra vira bytes e como a mesma informação pode ser exibida em representações diferentes.",
     "topology": "Aluno -> terminal local -> arquivo de texto -> visualização hexadecimal/Base64 -> interpretação humana",
-    "architecture": "Laboratório local sem tráfego externo obrigatório. O foco é a cadeia: entrada humana, codificação textual, bytes, representação hexadecimal, codificação Base64 e interpretação.",
+    "architecture": "Laboratório local, sem tráfego externo: entrada humana, codificação de texto, bytes, visualização hexadecimal, codificação Base64 e decodificação.",
     "prerequisites": [
       "Ter Windows com PowerShell ou Linux/macOS com terminal.",
       "Saber abrir um terminal.",
@@ -287,16 +213,15 @@
     "safetyNotes": [
       "Use apenas textos de teste, sem senhas, tokens, dados pessoais ou informações reais de empresa.",
       "Não colete payloads de terceiros.",
-      "Não envie dados sensíveis para ferramentas online de conversão.",
-      "O objetivo é defensivo e educacional: compreender representação e evitar interpretações incorretas."
+      "Não envie dados sensíveis para ferramentas online de conversão."
     ],
     "steps": [
       {
         "number": 1,
         "title": "Criar uma informação humana simples",
-        "instruction": "Crie um arquivo de texto contendo apenas a palavra rede. Essa palavra será nossa informação de origem.",
+        "instruction": "Crie um arquivo de texto contendo apenas a palavra rede, sem quebra de linha no final.",
         "command": "Windows PowerShell: Set-Content -Path .\\m00-aula01.txt -Value 'rede' -NoNewline\nLinux: printf 'rede' > m00-aula01.txt",
-        "expectedOutput": "Um arquivo chamado m00-aula01.txt com quatro caracteres visíveis: rede.",
+        "expectedOutput": "Um arquivo chamado m00-aula01.txt com quatro caracteres: rede (4 bytes).",
         "explanation": "Para você, o arquivo contém uma palavra. Para o computador, ele contém bytes que representam caracteres."
       },
       {
@@ -312,61 +237,56 @@
         "title": "Visualizar os bytes em hexadecimal",
         "instruction": "Agora veja o mesmo arquivo como bytes. No Windows, use Format-Hex. No Linux, use xxd ou hexdump.",
         "command": "Windows PowerShell: Format-Hex -Path .\\m00-aula01.txt\nLinux: xxd -g 1 m00-aula01.txt || hexdump -C m00-aula01.txt",
-        "expectedOutput": "Uma visualização hexadecimal dos bytes que representam a palavra rede.",
-        "explanation": "A palavra não desapareceu; apenas está sendo exibida em outra representação. Hexadecimal é comum em redes porque compacta a visualização de bytes."
+        "expectedOutput": "Os bytes 72 65 64 65 (em hexadecimal), um por letra, com a palavra rede ao lado na coluna de texto.",
+        "explanation": "A palavra não desapareceu: está exibida em outra representação. Cada par de dígitos hexadecimais é um byte (r = 72, e = 65, d = 64). Hexadecimal é comum em redes porque mostra bytes de forma compacta."
       },
       {
         "number": 4,
         "title": "Codificar a mesma informação em Base64",
         "instruction": "Gere uma representação Base64 do arquivo para observar uma codificação textual reversível.",
         "command": "Windows PowerShell: [Convert]::ToBase64String([System.IO.File]::ReadAllBytes('.\\m00-aula01.txt'))\nLinux: base64 m00-aula01.txt",
-        "expectedOutput": "Uma string Base64 representando os mesmos bytes do arquivo.",
-        "explanation": "Base64 não criptografa. Ela apenas representa bytes usando caracteres seguros para transporte textual em certos contextos."
+        "expectedOutput": "cmVkZQ==",
+        "explanation": "Base64 não criptografa: só representa os mesmos bytes com caracteres seguros para transporte em texto, como cabeçalhos HTTP, JSON e e-mail."
       },
       {
         "number": 5,
-        "title": "Comparar significado e representação",
-        "instruction": "Anote três formas observadas: texto normal, hexadecimal e Base64. Explique por que elas podem representar a mesma informação.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
-        "expectedOutput": "Uma comparação escrita entre texto, hexadecimal e Base64.",
-        "explanation": "A mesma informação pode aparecer de formas diferentes dependendo da ferramenta e da camada de interpretação."
+        "title": "Decodificar o Base64",
+        "instruction": "Reverta a string Base64 do passo anterior, sem usar nenhuma chave ou senha.",
+        "command": "Windows PowerShell: [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('cmVkZQ=='))\nLinux: echo 'cmVkZQ==' | base64 -d",
+        "expectedOutput": "rede",
+        "explanation": "Qualquer pessoa com a string recupera o conteúdo original. É por isso que Base64 não protege segredos."
       },
       {
         "number": 6,
         "title": "Relacionar com análise de tráfego",
         "instruction": "Imagine que esses bytes aparecessem em uma captura de rede. Descreva o que uma ferramenta como Wireshark estaria fazendo ao mostrar campos interpretados.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
         "expectedOutput": "Uma explicação conectando bytes capturados, protocolos e interpretação humana.",
         "explanation": "Ferramentas de rede organizam bytes segundo protocolos conhecidos. Quando não reconhecem o formato, mostram bytes brutos ou interpretações limitadas."
       },
       {
         "number": 7,
-        "title": "Registrar evidências",
-        "instruction": "Cole no seu material de estudo a saída textual, a visualização hexadecimal e a representação Base64, junto com uma conclusão de cinco linhas.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
-        "expectedOutput": "Registro com três representações e uma conclusão.",
-        "explanation": "Criar evidência é um hábito profissional de troubleshooting, auditoria e segurança."
+        "title": "Comparar e registrar evidências",
+        "instruction": "Registre no seu material de estudo as três representações (texto, hexadecimal e Base64) e escreva uma conclusão de até cinco linhas explicando por que elas representam a mesma informação.",
+        "expectedOutput": "Registro com as três representações e a conclusão.",
+        "explanation": "A mesma informação aparece de formas diferentes conforme a ferramenta e a camada de interpretação. Registrar evidências é hábito de troubleshooting, auditoria e segurança."
       }
     ],
-    "expectedResult": "O aluno deve conseguir demonstrar que a palavra rede pode ser vista como texto, bytes em hexadecimal e Base64, compreendendo que a ferramenta muda a representação exibida, não necessariamente a informação original.",
+    "expectedResult": "Você demonstra que a palavra rede pode ser vista como texto, como os bytes 72 65 64 65 em hexadecimal e como cmVkZQ== em Base64, e que a ferramenta muda a representação exibida, não a informação original.",
     "validation": [
       {
-        "check": "Arquivo foi criado corretamente",
-        "command": "Windows PowerShell: Get-Content .\\m00-aula01.txt\nLinux: cat m00-aula01.txt",
-        "expected": "A saída deve mostrar rede.",
+        "check": "Passo 2 (arquivo criado)",
+        "expected": "A leitura do arquivo mostra rede.",
         "ifFails": "Verifique o diretório atual, o nome do arquivo e se o comando de criação foi executado."
       },
       {
-        "check": "Bytes foram visualizados",
-        "command": "Windows PowerShell: Format-Hex -Path .\\m00-aula01.txt\nLinux: xxd -g 1 m00-aula01.txt || hexdump -C m00-aula01.txt",
-        "expected": "Deve aparecer uma sequência hexadecimal correspondente aos caracteres.",
-        "ifFails": "No Linux, instale ou use hexdump se xxd não estiver disponível. No Windows, confirme que está usando PowerShell."
+        "check": "Passo 3 (bytes visualizados)",
+        "expected": "Aparecem os bytes 72 65 64 65.",
+        "ifFails": "No Linux, use hexdump -C se xxd não estiver disponível. No Windows, confirme que está no PowerShell."
       },
       {
-        "check": "Base64 foi gerado",
-        "command": "Windows PowerShell: [Convert]::ToBase64String([System.IO.File]::ReadAllBytes('.\\m00-aula01.txt'))\nLinux: base64 m00-aula01.txt",
-        "expected": "Deve aparecer uma string textual codificada.",
-        "ifFails": "Confirme o caminho do arquivo e se o comando foi copiado sem alterações indevidas."
+        "check": "Passos 4 e 5 (Base64 gerado e revertido)",
+        "expected": "A codificação mostra cmVkZQ== e a decodificação devolve rede.",
+        "ifFails": "Confirme o caminho do arquivo e se o comando foi copiado sem alterações."
       }
     ],
     "troubleshooting": [
@@ -377,16 +297,16 @@
         "fix": "Usar hexdump -C m00-aula01.txt como alternativa."
       },
       {
-        "symptom": "A saída hexadecimal mostra bytes extras no final.",
-        "probableCause": "O arquivo foi criado com quebra de linha automática.",
-        "howToConfirm": "Comparar criação com e sem -NoNewline no Windows ou printf no Linux.",
+        "symptom": "A saída hexadecimal mostra um byte 0a (ou 0d 0a) a mais no final, e o Base64 vira cmVkZQo=.",
+        "probableCause": "O arquivo foi criado com quebra de linha (0a é LF; 0d 0a é CR LF, padrão do Windows). A diferença também aparece quando o mesmo texto é gravado em sistemas diferentes.",
+        "howToConfirm": "Comparar a criação com e sem -NoNewline no Windows, ou usar printf em vez de echo no Linux.",
         "fix": "Recriar o arquivo sem quebra de linha se quiser observar apenas os bytes da palavra."
       },
       {
-        "symptom": "A string Base64 muda entre sistemas.",
-        "probableCause": "Diferença de quebra de linha ou codificação do arquivo.",
-        "howToConfirm": "Verificar bytes em hexadecimal e tamanho do arquivo.",
-        "fix": "Padronizar a criação do arquivo sem newline e com texto simples."
+        "symptom": "No Windows, a palavra acentuada do desafio ocupa só 1 byte por letra.",
+        "probableCause": "O Windows PowerShell 5.1 grava com Set-Content na página de código do sistema (ANSI), e não em UTF-8; o PowerShell 7 grava em UTF-8 por padrão.",
+        "howToConfirm": "Conferir a versão com $PSVersionTable.PSVersion e o tamanho do arquivo.",
+        "fix": "Usar o PowerShell 7 ou o Linux para observar a codificação UTF-8."
       },
       {
         "symptom": "O aluno acha que Base64 protegeu o conteúdo.",
@@ -396,27 +316,24 @@
       }
     ],
     "improvements": [
-      "Repetir o laboratório com uma palavra acentuada, como ação, e observar diferenças de codificação.",
-      "Repetir com um pequeno arquivo binário e comparar com texto puro.",
-      "Capturar uma requisição HTTP em laboratório futuro e procurar payload textual e campos de protocolo.",
-      "Registrar as saídas em um caderno de evidências do curso."
+      "Repetir com um pequeno arquivo binário (por exemplo, uma imagem) e comparar com texto puro.",
+      "Em um laboratório futuro, capturar uma requisição HTTP e procurar o payload textual e os campos de protocolo."
     ],
     "evidenceToCollect": [
       "Conteúdo textual do arquivo.",
       "Saída hexadecimal.",
-      "Saída Base64.",
+      "Saída Base64 e resultado da decodificação.",
       "Conclusão explicando a diferença entre informação, bytes e representação.",
       "Lista de dúvidas para revisar na aula 0.2."
     ],
     "questions": [
       "A palavra rede é a mesma coisa que os bytes que a representam?",
       "Por que a visualização hexadecimal é útil para redes?",
-      "Base64 protege o conteúdo contra leitura?",
       "Por que uma quebra de linha altera os bytes do arquivo?",
       "Como isso se relaciona com payloads em uma captura de rede?"
     ],
-    "challenge": "Crie um exemplo próprio com uma palavra acentuada, observe a saída hexadecimal e explique por que ela pode usar mais bytes do que a quantidade de letras visíveis.",
-    "solution": "Caracteres acentuados podem ser representados por mais de um byte em codificações como UTF-8. A quantidade de letras percebidas por humanos não necessariamente corresponde à quantidade de bytes armazenados ou transmitidos."
+    "challenge": "Crie um arquivo com a palavra ação, observe a saída hexadecimal e explique por que ela usa mais bytes do que a quantidade de letras visíveis.",
+    "solution": "Em UTF-8, ação ocupa 6 bytes: 61 c3 a7 c3 a3 6f. As letras a e o usam 1 byte cada; ç (c3 a7) e ã (c3 a3) usam 2 bytes cada. A quantidade de letras percebidas por humanos não corresponde necessariamente à quantidade de bytes armazenados ou transmitidos."
   },
   "mentorQuestions": [
     {
@@ -474,21 +391,6 @@
     }
   ],
   "quiz": [
-    {
-      "id": "q0.1.1",
-      "question": "Qual é a menor unidade de informação digital usada como base para representação em computadores?",
-      "options": [
-        "Byte",
-        "Bit",
-        "Pacote",
-        "Arquivo"
-      ],
-      "answer": 1,
-      "explanation": "O bit é a menor unidade de informação digital e pode assumir dois estados possíveis, normalmente representados como 0 e 1.",
-      "topic": "bits",
-      "difficulty": "iniciante",
-      "type": "conceito"
-    },
     {
       "id": "q0.1.2",
       "question": "Qual alternativa diferencia corretamente dado e sinal físico?",
@@ -563,6 +465,36 @@
       "topic": "cloud networking",
       "difficulty": "iniciante",
       "type": "cloud"
+    },
+    {
+      "id": "q0.1.7",
+      "question": "Em um dump aparece o byte 01000001. O que você pode afirmar sem conhecer o formato dos dados?",
+      "options": [
+        "É obrigatoriamente a letra A.",
+        "É um pedaço de payload criptografado.",
+        "É um endereço IP inválido.",
+        "É um byte de valor 65, que pode ser a letra A, o número 65 ou parte de outro campo, conforme o contexto."
+      ],
+      "answer": 3,
+      "explanation": "Sem contexto, bits são apenas bits. 01000001 vale 65 e, em ASCII/UTF-8, corresponde à letra A, mas pode ser número, instrução ou parte de um campo de protocolo; quem define o significado é o formato ou protocolo.",
+      "topic": "interpretação",
+      "difficulty": "iniciante",
+      "type": "conceito"
+    },
+    {
+      "id": "q0.1.8",
+      "question": "Um arquivo em UTF-8 contém apenas a palavra ação (4 letras) e ocupa 6 bytes. Por quê?",
+      "options": [
+        "Porque ç e ã ocupam 2 bytes cada em UTF-8.",
+        "Porque todo arquivo UTF-8 reserva 2 bytes para cabeçalho.",
+        "Porque cada letra ocupa 1,5 byte.",
+        "Porque o arquivo foi criptografado ao ser salvo."
+      ],
+      "answer": 0,
+      "explanation": "Em UTF-8, letras sem acento ocupam 1 byte e caracteres como ç e ã ocupam 2: 61 c3 a7 c3 a3 6f. Letras visíveis e bytes não são a mesma coisa.",
+      "topic": "codificação",
+      "difficulty": "iniciante",
+      "type": "diagnóstico"
     }
   ],
   "flashcards": [
@@ -587,16 +519,6 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc0.1.3",
-      "front": "Dado vs sinal físico",
-      "back": "Dado é a informação representada. Sinal físico é a forma usada para transportar bits, como tensão, luz ou rádio.",
-      "tags": [
-        "sinais",
-        "representação"
-      ],
-      "difficulty": "iniciante"
-    },
-    {
       "id": "fc0.1.4",
       "front": "Por que computadores usam representação binária?",
       "back": "Porque dois estados são mais fáceis e confiáveis de distinguir em hardware real sujeito a ruído, variação e imperfeições.",
@@ -607,22 +529,42 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc0.1.5",
-      "front": "Base64 é criptografia?",
-      "back": "Não. Base64 é uma codificação reversível para representar bytes usando texto. Não fornece confidencialidade.",
-      "tags": [
-        "base64",
-        "segurança"
-      ],
-      "difficulty": "iniciante"
-    },
-    {
       "id": "fc0.1.6",
       "front": "O que o Wireshark mostra?",
       "back": "Uma interpretação organizada de bytes capturados, usando conhecimento sobre protocolos. Nem tudo que aparece na tela é o pacote bruto completo.",
       "tags": [
         "wireshark",
         "pacotes"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.1.7",
+      "front": "Como fica a palavra rede em bytes (hexadecimal)?",
+      "back": "72 65 64 65: um byte por letra (r = 72, e = 65, d = 64).",
+      "tags": [
+        "bytes",
+        "hexadecimal"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.1.8",
+      "front": "O que é o byte 0a no fim de um arquivo de texto?",
+      "back": "A quebra de linha (LF). No Windows ela costuma ser 0d 0a (CR LF). Ela muda o tamanho do arquivo e o Base64 gerado.",
+      "tags": [
+        "bytes",
+        "quebra de linha"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.1.9",
+      "front": "Checksum/CRC x MAC criptográfico",
+      "back": "Checksum e CRC detectam alteração acidental, mas qualquer um pode recalculá-los. Um MAC criptográfico usa uma chave secreta e detecta alteração maliciosa (não tem relação com o endereço MAC).",
+      "tags": [
+        "integridade",
+        "segurança"
       ],
       "difficulty": "iniciante"
     }
@@ -645,16 +587,16 @@
     {
       "id": "ex0.1.3",
       "type": "diagnóstico",
-      "prompt": "Um colega afirma que um payload em Base64 está seguro porque não é legível. Corrija a afirmação de forma técnica e educada.",
-      "expectedAnswer": "Base64 não é segurança, é codificação reversível. O conteúdo pode ser recuperado sem chave. Se houver dado sensível, deve ser protegido com criptografia, controle de acesso e gestão de segredos.",
+      "prompt": "Um colega afirma que o cabeçalho Authorization: Basic YWRtaW46MTIzNDU2 está seguro porque não é legível. Decodifique o valor (por exemplo, com echo YWRtaW46MTIzNDU2 | base64 -d) e corrija a afirmação de forma técnica e educada.",
+      "expectedAnswer": "O valor decodifica para admin:123456, ou seja, usuário e senha em texto claro. Base64 é codificação reversível, sem chave. Quem capturar o cabeçalho recupera a credencial; ela precisa trafegar dentro de TLS, e segredos devem ser protegidos com criptografia, controle de acesso e gestão de segredos.",
       "explanation": "O objetivo é combater uma confusão muito comum entre codificação e criptografia."
     },
     {
-      "id": "ex0.1.4",
-      "type": "arquitetura",
-      "prompt": "Desenhe ou descreva um fluxo de cinco etapas mostrando como uma mensagem de chat sai do usuário e chega ao servidor.",
-      "expectedAnswer": "Intenção humana -> dado de aplicação -> bytes/codificação -> encapsulamento em protocolos de rede -> sinais físicos -> reconstrução e interpretação no destino.",
-      "explanation": "A resposta precisa mostrar cadeia de representação, não apenas dizer que a mensagem foi enviada."
+      "id": "ex0.1.5",
+      "type": "classificação",
+      "prompt": "Classifique cada item como sinal físico, byte, estrutura de protocolo ou dado de aplicação: (a) pulso de luz em uma fibra; (b) o valor 72 em hexadecimal; (c) o cabeçalho de um pacote IPv4; (d) o documento JSON {\"msg\": \"rede\"}.",
+      "expectedAnswer": "(a) sinal físico; (b) byte (em texto UTF-8, a letra r); (c) estrutura de protocolo, interpretada pela pilha de rede; (d) dado de aplicação, interpretado pela aplicação.",
+      "explanation": "O exercício verifica se você separa os níveis da tabela de arquitetura e sabe quem interpreta cada um."
     }
   ],
   "challenge": {
@@ -670,8 +612,7 @@
     "constraints": [
       "Não usar jargão sem explicar.",
       "Não dizer apenas que tudo vira bit.",
-      "Não confundir Base64 com criptografia.",
-      "Manter foco defensivo e educacional."
+      "Não confundir Base64 com criptografia."
     ],
     "expectedDeliverables": [
       "Texto explicativo de 10 a 15 linhas.",
@@ -823,6 +764,35 @@
         "0.1",
         "0.3",
         "8.5"
+      ]
+    },
+    {
+      "term": "UTF-8",
+      "shortDefinition": "Codificação de texto que representa cada caractere com 1 a 4 bytes.",
+      "longDefinition": "Em UTF-8, letras sem acento ocupam 1 byte, com os mesmos valores do ASCII; caracteres acentuados, como ç e ã, ocupam 2 bytes. É a codificação mais usada em web, APIs e logs.",
+      "example": "A palavra rede ocupa 4 bytes (72 65 64 65); ação ocupa 6 bytes (61 c3 a7 c3 a3 6f).",
+      "relatedTerms": [
+        "codificação",
+        "byte",
+        "Base64"
+      ],
+      "relatedLessons": [
+        "0.1",
+        "0.3"
+      ]
+    },
+    {
+      "term": "Payload",
+      "shortDefinition": "A parte de uma mensagem ou pacote que carrega os dados úteis, sem os cabeçalhos de controle.",
+      "longDefinition": "Em um pacote, os cabeçalhos dizem como entregar e interpretar a mensagem; o payload é o conteúdo transportado. Ele pode ser texto, formato binário, dado compactado ou criptografado, e sua interpretação depende do protocolo.",
+      "example": "Em uma requisição HTTP sem TLS, o corpo JSON aparece no payload do segmento TCP.",
+      "relatedTerms": [
+        "dado digital",
+        "protocolo",
+        "byte"
+      ],
+      "relatedLessons": [
+        "0.1"
       ]
     }
   ],

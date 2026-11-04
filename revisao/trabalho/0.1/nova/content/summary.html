@@ -1,11 +1,11 @@
 
 <section class="lesson-section lesson-section--summary">
-  <h2>19. Resumo</h2>
+  <h2>Resumo</h2>
   <ul>
-    <li><strong>Ideia central:</strong> computadores representam informação por meio de bits, e bits precisam ser fisicamente transportados como sinais.</li>
-    <li><strong>O que lembrar:</strong> informação, dado, byte, bit e sinal não são a mesma coisa.</li>
-    <li><strong>Erro comum:</strong> achar que bytes ilegíveis significam automaticamente criptografia ou ataque.</li>
-    <li><strong>Uso real:</strong> análise de pacotes, logs, payloads, APIs, cloud flow logs, SIEM e troubleshooting dependem de interpretação correta.</li>
-    <li><strong>Segurança:</strong> muitos incidentes envolvem falhas de interpretação, codificação incorreta, logs insuficientes ou tratamento inseguro de entrada.</li>
+    <li><strong>Ideia central:</strong> redes são uma cadeia de traduções: intenção humana vira dado, dado vira bytes, bytes viram bits, bits viram sinais físicos, e no destino os sinais voltam a ser bits, que só ganham significado quando interpretados pelo protocolo correto.</li>
+    <li><strong>O que lembrar:</strong> informação, dado, byte, bit e sinal não são a mesma coisa. 1 byte = 8 bits; “rede” são 4 bytes (72 65 64 65 em hexadecimal); a mesma sequência de bits pode ser número, letra ou campo de protocolo, conforme o contexto.</li>
+    <li><strong>Erro comum:</strong> achar que bytes ilegíveis significam automaticamente criptografia ou ataque; podem ser codificação, serialização, compressão ou formato binário.</li>
+    <li><strong>Uso real:</strong> análise de pacotes, logs, payloads, APIs, flow logs de cloud, SIEM e troubleshooting dependem de interpretação correta; ferramentas mostram interpretações, não a realidade completa.</li>
+    <li><strong>Segurança:</strong> Base64 e hexadecimal mudam a representação, não protegem; confidencialidade exige criptografia, como TLS.</li>
   </ul>
 </section>
