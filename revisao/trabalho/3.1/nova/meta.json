@@ -3,9 +3,9 @@
   "moduleId": "m03",
   "order": 1,
   "title": "Ethernet: a base da rede local cabeada",
-  "subtitle": "Como a tecnologia que domina redes locais transforma bits em quadros, endereços MAC, enlaces e evidências de troubleshooting.",
-  "duration": "85-120 min",
-  "estimatedStudyTimeMinutes": 120,
+  "subtitle": "Como a tecnologia que domina as redes locais transforma bits em quadros, endereços MAC, enlaces e evidências de troubleshooting.",
+  "duration": "100-140 min",
+  "estimatedStudyTimeMinutes": 140,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 210,
@@ -85,146 +85,6 @@
       "Segurança de camada 2"
     ]
   },
-  "protocolFields": [
-    {
-      "field": "Destination MAC",
-      "size": "48 bits",
-      "purpose": "Identificar o destino local do frame Ethernet.",
-      "securityObservation": "Pode apontar para gateway, host local, broadcast ou multicast; deve ser interpretado no contexto da LAN."
-    },
-    {
-      "field": "Source MAC",
-      "size": "48 bits",
-      "purpose": "Identificar a interface que originou o frame no enlace local.",
-      "securityObservation": "Pode ser alterado em software, portanto não deve ser usado sozinho como identidade forte."
-    },
-    {
-      "field": "EtherType",
-      "size": "16 bits",
-      "purpose": "Indicar qual protocolo de camada superior está encapsulado, como IPv4, IPv6 ou ARP.",
-      "securityObservation": "Ajuda na análise defensiva de tráfego e filtros de captura."
-    },
-    {
-      "field": "FCS",
-      "size": "32 bits",
-      "purpose": "Permitir verificação de erro no frame.",
-      "securityObservation": "Erros físicos ou de enlace podem aparecer como CRC/FCS em equipamentos gerenciáveis."
-    }
-  ],
-  "packetFlow": [
-    {
-      "step": 1,
-      "actor": "Host",
-      "action": "Recebe dados das camadas superiores.",
-      "detail": "O pacote IP precisa ser transportado dentro de um frame Ethernet na LAN.",
-      "possibleFailure": "Interface desabilitada ou sem link físico."
-    },
-    {
-      "step": 2,
-      "actor": "Host",
-      "action": "Define o MAC de destino local.",
-      "detail": "Pode ser o MAC do host na mesma rede ou do gateway, normalmente descoberto via ARP para IPv4.",
-      "possibleFailure": "ARP ausente, cache incorreto ou destino fora do domínio esperado."
-    },
-    {
-      "step": 3,
-      "actor": "NIC",
-      "action": "Monta e transmite o frame.",
-      "detail": "Frame contém MAC destino, MAC origem, EtherType, payload e verificação.",
-      "possibleFailure": "Cabo ruim, duplex/velocidade problemática ou erro físico."
-    },
-    {
-      "step": 4,
-      "actor": "Switch",
-      "action": "Aprende o MAC de origem e encaminha pelo MAC de destino.",
-      "detail": "A tabela MAC associa endereços a portas por tempo limitado.",
-      "possibleFailure": "Tabela instável, VLAN errada, loop ou flooding excessivo."
-    },
-    {
-      "step": 5,
-      "actor": "Destino",
-      "action": "Recebe o frame e entrega payload para a próxima camada.",
-      "detail": "Se o frame for para o gateway, o roteador processa o pacote IP e decide o próximo salto.",
-      "possibleFailure": "Gateway indisponível, porta bloqueada ou política impedindo tráfego."
-    }
-  ],
-  "deepDive": {
-    "mentalModel": "Ethernet é o envelope local da LAN cabeada: ela entrega quadros entre interfaces próximas usando MACs e switches, enquanto IP cuida do endereçamento lógico entre redes.",
-    "keyTerms": [
-      "Ethernet",
-      "LAN",
-      "frame",
-      "MAC",
-      "switch",
-      "NIC",
-      "EtherType",
-      "FCS",
-      "domínio de broadcast"
-    ],
-    "limitations": [
-      "Não roteia entre redes por si só.",
-      "Não autentica usuário por padrão.",
-      "Não criptografa tráfego por padrão.",
-      "Não substitui firewall, IAM ou controle de aplicação.",
-      "Não resolve problemas de DNS, TLS ou HTTP."
-    ],
-    "whenToUse": [
-      "Conectar hosts em LAN cabeada.",
-      "Ligar servidores, switches, firewalls, APs e appliances.",
-      "Criar base física e de enlace para redes corporativas.",
-      "Investigar problemas locais antes de culpar IP ou aplicação."
-    ],
-    "whenNotToUse": [
-      "Quando mobilidade sem fio é requisito principal.",
-      "Quando a comunicação precisa atravessar redes sem roteamento.",
-      "Quando o problema está claramente em aplicação, IAM ou autorização.",
-      "Quando controles criptográficos de ponta a ponta são exigidos sem outras camadas."
-    ],
-    "operationalImpact": [
-      "Exige documentação de portas, VLANs, racks e patch panels.",
-      "Problemas físicos podem causar sintomas intermitentes difíceis.",
-      "Switches precisam de configuração, monitoramento e controle de mudanças.",
-      "Alterações de porta ou VLAN podem afetar segurança e operação."
-    ],
-    "financialImpact": [
-      "Switches, cabos, patch panels, racks, certificação e mão de obra têm custo.",
-      "Ambientes maiores exigem switches gerenciáveis e ferramentas de monitoramento.",
-      "Falhas de cabeamento podem gerar horas de troubleshooting e indisponibilidade.",
-      "Redundância aumenta custo, mas reduz impacto operacional."
-    ],
-    "securityImpact": [
-      "Portas ativas sem controle podem permitir acesso indevido.",
-      "MAC não é identidade forte.",
-      "Rede plana amplia movimento lateral.",
-      "VLAN e NAC ajudam, mas não substituem autenticação e autorização de aplicação."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Confundir Ethernet com internet.",
-      "whyItHappens": "Os termos aparecem juntos no cotidiano.",
-      "consequence": "O aluno diagnostica problemas locais como se fossem falhas do provedor.",
-      "correction": "Ethernet é tecnologia de LAN; internet é interconexão de redes usando IP e roteamento."
-    },
-    {
-      "mistake": "Achar que MAC identifica usuário de forma segura.",
-      "whyItHappens": "MAC parece um identificador único e fixo.",
-      "consequence": "Controles de segurança ficam frágeis.",
-      "correction": "MAC pode ser alterado; use NAC, autenticação, inventário e logs correlacionados."
-    },
-    {
-      "mistake": "Ignorar VLAN ao trocar cabo de porta.",
-      "whyItHappens": "A porta parece fisicamente igual.",
-      "consequence": "Host entra em segmento errado ou perde acesso.",
-      "correction": "Validar configuração do switchport, VLAN, trunk/access e documentação."
-    },
-    {
-      "mistake": "Culpar DNS antes de verificar link e gateway.",
-      "whyItHappens": "Muitos problemas aparecem ao acessar nomes.",
-      "consequence": "Tempo perdido em camada errada.",
-      "correction": "Usar método por camadas: link, IP local, gateway, DNS, transporte e aplicação."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Ícone de cabo desconectado",
@@ -247,23 +107,23 @@
     "commands": [
       {
         "platform": "Windows",
-        "command": "Get-NetAdapter | Format-Table Name, Status, LinkSpeed, MacAddress\nipconfig /all\narp -a",
-        "purpose": "Ver adaptador, link, velocidade, MAC, IP, gateway e vizinhança ARP.",
+        "command": "Get-NetAdapter | Format-Table Name, Status, LinkSpeed, FullDuplex, MacAddress\nipconfig /all\narp -a",
+        "purpose": "Ver adaptador, link, velocidade, duplex, MAC, IP, gateway e vizinhança ARP.",
         "expectedObservation": "Adaptador Up, velocidade coerente, MAC presente e gateway configurado.",
         "interpretation": "Se o adaptador está Down ou sem gateway, investigar Camada 1/2 antes de DNS ou HTTP."
       },
       {
         "platform": "Linux",
-        "command": "ip link\nip addr\nip route\nip neigh",
-        "purpose": "Ver estado da interface, MAC, IP, rota default e vizinhos locais.",
-        "expectedObservation": "Interface UP/LOWER_UP, endereço IP, rota default e vizinho para gateway.",
-        "interpretation": "Sem LOWER_UP indica possível problema físico; sem vizinho indica problema local ou ARP ainda não resolvido."
+        "command": "ip link\nip addr\nip route\nip neigh\nethtool <interface>",
+        "purpose": "Ver estado da interface, MAC, IP, rota default e vizinhos; o ethtool (se instalado) mostra velocidade e duplex.",
+        "expectedObservation": "Interface UP/LOWER_UP, endereço IP, rota default, vizinho para o gateway e Speed/Duplex coerentes com a porta.",
+        "interpretation": "Sem LOWER_UP: possível problema físico. Sem vizinho: problema local ou ARP não resolvido. Velocidade baixa ou half-duplex: cabo, porta ou negociação."
       },
       {
         "platform": "Cisco IOS",
         "command": "show interfaces status\nshow mac address-table\nshow vlan brief\nshow interfaces counters errors",
         "purpose": "Ver portas, VLAN, MACs aprendidos e erros físicos/de enlace.",
-        "expectedObservation": "Porta connected, VLAN correta, MAC aprendido e poucos erros.",
+        "expectedObservation": "Porta connected, velocidade e duplex esperados, VLAN correta, MAC aprendido e poucos erros.",
         "interpretation": "CRC, flaps ou VLAN incorreta indicam investigação de camada física/enlace."
       }
     ],
@@ -273,8 +133,12 @@
         "then": "Verificar cabo, porta, NIC, patch panel, switchport e energia do equipamento."
       },
       {
-        "if": "Link existe, mas gateway não responde",
-        "then": "Verificar IP, máscara, VLAN, ARP, gateway e firewall local."
+        "if": "Link ativo, mas sem IP ou sem gateway",
+        "then": "Verificar DHCP, configuração manual, VLAN da porta e autenticação 802.1X/NAC."
+      },
+      {
+        "if": "Gateway configurado, mas ARP não resolve ou o gateway não responde",
+        "then": "Comparar IP e máscara (o gateway está na mesma sub-rede?), VLAN, tabela ARP/neigh e firewall local."
       },
       {
         "if": "MAC aparece em porta inesperada",
@@ -282,31 +146,25 @@
       },
       {
         "if": "Erros CRC ou flaps",
-        "then": "Investigar cabo, conector, transceptor, interferência, porta ou negociação."
+        "then": "Investigar cabo, conector, transceptor, interferência, porta ou negociação; substituir o componente e documentar a mudança."
       }
     ]
   },
   "security": {
     "goodPractices": [
-      "Documentar portas, VLANs e patch panels.",
-      "Desativar portas não utilizadas.",
-      "Usar 802.1X/NAC quando aplicável.",
+      "Documentar portas, VLANs e patch panels e aplicar descrição nos switchports.",
+      "Proteger racks, switches e tomadas em áreas públicas.",
       "Monitorar mudanças de MAC e eventos de link.",
-      "Separar redes por função com VLANs e controles adicionais.",
-      "Proteger racks, switches e tomadas em áreas públicas."
+      "Registrar mudanças físicas (troca de porta, patch cord, equipamento)."
     ],
     "badPractices": [
-      "Deixar portas ativas sem necessidade.",
       "Usar rede plana para todos os ativos.",
-      "Confiar apenas em MAC como identidade.",
-      "Não registrar mudanças físicas.",
-      "Não monitorar switchports críticos.",
+      "Confiar apenas no MAC como identidade.",
       "Ignorar erros CRC e flaps recorrentes."
     ],
     "commonErrors": [
       "Tratar VLAN como firewall absoluto.",
-      "Achar que cabo funcionando significa rede segura.",
-      "Confundir link físico com autorização de aplicação.",
+      "Achar que cabo funcionando significa rede segura ou acesso autorizado à aplicação.",
       "Não sanitizar MACs e topologia em relatórios compartilhados."
     ],
     "vulnerabilities": [
@@ -327,6 +185,12 @@
         "description": "Muitos ativos no mesmo domínio aumentam alcance lateral.",
         "defensiveExplanation": "A ausência de segmentação amplia impacto de comprometimentos.",
         "mitigation": "VLANs, firewalls internos, menor privilégio, logs e revisão periódica."
+      },
+      {
+        "name": "Loop de camada 2",
+        "description": "Um cabo ligando duas portas da mesma rede faz broadcasts circularem sem fim (broadcast storm), com CPU alta nos switches e rede instável.",
+        "defensiveExplanation": "O frame Ethernet não tem contador de saltos; sem proteção, um único loop derruba a rede inteira.",
+        "mitigation": "STP, BPDU Guard nas portas de acesso, desenho correto e controle de mudanças."
       }
     ],
     "monitoring": [
@@ -340,19 +204,16 @@
     ],
     "hardening": [
       "Desativar portas não usadas",
-      "Aplicar descrição em switchports",
-      "Separar VLANs por função",
+      "Separar VLANs por função, com firewall interno entre segmentos",
+      "Aplicar NAC/802.1X",
       "Usar BPDU Guard quando aplicável",
       "Controlar trunks",
-      "Aplicar NAC/802.1X",
       "Restringir acesso administrativo ao switch"
     ],
     "detectionIdeas": [
       "Alertar MAC desconhecido em porta sensível",
-      "Correlacionar porta física com inventário",
-      "Monitorar aumento de broadcast",
-      "Investigar flaps recorrentes",
-      "Comparar documentação com estado real do switch"
+      "Monitorar aumento de broadcast (sinal de loop)",
+      "Comparar documentação e inventário com o estado real do switch"
     ]
   },
   "lab": {
@@ -364,30 +225,27 @@
     "topology": "Host do aluno -> cabo ou adaptador de rede -> switch/roteador local -> gateway",
     "architecture": "Rede local simples com host final, interface Ethernet ou Wi-Fi equivalente para comparação, gateway e possível switch de acesso.",
     "prerequisites": [
-      "Ter concluído os Módulos 0, 1 e as aulas 2.1 a 2.10.",
-      "Usar apenas equipamentos próprios ou ambiente autorizado.",
-      "Não executar varreduras agressivas nem interferir em redes de terceiros."
+      "Computador próprio com Windows ou Linux.",
+      "Para o passo 5: Packet Tracer ou switch com acesso autorizado."
     ],
     "tools": [
       "Windows PowerShell ou Terminal Linux",
       "Opcional: acesso autorizado a switch Cisco ou Packet Tracer",
       "Opcional: Wireshark apenas para observação local autorizada"
     ],
-    "estimatedTimeMinutes": 45,
+    "estimatedTimeMinutes": 40,
     "cost": "zero",
     "safetyNotes": [
-      "Não conecte dispositivos em portas corporativas sem autorização.",
-      "Não altere MAC, VLAN ou configuração de switch em ambiente real.",
-      "Sanitize MACs, IPs públicos, nomes de host e topologia antes de compartilhar evidências.",
-      "O laboratório é defensivo e de observação."
+      "Observe apenas: não conecte dispositivos em portas corporativas nem altere MAC, VLAN ou switch em ambiente real sem autorização.",
+      "Sanitize MACs, IPs públicos, nomes de host e topologia antes de compartilhar evidências."
     ],
     "steps": [
       {
         "number": 1,
         "title": "Identificar interfaces locais",
         "instruction": "Liste interfaces de rede e observe nome, estado, MAC e velocidade quando disponível.",
-        "command": "Windows:\nGet-NetAdapter | Format-Table Name, Status, LinkSpeed, MacAddress\n\nLinux:\nip link",
-        "expectedOutput": "Interface ativa, MAC local e, no Windows, LinkSpeed quando suportado.",
+        "command": "Windows:\nGet-NetAdapter | Format-Table Name, Status, LinkSpeed, FullDuplex, MacAddress\n\nLinux:\nip link\nethtool <interface>   # velocidade e duplex, se instalado",
+        "expectedOutput": "Interface ativa, MAC local e velocidade/duplex quando o sistema informar.",
         "explanation": "A interface é a porta lógica/física pela qual Ethernet aparece no host."
       },
       {
@@ -425,70 +283,37 @@
       {
         "number": 6,
         "title": "Montar interpretação por camada",
-        "instruction": "Crie uma pequena tabela com Camada 1, Camada 2 e Camada 3, evidência coletada e interpretação.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "instruction": "Monte uma tabela com uma linha por camada: Camada 1 (estado do link, velocidade, duplex), Camada 2 (MAC local, MAC do gateway na tabela ARP/neigh, porta/VLAN se tiver o switch) e Camada 3 (IP, máscara, gateway, resposta do ping). Em cada linha, anote a evidência e a sua interpretação.",
         "expectedOutput": "Matriz com link/interface, MAC/vizinhança e IP/gateway.",
         "explanation": "A matriz evita pular direto para DNS ou aplicação sem validar Ethernet."
       }
     ],
-    "expectedResult": "O aluno deve identificar interface, MAC, estado do link, configuração IP, gateway, vizinhança ARP e, se autorizado, porta/VLAN/MAC no switch.",
+    "expectedResult": "Interface, MAC, estado do link, IP, gateway e vizinhança ARP identificados e, se autorizado, porta/VLAN/MAC no switch.",
     "validation": [
       {
         "check": "Interface ativa",
-        "command": "Get-NetAdapter ou ip link",
         "expected": "Status Up/connected ou equivalente.",
         "ifFails": "Verificar cabo, adaptador, porta física, Wi-Fi desativado ou driver."
       },
       {
         "check": "Gateway configurado",
-        "command": "ipconfig /all ou ip route",
         "expected": "Gateway/default route presente.",
         "ifFails": "Verificar DHCP, configuração manual, VLAN e serviço de rede."
       },
       {
         "check": "Vizinho para gateway",
-        "command": "arp -a ou ip neigh",
         "expected": "IP do gateway associado a MAC.",
         "ifFails": "Gerar tráfego para o gateway e verificar link/VLAN/ARP."
       },
       {
         "check": "Switch aprende MAC correto",
-        "command": "show mac address-table",
         "expected": "MAC do host na porta esperada.",
         "ifFails": "Verificar patching, VLAN, porta, segurança de porta e documentação."
       }
     ],
-    "troubleshooting": [
-      {
-        "symptom": "Interface aparece desconectada",
-        "probableCause": "Cabo, porta, adaptador, patch panel ou switch desligado.",
-        "howToConfirm": "Ver estado da interface e LEDs/porta do switch se autorizado.",
-        "fix": "Testar outro cabo/porta em ambiente autorizado e acionar equipe responsável."
-      },
-      {
-        "symptom": "Link ativo, mas sem gateway",
-        "probableCause": "DHCP falhou, VLAN errada ou configuração manual incompleta.",
-        "howToConfirm": "Ver ipconfig/ip route e VLAN da porta.",
-        "fix": "Corrigir escopo DHCP, VLAN ou configuração IP conforme política."
-      },
-      {
-        "symptom": "Gateway configurado, mas ARP não resolve",
-        "probableCause": "Gateway fora do domínio, máscara incorreta, VLAN errada ou bloqueio local.",
-        "howToConfirm": "Comparar IP/máscara, VLAN e tabela ARP/neigh.",
-        "fix": "Corrigir endereçamento, VLAN ou caminho local."
-      },
-      {
-        "symptom": "Erros CRC ou flaps",
-        "probableCause": "Cabo ruim, conector, interferência, porta defeituosa ou transceptor.",
-        "howToConfirm": "Contadores do switch e histórico de link.",
-        "fix": "Substituir componentes e documentar mudança."
-      }
-    ],
     "improvements": [
-      "Repetir o laboratório no Packet Tracer com switch gerenciável.",
-      "Adicionar captura Wireshark de ARP em ambiente próprio.",
-      "Criar inventário sanitizado de portas, MACs e VLANs.",
-      "Comparar Ethernet cabeada com Wi-Fi e anotar diferenças de evidência."
+      "Capturar o ARP para o gateway no Wireshark, em ambiente próprio.",
+      "Repetir os passos 1 a 3 no Wi-Fi e comparar as evidências com as da interface cabeada."
     ],
     "evidenceToCollect": [
       "Nome da interface",
@@ -503,8 +328,7 @@
     "questions": [
       "Por que MAC não substitui IP?",
       "Por que link ativo não garante acesso à aplicação?",
-      "Por que uma VLAN errada pode parecer problema de DHCP?",
-      "Por que uma porta física exposta é risco de segurança?"
+      "Por que uma VLAN errada pode parecer problema de DHCP?"
     ],
     "challenge": "Monte um relatório sanitizado explicando se seu host tem evidências suficientes de Ethernet funcional e quais testes faltariam para provar conectividade completa até uma aplicação.",
     "solution": "Uma boa solução separa evidências por camada: Camada 1 com interface/link, Camada 2 com MAC/vizinho/switch, Camada 3 com IP/gateway, Camada 4 com porta e camadas superiores com TLS/HTTP/autenticação. Não declare aplicação funcional apenas porque Ethernet está ativa."
@@ -512,19 +336,19 @@
   "mentorQuestions": [
     {
       "type": "reflexão",
-      "question": "Por que Ethernet não é a mesma coisa que internet?",
+      "question": "Num caminho até a internet, por que o MAC de destino muda a cada roteador, mas o IP de destino não?",
       "hints": [
-        "Pense em LAN e roteamento.",
-        "Pense em MAC e IP."
+        "Pense em até onde vale um frame Ethernet.",
+        "Pense no que o roteador faz com o frame que recebe."
       ],
       "expectedIdeas": [
-        "Ethernet é camada 2 local",
-        "internet envolve IP e roteamento",
-        "LAN",
-        "MAC",
-        "gateway"
+        "frame vale só no enlace local",
+        "roteador descarta o frame e monta outro",
+        "MAC do próximo salto",
+        "IP é endereço lógico fim a fim",
+        "exceção: NAT"
       ],
-      "explanation": "Ethernet entrega frames localmente; a internet depende de interconexão de redes, IP, roteamento e serviços."
+      "explanation": "O frame só vale até o próximo equipamento de camada 3: cada roteador o descarta, decide pelo IP e monta um frame novo. Por isso Ethernet não é internet."
     },
     {
       "type": "diagnóstico",
@@ -566,12 +390,12 @@
       "id": "q3.1.1",
       "question": "Qual é a melhor descrição de Ethernet?",
       "options": [
-        "Tecnologia de LAN que troca frames usando endereços MAC",
         "Protocolo de tradução de nomes em IPs",
+        "Tecnologia de LAN que troca frames usando endereços MAC",
         "Sistema de autenticação de usuários web",
         "Protocolo de roteamento entre provedores"
       ],
-      "answer": 0,
+      "answer": 1,
       "explanation": "Ethernet atua principalmente na comunicação local de camada 2 usando frames e endereços MAC.",
       "topic": "ethernet",
       "difficulty": "iniciante",
@@ -581,12 +405,12 @@
       "id": "q3.1.2",
       "question": "Qual afirmação diferencia corretamente MAC e IP?",
       "options": [
-        "MAC é endereço local de enlace; IP é endereço lógico de rede",
-        "MAC substitui IP em redes modernas",
         "IP só existe em redes Wi-Fi",
+        "MAC substitui IP em redes modernas",
+        "MAC é endereço local de enlace; IP é endereço lógico de rede",
         "MAC é sempre identidade forte de usuário"
       ],
-      "answer": 0,
+      "answer": 2,
       "explanation": "MAC é usado no enlace local; IP identifica logicamente origem/destino em camada de rede.",
       "topic": "mac-ip",
       "difficulty": "iniciante",
@@ -596,10 +420,10 @@
       "id": "q3.1.3",
       "question": "Um host cabeado mostra interface desconectada. Qual camada deve ser investigada primeiro?",
       "options": [
-        "Camada 1",
-        "Camada 4",
-        "Camada 7",
-        "Camada de autenticação da aplicação"
+        "Camada 1: cabo, porta, NIC",
+        "Camada 3: IP e gateway",
+        "Camada 7: DNS e aplicação",
+        "Camada 4: portas TCP"
       ],
       "answer": 0,
       "explanation": "Interface desconectada aponta inicialmente para meio físico, porta, cabo, NIC ou switch.",
@@ -611,12 +435,12 @@
       "id": "q3.1.4",
       "question": "Por que MAC não deve ser usado sozinho como controle forte de identidade?",
       "options": [
-        "Porque pode ser alterado ou falsificado em muitos sistemas",
+        "Porque MAC impede ARP automaticamente",
         "Porque MAC só existe em servidores cloud",
         "Porque MAC criptografa o tráfego",
-        "Porque MAC impede ARP automaticamente"
+        "Porque pode ser alterado ou falsificado em muitos sistemas"
       ],
-      "answer": 0,
+      "answer": 3,
       "explanation": "MAC pode ser alterado em software; controles fortes exigem autenticação, NAC, logs e correlação.",
       "topic": "segurança",
       "difficulty": "intermediário",
@@ -626,31 +450,31 @@
       "id": "q3.1.5",
       "question": "Em uma LAN cabeada com switch, o switch encaminha frames principalmente com base em quê?",
       "options": [
+        "Tabela ARP",
         "Tabela MAC",
-        "Tabela DNS",
-        "Código HTTP",
-        "Token JWT"
+        "Tabela de rotas",
+        "EtherType do frame"
       ],
-      "answer": 0,
-      "explanation": "Switches Ethernet aprendem MACs por porta e usam a tabela MAC para encaminhar frames.",
+      "answer": 1,
+      "explanation": "O switch aprende MACs por porta e encaminha pela tabela MAC. A tabela ARP (IP→MAC) fica nos hosts e roteadores; a tabela de rotas é decisão de Camada 3.",
       "topic": "switching",
       "difficulty": "iniciante",
       "type": "arquitetura"
     },
     {
-      "id": "q3.1.6",
-      "question": "Em cloud pública, por que ainda vale entender Ethernet mesmo que a camada física seja abstraída?",
+      "id": "q3.1.7",
+      "type": "diagnóstico",
+      "question": "Seu notebook cabeado envia um pacote para um servidor na internet. Qual MAC de destino vai no frame que sai do notebook?",
       "options": [
-        "Porque conceitos de interface, enlace, encapsulamento e segmentação continuam úteis",
-        "Porque o cliente sempre configura cabos físicos da cloud",
-        "Porque Ethernet substitui security groups",
-        "Porque IP deixa de existir em cloud"
+        "O MAC de broadcast, sempre",
+        "O MAC do servidor na internet",
+        "O MAC da interface LAN do gateway padrão",
+        "O MAC do servidor DNS configurado"
       ],
-      "answer": 0,
-      "explanation": "Cloud abstrai muitos detalhes físicos, mas redes virtuais ainda dependem de conceitos de interface, enlace e encapsulamento.",
-      "topic": "cloud",
-      "difficulty": "intermediário",
-      "type": "cloud"
+      "answer": 2,
+      "explanation": "O servidor está em outra rede, então o frame vai para o MAC do gateway (descoberto via ARP em IPv4); o IP de destino continua sendo o do servidor.",
+      "topic": "encapsulamento",
+      "difficulty": "intermediário"
     }
   ],
   "flashcards": [
@@ -675,14 +499,14 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc3.1.3",
-      "front": "Switch encaminha frames com base em quê?",
-      "back": "Principalmente na tabela MAC, que associa endereços MAC a portas.",
+      "id": "fc3.1.7",
+      "front": "O que o switch faz com um frame cujo MAC de destino não está na tabela?",
+      "back": "Faz flooding: envia o frame para as outras portas do mesmo domínio de broadcast (VLAN), e aprende a porta do destino quando ele responder.",
       "tags": [
         "switch",
-        "mac"
+        "flooding"
       ],
-      "difficulty": "iniciante"
+      "difficulty": "intermediário"
     },
     {
       "id": "fc3.1.4",
@@ -695,14 +519,14 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc3.1.5",
-      "front": "Por que portas físicas expostas são risco?",
-      "back": "Podem permitir conexão de dispositivos não autorizados à LAN se não houver controles físicos e lógicos.",
+      "id": "fc3.1.8",
+      "front": "Qual padrão IEEE define a Ethernet e qual define o Wi-Fi?",
+      "back": "Ethernet: IEEE 802.3. Wi-Fi: IEEE 802.11. Os dois são tecnologias de enlace que usam endereços MAC.",
       "tags": [
-        "segurança",
-        "lan"
+        "ethernet",
+        "wi-fi"
       ],
-      "difficulty": "intermediário"
+      "difficulty": "iniciante"
     },
     {
       "id": "fc3.1.6",
@@ -717,32 +541,25 @@
   ],
   "exercises": [
     {
-      "id": "ex3.1.1",
-      "type": "conceitual",
-      "prompt": "Explique com suas palavras por que Ethernet não é sinônimo de internet.",
-      "expectedAnswer": "Ethernet é tecnologia de rede local de camada 2; internet envolve IP, roteamento entre redes e serviços superiores.",
-      "explanation": "A confusão ocorre porque em casa o cabo Ethernet costuma ser o caminho para acessar a internet."
-    },
-    {
-      "id": "ex3.1.2",
-      "type": "diagnóstico",
-      "prompt": "Um notebook conectado por cabo não recebe IP. Liste quatro hipóteses antes de culpar DNS.",
-      "expectedAnswer": "Cabo/porta sem link, VLAN errada, switchport bloqueada/desabilitada, DHCP inacessível, autenticação 802.1X/NAC, NIC desabilitada.",
-      "explanation": "DNS só entra depois que há conectividade IP mínima."
-    },
-    {
-      "id": "ex3.1.3",
-      "type": "segurança",
-      "prompt": "Liste três controles para reduzir risco de portas Ethernet em áreas públicas.",
-      "expectedAnswer": "Desativar portas não usadas, usar 802.1X/NAC, controle físico, VLAN restrita, monitoramento de MAC e alertas de link.",
-      "explanation": "Segurança de acesso começa antes da aplicação, na borda física e de enlace."
-    },
-    {
       "id": "ex3.1.4",
       "type": "arquitetura",
       "prompt": "Desenhe uma topologia simples host -> switch -> gateway e indique onde aparecem MAC, frame, IP e rota default.",
       "expectedAnswer": "MAC e frame aparecem no enlace host-switch-gateway; IP e rota default aparecem na decisão de camada 3 para sair da rede local.",
       "explanation": "O objetivo é separar camada 2 e camada 3 no mesmo fluxo."
+    },
+    {
+      "id": "ex3.1.5",
+      "type": "diagnóstico",
+      "prompt": "Usuários reclamam de lentidão. O notebook, ligado a um switch gigabit, mostra no Get-NetAdapter Status Up e LinkSpeed 100 Mbps. Qual camada você investiga primeiro e com quais evidências?",
+      "expectedAnswer": "Camada 1: cabo ou conector danificado, cabo de categoria inadequada, ou porta/NIC com velocidade fixa ou negociação ruim. Evidências: velocidade e duplex no host e na porta (show interfaces status), erros CRC (show interfaces counters errors) e teste com outro cabo, em ambiente autorizado.",
+      "explanation": "Link ativo não é link saudável: velocidade abaixo do esperado aponta para a camada física antes de IP, DNS ou aplicação."
+    },
+    {
+      "id": "ex3.1.6",
+      "type": "diagnóstico",
+      "prompt": "O show mac address-table mostra o MAC do notebook de um usuário na porta Gi1/0/12, mas a documentação diz Gi1/0/5. Quais hipóteses você levanta e o que verifica?",
+      "expectedAnswer": "Hipóteses: patch cord em outro ponto, usuário que mudou de mesa, documentação desatualizada, MAC clonado por outro dispositivo ou loop (MAC alternando entre portas). Verificar patch panel, se o MAC aparece em mais de uma porta, eventos de link e logs de NAC/802.1X.",
+      "explanation": "A tabela MAC mostra onde o switch viu o MAC por último; não prova identidade."
     }
   ],
   "challenge": {

@@ -1,0 +1,80 @@
+{
+  "id": "3.1",
+  "versao": "nova",
+  "titulo": "Ethernet: a base da rede local cabeada",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4818,
+    "invisiveis": 33,
+    "teoriaVisivel": 2630
+  },
+  "porCampoVisivel": {
+    "content.motivation": 157,
+    "content.history": 161,
+    "content.problem": 129,
+    "content.concept": 293,
+    "content.internals": 277,
+    "content.architecture": 126,
+    "content.analogy": 82,
+    "content.simpleExample": 99,
+    "content.enterpriseExample": 112,
+    "content.cloudExample": 77,
+    "content.devsecopsExample": 66,
+    "content.diagram": 37,
+    "content.summary": 103,
+    "content.nextTheme": 40,
+    "security": 301,
+    "troubleshooting": 320,
+    "glossary": 250,
+    "title+subtitle": 26,
+    "objectives": 64,
+    "learningOutcomes": 70,
+    "quiz": 326,
+    "flashcards": 133,
+    "mentorQuestions": 203,
+    "exercises": 231,
+    "challenge": 159,
+    "commentedSolution": 183,
+    "references": 44,
+    "linksToOtherCourses": 55,
+    "lab": 694
+  },
+  "porCampoInvisivel": {
+    "networkContext": 33
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 40,
+    "alternativa_5minPasso_maisLeitura": 35.3,
+    "plausivel": true,
+    "palavras": 694
+  },
+  "duracao": {
+    "declarada": "100-140 min",
+    "estimatedStudyTimeMinutes": 140,
+    "M": 120,
+    "T": 116.2,
+    "partes": {
+      "teoria": 20.2,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 20,
+      "lab": 40
+    },
+    "faixaRecomendada": "100-140 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 20
+  }
+}
