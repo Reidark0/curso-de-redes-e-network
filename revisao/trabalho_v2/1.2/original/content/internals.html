@@ -1,0 +1,15 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>Quando um notebook acessa uma aplicação interna, a comunicação pode ser descrita em papéis. O notebook é o cliente. O serviço pode ser uma aplicação web. O servidor, VM ou container hospeda esse serviço. Switches comutam quadros dentro da rede local. Roteadores encaminham entre redes. Firewalls verificam política. DNS traduz nome para endereço. Um balanceador pode distribuir a requisição. Logs registram partes do caminho.</p>
+  <ol class="flow-list">
+    <li><strong>Cliente inicia:</strong> uma aplicação no dispositivo final gera a requisição.</li>
+    <li><strong>Nome é resolvido:</strong> um serviço de DNS pode traduzir o nome para IP.</li>
+    <li><strong>Tráfego sai do host:</strong> a placa de rede envia sinais pelo meio físico ou sem fio.</li>
+    <li><strong>Intermediários encaminham:</strong> switch, AP, roteador ou firewall movem o tráfego até o destino.</li>
+    <li><strong>Políticas são aplicadas:</strong> firewalls, ACLs, proxies, security groups ou WAFs podem permitir, negar ou registrar.</li>
+    <li><strong>Serviço responde:</strong> a aplicação ou serviço escuta em uma porta e processa a solicitação.</li>
+    <li><strong>Evidências são geradas:</strong> logs, tabelas ARP, conexões, eventos de firewall e métricas ajudam a diagnosticar.</li>
+  </ol>
+  <p>Essa decomposição evita uma armadilha comum: achar que “o servidor está fora” apenas porque um serviço não responde. O host pode estar vivo, mas o processo pode estar parado, a porta pode estar fechada, a rota pode estar errada, o DNS pode apontar para outro IP ou uma política pode estar bloqueando.</p>
+</section>

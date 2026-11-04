@@ -1,0 +1,771 @@
+{
+  "id": "1.2",
+  "moduleId": "m01",
+  "order": 2,
+  "title": "Dispositivos finais, intermediários e serviços",
+  "subtitle": "Como separar quem usa a rede, quem transporta a comunicação e qual função está sendo oferecida.",
+  "duration": "75-105 min",
+  "estimatedStudyTimeMinutes": 105,
+  "difficulty": "iniciante",
+  "type": "fundamental",
+  "xp": 185,
+  "tags": [
+    "redes",
+    "fundamentos",
+    "hosts",
+    "switch",
+    "roteador",
+    "firewall",
+    "serviços",
+    "inventário",
+    "segurança",
+    "troubleshooting",
+    "cloud",
+    "devsecops"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m01",
+      "lesson": "1.1",
+      "reason": "A aula 1.1 define rede como sistema de comunicação. Agora a rede será decomposta em papéis: finais, intermediários e serviços."
+    },
+    {
+      "type": "module",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.8",
+      "reason": "A classificação por papéis usa o pensamento em camadas e a separação entre dispositivo, protocolo, meio, serviço e política."
+    }
+  ],
+  "objectives": [
+    "Diferenciar dispositivo final, dispositivo intermediário e serviço de rede.",
+    "Entender que um mesmo equipamento pode exercer mais de um papel dependendo do contexto.",
+    "Mapear um fluxo simples identificando origem, intermediários, destino e serviço envolvido.",
+    "Relacionar esses papéis com inventário, troubleshooting, segurança e cloud.",
+    "Evitar confusões comuns como tratar servidor e serviço como a mesma coisa."
+  ],
+  "learningOutcomes": [
+    "Dado um cenário de rede doméstica ou corporativa, o aluno classifica os elementos em dispositivos finais, intermediários e serviços.",
+    "Dado um sintoma de falha, o aluno identifica se a suspeita inicial está no host, no intermediário, no serviço, no nome, na porta ou na política.",
+    "Dado um desenho de cloud, o aluno reconhece equivalentes como VM, load balancer, security group, NAT gateway, private endpoint e serviço gerenciado."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Camada 1",
+      "Camada 2",
+      "Camada 3",
+      "Camada 4",
+      "Camada 7"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede",
+      "Internet",
+      "Transporte",
+      "Aplicação"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "Wi-Fi",
+      "ARP",
+      "IPv4",
+      "IPv6",
+      "TCP",
+      "UDP",
+      "DNS",
+      "DHCP",
+      "HTTP",
+      "TLS"
+    ],
+    "dependsOn": [
+      "rede como sistema",
+      "bits",
+      "sinais",
+      "protocolos",
+      "pensamento em camadas"
+    ],
+    "enables": [
+      "tipos de rede",
+      "topologias",
+      "equipamentos de rede",
+      "inventário",
+      "firewall",
+      "cloud networking",
+      "troubleshooting"
+    ]
+  },
+  "deepDive": {
+    "mentalModel": "Classifique pelo papel no fluxo: origem, intermediário, serviço, política e evidência. O nome do equipamento ajuda, mas o papel depende do contexto.",
+    "keyTerms": [
+      "host",
+      "cliente",
+      "servidor",
+      "serviço",
+      "intermediário",
+      "gateway",
+      "política",
+      "inventário",
+      "fluxo"
+    ],
+    "limitations": [
+      "A classificação não substitui análise por camada; ela é o primeiro mapa mental.",
+      "Um mesmo equipamento pode acumular papéis diferentes.",
+      "Saber o papel não prova a causa da falha; apenas organiza hipóteses."
+    ],
+    "whenToUse": [
+      "Ao mapear uma rede desconhecida.",
+      "Ao abrir ou revisar regra de firewall.",
+      "Ao investigar falha de acesso a serviço.",
+      "Ao criar inventário de ativos e dependências."
+    ],
+    "whenNotToUse": [
+      "Não use a classificação como substituto de evidência técnica.",
+      "Não conclua que todo servidor expõe apenas um serviço.",
+      "Não assuma que um intermediário é seguro apenas porque está no meio do caminho."
+    ],
+    "operationalImpact": [
+      "Mapear papéis melhora troubleshooting e documentação.",
+      "Ambientes sem inventário de hosts, serviços e intermediários demoram mais para diagnosticar incidentes.",
+      "A classificação ajuda a definir donos: endpoint, rede, segurança, sistemas ou aplicação."
+    ],
+    "financialImpact": [
+      "Intermediários como firewalls, load balancers e NAT gateways podem ter custo de licença, appliance ou cobrança cloud.",
+      "Serviços gerenciados reduzem operação manual, mas podem gerar custo recorrente e dependência do provedor.",
+      "Inventário ruim aumenta custo de troubleshooting e risco de manter ativos esquecidos."
+    ],
+    "securityImpact": [
+      "Dispositivos finais ampliam superfície de ataque quando não são gerenciados.",
+      "Intermediários concentram confiança e precisam de hardening, logs e controle de acesso.",
+      "Serviços expostos precisam de autenticação, autorização, patching, criptografia e monitoramento."
+    ]
+  },
+  "commonMistakes": [
+    {
+      "mistake": "Confundir servidor com serviço.",
+      "whyItHappens": "No dia a dia, as pessoas dizem 'o servidor caiu' quando querem dizer que um sistema não responde.",
+      "consequence": "A equipe reinicia ou investiga o host errado sem verificar se o serviço está escutando.",
+      "correction": "Servidor é o equipamento ou workload; serviço é a função exposta, como HTTP, DNS, SSH ou banco de dados."
+    },
+    {
+      "mistake": "Chamar todo equipamento de rede de roteador.",
+      "whyItHappens": "Em casa, o roteador Wi-Fi acumula funções de AP, switch, roteador, NAT e DHCP.",
+      "consequence": "O aluno não diferencia switching, roteamento, Wi-Fi, firewall e DHCP.",
+      "correction": "Classifique pelo papel: comutar na LAN, rotear entre redes, oferecer Wi-Fi, distribuir IP ou filtrar tráfego."
+    },
+    {
+      "mistake": "Ignorar impressoras, câmeras e IoT como dispositivos finais.",
+      "whyItHappens": "Esses ativos não parecem computadores tradicionais.",
+      "consequence": "Ficam fora de inventário, patching e monitoramento.",
+      "correction": "Todo dispositivo com IP, serviço, firmware ou credencial precisa ser tratado como ativo de rede."
+    },
+    {
+      "mistake": "Achar que intermediário só transporta e nunca altera.",
+      "whyItHappens": "Modelos simplificados mostram equipamentos apenas como setas no caminho.",
+      "consequence": "A equipe esquece NAT, proxy, TLS inspection, WAF, balanceamento e políticas.",
+      "correction": "Intermediários podem encaminhar, bloquear, traduzir, registrar, inspecionar e até modificar tráfego."
+    }
+  ],
+  "troubleshooting": {
+    "symptoms": [
+      "Serviço não abre, mas host responde ping",
+      "Wi-Fi conecta, mas não navega",
+      "Pipeline não baixa imagem do registry",
+      "Aplicação funciona por IP, mas não por nome",
+      "Apenas uma filial não acessa sistema interno"
+    ],
+    "diagnosticQuestions": [
+      "Quem é o dispositivo final de origem?",
+      "Qual serviço está sendo acessado?",
+      "O serviço depende de DNS, autenticação ou banco?",
+      "Quais intermediários estão no caminho?",
+      "Existe política de firewall, proxy, ACL, security group ou VPN?",
+      "Há evidência em log, tabela de conexões, rota ou captura?"
+    ],
+    "commands": [
+      {
+        "platform": "Windows",
+        "command": "ipconfig /all",
+        "purpose": "Identificar IP, gateway, DNS e interface do dispositivo final.",
+        "expectedObservation": "Interface ativa com endereço, gateway e DNS coerentes.",
+        "interpretation": "Sem IP ou gateway, a suspeita inicial está no host, DHCP, VLAN, Wi-Fi ou cabo."
+      },
+      {
+        "platform": "Windows",
+        "command": "Get-NetTCPConnection | Select-Object -First 20",
+        "purpose": "Observar conexões TCP locais e portas envolvidas.",
+        "expectedObservation": "Lista de conexões com endereços locais/remotos e estados.",
+        "interpretation": "Ajuda a separar host, serviço e conexão estabelecida."
+      },
+      {
+        "platform": "Windows",
+        "command": "Test-NetConnection <destino> -Port 443",
+        "purpose": "Testar acesso a um serviço específico por porta.",
+        "expectedObservation": "TcpTestSucceeded true quando a porta está acessível.",
+        "interpretation": "Se ping funciona e porta falha, investigue serviço, firewall, proxy ou rota específica."
+      },
+      {
+        "platform": "Linux",
+        "command": "ip addr && ip route",
+        "purpose": "Ver IPs e rotas do dispositivo final Linux.",
+        "expectedObservation": "Interface com IP e rota default.",
+        "interpretation": "Sem rota default, o host não alcança redes externas."
+      },
+      {
+        "platform": "Linux",
+        "command": "ss -tulpen",
+        "purpose": "Listar serviços locais escutando portas TCP/UDP.",
+        "expectedObservation": "Portas, processos e endereços de escuta.",
+        "interpretation": "Ajuda a confirmar se o serviço existe no host e em qual porta escuta."
+      },
+      {
+        "platform": "Linux",
+        "command": "curl -I https://example.com",
+        "purpose": "Testar acesso HTTP/HTTPS e observar cabeçalhos.",
+        "expectedObservation": "Status HTTP e headers de resposta.",
+        "interpretation": "Confirma que há caminho, DNS, TCP, TLS e resposta de serviço web."
+      },
+      {
+        "platform": "Cisco IOS",
+        "command": "show ip interface brief",
+        "purpose": "Ver interfaces e estado de intermediários Cisco.",
+        "expectedObservation": "Interfaces relevantes em up/up.",
+        "interpretation": "Interface down pode interromper o caminho entre dispositivos finais."
+      },
+      {
+        "platform": "Cisco IOS",
+        "command": "show cdp neighbors",
+        "purpose": "Identificar vizinhos diretamente conectados em ambientes Cisco controlados.",
+        "expectedObservation": "Lista de dispositivos vizinhos e interfaces.",
+        "interpretation": "Ajuda a mapear intermediários físicos, quando CDP está habilitado e autorizado."
+      }
+    ],
+    "decisionTree": [
+      {
+        "if": "Host não tem IP válido",
+        "then": "Investigar dispositivo final, DHCP, meio físico, Wi-Fi, VLAN ou configuração manual."
+      },
+      {
+        "if": "Host tem IP e gateway, mas não resolve nomes",
+        "then": "Investigar serviço DNS, configuração de DNS, firewall ou conectividade até o resolvedor."
+      },
+      {
+        "if": "Nome resolve, mas porta falha",
+        "then": "Investigar serviço, firewall, proxy, security group, ACL ou aplicação parada."
+      },
+      {
+        "if": "Apenas um segmento falha",
+        "then": "Investigar intermediários, roteamento, VLAN, firewall entre redes e políticas."
+      }
+    ]
+  },
+  "security": {
+    "goodPractices": [
+      "Manter inventário de dispositivos finais, intermediários e serviços.",
+      "Separar rede de usuários, servidores, visitantes, gerenciamento e IoT quando possível.",
+      "Registrar regras de firewall com justificativa, dono e prazo de revisão.",
+      "Monitorar serviços críticos e intermediários de rede.",
+      "Proteger interfaces de gerenciamento de switches, roteadores, firewalls e access points."
+    ],
+    "badPractices": [
+      "Tratar impressoras, câmeras e IoT como irrelevantes para segurança.",
+      "Permitir acesso administrativo aos intermediários a partir de qualquer rede.",
+      "Expor serviços internos sem autenticação forte.",
+      "Documentar apenas servidores e esquecer serviços e dependências.",
+      "Liberar regras amplas porque não se sabe qual serviço é necessário."
+    ],
+    "commonErrors": [
+      "Confundir conectividade com autorização.",
+      "Confundir host ativo com serviço saudável.",
+      "Ignorar intermediários transparentes como proxy, NAT, WAF ou inspeção TLS.",
+      "Não coletar evidências antes de alterar regras."
+    ],
+    "vulnerabilities": [
+      {
+        "name": "Ativo desconhecido",
+        "description": "Dispositivo final conectado à rede sem inventário, dono ou política clara.",
+        "defensiveExplanation": "Ativos desconhecidos podem manter serviços vulneráveis, credenciais padrão ou firmware antigo.",
+        "mitigation": "Inventário, NAC quando aplicável, segmentação, varreduras autorizadas, logs de DHCP e revisão periódica."
+      },
+      {
+        "name": "Serviço exposto indevidamente",
+        "description": "Serviço acessível por redes ou usuários que não deveriam alcançá-lo.",
+        "defensiveExplanation": "A exposição amplia superfície de ataque mesmo quando o host parece legítimo.",
+        "mitigation": "Firewall, ACL, security group, autenticação, menor privilégio, TLS e revisão de portas."
+      },
+      {
+        "name": "Gerência de intermediário exposta",
+        "description": "Interface administrativa de switch, roteador, AP ou firewall acessível por redes amplas.",
+        "defensiveExplanation": "Comprometer intermediários pode permitir interceptação, alteração de tráfego ou negação de serviço.",
+        "mitigation": "Rede de gerência, MFA quando disponível, ACL administrativa, atualização e logs."
+      }
+    ],
+    "monitoring": [
+      "Logs de DHCP para novos hosts",
+      "Logs de firewall por origem, destino, porta e ação",
+      "Alertas de novos serviços escutando",
+      "Monitoramento de disponibilidade de serviços críticos",
+      "Alterações de configuração em intermediários"
+    ],
+    "hardening": [
+      "Desabilitar serviços desnecessários",
+      "Alterar credenciais padrão",
+      "Atualizar firmware e sistemas",
+      "Restringir acesso administrativo",
+      "Aplicar menor privilégio em regras e serviços"
+    ],
+    "detectionIdeas": [
+      "Aumento de conexões laterais entre dispositivos finais",
+      "Serviço novo escutando porta incomum",
+      "Dispositivo desconhecido solicitando DHCP",
+      "Falhas de autenticação em serviços internos",
+      "Mudanças não autorizadas em regras de intermediários"
+    ]
+  },
+  "mentorQuestions": [
+    {
+      "type": "reflexão",
+      "question": "Por que uma impressora de rede deve ser tratada como dispositivo final relevante para segurança?",
+      "hints": [
+        "Ela possui IP, firmware e serviços.",
+        "Pense em documentos, credenciais e acesso interno."
+      ],
+      "expectedIdeas": [
+        "IP",
+        "firmware",
+        "serviço",
+        "credenciais",
+        "inventário",
+        "risco",
+        "segmentação"
+      ],
+      "explanation": "Impressoras podem armazenar documentos, aceitar jobs, expor interfaces web e usar credenciais. Elas não devem ficar fora do inventário."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "Um servidor responde ping, mas o site hospedado nele não abre. O dispositivo final está necessariamente fora do ar?",
+      "hints": [
+        "Ping não testa HTTP.",
+        "Pense em serviço, porta e firewall."
+      ],
+      "expectedIdeas": [
+        "não",
+        "serviço",
+        "porta",
+        "processo",
+        "firewall",
+        "HTTP",
+        "aplicação"
+      ],
+      "explanation": "O host pode estar ativo, mas o serviço web pode estar parado, bloqueado, em outra porta ou com erro de aplicação."
+    },
+    {
+      "type": "cenário real",
+      "question": "Um firewall é dispositivo final ou intermediário?",
+      "hints": [
+        "Classifique pelo papel no fluxo.",
+        "Ele também pode ter serviços de gerenciamento."
+      ],
+      "expectedIdeas": [
+        "intermediário",
+        "filtra",
+        "encaminha",
+        "política",
+        "logs",
+        "gerenciamento"
+      ],
+      "explanation": "No fluxo de outros sistemas, firewall é intermediário. Para acesso administrativo ao próprio firewall, ele também se comporta como destino de serviço de gerenciamento."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1.2.1",
+      "type": "conceito",
+      "q": "Qual alternativa representa melhor um dispositivo intermediário?",
+      "opts": [
+        "Um switch encaminhando quadros entre hosts",
+        "Um arquivo PDF enviado por e-mail",
+        "Uma senha usada em login",
+        "Um documento salvo localmente"
+      ],
+      "a": 0,
+      "exp": "Switch é intermediário porque conecta dispositivos e encaminha quadros dentro da LAN.",
+      "difficulty": "iniciante",
+      "topic": "papéis de rede"
+    },
+    {
+      "id": "q1.2.2",
+      "type": "comparação",
+      "q": "DNS é melhor classificado como:",
+      "opts": [
+        "Meio físico",
+        "Serviço",
+        "Cabo",
+        "Topologia"
+      ],
+      "a": 1,
+      "exp": "DNS é um serviço de rede que traduz nomes para endereços.",
+      "difficulty": "iniciante",
+      "topic": "serviços"
+    },
+    {
+      "id": "q1.2.3",
+      "type": "cenário",
+      "q": "Um servidor executa HTTP, SSH e banco de dados. O servidor e os serviços são a mesma coisa?",
+      "opts": [
+        "Sim, sempre",
+        "Não. O servidor é o host/workload; HTTP, SSH e banco são serviços",
+        "Sim, porque todos usam IP",
+        "Não existe serviço em servidor"
+      ],
+      "a": 1,
+      "exp": "Um mesmo host pode hospedar vários serviços, cada um com protocolo, porta, configuração e risco próprios.",
+      "difficulty": "iniciante",
+      "topic": "servidor vs serviço"
+    },
+    {
+      "id": "q1.2.4",
+      "type": "diagnóstico",
+      "q": "Um host tem IP e pinga o gateway, mas não acessa um site por nome. Qual serviço deve ser investigado cedo?",
+      "opts": [
+        "DNS",
+        "Teclado",
+        "Monitor",
+        "Fonte do switch sempre"
+      ],
+      "a": 0,
+      "exp": "Se há conectividade local, mas nomes falham, DNS é uma hipótese forte.",
+      "difficulty": "iniciante",
+      "topic": "troubleshooting"
+    },
+    {
+      "id": "q1.2.5",
+      "type": "segurança",
+      "q": "Por que intermediários como firewalls e roteadores exigem hardening forte?",
+      "opts": [
+        "Porque nunca registram logs",
+        "Porque concentram tráfego, políticas e confiança",
+        "Porque não têm firmware",
+        "Porque não participam da comunicação"
+      ],
+      "a": 1,
+      "exp": "Intermediários influenciam muitos fluxos. Comprometê-los pode afetar confidencialidade, integridade e disponibilidade.",
+      "difficulty": "intermediário",
+      "topic": "segurança"
+    },
+    {
+      "id": "q1.2.6",
+      "type": "cloud",
+      "q": "Em cloud, um load balancer normalmente atua como:",
+      "opts": [
+        "Dispositivo final do usuário",
+        "Intermediário que distribui tráfego para serviços/backends",
+        "Codificação de texto",
+        "Sistema operacional local"
+      ],
+      "a": 1,
+      "exp": "Load balancer é intermediário: recebe tráfego e o encaminha para backends conforme regras e saúde dos alvos.",
+      "difficulty": "iniciante",
+      "topic": "cloud networking"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc1.2.1",
+      "front": "O que é dispositivo final?",
+      "back": "É a origem ou destino de uma comunicação, como notebook, celular, servidor, VM, container, impressora ou câmera.",
+      "tags": [
+        "fundamentos",
+        "host"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.2.2",
+      "front": "O que é dispositivo intermediário?",
+      "back": "É um elemento que encaminha, conecta, filtra, traduz ou inspeciona tráfego, como switch, roteador, firewall, AP, proxy ou load balancer.",
+      "tags": [
+        "fundamentos",
+        "intermediários"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.2.3",
+      "front": "Servidor e serviço são iguais?",
+      "back": "Não. Servidor é o host ou workload; serviço é a função acessível, como HTTP, DNS, SSH, SMB ou banco de dados.",
+      "tags": [
+        "serviços"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.2.4",
+      "front": "Por que classificar papéis ajuda no troubleshooting?",
+      "back": "Porque separa hipóteses: origem, caminho, política, destino e serviço.",
+      "tags": [
+        "troubleshooting"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.2.5",
+      "front": "Um firewall é sempre intermediário?",
+      "back": "No fluxo de outros sistemas, sim; mas ele também pode ser destino de serviços de gerenciamento, VPN ou logs.",
+      "tags": [
+        "firewall",
+        "papéis"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc1.2.6",
+      "front": "Qual é o risco de ativo desconhecido?",
+      "back": "Ele pode expor serviços, firmware antigo, credenciais padrão ou tráfego lateral sem monitoramento adequado.",
+      "tags": [
+        "segurança",
+        "inventário"
+      ],
+      "difficulty": "iniciante"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex1.2.1",
+      "type": "classificação",
+      "prompt": "Classifique: notebook, switch, DNS, firewall, servidor web e API.",
+      "expectedAnswer": "Notebook: dispositivo final. Switch: intermediário. DNS: serviço. Firewall: intermediário/política. Servidor web: dispositivo final/workload que hospeda serviço HTTP. API: serviço.",
+      "explanation": "A classificação depende do papel no fluxo. O servidor web é host; HTTP/API são serviços."
+    },
+    {
+      "id": "ex1.2.2",
+      "type": "diagnóstico",
+      "prompt": "Um usuário acessa o sistema por IP, mas não por nome. Quais papéis entram na investigação?",
+      "expectedAnswer": "Dispositivo final do usuário, serviço DNS, destino do sistema, possíveis intermediários e políticas entre origem e DNS/destino.",
+      "explanation": "Se por IP funciona e por nome não, DNS ou resolução de nomes é hipótese forte."
+    },
+    {
+      "id": "ex1.2.3",
+      "type": "segurança",
+      "prompt": "Explique por que câmeras IP devem entrar no inventário de rede.",
+      "expectedAnswer": "Porque têm IP, firmware, credenciais, serviços de vídeo/administração e podem ser exploradas ou usadas como ponto de movimento lateral.",
+      "explanation": "Dispositivo final não é apenas notebook ou servidor tradicional."
+    },
+    {
+      "id": "ex1.2.4",
+      "type": "cloud",
+      "prompt": "Em uma VPC/VNet com VM, load balancer, NAT Gateway e banco gerenciado, classifique os papéis.",
+      "expectedAnswer": "VM: dispositivo final/workload. Load balancer: intermediário. NAT Gateway: intermediário/tradução de saída. Banco gerenciado: serviço. Security group/NSG: política.",
+      "explanation": "Cloud muda a forma de implementação, mas mantém papéis de comunicação e controle."
+    }
+  ],
+  "challenge": {
+    "title": "Classifique uma rede de pequeno escritório",
+    "scenario": "Um escritório possui 12 notebooks, 2 impressoras, 1 roteador/firewall, 2 switches, 1 access point, 1 servidor de arquivos, DNS interno, DHCP, link de internet, VPN e um sistema web em cloud.",
+    "tasks": [
+      "Classificar cada item como dispositivo final, intermediário, serviço ou política.",
+      "Identificar itens que acumulam mais de um papel.",
+      "Listar três riscos de segurança.",
+      "Indicar cinco evidências que você coletaria antes de alterar qualquer regra."
+    ],
+    "constraints": [
+      "Não usar varredura invasiva.",
+      "Não assumir que todo servidor é um único serviço.",
+      "Separar conectividade, serviço e autorização."
+    ],
+    "expectedDeliverables": [
+      "Tabela de classificação",
+      "Lista de papéis acumulados",
+      "Riscos e mitigações",
+      "Plano de evidências"
+    ],
+    "gradingRubric": [
+      {
+        "criterion": "Classificação correta",
+        "points": 35,
+        "description": "Separa finais, intermediários, serviços e políticas."
+      },
+      {
+        "criterion": "Reconhecimento de papéis múltiplos",
+        "points": 20,
+        "description": "Identifica roteador/firewall, servidor e AP com funções acumuladas."
+      },
+      {
+        "criterion": "Visão de segurança",
+        "points": 25,
+        "description": "Inclui riscos de exposição, gerência, impressoras, VPN e serviços."
+      },
+      {
+        "criterion": "Evidências",
+        "points": 20,
+        "description": "Propõe evidências técnicas antes de mudanças."
+      }
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "A solução começa separando coisa física, papel lógico e serviço. Um equipamento pode acumular papéis, então a classificação deve explicar o contexto.",
+    "steps": [
+      "Listar todos os elementos.",
+      "Marcar quem inicia ou recebe comunicação.",
+      "Marcar quem encaminha, filtra ou traduz.",
+      "Separar serviços hospedados ou consumidos.",
+      "Identificar políticas e pontos de controle.",
+      "Associar evidências: IP, rota, porta, regra, log e processo."
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "Classificar o servidor de arquivos apenas como serviço.",
+        "whyItIsWrong": "O equipamento/VM é dispositivo final; o compartilhamento de arquivos é o serviço."
+      },
+      {
+        "answer": "Ignorar impressoras porque não são computadores.",
+        "whyItIsWrong": "Impressoras têm IP, serviços, firmware, credenciais e podem armazenar documentos."
+      },
+      {
+        "answer": "Chamar roteador/firewall apenas de roteador.",
+        "whyItIsWrong": "Ele pode rotear, filtrar, fazer NAT, VPN, DHCP, DNS forwarder e registrar logs."
+      }
+    ],
+    "finalAnswer": "Uma classificação madura separa notebooks, impressoras e servidor como dispositivos finais; switches, AP, roteador/firewall, VPN e link como intermediários ou meios; DNS, DHCP, arquivos e sistema web como serviços; regras de firewall, autenticação e permissões como políticas. Antes de mudar regras, colete IPs, rotas, DNS, portas, logs e dono do serviço."
+  },
+  "glossary": [
+    {
+      "term": "Dispositivo final",
+      "shortDefinition": "Origem ou destino de comunicação em uma rede.",
+      "longDefinition": "Elemento que consome ou entrega comunicação, como notebook, celular, servidor, VM, container, impressora ou câmera.",
+      "example": "Um notebook acessando um sistema web é dispositivo final de origem.",
+      "relatedTerms": [
+        "host",
+        "cliente",
+        "servidor",
+        "workload"
+      ],
+      "relatedLessons": [
+        "1.1",
+        "1.2",
+        "1.7"
+      ]
+    },
+    {
+      "term": "Dispositivo intermediário",
+      "shortDefinition": "Elemento que encaminha, filtra, traduz, concentra ou inspeciona tráfego.",
+      "longDefinition": "Equipamento ou serviço de rede que fica no caminho entre origem e destino, como switch, roteador, firewall, proxy, AP ou load balancer.",
+      "example": "Um firewall entre VLANs é intermediário e ponto de política.",
+      "relatedTerms": [
+        "switch",
+        "roteador",
+        "firewall",
+        "proxy",
+        "gateway"
+      ],
+      "relatedLessons": [
+        "1.2",
+        "1.7",
+        "9.1"
+      ]
+    },
+    {
+      "term": "Serviço de rede",
+      "shortDefinition": "Função acessível pela rede.",
+      "longDefinition": "Recurso consumido por clientes ou outros sistemas usando protocolos e portas, como DNS, DHCP, HTTP, SSH, SMB, API ou banco de dados.",
+      "example": "DNS é serviço que traduz nomes para endereços.",
+      "relatedTerms": [
+        "porta",
+        "protocolo",
+        "aplicação"
+      ],
+      "relatedLessons": [
+        "1.2",
+        "6.1",
+        "7.1"
+      ]
+    },
+    {
+      "term": "Política de rede",
+      "shortDefinition": "Regra que decide o que pode trafegar.",
+      "longDefinition": "Controle aplicado por firewall, ACL, security group, proxy, WAF ou mecanismo similar para permitir, negar, registrar ou inspecionar comunicação.",
+      "example": "Permitir HTTPS da rede de usuários para o sistema interno e negar acesso ao banco.",
+      "relatedTerms": [
+        "firewall",
+        "ACL",
+        "menor privilégio"
+      ],
+      "relatedLessons": [
+        "1.2",
+        "9.1",
+        "13.1"
+      ]
+    },
+    {
+      "term": "Inventário de ativos",
+      "shortDefinition": "Lista controlada de elementos relevantes da rede.",
+      "longDefinition": "Registro de dispositivos, serviços, donos, endereços, funções, criticidade e riscos, usado para operação, segurança e auditoria.",
+      "example": "Uma tabela contendo notebooks, switches, impressoras, servidores, APIs e responsáveis.",
+      "relatedTerms": [
+        "CMDB",
+        "asset management",
+        "observabilidade"
+      ],
+      "relatedLessons": [
+        "1.2",
+        "15.1",
+        "16.1"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Módulo 0",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Base conceitual de bits, sinais, protocolos e pensamento em camadas."
+    },
+    {
+      "type": "internal-course",
+      "title": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Relação com pipelines, runners, registries, clusters e automação."
+    },
+    {
+      "type": "internal-course",
+      "title": "Enterprise Identity, IAM e Segurança de Acessos",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Relação entre conectividade, serviços, identidade e autorização."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "m00",
+      "lesson": "fundamentos",
+      "reason": "Runners, registries, clusters e APIs também devem ser classificados como workloads, intermediários, serviços e políticas."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "m00",
+      "lesson": "fundamentos",
+      "reason": "Acesso a serviço depende de rede, mas também de autenticação, autorização e identidade."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70,
+      "oneOf": [
+        "exerciseDone",
+        "practicalExerciseDone"
+      ]
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "1.3"
+    ]
+  }
+}

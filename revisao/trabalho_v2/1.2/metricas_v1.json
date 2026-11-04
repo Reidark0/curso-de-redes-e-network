@@ -1,0 +1,94 @@
+{
+  "id": "1.2",
+  "versao": "v1",
+  "titulo": "Dispositivos finais, intermediários e serviços",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4188,
+    "teoria": 2816,
+    "praticaExtra": 650,
+    "quiz": 435,
+    "flashcards": 132
+  },
+  "porGrupoTeoria": {
+    "introducao": 586,
+    "contexto": 262,
+    "conteudo": 679,
+    "exemplos": 471,
+    "seguranca_troubleshooting": 818
+  },
+  "porSecao": {
+    "motivation": 137,
+    "summary": 111,
+    "problem": 64,
+    "evolution": 198,
+    "concept": 318,
+    "internals": 206,
+    "architecture": 154,
+    "diagram": 1,
+    "analogy": 70,
+    "simpleExample": 93,
+    "enterpriseExample": 124,
+    "cloudExample": 89,
+    "devsecopsExample": 95,
+    "objectives": 55,
+    "learningOutcomes": 67,
+    "glossary": 216,
+    "security": 438,
+    "troubleshooting": 380,
+    "nextTheme": 33
+  },
+  "pratica": {
+    "quiz": 435,
+    "flashcards": 132,
+    "lab": 0,
+    "mentorQuestions": 170,
+    "exercises": 176,
+    "challenge": 141,
+    "commentedSolution": 163
+  },
+  "outros": {
+    "title+subtitle": 21,
+    "nextTheme": 33,
+    "references": 56,
+    "linksToOtherCourses": 45
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 5,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "70-100 min",
+    "estimatedStudyTimeMinutes": 100,
+    "nucleo": 31.7,
+    "nucleoPartes": {
+      "teoria": 21.7,
+      "diagramas": 3,
+      "quiz": 7
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-40 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "25-40 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 40
+  }
+}

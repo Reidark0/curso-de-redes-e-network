@@ -1,0 +1,14 @@
+
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>Para Segurança da Informação, a classificação de papéis é base de inventário, hardening, monitoramento e resposta a incidentes. Você não protege bem o que não sabe classificar. Um dispositivo final comprometido pode tentar alcançar serviços internos. Um intermediário mal configurado pode permitir tráfego lateral. Um serviço exposto pode ser explorado. Uma política ampla pode transformar uma falha pequena em incidente grande.</p>
+  <table class="data-table risk-table">
+    <thead><tr><th>Elemento</th><th>Risco</th><th>Como aparece</th><th>Mitigação</th></tr></thead>
+    <tbody>
+      <tr><td>Dispositivo final</td><td>Comprometimento ou credencial roubada</td><td>Conexões incomuns, processos suspeitos, tráfego lateral</td><td>EDR, patching, menor privilégio, segmentação e MFA</td></tr>
+      <tr><td>Intermediário</td><td>Configuração permissiva ou firmware vulnerável</td><td>Regras any-any, portas de gerência expostas, logs ausentes</td><td>Hardening, atualização, ACLs, logs e revisão de regras</td></tr>
+      <tr><td>Serviço</td><td>Exposição indevida ou autenticação fraca</td><td>Portas abertas, banners, falhas de login, vazamento de dados</td><td>Controle de acesso, TLS, monitoramento, patching e limitação de superfície</td></tr>
+      <tr><td>Política</td><td>Permissão excessiva</td><td>Acesso entre segmentos sem justificativa</td><td>Menor privilégio, revisão periódica, documentação e testes</td></tr>
+    </tbody>
+  </table>
+</section>

@@ -1,0 +1,15 @@
+
+<section class="lesson-section lesson-section--architecture">
+  <h2>7. Arquitetura</h2>
+  <p>Em uma arquitetura real, os papéis aparecem juntos. O aluno deve aprender a desenhar o fluxo e anotar o papel de cada componente.</p>
+  <table class="data-table">
+    <thead><tr><th>Papel</th><th>Função principal</th><th>Exemplos</th><th>O que observar</th></tr></thead>
+    <tbody>
+      <tr><td>Dispositivo final</td><td>Origem ou destino</td><td>Notebook, servidor, celular, VM, container, impressora</td><td>IP, MAC, interface, sistema, agente, credenciais, portas locais</td></tr>
+      <tr><td>Intermediário</td><td>Encaminhar, comutar, filtrar, traduzir ou inspecionar</td><td>Switch, roteador, firewall, AP, proxy, NAT, load balancer</td><td>Tabelas, rotas, VLANs, regras, logs, estado da interface</td></tr>
+      <tr><td>Serviço</td><td>Entregar uma função acessível</td><td>DNS, DHCP, HTTP, SSH, SMB, AD, API, banco, registry</td><td>Nome, IP, porta, protocolo, processo, autenticação, autorização</td></tr>
+      <tr><td>Política</td><td>Decidir o que é permitido</td><td>ACL, firewall rule, security group, RBAC, proxy policy</td><td>Origem, destino, porta, identidade, horário, logs e exceções</td></tr>
+    </tbody>
+  </table>
+  <p>Essa visão será reutilizada em todo o curso. Ao estudar Ethernet, você entenderá melhor switches. Ao estudar IP, entenderá roteadores. Ao estudar TCP/UDP, entenderá serviços e portas. Ao estudar firewall, entenderá política. Ao estudar cloud, verá versões virtuais desses mesmos papéis.</p>
+</section>

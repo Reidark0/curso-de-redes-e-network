@@ -1,0 +1,97 @@
+{
+  "id": "1.2",
+  "versao": "original",
+  "titulo": "Dispositivos finais, intermediários e serviços",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4018,
+    "teoria": 2836,
+    "praticaExtra": 640,
+    "quiz": 240,
+    "flashcards": 134
+  },
+  "porGrupoTeoria": {
+    "introducao": 562,
+    "contexto": 435,
+    "conteudo": 483,
+    "exemplos": 664,
+    "seguranca_troubleshooting": 692
+  },
+  "porSecao": {
+    "motivation": 166,
+    "summary": 58,
+    "history": 147,
+    "problem": 129,
+    "evolution": 159,
+    "concept": 107,
+    "internals": 215,
+    "architecture": 158,
+    "diagram": 3,
+    "analogy": 97,
+    "simpleExample": 96,
+    "enterpriseExample": 119,
+    "cloudExample": 105,
+    "devsecopsExample": 96,
+    "securityExample": 151,
+    "objectives": 55,
+    "learningOutcomes": 67,
+    "glossary": 216,
+    "security": 312,
+    "troubleshooting": 380,
+    "nextTheme": 46
+  },
+  "pratica": {
+    "quiz": 240,
+    "flashcards": 134,
+    "lab": 0,
+    "mentorQuestions": 160,
+    "exercises": 176,
+    "challenge": 141,
+    "commentedSolution": 163
+  },
+  "outros": {
+    "title+subtitle": 21,
+    "nextTheme": 46,
+    "references": 56,
+    "linksToOtherCourses": 45
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 5,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "75-105 min",
+    "estimatedStudyTimeMinutes": 105,
+    "nucleo": 30.8,
+    "nucleoPartes": {
+      "teoria": 21.8,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "25-35 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}
