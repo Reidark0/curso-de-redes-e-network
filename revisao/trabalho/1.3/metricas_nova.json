@@ -1,0 +1,72 @@
+{
+  "id": "1.3",
+  "versao": "nova",
+  "titulo": "Tipos de rede: PAN, LAN, WLAN, CAN, MAN, WAN e SAN",
+  "tipo": "intermediária",
+  "palavras": {
+    "visiveis": 4085,
+    "invisiveis": 48,
+    "teoriaVisivel": 2437
+  },
+  "porCampoVisivel": {
+    "content.motivation": 106,
+    "content.problem": 172,
+    "content.concept": 390,
+    "content.internals": 143,
+    "content.architecture": 251,
+    "content.analogy": 86,
+    "content.simpleExample": 101,
+    "content.enterpriseExample": 92,
+    "content.cloudExample": 115,
+    "content.securityExample": 110,
+    "content.diagram": 2,
+    "content.summary": 109,
+    "content.nextTheme": 31,
+    "security": 290,
+    "troubleshooting": 240,
+    "glossary": 199,
+    "title+subtitle": 24,
+    "objectives": 53,
+    "learningOutcomes": 52,
+    "quiz": 538,
+    "flashcards": 143,
+    "mentorQuestions": 223,
+    "exercises": 165,
+    "challenge": 158,
+    "commentedSolution": 180,
+    "references": 57,
+    "linksToOtherCourses": 55
+  },
+  "porCampoInvisivel": {
+    "networkContext": 48
+  },
+  "quantidades": {
+    "quiz": 8,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "70-100 min",
+    "estimatedStudyTimeMinutes": 100,
+    "M": 85,
+    "T": 82.7,
+    "partes": {
+      "teoria": 18.7,
+      "diagramas": 3,
+      "quiz": 8,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "70-100 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 26
+  }
+}

@@ -4,8 +4,8 @@
   "order": 3,
   "title": "Tipos de rede: PAN, LAN, WLAN, CAN, MAN, WAN e SAN",
   "subtitle": "Como alcance, finalidade, meio e domínio administrativo mudam arquitetura, operação, custo e segurança.",
-  "duration": "65-95 min",
-  "estimatedStudyTimeMinutes": 95,
+  "duration": "70-100 min",
+  "estimatedStudyTimeMinutes": 100,
   "difficulty": "iniciante-intermediário",
   "type": "intermediária",
   "xp": 165,
@@ -103,86 +103,6 @@
       "troubleshooting"
     ]
   },
-  "deepDive": {
-    "mentalModel": "Classifique uma rede perguntando: qual alcance ela cobre, qual finalidade atende, quem controla, qual meio usa, que risco cria e que evidência comprova seu funcionamento.",
-    "keyTerms": [
-      "PAN",
-      "LAN",
-      "WLAN",
-      "CAN",
-      "MAN",
-      "WAN",
-      "SAN",
-      "domínio administrativo",
-      "alcance",
-      "meio",
-      "SLA"
-    ],
-    "limitations": [
-      "As siglas não substituem desenho de arquitetura.",
-      "Uma rede real pode misturar vários tipos ao mesmo tempo.",
-      "Cloud abstrai parte do meio físico, mas não elimina alcance, rota, custo e risco.",
-      "SAN é especializada; não deve ser confundida com simples compartilhamento de arquivos."
-    ],
-    "whenToUse": [
-      "Ao explicar uma arquitetura para áreas técnicas ou gestão.",
-      "Ao separar escopo de falhas em troubleshooting.",
-      "Ao planejar orçamento de conectividade.",
-      "Ao desenhar segmentação, firewall e monitoramento."
-    ],
-    "whenNotToUse": [
-      "Não use a sigla como resposta final sem descrever arquitetura.",
-      "Não assuma que toda rede sem fio é insegura por definição.",
-      "Não trate toda conexão entre sites como internet pública sem verificar o serviço contratado."
-    ],
-    "operationalImpact": [
-      "LAN e WLAN exigem inventário local, cabeamento, APs, switches e suporte ao usuário.",
-      "WAN exige gestão de operadora, SLA, redundância, roteamento e monitoramento de disponibilidade.",
-      "SAN exige operação especializada, controle rigoroso e planejamento de performance.",
-      "Cloud networking exige documentação de subnets, rotas, peering, endpoints e custos de tráfego."
-    ],
-    "financialImpact": [
-      "PAN e pequenas LANs têm baixo custo inicial, mas ainda exigem suporte e segurança.",
-      "WLAN corporativa pode exigir APs gerenciados, controladora, licenças e site survey.",
-      "WAN e links dedicados podem representar custo recorrente alto.",
-      "SAN costuma envolver storage, switches especializados, licenças, redundância e equipe especializada.",
-      "Em cloud, tráfego entre regiões, NAT gateways, firewalls gerenciados e links dedicados podem gerar custo relevante."
-    ],
-    "securityImpact": [
-      "Cada tipo de rede possui superfície de ataque diferente.",
-      "WLAN exige atenção a autenticação, cobertura e isolamento.",
-      "WAN exige criptografia, roteamento seguro e monitoramento.",
-      "LAN plana facilita movimento lateral.",
-      "SAN e redes de gerenciamento devem ser altamente isoladas.",
-      "Cloud exige menor privilégio em security groups, rotas e endpoints."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Achar que WLAN e Wi-Fi são uma internet separada.",
-      "whyItHappens": "O usuário vê o Wi-Fi como sinônimo de conexão externa.",
-      "consequence": "Diagnóstico confunde rádio local com acesso WAN.",
-      "correction": "WLAN é acesso local sem fio; internet depende de roteamento, gateway, DNS e provedor."
-    },
-    {
-      "mistake": "Tratar WAN como se tivesse a mesma latência de LAN.",
-      "whyItHappens": "A aplicação funciona em ambiente local e depois é movida para filiais ou cloud.",
-      "consequence": "Sistemas ficam lentos por chatty protocols, replicação ruim ou dependência síncrona.",
-      "correction": "Projetar considerando latência, perda, SLA, cache, filas e arquitetura distribuída."
-    },
-    {
-      "mistake": "Confundir SAN com NAS ou compartilhamento comum de arquivos.",
-      "whyItHappens": "Ambos envolvem armazenamento acessível pela rede.",
-      "consequence": "Subestimação de criticidade, performance e isolamento.",
-      "correction": "SAN é rede especializada para blocos/armazenamento; NAS é serviço de arquivos na rede."
-    },
-    {
-      "mistake": "Achar que cloud dispensa redes.",
-      "whyItHappens": "A infraestrutura física fica invisível ao usuário.",
-      "consequence": "Subnets públicas, rotas permissivas e custos inesperados.",
-      "correction": "Modelar VPC/VNet, subnets, rotas, security groups, endpoints privados e tráfego."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Wi-Fi conectado, mas sem internet",
@@ -242,17 +162,15 @@
   },
   "security": {
     "goodPractices": [
-      "Separar redes por função e criticidade.",
-      "Isolar rede de visitantes da rede interna.",
-      "Usar criptografia em links WAN e acessos remotos.",
+      "Separar redes por função e criticidade: usuários, servidores, visitantes, IoT, gerência e storage.",
+      "Isolar a rede de visitantes da rede interna.",
+      "Criptografar links WAN e acessos remotos.",
       "Manter SAN e gerenciamento fora do alcance de usuários comuns.",
       "Documentar domínio administrativo, rotas, responsáveis e logs por tipo de rede."
     ],
     "badPractices": [
       "Usar uma única LAN plana para usuários, servidores, impressoras, visitantes e IoT.",
-      "Conectar filiais sem criptografia ou controle de tráfego.",
       "Expor storage ou gerenciamento em redes de usuário.",
-      "Tratar Wi-Fi de visitantes como se fosse confiável.",
       "Criar subnets públicas em cloud sem necessidade."
     ],
     "commonErrors": [
@@ -290,11 +208,9 @@
       "Logs de VPN e DNS"
     ],
     "hardening": [
-      "Segmentar por função",
-      "Desabilitar portas não usadas",
-      "Aplicar menor privilégio",
-      "Proteger gerência",
-      "Usar criptografia em links externos",
+      "Desabilitar portas de switch não usadas",
+      "Aplicar menor privilégio em ACLs e security groups",
+      "Proteger as interfaces de gerência",
       "Revisar rotas e exposição pública"
     ],
     "detectionIdeas": [
@@ -325,20 +241,20 @@
     },
     {
       "type": "diagnóstico",
-      "question": "Um usuário acessa sistemas locais, mas não acessa a aplicação hospedada em outra cidade. Que tipo de rede entra como hipótese forte?",
+      "question": "Um sistema interno funcionava bem com o banco de dados na mesma LAN. Depois que o banco foi movido para a cloud, em outra região, cada tela passou a demorar vários segundos, embora o link não esteja saturado. Por que isso acontece?",
       "hints": [
-        "O recurso local funciona.",
-        "O destino está distante."
+        "Compare a latência típica de uma LAN com a de uma WAN.",
+        "Pense em quantas idas e voltas cada tela faz até o banco."
       ],
       "expectedIdeas": [
-        "WAN",
-        "rota",
-        "VPN",
-        "operadora",
-        "firewall",
-        "DNS"
+        "latência de WAN",
+        "protocolo chatty",
+        "muitas idas e voltas",
+        "dependência síncrona",
+        "cache",
+        "arquitetura distribuída"
       ],
-      "explanation": "Se a LAN funciona, o foco pode se deslocar para WAN, VPN, rota, DNS, firewall ou serviço remoto."
+      "explanation": "WAN não tem a latência de uma LAN. Uma aplicação que faz muitas consultas pequenas e síncronas multiplica essa latência a cada ida e volta. A solução passa por projetar para WAN: menos idas e voltas, cache, filas ou aproximar dados e aplicação."
     },
     {
       "type": "cenário real",
@@ -362,93 +278,123 @@
   "quiz": [
     {
       "id": "q1.3.1",
-      "type": "conceito",
-      "q": "Qual alternativa descreve melhor uma LAN?",
-      "opts": [
-        "Rede local sob controle relativamente próximo, como casa, escritório ou andar",
+      "question": "Qual alternativa descreve melhor uma LAN?",
+      "options": [
         "Rede global da internet",
+        "Rede local sob controle relativamente próximo, como casa, escritório ou andar",
         "Rede exclusiva de armazenamento em bloco",
         "Rede pessoal de poucos centímetros"
       ],
-      "a": 0,
-      "exp": "LAN é uma rede local, normalmente dentro de um ambiente limitado e administrável.",
+      "answer": 1,
+      "explanation": "LAN é uma rede local, normalmente dentro de um ambiente limitado e administrável.",
+      "topic": "LAN",
       "difficulty": "iniciante",
-      "topic": "LAN"
+      "type": "conceito"
     },
     {
       "id": "q1.3.2",
-      "type": "comparação",
-      "q": "Qual diferença central entre LAN e WLAN?",
-      "opts": [
-        "WLAN é uma LAN sem fio, normalmente usando rádio/Wi-Fi",
-        "LAN sempre é pública e WLAN sempre é privada",
-        "WLAN é usada apenas entre cidades",
-        "LAN não usa protocolos"
+      "question": "Qual afirmação sobre LAN e WLAN está correta?",
+      "options": [
+        "WLAN cobre uma cidade, e LAN cobre um prédio",
+        "WLAN é a parte da rede que leva à internet; LAN é só a rede interna",
+        "WLAN muda o meio para rádio, mas mantém o alcance local de uma LAN",
+        "WLAN dispensa gateway e DNS, porque o access point resolve tudo"
       ],
-      "a": 0,
-      "exp": "WLAN é uma rede local sem fio. Ela mantém finalidade local, mas muda o meio e os riscos.",
+      "answer": 2,
+      "explanation": "WLAN é uma LAN sem fio: mantém a finalidade local, mas muda o meio (rádio) e os riscos. Internet depende de gateway, rota, DNS e WAN.",
+      "topic": "WLAN",
       "difficulty": "iniciante",
-      "topic": "WLAN"
+      "type": "comparação"
     },
     {
       "id": "q1.3.3",
-      "type": "cenário",
-      "q": "Uma empresa conecta sede e filial em estados diferentes por VPN sobre link de operadora. Qual tipo de rede está mais associado a esse cenário?",
-      "opts": [
+      "question": "Uma empresa conecta sede e filial em estados diferentes por VPN sobre link de operadora. Qual tipo de rede está mais associado a esse cenário?",
+      "options": [
         "WAN",
-        "PAN",
+        "MAN",
         "SAN",
         "WLAN"
       ],
-      "a": 0,
-      "exp": "A conexão entre locais distantes é característica de WAN, mesmo quando usa VPN.",
+      "answer": 0,
+      "explanation": "Ligar locais distantes, em estados diferentes, é característica de WAN, mesmo quando a ligação usa VPN. MAN se limita a uma cidade ou região metropolitana.",
+      "topic": "WAN",
       "difficulty": "iniciante",
-      "topic": "WAN"
+      "type": "cenário"
     },
     {
       "id": "q1.3.4",
-      "type": "segurança",
-      "q": "Qual é um risco típico de uma LAN plana?",
-      "opts": [
-        "Facilitar movimento lateral após comprometimento",
-        "Reduzir totalmente a latência da internet",
-        "Impedir qualquer broadcast",
-        "Eliminar necessidade de firewall"
+      "question": "Qual é um risco típico de uma LAN plana?",
+      "options": [
+        "Tornar a WAN mais lenta que a LAN",
+        "Impedir que usuários alcancem impressoras e servidores",
+        "Exigir roteamento entre todos os hosts",
+        "Facilitar movimento lateral após comprometimento"
       ],
-      "a": 0,
-      "exp": "Redes planas reduzem barreiras internas e podem facilitar propagação lateral.",
+      "answer": 3,
+      "explanation": "Sem barreiras internas, um host comprometido alcança os demais. A mitigação é segmentar com VLANs, ACLs e firewall interno.",
+      "topic": "segurança",
       "difficulty": "intermediário",
-      "topic": "segurança"
+      "type": "segurança"
     },
     {
       "id": "q1.3.5",
-      "type": "cloud",
-      "q": "Em cloud, qual recurso se aproxima da ideia de uma rede virtual controlada pelo cliente?",
-      "opts": [
+      "question": "Em cloud, qual recurso representa a rede virtual do cliente, dentro da qual ficam as subnets e as rotas?",
+      "options": [
+        "Private endpoint",
         "VPC/VNet",
-        "Monitor local",
-        "Fone Bluetooth",
-        "Cabo RJ-45 físico obrigatório"
+        "Security group",
+        "NAT gateway"
       ],
-      "a": 0,
-      "exp": "VPC e VNet representam redes virtuais em provedores cloud, com subnets, rotas e políticas.",
+      "answer": 1,
+      "explanation": "VPC (AWS, GCP) e VNet (Azure) são a rede virtual. Private endpoint, security group e NAT gateway são recursos que ficam dentro ou na borda dela.",
+      "topic": "cloud",
       "difficulty": "iniciante",
-      "topic": "cloud"
+      "type": "cloud"
     },
     {
       "id": "q1.3.6",
-      "type": "pegadinha comum",
-      "q": "Por que SAN não deve ser tratada como simples Wi-Fi ou compartilhamento de arquivos?",
-      "opts": [
-        "Porque é uma rede especializada para armazenamento, com requisitos próprios de desempenho, isolamento e disponibilidade",
-        "Porque SAN significa internet sem fio",
-        "Porque SAN é sempre uma rede doméstica",
-        "Porque SAN dispensa qualquer controle de acesso"
+      "question": "Qual é a diferença entre SAN e NAS?",
+      "options": [
+        "NAS é sempre corporativo e SAN é sempre doméstica",
+        "SAN é a versão sem fio de um NAS",
+        "SAN é uma rede especializada que entrega armazenamento em blocos aos servidores; NAS é um serviço de arquivos na rede comum",
+        "SAN e NAS são o mesmo serviço com nomes de fabricantes diferentes"
       ],
-      "a": 0,
-      "exp": "SAN é voltada a armazenamento e costuma ser crítica, especializada e altamente controlada.",
+      "answer": 2,
+      "explanation": "Os dois põem armazenamento na rede, mas a SAN é uma rede dedicada, crítica e isolada. Tratá-la como compartilhamento de arquivos subestima criticidade e isolamento.",
+      "topic": "SAN",
       "difficulty": "intermediário",
-      "topic": "SAN"
+      "type": "pegadinha comum"
+    },
+    {
+      "id": "q1.3.7",
+      "question": "Um notebook está associado ao Wi-Fi corporativo e responde ao ping do gateway, mas não abre nenhum site. Qual hipótese é a mais coerente?",
+      "options": [
+        "A SAN do datacenter está congestionada",
+        "O sinal Wi-Fi está fraco demais para navegar",
+        "A PAN Bluetooth do notebook está bloqueando a internet",
+        "O problema está além da WLAN: DNS, rota default, NAT, firewall ou WAN/provedor"
+      ],
+      "answer": 3,
+      "explanation": "Se o gateway responde, a WLAN e a LAN local estão funcionando. A hipótese se desloca para o que vem depois do gateway: DNS, rota default, NAT, firewall, WAN ou provedor.",
+      "topic": "troubleshooting",
+      "difficulty": "intermediário",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q1.3.8",
+      "question": "Uma universidade liga com fibra própria os prédios do seu campus. Uma prefeitura liga escolas espalhadas pela cidade com links de operadora. Como classificar cada caso?",
+      "options": [
+        "Universidade: CAN; prefeitura: MAN",
+        "Universidade: MAN; prefeitura: CAN",
+        "Universidade: LAN; prefeitura: SAN",
+        "Os dois casos são PAN, porque a organização é uma só"
+      ],
+      "answer": 0,
+      "explanation": "CAN interliga prédios próximos de um campus sob uma organização. MAN conecta sites dentro de uma cidade ou região metropolitana e costuma depender de operadora.",
+      "topic": "CAN/MAN",
+      "difficulty": "iniciante",
+      "type": "cenário"
     }
   ],
   "flashcards": [
@@ -458,25 +404,6 @@
       "back": "Personal Area Network: rede de curtíssimo alcance ao redor de uma pessoa, como Bluetooth entre celular e fone.",
       "tags": [
         "PAN"
-      ],
-      "difficulty": "iniciante"
-    },
-    {
-      "id": "fc1.3.2",
-      "front": "O que é LAN?",
-      "back": "Local Area Network: rede local, como casa, escritório, laboratório ou andar corporativo.",
-      "tags": [
-        "LAN"
-      ],
-      "difficulty": "iniciante"
-    },
-    {
-      "id": "fc1.3.3",
-      "front": "O que é WLAN?",
-      "back": "Wireless LAN: rede local sem fio, normalmente Wi-Fi, com riscos de rádio, sinal e autenticação.",
-      "tags": [
-        "WLAN",
-        "Wi-Fi"
       ],
       "difficulty": "iniciante"
     },
@@ -505,6 +432,26 @@
       "back": "Qual é o alcance, a finalidade, o meio, quem controla, qual custo e qual risco?",
       "tags": [
         "arquitetura"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.3.7",
+      "front": "CAN x MAN: qual a diferença?",
+      "back": "CAN (Campus Area Network) interliga prédios de um campus sob uma organização, geralmente com backbone próprio. MAN (Metropolitan Area Network) conecta sites dentro de uma cidade e costuma depender de operadora.",
+      "tags": [
+        "CAN",
+        "MAN"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.3.8",
+      "front": "Wi-Fi conectado garante acesso à internet?",
+      "back": "Não. A WLAN é só o acesso local por rádio; a internet depende de gateway, rota, DNS, NAT e WAN/provedor.",
+      "tags": [
+        "WLAN",
+        "troubleshooting"
       ],
       "difficulty": "iniciante"
     }
@@ -677,7 +624,7 @@
     {
       "term": "SAN",
       "shortDefinition": "Rede de armazenamento.",
-      "longDefinition": "Storage Area Network, rede especializada para conectar servidores a armazenamento crítico em datacenter.",
+      "longDefinition": "Storage Area Network, rede especializada que entrega armazenamento em blocos a servidores em datacenter. Não confundir com NAS, que é um serviço de arquivos na rede comum.",
       "example": "Cluster de virtualização acessando storage por rede dedicada.",
       "relatedTerms": [
         "storage",

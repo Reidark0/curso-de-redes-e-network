@@ -1,8 +1,8 @@
 
 <section class="lesson-section lesson-section--security">
-  <h2>13. Exemplo em Segurança</h2>
-  <p>Tipos de rede mudam o modelo de ameaça. WLAN expõe rádio e autenticação sem fio. WAN envolve terceiros, criptografia, roteamento e disponibilidade. LAN plana aumenta movimento lateral. SAN mal isolada pode afetar dados críticos. Cloud mal segmentada pode expor serviços internos à internet.</p>
-  <table class="data-table risk-table">
+  <h2>Exemplo em Segurança</h2>
+  <p>Cada tipo de rede muda o modelo de ameaça e a superfície de ataque:</p>
+  <div class="responsive-table"><table class="data-table risk-table">
     <thead><tr><th>Tipo</th><th>Risco comum</th><th>Impacto</th><th>Mitigação</th></tr></thead>
     <tbody>
       <tr><td>WLAN</td><td>Senha fraca, rogue AP, cobertura indevida</td><td>Acesso não autorizado ou interceptação local</td><td>WPA2/WPA3 Enterprise, segmentação, logs e site survey</td></tr>
@@ -11,5 +11,5 @@
       <tr><td>SAN</td><td>Acesso indevido a storage</td><td>Perda, corrupção ou vazamento de dados críticos</td><td>Isolamento, zoning, autenticação, multipath e auditoria</td></tr>
       <tr><td>Cloud</td><td>Subnet pública indevida</td><td>Exposição direta de workloads</td><td>Private subnets, security groups mínimos e endpoints privados</td></tr>
     </tbody>
-  </table>
+  </table></div>
 </section>

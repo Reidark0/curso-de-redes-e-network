@@ -1,13 +1,13 @@
 
 <section class="lesson-section lesson-section--internals">
-  <h2>6. Funcionamento interno</h2>
-  <p>O funcionamento interno muda conforme o tipo de rede, mas o raciocínio base permanece: dispositivos precisam de um meio, regras de comunicação, endereçamento, encaminhamento, controle de acesso e observabilidade.</p>
+  <h2>Funcionamento interno</h2>
+  <p>Todo tipo de rede precisa de meio, regras de comunicação, endereçamento, encaminhamento, controle de acesso e observabilidade. O que muda é onde está a preocupação central:</p>
   <ol class="flow-list">
-    <li><strong>PAN:</strong> geralmente usa tecnologias de curto alcance e baixo consumo. A preocupação central é pareamento, proximidade e autorização entre dispositivos.</li>
-    <li><strong>LAN:</strong> normalmente usa Ethernet e switches. A preocupação central é comutação local, endereçamento, VLANs, broadcast, gateway e cabeamento.</li>
-    <li><strong>WLAN:</strong> usa rádio e access points. A preocupação central é sinal, canal, interferência, autenticação, roaming e densidade de usuários.</li>
-    <li><strong>CAN/MAN/WAN:</strong> dependem de enlaces entre locais, roteamento, redundância, operadora, criptografia e política de tráfego.</li>
-    <li><strong>SAN:</strong> separa tráfego de armazenamento para desempenho e confiabilidade. A preocupação central é latência, disponibilidade, isolamento e integridade.</li>
+    <li><strong>PAN:</strong> tecnologias de curto alcance e baixo consumo. Foco em pareamento, proximidade e autorização entre dispositivos.</li>
+    <li><strong>LAN:</strong> normalmente Ethernet e switches. Foco em comutação local, endereçamento, VLANs, broadcast, gateway e cabeamento.</li>
+    <li><strong>WLAN:</strong> rádio e access points. Foco em sinal, canal, interferência, autenticação, roaming e densidade de usuários.</li>
+    <li><strong>CAN/MAN/WAN:</strong> enlaces entre locais. Foco em roteamento, redundância, operadora, criptografia e política de tráfego.</li>
+    <li><strong>SAN:</strong> separa o tráfego de armazenamento para desempenho e confiabilidade. Foco em latência, disponibilidade, isolamento e integridade.</li>
   </ol>
-  <p>Em troubleshooting, o tipo de rede muda as hipóteses. Em LAN você olha cabo, switch, VLAN e gateway. Em WLAN você olha sinal e autenticação. Em WAN você olha rota, SLA, VPN e operadora. Em SAN você olha paths, zoning, storage e latência.</p>
+  <p>Em troubleshooting, o tipo de rede muda as hipóteses: em LAN você olha cabo, switch, VLAN e gateway; em WLAN, sinal e autenticação; em WAN, rota, SLA, VPN e operadora; em SAN, paths, zoning, storage e latência.</p>
 </section>

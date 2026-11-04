@@ -1,7 +1,27 @@
 
 <section class="lesson-section lesson-section--concept">
-  <h2>5. Conceito</h2>
-  <p>Tipos de rede são classificações usadas para descrever o alcance, a finalidade, o meio de transmissão, o domínio administrativo e a função de uma rede.</p>
-  <div class="definition-box"><strong>Definição:</strong> uma PAN conecta dispositivos muito próximos de uma pessoa; uma LAN conecta dispositivos locais; uma WLAN é uma LAN sem fio; uma CAN conecta prédios de um campus; uma MAN cobre área metropolitana; uma WAN conecta locais distantes; uma SAN conecta servidores e armazenamento em ambiente especializado.</div>
-  <p>Essas categorias não são caixas rígidas. Uma empresa pode ter LAN dentro da filial, WLAN para usuários móveis, WAN para conectar filiais, SAN no datacenter e redes virtuais em cloud. O profissional de redes precisa enxergar como esses tipos se combinam em uma arquitetura real.</p>
+  <h2>Conceito</h2>
+  <p>Tipos de rede são classificações que descrevem o alcance, a finalidade, o meio de transmissão e o domínio administrativo de uma rede.</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Tipo</th><th>Alcance típico</th><th>Finalidade</th><th>Limitação principal</th></tr></thead>
+    <tbody>
+      <tr><td>PAN (Personal Area Network)</td><td>Pessoa ou poucos metros</td><td>Periféricos, sensores, celular, wearable</td><td>Baixo alcance, bateria, pareamento e segurança local</td></tr>
+      <tr><td>LAN (Local Area Network)</td><td>Sala, casa, escritório, andar</td><td>Conectar hosts próximos com alto controle</td><td>Broadcast, cabos, switches, segmentação e crescimento</td></tr>
+      <tr><td>WLAN (Wireless LAN)</td><td>Ambiente coberto por rádio</td><td>Mobilidade via Wi-Fi; é uma LAN sem fio</td><td>Interferência, sinal, autenticação e compartilhamento do meio</td></tr>
+      <tr><td>CAN (Campus Area Network)</td><td>Campus, conjunto de prédios</td><td>Interligar unidades próximas sob uma organização</td><td>Backbone, fibra, redundância e administração central</td></tr>
+      <tr><td>MAN (Metropolitan Area Network)</td><td>Cidade ou região metropolitana</td><td>Conectar sites dentro de área urbana</td><td>Dependência de operadora e custo de link</td></tr>
+      <tr><td>WAN (Wide Area Network)</td><td>Região, país ou global</td><td>Conectar filiais, datacenters, internet e cloud</td><td>Latência, custo, SLA, roteamento e segurança</td></tr>
+      <tr><td>SAN (Storage Area Network)</td><td>Datacenter ou ambiente especializado</td><td>Conectar servidores a armazenamento</td><td>Complexidade, custo, isolamento e criticidade</td></tr>
+    </tbody>
+  </table></div>
+  <p>Essas categorias não são caixas rígidas: a mesma empresa tem LAN na filial, WLAN para usuários móveis, WAN entre filiais, SAN no datacenter e redes virtuais em cloud. A sigla não substitui o desenho da arquitetura; ela é o ponto de partida.</p>
+  <div class="callout warning"><strong>Erros comuns:</strong>
+    <ul>
+      <li><strong>Achar que WLAN é “a internet”.</strong> WLAN é o acesso local por rádio; a internet depende de gateway, rota, DNS e provedor. Sem essa separação, o diagnóstico confunde rádio local com acesso WAN.</li>
+      <li><strong>Tratar WAN com a latência de uma LAN.</strong> Uma aplicação que funcionava no mesmo prédio fica lenta quando vai para a filial ou a cloud, por protocolos “tagarelas” (chatty), replicação ruim ou dependência síncrona. Projete considerando latência, perda, SLA, cache e filas.</li>
+      <li><strong>Confundir SAN com NAS.</strong> Os dois põem armazenamento na rede, mas SAN é uma rede especializada que entrega armazenamento em blocos aos servidores; NAS é um serviço de arquivos dentro da rede comum. Confundir leva a subestimar criticidade, desempenho e isolamento.</li>
+      <li><strong>Achar que cloud dispensa redes.</strong> O cabo fica invisível, mas VPC/VNet, subnets, rotas, security groups, endpoints privados e tráfego continuam sendo seu problema; ignorá-los gera subnets públicas, rotas permissivas e custos inesperados.</li>
+      <li><strong>Supor que toda conexão entre sites é internet pública</strong> (ou que toda rede sem fio é insegura por definição). Verifique o serviço contratado e os controles aplicados antes de concluir.</li>
+    </ul>
+  </div>
 </section>
