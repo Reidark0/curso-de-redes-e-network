@@ -10,4 +10,5 @@ Você vai revisar UMA aula do curso na revisão v2: `{ID}` (módulo `{MOD}`). O 
 
 Regras: não altere nada fora de `revisao/trabalho_v2/{ID}/`, `revisao/analises_v2/` e (pelo `montar`) `aulas novas/`. Não faça commit, não edite `PROGRESSO.md` nem `DECISOES.md` e não crie subagentes. Não despeje arquivos inteiros no terminal: leia os `.html` e o `meta.json` com a ferramenta de leitura de arquivos e edite o `meta.json` com edições pontuais ou um script curto. Não faça perguntas: na dúvida, siga a aula de referência 0.1 e registre em "Revisão humana".
 {EXTRA}
+Se a base for o original, aplique também a seção 9.6. Se alguma ferramenta tiver um bug, contorne sem editá-la e descreva o bug na resposta final.
 Ao terminar, responda em no máximo 8 linhas: status (OK/FALHOU), palavras visíveis original→v1→v2, núcleo e prática extra (min) original→v2, a `duration` nova, o que saiu de maior, o número de avisos do `validar` e os itens para revisão humana.
