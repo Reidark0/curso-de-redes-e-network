@@ -1,12 +1,11 @@
 <section class="lesson-section lesson-section--problem">
-  <h2>3. Problema</h2>
-  <p>Sem Camada 4, a rede conseguiria entregar um pacote ao host, mas não saberia qual aplicação deve processar o conteúdo. Também faltaria uma forma padronizada de controlar confiabilidade, ordem, retransmissão, multiplexação e demultiplexação de fluxos.</p>
+  <h2>Problema</h2>
+  <p>Um computador executa vários serviços ao mesmo tempo, e o IP identifica o host, não o processo. Além disso, o IP pode perder, atrasar ou reordenar pacotes. Por isso surgiram o TCP (confiável, ordenado e orientado à conexão) e o UDP (mais simples, sem conexão e com menos overhead). A Camada 4 resolve:</p>
   <ul class="flow-list">
-    <li><strong>Multiplexação:</strong> vários serviços podem existir no mesmo host usando portas diferentes.</li>
-    <li><strong>Demultiplexação:</strong> o sistema operacional entrega o tráfego ao processo correto.</li>
-    <li><strong>Confiabilidade:</strong> TCP confirma recebimento, ordena segmentos e retransmite quando necessário.</li>
-    <li><strong>Baixa latência:</strong> UDP evita handshake e controle pesado quando a aplicação aceita esse modelo.</li>
-    <li><strong>Controle de segurança:</strong> políticas podem permitir ou negar tráfego por protocolo e porta.</li>
+    <li><strong>Multiplexação e demultiplexação:</strong> vários serviços no mesmo host, em portas diferentes; o sistema operacional entrega cada fluxo ao processo correto.</li>
+    <li><strong>Confiabilidade:</strong> o TCP confirma o recebimento, ordena os segmentos e retransmite.</li>
+    <li><strong>Baixa latência:</strong> o UDP evita handshake quando a aplicação aceita esse modelo.</li>
+    <li><strong>Controle de segurança:</strong> firewalls, NAT, balanceadores e security groups decidem por origem, destino, protocolo e porta.</li>
   </ul>
-  <p>O erro comum é tratar conectividade IP como disponibilidade de serviço. Pingar um servidor não prova que TCP/443 está aberto, que a aplicação responde, que TLS negocia corretamente ou que a autenticação funciona. Cada camada precisa de evidências próprias.</p>
+  <p>O erro comum é tratar conectividade IP como disponibilidade de serviço. Ping usa ICMP: não prova que TCP/443 está aberto, que o TLS negocia nem que a autenticação funciona. Cada camada precisa de evidência própria.</p>
 </section>

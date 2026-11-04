@@ -1,5 +1,5 @@
 <section class="lesson-section lesson-section--diagram">
-  <h2>14. Diagrama SVG</h2>
+  <h2>Diagrama</h2>
   <svg class="lesson-svg" viewBox="0 0 980 520" role="img" aria-labelledby="m02l06-title m02l06-desc">
     <title id="m02l06-title">Camada 4 com TCP, UDP, portas e firewall</title>
     <desc id="m02l06-desc">Um cliente usa uma porta efêmera para acessar TCP 443 em um servidor, passando por firewall stateful. Também há exemplo de UDP 53 para DNS.</desc>
@@ -9,10 +9,11 @@
       </marker>
     </defs>
 
-    <rect x="40" y="135" width="170" height="105" rx="14" class="svg-node svg-node--client"></rect>
-    <text x="125" y="172" text-anchor="middle" class="svg-label">Cliente</text>
-    <text x="125" y="198" text-anchor="middle" class="svg-label svg-label--small">porta local 52344</text>
-    <text x="125" y="220" text-anchor="middle" class="svg-label svg-label--small">TCP SYN</text>
+    <rect x="40" y="125" width="170" height="185" rx="14" class="svg-node svg-node--client"></rect>
+    <text x="125" y="163" text-anchor="middle" class="svg-label">Cliente</text>
+    <text x="125" y="190" text-anchor="middle" class="svg-label svg-label--small">porta local 52344</text>
+    <text x="125" y="214" text-anchor="middle" class="svg-label svg-label--small">TCP SYN</text>
+    <text x="125" y="294" text-anchor="middle" class="svg-label svg-label--small">consulta DNS (UDP)</text>
 
     <rect x="305" y="125" width="185" height="125" rx="14" class="svg-node svg-node--firewall"></rect>
     <text x="397" y="163" text-anchor="middle" class="svg-label">Firewall</text>
@@ -29,20 +30,20 @@
     <line x1="610" y1="218" x2="490" y2="218" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m02l06-arrow)"></line>
     <line x1="305" y1="218" x2="210" y2="218" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m02l06-arrow)"></line>
 
-    <rect x="805" y="305" width="135" height="95" rx="14" class="svg-node svg-node--server"></rect>
-    <text x="872" y="338" text-anchor="middle" class="svg-label">DNS</text>
-    <text x="872" y="363" text-anchor="middle" class="svg-label svg-label--small">UDP/53</text>
+    <rect x="805" y="255" width="135" height="70" rx="14" class="svg-node svg-node--server"></rect>
+    <text x="872" y="283" text-anchor="middle" class="svg-label">DNS</text>
+    <text x="872" y="307" text-anchor="middle" class="svg-label svg-label--small">UDP/53</text>
 
-    <line x1="210" y1="335" x2="805" y2="350" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m02l06-arrow)"></line>
-    <text x="500" y="328" text-anchor="middle" class="svg-label svg-label--small">UDP: sem handshake nativo, resposta depende da aplicação</text>
+    <line x1="210" y1="290" x2="805" y2="290" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m02l06-arrow)"></line>
+    <text x="500" y="278" text-anchor="middle" class="svg-label svg-label--small">UDP: sem handshake nativo, resposta depende da aplicação</text>
 
-    <rect x="60" y="305" width="690" height="155" rx="16" class="content-card"></rect>
-    <text x="405" y="337" text-anchor="middle" class="svg-label">Camada 4 responde</text>
-    <text x="95" y="372" class="svg-label svg-label--small">1. Qual protocolo? TCP ou UDP?</text>
-    <text x="95" y="398" class="svg-label svg-label--small">2. Qual porta de origem e destino?</text>
-    <text x="95" y="424" class="svg-label svg-label--small">3. Existe serviço escutando?</text>
-    <text x="415" y="372" class="svg-label svg-label--small">4. Firewall permite e acompanha estado?</text>
-    <text x="415" y="398" class="svg-label svg-label--small">5. A conexão estabelece, reseta ou expira?</text>
-    <text x="415" y="424" class="svg-label svg-label--small">6. Depois disso ainda faltam TLS e aplicação.</text>
+    <rect x="60" y="345" width="690" height="155" rx="16" class="content-card"></rect>
+    <text x="405" y="377" text-anchor="middle" class="svg-label">Camada 4 responde</text>
+    <text x="95" y="412" class="svg-label svg-label--small">1. Qual protocolo? TCP ou UDP?</text>
+    <text x="95" y="438" class="svg-label svg-label--small">2. Qual porta de origem e destino?</text>
+    <text x="95" y="464" class="svg-label svg-label--small">3. Existe serviço escutando?</text>
+    <text x="415" y="412" class="svg-label svg-label--small">4. Firewall permite e acompanha estado?</text>
+    <text x="415" y="438" class="svg-label svg-label--small">5. A conexão estabelece, reseta ou expira?</text>
+    <text x="415" y="464" class="svg-label svg-label--small">6. Depois disso ainda faltam TLS e aplicação.</text>
   </svg>
 </section>

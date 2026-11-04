@@ -1,6 +1,5 @@
 <section class="lesson-section lesson-section--motivation">
-  <h2>1. Motivação</h2>
-  <p>Na Camada 3, você aprendeu como um pacote IP encontra outra rede por meio de gateway, rotas e TTL. Mas alcançar o servidor ainda não significa acessar o serviço certo. Um mesmo servidor pode hospedar HTTPS na porta 443, SSH na porta 22, DNS na porta 53, banco de dados em outra porta, métricas em uma porta interna e uma API em um caminho HTTP específico.</p>
-  <p>A Camada 4 existe para resolver uma pergunta que a Camada 3 não resolve: dentro de um host, qual processo ou serviço deve receber aquele tráfego? É aqui que entram TCP, UDP, portas, conexões, sockets, estados e controle de entrega.</p>
-  <div class="callout callout--problem"><strong>Problema real:</strong> um servidor responde ping, a rota está correta e o DNS resolve, mas o sistema continua indisponível. O problema pode estar na porta fechada, em um firewall bloqueando TCP/443, em uma aplicação que não está escutando, em uma conexão resetada, em timeout TCP, em balanceador sem backend saudável ou em um serviço UDP sem resposta observável.</div>
+  <h2>Motivação</h2>
+  <p>Na Camada 3, o pacote IP chegou ao servidor. Mas alcançar o servidor não significa acessar o serviço certo: o mesmo host pode ter HTTPS na porta 443, SSH na 22, DNS na 53, um banco de dados e uma porta interna de métricas. A Camada 4 responde à pergunta que a Camada 3 não resolve: <strong>dentro do host, qual processo deve receber esse tráfego?</strong></p>
+  <div class="callout callout--problem"><strong>Problema real:</strong> o servidor responde ping, a rota está correta e o DNS resolve, mas o sistema continua indisponível. A causa pode ser porta fechada, firewall bloqueando TCP/443, aplicação que não escuta, conexão resetada, timeout TCP, balanceador sem backend saudável ou serviço UDP sem resposta observável.</div>
 </section>

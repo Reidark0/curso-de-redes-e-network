@@ -1,5 +1,5 @@
 <section class="lesson-section lesson-section--cloud">
-  <h2>11. Exemplo em cloud</h2>
-  <p>Em cloud, portas aparecem em security groups, NSGs, firewall rules, load balancers, listeners, target groups, health checks, NAT gateways e private endpoints. Um serviço pode estar saudável internamente, mas inacessível porque o listener do load balancer usa porta errada, o security group bloqueia retorno, o targetPort do Kubernetes não bate com a porta do container ou a rota manda o tráfego para o lugar errado.</p>
-  <p>Também há impacto financeiro: balanceadores, NAT gateways, firewalls gerenciados, logs de fluxo e tráfego entre zonas podem gerar custo recorrente. Porta liberada sem necessidade aumenta superfície de ataque e custo de monitoramento.</p>
+  <h2>Exemplo em cloud</h2>
+  <p>Em cloud, portas aparecem em security groups, NSGs, regras de firewall, listeners e target groups de load balancers, health checks e private endpoints. Um serviço pode estar saudável internamente e ainda assim inacessível porque o listener do load balancer usa a porta errada, o security group não libera a porta de entrada a partir da origem certa, uma ACL stateless de sub-rede bloqueia o retorno ou o health check testa uma porta em que a aplicação não escuta.</p>
+  <p>Cada porta liberada sem necessidade aumenta a superfície de ataque e o volume de logs a monitorar.</p>
 </section>

@@ -1,5 +1,8 @@
 <section class="lesson-section lesson-section--example">
-  <h2>9. Exemplo simples</h2>
-  <p>Seu notebook acessa <code>https://example.com</code>. O DNS resolve um IP. A Camada 3 leva o pacote até o servidor. A Camada 4 cria uma conexão TCP entre uma porta efêmera do seu notebook, como 52344, e a porta 443 do servidor.</p>
-  <p>Se TCP/443 estiver bloqueado, a rota pode estar correta e o ping pode funcionar, mas o site não abre. Se TCP/443 abre, ainda faltam Camada 5/6/7: TLS, HTTP, certificado, aplicação, autenticação e autorização.</p>
+  <h2>Exemplo simples</h2>
+  <p>Seu notebook (192.168.10.50) acessa <code>https://example.com</code>. O DNS resolve um IP (aqui, 203.0.113.20). A Camada 3 leva o pacote até o servidor. A Camada 4 cria uma conexão TCP entre uma porta efêmera do notebook, como 52344, e a porta 443 do servidor. No Windows, <code>netstat -ano</code> mostraria algo assim:</p>
+  <pre class="code-block"><code>  Proto  Endereço Local         Endereço Externo       Estado        PID
+  TCP    192.168.10.50:52344    203.0.113.20:443       ESTABLISHED   4120</code></pre>
+  <p>Leia assim: porta local efêmera 52344 (você é o cliente), porta remota 443 (o serviço HTTPS), conexão estabelecida, processo 4120 (o navegador). No servidor, o mesmo serviço apareceria como <code>LISTEN</code> na porta 443.</p>
+  <p>Se TCP/443 estiver bloqueado, a rota pode estar correta e o ping pode funcionar, mas o site não abre. Se TCP/443 abre, ainda faltam as Camadas 5, 6 e 7: TLS, certificado, HTTP, autenticação e autorização.</p>
 </section>

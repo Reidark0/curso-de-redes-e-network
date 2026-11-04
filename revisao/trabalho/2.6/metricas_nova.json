@@ -1,0 +1,79 @@
+{
+  "id": "2.6",
+  "versao": "nova",
+  "titulo": "Camada 4 — Transporte: TCP, UDP, portas e conexões",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5102,
+    "invisiveis": 31,
+    "teoriaVisivel": 2624
+  },
+  "porCampoVisivel": {
+    "content.motivation": 112,
+    "content.problem": 148,
+    "content.concept": 291,
+    "content.internals": 382,
+    "content.architecture": 107,
+    "content.analogy": 69,
+    "content.simpleExample": 132,
+    "content.enterpriseExample": 76,
+    "content.cloudExample": 98,
+    "content.devsecopsExample": 98,
+    "content.diagram": 1,
+    "content.summary": 86,
+    "content.nextTheme": 37,
+    "security": 382,
+    "troubleshooting": 383,
+    "glossary": 222,
+    "title+subtitle": 27,
+    "objectives": 65,
+    "learningOutcomes": 93,
+    "quiz": 481,
+    "flashcards": 140,
+    "mentorQuestions": 226,
+    "exercises": 233,
+    "challenge": 145,
+    "commentedSolution": 238,
+    "references": 58,
+    "linksToOtherCourses": 53,
+    "lab": 719
+  },
+  "porCampoInvisivel": {
+    "networkContext": 31
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 45,
+    "alternativa_5minPasso_maisLeitura": 40.5,
+    "plausivel": true,
+    "palavras": 719
+  },
+  "duracao": {
+    "declarada": "110-155 min",
+    "estimatedStudyTimeMinutes": 155,
+    "M": 132.5,
+    "T": 127.2,
+    "partes": {
+      "teoria": 20.2,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 45
+    },
+    "faixaRecomendada": "110-155 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 18
+  }
+}

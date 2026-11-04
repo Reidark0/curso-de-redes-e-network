@@ -1,10 +1,9 @@
 <section class="lesson-section lesson-section--summary">
-  <h2>19. Resumo</h2>
+  <h2>Resumo</h2>
   <ul>
-    <li><strong>Ideia central:</strong> Camada 4 entrega tráfego ao serviço correto usando TCP, UDP e portas.</li>
-    <li><strong>O que lembrar:</strong> ping não testa porta; rota correta não prova serviço disponível.</li>
-    <li><strong>Erro comum:</strong> confundir porta aberta com aplicação saudável ou autorização concedida.</li>
-    <li><strong>Uso real:</strong> firewall, balanceador, Kubernetes Service, security group, NAT, proxy e diagnóstico de API.</li>
-    <li><strong>Segurança:</strong> portas expostas e conexões incomuns são sinais importantes de superfície de ataque e possível abuso.</li>
+    <li><strong>Ideia central:</strong> o IP leva o pacote até o host; TCP/UDP e portas entregam o tráfego ao processo correto. O TCP cria uma conversa confiável e com estado; o UDP envia datagramas sem handshake.</li>
+    <li><strong>Diagnóstico:</strong> ping não testa porta. SYN-ACK = serviço escutando; RST = porta fechada ou rejeição; timeout = descarte ou resposta que não volta.</li>
+    <li><strong>Erro comum:</strong> confundir porta aberta com aplicação saudável ou com autorização.</li>
+    <li><strong>Segurança:</strong> firewalls, balanceadores e security groups decidem por porta e estado; portas expostas e saídas incomuns são sinais de risco.</li>
   </ul>
 </section>

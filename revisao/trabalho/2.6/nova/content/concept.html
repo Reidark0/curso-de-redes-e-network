@@ -1,6 +1,27 @@
 <section class="lesson-section lesson-section--concept">
-  <h2>5. Conceito</h2>
-  <p>A Camada 4 do Modelo OSI, chamada de Transporte, fornece comunicação lógica entre processos em hosts diferentes. Em redes TCP/IP, os dois protocolos mais conhecidos dessa função são TCP e UDP.</p>
-  <div class="definition-box"><strong>Definição:</strong> a Camada 4 usa protocolos de transporte, portas e estados para entregar dados ao serviço correto e, dependendo do protocolo, oferecer confiabilidade, ordenação, controle de fluxo e controle de conexão.</div>
-  <p>Uma porta não é uma tomada física. Uma porta é um número lógico usado pelo sistema operacional e pelos protocolos de transporte para identificar serviços e fluxos. Quando você acessa HTTPS, normalmente fala com TCP/443. Quando consulta DNS tradicional, pode usar UDP/53 ou TCP/53. Quando acessa SSH, usa TCP/22.</p>
+  <h2>Conceito</h2>
+  <div class="definition-box"><strong>Definição:</strong> a Camada 4 (Transporte) fornece comunicação lógica entre processos em hosts diferentes. Ela usa protocolos de transporte (em TCP/IP, principalmente TCP e UDP), portas e estados para entregar os dados ao serviço correto e, conforme o protocolo, oferecer confiabilidade, ordenação, controle de fluxo e de conexão.</div>
+  <p>Uma porta não é uma tomada física: é um número lógico de 16 bits (0 a 65535) que identifica serviços e fluxos. Por padrão, HTTP usa TCP/80; HTTPS, TCP/443; SSH, TCP/22; o DNS tradicional, UDP/53, mas também TCP/53 para respostas grandes e transferências de zona. Por isso, liberar só UDP/53 causa falhas que aparecem apenas em consultas grandes.</p>
+  <h3>TCP x UDP</h3>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Aspecto</th><th>TCP</th><th>UDP</th></tr></thead>
+    <tbody>
+      <tr><td>Conexão</td><td>Three-way handshake antes dos dados</td><td>Nenhuma: envia datagramas direto</td></tr>
+      <tr><td>Garantias</td><td>Sequência, ACK, janela e retransmissão</td><td>Nenhuma nativa; a aplicação trata perda e ordem se precisar</td></tr>
+      <tr><td>Custo</td><td>Mais overhead, mais sensível a latência e perda</td><td>Menos overhead, menor latência</td></tr>
+      <tr><td>Uso típico</td><td>HTTP/HTTPS, SSH, bancos de dados</td><td>DNS, voz e vídeo, QUIC (base do HTTP/3)</td></tr>
+    </tbody>
+  </table></div>
+  <p>Nenhum dos dois é "mais seguro": a segurança vem de TLS, autenticação e política, acima do transporte.</p>
+  <h3>Porta, socket, conexão e sessão</h3>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Termo</th><th>O que é</th><th>Exemplo</th></tr></thead>
+    <tbody>
+      <tr><td>Porta de serviço</td><td>Porta em que o servidor escuta (listener)</td><td>TCP/443 no servidor web</td></tr>
+      <tr><td>Porta efêmera</td><td>Porta local temporária que o cliente escolhe para cada conexão (49152–65535 no Windows e na faixa da IANA; 32768–60999 no Linux, por padrão)</td><td>52344 no notebook</td></tr>
+      <tr><td>Socket</td><td>Ponto de comunicação de um processo: IP + protocolo + porta</td><td>192.168.10.50:52344/TCP</td></tr>
+      <tr><td>Conexão TCP</td><td>Par de sockets, identificado pela 5-tupla: protocolo, IP e porta de origem, IP e porta de destino</td><td>192.168.10.50:52344 → 203.0.113.20:443</td></tr>
+      <tr><td>Sessão de aplicação</td><td>Estado acima do transporte (login, cookie, token); pode atravessar várias conexões TCP</td><td>Você continua logado depois que a conexão é refeita</td></tr>
+    </tbody>
+  </table></div>
 </section>

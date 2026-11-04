@@ -1,5 +1,5 @@
 <section class="lesson-section lesson-section--enterprise">
-  <h2>10. Exemplo empresarial</h2>
-  <p>Em uma empresa, um sistema de folha pode estar em um servidor interno. Usuários acessam TCP/443 via navegador. Administradores acessam TCP/22 ou TCP/3389, idealmente por bastion, VPN ou ferramenta de acesso privilegiado. O banco escuta TCP/5432 ou TCP/1433, mas essa porta não deve estar exposta para estações comuns.</p>
-  <p>Uma política madura descreve origem, destino, protocolo, porta, justificativa, responsável, expiração, logs e evidências. Liberar <code>any-any</code> porque “não sabemos qual porta usa” é uma má prática operacional e de segurança.</p>
+  <h2>Exemplo empresarial</h2>
+  <p>Um sistema de folha roda num servidor interno. Usuários acessam TCP/443 pelo navegador. Administradores acessam TCP/22 ou TCP/3389, de preferência por bastion, VPN ou ferramenta de acesso privilegiado. O banco escuta TCP/5432 ou TCP/1433, mas essa porta não deve estar acessível a partir das estações comuns.</p>
+  <p>Uma política madura descreve origem, destino, protocolo, porta, justificativa, responsável, expiração e logs. Liberar <code>any-any</code> porque "não sabemos qual porta usa" é má prática operacional e de segurança.</p>
 </section>

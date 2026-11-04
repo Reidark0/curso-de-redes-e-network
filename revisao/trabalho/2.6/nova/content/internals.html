@@ -1,15 +1,35 @@
 <section class="lesson-section lesson-section--internals">
-  <h2>6. Funcionamento interno</h2>
-  <p>O funcionamento interno da Camada 4 depende do protocolo. TCP é orientado à conexão; UDP é baseado em datagramas.</p>
+  <h2>Funcionamento interno</h2>
   <ol class="flow-list">
-    <li>Uma aplicação cliente solicita ao sistema operacional uma conexão ou envio para IP, protocolo e porta de destino.</li>
-    <li>O sistema escolhe uma porta local efêmera para representar aquele fluxo do cliente.</li>
-    <li>No TCP, o cliente envia SYN para iniciar o three-way handshake.</li>
-    <li>O servidor responde SYN-ACK se estiver escutando e se políticas permitirem.</li>
-    <li>O cliente envia ACK e a conexão fica estabelecida.</li>
-    <li>Durante a transferência, TCP usa números de sequência, confirmações, janelas e retransmissões.</li>
-    <li>Ao encerrar, podem aparecer FIN, ACK e, em alguns casos, RST para resetar a conexão.</li>
-    <li>No UDP, não há handshake nativo. A aplicação envia datagramas e decide como lidar com ausência de resposta.</li>
+    <li>A aplicação cliente pede ao sistema operacional uma conexão para IP, protocolo e porta de destino; o sistema escolhe uma porta local efêmera para esse fluxo.</li>
+    <li>No TCP, o cliente envia <strong>SYN</strong> (three-way handshake).</li>
+    <li>O servidor responde <strong>SYN-ACK</strong> se houver serviço escutando e as políticas permitirem.</li>
+    <li>O cliente envia <strong>ACK</strong> e a conexão fica estabelecida (ESTABLISHED).</li>
+    <li>Na transferência, o TCP usa números de sequência, confirmações, janelas e retransmissões.</li>
+    <li>No encerramento aparecem <strong>FIN</strong> e ACK; <strong>RST</strong> encerra de forma abrupta ou recusa a tentativa.</li>
+    <li>No UDP não há handshake: a aplicação envia datagramas e decide o que fazer sem resposta.</li>
   </ol>
-  <p>Firewalls stateful aproveitam esses estados para permitir respostas a conexões iniciadas de dentro, bloquear tráfego inesperado e registrar eventos. Porém, estado também consome memória e pode virar gargalo sob carga ou ataque.</p>
+  <h3>Campos do cabeçalho que aparecem em logs e capturas</h3>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Campo</th><th>Tamanho</th><th>Função e leitura defensiva</th></tr></thead>
+    <tbody>
+      <tr><td>Source Port</td><td>16 bits</td><td>Porta de origem; ajuda a correlacionar conexões, mas não identifica o usuário</td></tr>
+      <tr><td>Destination Port</td><td>16 bits</td><td>Serviço de destino (TCP/443, UDP/53); porta permitida não garante conteúdo autorizado</td></tr>
+      <tr><td>Sequence Number</td><td>32 bits (TCP)</td><td>Ordena os bytes; anomalias indicam perda, retransmissão, reset ou manipulação</td></tr>
+      <tr><td>Flags TCP</td><td>bits de controle</td><td>SYN, ACK, FIN, RST; picos de SYN ou RST indicam problema operacional ou abuso</td></tr>
+      <tr><td>UDP Length</td><td>16 bits</td><td>Tamanho do datagrama UDP</td></tr>
+    </tbody>
+  </table></div>
+  <h3>O que o cliente observa ao enviar o SYN</h3>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Resposta</th><th>Significado provável</th><th>Próxima hipótese</th></tr></thead>
+    <tbody>
+      <tr><td>SYN-ACK</td><td>Serviço escutando e caminho liberado</td><td>Transporte ok; testar TLS e aplicação</td></tr>
+      <tr><td>RST imediato</td><td>Host alcançado, mas nada escuta na porta, ou houve rejeição ativa</td><td>Listener, porta configurada, firewall que rejeita</td></tr>
+      <tr><td>Nada (SYN retransmitido até o timeout)</td><td>Descarte silencioso ou resposta que não volta</td><td>Firewall com DROP, rota assimétrica, host fora</td></tr>
+    </tbody>
+  </table></div>
+  <p>No UDP a leitura é menos clara: porta fechada costuma gerar ICMP "port unreachable", mas porta aberta pode simplesmente não responder. Ausência de resposta UDP não prova bloqueio.</p>
+  <p>Firewalls stateful usam esses estados para permitir a resposta de uma conexão iniciada por origem autorizada e bloquear o resto. O estado consome memória e pode virar gargalo sob carga ou ataque. E se a resposta volta por outro caminho (rota assimétrica), o firewall stateful desse caminho, que não viu o SYN, descarta o SYN-ACK: parece porta bloqueada, mas a causa é a rota.</p>
+  <div class="callout warning"><strong>O que um teste de Camada 4 não prova:</strong> porta aberta não prova aplicação saudável; porta fechada não diz se o bloqueio é local, remoto ou intermediário; ICMP bloqueado não prova que o TCP está bloqueado.</div>
 </section>
