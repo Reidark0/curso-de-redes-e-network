@@ -1,0 +1,28 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <p>
+    O Módulo 0 forma uma cadeia: cada etapa depende da anterior e acrescenta uma pergunta. Diante de qualquer comunicação, ou de qualquer falha, percorra-a em ordem:
+  </p>
+  <ol class="flow-list">
+    <li><strong>Dado (0.1):</strong> o que está sendo representado? Um texto, um número, uma imagem, uma credencial?</li>
+    <li><strong>Bytes (0.2):</strong> como ler esses bytes: em decimal, binário ou hexadecimal?</li>
+    <li><strong>Codificação (0.3):</strong> se é texto, qual regra transforma caracteres em bytes? A forma mudou (UTF-8, Base64) ou o conteúdo foi protegido (criptografia)?</li>
+    <li><strong>Sinal (0.5):</strong> como os bits saem da máquina: tensão no cobre, luz na fibra ou ondas de rádio?</li>
+    <li><strong>Métricas (0.4, 0.6):</strong> a taxa está em bits ou em bytes? Qual é a latência, a perda, o jitter e o throughput útil?</li>
+    <li><strong>Protocolo (0.7):</strong> qual contrato define o formato, a ordem, os erros e o significado das mensagens?</li>
+    <li><strong>Camada (0.8):</strong> em qual nível a evidência aponta a falha: meio, endereço, nome, porta, aplicação, identidade ou política?</li>
+    <li><strong>Evidência (0.9):</strong> o que este teste mostra, o que não mostra e qual é o próximo teste? Antes de compartilhar, o que precisa ser mascarado?</li>
+  </ol>
+
+  <h3>Checklist de prontidão para o Módulo 1</h3>
+  <p>Marque só o que você consegue fazer sem consultar. Cada item que travar é uma lacuna: volte à aula indicada antes de avançar.</p>
+  <ul>
+    <li>Explicar a diferença entre informação, dado, bit, byte e sinal (0.1, 0.5).</li>
+    <li>Ler um byte em binário, decimal e hexadecimal (0.2).</li>
+    <li>Dizer por que Base64 não é criptografia e por que isso importa em segurança (0.3).</li>
+    <li>Converter Mbps em MB/s e estimar o tempo de uma transferência, lembrando do overhead (0.4).</li>
+    <li>Diferenciar latência, largura de banda, throughput, perda e jitter num cenário real (0.6).</li>
+    <li>Explicar protocolo como contrato e dizer o que um teste prova e o que não prova (0.7, 0.9).</li>
+    <li>Montar um diagnóstico inicial por camadas sem pular direto para a conclusão (0.8).</li>
+  </ul>
+</section>

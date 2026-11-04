@@ -1,0 +1,84 @@
+{
+  "id": "0.10",
+  "versao": "nova",
+  "titulo": "Revisão do Módulo 0",
+  "tipo": "ligação/revisão",
+  "palavras": {
+    "visiveis": 2680,
+    "teoria": 1308,
+    "praticaExtra": 637,
+    "quiz": 415,
+    "flashcards": 148
+  },
+  "porGrupoTeoria": {
+    "introducao": 392,
+    "contexto": 111,
+    "conteudo": 657,
+    "exemplos": 148,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 144,
+    "summary": 85,
+    "problem": 111,
+    "concept": 355,
+    "internals": 301,
+    "diagram": 1,
+    "simpleExample": 148,
+    "objectives": 63,
+    "learningOutcomes": 0,
+    "glossary": 100,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 45
+  },
+  "pratica": {
+    "quiz": 415,
+    "flashcards": 148,
+    "lab": 0,
+    "mentorQuestions": 130,
+    "exercises": 187,
+    "challenge": 105,
+    "commentedSolution": 215
+  },
+  "outros": {
+    "title+subtitle": 19,
+    "nextTheme": 45,
+    "references": 63,
+    "linksToOtherCourses": 45
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 2,
+    "exercicios": 3,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 3,
+    "exemplosPorAmbiente": []
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "15-25 min + 35 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 19.1,
+    "nucleoPartes": {
+      "teoria": 10.1,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 37,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 4,
+      "exercicios": 18,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-25 min",
+    "praticaExtraArredondada": 35,
+    "recomendada": "15-25 min + 35 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

@@ -1,0 +1,15 @@
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>
+    Segurança depende de fundamentos porque ataques, falhas e incidentes deixam rastros em bytes, protocolos, logs, métricas e camadas. Um analista precisa reconhecer quando um dado foi apenas codificado, quando um protocolo está em texto claro, quando uma latência anormal pode indicar túnel, quando um volume de saída pode sugerir exfiltração e quando uma política de bloqueio está funcionando.
+  </p>
+  <table class="data-table risk-table">
+    <thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead>
+    <tbody>
+      <tr><td>Confundir Base64 com proteção</td><td>Secrets em YAML, logs ou tickets</td><td>Exposição de credenciais</td><td>Mascarar, criptografar, usar cofre e revisar logs</td></tr>
+      <tr><td>Diagnóstico sem camada</td><td>Abertura de regra any-any para "testar"</td><td>Aumento da superfície de ataque</td><td>Testes mínimos, temporários, registrados e justificados</td></tr>
+      <tr><td>Métrica mal interpretada</td><td>Volume alto tratado como normal</td><td>Possível vazamento despercebido</td><td>Baselines, alertas e investigação por protocolo/destino</td></tr>
+      <tr><td>Evidência sensível</td><td>Prints com IPs, tokens e nomes internos</td><td>Vazamento operacional</td><td>Sanitização antes de compartilhar</td></tr>
+    </tbody>
+  </table>
+</section>

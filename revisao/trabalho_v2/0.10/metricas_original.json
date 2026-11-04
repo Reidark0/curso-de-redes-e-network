@@ -1,0 +1,97 @@
+{
+  "id": "0.10",
+  "versao": "original",
+  "titulo": "Revisão do Módulo 0",
+  "tipo": "ligação/revisão",
+  "palavras": {
+    "visiveis": 3839,
+    "teoria": 2558,
+    "praticaExtra": 671,
+    "quiz": 318,
+    "flashcards": 113
+  },
+  "porGrupoTeoria": {
+    "introducao": 585,
+    "contexto": 474,
+    "conteudo": 356,
+    "exemplos": 648,
+    "seguranca_troubleshooting": 495
+  },
+  "porSecao": {
+    "motivation": 173,
+    "summary": 72,
+    "history": 149,
+    "problem": 142,
+    "evolution": 183,
+    "concept": 95,
+    "internals": 153,
+    "architecture": 105,
+    "diagram": 3,
+    "analogy": 108,
+    "simpleExample": 106,
+    "enterpriseExample": 100,
+    "cloudExample": 99,
+    "devsecopsExample": 96,
+    "securityExample": 139,
+    "objectives": 61,
+    "learningOutcomes": 75,
+    "glossary": 204,
+    "security": 222,
+    "troubleshooting": 273,
+    "nextTheme": 52
+  },
+  "pratica": {
+    "quiz": 318,
+    "flashcards": 113,
+    "lab": 0,
+    "mentorQuestions": 137,
+    "exercises": 173,
+    "challenge": 177,
+    "commentedSolution": 184
+  },
+  "outros": {
+    "title+subtitle": 19,
+    "nextTheme": 52,
+    "references": 63,
+    "linksToOtherCourses": 45
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 5,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "70-100 min",
+    "estimatedStudyTimeMinutes": 100,
+    "nucleo": 28.7,
+    "nucleoPartes": {
+      "teoria": 19.7,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "25-35 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

@@ -1,0 +1,454 @@
+{
+  "id": "0.10",
+  "moduleId": "m00",
+  "order": 10,
+  "title": "Revisão do Módulo 0",
+  "subtitle": "Mapa do módulo, pares que confundem e checklist de prontidão para começar Fundamentos de Redes.",
+  "duration": "15-25 min + 35 min de prática extra",
+  "estimatedStudyTimeMinutes": 25,
+  "difficulty": "iniciante-intermediário",
+  "type": "ligação/revisão",
+  "xp": 200,
+  "tags": [
+    "fundamentos",
+    "revisão",
+    "checklist",
+    "mapa mental",
+    "métricas",
+    "codificação",
+    "camadas",
+    "preparação"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.1",
+      "reason": "A revisão começa pela ideia de que computadores representam informação em estados digitais."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.2",
+      "reason": "A revisão cobra diferença entre bit, byte, binário, hexadecimal e octetos."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.3",
+      "reason": "A revisão cobra codificação de texto, UTF-8, Base64 e o erro de confundir codificação com criptografia."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.4",
+      "reason": "A revisão cobra conversão entre bps, B/s, volume, overhead e throughput útil."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.5",
+      "reason": "A revisão cobra a diferença entre dado abstrato e sinal físico em cobre, fibra e rádio."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.6",
+      "reason": "A revisão cobra latência, largura de banda, throughput, perda, jitter e gargalos."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.7",
+      "reason": "A revisão cobra protocolo como contrato de comunicação."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.8",
+      "reason": "A revisão cobra pensamento em camadas como método de diagnóstico."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.9",
+      "reason": "A revisão usa o laboratório integrador como evidência de aprendizagem."
+    }
+  ],
+  "objectives": [
+    "Ligar os fundamentos do Módulo 0 numa cadeia de perguntas (dado, bytes, codificação, sinal, métricas, protocolo, camada e evidência) e usá-la num sintoma vago como \"está lento\".",
+    "Distinguir os pares que mais geram diagnóstico errado: Mbps × MB/s, codificação × criptografia, banda × throughput × latência e conectividade × autorização.",
+    "Identificar suas lacunas com o checklist de prontidão e saber a qual aula voltar antes do Módulo 1."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Preparatório para todas as camadas",
+      "Camada 1",
+      "Camada 2",
+      "Camada 3",
+      "Camada 4",
+      "Camada 7"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede",
+      "Internet",
+      "Transporte",
+      "Aplicação"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "IPv4",
+      "ICMP",
+      "DNS",
+      "TCP",
+      "UDP",
+      "TLS",
+      "HTTP"
+    ],
+    "dependsOn": [
+      "aulas 0.1 até 0.9"
+    ],
+    "enables": [
+      "Fundamentos de Redes",
+      "Modelo OSI",
+      "Ethernet",
+      "IPv4",
+      "TCP/UDP",
+      "DNS",
+      "HTTP/TLS",
+      "Troubleshooting"
+    ]
+  },
+  "mentorQuestions": [
+    {
+      "type": "reflexão",
+      "question": "Qual item do checklist de prontidão você marcou com menos segurança? Explique-o em voz alta, sem consultar, usando um exemplo seu, e depois confira na aula indicada.",
+      "hints": [
+        "Escolha o item em que você hesitou, não o mais difícil.",
+        "Um exemplo seu vale mais que a definição decorada: um download, um site lento, um log."
+      ],
+      "expectedIdeas": [
+        "lacuna identificada",
+        "exemplo concreto",
+        "volta à aula indicada"
+      ],
+      "explanation": "Explicar sem consultar revela a lacuna que a releitura esconde. Se o exemplo não sai, volte à aula do item antes do Módulo 1."
+    },
+    {
+      "type": "cenário real",
+      "question": "Você encontrou uma string em Base64 em um log. O que pode e o que não pode concluir?",
+      "hints": [
+        "Base64 é reversível.",
+        "Não assuma que é segredo sem contexto."
+      ],
+      "expectedIdeas": [
+        "codificação",
+        "não criptografia",
+        "decodificação segura",
+        "sanitização",
+        "verificar contexto"
+      ],
+      "explanation": "A resposta deve evitar tanto alarmismo quanto negligência."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q0.10.2",
+      "question": "Por que Base64 não deve ser tratado como proteção de segredo?",
+      "options": [
+        "Porque só funciona em Linux.",
+        "Porque é uma codificação reversível, não criptografia.",
+        "Porque altera a senha permanentemente.",
+        "Porque impede leitura por aplicações."
+      ],
+      "answer": 1,
+      "explanation": "Base64 representa bytes em texto e pode ser revertido facilmente.",
+      "topic": "codificação",
+      "difficulty": "iniciante",
+      "type": "segurança"
+    },
+    {
+      "id": "q0.10.3",
+      "question": "Ping para um destino responde. O que isso NÃO prova sozinho?",
+      "options": [
+        "Que houve resposta dentro de certo tempo.",
+        "Que há algum tipo de conectividade ICMP.",
+        "Que a aplicação web está saudável e que o usuário tem autorização.",
+        "Que o destino estava alcançável por ICMP naquele momento."
+      ],
+      "answer": 2,
+      "explanation": "Ping pode indicar conectividade básica, mas não prova HTTP, TLS, login, autorização ou saúde da aplicação.",
+      "topic": "troubleshooting",
+      "difficulty": "intermediário",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q0.10.5",
+      "question": "Qual atitude representa melhor pensamento em camadas?",
+      "options": [
+        "Liberar temporariamente o firewall para eliminar a camada de política e simplificar o teste.",
+        "Começar pela aplicação, porque é onde o usuário vê o erro, e só olhar a rede se o log da aplicação estiver limpo.",
+        "Rodar todos os comandos disponíveis de uma vez e escolher a causa que aparecer em mais saídas.",
+        "Separar hipóteses físicas, de rede, transporte, aplicação, identidade e política e testar cada uma com evidência antes de concluir."
+      ],
+      "answer": 3,
+      "explanation": "Pensar em camadas é organizar investigação por dependências e evidências.",
+      "topic": "camadas",
+      "difficulty": "iniciante",
+      "type": "camadas"
+    },
+    {
+      "id": "q0.10.6",
+      "question": "Ao acessar um sistema interno, o navegador mostra HTTP 403. Qual conclusão é mais segura inicialmente?",
+      "options": [
+        "A rede física certamente caiu.",
+        "Há resposta do serviço, mas pode haver problema de autorização, política, identidade ou escopo de credencial.",
+        "O DNS certamente está quebrado.",
+        "A largura de banda está insuficiente."
+      ],
+      "answer": 1,
+      "explanation": "403 é uma resposta HTTP de negação: houve caminho até o serviço, e ele recusou o acesso. Investigue permissão, política ou credencial antes de culpar a rede.",
+      "topic": "conectividade × autorização",
+      "difficulty": "intermediário",
+      "type": "cenário"
+    },
+    {
+      "id": "q0.10.7",
+      "type": "cálculo",
+      "question": "Um link de 200 Mbps está livre. Qual é o máximo teórico de download em MB/s, antes do overhead?",
+      "options": [
+        "1.600 MB/s",
+        "200 MB/s",
+        "25 MB/s",
+        "20 MB/s"
+      ],
+      "answer": 2,
+      "explanation": "1 byte = 8 bits, então 200 ÷ 8 = 25 MB/s. Na prática o throughput fica abaixo disso por overhead, Wi-Fi, servidor remoto e congestionamento.",
+      "difficulty": "iniciante",
+      "topic": "métricas"
+    },
+    {
+      "id": "q0.10.8",
+      "type": "cenário",
+      "question": "Um download grande atinge quase toda a velocidade contratada, mas um sistema web interativo demora a responder a cada clique. Qual métrica investigar primeiro?",
+      "options": [
+        "Volume transferido, porque arquivos grandes sempre deixam o link lento.",
+        "Largura de banda, porque é preciso contratar um link maior.",
+        "Throughput, porque o download está muito abaixo do plano.",
+        "Latência (RTT), porque o sintoma é tempo de resposta, não capacidade."
+      ],
+      "answer": 3,
+      "explanation": "Se o download usa quase toda a banda, capacidade não é o gargalo. Muitas idas e voltas pequenas sofrem com latência: investigue RTT, DNS e o tempo de resposta da aplicação.",
+      "difficulty": "iniciante-intermediário",
+      "topic": "métricas"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc0.10.1",
+      "front": "Qual é a cadeia mental do Módulo 0?",
+      "back": "Dado -> bytes -> codificação -> sinal -> métricas -> protocolo -> camada -> evidência. Cada etapa é uma pergunta do diagnóstico.",
+      "tags": [
+        "revisão"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.10.7",
+      "front": "Perda × jitter: qual a diferença?",
+      "back": "Perda é o percentual de pacotes que não chegam; jitter é a variação da latência entre pacotes. Os dois degradam voz e vídeo mesmo com banda sobrando.",
+      "tags": [
+        "métricas"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.10.3",
+      "front": "O que ping prova?",
+      "back": "Pode indicar resposta ICMP e RTT aproximado, mas não prova aplicação, autorização, TLS ou saúde do serviço.",
+      "tags": [
+        "troubleshooting"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc0.10.4",
+      "front": "Diferença entre Mbps e MB/s?",
+      "back": "Mbps mede megabits por segundo; MB/s mede megabytes por segundo. 1 byte = 8 bits, antes de considerar overhead.",
+      "tags": [
+        "métricas"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.10.5",
+      "front": "Por que pensar em camadas?",
+      "back": "Para organizar diagnóstico, evitar achismo e separar falhas físicas, lógicas, de transporte, aplicação, identidade e política.",
+      "tags": [
+        "camadas"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.10.6",
+      "front": "O que é evidência técnica?",
+      "back": "Uma observação coletada por comando, log, métrica ou teste, registrada com o que ela mostra, o que não mostra e o próximo teste.",
+      "tags": [
+        "evidências"
+      ],
+      "difficulty": "iniciante"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex0.10.3",
+      "type": "diagnóstico",
+      "prompt": "Um site abre no navegador, mas o login retorna 403. Liste três hipóteses que não sejam 'rede caiu'.",
+      "expectedAnswer": "Exemplos: usuário sem permissão para aquela área, sessão ou token expirado, credencial com escopo errado, política de acesso que bloqueia o grupo do usuário, bloqueio por um proxy ou regra da própria aplicação. Em todos, a rede funcionou: o 403 é uma resposta.",
+      "explanation": "A conectividade básica pode existir mesmo quando autorização falha."
+    },
+    {
+      "id": "ex0.10.4",
+      "type": "segurança",
+      "prompt": "Você precisa compartilhar um print de erro com outro time. O que deve verificar antes?",
+      "expectedAnswer": "Tokens, cookies, IPs internos, nomes de hosts, usuários, e-mails, caminhos internos, headers sensíveis e dados pessoais.",
+      "explanation": "Evidência técnica pode vazar informações sensíveis."
+    },
+    {
+      "id": "ex0.10.5",
+      "type": "cálculo",
+      "prompt": "Um backup de 45 GB (45.000 MB) precisa terminar em 1 hora, num link de 100 Mbps reservado só para ele. Cabe na janela? Mostre a conta.",
+      "expectedAnswer": "100 Mbps ÷ 8 = 12,5 MB/s no máximo. 45.000 MB ÷ 12,5 MB/s = 3.600 s = 60 min. Isso já é o limite teórico, antes do overhead; o throughput real será menor, então o backup não cabe em 1 hora.",
+      "explanation": "O exercício aplica a conversão Mbps → MB/s e a diferença entre banda nominal e throughput útil."
+    }
+  ],
+  "challenge": {
+    "title": "Passagem de bastão para Fundamentos de Redes",
+    "scenario": "Uma empresa pequena relata que usuários às vezes não conseguem acessar um sistema interno, às vezes acessam com lentidão e às vezes recebem erro de autorização. Você ainda não estudou profundamente redes, mas concluiu o Módulo 0.",
+    "tasks": [
+      "Separar os três sintomas em camadas ou áreas de investigação.",
+      "Listar as evidências iniciais que você coletaria para cada um.",
+      "Indicar quais conclusões você ainda não pode tirar.",
+      "Dizer o que mascarar antes de compartilhar as evidências."
+    ],
+    "constraints": [
+      "Não abrir regras amplas de firewall como teste.",
+      "Não concluir causa única sem evidência."
+    ],
+    "expectedDeliverables": [
+      "Uma tabela com sintoma, hipótese, evidência e limite da evidência."
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "Comece transformando cada sintoma em pergunta. Lentidão pede métricas; falha de acesso pode estar no meio, no endereço, no nome, na porta ou na aplicação; erro de autorização aponta para permissão ou credencial, não necessariamente para a rede.",
+    "steps": [
+      "Definir o escopo: quem é afetado, quando, de onde e em qual sistema.",
+      "\"Não acessa\": coletar IP, gateway, DNS e teste de porta, de baixo para cima.",
+      "\"Lento\": medir latência e perda até o gateway e até o servidor, e comparar o throughput com a banda na mesma unidade.",
+      "\"Erro de autorização\": houve resposta do serviço, então há caminho; investigar credencial e permissão.",
+      "Registrar limites: ping não prova a aplicação, 403 não prova queda de rede, Base64 não protege segredo.",
+      "Mascarar senhas, tokens e nomes internos antes de anexar as evidências."
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "É só aumentar a internet.",
+        "whyItIsWrong": "Não há evidência de que largura de banda seja o gargalo."
+      },
+      {
+        "answer": "É firewall, libera tudo para testar.",
+        "whyItIsWrong": "Abertura ampla aumenta risco e não é diagnóstico controlado."
+      },
+      {
+        "answer": "403 é rede fora.",
+        "whyItIsWrong": "403 é resposta HTTP de negação; indica que houve comunicação suficiente para uma resposta da aplicação ou intermediário."
+      }
+    ],
+    "finalAnswer": "Três sintomas, três perguntas diferentes: conectividade, métricas e autorização. A boa resposta organiza hipóteses por camada, coleta evidências mínimas, declara o que cada uma não prova e protege os dados antes de compartilhar."
+  },
+  "glossary": [
+    {
+      "term": "Overhead",
+      "shortDefinition": "A parte do tráfego gasta com controle (cabeçalhos, confirmações, criptografia), e não com o conteúdo útil.",
+      "example": "Por causa do overhead, um link de 100 Mbps entrega menos que 12,5 MB/s de arquivo.",
+      "relatedLessons": [
+        "0.4"
+      ]
+    },
+    {
+      "term": "RTT",
+      "shortDefinition": "Round-trip time: o tempo de ida e volta de uma mensagem, em milissegundos. É o valor que o ping mostra.",
+      "example": "Ping até o servidor com RTT de 180 ms: cada ida e volta leva quase 0,2 s.",
+      "relatedLessons": [
+        "0.6"
+      ]
+    },
+    {
+      "term": "HTTP 403",
+      "shortDefinition": "Código de resposta HTTP que significa \"proibido\": o servidor recebeu o pedido e recusou o acesso.",
+      "example": "Um usuário sem permissão abre uma página administrativa e recebe 403.",
+      "relatedLessons": [
+        "8.2"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Módulo 0, aulas 0.1 a 0.9",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Base direta desta revisão."
+    },
+    {
+      "type": "internal-course",
+      "title": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Os conceitos de evidência, pipeline, observabilidade e automação serão reaplicados em DevSecOps."
+    },
+    {
+      "type": "internal-course",
+      "title": "Enterprise Identity, IAM e Segurança de Acessos",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Os conceitos de codificação, protocolo, autenticação e autorização serão aprofundados em IAM."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "m00",
+      "lesson": "fundamentos",
+      "reason": "A leitura de logs, métricas e falhas de pipeline depende dos fundamentos revisados aqui."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "m00",
+      "lesson": "fundamentos de identidade",
+      "reason": "A diferença entre conectividade, autenticação e autorização prepara o aluno para IAM."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "1.1"
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <div class="definition-box">
+    <strong>Definição:</strong> revisar tecnicamente não é reler tudo. É reconstruir o caminho lógico dos fundamentos (representação, codificação, transmissão, medição, protocolo, camada, evidência e segurança) e verificar se você consegue usá-los num cenário novo.
+  </div>
+
+  <h3>O módulo, aula a aula</h3>
+  <p>Cada aula acrescentou um tipo de raciocínio, não só um termo novo.</p>
+  <div class="responsive-table">
+    <table class="data-table comparison-table">
+      <thead>
+        <tr><th>Aula</th><th>Ideia central</th><th>Problema que resolve</th><th>Prepara para</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0.1</td><td>Informação precisa virar estados digitais</td><td>Entender o que é dado para o computador</td><td>bits, bytes, pacotes e sinais</td></tr>
+        <tr><td>0.2</td><td>Bits e bytes podem ser lidos em bases diferentes</td><td>Interpretar endereços e dumps</td><td>MAC, IPv4, IPv6, máscaras e hex dumps</td></tr>
+        <tr><td>0.3</td><td>Texto precisa de codificação</td><td>Evitar confundir texto, bytes e segredo</td><td>HTTP, APIs, tokens, logs e IAM</td></tr>
+        <tr><td>0.4</td><td>Bit e byte medem coisas diferentes</td><td>Interpretar velocidade, volume e overhead</td><td>throughput, links, cloud billing e backups</td></tr>
+        <tr><td>0.5</td><td>Bits viajam como sinais físicos</td><td>Entender falhas de cabo, fibra e rádio</td><td>Ethernet, Wi-Fi e camada física</td></tr>
+        <tr><td>0.6</td><td>Desempenho tem várias métricas</td><td>Separar latência, banda, vazão e perda</td><td>troubleshooting, VPN, proxy e cloud</td></tr>
+        <tr><td>0.7</td><td>Protocolo é contrato</td><td>Dar significado e ordem aos bytes</td><td>TCP, UDP, DNS, HTTP, TLS e APIs</td></tr>
+        <tr><td>0.8</td><td>Camadas organizam diagnóstico</td><td>Evitar conclusões prematuras</td><td>Modelo OSI e TCP/IP</td></tr>
+        <tr><td>0.9</td><td>Evidência transforma teoria em prática</td><td>Documentar investigação técnica</td><td>troubleshooting profissional</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Pares que você não pode confundir</h3>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead>
+        <tr><th>Par</th><th>Diferença</th><th>Na prática</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Informação × dado</td><td>Informação é o significado humano ou operacional; dado é a representação processável.</td><td>"Senha do usuário" é informação; os bytes gravados são dado.</td></tr>
+        <tr><td>Bit × byte</td><td>Bit é a menor unidade binária (0 ou 1); byte é um grupo de 8 bits.</td><td>Link de 100 Mbps entrega no máximo 100 ÷ 8 = 12,5 MB/s, antes do overhead. Um arquivo de 1 GB (1.000 MB) leva pelo menos 80 s.</td></tr>
+        <tr><td>Codificação × criptografia</td><td>UTF-8 e Base64 só mudam a representação e qualquer um reverte; criptografia protege a confidencialidade.</td><td>Token em Base64 num log está exposto, não protegido.</td></tr>
+        <tr><td>Largura de banda × throughput</td><td>Banda é a capacidade nominal; throughput é a vazão útil observada.</td><td>Overhead, Wi-Fi, servidor remoto, proxy e congestionamento reduzem o throughput.</td></tr>
+        <tr><td>Latência × largura de banda</td><td>Latência mede tempo (ms, RTT no ping); banda mede capacidade.</td><td>Página que demora a cada clique pode ter banda sobrando e latência alta.</td></tr>
+        <tr><td>Perda × jitter</td><td>Perda é o percentual de pacotes que não chegam; jitter é a variação da latência entre pacotes.</td><td>Os dois degradam voz e vídeo mesmo com banda sobrando.</td></tr>
+        <tr><td>Conectividade × autorização</td><td>Ping ou porta respondendo mostra caminho; não mostra permissão.</td><td>HTTP 403 prova que houve resposta: o serviço negou o acesso.</td></tr>
+        <tr><td>Protocolo × aplicação</td><td>Protocolo é o contrato (formato, ordem, estado, erro, significado); a aplicação usa esse contrato.</td><td>HTTP funcionando não garante que a regra de negócio esteja certa.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warning">
+    <strong>Erros comuns na revisão:</strong>
+    <ul>
+      <li><strong>Só reler o conteúdo.</strong> Reler dá sensação de familiaridade, mas não de aplicação. Responda os exercícios, explique em voz alta e monte relações.</li>
+      <li><strong>Confundir termos parecidos.</strong> Os pares acima aparecem juntos e geram diagnósticos errados; revise-os pela tabela, com exemplos.</li>
+      <li><strong>Pular camadas no diagnóstico.</strong> O sintoma visível quase sempre aparece na aplicação, e daí se culpa aplicação, DNS ou firewall sem evidência. Comece por perguntas simples e suba a pilha com evidências.</li>
+    </ul>
+  </div>
+</section>

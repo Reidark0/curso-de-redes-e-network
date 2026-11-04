@@ -1,0 +1,34 @@
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <div class="definition-box">
+    <strong>Definição:</strong> revisar não é reler tudo. É reconstruir como os fundamentos se ligam e verificar se você consegue usá-los num caso novo, sem consultar.
+  </div>
+
+  <h3>Pares que você não pode confundir</h3>
+  <p>Quase todo diagnóstico errado do Módulo 0 nasce de tratar dois conceitos vizinhos como se fossem o mesmo.</p>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead>
+        <tr><th>Par</th><th>Diferença</th><th>Na prática</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Informação × dado</td><td>Informação é o significado; dado é a representação que um programa manipula.</td><td>"Senha do usuário" é informação; os bytes gravados são dado.</td></tr>
+        <tr><td>Bit × byte</td><td>Bit é a menor unidade (0 ou 1); byte é um grupo de 8 bits.</td><td>Link de 100 Mbps entrega no máximo 100 ÷ 8 = 12,5 MB/s, antes do overhead. Um arquivo de 1 GB (1.000 MB) leva pelo menos 80 s.</td></tr>
+        <tr><td>Codificação × criptografia</td><td>UTF-8 e Base64 só mudam a forma, e qualquer um reverte; criptografia só se reverte com a chave.</td><td>Token em Base64 num log está exposto, não protegido.</td></tr>
+        <tr><td>Largura de banda × throughput</td><td>Banda é a capacidade nominal; throughput é a vazão útil observada.</td><td>Overhead, Wi-Fi, servidor remoto e congestionamento reduzem o throughput.</td></tr>
+        <tr><td>Latência × largura de banda</td><td>Latência mede tempo (ms, o RTT do ping); banda mede capacidade.</td><td>Página que demora a cada clique pode ter banda sobrando e latência alta.</td></tr>
+        <tr><td>Perda × jitter</td><td>Perda é o percentual de pacotes que não chegam; jitter é a variação da latência entre pacotes.</td><td>Os dois degradam voz e vídeo mesmo com banda sobrando.</td></tr>
+        <tr><td>Conectividade × autorização</td><td>Ping ou porta respondendo mostra que há caminho; não mostra permissão nem aplicação saudável.</td><td>HTTP 403 prova que houve resposta: o serviço recebeu o pedido e negou o acesso.</td></tr>
+        <tr><td>Protocolo × aplicação</td><td>Protocolo é o contrato (formato, ordem, erros, significado); a aplicação usa esse contrato.</td><td>HTTP funcionando não garante que a regra de negócio esteja certa.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warning">
+    <strong>Erros comuns na revisão</strong>
+    <ul>
+      <li><strong>Só reler.</strong> Reler dá sensação de familiaridade, não de domínio. Explique cada par em voz alta com um exemplo seu e resolva os exercícios sem consultar.</li>
+      <li><strong>Começar pela aplicação porque é onde o erro aparece.</strong> O usuário vê o sintoma na tela, mas a causa pode estar no meio, no endereço ou no nome. Teste de baixo para cima, com evidência em cada etapa.</li>
+    </ul>
+  </div>
+</section>

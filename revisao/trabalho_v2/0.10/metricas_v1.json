@@ -1,0 +1,92 @@
+{
+  "id": "0.10",
+  "versao": "v1",
+  "titulo": "Revisão do Módulo 0",
+  "tipo": "ligação/revisão",
+  "palavras": {
+    "visiveis": 4107,
+    "teoria": 2566,
+    "praticaExtra": 748,
+    "quiz": 483,
+    "flashcards": 133
+  },
+  "porGrupoTeoria": {
+    "introducao": 536,
+    "contexto": 141,
+    "conteudo": 791,
+    "exemplos": 529,
+    "seguranca_troubleshooting": 569
+  },
+  "porSecao": {
+    "motivation": 112,
+    "summary": 84,
+    "problem": 141,
+    "concept": 516,
+    "internals": 274,
+    "diagram": 1,
+    "analogy": 87,
+    "simpleExample": 102,
+    "enterpriseExample": 101,
+    "devsecopsExample": 139,
+    "securityExample": 100,
+    "objectives": 61,
+    "learningOutcomes": 75,
+    "glossary": 204,
+    "security": 211,
+    "troubleshooting": 358,
+    "nextTheme": 50
+  },
+  "pratica": {
+    "quiz": 483,
+    "flashcards": 133,
+    "lab": 0,
+    "mentorQuestions": 157,
+    "exercises": 230,
+    "challenge": 177,
+    "commentedSolution": 184
+  },
+  "outros": {
+    "title+subtitle": 19,
+    "nextTheme": 50,
+    "references": 63,
+    "linksToOtherCourses": 45
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 5,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "70-100 min",
+    "estimatedStudyTimeMinutes": 100,
+    "nucleo": 29.7,
+    "nucleoPartes": {
+      "teoria": 19.7,
+      "diagramas": 3,
+      "quiz": 7
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "25-35 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}
