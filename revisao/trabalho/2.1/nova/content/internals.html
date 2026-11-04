@@ -11,14 +11,13 @@
     <li><strong>Física:</strong> os bits viram sinais elétricos, luz ou rádio.</li>
   </ol>
   <p>No destino, a leitura é inversa: sinal vira bits, bits viram quadro, o quadro contém o pacote, o pacote contém o segmento e o segmento contém os dados da aplicação. A aula 2.2 aprofunda isso com encapsulamento, desencapsulamento e PDUs.</p>
-  <h3>Como isso vira diagnóstico</h3>
-  <p>Transforme cada camada em uma pergunta com uma evidência: a interface está ativa? O host tem IP e rota? A porta conecta? O TLS negocia? A aplicação responde? A primeira evidência que falha aponta a camada provável e deixa a hipótese mais precisa. Vá do básico para o específico, sem pular etapas.</p>
+  <p>No diagnóstico, transforme cada camada em uma pergunta com evidência e vá do básico para o específico, sem pular etapas: a primeira evidência que falha aponta a camada provável.</p>
   <div class="callout warning"><strong>Erros comuns:</strong>
     <ul>
-      <li><strong>Decorar as sete camadas sem aplicar:</strong> você repete nomes, mas não investiga falhas. Associe cada camada a uma pergunta, uma evidência e um ponto de falha.</li>
-      <li><strong>Chamar qualquer falha de “problema de rede”:</strong> para o usuário, tudo parece rede; o time errado é acionado e o diagnóstico atrasa.</li>
-      <li><strong>Achar que ping bem-sucedido prova que o sistema funciona:</strong> o ping só mostra alcance ICMP. Ele não valida porta, TLS, HTTP, autenticação nem autorização. E o inverso também vale: o ICMP pode estar bloqueado enquanto TCP/443 funciona.</li>
-      <li><strong>Forçar todo produto em uma camada única:</strong> confunde a análise de proxies, WAFs, load balancers e service mesh, que são multicamada.</li>
+      <li><strong>Decorar as camadas sem aplicar:</strong> associe cada uma a uma pergunta, uma evidência e um ponto de falha.</li>
+      <li><strong>Chamar qualquer falha de “problema de rede”:</strong> o time errado é acionado e o diagnóstico atrasa.</li>
+      <li><strong>Tratar ping como prova de saúde:</strong> ele só mostra alcance ICMP; não valida porta, TLS, HTTP, autenticação nem autorização. E o ICMP pode estar bloqueado enquanto TCP/443 funciona.</li>
+      <li><strong>Forçar todo produto em uma camada:</strong> proxies, WAFs, load balancers e service mesh são multicamada.</li>
     </ul>
   </div>
 </section>

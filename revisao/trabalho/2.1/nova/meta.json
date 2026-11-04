@@ -4,8 +4,8 @@
   "order": 1,
   "title": "Por que o Modelo OSI existe",
   "subtitle": "Como um modelo de camadas transforma redes complexas em diagnóstico, arquitetura, documentação e comunicação entre times.",
-  "duration": "80-115 min",
-  "estimatedStudyTimeMinutes": 115,
+  "duration": "65-90 min",
+  "estimatedStudyTimeMinutes": 90,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 195,
@@ -103,79 +103,6 @@
       "cloud networking"
     ]
   },
-  "deepDive": {
-    "mentalModel": "Use o OSI como mapa de perguntas. Cada camada responde uma pergunta diferente. Quando uma evidência falha, a hipótese fica mais precisa.",
-    "keyTerms": [
-      "modelo de referência",
-      "camada",
-      "serviço de camada",
-      "encapsulamento",
-      "PDU",
-      "troubleshooting por camadas",
-      "defesa em profundidade"
-    ],
-    "limitations": [
-      "O OSI não é a implementação exata da internet moderna.",
-      "Nem todo protocolo encaixa perfeitamente em uma única camada.",
-      "Equipamentos como firewalls, load balancers, proxies e WAFs podem operar em múltiplas camadas.",
-      "Criptografia, identidade e sessão podem atravessar fronteiras conceituais."
-    ],
-    "whenToUse": [
-      "Ao ensinar redes.",
-      "Ao diagnosticar falhas complexas.",
-      "Ao documentar arquitetura.",
-      "Ao explicar responsabilidades entre times.",
-      "Ao mapear controles de segurança por profundidade."
-    ],
-    "whenNotToUse": [
-      "Como substituto de documentação real de protocolo.",
-      "Para discutir detalhes de implementação sem consultar RFCs ou documentação oficial.",
-      "Para encerrar investigação apenas porque uma camada parece suspeita."
-    ],
-    "operationalImpact": [
-      "Melhora comunicação entre times.",
-      "Reduz tentativa e erro.",
-      "Exige disciplina na coleta de evidências.",
-      "Ajuda a priorizar troubleshooting do básico para o específico."
-    ],
-    "financialImpact": [
-      "Reduz tempo de indisponibilidade quando aplicado corretamente.",
-      "Evita compras desnecessárias de link, appliance ou licenças quando a causa está em outra camada.",
-      "Pode exigir investimento em ferramentas de observabilidade para coletar evidências por camada."
-    ],
-    "securityImpact": [
-      "Apoia defesa em profundidade.",
-      "Ajuda a separar conectividade de autorização.",
-      "Evita falsa sensação de segurança baseada apenas em firewall de perímetro.",
-      "Melhora investigação ao associar logs, fluxos e sintomas a camadas."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Decorar as sete camadas sem aplicar em diagnóstico.",
-      "whyItHappens": "Muitos cursos apresentam OSI como lista de memorização.",
-      "consequence": "O aluno sabe repetir nomes, mas não sabe investigar falhas reais.",
-      "correction": "Sempre associe cada camada a uma pergunta, uma evidência e um ponto de falha."
-    },
-    {
-      "mistake": "Chamar qualquer falha de aplicação de problema de rede.",
-      "whyItHappens": "Para o usuário, tudo que depende da rede parece rede.",
-      "consequence": "O time errado é acionado e o diagnóstico atrasa.",
-      "correction": "Separe físico, enlace, rede, transporte, apresentação, sessão e aplicação."
-    },
-    {
-      "mistake": "Achar que ping bem-sucedido prova que o sistema está funcionando.",
-      "whyItHappens": "Ping é um teste fácil e rápido.",
-      "consequence": "Ignora porta, TLS, HTTP, autenticação e autorização.",
-      "correction": "Use ping apenas como uma evidência de alcance ICMP, não como prova de saúde de aplicação."
-    },
-    {
-      "mistake": "Forçar todo produto moderno em uma camada única.",
-      "whyItHappens": "O modelo é apresentado como caixas rígidas.",
-      "consequence": "Confusão ao analisar proxies, WAF, load balancers e service mesh.",
-      "correction": "Use OSI como referência conceitual e reconheça componentes multicamada."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Sistema não abre",
@@ -293,8 +220,7 @@
       "Desabilitar portas físicas não usadas.",
       "Documentar VLANs, subnets, rotas e regras.",
       "Aplicar menor privilégio em regras de firewall.",
-      "Validar TLS e certificados.",
-      "Usar autenticação e autorização fortes na aplicação."
+      "Validar TLS e certificados."
     ],
     "detectionIdeas": [
       "Aumento de conexões laterais internas.",
@@ -372,30 +298,30 @@
       "type": "conceito"
     },
     {
-      "id": "q2.1.2",
-      "question": "Um cabo desconectado ou sinal Wi‑Fi inexistente está mais associado a qual camada?",
+      "id": "q2.1.7",
+      "question": "No modelo TCP/IP de quatro camadas, onde ficam as responsabilidades que o OSI separa nas camadas 5 (Sessão), 6 (Apresentação) e 7 (Aplicação)?",
       "options": [
-        "Camada 1 — Física",
-        "Camada 4 — Transporte",
-        "Camada 6 — Apresentação",
-        "Camada 7 — Aplicação"
+        "Na camada de Transporte",
+        "Divididas entre Internet e Transporte",
+        "Todas na camada de Aplicação",
+        "Na camada de Acesso à rede"
       ],
-      "answer": 0,
-      "explanation": "A camada física trata do meio, sinal, conectores, rádio, fibra, cobre e energia de transmissão.",
-      "topic": "camada física",
-      "difficulty": "iniciante",
-      "type": "diagnóstico"
+      "answer": 2,
+      "explanation": "O TCP/IP agrupa sessão, apresentação e aplicação em uma única camada de Aplicação (HTTP, DNS, TLS). Transporte equivale à camada 4, Internet à 3 e Acesso à rede às camadas 2 e 1.",
+      "topic": "osi x tcp/ip",
+      "difficulty": "iniciante-intermediário",
+      "type": "comparação"
     },
     {
       "id": "q2.1.3",
       "question": "Por que ping bem-sucedido não prova que uma aplicação web está funcionando?",
       "options": [
-        "Porque ping testa apenas DNS",
         "Porque ICMP/alcance não valida porta TCP, TLS, HTTP, autenticação ou aplicação",
+        "Porque ping testa apenas DNS",
         "Porque ping sempre usa camada 7",
         "Porque ping só funciona em redes sem roteador"
       ],
-      "answer": 1,
+      "answer": 0,
       "explanation": "Ping pode indicar algum alcance ICMP, mas não valida os mecanismos de transporte e aplicação necessários para um serviço web.",
       "topic": "troubleshooting",
       "difficulty": "iniciante-intermediário",
@@ -406,11 +332,11 @@
       "question": "Qual é um exemplo de defesa em profundidade usando a lógica do OSI?",
       "options": [
         "Usar apenas NAT como segurança",
-        "Proteger físico, segmentar rede, restringir portas e autenticar aplicação",
+        "Desativar logs para reduzir ruído",
         "Liberar any-any para simplificar diagnóstico",
-        "Desativar logs para reduzir ruído"
+        "Proteger físico, segmentar rede, restringir portas e autenticar aplicação"
       ],
-      "answer": 1,
+      "answer": 3,
       "explanation": "Defesa em profundidade distribui controles por camadas, reduzindo dependência de um único mecanismo.",
       "topic": "segurança",
       "difficulty": "intermediário",
@@ -420,12 +346,12 @@
       "id": "q2.1.5",
       "question": "Em cloud, uma VM alcança a porta do banco, mas recebe erro de permissão. Qual distinção o OSI ajuda a fazer?",
       "options": [
-        "Conectividade não é o mesmo que autorização",
         "Todo erro de banco é camada 1",
+        "Conectividade não é o mesmo que autorização",
         "Security group substitui IAM",
         "DNS sempre é a causa"
       ],
-      "answer": 0,
+      "answer": 1,
       "explanation": "A porta aberta indica conectividade de transporte, mas permissão depende de identidade, política e aplicação.",
       "topic": "cloud",
       "difficulty": "intermediário",
@@ -436,11 +362,11 @@
       "question": "Qual afirmação sobre OSI está correta?",
       "options": [
         "Todo produto moderno atua em uma única camada",
-        "O OSI é um modelo conceitual; componentes reais podem operar em várias camadas",
         "O OSI elimina a necessidade de logs",
+        "O OSI é um modelo conceitual; componentes reais podem operar em várias camadas",
         "O OSI torna desnecessário entender TCP/IP"
       ],
-      "answer": 1,
+      "answer": 2,
       "explanation": "O OSI é uma referência. Firewalls, proxies, WAFs e load balancers podem atuar em múltiplas camadas.",
       "topic": "limitações",
       "difficulty": "intermediário",
@@ -451,7 +377,7 @@
     {
       "id": "fc2.1.1",
       "front": "O que é o Modelo OSI?",
-      "back": "Um modelo conceitual de sete camadas usado para organizar responsabilidades da comunicação em rede.",
+      "back": "Um modelo conceitual de referência com sete camadas (Física, Enlace, Rede, Transporte, Sessão, Apresentação e Aplicação) usado para organizar as responsabilidades da comunicação em rede.",
       "tags": [
         "osi",
         "camadas"
@@ -511,13 +437,6 @@
       "prompt": "Classifique os itens em camadas prováveis: cabo desconectado, MAC address, rota default, porta TCP 443, erro HTTP 403.",
       "expectedAnswer": "Cabo: camada 1; MAC: camada 2; rota default: camada 3; TCP 443: camada 4; HTTP 403: camada 7/aplicação/autorização.",
       "explanation": "A classificação ajuda a não misturar conectividade física, enlace, rede, transporte e aplicação."
-    },
-    {
-      "id": "ex2.1.2",
-      "type": "diagnóstico",
-      "prompt": "Um usuário diz que o sistema não abre. Liste cinco perguntas por camadas antes de culpar firewall.",
-      "expectedAnswer": "A interface está ativa? O host tem IP/gateway/DNS? O gateway responde? O nome resolve? A porta do serviço conecta? O TLS/HTTP retorna qual erro?",
-      "explanation": "O firewall pode ser uma causa, mas a análise deve coletar evidências antes."
     },
     {
       "id": "ex2.1.3",

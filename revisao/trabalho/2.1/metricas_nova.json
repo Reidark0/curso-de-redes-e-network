@@ -1,0 +1,72 @@
+{
+  "id": "2.1",
+  "versao": "nova",
+  "titulo": "Por que o Modelo OSI existe",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3753,
+    "invisiveis": 53,
+    "teoriaVisivel": 2341
+  },
+  "porCampoVisivel": {
+    "content.motivation": 130,
+    "content.problem": 158,
+    "content.concept": 289,
+    "content.internals": 272,
+    "content.architecture": 131,
+    "content.analogy": 81,
+    "content.simpleExample": 63,
+    "content.enterpriseExample": 65,
+    "content.cloudExample": 118,
+    "content.securityExample": 113,
+    "content.diagram": 2,
+    "content.summary": 92,
+    "content.nextTheme": 28,
+    "security": 312,
+    "troubleshooting": 269,
+    "glossary": 218,
+    "title+subtitle": 22,
+    "objectives": 69,
+    "learningOutcomes": 73,
+    "quiz": 350,
+    "flashcards": 96,
+    "mentorQuestions": 167,
+    "exercises": 143,
+    "challenge": 174,
+    "commentedSolution": 192,
+    "references": 71,
+    "linksToOtherCourses": 55
+  },
+  "porCampoInvisivel": {
+    "networkContext": 53
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "65-90 min",
+    "estimatedStudyTimeMinutes": 90,
+    "M": 77.5,
+    "T": 74,
+    "partes": {
+      "teoria": 18,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "65-90 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 28
+  }
+}
