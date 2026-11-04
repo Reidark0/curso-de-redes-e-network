@@ -1,0 +1,90 @@
+{
+  "id": "3.5",
+  "versao": "original",
+  "titulo": "ARP: transformando IPv4 em MAC na rede local",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4502,
+    "invisiveis": 703,
+    "teoriaVisivel": 2650
+  },
+  "porCampoVisivel": {
+    "content.motivation": 156,
+    "content.history": 149,
+    "content.problem": 142,
+    "content.evolution": 131,
+    "content.concept": 157,
+    "content.internals": 188,
+    "content.architecture": 150,
+    "content.analogy": 109,
+    "content.simpleExample": 91,
+    "content.enterpriseExample": 111,
+    "content.cloudExample": 129,
+    "content.devsecopsExample": 113,
+    "content.securityExample": 140,
+    "content.diagram": 3,
+    "content.summary": 67,
+    "content.nextTheme": 52,
+    "security": 269,
+    "troubleshooting": 283,
+    "glossary": 210,
+    "title+subtitle": 23,
+    "objectives": 41,
+    "learningOutcomes": 79,
+    "quiz": 245,
+    "flashcards": 96,
+    "mentorQuestions": 147,
+    "exercises": 186,
+    "challenge": 111,
+    "commentedSolution": 151,
+    "references": 48,
+    "linksToOtherCourses": 60,
+    "lab": 665
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 45,
+    "content.exercisesIntro": 32,
+    "content.challengeIntro": 33,
+    "content.solutionIntro": 28,
+    "networkContext": 32,
+    "protocolFields": 112,
+    "packetFlow": 122,
+    "deepDive": 169,
+    "commonMistakes": 130
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 125,
+    "alternativa_5minPasso_maisLeitura": 30.1,
+    "plausivel": false,
+    "palavras": 665
+  },
+  "duracao": {
+    "declarada": "90-125 min",
+    "estimatedStudyTimeMinutes": 125,
+    "M": 107.5,
+    "T": 112.5,
+    "partes": {
+      "teoria": 20.4,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 30.1
+    },
+    "faixaRecomendada": "95-135 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 21
+  }
+}

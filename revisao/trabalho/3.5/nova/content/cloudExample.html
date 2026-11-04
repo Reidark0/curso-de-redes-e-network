@@ -1,0 +1,4 @@
+<section class="lesson-section lesson-section--cloud"><h2>11. Exemplo em cloud</h2>
+<p>Em cloud pública, o aluno raramente manipula ARP diretamente como em uma LAN física. Provedores abstraem muitos detalhes de Camada 2 para oferecer redes virtuais escaláveis, isoladas e controladas. Ainda assim, o modelo mental permanece útil: uma instância tem uma interface virtual, uma subnet, uma rota e um próximo salto lógico.</p>
+<p>Ao investigar por que uma VM não acessa um banco privado, você pode não ver ARP tradicional, mas continuará perguntando: a interface tem IP? a subnet está correta? existe rota? o próximo salto é válido? há security group, NSG, NACL, firewall ou tabela de rota bloqueando? O ARP ensina que comunicação local depende de resolução do próximo salto; a cloud apenas muda onde essa resolução é implementada e quanto dela aparece para o usuário.</p>
+</section>

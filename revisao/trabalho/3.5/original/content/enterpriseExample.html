@@ -1,0 +1,4 @@
+<section class="lesson-section lesson-section--enterprise"><h2>10. Exemplo empresarial</h2>
+<p>Em uma empresa, ARP aparece quando estações acessam gateway, servidores locais, impressoras, appliances de segurança, balanceadores internos e sistemas legados. Uma falha de ARP pode derrubar uma VLAN inteira, confundir o SOC ou parecer problema de DNS ou firewall.</p>
+<p>Imagine uma filial onde usuários conseguem IP via DHCP, mas não acessam sistemas internos. O analista verifica IP, máscara e gateway. Depois executa <code>arp -a</code> e percebe que o gateway não aparece. Isso indica que a investigação deve olhar para Camada 2: VLAN, trunk, porta, gateway desligado, firewall local ou bloqueio. Em outro cenário, o MAC do gateway muda várias vezes, sugerindo failover legítimo, duplicidade, flapping ou comportamento suspeito.</p>
+</section>

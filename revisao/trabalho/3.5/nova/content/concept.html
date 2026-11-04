@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--concept"><h2>5. Conceito</h2>
+<p><strong>ARP</strong>, Address Resolution Protocol, é o protocolo usado no IPv4 para descobrir o endereço MAC associado a um endereço IPv4 dentro da rede local. Ele não resolve nomes como DNS, não roteia pacotes como um roteador e não protege a comunicação. Ele apenas responde a uma pergunta local: “qual MAC devo usar para entregar este frame ao próximo salto?”</p>
+<div class="definition-box"><strong>Definição prática:</strong> ARP conecta o mundo lógico do IPv4 ao mundo local da Ethernet, permitindo que um host transforme o IP do destino local ou do gateway em um MAC de destino para o frame Ethernet.</div>
+<p>A frase “ARP transforma IPv4 em MAC” é útil, mas deve ser entendida com cuidado. Se o destino está fora da rede local, ARP não procura o MAC do servidor final na internet. Ele procura o MAC do gateway padrão. O gateway então recebe o frame local, remove a Camada 2, analisa o pacote IP e decide o próximo salto.</p>
+</section>
