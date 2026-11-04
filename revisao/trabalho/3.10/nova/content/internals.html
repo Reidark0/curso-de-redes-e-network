@@ -1,3 +1,18 @@
-<section class="lesson-section lesson-section--internals"><h2>6. Funcionamento interno</h2>
-<ol class="flow-list"><li>O host calcula se o destino IPv4 está na mesma rede ou fora dela.</li><li>Se o destino for local, o MAC necessário é o do próprio destino; se for remoto, o MAC necessário é o do gateway.</li><li>O host consulta o cache ARP. Se não houver entrada válida, envia ARP Request em broadcast dentro da VLAN.</li><li>O switch recebe o frame, aprende o MAC de origem e encaminha conforme sua tabela MAC.</li><li>Se o destino for broadcast ou MAC desconhecido, o switch faz flooding dentro da VLAN.</li><li>Se houver trunk, apenas VLANs permitidas devem atravessar o enlace.</li><li>STP deve impedir loops bloqueando caminhos redundantes quando necessário.</li><li>Controles defensivos podem permitir, negar, alertar ou colocar a porta em quarentena.</li></ol>
+<section class="lesson-section lesson-section--internals"><h2>Funcionamento interno</h2>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>#</th><th>Quem</th><th>O que acontece</th><th>Falha típica</th></tr></thead><tbody>
+<tr><td>1</td><td>Host</td><td>Compara o IP de destino com o próprio IP e a máscara. Destino local: o MAC necessário é o do próprio destino. Destino remoto: é o MAC do gateway.</td><td>Máscara ou gateway incorretos</td></tr>
+<tr><td>2</td><td>Host</td><td>Consulta o cache ARP. Sem entrada válida, envia ARP Request em broadcast dentro da VLAN.</td><td>Entrada ausente, INCOMPLETE/FAILED ou inconsistente</td></tr>
+<tr><td>3</td><td>Switch</td><td>Aprende o MAC de origem na porta (tabela MAC por VLAN) e encaminha pelo MAC de destino. Broadcast ou MAC desconhecido: flooding dentro da VLAN.</td><td>MAC flapping, flooding, porta errada</td></tr>
+<tr><td>4</td><td>Trunk / uplink</td><td>Só as VLANs permitidas atravessam o enlace, identificadas pela tag 802.1Q.</td><td>VLAN ausente no trunk</td></tr>
+<tr><td>5</td><td>STP</td><td>Bloqueia caminhos redundantes quando necessário para impedir loops.</td><td>Loop, ou bloqueio inesperado do caminho em uso</td></tr>
+<tr><td>6</td><td>Controles L2</td><td>Permitem, negam, alertam ou colocam a porta em quarentena.</td><td>Controle mal planejado bloqueando tráfego legítimo</td></tr>
+<tr><td>7</td><td>Gateway</td><td>Recebe o frame local e processa o pacote IP. Daqui em diante começa o roteamento para outras redes.</td><td>Gateway errado, firewall local ou rota ausente</td></tr>
+</tbody></table></div>
+<h3>Campos que você confere</h3>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Campo</th><th>Tamanho</th><th>Para que serve</th><th>Atenção</th></tr></thead><tbody>
+<tr><td>Destination MAC</td><td>48 bits</td><td>Próximo destino local do frame: destino, gateway ou broadcast</td><td>Um MAC inesperado merece investigação</td></tr>
+<tr><td>Source MAC</td><td>48 bits</td><td>Interface que originou o frame naquele enlace</td><td>Não é identidade forte: pode mudar ou ser falsificado</td></tr>
+<tr><td>Tag 802.1Q</td><td>32 bits</td><td>Carrega o VLAN ID em enlaces trunk</td><td>Trunks permissivos ampliam erro e exposição</td></tr>
+<tr><td>ARP Sender/Target</td><td>variável</td><td>Associa IPv4 e MAC na rede local</td><td>ARP não autentica a associação</td></tr>
+</tbody></table></div>
 </section>

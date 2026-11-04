@@ -1,3 +1,11 @@
-<section class="lesson-section lesson-section--problem"><h2>3. Problema</h2>
-<p>O problema central desta revisão é unir peças que muitas vezes são estudadas separadamente. Na prática, o host não envia um pacote IP nu pelo cabo. Ele encapsula dados em um frame Ethernet, define MAC de origem e destino, usa ARP quando precisa descobrir o MAC do próximo salto, entrega o frame ao switch, depende da VLAN correta e espera que a topologia não tenha loops ou bloqueios indevidos.</p><ul class="flow-list"><li><strong>Sem MAC correto:</strong> o frame não chega ao destino local correto.</li><li><strong>Sem ARP coerente:</strong> o host não sabe qual MAC usar para o IP local ou gateway.</li><li><strong>Sem VLAN correta:</strong> o broadcast de ARP pode nunca chegar ao gateway esperado.</li><li><strong>Sem STP saudável:</strong> loops ou portas bloqueadas indevidamente podem causar indisponibilidade.</li><li><strong>Sem controles defensivos:</strong> portas físicas, ARP e tabela MAC podem ser abusados ou gerar risco operacional.</li></ul>
+<section class="lesson-section lesson-section--problem"><h2>Problema</h2>
+<p>O host não envia um pacote IP "nu" pelo cabo: ele encapsula os dados num frame Ethernet, define MAC de origem e destino, usa ARP quando precisa descobrir o MAC do próximo salto, entrega o frame ao switch, depende da VLAN correta e espera que a topologia não tenha loops nem bloqueios indevidos. Cada peça resolveu um problema, trouxe uma responsabilidade operacional e tem um jeito próprio de falhar:</p>
+<div class="responsive-table"><table class="data-table"><thead><tr><th>Peça</th><th>O que resolve → o que exige de você</th><th>Quando falha</th></tr></thead><tbody>
+<tr><td>Ethernet / MAC</td><td>Entrega local de frames → entender frames e meio físico</td><td>O frame não chega ao destino local correto</td></tr>
+<tr><td>Switch</td><td>Reduz colisões e encaminha por MAC → monitorar tabela MAC e flooding</td><td>Porta errada, flooding, MAC flapping</td></tr>
+<tr><td>ARP</td><td>Descobre o MAC de um IPv4 local → validar cache, gateway e inconsistências</td><td>O host não sabe qual MAC usar para o IP local ou o gateway</td></tr>
+<tr><td>VLAN</td><td>Separa domínios de broadcast → configurar access, trunk e roteamento inter-VLAN</td><td>O ARP Request nunca chega ao gateway esperado</td></tr>
+<tr><td>STP</td><td>Permite redundância sem loops de L2 → planejar root bridge e proteger portas</td><td>Loop ou porta bloqueada indevidamente derruba o caminho</td></tr>
+<tr><td>Controles L2</td><td>Reduzem abuso local → manter inventário, logs e exceções</td><td>Portas, ARP e tabela MAC abusados, ou controle mal planejado bloqueando tráfego legítimo</td></tr>
+</tbody></table></div>
 </section>

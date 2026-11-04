@@ -1,0 +1,77 @@
+{
+  "id": "3.10",
+  "versao": "nova",
+  "titulo": "Revisão prática: do frame ao gateway",
+  "tipo": "ligação/revisão",
+  "palavras": {
+    "visiveis": 4536,
+    "invisiveis": 32,
+    "teoriaVisivel": 2277
+  },
+  "porCampoVisivel": {
+    "content.motivation": 143,
+    "content.problem": 207,
+    "content.concept": 425,
+    "content.internals": 258,
+    "content.architecture": 76,
+    "content.simpleExample": 95,
+    "content.enterpriseExample": 128,
+    "content.securityExample": 126,
+    "content.diagram": 1,
+    "content.summary": 88,
+    "content.nextTheme": 46,
+    "security": 216,
+    "troubleshooting": 303,
+    "glossary": 165,
+    "title+subtitle": 23,
+    "objectives": 63,
+    "learningOutcomes": 86,
+    "quiz": 321,
+    "flashcards": 154,
+    "mentorQuestions": 249,
+    "exercises": 290,
+    "challenge": 158,
+    "commentedSolution": 209,
+    "references": 47,
+    "linksToOtherCourses": 40,
+    "lab": 619
+  },
+  "porCampoInvisivel": {
+    "networkContext": 32
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 35,
+    "alternativa_5minPasso_maisLeitura": 34.8,
+    "plausivel": true,
+    "palavras": 619
+  },
+  "duracao": {
+    "declarada": "90-130 min",
+    "estimatedStudyTimeMinutes": 130,
+    "M": 110,
+    "T": 108.5,
+    "partes": {
+      "teoria": 17.5,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 20,
+      "lab": 35
+    },
+    "faixaRecomendada": "90-130 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 19
+  }
+}
