@@ -1,0 +1,13 @@
+
+<section class="lesson-section lesson-section--motivation">
+  <h2>Motivação</h2>
+  <p>
+    “A rede está lenta” é um sintoma, não um diagnóstico. A frase pode significar que uma página demora para começar a carregar, que um download não passa de certa taxa, que uma chamada de vídeo engasga, que uma API responde em segundos ou que um backup leva a noite inteira. Cada caso aponta para uma métrica diferente: <strong>latência</strong> (tempo de resposta), <strong>largura de banda</strong> (capacidade do caminho) ou <strong>throughput</strong> (quanto realmente passa), além de perda e jitter. Essas métricas variam de forma independente: um link pode ter muita banda e latência alta, ou ir bem num teste simples e entregar péssima experiência por jitter e perda.
+  </p>
+  <div class="callout callout--problem">
+    <strong>Problema real:</strong> uma empresa contrata um link de 1 Gbps, mas usuários reclamam que o sistema web interno está lento. O teste de velocidade parece bom. O firewall não bloqueia. O DNS resolve. Depois de investigar, a equipe percebe que o problema está em latência alta até a região cloud, filas no proxy e perda intermitente na VPN. O link tinha capacidade; o caminho não entregava boa experiência.
+  </div>
+  <p>
+    Separar essas métricas também evita confundir ataque, falha de rede, gargalo de aplicação e limite contratual: exfiltração aparece como throughput de saída anormal, e negação de serviço aparece como perda, fila e latência.
+  </p>
+</section>

@@ -1,0 +1,18 @@
+
+<section class="lesson-section lesson-section--architecture">
+  <h2>7. Arquitetura</h2>
+  <p>
+    Em uma arquitetura corporativa, latência, largura de banda e throughput aparecem em vários pontos. O notebook do usuário pode estar em Wi‑Fi congestionado. O switch pode ter uplink saturado. O firewall pode estar com inspeção pesada. A VPN pode passar por uma região distante. A aplicação pode estar em cloud em outra localidade. O banco pode estar em outra zona. O proxy pode estar enfileirando conexões.
+  </p>
+  <ul>
+    <li><strong>Cliente:</strong> Wi‑Fi, CPU, navegador, antivírus, VPN e DNS local influenciam a percepção.</li>
+    <li><strong>LAN:</strong> switches, uplinks, VLANs, filas e erros físicos influenciam throughput e perda.</li>
+    <li><strong>Borda:</strong> firewall, NAT, proxy, WAF, IDS/IPS e inspeção TLS adicionam processamento.</li>
+    <li><strong>WAN/Internet:</strong> rota, distância, peering, congestionamento e perda influenciam RTT.</li>
+    <li><strong>Cloud:</strong> região, zona, load balancer, NAT gateway, private endpoint, service mesh e banco podem adicionar latência.</li>
+    <li><strong>Observabilidade:</strong> métricas de rede e aplicação precisam ser correlacionadas.</li>
+  </ul>
+  <p>
+    O diagnóstico maduro pergunta: onde a métrica piora? No Wi‑Fi? No gateway? No firewall? No provedor? Na VPN? Na aplicação? No banco? Essa pergunta impede conclusões genéricas e ajuda a construir evidência.
+  </p>
+</section>

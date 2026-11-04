@@ -1,0 +1,22 @@
+
+<section class="lesson-section lesson-section--security">
+  <h2>Exemplo em Segurança</h2>
+  <p>
+    Métricas de desempenho também são sinais de segurança. A tabela mostra como cada risco aparece nelas:
+  </p>
+  <div class="responsive-table">
+    <table class="data-table risk-table">
+      <thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead>
+      <tbody>
+        <tr><td>Exfiltração</td><td>Aumento de upload para destino incomum</td><td>Vazamento de dados</td><td>Monitoramento de egress, DLP, proxy, alertas e classificação de dados</td></tr>
+        <tr><td>DDoS/DoS</td><td>Perda, filas, saturação e latência alta</td><td>Indisponibilidade</td><td>Rate limit, proteção DDoS, autoscaling e filtragem</td></tr>
+        <tr><td>Túnel não autorizado</td><td>Tráfego constante para destino incomum</td><td>Canal oculto de saída</td><td>Controle de egress e correlação com DNS, proxy e identidade</td></tr>
+        <tr><td>Proxy/firewall saturado</td><td>Tempo de resposta piora em horários de pico</td><td>Degradação geral</td><td>Capacity planning, métricas, HA e ajuste de inspeção</td></tr>
+        <tr><td>VPN mal dimensionada</td><td>Throughput baixo e RTT alto para usuários remotos</td><td>Produtividade baixa</td><td>Split tunneling controlado, ZTNA, regiões próximas e monitoramento</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout callout--security">
+    <strong>Limite ético:</strong> meça desempenho só em rede própria ou autorizada; teste de carga, saturação, varredura agressiva ou simulação de negação de serviço contra terceiros ou ambiente corporativo exige autorização formal.
+  </div>
+</section>

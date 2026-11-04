@@ -1,0 +1,16 @@
+
+<section class="lesson-section lesson-section--motivation">
+  <h2>1. Motivação</h2>
+  <p>
+    Quando alguém diz “a rede está lenta”, essa frase quase nunca é um diagnóstico. Ela é um sintoma. Pode significar que uma página demora para começar a carregar, que um download não passa de certa taxa, que uma chamada de vídeo engasga, que uma API responde em segundos, que o acesso via VPN está ruim ou que um backup demora a noite inteira. Em todos esses casos, a palavra “lenta” esconde fenômenos diferentes.
+  </p>
+  <p>
+    Para diagnosticar corretamente, você precisa separar três ideias que muita gente mistura: <strong>latência</strong>, <strong>largura de banda</strong> e <strong>throughput</strong>. Latência é tempo de resposta. Largura de banda é capacidade teórica ou contratada do caminho. Throughput é quanto de dados úteis realmente passa em determinado período. A rede pode ter muita largura de banda e ainda ter latência alta. Pode ter baixa latência e throughput ruim. Pode ter bom throughput em um teste simples, mas péssima experiência por jitter e perda.
+  </p>
+  <div class="callout callout--problem">
+    <strong>Problema real:</strong> uma empresa contrata um link de 1 Gbps, mas usuários reclamam que o sistema web interno está lento. O teste de velocidade parece bom. O firewall não bloqueia. O DNS resolve. Depois de investigar, a equipe percebe que o problema está em latência alta até a região cloud, filas no proxy e perda intermitente na VPN. O link tinha capacidade; o caminho não entregava boa experiência.
+  </div>
+  <p>
+    Em Segurança da Informação, essas métricas também são relevantes. Exfiltração de dados pode aparecer como aumento de throughput de saída. Ataques de negação de serviço podem gerar perda, filas e latência. Inspeção TLS, proxies, VPNs e firewalls adicionam processamento e podem alterar performance. Sem entender essas métricas, você pode confundir ataque, falha de rede, gargalo de aplicação e limitação contratual.
+  </p>
+</section>

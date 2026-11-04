@@ -1,0 +1,103 @@
+{
+  "id": "0.6",
+  "versao": "original",
+  "titulo": "Latência, largura de banda e throughput",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5790,
+    "teoria": 3514,
+    "praticaExtra": 1607,
+    "quiz": 322,
+    "flashcards": 132
+  },
+  "porGrupoTeoria": {
+    "introducao": 769,
+    "contexto": 673,
+    "conteudo": 612,
+    "exemplos": 789,
+    "seguranca_troubleshooting": 671
+  },
+  "porSecao": {
+    "motivation": 282,
+    "summary": 74,
+    "history": 249,
+    "problem": 221,
+    "evolution": 203,
+    "concept": 211,
+    "internals": 229,
+    "architecture": 169,
+    "diagram": 3,
+    "analogy": 117,
+    "simpleExample": 135,
+    "enterpriseExample": 129,
+    "cloudExample": 115,
+    "devsecopsExample": 117,
+    "securityExample": 176,
+    "objectives": 64,
+    "learningOutcomes": 95,
+    "glossary": 254,
+    "security": 344,
+    "troubleshooting": 327,
+    "nextTheme": 44
+  },
+  "pratica": {
+    "quiz": 322,
+    "flashcards": 132,
+    "lab": 846,
+    "mentorQuestions": 163,
+    "exercises": 167,
+    "challenge": 200,
+    "commentedSolution": 231
+  },
+  "outros": {
+    "title+subtitle": 22,
+    "nextTheme": 44,
+    "references": 72,
+    "linksToOtherCourses": 77
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 105,
+    "alternativa_5minPorPasso": 25,
+    "plausivel": false,
+    "override": null,
+    "palavras": 846
+  },
+  "duracao": {
+    "declarada": "75-105 min",
+    "estimatedStudyTimeMinutes": 105,
+    "nucleo": 36,
+    "nucleoPartes": {
+      "teoria": 27,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 70,
+    "praticaExtraPartes": {
+      "lab": 25,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "30-45 min",
+    "praticaExtraArredondada": 70,
+    "recomendada": "30-45 min + 70 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 45
+  }
+}

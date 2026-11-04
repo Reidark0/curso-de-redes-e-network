@@ -1,0 +1,21 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>
+    Quando uma aplicação envia dados, eles atravessam várias etapas. A aplicação entrega dados ao sistema operacional. O protocolo divide ou organiza esses dados. A pilha de rede encapsula em segmentos, pacotes e quadros. A interface transmite sinais físicos. Cada etapa pode acrescentar tempo, overhead, fila ou erro.
+  </p>
+  <ol class="flow-list">
+    <li><strong>Aplicação gera dados:</strong> uma página, arquivo, requisição API, stream ou backup.</li>
+    <li><strong>Pilha de rede encapsula:</strong> headers de protocolo aumentam o tamanho total transmitido.</li>
+    <li><strong>Interface coloca no meio:</strong> cabo, fibra ou rádio transportam sinais.</li>
+    <li><strong>Dispositivos intermediários encaminham:</strong> switches, roteadores, firewalls, proxies, NAT, VPN e WAF podem processar ou enfileirar.</li>
+    <li><strong>Destino processa:</strong> servidor, aplicação, banco e autenticação adicionam tempo.</li>
+    <li><strong>Resposta volta:</strong> o caminho de retorno também pode ter gargalos diferentes.</li>
+  </ol>
+  <p>
+    Latência aparece quando somamos propagação, transmissão, processamento e fila. A propagação depende da distância e do meio físico. A transmissão depende da taxa do link e do tamanho do dado. O processamento depende dos equipamentos e softwares no caminho. A fila aparece quando um dispositivo recebe mais tráfego do que consegue encaminhar naquele momento.
+  </p>
+  <p>
+    Throughput real é afetado por overhead, janela TCP, perda, controle de congestionamento, qualidade do meio, CPU dos endpoints, criptografia, inspeção, tamanho de arquivo, paralelismo e limites do servidor. Por isso, medir throughput exige contexto. Um download lento pode ser limite do servidor, da rota, do firewall, do Wi‑Fi, do disco, do antivírus, da VPN ou da aplicação.
+  </p>
+</section>
