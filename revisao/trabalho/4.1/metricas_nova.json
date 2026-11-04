@@ -1,0 +1,81 @@
+{
+  "id": "4.1",
+  "versao": "nova",
+  "titulo": "Por que o IPv4 existe",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4878,
+    "invisiveis": 22,
+    "teoriaVisivel": 2613
+  },
+  "porCampoVisivel": {
+    "content.motivation": 140,
+    "content.problem": 166,
+    "content.evolution": 98,
+    "content.concept": 199,
+    "content.internals": 383,
+    "content.architecture": 87,
+    "content.analogy": 80,
+    "content.simpleExample": 49,
+    "content.enterpriseExample": 126,
+    "content.cloudExample": 102,
+    "content.devsecopsExample": 64,
+    "content.securityExample": 108,
+    "content.diagram": 2,
+    "content.summary": 73,
+    "content.nextTheme": 37,
+    "security": 272,
+    "troubleshooting": 391,
+    "glossary": 236,
+    "title+subtitle": 24,
+    "objectives": 48,
+    "learningOutcomes": 73,
+    "quiz": 446,
+    "flashcards": 161,
+    "mentorQuestions": 140,
+    "exercises": 221,
+    "challenge": 130,
+    "commentedSolution": 183,
+    "references": 49,
+    "linksToOtherCourses": 53,
+    "lab": 737
+  },
+  "porCampoInvisivel": {
+    "networkContext": 22
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 35,
+    "alternativa_5minPasso_maisLeitura": 35.7,
+    "plausivel": true,
+    "palavras": 737
+  },
+  "duracao": {
+    "declarada": "100-140 min",
+    "estimatedStudyTimeMinutes": 140,
+    "M": 120,
+    "T": 117.1,
+    "partes": {
+      "teoria": 20.1,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 35
+    },
+    "faixaRecomendada": "100-140 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 20
+  }
+}

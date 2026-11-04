@@ -4,8 +4,8 @@
   "order": 1,
   "title": "Por que o IPv4 existe",
   "subtitle": "Como a rede deixa de ser uma LAN isolada e passa a interligar redes usando endereçamento lógico e roteamento.",
-  "duration": "95-135 min",
-  "estimatedStudyTimeMinutes": 135,
+  "duration": "100-140 min",
+  "estimatedStudyTimeMinutes": 140,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 225,
@@ -77,68 +77,6 @@
       "cloud networking"
     ]
   },
-  "deepDive": {
-    "mentalModel": "IPv4 é o endereço lógico que permite decidir se o destino está na rede local ou se o pacote precisa ir ao gateway para alcançar outra rede.",
-    "keyTerms": [
-      "IPv4",
-      "endereço lógico",
-      "máscara",
-      "gateway",
-      "rota",
-      "pacote"
-    ],
-    "limitations": [
-      "IPv4 tem espaço de endereços limitado.",
-      "IPv4 por si só não garante entrega, confidencialidade, autenticação ou autorização.",
-      "Um IP identifica um ponto lógico de rede em determinado momento, não necessariamente uma pessoa ou processo."
-    ],
-    "whenToUse": [
-      "Endereçar hosts e redes em ambientes IPv4.",
-      "Planejar sub-redes, rotas, NAT e políticas de firewall.",
-      "Interpretar logs e evidências de conectividade."
-    ],
-    "whenNotToUse": [
-      "Como substituto de identidade forte.",
-      "Como único controle de segurança.",
-      "Como prova absoluta de autoria sem contexto de NAT, proxy, DHCP e logs."
-    ],
-    "operationalImpact": [
-      "Exige documentação de sub-redes, gateways, reservas e rotas.",
-      "Erros de máscara, gateway ou rota geram troubleshooting complexo.",
-      "Mudanças de IP podem afetar firewall, DNS, monitoramento e allowlists.",
-      "Mudanças de gateway, máscara ou rota devem ser tratadas como mudança de arquitetura, não apenas ajuste de estação, porque podem alterar caminhos, logs e controles de segurança."
-    ],
-    "financialImpact": [
-      "Em cloud, IP público, NAT Gateway, firewall gerenciado, tráfego entre zonas e logs podem gerar custo recorrente.",
-      "Endereçamento mal planejado pode exigir retrabalho, renumeração e janelas de manutenção.",
-      "Em cloud, escolher entre IP público, NAT gerenciado, bastion, VPN ou endpoint privado muda custo recorrente e também o esforço de operação."
-    ],
-    "securityImpact": [
-      "IPv4 é usado em regras de firewall, logs, SIEM e segmentação.",
-      "Redes planas aumentam movimento lateral.",
-      "Allowlists amplas e IP público exposto aumentam superfície de ataque."
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Confundir IP com MAC.",
-      "whyItHappens": "Ambos aparecem como identificadores de rede.",
-      "consequence": "O aluno tenta resolver problema de roteamento olhando apenas tabela MAC ou ARP.",
-      "correction": "MAC é entrega local de Camada 2; IPv4 é endereçamento lógico roteável de Camada 3."
-    },
-    {
-      "mistake": "Achar que DNS é necessário para pingar um IP.",
-      "whyItHappens": "Muitos acessos usam nomes, como sites e APIs.",
-      "consequence": "Diagnóstico perde tempo com DNS quando o problema é IP, rota ou gateway.",
-      "correction": "DNS traduz nome em IP; tráfego para IP direto não depende de DNS."
-    },
-    {
-      "mistake": "Usar IP como identidade de usuário.",
-      "whyItHappens": "Logs frequentemente mostram IP de origem.",
-      "consequence": "Investigação pode atribuir ação à pessoa errada em ambientes com NAT, DHCP ou proxy.",
-      "correction": "Correlacionar IP com DHCP, autenticação, proxy, EDR, VPN e horário."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Host acessa recursos locais, mas não acessa outras redes.",
@@ -224,9 +162,9 @@
   },
   "security": {
     "goodPractices": [
-      "Planejar blocos IPv4 por função e criticidade.",
-      "Evitar redes planas.",
-      "Documentar sub-redes, gateways e rotas.",
+      "Planejar blocos IPv4 por função e criticidade, evitando redes planas.",
+      "Documentar sub-redes, gateways, reservas e rotas.",
+      "Tratar mudança de gateway, máscara ou rota como mudança de arquitetura: ela pode alterar caminhos, logs, firewall, DNS, monitoramento e allowlists.",
       "Aplicar regras de firewall com menor privilégio.",
       "Coletar logs de firewall, NAT, VPN e flow logs.",
       "Revisar allowlists e expirá-las quando possível."
@@ -242,7 +180,7 @@
       "Confundir conectividade com autorização.",
       "Achar que IP privado é automaticamente seguro.",
       "Achar que NAT substitui firewall.",
-      "Interpretar IP de origem sem considerar proxy, NAT ou VPN."
+      "Tratar IP de origem como prova de autoria sem correlacionar NAT, proxy, DHCP, VPN e logs."
     ],
     "vulnerabilities": [
       {
@@ -265,7 +203,6 @@
       "Uso anormal de IPs públicos ou NAT."
     ],
     "hardening": [
-      "Segmentação por função.",
       "Rotas explícitas e revisadas.",
       "Firewall default deny onde aplicável.",
       "IAM e identidade acima de confiança por IP.",
@@ -278,62 +215,6 @@
       "Mudanças inesperadas em regras com CIDR amplo."
     ]
   },
-  "protocolFields": [
-    {
-      "field": "Source Address",
-      "size": "32 bits",
-      "purpose": "Identificar o endereço IPv4 de origem do pacote.",
-      "securityObservation": "Pode ser alterado em alguns cenários; em redes internas, precisa ser correlacionado com DHCP, NAT, VPN e logs."
-    },
-    {
-      "field": "Destination Address",
-      "size": "32 bits",
-      "purpose": "Identificar o endereço IPv4 de destino.",
-      "securityObservation": "Útil para firewall, roteamento, flow logs e investigação."
-    },
-    {
-      "field": "TTL",
-      "size": "8 bits",
-      "purpose": "Limitar a vida do pacote e ajudar a evitar loops infinitos.",
-      "securityObservation": "Aparece em traceroute e pode ajudar a inferir caminho, mas não deve ser usado como prova isolada."
-    },
-    {
-      "field": "Protocol",
-      "size": "8 bits",
-      "purpose": "Indicar o protocolo transportado, como ICMP, TCP ou UDP.",
-      "securityObservation": "Firewalls e IDS usam esse campo junto com portas e estado para decisões."
-    }
-  ],
-  "packetFlow": [
-    {
-      "step": 1,
-      "actor": "Host",
-      "action": "Compara IP local e IP de destino usando a máscara.",
-      "detail": "Decide se o destino é local ou remoto.",
-      "possibleFailure": "Máscara incorreta gera decisão errada."
-    },
-    {
-      "step": 2,
-      "actor": "Host",
-      "action": "Escolhe o próximo salto.",
-      "detail": "Destino local usa MAC do destino; destino remoto usa MAC do gateway.",
-      "possibleFailure": "Gateway ausente impede comunicação com outras redes."
-    },
-    {
-      "step": 3,
-      "actor": "ARP/Ethernet",
-      "action": "Resolve o MAC necessário para o próximo salto local.",
-      "detail": "ARP Request/Reply ocorre dentro da VLAN local.",
-      "possibleFailure": "VLAN errada ou ARP inconsistente impede entrega local."
-    },
-    {
-      "step": 4,
-      "actor": "Roteador/Gateway",
-      "action": "Analisa o pacote IPv4 e consulta tabela de rotas.",
-      "detail": "Escolhe próximo salto para a rede de destino.",
-      "possibleFailure": "Rota ausente ou firewall bloqueando causa falha."
-    }
-  ],
   "lab": {
     "id": "lab-4.1",
     "title": "Identificando IPv4, máscara, gateway e decisão local de envio",
@@ -344,8 +225,7 @@
     "architecture": "Host IPv4 em uma LAN com gateway padrão e saída para destinos remotos.",
     "prerequisites": [
       "Ter concluído os módulos 0, 1, 2 e 3.",
-      "Ter acesso a um terminal Windows ou Linux.",
-      "Usar apenas sua própria máquina ou laboratório autorizado."
+      "Ter acesso a um terminal Windows ou Linux."
     ],
     "tools": [
       "Windows PowerShell ou Prompt de Comando",
@@ -353,12 +233,11 @@
       "Opcional: Cisco Packet Tracer",
       "Opcional: Wireshark somente em ambiente autorizado"
     ],
-    "estimatedTimeMinutes": 60,
+    "estimatedTimeMinutes": 35,
     "cost": "zero",
     "safetyNotes": [
-      "Não execute varreduras em redes de terceiros.",
-      "Não publique IPs públicos, MACs, gateways ou topologia interna sem sanitização.",
-      "Colete apenas evidências do seu próprio host ou laboratório autorizado."
+      "Colete evidências só do seu próprio host ou de laboratório autorizado; não faça varreduras em redes de terceiros.",
+      "Sanitize IPs públicos, MACs, gateways e topologia interna antes de publicar qualquer evidência."
     ],
     "steps": [
       {
@@ -397,7 +276,7 @@
         "number": 5,
         "title": "Registrar decisão local",
         "instruction": "Escolha um IP local e um IP remoto e explique qual MAC seria necessário em cada caso.",
-        "analysisTask": "Produza o artefato indicado na instrução do passo e registre a evidência objetiva no relatório do laboratório.",
+        "analysisTask": "Monte uma tabela com as colunas destino, local ou remoto, próximo salto (MAC de quem) e evidência (saída do passo 4 ou do passo 6).",
         "expectedOutput": "Tabela com destino, local/remoto, próximo salto e evidência.",
         "explanation": "O objetivo é demonstrar entendimento, não gerar tráfego desnecessário."
       },
@@ -449,17 +328,10 @@
         "probableCause": "Configuração manual incompleta ou DHCP incorreto.",
         "howToConfirm": "ipconfig /all ou ip route sem default gateway.",
         "fix": "Corrigir configuração IPv4 ou escopo DHCP."
-      },
-      {
-        "symptom": "Gateway não responde",
-        "probableCause": "Falha L1/L2, VLAN errada, ARP inconsistente ou ICMP bloqueado.",
-        "howToConfirm": "Ver link, VLAN, ARP e logs locais.",
-        "fix": "Corrigir causa raiz antes de testar DNS ou aplicação."
       }
     ],
     "improvements": [
       "Montar o mesmo cenário no Packet Tracer com duas redes e um roteador.",
-      "Adicionar uma tabela de evidências sanitizada ao seu caderno técnico.",
       "Comparar o comportamento com VPN ligada e desligada, se autorizado."
     ],
     "evidenceToCollect": [
@@ -528,12 +400,12 @@
       "id": "q4.1.1",
       "question": "Qual problema principal o IPv4 resolve?",
       "options": [
-        "Endereçamento lógico e roteamento entre redes",
         "Criptografia de pacotes",
+        "Endereçamento lógico e roteamento entre redes",
         "Substituição completa do MAC",
         "Tradução de nomes em endereços"
       ],
-      "answer": 0,
+      "answer": 1,
       "explanation": "IPv4 identifica origem e destino lógico e permite roteamento entre redes.",
       "topic": "conceito",
       "difficulty": "iniciante",
@@ -543,13 +415,13 @@
       "id": "q4.1.2",
       "question": "Qual afirmação diferencia corretamente MAC e IPv4?",
       "options": [
+        "IPv4 só funciona dentro da LAN; os roteadores encaminham entre redes pelo MAC",
+        "MAC identifica a rede do host; IPv4 identifica só a placa de rede",
         "MAC é usado para entrega local; IPv4 é endereço lógico roteável",
-        "MAC é sempre público; IPv4 é sempre privado",
-        "IPv4 só funciona dentro da LAN; MAC funciona na internet",
-        "MAC substitui gateway"
+        "MAC e IPv4 de destino são trocados a cada roteador do caminho"
       ],
-      "answer": 0,
-      "explanation": "MAC atua no enlace local; IPv4 permite comunicação lógica entre redes.",
+      "answer": 2,
+      "explanation": "MAC atua só no enlace local e muda a cada salto; IPv4 identifica origem e destino lógicos, que se mantêm, e permite comunicação entre redes.",
       "topic": "mac-vs-ip",
       "difficulty": "iniciante",
       "type": "comparação"
@@ -558,14 +430,29 @@
       "id": "q4.1.3",
       "question": "Um host tem IP e máscara, mas não tem gateway. Qual sintoma é provável?",
       "options": [
-        "Acessa apenas recursos locais, mas falha para redes externas",
-        "Não consegue converter texto em UTF-8",
-        "Todos os switches param de aprender MAC",
-        "O DNS sempre passa a criptografar respostas"
+        "Acessa recursos da rede local, mas falha para outras redes",
+        "Não acessa nem os hosts da própria rede local",
+        "Acessa outras redes por IP, mas falha ao usar nomes",
+        "Acessa outras redes normalmente, porque o switch encaminha o tráfego para fora"
       ],
       "answer": 0,
-      "explanation": "Sem gateway, destinos fora da rede local não têm próximo salto.",
+      "explanation": "Sem gateway, destinos fora da rede local não têm próximo salto. Destinos locais continuam funcionando, porque o host faz ARP direto para eles.",
       "topic": "gateway",
+      "difficulty": "iniciante",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q4.1.7",
+      "question": "O notebook 192.168.1.50/24, com gateway 192.168.1.1, envia um pacote para 8.8.8.8. Quais destinos vão no frame Ethernet e no pacote IPv4 que saem do notebook?",
+      "options": [
+        "MAC do servidor 8.8.8.8; IP de destino 8.8.8.8",
+        "MAC de broadcast; IP de destino 8.8.8.8",
+        "MAC do gateway 192.168.1.1; IP de destino 192.168.1.1",
+        "MAC do gateway 192.168.1.1; IP de destino 8.8.8.8"
+      ],
+      "answer": 3,
+      "explanation": "8.8.8.8 está fora de 192.168.1.0/24, então o host faz ARP para o gateway e usa o MAC dele no frame. O IP de destino do pacote continua 8.8.8.8 até o fim do caminho.",
+      "topic": "decisao-local",
       "difficulty": "iniciante",
       "type": "diagnóstico"
     },
@@ -573,43 +460,28 @@
       "id": "q4.1.4",
       "question": "Por que não é seguro confiar apenas em IP de origem como identidade?",
       "options": [
+        "Porque o IP de origem é trocado a cada roteador do caminho",
         "Porque NAT, DHCP, proxy e VPN podem alterar ou compartilhar contexto de origem",
-        "Porque IP sempre muda a cada pacote",
-        "Porque IP é um algoritmo de criptografia fraco",
-        "Porque MAC é globalmente roteável"
+        "Porque endereços IPv4 privados não aparecem em logs de firewall",
+        "Porque o cabeçalho IPv4 não tem campo de endereço de origem"
       ],
-      "answer": 0,
-      "explanation": "IP precisa ser correlacionado com outros logs e identidades.",
+      "answer": 1,
+      "explanation": "O IP de origem viaja no cabeçalho e se mantém no caminho, mas DHCP reatribui endereços, NAT e proxy concentram vários usuários num mesmo IP e VPN muda a origem aparente. Correlacione com lease, autenticação e horário.",
       "topic": "segurança",
       "difficulty": "intermediário",
       "type": "segurança"
     },
     {
-      "id": "q4.1.5",
-      "question": "Em cloud, qual recurso se relaciona diretamente com o encaminhamento IPv4 entre sub-redes?",
-      "options": [
-        "Route table",
-        "Fonte do servidor",
-        "Teclado do operador",
-        "Encoding UTF-8"
-      ],
-      "answer": 0,
-      "explanation": "Route tables definem como pacotes são encaminhados em redes cloud.",
-      "topic": "cloud",
-      "difficulty": "iniciante",
-      "type": "cloud"
-    },
-    {
       "id": "q4.1.6",
       "question": "Se o gateway não responde, qual abordagem vem antes de culpar DNS?",
       "options": [
+        "Limpar o cache DNS e testar de novo pelo nome",
+        "Trocar o servidor DNS configurado no host",
         "Validar L1/L2, VLAN, ARP, IP e firewall local",
-        "Trocar o certificado TLS",
-        "Reinstalar o navegador",
-        "Alterar o JSON da aplicação"
+        "Reiniciar a aplicação que está falhando"
       ],
-      "answer": 0,
-      "explanation": "DNS atua depois que a conectividade básica está coerente.",
+      "answer": 2,
+      "explanation": "O gateway é testado por IP direto, sem DNS. Se ele não responde, o problema está antes: enlace, VLAN, ARP, endereçamento ou firewall local.",
       "topic": "diagnóstico",
       "difficulty": "iniciante",
       "type": "troubleshooting"
@@ -617,21 +489,22 @@
   ],
   "flashcards": [
     {
-      "id": "fc4.1.1",
-      "front": "O que é IPv4?",
-      "back": "Protocolo de Camada 3 usado para endereçamento lógico e roteamento entre redes.",
+      "id": "fc4.1.7",
+      "front": "O que muda e o que se mantém quando um pacote atravessa um roteador?",
+      "back": "Mudam os MACs de origem e destino (o roteador cria um novo frame para cada enlace); o IP de origem e o IP de destino se mantêm.",
       "tags": [
-        "ipv4"
+        "ipv4",
+        "mac"
       ],
       "difficulty": "iniciante"
     },
     {
-      "id": "fc4.1.2",
-      "front": "MAC e IP são iguais?",
-      "back": "Não. MAC entrega localmente na Camada 2; IPv4 identifica origem/destino lógico na Camada 3.",
+      "id": "fc4.1.8",
+      "front": "Em que camada o IPv4 opera e o que fica acima e abaixo dele?",
+      "back": "Camada 3 (Rede) no OSI, camada Internet no TCP/IP. Abaixo: Ethernet, Wi-Fi, PPP, túneis. Acima: TCP, UDP e ICMP.",
       "tags": [
-        "mac",
-        "ipv4"
+        "ipv4",
+        "camadas"
       ],
       "difficulty": "iniciante"
     },
@@ -647,7 +520,7 @@
     {
       "id": "fc4.1.4",
       "front": "IPv4 garante segurança?",
-      "back": "Não. IPv4 endereça e roteia; segurança depende de controles como firewall, segmentação, IAM, logs e criptografia.",
+      "back": "Não. IPv4 endereça e roteia, mas não garante entrega, confidencialidade nem autenticação; segurança depende de firewall, segmentação, IAM, logs e criptografia.",
       "tags": [
         "segurança"
       ],
@@ -663,14 +536,14 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc4.1.6",
-      "front": "Por que IP de origem em log não prova autoria sozinho?",
-      "back": "Porque pode haver NAT, DHCP, proxy, VPN, compartilhamento de dispositivo ou falta de correlação com identidade.",
+      "id": "fc4.1.9",
+      "front": "Preciso de DNS para pingar 8.8.8.8?",
+      "back": "Não. DNS só traduz nome em IP; tráfego para um IP direto não depende de DNS.",
       "tags": [
-        "logs",
-        "segurança"
+        "dns",
+        "diagnóstico"
       ],
-      "difficulty": "intermediário"
+      "difficulty": "iniciante"
     }
   ],
   "exercises": [
@@ -682,11 +555,11 @@
       "explanation": "As duas tecnologias trabalham em camadas diferentes e se complementam."
     },
     {
-      "id": "ex4.1.2",
+      "id": "ex4.1.5",
       "type": "diagnóstico",
-      "prompt": "Um host acessa outro host na mesma rede, mas não acessa a internet. Liste três hipóteses IPv4.",
-      "expectedAnswer": "Gateway ausente/incorreto, rota default ausente, firewall/NAT/rota externa bloqueando.",
-      "explanation": "Se local funciona, L2 pode estar ok; falhas externas apontam para gateway, rota ou controle."
+      "prompt": "O notebook 192.168.1.50 deveria usar máscara /24 (rede 192.168.1.0/24), mas foi configurado com /16, que faz o host considerar local todo endereço 192.168.x.x. Ele tenta acessar o servidor 192.168.20.10, que fica em outra rede, atrás do gateway 192.168.1.1. O que o notebook faz e qual sintoma aparece?",
+      "expectedAnswer": "Com /16, o notebook conclui que 192.168.20.10 é local e faz ARP direto para ele, em vez de usar o gateway. Como o servidor não está na LAN, ninguém responde ao ARP e o acesso falha, enquanto os hosts de 192.168.1.0/24 continuam acessíveis.",
+      "explanation": "Máscara errada gera decisão local errada: o frame nunca é entregue ao gateway para esse destino. Corrigir a máscara para /24 resolve."
     },
     {
       "id": "ex4.1.3",
@@ -811,7 +684,7 @@
       "term": "Máscara de rede",
       "shortDefinition": "Valor que separa parte de rede e parte de host no IPv4.",
       "longDefinition": "A máscara permite ao host decidir se o destino está localmente acessível ou se precisa ir ao gateway.",
-      "example": "/24 equivale, em geral, a 255.255.255.0.",
+      "example": "/24 equivale a 255.255.255.0.",
       "relatedTerms": [
         "CIDR",
         "subnetting"
