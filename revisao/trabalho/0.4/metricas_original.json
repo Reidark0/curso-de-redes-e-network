@@ -1,0 +1,81 @@
+{
+  "id": "0.4",
+  "versao": "original",
+  "titulo": "Bit vs Byte em redes",
+  "tipo": "intermediária",
+  "palavras": {
+    "visiveis": 4927,
+    "invisiveis": 610,
+    "teoriaVisivel": 3536
+  },
+  "porCampoVisivel": {
+    "content.motivation": 234,
+    "content.history": 237,
+    "content.problem": 242,
+    "content.evolution": 229,
+    "content.concept": 158,
+    "content.internals": 205,
+    "content.architecture": 194,
+    "content.analogy": 110,
+    "content.simpleExample": 114,
+    "content.enterpriseExample": 140,
+    "content.cloudExample": 174,
+    "content.devsecopsExample": 165,
+    "content.securityExample": 182,
+    "content.diagram": 3,
+    "content.summary": 72,
+    "content.nextTheme": 52,
+    "security": 423,
+    "troubleshooting": 384,
+    "glossary": 218,
+    "title+subtitle": 19,
+    "objectives": 67,
+    "learningOutcomes": 90,
+    "quiz": 266,
+    "flashcards": 99,
+    "mentorQuestions": 159,
+    "exercises": 118,
+    "challenge": 198,
+    "commentedSolution": 260,
+    "references": 50,
+    "linksToOtherCourses": 65
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 40,
+    "content.exercisesIntro": 29,
+    "content.challengeIntro": 33,
+    "content.solutionIntro": 29,
+    "networkContext": 42,
+    "deepDive": 311,
+    "commonMistakes": 126
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "60-85 min",
+    "estimatedStudyTimeMinutes": 85,
+    "M": 72.5,
+    "T": 89.2,
+    "partes": {
+      "teoria": 27.2,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "75-105 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 34
+  }
+}

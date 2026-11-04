@@ -1,0 +1,21 @@
+
+<section class="lesson-section lesson-section--evolution">
+  <h2>4. Evolução</h2>
+  <p>
+    Em redes antigas, velocidades eram baixas e a diferença entre bits e bytes aparecia de forma mais visível. Com links de Kbps, cada byte importava. À medida que Ethernet, banda larga, fibra, Wi-Fi e links de datacenter evoluíram para centenas de Mbps, Gbps e Tbps, a confusão não desapareceu; ela ficou mais cara. Errar uma ordem de grandeza em um link de 10 Gbps pode significar comprar equipamento errado, subdimensionar firewall, pagar cloud egress desnecessário ou criar gargalo em backup.
+  </p>
+  <p>
+    Outra evolução foi a distância entre velocidade nominal e experiência real. Um cabo pode negociar 1 Gbps, mas o throughput útil pode ser menor por causa de TCP, TLS, MTU, VPN, inspeção de segurança, latência, perda, janela TCP, servidor remoto, armazenamento e CPU. No Wi-Fi, a diferença é ainda maior: velocidade de link não é o mesmo que throughput útil. O meio é compartilhado, sujeito a interferência e half-duplex na prática.
+  </p>
+  <table class="data-table comparison-table">
+    <thead>
+      <tr><th>Conceito</th><th>O que significa</th><th>Exemplo</th><th>Limitação</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Velocidade nominal</td><td>Capacidade anunciada ou negociada do link</td><td>1 Gbps na placa de rede</td><td>Não garante taxa útil de aplicação</td></tr>
+      <tr><td>Throughput útil</td><td>Dados reais entregues à aplicação por tempo</td><td>90 MB/s copiando arquivo</td><td>Depende de protocolos e gargalos</td></tr>
+      <tr><td>Overhead</td><td>Bytes extras de controle, cabeçalho, criptografia e retransmissão</td><td>Ethernet + IP + TCP + TLS</td><td>Reduz a carga útil visível</td></tr>
+      <tr><td>Volume transferido</td><td>Total de dados movimentados</td><td>500 GB/mês em cloud</td><td>Não informa velocidade instantânea</td></tr>
+    </tbody>
+  </table>
+</section>

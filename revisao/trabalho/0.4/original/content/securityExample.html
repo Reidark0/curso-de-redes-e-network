@@ -1,0 +1,21 @@
+
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>
+    Em segurança, bits e bytes aparecem em estimativa de impacto. Se um alerta indica transferência de 80 MB/s para um destino externo por 10 minutos, isso não é “80 Mbps”. São 640 Mbps úteis. Em 10 minutos, o volume pode passar de dezenas de gigabytes. Essa diferença muda severidade, resposta a incidente, bloqueio, contenção e comunicação com gestão.
+  </p>
+  <table class="data-table risk-table">
+    <thead>
+      <tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Subestimar exfiltração</td><td>Confundir MB/s com Mbps</td><td>Resposta lenta ou severidade incorreta</td><td>Converter unidades e calcular volume por tempo</td></tr>
+      <tr><td>Dimensionar SIEM errado</td><td>Confundir eventos, bytes e taxa de ingestão</td><td>Perda de logs ou custo inesperado</td><td>Medir EPS, GB/dia e retenção separadamente</td></tr>
+      <tr><td>Firewall subdimensionado</td><td>Ignorar queda de throughput com IPS/TLS</td><td>Gargalo ou desativação de controles</td><td>Validar throughput com recursos reais ativados</td></tr>
+      <tr><td>Falsa conclusão em speedtest</td><td>Teste por Wi-Fi ou VPN</td><td>Trocas desnecessárias e diagnóstico ruim</td><td>Testar cabeado, sem VPN, com múltiplas origens e métricas</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Esta aula não ensina ataque. Ela ensina interpretação defensiva de métricas. Em ambientes reais, qualquer coleta de tráfego, teste de carga ou medição ativa deve ser autorizada e planejada para não causar indisponibilidade.
+  </p>
+</section>

@@ -1,0 +1,16 @@
+
+<section class="lesson-section lesson-section--motivation">
+  <h2>1. Motivação</h2>
+  <p>
+    Uma das confusões mais comuns em redes aparece quando alguém contrata um link de <strong>500 Mbps</strong> e espera ver downloads a <strong>500 MB/s</strong>. Essa expectativa está errada por uma razão simples: Mbps mede <em>megabits por segundo</em>, enquanto MB/s mede <em>megabytes por segundo</em>. Como 1 byte tem 8 bits, um link de 500 Mbps tem um teto teórico próximo de 62,5 MB/s antes de considerar overhead, perdas, Wi-Fi, servidor de origem, criptografia, VPN, disco e processamento.
+  </p>
+  <p>
+    Essa diferença não é detalhe acadêmico. Ela aparece em chamados de suporte, testes de internet, dimensionamento de links, cópias de backup, replicação entre datacenters, ingestão de logs no SIEM, tráfego de cloud, pipelines que baixam imagens Docker, sincronização de repositórios, coleta forense e investigação de possível exfiltração. Uma leitura errada da unidade pode levar a conclusões completamente erradas.
+  </p>
+  <div class="callout callout--problem">
+    <strong>Problema real:</strong> um usuário diz que a internet de 300 Mbps está ruim porque o navegador mostra 32 MB/s. Sem converter as unidades, alguém pode abrir chamado com o provedor, trocar equipamento ou alterar firewall sem necessidade. Na verdade, 32 MB/s equivalem a aproximadamente 256 Mbps úteis, o que pode ser aceitável dependendo do cenário.
+  </div>
+  <p>
+    Nesta aula, você vai aprender a pensar como profissional: primeiro identificar a unidade, depois converter, depois considerar overhead e só então diagnosticar. Essa habilidade será usada em todos os módulos seguintes, especialmente em Ethernet, Wi-Fi, TCP, VPN, cloud networking, firewalls, proxies e troubleshooting profissional.
+  </p>
+</section>

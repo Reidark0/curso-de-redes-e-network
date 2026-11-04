@@ -1,0 +1,74 @@
+{
+  "id": "0.4",
+  "versao": "nova",
+  "titulo": "Bit vs Byte em redes",
+  "tipo": "intermediária",
+  "palavras": {
+    "visiveis": 4934,
+    "invisiveis": 42,
+    "teoriaVisivel": 3368
+  },
+  "porCampoVisivel": {
+    "content.motivation": 165,
+    "content.history": 135,
+    "content.problem": 302,
+    "content.concept": 398,
+    "content.internals": 312,
+    "content.architecture": 155,
+    "content.analogy": 80,
+    "content.simpleExample": 107,
+    "content.enterpriseExample": 117,
+    "content.cloudExample": 145,
+    "content.devsecopsExample": 113,
+    "content.securityExample": 113,
+    "content.diagram": 1,
+    "content.summary": 124,
+    "content.nextTheme": 40,
+    "security": 406,
+    "troubleshooting": 393,
+    "glossary": 262,
+    "title+subtitle": 19,
+    "objectives": 67,
+    "learningOutcomes": 90,
+    "quiz": 382,
+    "flashcards": 158,
+    "mentorQuestions": 159,
+    "exercises": 118,
+    "challenge": 198,
+    "commentedSolution": 260,
+    "references": 50,
+    "linksToOtherCourses": 65
+  },
+  "porCampoInvisivel": {
+    "networkContext": 42
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 8,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "75-110 min",
+    "estimatedStudyTimeMinutes": 110,
+    "M": 92.5,
+    "T": 89.9,
+    "partes": {
+      "teoria": 25.9,
+      "diagramas": 3,
+      "quiz": 7,
+      "flashcards": 4,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 0
+    },
+    "faixaRecomendada": "75-110 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 32
+  }
+}

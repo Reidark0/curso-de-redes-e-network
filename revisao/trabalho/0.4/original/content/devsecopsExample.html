@@ -1,0 +1,13 @@
+
+<section class="lesson-section lesson-section--devsecops">
+  <h2>12. Exemplo em DevSecOps</h2>
+  <p>
+    Em DevSecOps, pipelines baixam dependências, imagens de container, artefatos, pacotes, scanners e bases de vulnerabilidades. Um build lento pode ser atribuído à rede, mas o gargalo real pode estar em cache mal configurado, registry distante, proxy corporativo, autenticação, inspeção TLS, limite do runner, disco lento ou concorrência de jobs.
+  </p>
+  <p>
+    Ao analisar um pipeline, diferencie volume e taxa. Baixar uma imagem de 1,2 GB em 60 segundos equivale a aproximadamente 20 MB/s, ou 160 Mbps úteis. Isso pode estar normal para um runner compartilhado. Se a organização tem muitos builds paralelos, o tráfego total pode saturar link, NAT, proxy ou registry interno. A solução pode ser cache local, mirror de registry, compressão, imagens menores, camadas otimizadas, runners próximos do registry ou políticas de retenção.
+  </p>
+  <p>
+    Segurança também entra aqui: scanners, SBOMs, logs e artefatos geram dados. Se tudo é enviado para fora da rede ou para outra região, há impacto financeiro e risco de exposição. Unidade correta ajuda a dimensionar controles sem achismo.
+  </p>
+</section>
