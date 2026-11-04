@@ -1,24 +1,50 @@
 
 <section class="lesson-section lesson-section--internals">
-  <h2>6. Funcionamento interno</h2>
+  <h2>Funcionamento interno</h2>
+  <h3>Do texto aos bytes (UTF-8)</h3>
   <p>
-    Vamos acompanhar uma frase simples: <code>Olá</code>. Para um humano, isso é texto. Para uma aplicação, primeiro existem caracteres: <code>O</code>, <code>l</code> e <code>á</code>. No Unicode, cada caractere possui um ponto de código. Em UTF-8, cada ponto de código é transformado em um ou mais bytes. Os caracteres ASCII básicos, como <code>O</code> e <code>l</code>, ocupam 1 byte em UTF-8. O caractere <code>á</code> ocupa 2 bytes: <code>C3 A1</code> em hexadecimal.
+    Acompanhe a palavra <code>Olá</code>. Ela tem três caracteres: <code>O</code>, <code>l</code> e <code>á</code>, com pontos de código <code>U+004F</code>, <code>U+006C</code> e <code>U+00E1</code>. Em UTF-8, <code>O</code> e <code>l</code> ocupam 1 byte cada (<code>4F</code> e <code>6C</code>, os mesmos valores do ASCII), e <code>á</code> ocupa 2 bytes: <code>C3 A1</code>. Resultado: 3 caracteres, 4 bytes. Ao salvar ou transmitir, a aplicação escolhe a codificação e gera esses bytes; eles viajam dentro de HTTP sobre TCP/IP sem que a rede saiba que são texto; o receptor os interpreta com a codificação que ele espera. Se ela for diferente da do emissor, o texto sai errado.
+  </p>
+  <p>O tamanho em UTF-8 depende do ponto de código:</p>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead>
+        <tr><th>Faixa de pontos de código</th><th>Bytes em UTF-8</th><th>Exemplo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>U+0000</code> a <code>U+007F</code> (ASCII)</td><td>1</td><td><code>A</code> = <code>41</code></td></tr>
+        <tr><td><code>U+0080</code> a <code>U+07FF</code></td><td>2</td><td><code>á</code> = <code>C3 A1</code>, <code>ç</code> = <code>C3 A7</code></td></tr>
+        <tr><td><code>U+0800</code> a <code>U+FFFF</code></td><td>3</td><td><code>€</code> (<code>U+20AC</code>) = <code>E2 82 AC</code></td></tr>
+        <tr><td><code>U+10000</code> em diante</td><td>4</td><td>😀 (<code>U+1F600</code>) = <code>F0 9F 98 80</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Por que aparece <code>UsuÃ¡rio</code></h3>
+  <p>
+    Esse texto quebrado (às vezes chamado de <em>mojibake</em>) tem uma causa exata: os bytes UTF-8 de <code>á</code>, <code>C3 A1</code>, foram lidos com uma tabela de 1 byte por caractere, como Latin-1 ou Windows-1252. Nessas tabelas, <code>C3</code> é <code>Ã</code> e <code>A1</code> é <code>¡</code>. Por isso <code>á</code> vira <code>Ã¡</code>, <code>ã</code> (<code>C3 A3</code>) vira <code>Ã£</code> e <code>ç</code> (<code>C3 A7</code>) vira <code>Ã§</code>. Ver <code>Ã</code> seguido de outro símbolo é uma pista forte de UTF-8 interpretado como Latin-1. O caminho inverso também acontece: o byte Latin-1 <code>E1</code> (<code>á</code>) não é UTF-8 válido sozinho, e o receptor costuma exibir o caractere de substituição <code>�</code>.
+  </p>
+  <h3>Base64: bytes como texto</h3>
+  <p>
+    Base64 resolve outro problema: nem todo canal de texto aceita qualquer byte. Bytes de controle, quebras de linha e valores binários arbitrários podem ser alterados ou rejeitados em e-mail, JSON, XML ou campos HTTP. Base64 não mapeia caracteres humanos para bytes; ele pega bytes já existentes e os reescreve com 64 caracteres seguros: <code>A–Z</code>, <code>a–z</code>, <code>0–9</code>, <code>+</code> e <code>/</code>.
   </p>
   <ol class="flow-list">
-    <li><strong>Passo 1:</strong> o usuário digita um caractere em uma aplicação.</li>
-    <li><strong>Passo 2:</strong> a aplicação representa esse caractere internamente usando um modelo de texto.</li>
-    <li><strong>Passo 3:</strong> ao salvar ou transmitir, a aplicação escolhe uma codificação, como UTF-8.</li>
-    <li><strong>Passo 4:</strong> a codificação transforma os caracteres em bytes.</li>
-    <li><strong>Passo 5:</strong> os bytes são enviados pela rede dentro de protocolos como HTTP/TCP/IP.</li>
-    <li><strong>Passo 6:</strong> o sistema receptor interpreta os bytes usando a codificação esperada.</li>
-    <li><strong>Passo 7:</strong> se a interpretação estiver errada, o texto exibido ou processado será incorreto.</li>
+    <li>Junte os bytes em blocos de 3 (24 bits).</li>
+    <li>Divida cada bloco em 4 grupos de 6 bits; 6 bits dão 64 combinações.</li>
+    <li>Troque cada grupo pelo caractere correspondente da tabela.</li>
+    <li>Se o último bloco tiver só 1 ou 2 bytes, complete a saída com <code>==</code> ou <code>=</code> (preenchimento).</li>
   </ol>
   <p>
-    Base64 funciona de forma diferente. Ele não mapeia caracteres humanos para bytes. Ele pega bytes já existentes e os reagrupa em blocos de 6 bits, usando uma tabela de 64 caracteres. Como 6 bits permitem 64 combinações, é possível representar dados binários usando letras, números e alguns símbolos. O caractere <code>=</code> pode aparecer como preenchimento para indicar alinhamento no final.
+    Exemplo: <code>Hel</code> = <code>48 65 6C</code> = <code>01001000 01100101 01101100</code>. Em grupos de 6 bits: <code>010010</code> <code>000110</code> <code>010101</code> <code>101100</code> = 18, 6, 21, 44 = <code>S</code>, <code>G</code>, <code>V</code>, <code>s</code>. Por isso <code>Hello</code> (5 bytes) começa com <code>SGVs</code> e termina como <code>SGVsbG8=</code>: o último bloco tem 2 bytes e ganha um <code>=</code>. Da mesma forma, <code>admin:admin</code> (11 bytes) vira 16 caracteres, <code>YWRtaW46YWRtaW4=</code>.
+  </p>
+  <p>
+    Consequência prática: cada 3 bytes viram 4 caracteres, então Base64 aumenta o tamanho em cerca de 33%. A variante <strong>Base64URL</strong>, usada em JWT e URLs, troca <code>+</code> por <code>-</code> e <code>/</code> por <code>_</code> e costuma omitir o <code>=</code>.
   </p>
   <div class="content-card">
     <h3>Fluxo mental</h3>
     <p><strong>Texto humano</strong> → caracteres → pontos de código Unicode → bytes em UTF-8 → pacotes na rede → bytes recebidos → interpretação → texto novamente.</p>
     <p><strong>Bytes binários</strong> → Base64 → texto seguro para transporte → decodificação → bytes originais.</p>
+  </div>
+  <div class="callout warning">
+    <strong>Erro comum: achar que 1 caractere = 1 byte.</strong> Isso vale em ASCII, mas em UTF-8 limites de tamanho, truncamento e colunas de banco medidos em bytes falham com acentos e emojis. Diferencie caracteres, pontos de código e bytes.
   </div>
 </section>

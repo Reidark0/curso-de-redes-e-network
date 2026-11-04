@@ -1,20 +1,19 @@
 
 <section class="lesson-section lesson-section--problem">
-  <h2>3. Problema</h2>
+  <h2>Problema</h2>
   <p>
-    O problema central é que texto não é armazenado nem transmitido como uma ideia abstrata. Ele precisa virar bytes. Para que dois sistemas conversem, ambos precisam concordar sobre a interpretação desses bytes. Se um sistema escreve bytes usando uma codificação e outro interpreta usando outra, o tráfego pode chegar intacto e mesmo assim o resultado ficar errado.
+    Texto não é transmitido como ideia abstrata: ele precisa virar bytes, e os dois lados precisam concordar sobre como interpretá-los. Se o emissor grava com uma codificação e o receptor lê com outra, o tráfego chega intacto e o resultado sai errado.
   </p>
   <p>
-    Isso é essencial para redes porque protocolos normalmente transportam sequências de bytes. Alguns campos são binários, outros são texto. HTTP usa muito texto em headers e payloads. JSON é texto. DNS usa nomes. SMTP transporta mensagens. Logs são texto. Autenticação Basic usa Base64. Certificados PEM usam Base64 envolto por marcadores textuais. JWT possui partes codificadas em Base64URL. A camada de rede pode estar perfeita, mas a aplicação falha se interpretar mal o conteúdo.
+    Protocolos transportam sequências de bytes; alguns campos são binários, outros são texto. HTTP usa texto em headers e payloads, JSON é texto, DNS carrega nomes, logs são texto. Autenticação Basic usa Base64, certificados PEM são Base64 entre marcadores textuais e JWT tem partes em Base64URL. A rede pode estar perfeita e a aplicação falhar ao interpretar o conteúdo.
   </p>
   <ul class="flow-list">
-    <li><strong>Texto sem codificação definida:</strong> sistemas diferentes podem interpretar os mesmos bytes de formas diferentes.</li>
-    <li><strong>Caracteres não ASCII:</strong> acentos, símbolos e emojis podem ocupar mais bytes que o esperado.</li>
-    <li><strong>Base64 mal compreendido:</strong> dados facilmente decodificáveis podem ser tratados como segredo seguro.</li>
-    <li><strong>Logs quebrados:</strong> evidências de auditoria e incidente podem ficar difíceis de pesquisar e correlacionar.</li>
-    <li><strong>Assinaturas inválidas:</strong> mudar bytes ao converter texto pode invalidar HMAC, assinatura digital ou hash.</li>
+    <li><strong>Caracteres não ASCII:</strong> acentos, símbolos e emojis ocupam mais bytes que o esperado.</li>
+    <li><strong>Base64 mal compreendido:</strong> dados decodificáveis por qualquer um são tratados como segredo.</li>
+    <li><strong>Logs quebrados:</strong> evidências de auditoria e incidente ficam difíceis de pesquisar e correlacionar.</li>
+    <li><strong>Assinaturas inválidas:</strong> mudar bytes ao converter texto invalida HMAC, assinatura digital ou hash.</li>
   </ul>
   <div class="callout callout--warning">
-    <strong>Armadilha comum:</strong> se dois textos parecem iguais na tela, não significa que seus bytes sejam iguais. Normalização Unicode, acentos compostos e caracteres visualmente parecidos podem causar diferenças importantes em autenticação, logs e validações.
+    <strong>Armadilha comum:</strong> dois textos iguais na tela não têm necessariamente os mesmos bytes. Normalização Unicode, acentos compostos e caracteres visualmente parecidos causam diferenças importantes em autenticação, logs e validações. Exemplo: <code>á</code> pode ser o ponto de código único <code>U+00E1</code> (bytes <code>C3 A1</code>) ou <code>a</code> seguido do acento combinante <code>U+0301</code> (bytes <code>61 CC 81</code>). Normalizar (por exemplo, para a forma NFC) faz as duas virarem a mesma sequência antes de comparar.
   </div>
 </section>

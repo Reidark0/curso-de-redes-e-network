@@ -1,13 +1,10 @@
 
 <section class="lesson-section lesson-section--enterprise">
-  <h2>10. Exemplo empresarial</h2>
+  <h2>Exemplo empresarial</h2>
   <p>
-    Em uma empresa, sistemas legados e modernos convivem. Um ERP antigo pode exportar CSV em uma codificação local. Um serviço moderno espera UTF-8. Um pipeline de dados importa o arquivo, envia para uma API e grava logs no SIEM. Se a codificação for inferida de forma errada, nomes de clientes, cidades, usuários e descrições podem ficar corrompidos. Isso não é apenas um problema estético: pode quebrar reconciliação, alertas, busca por usuário, evidências de auditoria e relatórios regulatórios.
+    Um ERP antigo exporta CSV em Windows-1252; um serviço moderno espera UTF-8. O pipeline importa o arquivo, envia para uma API e grava logs no SIEM. Se a codificação for inferida errado, nomes de clientes, cidades e usuários ficam corrompidos. Não é só estética: isso quebra reconciliação, alertas, busca por usuário, evidências de auditoria e relatórios regulatórios.
   </p>
   <p>
-    Em segurança, isso também aparece em autenticação e autorização. Um nome de usuário com caractere especial pode ser tratado de forma diferente por dois sistemas. Um WAF pode aplicar normalização diferente da aplicação. Um log pode registrar uma versão escapada de um valor, enquanto a aplicação processa outra. Em investigações, o analista precisa perguntar: “estou vendo o texto original, uma versão escapada, uma versão codificada, uma versão normalizada ou uma versão truncada?”
+    Em segurança, o mesmo acontece com autenticação e autorização. Um nome de usuário com caractere especial pode ser tratado de forma diferente por dois sistemas, um WAF pode normalizar diferente da aplicação, e um log pode registrar uma versão escapada do valor enquanto a aplicação processa outra. Numa investigação, pergunte: “estou vendo o texto original, uma versão escapada, codificada, normalizada ou truncada?”
   </p>
-  <div class="callout callout--security">
-    <strong>Uso corporativo:</strong> padronizar UTF-8, testar caracteres internacionais, registrar charset nos contratos de API e evitar múltiplas conversões implícitas reduz incidentes operacionais e melhora rastreabilidade.
-  </div>
 </section>

@@ -1,18 +1,15 @@
 
 <section class="lesson-section lesson-section--architecture">
-  <h2>7. Arquitetura</h2>
+  <h2>Arquitetura</h2>
   <p>
-    Codificação de texto aparece acima das camadas de transporte, mas seus efeitos atravessam toda a operação. O TCP pode entregar bytes corretamente. O TLS pode proteger o canal corretamente. O balanceador pode encaminhar para o backend correto. Mesmo assim, se o serviço interpretar bytes com codificação errada, o resultado será falha funcional.
+    Codificação de texto vive acima do transporte, mas seus efeitos atravessam toda a operação. O TCP pode entregar os bytes corretamente, o TLS pode proteger o canal e o balanceador pode encaminhar ao backend certo; se o serviço interpretar os bytes com a codificação errada, o resultado ainda é falha funcional.
   </p>
   <ul class="flow-list">
-    <li><strong>Aplicação:</strong> define formato de dados, como JSON, HTML, XML, logs ou arquivo de configuração.</li>
-    <li><strong>Protocolo de aplicação:</strong> pode declarar tipo e charset, por exemplo em HTTP.</li>
-    <li><strong>Transporte:</strong> TCP ou QUIC transporta bytes, sem entender o significado textual.</li>
+    <li><strong>Aplicação:</strong> define o formato dos dados, como JSON, HTML, XML, logs ou arquivo de configuração.</li>
+    <li><strong>Protocolo de aplicação:</strong> pode declarar tipo e charset, por exemplo <code>Content-Type: application/json; charset=utf-8</code> em HTTP.</li>
+    <li><strong>Transporte:</strong> TCP ou QUIC transporta bytes sem entender o significado textual.</li>
     <li><strong>Segurança:</strong> TLS protege bytes em trânsito, mas não corrige codificação errada.</li>
-    <li><strong>Observabilidade:</strong> logs, traces e SIEM precisam preservar texto corretamente para busca e correlação.</li>
-    <li><strong>Automação:</strong> pipelines, scripts e IaC precisam lidar com arquivos em UTF-8 para evitar mudanças invisíveis.</li>
+    <li><strong>Observabilidade:</strong> logs, traces e SIEM precisam preservar o texto para busca e correlação.</li>
+    <li><strong>Automação:</strong> pipelines, scripts e IaC precisam tratar arquivos em UTF-8 para evitar mudanças invisíveis.</li>
   </ul>
-  <p>
-    Em arquitetura corporativa, a recomendação é documentar contratos de API, padronizar UTF-8, evitar transformações implícitas, validar entrada, registrar logs de forma segura e manter testes automatizados com caracteres acentuados, símbolos e casos internacionais.
-  </p>
 </section>

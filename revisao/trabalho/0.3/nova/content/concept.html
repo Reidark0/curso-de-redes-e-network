@@ -1,24 +1,43 @@
 
 <section class="lesson-section lesson-section--concept">
-  <h2>5. Conceito</h2>
+  <h2>Conceito</h2>
   <p>
-    Um <strong>caractere</strong> é uma unidade textual percebida por humanos, como <code>A</code>, <code>ç</code>, <code>?</code> ou <code>€</code>. Um <strong>ponto de código</strong> é o número atribuído a um caractere em um repertório como Unicode. Uma <strong>codificação</strong> é a regra que transforma esse ponto de código em bytes. Um <strong>charset</strong>, em muitos contextos práticos, indica o conjunto/codificação esperada para interpretar texto, embora o uso histórico do termo varie.
+    Um <strong>caractere</strong> é a unidade textual que você percebe, como <code>A</code>, <code>ç</code>, <code>?</code> ou <code>€</code>. Um <strong>ponto de código</strong> é o número atribuído a esse caractere no Unicode. Uma <strong>codificação</strong> (encoding) é a regra que transforma pontos de código em bytes. <strong>Charset</strong>, na prática, indica qual codificação usar para interpretar o texto (por exemplo, <code>charset=utf-8</code> num cabeçalho HTTP), embora o uso histórico do termo varie.
   </p>
   <div class="definition-box">
-    <strong>Definição essencial:</strong> ASCII é uma tabela histórica de caracteres básicos; Unicode é um padrão amplo que atribui números a caracteres; UTF-8 é uma codificação que transforma pontos de código Unicode em bytes; Base64 é uma forma de representar bytes usando caracteres textuais seguros.
+    <strong>Definição essencial:</strong> ASCII é uma tabela histórica de caracteres básicos; Unicode é um padrão amplo que atribui números a caracteres; UTF-8 é uma codificação que transforma pontos de código Unicode em bytes; Base64 é uma forma de representar bytes quaisquer usando caracteres de texto seguros.
   </div>
   <p>
-    A diferença mais importante para redes é esta: a rede transporta bytes. O significado desses bytes depende do protocolo e da codificação combinada. Quando uma API diz que envia JSON em UTF-8, ela está dizendo que o corpo da mensagem é texto JSON e que os caracteres desse texto devem ser interpretados como UTF-8. Quando um certificado aparece em PEM, ele contém dados binários codificados em Base64 para caber em um arquivo textual.
+    Para redes, o ponto central é: a rede transporta bytes, e o significado deles depende do protocolo e da codificação combinada. Quando uma API diz que envia JSON em UTF-8, o corpo é texto JSON cujos bytes devem ser lidos como UTF-8. Quando um certificado está em PEM, os bytes binários do certificado foram codificados em Base64 para caber num arquivo de texto.
   </p>
-  <table class="data-table">
-    <thead>
-      <tr><th>Termo</th><th>Pergunta que responde</th><th>Exemplo</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Caractere</td><td>Qual símbolo humano?</td><td><code>A</code>, <code>á</code>, <code>你</code></td></tr>
-      <tr><td>Ponto de código</td><td>Qual número representa o símbolo?</td><td><code>U+0041</code>, <code>U+00E1</code></td></tr>
-      <tr><td>Codificação</td><td>Como esse número vira bytes?</td><td>UTF-8, UTF-16</td></tr>
-      <tr><td>Base64</td><td>Como representar bytes como texto seguro?</td><td><code>SGVsbG8=</code></td></tr>
-    </tbody>
-  </table>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead>
+        <tr><th>Termo</th><th>Pergunta que responde</th><th>Exemplo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Caractere</td><td>Qual símbolo humano?</td><td><code>A</code>, <code>á</code>, <code>你</code></td></tr>
+        <tr><td>Ponto de código</td><td>Qual número representa o símbolo?</td><td><code>U+0041</code>, <code>U+00E1</code></td></tr>
+        <tr><td>Codificação</td><td>Como esse número vira bytes?</td><td>UTF-8, UTF-16</td></tr>
+        <tr><td>Base64</td><td>Como representar bytes como texto seguro?</td><td><code>SGVsbG8=</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Codificação não é criptografia, hash nem assinatura</h3>
+  <p>
+    Base64 aparece em HTTP Basic, em partes de JWT, em certificados, em anexos, em scripts e em malware. Saber em qual categoria um valor está evita decisões inseguras:
+  </p>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead>
+        <tr><th>Mecanismo</th><th>Precisa de chave?</th><th>Reversível?</th><th>Para que serve</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Codificação (UTF-8, Base64)</td><td>Não</td><td>Sim, por qualquer um que conheça a regra</td><td>Representar dados</td></tr>
+        <tr><td>Criptografia</td><td>Sim</td><td>Só com a chave</td><td>Confidencialidade</td></tr>
+        <tr><td>Hash</td><td>Não</td><td>Não (função unidirecional)</td><td>Detectar alteração, comparar sem guardar o original</td></tr>
+        <tr><td>Assinatura digital / HMAC</td><td>Sim</td><td>Não se aplica: é verificada</td><td>Provar integridade e origem; muda se um único byte mudar</td></tr>
+      </tbody>
+    </table>
+  </div>
 </section>
