@@ -1,0 +1,14 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>Por baixo da interface simples do console, o provedor mantém uma infraestrutura física e uma camada de virtualização de rede. O cliente não manipula diretamente switches físicos do provedor; ele manipula objetos lógicos que o plano de controle transforma em comportamento de rede.</p>
+  <ol class="flow-list">
+    <li><strong>Você declara uma rede virtual:</strong> cria uma VPC, VNet ou VPC Network com um ou mais blocos CIDR.</li>
+    <li><strong>Você divide o espaço:</strong> cria subnets para workloads públicos, privados, dados, gestão ou serviços compartilhados.</li>
+    <li><strong>Você define caminhos:</strong> tabelas de rota indicam se o destino vai para internet gateway, NAT, VPN, peering, transit, firewall ou rede local.</li>
+    <li><strong>Você aplica controles:</strong> security groups, NSGs, NACLs, firewalls e políticas decidem quais fluxos são permitidos.</li>
+    <li><strong>Você publica serviços:</strong> load balancers e DNS expõem aplicações de forma controlada.</li>
+    <li><strong>Você restringe serviços internos:</strong> private endpoints e DNS privado evitam tráfego desnecessário pela internet.</li>
+    <li><strong>Você observa:</strong> flow logs, métricas, logs de auditoria e tracing ajudam a provar o que aconteceu.</li>
+  </ol>
+  <p>A diferença operacional é que esses passos podem ser feitos por console, CLI, SDK, Terraform, Pulumi, Bicep, CloudFormation, Crossplane ou pipelines GitOps. Isso torna a rede versionável, mas também torna erros de rede replicáveis em vários ambientes se não houver revisão, validação e guardrails.</p>
+</section>

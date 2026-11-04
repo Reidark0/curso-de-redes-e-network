@@ -1,0 +1,14 @@
+<section class="lesson-section lesson-section--cloud">
+  <h2>11. Exemplo em cloud</h2>
+  <p>Em AWS, o bloco central é a Amazon VPC. Em Azure, é a Azure Virtual Network. Em Google Cloud, é a VPC Network. Os nomes mudam, mas os problemas são parecidos: criar isolamento lógico, dividir subnets, controlar rotas, filtrar tráfego, publicar serviços, conectar redes e observar fluxos.</p>
+  <table class="comparison-table">
+    <thead><tr><th>Conceito</th><th>AWS</th><th>Azure</th><th>Google Cloud</th></tr></thead>
+    <tbody>
+      <tr><td>Rede virtual</td><td>VPC</td><td>Virtual Network / VNet</td><td>VPC Network</td></tr>
+      <tr><td>Sub-rede</td><td>Subnet em zona de disponibilidade</td><td>Subnet dentro de VNet</td><td>Subnet regional</td></tr>
+      <tr><td>Filtro de instância/subnet</td><td>Security Group e NACL</td><td>NSG</td><td>Firewall policies/rules</td></tr>
+      <tr><td>Saída privada para internet</td><td>NAT Gateway</td><td>NAT Gateway</td><td>Cloud NAT</td></tr>
+      <tr><td>Observabilidade</td><td>VPC Flow Logs</td><td>VNet/NSG Flow Logs</td><td>VPC Flow Logs</td></tr>
+    </tbody>
+  </table>
+</section>

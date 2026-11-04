@@ -1,0 +1,60 @@
+<section class="lesson-section lesson-section--diagram">
+  <h2>14. Diagrama SVG</h2>
+  <p>O diagrama mostra a mudança principal: no datacenter tradicional, a rede era construída como equipamentos físicos e cabos. Na cloud, você continua desenhando isolamento, rotas, publicação, segurança e observabilidade, mas faz isso por APIs e objetos lógicos do provedor.</p>
+  <svg class="lesson-svg" viewBox="0 0 960 520" role="img" aria-labelledby="cloud-net-title cloud-net-desc">
+    <title id="cloud-net-title">Do datacenter físico à rede virtual em cloud</title>
+    <desc id="cloud-net-desc">Datacenter tradicional com switches e firewall conectado a uma VPC ou VNet com sub-redes pública e privada, gateway, NAT, load balancer, security groups e flow logs.</desc>
+    <defs>
+      <marker id="arrow-cloud-1401" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
+      </marker>
+    </defs>
+
+    <rect x="30" y="60" width="360" height="400" rx="18" class="svg-zone" />
+    <text x="210" y="95" text-anchor="middle" class="svg-label">Datacenter tradicional</text>
+
+    <rect x="70" y="140" width="110" height="62" rx="12" class="svg-node svg-node--switch" />
+    <text x="125" y="176" text-anchor="middle" class="svg-label svg-label--small">Switch</text>
+
+    <rect x="240" y="140" width="110" height="62" rx="12" class="svg-node svg-node--firewall" />
+    <text x="295" y="176" text-anchor="middle" class="svg-label svg-label--small">Firewall</text>
+
+    <rect x="70" y="260" width="110" height="62" rx="12" class="svg-node svg-node--server" />
+    <text x="125" y="296" text-anchor="middle" class="svg-label svg-label--small">Servidor</text>
+
+    <rect x="240" y="260" width="110" height="62" rx="12" class="svg-node svg-node--server" />
+    <text x="295" y="296" text-anchor="middle" class="svg-label svg-label--small">Banco</text>
+
+    <line x1="180" y1="171" x2="240" y2="171" class="svg-flow animated-flow" marker-end="url(#arrow-cloud-1401)" />
+    <line x1="125" y1="202" x2="125" y2="260" class="svg-flow" marker-end="url(#arrow-cloud-1401)" />
+    <line x1="295" y1="202" x2="295" y2="260" class="svg-flow" marker-end="url(#arrow-cloud-1401)" />
+
+    <rect x="430" y="60" width="500" height="400" rx="18" class="svg-zone svg-node--cloud" />
+    <text x="680" y="95" text-anchor="middle" class="svg-label">VPC / VNet / VPC Network</text>
+
+    <rect x="465" y="125" width="190" height="120" rx="16" class="svg-boundary" />
+    <text x="560" y="150" text-anchor="middle" class="svg-label svg-label--small">Subnet pública</text>
+    <rect x="500" y="170" width="120" height="46" rx="10" class="svg-node svg-node--server" />
+    <text x="560" y="199" text-anchor="middle" class="svg-label svg-label--small">Load Balancer</text>
+
+    <rect x="705" y="125" width="190" height="120" rx="16" class="svg-boundary" />
+    <text x="800" y="150" text-anchor="middle" class="svg-label svg-label--small">Subnet privada</text>
+    <rect x="735" y="170" width="130" height="46" rx="10" class="svg-node svg-node--server" />
+    <text x="800" y="199" text-anchor="middle" class="svg-label svg-label--small">Aplicação</text>
+
+    <rect x="465" y="300" width="190" height="100" rx="16" class="svg-boundary" />
+    <text x="560" y="328" text-anchor="middle" class="svg-label svg-label--small">Gateway / NAT</text>
+    <text x="560" y="356" text-anchor="middle" class="svg-label svg-label--small">Rota e egress</text>
+
+    <rect x="705" y="300" width="190" height="100" rx="16" class="svg-boundary" />
+    <text x="800" y="328" text-anchor="middle" class="svg-label svg-label--small">Flow logs</text>
+    <text x="800" y="356" text-anchor="middle" class="svg-label svg-label--small">SIEM / auditoria</text>
+
+    <line x1="390" y1="260" x2="430" y2="260" class="svg-flow svg-flow--request animated-flow" marker-end="url(#arrow-cloud-1401)" />
+    <line x1="620" y1="193" x2="735" y2="193" class="svg-flow svg-flow--request animated-flow" marker-end="url(#arrow-cloud-1401)" />
+    <line x1="800" y1="216" x2="800" y2="300" class="svg-flow svg-flow--response" marker-end="url(#arrow-cloud-1401)" />
+    <line x1="560" y1="300" x2="560" y2="245" class="svg-flow svg-flow--blocked" marker-end="url(#arrow-cloud-1401)" />
+
+    <text x="480" y="480" class="svg-label svg-label--small">Cloud networking não elimina redes: transforma redes em objetos versionáveis, auditáveis e cobrados por uso.</text>
+  </svg>
+</section>

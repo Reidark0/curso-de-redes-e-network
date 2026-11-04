@@ -1,0 +1,97 @@
+{
+  "id": "14.1",
+  "versao": "original",
+  "titulo": "Por que Cloud Networking existe",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4271,
+    "teoria": 2860,
+    "praticaExtra": 629,
+    "quiz": 309,
+    "flashcards": 119
+  },
+  "porGrupoTeoria": {
+    "introducao": 628,
+    "contexto": 482,
+    "conteudo": 517,
+    "exemplos": 660,
+    "seguranca_troubleshooting": 573
+  },
+  "porSecao": {
+    "motivation": 182,
+    "summary": 70,
+    "history": 181,
+    "problem": 154,
+    "evolution": 147,
+    "concept": 133,
+    "internals": 202,
+    "architecture": 140,
+    "diagram": 42,
+    "analogy": 99,
+    "simpleExample": 89,
+    "enterpriseExample": 90,
+    "cloudExample": 106,
+    "devsecopsExample": 111,
+    "securityExample": 165,
+    "objectives": 77,
+    "learningOutcomes": 70,
+    "glossary": 229,
+    "security": 281,
+    "troubleshooting": 292,
+    "nextTheme": 43
+  },
+  "pratica": {
+    "quiz": 309,
+    "flashcards": 119,
+    "lab": 0,
+    "mentorQuestions": 142,
+    "exercises": 153,
+    "challenge": 169,
+    "commentedSolution": 165
+  },
+  "outros": {
+    "title+subtitle": 21,
+    "nextTheme": 43,
+    "references": 96,
+    "linksToOtherCourses": 194
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "90-140 min",
+    "estimatedStudyTimeMinutes": 140,
+    "nucleo": 31,
+    "nucleoPartes": {
+      "teoria": 22,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "25-35 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

@@ -1,0 +1,951 @@
+{
+  "id": "14.1",
+  "moduleId": "m14",
+  "order": 1,
+  "title": "Por que Cloud Networking existe",
+  "subtitle": "Como a cloud transformou redes físicas em redes virtuais programáveis, elásticas, auditáveis e cobradas por uso.",
+  "duration": "90-140 min",
+  "estimatedStudyTimeMinutes": 140,
+  "difficulty": "intermediário",
+  "type": "fundamental",
+  "xp": 260,
+  "tags": [
+    "cloud networking",
+    "vpc",
+    "vnet",
+    "subnet",
+    "roteamento",
+    "security groups",
+    "nsg",
+    "nat",
+    "dns",
+    "flow logs",
+    "devsecops",
+    "segurança"
+  ],
+  "prerequisites": [
+    {
+      "type": "module",
+      "course": "Redes e Network",
+      "module": "m04",
+      "lesson": "4.x",
+      "reason": "Cloud networking depende de IPv4, CIDR e endereçamento."
+    },
+    {
+      "type": "module",
+      "course": "Redes e Network",
+      "module": "m05",
+      "lesson": "5.x",
+      "reason": "Subnets em cloud exigem raciocínio de subnetting e crescimento."
+    },
+    {
+      "type": "module",
+      "course": "Redes e Network",
+      "module": "m07",
+      "lesson": "7.x",
+      "reason": "DNS, DHCP e NAT aparecem de forma recorrente em cloud."
+    },
+    {
+      "type": "module",
+      "course": "Redes e Network",
+      "module": "m09",
+      "lesson": "9.x",
+      "reason": "Security groups, NSGs, NACLs e cloud firewalls dependem de políticas de tráfego."
+    },
+    {
+      "type": "module",
+      "course": "Redes e Network",
+      "module": "m13",
+      "lesson": "13.10",
+      "reason": "Arquitetura defensiva de rede prepara a visão de segurança necessária para cloud networking."
+    }
+  ],
+  "objectives": [
+    "Explicar por que cloud networking surgiu como resposta a limitações de datacenters tradicionais.",
+    "Diferenciar rede física, rede virtualizada e rede cloud programável.",
+    "Relacionar VPC, VNet e VPC Network com fundamentos de IP, subnet, rota, NAT, firewall e DNS.",
+    "Entender impactos operacionais, financeiros e de segurança de redes cloud.",
+    "Criar um primeiro mapa conceitual de arquitetura cloud segura sem provisionar recursos pagos.",
+    "Preparar o aluno para regiões, zonas, subnets, rotas, gateways, endpoints privados e observabilidade nas próximas aulas."
+  ],
+  "learningOutcomes": [
+    "Dado um desenho simples de aplicação, o aluno consegue indicar quais blocos de cloud networking seriam necessários.",
+    "Dado um incidente de exposição pública, o aluno consegue relacionar IP público, rota, política e DNS.",
+    "Dado um custo inesperado, o aluno consegue levantar hipóteses envolvendo NAT, egress, peering, logs e appliances.",
+    "Dado um ambiente sem logs, o aluno consegue explicar por que flow logs e auditoria devem nascer junto com a rede."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Camada 3",
+      "Camada 4",
+      "Camada 7"
+    ],
+    "tcpIpLayers": [
+      "Internet",
+      "Transporte",
+      "Aplicação"
+    ],
+    "relatedProtocols": [
+      "IPv4",
+      "IPv6",
+      "TCP",
+      "UDP",
+      "DNS",
+      "HTTP",
+      "TLS",
+      "BGP",
+      "IPsec"
+    ],
+    "dependsOn": [
+      "CIDR",
+      "subnetting",
+      "roteamento",
+      "NAT",
+      "firewall",
+      "DNS",
+      "VPN",
+      "Zero Trust",
+      "segurança de redes"
+    ],
+    "enables": [
+      "VPC",
+      "VNet",
+      "cloud load balancing",
+      "private endpoint",
+      "VPN híbrida",
+      "cloud firewall",
+      "Kubernetes networking"
+    ]
+  },
+  "cloudProviderMapping": [
+    {
+      "concept": "Rede virtual isolada",
+      "aws": "Amazon VPC",
+      "azure": "Azure Virtual Network",
+      "gcp": "VPC Network"
+    },
+    {
+      "concept": "Controle por instância/recurso",
+      "aws": "Security Group",
+      "azure": "Network Security Group",
+      "gcp": "VPC firewall rules / firewall policies"
+    },
+    {
+      "concept": "Saída privada para internet",
+      "aws": "NAT Gateway",
+      "azure": "NAT Gateway",
+      "gcp": "Cloud NAT"
+    },
+    {
+      "concept": "Logs de fluxo",
+      "aws": "VPC Flow Logs",
+      "azure": "Virtual Network Flow Logs / NSG flow logs",
+      "gcp": "VPC Flow Logs"
+    }
+  ],
+  "protocolFields": [
+    {
+      "field": "CIDR block",
+      "size": "variável",
+      "purpose": "Definir o espaço de endereçamento da rede virtual.",
+      "securityObservation": "CIDR sobreposto dificulta peering, VPN, roteamento híbrido e fusões."
+    },
+    {
+      "field": "Route destination",
+      "size": "prefixo IP",
+      "purpose": "Indicar qual rede de destino uma rota cobre.",
+      "securityObservation": "Rotas amplas demais podem desviar tráfego para internet, transit ou firewall errado."
+    },
+    {
+      "field": "Security rule",
+      "size": "origem, destino, porta, protocolo e ação",
+      "purpose": "Permitir ou negar fluxos específicos.",
+      "securityObservation": "Regras any-any ou 0.0.0.0/0 sem justificativa aumentam exposição."
+    },
+    {
+      "field": "Flow log 5-tuple",
+      "size": "IP origem, IP destino, porta origem, porta destino e protocolo",
+      "purpose": "Representar metadados de fluxo para troubleshooting e detecção.",
+      "securityObservation": "Sem logs de fluxo, a investigação perde evidência de comunicação."
+    }
+  ],
+  "packetFlow": [
+    {
+      "step": 1,
+      "actor": "Cliente externo",
+      "action": "Resolve o DNS público da aplicação.",
+      "detail": "O nome aponta para um load balancer ou endpoint publicado.",
+      "possibleFailure": "DNS aponta para destino antigo, região errada ou endpoint público indevido."
+    },
+    {
+      "step": 2,
+      "actor": "Load balancer",
+      "action": "Recebe conexão e encaminha para backend permitido.",
+      "detail": "Health checks decidem quais destinos recebem tráfego.",
+      "possibleFailure": "Security group/NSG bloqueia backend ou health check."
+    },
+    {
+      "step": 3,
+      "actor": "Aplicação privada",
+      "action": "Consulta banco ou serviço interno.",
+      "detail": "Fluxo deve permanecer privado e ser permitido por política mínima.",
+      "possibleFailure": "Banco exposto publicamente ou DNS privado ausente."
+    },
+    {
+      "step": 4,
+      "actor": "Egress",
+      "action": "Aplicação acessa dependência externa quando necessário.",
+      "detail": "Saída pode passar por NAT, firewall, proxy ou endpoint privado.",
+      "possibleFailure": "Custo alto de NAT/egress, rota ausente ou saída sem inspeção."
+    }
+  ],
+  "deepDive": {
+    "mentalModel": "Cloud networking é rede como produto lógico: você desenha intenção de conectividade, isolamento e exposição; o provedor implementa isso sobre infraestrutura física compartilhada.",
+    "keyTerms": [
+      "VPC",
+      "VNet",
+      "subnet",
+      "route table",
+      "security group",
+      "NSG",
+      "NACL",
+      "NAT Gateway",
+      "load balancer",
+      "private endpoint",
+      "flow logs",
+      "egress"
+    ],
+    "limitations": [
+      "A abstração esconde o físico, mas não elimina latência, perda, MTU, DNS, rota e custo de tráfego.",
+      "Serviços têm nomes e comportamentos diferentes entre provedores.",
+      "Controles distribuídos podem dificultar troubleshooting quando não há padrão de arquitetura.",
+      "IaC acelera correções, mas também acelera erros repetidos se não houver validação."
+    ],
+    "whenToUse": [
+      "Ao publicar workloads em cloud pública, privada ou híbrida.",
+      "Ao criar landing zones, ambientes por produto, redes compartilhadas, Kubernetes e serviços gerenciados.",
+      "Ao integrar datacenter, filiais, usuários remotos e workloads cloud."
+    ],
+    "whenNotToUse": [
+      "Não usar como desculpa para ignorar fundamentos de rede.",
+      "Não criar redes cloud isoladas de governança corporativa.",
+      "Não expor serviços diretamente por conveniência quando private endpoint, proxy ou load balancer interno resolvem melhor."
+    ],
+    "operationalImpact": [
+      "Exige padrões de naming, tagging, IPAM, rotas, DNS privado, logs, revisão e ownership.",
+      "Muda troubleshooting: console, CLI, logs, IaC, métricas e eventos de auditoria precisam ser correlacionados.",
+      "Aumenta dependência de automação e conhecimento multi-cloud em empresas grandes."
+    ],
+    "financialImpact": [
+      "NAT Gateways, egress, peering, firewalls gerenciados, balanceadores e logs podem gerar custo recorrente.",
+      "Arquitetura ruim de tráfego pode custar mais do que computação em alguns cenários.",
+      "Desativar logs para economizar pode aumentar custo de incidente e auditoria."
+    ],
+    "securityImpact": [
+      "Permite segmentação e logs fortes quando bem desenhado.",
+      "Cria risco de exposição pública rápida quando mal governado.",
+      "Integra rede com IAM, políticas, auditoria e detecção de forma mais forte que muitos ambientes tradicionais."
+    ]
+  },
+  "realWorld": {
+    "homeScenario": "Um usuário cria uma VM em cloud para laboratório e abre SSH para a internet inteira por falta de entendimento de IP público e regra de firewall.",
+    "smallBusinessScenario": "Uma empresa publica um sistema web em uma VPC simples, mas esquece logs e backup de configuração, dificultando auditoria posterior.",
+    "enterpriseScenario": "Uma organização cria landing zones com redes hub-and-spoke, firewall central, DNS privado, VPN/ExpressRoute/Direct Connect e integração com SIEM.",
+    "cloudScenario": "Um serviço serverless acessa banco gerenciado por private endpoint para evitar exposição pública e reduzir caminhos de ataque.",
+    "incidentScenario": "Durante investigação, o SOC descobre que o tráfego de exfiltração saiu por NAT compartilhado sem flow logs suficientes para atribuir origem rapidamente."
+  },
+  "commonMistakes": [
+    {
+      "mistake": "Achar que subnet pública é necessária para toda aplicação.",
+      "whyItHappens": "O aluno associa acesso à internet com IP público em todos os recursos.",
+      "consequence": "Aumenta superfície de ataque e dificulta controle de entrada.",
+      "correction": "Publicar via load balancer, proxy, WAF ou endpoint controlado; manter workloads privados quando possível."
+    },
+    {
+      "mistake": "Usar 0.0.0.0/0 em regras administrativas.",
+      "whyItHappens": "É a forma mais rápida de fazer o acesso funcionar.",
+      "consequence": "SSH, RDP, bancos ou painéis podem ficar expostos à internet.",
+      "correction": "Usar VPN/ZTNA/bastion, origem restrita, MFA, logs e janela de acesso controlada."
+    },
+    {
+      "mistake": "Ignorar custo de NAT e egress.",
+      "whyItHappens": "O recurso parece apenas um componente técnico de rota.",
+      "consequence": "Surpresa financeira e pressão para remover controles.",
+      "correction": "Modelar tráfego, usar endpoints privados quando adequado e acompanhar billing por tag."
+    },
+    {
+      "mistake": "Não ativar flow logs desde o início.",
+      "whyItHappens": "Logs são vistos como detalhe posterior.",
+      "consequence": "Incidentes e troubleshooting ficam sem evidência histórica.",
+      "correction": "Incluir logs no baseline de rede e na landing zone."
+    }
+  ],
+  "troubleshooting": {
+    "symptoms": [
+      "VM privada não acessa internet",
+      "Aplicação pública retorna timeout",
+      "Banco gerenciado não aceita conexão",
+      "Custo de rede cresceu sem explicação",
+      "Ambiente não aparece nos logs do SIEM"
+    ],
+    "diagnosticQuestions": [
+      "O recurso está em subnet pública ou privada?",
+      "Existe rota para o destino e rota de retorno?",
+      "A política permite origem, destino, porta e protocolo?",
+      "O DNS resolve para IP público ou privado?",
+      "O tráfego passa por NAT, firewall, load balancer, endpoint privado ou peering?",
+      "Flow logs, auditoria e métricas estão habilitados?"
+    ],
+    "commands": [
+      {
+        "platform": "AWS CLI",
+        "command": "aws ec2 describe-vpcs && aws ec2 describe-route-tables && aws ec2 describe-security-groups",
+        "purpose": "Inventariar VPCs, rotas e security groups.",
+        "expectedObservation": "VPCs, CIDRs, rotas e regras associadas.",
+        "interpretation": "Ajuda a confirmar isolamento, rota default e exposição por regra."
+      },
+      {
+        "platform": "Azure CLI",
+        "command": "az network vnet list -o table && az network nsg list -o table",
+        "purpose": "Listar VNets e NSGs.",
+        "expectedObservation": "VNets, resource groups, localizações e grupos de segurança.",
+        "interpretation": "Ajuda a mapear rede virtual e filtros aplicados."
+      },
+      {
+        "platform": "Google Cloud CLI",
+        "command": "gcloud compute networks list && gcloud compute firewall-rules list",
+        "purpose": "Listar VPC Networks e regras de firewall.",
+        "expectedObservation": "Redes, modo de subnet e regras de firewall.",
+        "interpretation": "Ajuda a identificar exposição, escopo e política."
+      },
+      {
+        "platform": "Linux",
+        "command": "ip route && dig +short exemplo.internal && curl -v https://exemplo",
+        "purpose": "Validar rota, DNS e conectividade a partir de uma VM.",
+        "expectedObservation": "Rota default, resolução DNS e handshake de aplicação.",
+        "interpretation": "Se DNS, rota ou TLS falham, o problema pode não estar no security group."
+      }
+    ],
+    "decisionTree": [
+      {
+        "if": "Recurso privado não sai para internet",
+        "then": "Verificar rota para NAT, política de saída e se o NAT está na subnet/rota correta."
+      },
+      {
+        "if": "Cliente externo não acessa aplicação",
+        "then": "Verificar DNS público, load balancer, health checks, security group/NSG e rota de retorno."
+      },
+      {
+        "if": "Banco recebe conexão por IP público",
+        "then": "Revisar endpoint, regra, DNS e arquitetura privada; preferir private endpoint quando possível."
+      },
+      {
+        "if": "Custo de rede subiu",
+        "then": "Verificar NAT, egress, tráfego entre zonas/regiões, peering, logs e appliances gerenciados."
+      }
+    ]
+  },
+  "security": {
+    "goodPractices": [
+      "Desenhar subnets por função e sensibilidade.",
+      "Publicar entrada por load balancer, WAF, proxy ou API gateway quando adequado.",
+      "Manter workloads privados por padrão.",
+      "Usar menor privilégio em security groups, NSGs e firewalls.",
+      "Habilitar flow logs e auditoria desde a criação da rede.",
+      "Versionar redes em IaC com revisão e policy as code.",
+      "Planejar IPAM para evitar CIDR sobreposto."
+    ],
+    "badPractices": [
+      "Criar IP público em todo recurso para facilitar acesso.",
+      "Liberar 0.0.0.0/0 para portas administrativas.",
+      "Usar uma única rede para produção, homologação, dev e dados.",
+      "Desativar logs para reduzir custo sem análise de risco.",
+      "Criar peering sem matriz de fluxo e sem controle de rota."
+    ],
+    "commonErrors": [
+      "Confundir subnet pública com recurso público.",
+      "Achar que security group substitui arquitetura defensiva.",
+      "Ignorar DNS privado em private endpoints.",
+      "Esquecer que egress também é risco."
+    ],
+    "vulnerabilities": [
+      {
+        "name": "Exposição pública indevida",
+        "description": "Workload sensível recebe IP público ou regra permissiva.",
+        "defensiveExplanation": "Acesso direto aumenta varredura, exploração e risco de brute force.",
+        "mitigation": "Remover IP público, restringir origem, usar ZTNA/bastion e publicar por camada controlada."
+      },
+      {
+        "name": "Movimento lateral por rede plana",
+        "description": "Workloads de diferentes funções compartilham rotas e políticas amplas.",
+        "defensiveExplanation": "Um comprometimento pode alcançar serviços internos com pouca fricção.",
+        "mitigation": "Segmentação, matriz de fluxos, firewall interno e logs."
+      },
+      {
+        "name": "Baixa visibilidade",
+        "description": "Ambiente cloud sem flow logs, DNS logs ou auditoria suficiente.",
+        "defensiveExplanation": "Incidentes ficam sem linha do tempo confiável.",
+        "mitigation": "Ativar logging por padrão e integrar ao SIEM."
+      }
+    ],
+    "monitoring": [
+      "Flow logs",
+      "DNS logs",
+      "Cloud audit logs",
+      "Load balancer logs",
+      "Firewall logs",
+      "NAT metrics",
+      "Security posture management"
+    ],
+    "hardening": [
+      "Bloquear portas administrativas públicas",
+      "Aplicar tags obrigatórias",
+      "Exigir flow logs",
+      "Validar IaC",
+      "Usar private endpoints para serviços sensíveis",
+      "Controlar egress"
+    ],
+    "detectionIdeas": [
+      "Alertar regra 0.0.0.0/0 em porta administrativa",
+      "Detectar recurso novo com IP público",
+      "Detectar tráfego incomum via NAT",
+      "Detectar peering novo sem ticket",
+      "Detectar flow logs desativados"
+    ]
+  },
+  "mentorQuestions": [
+    {
+      "type": "reflexão",
+      "question": "Por que cloud networking não pode ser aprendido apenas decorando nomes de serviços da AWS, Azure ou Google Cloud?",
+      "hints": [
+        "Pense nos problemas que os serviços resolvem.",
+        "Compare VPC, VNet e VPC Network."
+      ],
+      "expectedIdeas": [
+        "fundamentos",
+        "isolamento",
+        "rota",
+        "filtro",
+        "DNS",
+        "custo",
+        "observabilidade"
+      ],
+      "explanation": "Nomes mudam por provedor, mas os problemas de rede continuam."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "Uma VM privada não acessa a internet. Quais hipóteses você testaria antes de culpar a aplicação?",
+      "hints": [
+        "Pense em rota, NAT, política e DNS.",
+        "Pense em logs."
+      ],
+      "expectedIdeas": [
+        "route table",
+        "NAT",
+        "security group/NSG",
+        "DNS",
+        "firewall",
+        "flow logs"
+      ],
+      "explanation": "Conectividade cloud precisa ser quebrada por camadas e controles."
+    },
+    {
+      "type": "cenário real",
+      "question": "Uma empresa quer migrar rápido para cloud. Qual risco aparece se cada squad criar sua própria VPC sem padrão?",
+      "hints": [
+        "Pense em CIDR, logs, segurança e custo.",
+        "Pense em governança."
+      ],
+      "expectedIdeas": [
+        "CIDR sobreposto",
+        "exposição",
+        "rotas inconsistentes",
+        "logs ausentes",
+        "custo",
+        "dificuldade de integração"
+      ],
+      "explanation": "Cloud sem landing zone vira datacenter paralelo sem governança."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q14.1.1",
+      "type": "conceito",
+      "q": "Qual é a melhor definição de cloud networking?",
+      "opts": [
+        "Uso de objetos lógicos de rede em cloud para conectar, isolar, proteger, publicar e observar workloads.",
+        "A substituição completa de TCP/IP por APIs.",
+        "Apenas a criação de máquinas virtuais com IP público.",
+        "Um serviço exclusivo de Wi-Fi corporativo."
+      ],
+      "a": 0,
+      "exp": "Cloud networking usa objetos lógicos, mas continua dependendo de TCP/IP, DNS, rotas e políticas.",
+      "difficulty": "iniciante",
+      "topic": "conceito"
+    },
+    {
+      "id": "q14.1.2",
+      "type": "comparação",
+      "q": "Qual par representa melhor equivalência entre provedores?",
+      "opts": [
+        "AWS VPC, Azure Virtual Network e Google Cloud VPC Network.",
+        "AWS S3, Azure DNS e Google Kubernetes Engine.",
+        "AWS IAM, Azure Load Balancer e Google Cloud NAT.",
+        "AWS Lambda, Azure VM e Google Cloud Router."
+      ],
+      "a": 0,
+      "exp": "VPC/VNet/VPC Network são abstrações centrais de rede virtual.",
+      "difficulty": "iniciante",
+      "topic": "multi-cloud"
+    },
+    {
+      "id": "q14.1.3",
+      "type": "segurança",
+      "q": "Qual prática reduz exposição em uma aplicação cloud?",
+      "opts": [
+        "Manter banco e aplicação privados e publicar entrada por load balancer/WAF.",
+        "Colocar IP público em todos os recursos para facilitar suporte.",
+        "Desativar logs para economizar sempre.",
+        "Usar 0.0.0.0/0 para portas administrativas."
+      ],
+      "a": 0,
+      "exp": "Publicação controlada reduz superfície de ataque e melhora governança.",
+      "difficulty": "intermediário",
+      "topic": "segurança"
+    },
+    {
+      "id": "q14.1.4",
+      "type": "custo",
+      "q": "Qual item pode gerar custo de rede recorrente em cloud?",
+      "opts": [
+        "NAT Gateway, egress, peering, logs e load balancers.",
+        "Somente nomes de subnets.",
+        "Somente tags de recursos.",
+        "Somente CIDR privado sem tráfego."
+      ],
+      "a": 0,
+      "exp": "Cloud networking pode ter cobrança por hora, GB processado, armazenamento de logs e transferência de dados.",
+      "difficulty": "intermediário",
+      "topic": "finops"
+    },
+    {
+      "id": "q14.1.5",
+      "type": "diagnóstico",
+      "q": "Uma aplicação privada não resolve o nome do banco gerenciado via private endpoint. Qual hipótese é forte?",
+      "opts": [
+        "DNS privado ou zona privada não configurada corretamente.",
+        "A internet inteira caiu.",
+        "O cliente precisa de Wi-Fi 7.",
+        "O problema só pode ser CPU."
+      ],
+      "a": 0,
+      "exp": "Private endpoints frequentemente dependem de DNS privado correto para evitar resolução pública ou incorreta.",
+      "difficulty": "intermediário",
+      "topic": "dns"
+    },
+    {
+      "id": "q14.1.6",
+      "type": "arquitetura",
+      "q": "Por que landing zones são úteis em cloud networking empresarial?",
+      "opts": [
+        "Porque padronizam rede, segurança, logs, identidade, governança e contas/assinaturas.",
+        "Porque eliminam a necessidade de firewall.",
+        "Porque impedem qualquer custo de cloud.",
+        "Porque substituem endereçamento IP por nomes."
+      ],
+      "a": 0,
+      "exp": "Landing zones criam base governada para ambientes cloud, reduzindo variação e risco.",
+      "difficulty": "intermediário",
+      "topic": "landing zone"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc14.1.1",
+      "front": "O que é uma VPC/VNet?",
+      "back": "Uma rede virtual lógica em cloud usada para isolar, conectar e controlar workloads.",
+      "tags": [
+        "cloud",
+        "vpc",
+        "vnet"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc14.1.2",
+      "front": "Cloud networking elimina TCP/IP?",
+      "back": "Não. Ele abstrai a operação da rede, mas continua usando conceitos como IP, rota, porta, DNS, NAT e firewall.",
+      "tags": [
+        "fundamentos"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc14.1.3",
+      "front": "O que é egress?",
+      "back": "Tráfego de saída de um ambiente, subnet, workload ou provedor para outro destino.",
+      "tags": [
+        "egress",
+        "custo"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc14.1.4",
+      "front": "Por que flow logs importam?",
+      "back": "Eles registram metadados de tráfego úteis para troubleshooting, auditoria e detecção de segurança.",
+      "tags": [
+        "logs",
+        "soc"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc14.1.5",
+      "front": "Qual é o erro de usar IP público por conveniência?",
+      "back": "Aumenta superfície de ataque e ignora opções de publicação controlada ou acesso privado.",
+      "tags": [
+        "segurança"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc14.1.6",
+      "front": "O que é landing zone?",
+      "back": "Uma base padronizada e governada para contas, redes, identidade, segurança, logs e operação em cloud.",
+      "tags": [
+        "governança",
+        "cloud"
+      ],
+      "difficulty": "intermediário"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex14.1.1",
+      "type": "conceitual",
+      "prompt": "Explique por que cloud networking é diferente de simplesmente criar uma VM com IP público.",
+      "expectedAnswer": "Porque envolve isolamento, endereçamento, subnets, rotas, filtros, publicação, DNS, egress, logs, custos e governança.",
+      "explanation": "IP público é apenas uma forma de exposição; cloud networking é arquitetura completa de conectividade e controle."
+    },
+    {
+      "id": "ex14.1.2",
+      "type": "arquitetura",
+      "prompt": "Liste quatro zonas para uma aplicação web com banco de dados em cloud.",
+      "expectedAnswer": "Entrada controlada, aplicação privada, dados privados e gestão/observabilidade.",
+      "explanation": "Essas zonas separam exposição, processamento, dados sensíveis e operação."
+    },
+    {
+      "id": "ex14.1.3",
+      "type": "segurança",
+      "prompt": "Uma regra permite SSH de 0.0.0.0/0 para uma VM. Qual risco e qual correção?",
+      "expectedAnswer": "Risco de exposição administrativa à internet; corrigir usando bastion, VPN/ZTNA, origem restrita, MFA, logs e janela controlada.",
+      "explanation": "Portas administrativas públicas são alvos frequentes de varredura e abuso."
+    },
+    {
+      "id": "ex14.1.4",
+      "type": "finops",
+      "prompt": "Cite três elementos de rede cloud que podem gerar custo recorrente.",
+      "expectedAnswer": "NAT Gateway, egress/data transfer, load balancer, firewall gerenciado, peering e armazenamento de logs.",
+      "explanation": "Cloud cobra não só computação; tráfego e serviços de rede também importam."
+    }
+  ],
+  "challenge": {
+    "title": "Primeiro desenho cloud seguro para uma aplicação web",
+    "scenario": "Uma empresa quer migrar uma aplicação web, API interna e banco para cloud. A equipe quer publicar rápido, mas segurança exige menor exposição, logs, controle de custo e separação por ambiente.",
+    "tasks": [
+      "Definir rede virtual e subnets.",
+      "Definir o que será público e o que será privado.",
+      "Criar matriz de fluxos permitidos.",
+      "Definir egress e DNS.",
+      "Definir logs e integração com SIEM.",
+      "Listar riscos residuais e custos potenciais."
+    ],
+    "constraints": [
+      "Banco não pode ter IP público.",
+      "Administração não pode usar SSH/RDP aberto para internet.",
+      "Dev, homologação e produção não devem compartilhar a mesma subnet.",
+      "A solução deve ser explicável para segurança e para FinOps."
+    ],
+    "expectedDeliverables": [
+      "Mapa de zonas",
+      "Plano CIDR",
+      "Matriz de fluxos",
+      "Plano de publicação",
+      "Plano de egress",
+      "Plano de logs",
+      "Lista de custos e riscos"
+    ],
+    "gradingRubric": [
+      {
+        "criterion": "Isolamento",
+        "points": 20,
+        "description": "Separa público, privado, dados e gestão."
+      },
+      {
+        "criterion": "Segurança",
+        "points": 25,
+        "description": "Evita exposição indevida e usa menor privilégio."
+      },
+      {
+        "criterion": "Observabilidade",
+        "points": 20,
+        "description": "Inclui flow logs, auditoria e integração com SIEM."
+      },
+      {
+        "criterion": "Custo",
+        "points": 15,
+        "description": "Considera NAT, egress, logs e serviços gerenciados."
+      },
+      {
+        "criterion": "Clareza",
+        "points": 20,
+        "description": "Entrega matriz e justificativas compreensíveis."
+      }
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "Começamos por ativos e fluxos, não por nomes de serviços. Depois definimos zonas, exposição, rotas, políticas, DNS, logs e custo.",
+    "steps": [
+      "Listar usuários, aplicações, banco, administração e dependências.",
+      "Separar entrada controlada, aplicação privada, dados privados e gestão.",
+      "Escolher CIDR sem sobreposição com datacenter.",
+      "Publicar somente load balancer/WAF.",
+      "Manter aplicação e banco sem IP público.",
+      "Definir egress por NAT/firewall/proxy ou endpoints privados.",
+      "Criar matriz de fluxos mínimos.",
+      "Ativar flow logs, audit logs, DNS logs e integração com SIEM.",
+      "Listar custos potenciais e riscos residuais."
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "Colocar tudo em uma subnet pública para simplificar.",
+        "whyItIsWrong": "Funciona rápido, mas aumenta exposição e reduz controle."
+      },
+      {
+        "answer": "Criar security group liberando tudo dentro da VPC.",
+        "whyItIsWrong": "Recria rede plana e permite movimento lateral."
+      },
+      {
+        "answer": "Desativar logs para economizar.",
+        "whyItIsWrong": "Reduz custo imediato, mas prejudica investigação e auditoria."
+      }
+    ],
+    "finalAnswer": "Uma resposta madura propõe uma rede virtual com subnets separadas, entrada pública apenas por camada controlada, workloads privados, banco privado, egress controlado, DNS privado quando necessário, regras mínimas, logs desde o início, tags de custo e lista de riscos residuais."
+  },
+  "glossary": [
+    {
+      "term": "Cloud networking",
+      "shortDefinition": "Redes de computadores aplicadas a ambientes cloud por objetos lógicos e programáveis.",
+      "longDefinition": "Conjunto de serviços e práticas para conectar, isolar, publicar, proteger, observar e operar workloads em cloud.",
+      "example": "Criar uma VPC com subnets privadas, security groups, NAT, load balancer e flow logs.",
+      "relatedTerms": [
+        "VPC",
+        "VNet",
+        "subnet",
+        "route table"
+      ],
+      "relatedLessons": [
+        "14.1",
+        "14.3",
+        "14.4"
+      ]
+    },
+    {
+      "term": "VPC",
+      "shortDefinition": "Rede virtual privada em cloud.",
+      "longDefinition": "Abstração de rede lógica que permite lançar recursos em um espaço isolado definido pelo cliente.",
+      "example": "Uma VPC 10.40.0.0/16 na AWS.",
+      "relatedTerms": [
+        "VNet",
+        "subnet",
+        "CIDR"
+      ],
+      "relatedLessons": [
+        "14.3"
+      ]
+    },
+    {
+      "term": "VNet",
+      "shortDefinition": "Rede virtual privada no Azure.",
+      "longDefinition": "Bloco fundamental para redes privadas no Azure, permitindo comunicação entre recursos, internet e redes locais.",
+      "example": "Uma VNet para produção com subnets de aplicação e dados.",
+      "relatedTerms": [
+        "VPC",
+        "NSG",
+        "subnet"
+      ],
+      "relatedLessons": [
+        "14.3",
+        "14.5"
+      ]
+    },
+    {
+      "term": "Egress",
+      "shortDefinition": "Tráfego de saída de um ambiente ou recurso.",
+      "longDefinition": "Fluxo que sai de uma rede, subnet, workload, região ou provedor para outro destino, frequentemente associado a custo e controle de segurança.",
+      "example": "Uma aplicação privada acessando uma API externa via NAT Gateway.",
+      "relatedTerms": [
+        "NAT",
+        "firewall",
+        "proxy"
+      ],
+      "relatedLessons": [
+        "14.4",
+        "14.5"
+      ]
+    },
+    {
+      "term": "Flow logs",
+      "shortDefinition": "Registros de metadados de tráfego de rede.",
+      "longDefinition": "Logs que registram informações como origem, destino, porta, protocolo, ação e volume para troubleshooting, auditoria e segurança.",
+      "example": "VPC Flow Logs enviados ao SIEM.",
+      "relatedTerms": [
+        "NetFlow",
+        "SIEM",
+        "telemetria"
+      ],
+      "relatedLessons": [
+        "13.4",
+        "13.5",
+        "14.12"
+      ]
+    },
+    {
+      "term": "Landing zone",
+      "shortDefinition": "Base governada para adoção de cloud.",
+      "longDefinition": "Estrutura inicial com contas/assinaturas, rede, identidade, segurança, logs, governança, políticas e operação padronizadas.",
+      "example": "Hub-and-spoke com firewall central, DNS privado, contas por ambiente e logs obrigatórios.",
+      "relatedTerms": [
+        "governança",
+        "hub-spoke",
+        "policy as code"
+      ],
+      "relatedLessons": [
+        "14.13"
+      ]
+    }
+  ],
+  "pedagogicalMap": {
+    "problem": "Criar redes sob demanda sem perder controle, segurança, custo e observabilidade.",
+    "concept": "Cloud networking transforma redes em objetos lógicos e programáveis.",
+    "internalMechanism": "Plano de controle do provedor traduz VPC/VNet, subnets, rotas e políticas em comportamento de rede.",
+    "realUse": "Landing zones, aplicações web, workloads privados, conectividade híbrida e Kubernetes.",
+    "commonMistake": "Confundir rapidez de provisionamento com arquitetura segura.",
+    "securityImpact": "Pode reduzir exposição e melhorar logs, ou criar superfície pública em escala se mal usado.",
+    "operationalImpact": "Exige IaC, revisão, logs, IPAM, troubleshooting multi-camada e FinOps.",
+    "summary": "Cloud networking é a ponte entre fundamentos de redes e operação moderna em cloud."
+  },
+  "references": [
+    {
+      "type": "official-doc",
+      "title": "What is Amazon VPC?",
+      "organization": "AWS",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html",
+      "note": "Referência sobre VPC como rede virtual logicamente isolada."
+    },
+    {
+      "type": "official-doc",
+      "title": "What is Azure Virtual Network?",
+      "organization": "Microsoft",
+      "url": "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview",
+      "note": "Referência sobre VNet como bloco fundamental de rede privada no Azure."
+    },
+    {
+      "type": "official-doc",
+      "title": "VPC networks",
+      "organization": "Google Cloud",
+      "url": "https://docs.cloud.google.com/vpc/docs/vpc",
+      "note": "Referência sobre VPC Network como versão virtual de rede física implementada no Google."
+    },
+    {
+      "type": "official-doc",
+      "title": "The NIST Definition of Cloud Computing",
+      "organization": "NIST",
+      "url": "https://csrc.nist.gov/pubs/sp/800/145/final",
+      "note": "Base conceitual para cloud computing e acesso sob demanda a recursos configuráveis."
+    },
+    {
+      "type": "official-doc",
+      "title": "Pricing for NAT gateways",
+      "organization": "AWS",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html",
+      "note": "Referência de custo de NAT Gateway por hora e GB processado."
+    },
+    {
+      "type": "official-doc",
+      "title": "VPC Flow Logs",
+      "organization": "AWS",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html",
+      "note": "Referência sobre logs de fluxo para tráfego IP em VPC."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Redes e Network",
+      "module": "m05",
+      "lesson": "5.x",
+      "reason": "Subnets em cloud dependem de subnetting."
+    },
+    {
+      "course": "Redes e Network",
+      "module": "m09",
+      "lesson": "9.x",
+      "reason": "Security groups e NSGs dependem de políticas de tráfego e firewall."
+    },
+    {
+      "course": "Redes e Network",
+      "module": "m13",
+      "lesson": "13.10",
+      "reason": "Cloud networking precisa herdar arquitetura defensiva de rede."
+    },
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "cloud/iaC",
+      "lesson": "IaC e pipelines",
+      "reason": "Redes cloud devem ser versionadas e validadas por automação."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "IAM",
+      "lesson": "Identidade e políticas",
+      "reason": "Cloud networking moderno se integra a IAM, ZTNA e acesso por contexto."
+    },
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "IaC, automação e pipelines",
+      "lesson": "Infraestrutura como código, validação em pipeline e GitOps",
+      "reason": "As decisões de rede corporativa precisam ser versionadas, revisadas e validadas em automação para reduzir drift e erro operacional."
+    },
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "Observabilidade, SRE e resposta a incidentes",
+      "lesson": "Observabilidade aplicada a serviços, logs, métricas, traces e runbooks",
+      "reason": "Esta aula de redes usa evidências, telemetria, logs, métricas ou playbooks que serão aprofundados em observabilidade e SRE."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "Zero Trust, identidade e acesso corporativo",
+      "lesson": "Identidade, contexto, autorização e menor privilégio em ambientes empresariais",
+      "reason": "Controles de rede não substituem identidade; decisões modernas combinam segmentação, autenticação, autorização e contexto."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70,
+      "oneOf": [
+        "exerciseDone",
+        "practicalExerciseDone"
+      ]
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "14.2"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+<section class="lesson-section lesson-section--architecture">
+  <h2>7. Arquitetura</h2>
+  <p>Uma arquitetura mínima de cloud networking normalmente tem zonas lógicas. Um desenho comum separa uma subnet pública para load balancers ou bastions controlados, subnets privadas para aplicações, subnets isoladas para bancos ou serviços internos, uma camada de egress controlado, DNS privado, logs de fluxo e integração com uma rede corporativa ou landing zone.</p>
+  <ul>
+    <li><strong>Camadas envolvidas:</strong> camada 3 para endereçamento e roteamento, camada 4 para portas e políticas, camada 7 para publicação, proxy, WAF e APIs.</li>
+    <li><strong>Componentes:</strong> VPC/VNet, subnet, route table, gateway, NAT, firewall, load balancer, DNS, private endpoint, flow logs e IAM.</li>
+    <li><strong>Dependências:</strong> módulos anteriores de IPv4, subnetting, roteamento, DNS, NAT, firewall, TLS, VPN, Zero Trust e segurança de redes.</li>
+    <li><strong>Pontos de falha:</strong> rota ausente, política bloqueando, DNS errado, subnet pública por engano, NAT caro, endpoint privado sem DNS correto, peering sem rota de retorno ou logs desativados.</li>
+  </ul>
+</section>

@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>Em segurança, cloud networking é uma das maiores fontes de risco e de evidência. Um banco com IP público, uma rota para internet, um security group aberto para o mundo, um peering sem matriz de fluxo, um private endpoint sem DNS correto ou flow logs desativados podem transformar um ambiente cloud em uma superfície de ataque difícil de governar.</p>
+  <table class="risk-table">
+    <thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead>
+    <tbody>
+      <tr><td>Exposição pública indevida</td><td>IP público, load balancer ou regra 0.0.0.0/0 sem justificativa.</td><td>Aumento de superfície de ataque.</td><td>Private endpoints, firewall, revisão de regras e IaC scanning.</td></tr>
+      <tr><td>Movimento lateral</td><td>Subnets e peering sem segmentação efetiva.</td><td>Comprometimento se espalha entre workloads.</td><td>Zonas, security groups, NSGs, microsegmentação e logs.</td></tr>
+      <tr><td>Custo invisível</td><td>NAT, egress, peering, logs e appliances sem controle.</td><td>Surpresa financeira e pressão para desativar controles.</td><td>FinOps, tagging, budgets, arquitetura de egress e revisão de tráfego.</td></tr>
+      <tr><td>Baixa investigabilidade</td><td>Flow logs, DNS logs e auditoria desativados.</td><td>Incidente sem linha do tempo confiável.</td><td>Logging por padrão, retenção definida e integração com SIEM.</td></tr>
+    </tbody>
+  </table>
+</section>
