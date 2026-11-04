@@ -1,0 +1,88 @@
+{
+  "id": "1.6",
+  "versao": "original",
+  "titulo": "Cabeamento estruturado e padrões RJ-45",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4764,
+    "invisiveis": 588,
+    "teoriaVisivel": 2638
+  },
+  "porCampoVisivel": {
+    "content.motivation": 175,
+    "content.history": 187,
+    "content.problem": 115,
+    "content.evolution": 145,
+    "content.concept": 121,
+    "content.internals": 175,
+    "content.architecture": 137,
+    "content.analogy": 69,
+    "content.simpleExample": 90,
+    "content.enterpriseExample": 106,
+    "content.cloudExample": 81,
+    "content.devsecopsExample": 84,
+    "content.securityExample": 149,
+    "content.diagram": 3,
+    "content.summary": 71,
+    "content.nextTheme": 39,
+    "security": 304,
+    "troubleshooting": 326,
+    "glossary": 261,
+    "title+subtitle": 25,
+    "objectives": 66,
+    "learningOutcomes": 70,
+    "quiz": 239,
+    "flashcards": 122,
+    "mentorQuestions": 134,
+    "exercises": 154,
+    "challenge": 160,
+    "commentedSolution": 188,
+    "references": 41,
+    "linksToOtherCourses": 49,
+    "lab": 878
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 42,
+    "content.exercisesIntro": 14,
+    "content.challengeIntro": 22,
+    "content.solutionIntro": 21,
+    "networkContext": 28,
+    "deepDive": 329,
+    "commonMistakes": 132
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 8,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 60,
+    "alternativa_5minPasso_maisLeitura": 46.8,
+    "plausivel": true,
+    "palavras": 878
+  },
+  "duracao": {
+    "declarada": "80-115 min",
+    "estimatedStudyTimeMinutes": 115,
+    "M": 97.5,
+    "T": 142.3,
+    "partes": {
+      "teoria": 20.3,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 60
+    },
+    "faixaRecomendada": "120-170 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 16
+  }
+}
