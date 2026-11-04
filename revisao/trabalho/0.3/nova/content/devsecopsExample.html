@@ -1,0 +1,13 @@
+
+<section class="lesson-section lesson-section--devsecops">
+  <h2>12. Exemplo em DevSecOps</h2>
+  <p>
+    Em DevSecOps, codificação aparece em repositórios Git, pipelines, arquivos YAML, manifests Kubernetes, variáveis de ambiente, secrets, scanners, artefatos, templates, scripts e policy as code. Um arquivo salvo em codificação inesperada pode quebrar pipeline. Um segredo codificado em Base64 em um manifesto Kubernetes não está criptografado. Um scanner pode mostrar um achado em formato escapado, e o time precisa saber interpretar.
+  </p>
+  <p>
+    Kubernetes é um exemplo didático: objetos Secret frequentemente exibem valores em Base64. Isso não significa que o conteúdo esteja seguro por causa do Base64. A segurança depende de RBAC, criptografia em repouso, controle de acesso ao etcd, auditoria, rotação e boas práticas de gestão de segredo. Base64 só torna os bytes representáveis dentro de YAML/JSON.
+  </p>
+  <div class="callout callout--warning">
+    <strong>Erro comum em pipelines:</strong> commitar um segredo em Base64 achando que ele está protegido. A forma correta é usar cofres de segredo, variáveis protegidas, OIDC federation, rotação e menor privilégio.
+  </div>
+</section>

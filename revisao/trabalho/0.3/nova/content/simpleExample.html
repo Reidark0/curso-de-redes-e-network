@@ -1,0 +1,20 @@
+
+<section class="lesson-section lesson-section--example">
+  <h2>9. Exemplo simples</h2>
+  <p>
+    No seu notebook, crie um arquivo de texto contendo <code>Ola</code> e outro contendo <code>Olá</code>. Visualmente, a diferença parece pequena: apenas o acento. Em bytes, a diferença é maior. Em UTF-8, <code>O</code>, <code>l</code> e <code>a</code> ocupam 1 byte cada. O <code>á</code>, por outro lado, ocupa 2 bytes. Isso explica por que contagem de caracteres e contagem de bytes não são sempre a mesma coisa.
+  </p>
+  <p>
+    Outro exemplo simples: <code>Hello</code> em Base64 vira <code>SGVsbG8=</code>. Isso não está secreto. Qualquer ferramenta comum consegue decodificar. Base64 é útil para transporte, não para sigilo.
+  </p>
+  <table class="data-table">
+    <thead>
+      <tr><th>Texto</th><th>Bytes em UTF-8 aproximados</th><th>Observação</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>Ola</code></td><td><code>4F 6C 61</code></td><td>Apenas ASCII básico</td></tr>
+      <tr><td><code>Olá</code></td><td><code>4F 6C C3 A1</code></td><td>O acento ocupa mais bytes em UTF-8</td></tr>
+      <tr><td><code>Hello</code> em Base64</td><td><code>SGVsbG8=</code></td><td>Representação textual dos bytes de Hello</td></tr>
+    </tbody>
+  </table>
+</section>

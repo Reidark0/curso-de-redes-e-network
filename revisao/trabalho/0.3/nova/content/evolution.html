@@ -1,0 +1,24 @@
+
+<section class="lesson-section lesson-section--evolution">
+  <h2>4. Evolução</h2>
+  <p>
+    A evolução pode ser vista como uma tentativa de responder a três perguntas: quais caracteres existem, qual número representa cada caractere e como esse número vira bytes. ASCII respondia quase tudo junto para um universo pequeno. Unicode separou melhor o repertório de caracteres da forma de codificá-los. UTF-8 virou uma escolha prática para transmitir e armazenar texto moderno.
+  </p>
+  <p>
+    Base64 resolve outro problema. Nem todo canal textual aceita qualquer byte. Alguns sistemas antigos eram sensíveis a bytes de controle, quebras de linha, caracteres especiais ou valores binários arbitrários. Base64 transforma bytes em um subconjunto seguro de caracteres imprimíveis. Isso é útil para transportar dados binários em meios textuais, como e-mail, JSON, XML, certificados PEM e alguns campos HTTP.
+  </p>
+  <table class="data-table comparison-table">
+    <thead>
+      <tr><th>Conceito</th><th>O que é</th><th>O que não é</th><th>Exemplo prático</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>ASCII</td><td>Tabela de caracteres básicos</td><td>Não representa todos os idiomas</td><td><code>A</code> = decimal 65 = <code>0x41</code></td></tr>
+      <tr><td>Unicode</td><td>Repertório universal de caracteres</td><td>Não é, sozinho, a sequência final de bytes</td><td><code>á</code> = <code>U+00E1</code></td></tr>
+      <tr><td>UTF-8</td><td>Codificação de Unicode em bytes</td><td>Não é criptografia</td><td><code>á</code> vira bytes <code>C3 A1</code></td></tr>
+      <tr><td>Base64</td><td>Representação textual de bytes</td><td>Não é proteção de segredo</td><td><code>admin:admin</code> pode virar <code>YWRtaW46YWRtaW4=</code></td></tr>
+    </tbody>
+  </table>
+  <p>
+    Na prática moderna, a recomendação operacional é simples: prefira UTF-8 de ponta a ponta, declare explicitamente a codificação quando necessário, valide entradas, normalize texto quando isso for requisito de comparação e nunca use Base64 como mecanismo de sigilo.
+  </p>
+</section>

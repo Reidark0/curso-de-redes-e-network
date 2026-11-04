@@ -1,0 +1,869 @@
+{
+  "id": "0.3",
+  "moduleId": "m00",
+  "order": 3,
+  "title": "ASCII, Unicode, UTF-8 e Base64",
+  "subtitle": "Como texto vira bytes em redes, logs, APIs, autenticação, tokens e análise de segurança.",
+  "duration": "70-95 min",
+  "estimatedStudyTimeMinutes": 95,
+  "difficulty": "iniciante",
+  "type": "fundamental",
+  "xp": 170,
+  "tags": [
+    "fundamentos",
+    "texto",
+    "ascii",
+    "unicode",
+    "utf-8",
+    "base64",
+    "http",
+    "apis",
+    "logs",
+    "tokens",
+    "segurança"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.1",
+      "reason": "A aula 0.1 explica que computadores representam informação como estados interpretados como bits."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.2",
+      "reason": "A aula 0.2 apresenta bits, bytes, binário e hexadecimal, que são a base para entender caracteres, codificações e Base64."
+    }
+  ],
+  "objectives": [
+    "Diferenciar caractere, código, codificação, byte e representação textual.",
+    "Explicar por que ASCII foi suficiente para alguns cenários antigos, mas insuficiente para idiomas, símbolos e sistemas globais.",
+    "Entender o papel do Unicode como repertório universal de caracteres e do UTF-8 como codificação em bytes.",
+    "Explicar o que Base64 resolve e por que Base64 não é criptografia, hash ou mecanismo de segurança.",
+    "Relacionar codificação de texto com HTTP, APIs, logs, tokens, certificados, headers, troubleshooting e segurança defensiva."
+  ],
+  "learningOutcomes": [
+    "Dado um caractere ASCII simples, o aluno consegue relacioná-lo com um valor decimal, hexadecimal e binário.",
+    "Dado um texto com acento, o aluno entende por que ele pode ocupar mais de 1 byte em UTF-8.",
+    "Dado um valor Base64, o aluno reconhece que ele pode ser decodificado e não deve ser tratado como segredo protegido.",
+    "Dado um problema de caracteres quebrados em logs ou APIs, o aluno consegue investigar charset, encoding e interpretação incorreta.",
+    "Dado um token, cabeçalho HTTP ou payload, o aluno evita confundir codificação com autenticação, autorização, criptografia ou assinatura."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Camada 7 - Aplicação",
+      "Camada 6 - Apresentação como modelo conceitual"
+    ],
+    "tcpIpLayers": [
+      "Aplicação"
+    ],
+    "relatedProtocols": [
+      "HTTP",
+      "SMTP",
+      "DNS",
+      "TLS",
+      "SSH",
+      "Syslog"
+    ],
+    "dependsOn": [
+      "bits",
+      "bytes",
+      "binário",
+      "hexadecimal"
+    ],
+    "enables": [
+      "HTTP",
+      "APIs",
+      "logs",
+      "tokens",
+      "certificados",
+      "análise de payload",
+      "segurança de aplicações"
+    ]
+  },
+  "deepDive": {
+    "mentalModel": "A rede transporta bytes; a aplicação dá significado aos bytes. Codificação é a ponte entre símbolos humanos e bytes transmitidos.",
+    "keyTerms": [
+      "ASCII",
+      "Unicode",
+      "UTF-8",
+      "Base64",
+      "caractere",
+      "ponto de código",
+      "charset",
+      "encoding",
+      "normalização"
+    ],
+    "limitations": [
+      "ASCII não representa adequadamente idiomas globais.",
+      "UTF-8 não protege dados; apenas define representação em bytes.",
+      "Base64 aumenta o tamanho dos dados e não oferece confidencialidade.",
+      "Dois textos visualmente parecidos podem ter sequências de bytes diferentes.",
+      "Logs podem escapar caracteres e esconder a forma original do payload."
+    ],
+    "whenToUse": [
+      "Usar UTF-8 como padrão para APIs, logs, arquivos de configuração e integrações modernas.",
+      "Usar Base64 para transportar bytes binários em canais textuais quando necessário.",
+      "Declarar charset em contratos de API quando houver risco de ambiguidade.",
+      "Normalizar texto quando comparação exata de identidade textual for requisito."
+    ],
+    "whenNotToUse": [
+      "Não usar Base64 como substituto de criptografia.",
+      "Não assumir que tamanho em caracteres é igual a tamanho em bytes.",
+      "Não converter texto repetidas vezes sem controle de encoding.",
+      "Não registrar credenciais ou tokens apenas porque parecem codificados."
+    ],
+    "operationalImpact": [
+      "Padronizar UTF-8 reduz falhas de integração, mas exige testes com caracteres acentuados e internacionais.",
+      "Pipelines de logs precisam preservar codificação para permitir busca, correlação e auditoria.",
+      "Troubleshooting de APIs deve incluir análise de headers, payload, charset e bytes reais."
+    ],
+    "financialImpact": [
+      "Base64 aumenta o tamanho dos dados, podendo elevar custo de tráfego, armazenamento e logs em cloud.",
+      "Erros de codificação geram custo operacional por retrabalho, falhas de integração e investigações longas.",
+      "Guardar payloads completos em logs pode aumentar custo de retenção e também risco de exposição de dados sensíveis."
+    ],
+    "securityImpact": [
+      "Credenciais em Base64 são facilmente recuperáveis e devem ser tratadas como exposição de segredo.",
+      "Normalização inconsistente pode causar bypass lógico entre WAF, aplicação e banco.",
+      "Caracteres visualmente semelhantes podem ser usados em phishing, fraude ou confusão operacional.",
+      "Logs com codificação quebrada reduzem capacidade de detecção e resposta a incidentes."
+    ]
+  },
+  "commonMistakes": [
+    {
+      "mistake": "Achar que Base64 é criptografia.",
+      "whyItHappens": "O texto codificado parece ilegível para humanos à primeira vista.",
+      "consequence": "Credenciais, tokens ou dados sensíveis podem ser expostos sem proteção real.",
+      "correction": "Base64 é reversível sem chave; use criptografia, assinatura, cofre de segredo e controle de acesso quando precisar de segurança."
+    },
+    {
+      "mistake": "Achar que um caractere sempre ocupa 1 byte.",
+      "whyItHappens": "Em ASCII e em muitos exemplos básicos, caracteres comuns ocupam 1 byte.",
+      "consequence": "Validações de tamanho, truncamento e armazenamento podem falhar com acentos, símbolos e emojis.",
+      "correction": "Diferencie quantidade de caracteres, pontos de código e bytes em uma codificação como UTF-8."
+    },
+    {
+      "mistake": "Culpar a rede por texto quebrado.",
+      "whyItHappens": "A falha aparece em uma integração remota, então parece problema de conectividade.",
+      "consequence": "Tempo é perdido investigando firewall, DNS ou TLS quando o problema é interpretação dos bytes.",
+      "correction": "Valide se os bytes chegam, verifique charset, Content-Type, logs e transformação na aplicação."
+    },
+    {
+      "mistake": "Copiar valores Base64 para logs ou tickets sem cuidado.",
+      "whyItHappens": "O valor parece não legível e é tratado como inofensivo.",
+      "consequence": "Segredos podem ser expostos em ferramentas de suporte, chat, tickets ou SIEM.",
+      "correction": "Trate Base64 como dado potencialmente sensível e mascare valores antes de compartilhar."
+    }
+  ],
+  "troubleshooting": {
+    "symptoms": [
+      "Acentos aparecem como caracteres estranhos, como UsuÃ¡rio.",
+      "API rejeita payload JSON com caracteres especiais.",
+      "Assinatura HMAC ou JWT falha após manipulação de texto.",
+      "Logs não permitem buscar nomes com acento corretamente.",
+      "Segredo em Base64 aparece em manifesto, log ou variável de ambiente."
+    ],
+    "diagnosticQuestions": [
+      "Qual codificação o sistema emissor usa?",
+      "Qual codificação o receptor espera?",
+      "O Content-Type ou contrato da API declara charset?",
+      "O texto foi convertido, escapado, normalizado ou truncado no caminho?",
+      "O valor Base64 contém credencial, token, certificado, imagem, binário ou outro payload?"
+    ],
+    "commands": [
+      {
+        "platform": "Windows PowerShell",
+        "command": "[Text.Encoding]::UTF8.GetBytes('Olá') | ForEach-Object { $_.ToString('X2') }",
+        "purpose": "Visualizar os bytes UTF-8 de uma string com acento.",
+        "expectedObservation": "Sequência hexadecimal incluindo C3 A1 para o caractere á.",
+        "interpretation": "O acento ocupa mais de 1 byte em UTF-8."
+      },
+      {
+        "platform": "Windows PowerShell",
+        "command": "[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('admin:admin'))",
+        "purpose": "Codificar uma string em Base64 para entender o mecanismo usado em muitos exemplos de autenticação Basic.",
+        "expectedObservation": "Saída YWRtaW46YWRtaW4=.",
+        "interpretation": "O valor pode ser revertido sem chave; não é segredo protegido."
+      },
+      {
+        "platform": "Linux",
+        "command": "printf 'Olá' | xxd -p",
+        "purpose": "Ver os bytes UTF-8 de um texto no terminal.",
+        "expectedObservation": "Saída semelhante a 4f6cc3a1.",
+        "interpretation": "O caractere á aparece como dois bytes: c3 a1."
+      },
+      {
+        "platform": "Linux",
+        "command": "printf 'admin:admin' | base64",
+        "purpose": "Gerar Base64 de uma string controlada.",
+        "expectedObservation": "Saída YWRtaW46YWRtaW4=.",
+        "interpretation": "Base64 representa bytes em texto e pode ser decodificado."
+      },
+      {
+        "platform": "Cisco IOS",
+        "command": "show logging",
+        "purpose": "Observar logs textuais do equipamento e discutir preservação de caracteres e mensagens.",
+        "expectedObservation": "Mensagens de log em texto, geralmente ASCII/inglês técnico.",
+        "interpretation": "Equipamentos de rede também produzem texto; logs precisam ser interpretados e transportados corretamente."
+      }
+    ],
+    "decisionTree": [
+      {
+        "if": "Conectividade funciona, mas texto chega quebrado",
+        "then": "Investigar codificação, charset, Content-Type, serialização e conversões na aplicação."
+      },
+      {
+        "if": "Valor parece ilegível e termina com =",
+        "then": "Considerar hipótese de Base64, mas tratar como potencialmente sensível antes de decodificar ou compartilhar."
+      },
+      {
+        "if": "Assinatura ou hash muda após reformatar texto",
+        "then": "Comparar bytes antes e depois da conversão, incluindo quebras de linha, normalização e encoding."
+      }
+    ]
+  },
+  "security": {
+    "goodPractices": [
+      "Padronizar UTF-8 em APIs, logs, arquivos e automações.",
+      "Declarar charset quando o protocolo ou contrato permitir.",
+      "Tratar Base64 como dado potencialmente sensível.",
+      "Mascarar credenciais, tokens e segredos antes de registrar logs.",
+      "Testar entradas com acentos, símbolos, emojis e caracteres internacionais.",
+      "Aplicar validação e normalização de entrada de forma consistente."
+    ],
+    "badPractices": [
+      "Usar Base64 como proteção de segredo.",
+      "Registrar Authorization headers completos em logs.",
+      "Misturar codificações sem documentação.",
+      "Assumir que todo texto tem 1 byte por caractere.",
+      "Comparar strings sensíveis sem considerar normalização e formato canônico."
+    ],
+    "commonErrors": [
+      "Confundir encoding com encryption.",
+      "Confundir hash com Base64.",
+      "Decodificar payloads sensíveis e colar em tickets ou chats.",
+      "Ignorar caracteres invisíveis, espaços especiais ou diferenças de normalização."
+    ],
+    "vulnerabilities": [
+      {
+        "name": "Exposição de credenciais codificadas",
+        "description": "Credenciais ou tokens em Base64 podem ser facilmente decodificados se forem expostos em logs, repositórios ou tickets.",
+        "defensiveExplanation": "O risco não está no Base64 em si, mas em tratá-lo como se oferecesse sigilo.",
+        "mitigation": "Não registrar segredos, usar cofres, mascaramento, rotação, RBAC e revisão de logs."
+      },
+      {
+        "name": "Bypass por normalização inconsistente",
+        "description": "Camadas diferentes podem interpretar caracteres equivalentes ou escapados de formas diferentes.",
+        "defensiveExplanation": "Um controle pode validar uma forma textual enquanto a aplicação processa outra.",
+        "mitigation": "Normalizar entrada antes de validar, alinhar WAF e aplicação e testar casos de encoding."
+      },
+      {
+        "name": "Perda de evidência por logs corrompidos",
+        "description": "Texto mal codificado reduz a capacidade de busca e correlação em incidentes.",
+        "defensiveExplanation": "Mesmo que o evento exista, ele pode não ser encontrado por pesquisas ou regras esperadas.",
+        "mitigation": "Padronizar UTF-8, validar pipeline de logs e monitorar falhas de parsing."
+      }
+    ],
+    "monitoring": [
+      "Alertar sobre headers Authorization registrados em logs.",
+      "Detectar strings Base64 longas em locais incomuns, como parâmetros, logs ou mensagens de erro.",
+      "Monitorar falhas de parsing em pipelines de logs.",
+      "Criar testes para payloads com caracteres fora de ASCII."
+    ],
+    "hardening": [
+      "Desabilitar logging de cabeçalhos sensíveis.",
+      "Usar secret scanning em repositórios e pipelines.",
+      "Aplicar políticas de encoding em contratos de API.",
+      "Usar controles de acesso e criptografia para armazenamento de logs sensíveis."
+    ],
+    "detectionIdeas": [
+      "Buscar padrões como Basic seguido de Base64 em logs.",
+      "Procurar mensagens com caracteres substitutos ou sequências quebradas.",
+      "Comparar aumento de erros 400/401 após mudança de encoding em uma API.",
+      "Correlacionar falhas de autenticação com usuários contendo caracteres especiais."
+    ]
+  },
+  "lab": {
+    "id": "lab-0.3",
+    "title": "Observando UTF-8 e Base64 na prática",
+    "labType": "security",
+    "objective": "Ver como texto vira bytes em UTF-8, como Base64 representa bytes como texto e por que Base64 não protege segredos.",
+    "scenario": "Você está investigando uma integração de API que falha com acentos e encontrou um valor Base64 em um cabeçalho de autenticação. O objetivo é reproduzir o comportamento localmente com dados controlados.",
+    "topology": "Notebook local -> terminal/PowerShell -> saída textual e bytes observados. Opcionalmente: navegador ou ferramenta HTTP em aula futura.",
+    "architecture": "Laboratório local sem tráfego externo. O aluno gera texto, observa bytes, codifica em Base64, decodifica e interpreta os resultados.",
+    "prerequisites": [
+      "Ter concluído as aulas 0.1 e 0.2.",
+      "Ter acesso a Windows PowerShell ou terminal Linux.",
+      "Usar apenas exemplos controlados, sem credenciais reais."
+    ],
+    "tools": [
+      "Windows PowerShell ou terminal Linux",
+      "Opcional: Python 3",
+      "Opcional: editor de texto configurado para UTF-8"
+    ],
+    "estimatedTimeMinutes": 45,
+    "cost": "zero",
+    "safetyNotes": [
+      "Não use credenciais reais nos comandos.",
+      "Não cole tokens reais em decodificadores online.",
+      "Não registre Authorization headers reais em tickets, prints ou logs.",
+      "O objetivo é entender codificação defensivamente, não expor dados de terceiros."
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "title": "Observar bytes UTF-8 no Windows",
+        "instruction": "No PowerShell, gere os bytes UTF-8 do texto Olá.",
+        "command": "[Text.Encoding]::UTF8.GetBytes('Olá') | ForEach-Object { $_.ToString('X2') }",
+        "expectedOutput": "4F, 6C, C3, A1 em linhas ou formato equivalente.",
+        "explanation": "O e l são ASCII básico; á ocupa dois bytes em UTF-8: C3 A1."
+      },
+      {
+        "number": 2,
+        "title": "Observar bytes UTF-8 no Linux",
+        "instruction": "No Linux, use printf e xxd para ver a sequência hexadecimal.",
+        "command": "printf 'Olá' | xxd -p",
+        "expectedOutput": "4f6cc3a1",
+        "explanation": "A saída hexadecimal confirma que o texto visual Olá ocupa 4 bytes, não 3."
+      },
+      {
+        "number": 3,
+        "title": "Codificar texto controlado em Base64",
+        "instruction": "Codifique uma string de exemplo, sem credenciais reais.",
+        "command": "printf 'admin:admin' | base64  # Linux\n[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('admin:admin'))  # PowerShell",
+        "expectedOutput": "YWRtaW46YWRtaW4=",
+        "explanation": "Esse valor é apenas a representação Base64 dos bytes de admin:admin."
+      },
+      {
+        "number": 4,
+        "title": "Decodificar Base64",
+        "instruction": "Decodifique o valor gerado para provar que não há sigilo.",
+        "command": "printf 'YWRtaW46YWRtaW4=' | base64 -d  # Linux\n[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('YWRtaW46YWRtaW4='))  # PowerShell",
+        "expectedOutput": "admin:admin",
+        "explanation": "Qualquer pessoa com o valor pode recuperar o texto original se ele não estiver criptografado."
+      },
+      {
+        "number": 5,
+        "title": "Comparar caracteres e bytes",
+        "instruction": "Compare o tamanho em caracteres e bytes de textos com e sem acento.",
+        "command": "python - <<'PY'\nfor s in ['Ola', 'Olá', 'ação', 'rede']:\n    b = s.encode('utf-8')\n    print(s, 'caracteres=', len(s), 'bytes=', len(b), 'hex=', b.hex())\nPY",
+        "expectedOutput": "Textos com acento podem ter mais bytes do que caracteres.",
+        "explanation": "Isso reforça a diferença entre texto percebido e bytes transmitidos."
+      }
+    ],
+    "expectedResult": "O aluno deve demonstrar que texto em UTF-8 vira bytes, que caracteres acentuados podem ocupar múltiplos bytes e que Base64 é reversível sem chave.",
+    "validation": [
+      {
+        "check": "Bytes de Olá foram observados",
+        "command": "printf 'Olá' | xxd -p ou comando equivalente no PowerShell",
+        "expected": "Sequência contendo 4F 6C C3 A1 ou equivalente em minúsculas.",
+        "ifFails": "Verifique se o terminal está usando UTF-8 e se o texto foi digitado corretamente."
+      },
+      {
+        "check": "Base64 foi decodificado",
+        "command": "printf 'YWRtaW46YWRtaW4=' | base64 -d",
+        "expected": "admin:admin",
+        "ifFails": "Verifique quebra de linha, comando disponível e se o valor Base64 foi copiado corretamente."
+      },
+      {
+        "check": "Diferença entre caracteres e bytes foi compreendida",
+        "command": "Script Python de comparação",
+        "expected": "Textos com acento mostrando mais bytes que caracteres.",
+        "ifFails": "Confirme que o Python está executando com suporte UTF-8 no ambiente."
+      }
+    ],
+    "troubleshooting": [
+      {
+        "symptom": "O terminal mostra caracteres quebrados",
+        "probableCause": "Codificação do terminal ou fonte incompatível.",
+        "howToConfirm": "Teste outro terminal, verifique locale no Linux ou configuração de encoding no Windows Terminal.",
+        "fix": "Configurar terminal para UTF-8 e repetir com texto simples."
+      },
+      {
+        "symptom": "base64 -d não funciona",
+        "probableCause": "Opção diferente em algumas plataformas ou comando indisponível.",
+        "howToConfirm": "Execute base64 --help ou use Python/PowerShell.",
+        "fix": "Usar alternativa com Python ou PowerShell."
+      },
+      {
+        "symptom": "Saída tem bytes diferentes",
+        "probableCause": "Texto copiado com caractere visualmente diferente, normalização distinta ou aspas diferentes.",
+        "howToConfirm": "Digite manualmente a string e compare caractere por caractere.",
+        "fix": "Usar exemplos simples e documentar exatamente a entrada usada."
+      }
+    ],
+    "improvements": [
+      "Testar emojis e observar que eles ocupam mais bytes em UTF-8.",
+      "Criar um pequeno arquivo JSON em UTF-8 e observar seus bytes.",
+      "Comparar um valor Base64 com o mesmo conteúdo criptografado em uma aula futura.",
+      "Observar no Wireshark, em aula futura de HTTP, como payload textual aparece em uma requisição sem TLS em laboratório controlado."
+    ],
+    "evidenceToCollect": [
+      "Print ou cópia da saída hexadecimal de Olá.",
+      "Valor Base64 gerado para string controlada.",
+      "Saída decodificada demonstrando reversibilidade.",
+      "Tabela com quantidade de caracteres e bytes de três exemplos."
+    ],
+    "questions": [
+      "Por que Olá ocupa mais bytes que Ola em UTF-8?",
+      "Por que Base64 não deve ser tratado como segredo?",
+      "Que tipo de problema surgiria se uma API enviasse UTF-8 e a outra interpretasse outra codificação?",
+      "Por que é perigoso colar tokens reais em decodificadores online?"
+    ],
+    "challenge": "Receba o valor YWRtaW46YWRtaW4= em um exemplo de cabeçalho Authorization controlado. Explique o que ele representa, por que isso não é seguro como segredo e quais controles seriam necessários em ambiente real.",
+    "solution": "O valor é Base64 para admin:admin. Ele não oferece confidencialidade, pois pode ser decodificado sem chave. Em ambiente real, deve-se usar TLS, não registrar o header, evitar credenciais estáticas, aplicar autenticação adequada, rotacionar segredos, usar cofres e monitorar exposição."
+  },
+  "mentorQuestions": [
+    {
+      "type": "reflexão",
+      "question": "Por que a rede pode entregar os bytes corretamente e, ainda assim, a aplicação exibir texto errado?",
+      "hints": [
+        "Pense na diferença entre transporte e interpretação.",
+        "TCP não sabe o que é um caractere acentuado."
+      ],
+      "expectedIdeas": [
+        "bytes",
+        "codificação",
+        "interpretação",
+        "UTF-8",
+        "aplicação"
+      ],
+      "explanation": "A rede transporta bytes. Se o receptor interpretar esses bytes com a codificação errada, o texto reconstruído fica incorreto mesmo sem perda de pacotes."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "Uma API começou a falhar apenas quando nomes possuem acento. O que você verificaria antes de culpar firewall ou DNS?",
+      "hints": [
+        "Verifique Content-Type.",
+        "Compare bytes enviados e recebidos.",
+        "Teste payloads com e sem acento."
+      ],
+      "expectedIdeas": [
+        "charset",
+        "UTF-8",
+        "payload",
+        "logs",
+        "serialização",
+        "normalização"
+      ],
+      "explanation": "Como a falha depende de caracteres, a hipótese de codificação/serialização deve ser testada antes de investigar conectividade básica."
+    },
+    {
+      "type": "cenário real",
+      "question": "Você encontrou um valor Base64 em um manifesto Kubernetes Secret. Como explicar para o time por que isso não significa que o segredo está criptografado?",
+      "hints": [
+        "Base64 é reversível sem chave.",
+        "Segurança depende de controles ao redor.",
+        "Pense em RBAC, etcd e cofres."
+      ],
+      "expectedIdeas": [
+        "Base64 não é criptografia",
+        "RBAC",
+        "criptografia em repouso",
+        "secret scanning",
+        "cofre de segredos",
+        "rotação"
+      ],
+      "explanation": "Kubernetes usa Base64 para representar bytes em YAML/JSON. A proteção vem de controle de acesso, armazenamento seguro, auditoria e práticas de gestão de segredos."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q0.3.1",
+      "type": "conceito",
+      "q": "Qual afirmação descreve melhor o papel do UTF-8?",
+      "opts": [
+        "É uma codificação que transforma caracteres Unicode em bytes.",
+        "É um algoritmo de criptografia para proteger texto.",
+        "É um protocolo de roteamento entre redes.",
+        "É um tipo de endereço MAC."
+      ],
+      "a": 0,
+      "exp": "UTF-8 é uma codificação de Unicode em bytes. Ele não oferece sigilo e não é protocolo de rede.",
+      "difficulty": "iniciante",
+      "topic": "utf-8"
+    },
+    {
+      "id": "q0.3.2",
+      "type": "segurança",
+      "q": "Por que Base64 não deve ser usado como mecanismo de proteção de segredo?",
+      "opts": [
+        "Porque pode ser revertido sem chave.",
+        "Porque só funciona em sistemas Linux.",
+        "Porque altera o endereço IP de origem.",
+        "Porque sempre corrompe dados binários."
+      ],
+      "a": 0,
+      "exp": "Base64 é uma representação reversível de bytes em texto. Qualquer pessoa com o valor pode decodificar se conhecer a regra.",
+      "difficulty": "iniciante",
+      "topic": "base64"
+    },
+    {
+      "id": "q0.3.3",
+      "type": "diagnóstico",
+      "q": "Uma integração falha apenas com nomes que possuem acento. Qual hipótese deve ser investigada cedo?",
+      "opts": [
+        "Problema de codificação ou charset.",
+        "Falha obrigatória de cabo físico.",
+        "Ataque BGP.",
+        "Conflito de endereço MAC."
+      ],
+      "a": 0,
+      "exp": "Quando a falha depende de caracteres especiais, codificação, serialização e interpretação dos bytes são hipóteses fortes.",
+      "difficulty": "iniciante",
+      "topic": "troubleshooting"
+    },
+    {
+      "id": "q0.3.4",
+      "type": "comparação",
+      "q": "Qual diferença entre Unicode e UTF-8 está correta?",
+      "opts": [
+        "Unicode define pontos de código; UTF-8 define como codificá-los em bytes.",
+        "Unicode é criptografia; UTF-8 é firewall.",
+        "Unicode é usado apenas em IPv4; UTF-8 apenas em switches.",
+        "Não há diferença: os termos são sempre sinônimos perfeitos."
+      ],
+      "a": 0,
+      "exp": "Unicode organiza o repertório de caracteres. UTF-8 é uma forma de representar esses caracteres em bytes.",
+      "difficulty": "intermediário",
+      "topic": "unicode"
+    },
+    {
+      "id": "q0.3.5",
+      "type": "cenário",
+      "q": "Um manifesto contém um Secret em Base64. Qual prática é correta?",
+      "opts": [
+        "Tratar o valor como sensível e controlar acesso ao manifesto e ao cluster.",
+        "Publicar no repositório porque Base64 é seguro.",
+        "Enviar em chat porque não é legível.",
+        "Desabilitar TLS porque Base64 já protege."
+      ],
+      "a": 0,
+      "exp": "Base64 não protege o segredo. O valor deve ser tratado como sensível e protegido por controles adequados.",
+      "difficulty": "intermediário",
+      "topic": "devsecops"
+    },
+    {
+      "id": "q0.3.6",
+      "type": "arquitetura",
+      "q": "Em qual camada conceitual problemas de charset costumam aparecer mais diretamente?",
+      "opts": [
+        "Aplicação e representação dos dados.",
+        "Camada física do cabo exclusivamente.",
+        "Somente camada de roteamento IP.",
+        "Somente tabela ARP."
+      ],
+      "a": 0,
+      "exp": "Charset e encoding são problemas de interpretação de dados pela aplicação, mesmo que dependam de bytes entregues pelas camadas inferiores.",
+      "difficulty": "iniciante",
+      "topic": "arquitetura"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc0.3.1",
+      "front": "O que é ASCII?",
+      "back": "Uma tabela histórica que associa números a caracteres básicos, especialmente úteis para texto em inglês e controles simples.",
+      "tags": [
+        "ascii",
+        "texto"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.3.2",
+      "front": "O que é Unicode?",
+      "back": "Um padrão que atribui pontos de código a um repertório amplo de caracteres do mundo todo.",
+      "tags": [
+        "unicode",
+        "texto"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.3.3",
+      "front": "O que é UTF-8?",
+      "back": "Uma codificação que transforma pontos de código Unicode em sequências de bytes.",
+      "tags": [
+        "utf-8",
+        "bytes"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.3.4",
+      "front": "Base64 é criptografia?",
+      "back": "Não. Base64 é uma representação reversível de bytes como texto e não oferece sigilo.",
+      "tags": [
+        "base64",
+        "segurança"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.3.5",
+      "front": "Por que um caractere pode ocupar mais de 1 byte?",
+      "back": "Porque codificações como UTF-8 usam múltiplos bytes para representar caracteres fora do ASCII básico.",
+      "tags": [
+        "utf-8",
+        "bytes"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.3.6",
+      "front": "Qual risco de logs com encoding quebrado?",
+      "back": "Eles prejudicam busca, correlação, auditoria e investigação de incidentes.",
+      "tags": [
+        "logs",
+        "segurança"
+      ],
+      "difficulty": "intermediário"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex0.3.1",
+      "type": "conceitual",
+      "prompt": "Explique com suas palavras a diferença entre caractere, ponto de código e codificação.",
+      "expectedAnswer": "Caractere é o símbolo percebido; ponto de código é o número que o representa em Unicode; codificação é a regra que transforma esse número em bytes.",
+      "explanation": "Essa distinção evita confundir Unicode com UTF-8 e ajuda a diagnosticar problemas de texto."
+    },
+    {
+      "id": "ex0.3.2",
+      "type": "prático",
+      "prompt": "Decodifique o valor Base64 SGVsbG8= usando ferramenta local e explique o resultado.",
+      "expectedAnswer": "O resultado é Hello. Isso demonstra que Base64 é reversível e não é sigilo.",
+      "explanation": "O objetivo é perceber que Base64 é transporte/representação, não proteção."
+    },
+    {
+      "id": "ex0.3.3",
+      "type": "diagnóstico",
+      "prompt": "Uma API recebe corretamente payloads sem acento, mas falha com João e Ação. Liste três hipóteses técnicas.",
+      "expectedAnswer": "Charset divergente, serialização incorreta, validação mal implementada, normalização diferente, banco ou log usando encoding incompatível.",
+      "explanation": "A dependência de acento aponta para interpretação textual antes de apontar para rede física."
+    },
+    {
+      "id": "ex0.3.4",
+      "type": "segurança",
+      "prompt": "Explique por que um Kubernetes Secret em Base64 ainda precisa de controle de acesso e proteção em repouso.",
+      "expectedAnswer": "Porque Base64 pode ser decodificado sem chave. A proteção depende de RBAC, criptografia do armazenamento, auditoria, rotação e gestão adequada de segredos.",
+      "explanation": "Esse exercício conecta fundamentos de codificação com DevSecOps e segurança de identidades."
+    }
+  ],
+  "challenge": {
+    "title": "Investigue uma falha de integração causada por codificação",
+    "scenario": "Uma empresa integrou um sistema legado com uma API moderna. Registros sem acento são processados. Registros com acento aparecem quebrados nos logs e alguns tokens ou credenciais de teste aparecem em Base64 em mensagens de erro.",
+    "tasks": [
+      "Listar hipóteses técnicas relacionadas a codificação.",
+      "Propor testes locais para comparar caracteres e bytes.",
+      "Explicar por que a rede pode não ser a causa principal.",
+      "Classificar o risco de Base64 em logs.",
+      "Propor mitigação operacional, de segurança e de DevSecOps."
+    ],
+    "constraints": [
+      "Não usar credenciais reais.",
+      "Não usar decodificadores online para dados sensíveis.",
+      "Preservar evidências sem expor segredo.",
+      "Separar falha de transporte de falha de interpretação."
+    ],
+    "expectedDeliverables": [
+      "Relatório com hipóteses e testes.",
+      "Tabela diferenciando texto, bytes, UTF-8 e Base64.",
+      "Plano de correção para API e logs.",
+      "Lista de controles para evitar vazamento de segredos codificados."
+    ],
+    "gradingRubric": [
+      {
+        "criterion": "Diagnóstico técnico de encoding",
+        "points": 30,
+        "description": "Identifica corretamente charset, UTF-8, normalização e serialização como hipóteses."
+      },
+      {
+        "criterion": "Separação entre rede e aplicação",
+        "points": 20,
+        "description": "Explica por que conectividade pode estar correta mesmo com texto quebrado."
+      },
+      {
+        "criterion": "Segurança defensiva",
+        "points": 30,
+        "description": "Reconhece Base64 como reversível e propõe controles de segredo."
+      },
+      {
+        "criterion": "Clareza operacional",
+        "points": 20,
+        "description": "Propõe evidências, testes e mitigação de forma aplicável."
+      }
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "O primeiro passo é separar entrega de bytes de interpretação dos bytes. Se a integração funciona sem acento e falha com acento, a hipótese de rede física, roteamento ou firewall perde força. A investigação deve olhar para charset, UTF-8, serialização, normalização, logs e tratamento de erro. O Base64 em mensagens de erro deve ser tratado como dado sensível, porque pode conter credenciais ou tokens reversíveis.",
+    "steps": [
+      "Confirmar que a conectividade básica e o TLS estão funcionando.",
+      "Criar payloads mínimos com e sem acento.",
+      "Comparar bytes enviados e recebidos.",
+      "Verificar Content-Type, charset e contrato da API.",
+      "Verificar se logs escapam, truncam ou recodificam valores.",
+      "Decodificar apenas exemplos controlados de Base64 localmente.",
+      "Mascarar valores sensíveis e corrigir logging.",
+      "Padronizar UTF-8 e adicionar testes automatizados com caracteres internacionais."
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "É problema de firewall porque acontece pela rede.",
+        "whyItIsWrong": "Se bytes chegam e apenas caracteres específicos falham, a causa provável está na interpretação ou serialização, não necessariamente em firewall."
+      },
+      {
+        "answer": "Base64 nos logs não importa porque ninguém entende.",
+        "whyItIsWrong": "Base64 é facilmente decodificado sem chave e pode expor segredos."
+      },
+      {
+        "answer": "Remover todos os acentos resolve.",
+        "whyItIsWrong": "Isso mascara o problema, prejudica qualidade dos dados e não resolve a causa de encoding."
+      }
+    ],
+    "finalAnswer": "A solução correta é padronizar UTF-8 entre produtor e consumidor, declarar charset quando aplicável, testar payloads com caracteres acentuados, corrigir pipeline de logs, mascarar valores sensíveis e tratar qualquer Base64 como dado potencialmente exposto. A rede deve ser verificada, mas a causa central provável é codificação/interpretação de texto."
+  },
+  "glossary": [
+    {
+      "term": "ASCII",
+      "shortDefinition": "Tabela histórica de caracteres básicos.",
+      "longDefinition": "Padrão que associa valores numéricos a caracteres como letras, números, pontuação e controles básicos, com forte presença em protocolos e sistemas antigos.",
+      "example": "A letra A é representada pelo valor decimal 65, hexadecimal 0x41.",
+      "relatedTerms": [
+        "Unicode",
+        "UTF-8",
+        "caractere"
+      ],
+      "relatedLessons": [
+        "0.2",
+        "0.3",
+        "8.1"
+      ]
+    },
+    {
+      "term": "Unicode",
+      "shortDefinition": "Padrão que organiza um repertório amplo de caracteres.",
+      "longDefinition": "Unicode atribui pontos de código a caracteres de muitos idiomas e símbolos, permitindo representação textual global.",
+      "example": "O caractere á possui ponto de código U+00E1.",
+      "relatedTerms": [
+        "ponto de código",
+        "UTF-8"
+      ],
+      "relatedLessons": [
+        "0.3"
+      ]
+    },
+    {
+      "term": "UTF-8",
+      "shortDefinition": "Codificação de Unicode em bytes.",
+      "longDefinition": "Forma de transformar pontos de código Unicode em sequências de 1 a 4 bytes, mantendo compatibilidade com ASCII para caracteres básicos.",
+      "example": "O caractere á é codificado em UTF-8 como C3 A1.",
+      "relatedTerms": [
+        "Unicode",
+        "encoding",
+        "byte"
+      ],
+      "relatedLessons": [
+        "0.2",
+        "0.3"
+      ]
+    },
+    {
+      "term": "Base64",
+      "shortDefinition": "Representação textual reversível de bytes.",
+      "longDefinition": "Codificação que representa dados binários usando caracteres textuais seguros para transporte em canais que esperam texto.",
+      "example": "admin:admin pode ser representado como YWRtaW46YWRtaW4=.",
+      "relatedTerms": [
+        "encoding",
+        "token",
+        "segredo"
+      ],
+      "relatedLessons": [
+        "0.3",
+        "8.4",
+        "10.5"
+      ]
+    },
+    {
+      "term": "Encoding",
+      "shortDefinition": "Regra para representar informação em bytes ou texto.",
+      "longDefinition": "Processo ou padrão usado para transformar caracteres, números ou bytes em uma forma armazenável ou transportável.",
+      "example": "UTF-8 é encoding de texto; Base64 é encoding textual de bytes.",
+      "relatedTerms": [
+        "charset",
+        "UTF-8",
+        "Base64"
+      ],
+      "relatedLessons": [
+        "0.3"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "standard",
+      "title": "The Unicode Standard",
+      "organization": "Unicode Consortium",
+      "url": "https://www.unicode.org/standard/standard.html",
+      "note": "Referência conceitual para Unicode e pontos de código."
+    },
+    {
+      "type": "rfc",
+      "title": "RFC 3629 - UTF-8, a transformation format of ISO 10646",
+      "organization": "IETF",
+      "url": "https://www.rfc-editor.org/rfc/rfc3629",
+      "note": "Referência técnica estável sobre UTF-8."
+    },
+    {
+      "type": "rfc",
+      "title": "RFC 4648 - The Base16, Base32, and Base64 Data Encodings",
+      "organization": "IETF",
+      "url": "https://www.rfc-editor.org/rfc/rfc4648",
+      "note": "Referência técnica sobre Base64 e outras codificações."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 - Aula 0.2",
+      "organization": "Deixando de ser TBN",
+      "url": "internal://redes-e-network/m00/0.2",
+      "note": "Base necessária sobre bits, bytes, binário e hexadecimal."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "Kubernetes e Segurança de Workloads",
+      "lesson": "Secrets e configuração",
+      "reason": "Kubernetes Secrets usam Base64 para representar bytes em YAML/JSON, mas exigem RBAC, criptografia e gestão segura."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "Tokens, Claims e Federação",
+      "lesson": "JWT, claims e representação de tokens",
+      "reason": "JWT usa Base64URL em suas partes, o que não deve ser confundido com criptografia do conteúdo."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70,
+      "oneOf": [
+        "labMarkedDone",
+        "practicalExerciseDone"
+      ]
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "0.4"
+    ]
+  }
+}

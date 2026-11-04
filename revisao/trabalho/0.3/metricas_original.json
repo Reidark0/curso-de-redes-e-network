@@ -1,0 +1,88 @@
+{
+  "id": "0.3",
+  "versao": "original",
+  "titulo": "ASCII, Unicode, UTF-8 e Base64",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5882,
+    "invisiveis": 682,
+    "teoriaVisivel": 3549
+  },
+  "porCampoVisivel": {
+    "content.motivation": 231,
+    "content.history": 303,
+    "content.problem": 233,
+    "content.evolution": 224,
+    "content.concept": 218,
+    "content.internals": 243,
+    "content.architecture": 163,
+    "content.analogy": 138,
+    "content.simpleExample": 126,
+    "content.enterpriseExample": 176,
+    "content.cloudExample": 176,
+    "content.devsecopsExample": 149,
+    "content.securityExample": 211,
+    "content.diagram": 3,
+    "content.summary": 79,
+    "content.nextTheme": 50,
+    "security": 349,
+    "troubleshooting": 288,
+    "glossary": 189,
+    "title+subtitle": 19,
+    "objectives": 75,
+    "learningOutcomes": 92,
+    "quiz": 330,
+    "flashcards": 115,
+    "mentorQuestions": 199,
+    "exercises": 187,
+    "challenge": 186,
+    "commentedSolution": 238,
+    "references": 63,
+    "linksToOtherCourses": 63,
+    "lab": 766
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 57,
+    "content.exercisesIntro": 46,
+    "content.challengeIntro": 38,
+    "content.solutionIntro": 34,
+    "networkContext": 31,
+    "deepDive": 295,
+    "commonMistakes": 181
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 45,
+    "alternativa_5minPasso_maisLeitura": 30.9,
+    "plausivel": true,
+    "palavras": 766
+  },
+  "duracao": {
+    "declarada": "70-95 min",
+    "estimatedStudyTimeMinutes": 95,
+    "M": 82.5,
+    "T": 134.3,
+    "partes": {
+      "teoria": 27.3,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 45
+    },
+    "faixaRecomendada": "115-160 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 23
+  }
+}

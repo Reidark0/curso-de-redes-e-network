@@ -1,0 +1,24 @@
+
+<section class="lesson-section lesson-section--concept">
+  <h2>5. Conceito</h2>
+  <p>
+    Um <strong>caractere</strong> é uma unidade textual percebida por humanos, como <code>A</code>, <code>ç</code>, <code>?</code> ou <code>€</code>. Um <strong>ponto de código</strong> é o número atribuído a um caractere em um repertório como Unicode. Uma <strong>codificação</strong> é a regra que transforma esse ponto de código em bytes. Um <strong>charset</strong>, em muitos contextos práticos, indica o conjunto/codificação esperada para interpretar texto, embora o uso histórico do termo varie.
+  </p>
+  <div class="definition-box">
+    <strong>Definição essencial:</strong> ASCII é uma tabela histórica de caracteres básicos; Unicode é um padrão amplo que atribui números a caracteres; UTF-8 é uma codificação que transforma pontos de código Unicode em bytes; Base64 é uma forma de representar bytes usando caracteres textuais seguros.
+  </div>
+  <p>
+    A diferença mais importante para redes é esta: a rede transporta bytes. O significado desses bytes depende do protocolo e da codificação combinada. Quando uma API diz que envia JSON em UTF-8, ela está dizendo que o corpo da mensagem é texto JSON e que os caracteres desse texto devem ser interpretados como UTF-8. Quando um certificado aparece em PEM, ele contém dados binários codificados em Base64 para caber em um arquivo textual.
+  </p>
+  <table class="data-table">
+    <thead>
+      <tr><th>Termo</th><th>Pergunta que responde</th><th>Exemplo</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Caractere</td><td>Qual símbolo humano?</td><td><code>A</code>, <code>á</code>, <code>你</code></td></tr>
+      <tr><td>Ponto de código</td><td>Qual número representa o símbolo?</td><td><code>U+0041</code>, <code>U+00E1</code></td></tr>
+      <tr><td>Codificação</td><td>Como esse número vira bytes?</td><td>UTF-8, UTF-16</td></tr>
+      <tr><td>Base64</td><td>Como representar bytes como texto seguro?</td><td><code>SGVsbG8=</code></td></tr>
+    </tbody>
+  </table>
+</section>

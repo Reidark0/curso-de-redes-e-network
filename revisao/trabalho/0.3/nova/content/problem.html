@@ -1,0 +1,20 @@
+
+<section class="lesson-section lesson-section--problem">
+  <h2>3. Problema</h2>
+  <p>
+    O problema central é que texto não é armazenado nem transmitido como uma ideia abstrata. Ele precisa virar bytes. Para que dois sistemas conversem, ambos precisam concordar sobre a interpretação desses bytes. Se um sistema escreve bytes usando uma codificação e outro interpreta usando outra, o tráfego pode chegar intacto e mesmo assim o resultado ficar errado.
+  </p>
+  <p>
+    Isso é essencial para redes porque protocolos normalmente transportam sequências de bytes. Alguns campos são binários, outros são texto. HTTP usa muito texto em headers e payloads. JSON é texto. DNS usa nomes. SMTP transporta mensagens. Logs são texto. Autenticação Basic usa Base64. Certificados PEM usam Base64 envolto por marcadores textuais. JWT possui partes codificadas em Base64URL. A camada de rede pode estar perfeita, mas a aplicação falha se interpretar mal o conteúdo.
+  </p>
+  <ul class="flow-list">
+    <li><strong>Texto sem codificação definida:</strong> sistemas diferentes podem interpretar os mesmos bytes de formas diferentes.</li>
+    <li><strong>Caracteres não ASCII:</strong> acentos, símbolos e emojis podem ocupar mais bytes que o esperado.</li>
+    <li><strong>Base64 mal compreendido:</strong> dados facilmente decodificáveis podem ser tratados como segredo seguro.</li>
+    <li><strong>Logs quebrados:</strong> evidências de auditoria e incidente podem ficar difíceis de pesquisar e correlacionar.</li>
+    <li><strong>Assinaturas inválidas:</strong> mudar bytes ao converter texto pode invalidar HMAC, assinatura digital ou hash.</li>
+  </ul>
+  <div class="callout callout--warning">
+    <strong>Armadilha comum:</strong> se dois textos parecem iguais na tela, não significa que seus bytes sejam iguais. Normalização Unicode, acentos compostos e caracteres visualmente parecidos podem causar diferenças importantes em autenticação, logs e validações.
+  </div>
+</section>

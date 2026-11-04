@@ -1,0 +1,41 @@
+
+<section class="lesson-section lesson-section--diagram">
+  <h2>14. Diagrama SVG</h2>
+  <svg class="lesson-svg" viewBox="0 0 980 420" role="img" aria-labelledby="m00l03-title m00l03-desc">
+    <title id="m00l03-title">Texto, Unicode, UTF-8, Base64 e transporte em rede</title>
+    <desc id="m00l03-desc">Fluxo mostrando um texto humano sendo convertido em ponto de código, depois em bytes UTF-8, opcionalmente em Base64, e finalmente transportado por HTTP sobre a rede.</desc>
+    <defs>
+      <marker id="m00l03-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
+      </marker>
+    </defs>
+    <rect x="30" y="70" width="150" height="74" rx="12" class="svg-node svg-node--client" />
+    <text x="105" y="102" text-anchor="middle" class="svg-label">Texto</text>
+    <text x="105" y="126" text-anchor="middle" class="svg-label svg-label--small">Olá</text>
+    <rect x="230" y="70" width="160" height="74" rx="12" class="svg-node" />
+    <text x="310" y="102" text-anchor="middle" class="svg-label">Unicode</text>
+    <text x="310" y="126" text-anchor="middle" class="svg-label svg-label--small">U+004F U+006C U+00E1</text>
+    <rect x="450" y="70" width="160" height="74" rx="12" class="svg-node" />
+    <text x="530" y="102" text-anchor="middle" class="svg-label">UTF-8</text>
+    <text x="530" y="126" text-anchor="middle" class="svg-label svg-label--small">4F 6C C3 A1</text>
+    <rect x="690" y="70" width="190" height="74" rx="12" class="svg-node svg-node--server" />
+    <text x="785" y="102" text-anchor="middle" class="svg-label">HTTP/API</text>
+    <text x="785" y="126" text-anchor="middle" class="svg-label svg-label--small">bytes no payload</text>
+    <line x1="180" y1="107" x2="230" y2="107" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l03-arrow)" />
+    <line x1="390" y1="107" x2="450" y2="107" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l03-arrow)" />
+    <line x1="610" y1="107" x2="690" y2="107" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l03-arrow)" />
+    <rect x="140" y="235" width="210" height="82" rx="12" class="svg-node svg-node--security" />
+    <text x="245" y="268" text-anchor="middle" class="svg-label">Base64</text>
+    <text x="245" y="293" text-anchor="middle" class="svg-label svg-label--small">representa bytes como texto</text>
+    <rect x="430" y="235" width="210" height="82" rx="12" class="svg-node svg-node--cloud" />
+    <text x="535" y="268" text-anchor="middle" class="svg-label">Logs/SIEM</text>
+    <text x="535" y="293" text-anchor="middle" class="svg-label svg-label--small">interpretação correta</text>
+    <rect x="720" y="235" width="210" height="82" rx="12" class="svg-node svg-node--attacker" />
+    <text x="825" y="268" text-anchor="middle" class="svg-label">Risco</text>
+    <text x="825" y="293" text-anchor="middle" class="svg-label svg-label--small">codificação ≠ sigilo</text>
+    <line x1="530" y1="144" x2="245" y2="235" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m00l03-arrow)" />
+    <line x1="785" y1="144" x2="535" y2="235" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m00l03-arrow)" />
+    <line x1="785" y1="144" x2="825" y2="235" class="svg-flow svg-flow--blocked animated-flow" marker-end="url(#m00l03-arrow)" />
+    <text x="490" y="378" text-anchor="middle" class="svg-label">A rede entrega bytes; a aplicação precisa interpretá-los com a codificação correta.</text>
+  </svg>
+</section>
