@@ -1,0 +1,79 @@
+{
+  "id": "1.9",
+  "versao": "nova",
+  "titulo": "Diagnóstico inicial: ipconfig, ping, arp, tracert e nslookup",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5138,
+    "invisiveis": 47,
+    "teoriaVisivel": 2643
+  },
+  "porCampoVisivel": {
+    "content.motivation": 141,
+    "content.problem": 161,
+    "content.concept": 237,
+    "content.internals": 442,
+    "content.architecture": 100,
+    "content.analogy": 89,
+    "content.simpleExample": 81,
+    "content.enterpriseExample": 108,
+    "content.cloudExample": 59,
+    "content.devsecopsExample": 61,
+    "content.diagram": 1,
+    "content.summary": 102,
+    "content.nextTheme": 25,
+    "security": 333,
+    "troubleshooting": 473,
+    "glossary": 230,
+    "title+subtitle": 24,
+    "objectives": 65,
+    "learningOutcomes": 79,
+    "quiz": 494,
+    "flashcards": 172,
+    "mentorQuestions": 164,
+    "exercises": 232,
+    "challenge": 172,
+    "commentedSolution": 227,
+    "references": 46,
+    "linksToOtherCourses": 57,
+    "lab": 763
+  },
+  "porCampoInvisivel": {
+    "networkContext": 47
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 10,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 55,
+    "alternativa_5minPasso_maisLeitura": 55.9,
+    "plausivel": true,
+    "palavras": 763
+  },
+  "duracao": {
+    "declarada": "115-165 min",
+    "estimatedStudyTimeMinutes": 165,
+    "M": 140,
+    "T": 137.3,
+    "partes": {
+      "teoria": 20.3,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 55
+    },
+    "faixaRecomendada": "115-165 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 17
+  }
+}

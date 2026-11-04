@@ -4,8 +4,8 @@
   "order": 9,
   "title": "Diagnóstico inicial: ipconfig, ping, arp, tracert e nslookup",
   "subtitle": "Como coletar evidências básicas de configuração, alcance, vizinhança local, caminho e DNS antes de formular hipóteses.",
-  "duration": "80-115 min",
-  "estimatedStudyTimeMinutes": 115,
+  "duration": "115-165 min",
+  "estimatedStudyTimeMinutes": 165,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 195,
@@ -102,114 +102,6 @@
       "diagnóstico de conectividade"
     ]
   },
-  "deepDive": {
-    "mentalModel": "Diagnóstico inicial é uma escada: configuração local, vizinhança, gateway, caminho, nome e serviço. Suba um degrau por vez e registre o que cada teste prova e o que ele não prova.",
-    "keyTerms": [
-      "ipconfig",
-      "ping",
-      "arp",
-      "tracert",
-      "nslookup",
-      "gateway",
-      "DNS",
-      "ICMP",
-      "ARP cache",
-      "TTL",
-      "rota",
-      "evidência"
-    ],
-    "limitations": [
-      "Ping pode ser bloqueado sem que a aplicação esteja fora.",
-      "Tracert pode mostrar saltos incompletos por filtros, rate limit ou caminhos assimétricos.",
-      "ARP só ajuda no domínio local ou no próximo salto, não atravessa roteadores.",
-      "Nslookup testa resolução de nomes, não testa porta, TLS, autenticação ou autorização.",
-      "Ipconfig mostra configuração, mas não garante que o caminho esteja funcional."
-    ],
-    "whenToUse": [
-      "Use ipconfig ou ip addr no início de qualquer diagnóstico de host.",
-      "Use ping para testar alcance básico e latência aproximada quando ICMP for permitido.",
-      "Use arp quando suspeitar de falha local até gateway ou conflito de vizinhança.",
-      "Use tracert/traceroute quando precisar observar saltos até um destino.",
-      "Use nslookup/dig quando o problema ocorre por nome, mas talvez não por IP."
-    ],
-    "whenNotToUse": [
-      "Não use esses comandos para varrer redes sem autorização.",
-      "Não conclua saúde de aplicação apenas com ping.",
-      "Não trate ausência de resposta ICMP como prova definitiva de queda.",
-      "Não compartilhe outputs com IPs, nomes internos e domínios sensíveis sem sanitizar.",
-      "Não altere configurações de produção apenas com base em uma evidência isolada."
-    ],
-    "operationalImpact": [
-      "Reduz tempo de atendimento porque separa configuração, rede local, DNS e caminho.",
-      "Melhora comunicação entre suporte, redes, segurança, cloud e aplicação.",
-      "Exige padronização de coleta de evidências para evitar chamados vagos.",
-      "Ajuda a comparar antes e depois de mudanças de rede."
-    ],
-    "financialImpact": [
-      "Evita compra desnecessária de link quando o problema é DNS, gateway, Wi-Fi ou política.",
-      "Reduz horas de troubleshooting por tentativa e erro.",
-      "Ajuda a justificar ferramentas de monitoramento mais avançadas quando os comandos básicos não bastam.",
-      "Em cloud, evita manter recursos ou rotas erradas por diagnóstico incompleto."
-    ],
-    "securityImpact": [
-      "Pode revelar gateway, DNS e rotas suspeitas em incidentes.",
-      "Evidências podem conter informação sensível e devem ser protegidas.",
-      "Comandos básicos devem ser usados de forma defensiva e autorizada.",
-      "Resultados anômalos precisam ser correlacionados com logs, EDR, DHCP, firewall e identidade."
-    ],
-    "decisionTable": [
-      {
-        "situation": "Host sem internet e IP 169.254.x.x",
-        "recommendedChoice": "Investigar DHCP, cabo, Wi‑Fi, VLAN ou AP antes de DNS externo",
-        "why": "Endereço APIPA indica que o host não recebeu configuração IPv4 via DHCP",
-        "risk": "Culpar DNS quando o host nem possui configuração válida"
-      },
-      {
-        "situation": "Ping por IP funciona, acesso por nome falha",
-        "recommendedChoice": "Testar nslookup e servidores DNS configurados",
-        "why": "Conectividade por IP existe, mas resolução de nomes pode estar quebrada",
-        "risk": "Abrir chamado para aplicação sem testar DNS"
-      },
-      {
-        "situation": "Gateway não responde e não aparece no ARP",
-        "recommendedChoice": "Verificar link, VLAN, Wi‑Fi, gateway configurado e porta local",
-        "why": "A falha parece local antes de sair da rede",
-        "risk": "Investigar WAN ou cloud antes de resolver camada local"
-      }
-    ]
-  },
-  "commonMistakes": [
-    {
-      "mistake": "Usar ping como único teste de rede.",
-      "whyItHappens": "Ping é rápido, conhecido e fácil de executar.",
-      "consequence": "Problemas de DNS, porta, TLS, autenticação e aplicação ficam ocultos.",
-      "correction": "Use ping como uma evidência de alcance ICMP, não como teste completo."
-    },
-    {
-      "mistake": "Ignorar gateway e DNS no ipconfig.",
-      "whyItHappens": "Muitos olham apenas o endereço IPv4.",
-      "consequence": "A causa real pode ser rota default ausente ou DNS errado.",
-      "correction": "Sempre verifique IP, máscara, gateway, DNS, DHCP e interface."
-    },
-    {
-      "mistake": "Achar que ARP mostra todos os dispositivos da internet.",
-      "whyItHappens": "ARP lista IPs e MACs e parece uma tabela geral.",
-      "consequence": "Interpretação errada do escopo local.",
-      "correction": "ARP resolve vizinhos locais e o próximo salto, não destinos remotos através de roteadores."
-    },
-    {
-      "mistake": "Interpretar salto sem resposta no tracert como falha definitiva.",
-      "whyItHappens": "O aluno espera que todo roteador responda.",
-      "consequence": "Diagnóstico falso de queda no meio do caminho.",
-      "correction": "Roteadores podem filtrar ICMP/TTL; observe se o destino final responde e correlacione evidências."
-    },
-    {
-      "mistake": "Compartilhar prints completos sem sanitizar.",
-      "whyItHappens": "Pressa para abrir chamado ou pedir ajuda.",
-      "consequence": "Vazamento de IPs internos, domínios, nomes de host e estrutura de rede.",
-      "correction": "Remova ou mascare dados sensíveis antes de compartilhar externamente."
-    }
-  ],
   "troubleshooting": {
     "symptoms": [
       "Sem internet",
@@ -318,7 +210,7 @@
     ],
     "decisionTree": [
       {
-        "if": "Host sem IP válido",
+        "if": "Host sem IP válido (por exemplo, 169.254.x.x)",
         "then": "Investigar DHCP, link, Wi‑Fi, VLAN e interface antes de DNS ou aplicação."
       },
       {
@@ -344,50 +236,40 @@
       "Executar testes apenas em sistemas e redes autorizados.",
       "Registrar data, hora, origem, destino e comando usado.",
       "Sanitizar outputs antes de compartilhar fora do time autorizado.",
-      "Correlacionar evidências com logs de DHCP, DNS, firewall, EDR e SIEM.",
-      "Padronizar roteiro de diagnóstico para evitar coletas invasivas ou irrelevantes."
+      "Correlacionar evidências com logs de DHCP, DNS, firewall, EDR e SIEM antes de concluir."
     ],
     "badPractices": [
       "Rodar varreduras amplas sem autorização.",
-      "Compartilhar prints com IPs internos, nomes de domínio e usuários.",
-      "Concluir ataque apenas por um resultado isolado.",
+      "Concluir ataque ou causa a partir de um resultado isolado.",
       "Alterar DNS, gateway ou rota em produção sem mudança aprovada.",
-      "Ignorar políticas corporativas de coleta de evidências."
-    ],
-    "commonErrors": [
-      "Confundir teste ICMP com teste de aplicação.",
-      "Confundir DNS com autorização.",
-      "Confundir ARP local com roteamento remoto.",
-      "Tratar traceroute incompleto como prova definitiva.",
-      "Não preservar evidências antes de mudar configuração."
+      "Mudar configuração antes de preservar as evidências."
     ],
     "vulnerabilities": [
       {
         "name": "DNS não autorizado",
-        "description": "Um host pode estar usando servidor DNS inesperado por configuração manual, DHCP indevido ou comprometimento.",
-        "defensiveExplanation": "O diagnóstico deve identificar o servidor DNS usado e comparar com o padrão esperado.",
-        "mitigation": "Controle de DHCP, políticas de endpoint, DNS corporativo, bloqueio de DNS externo quando apropriado e monitoramento."
+        "description": "O host usa um servidor DNS inesperado por configuração manual, DHCP indevido ou comprometimento. O impacto vai de redirecionamento para phishing até perda de acesso a sistemas internos.",
+        "defensiveExplanation": "O ipconfig /all mostra o servidor DNS em uso; compare-o com o padrão esperado (DNS corporativo ou do roteador).",
+        "mitigation": "Controle de DHCP, políticas de endpoint, DNS corporativo, bloqueio de DNS externo quando apropriado, EDR e monitoramento."
       },
       {
         "name": "Gateway ou ARP suspeito",
-        "description": "Alterações inesperadas no gateway ou no MAC associado podem indicar erro de rede ou tentativa de interceptação local.",
+        "description": "Gateway diferente do esperado, ou MAC do gateway mudando de forma inesperada no arp -a, pode ser erro de rede ou tentativa de interceptação local. O tráfego passa por caminho não autorizado ou sofre negação de serviço.",
         "defensiveExplanation": "A análise deve ser feita com logs de switch, DHCP, NAC e EDR, sem executar ataque de ARP spoofing.",
-        "mitigation": "Port security, DHCP snooping, Dynamic ARP Inspection, segmentação e monitoramento."
+        "mitigation": "Controle de DHCP, NAC, port security, DHCP snooping, Dynamic ARP Inspection, segmentação e monitoramento."
       },
       {
         "name": "Vazamento de topologia",
-        "description": "Outputs de diagnóstico podem revelar estrutura interna da rede.",
+        "description": "Outputs e prints de diagnóstico revelam IPs internos, nomes de host, domínios e a estrutura da rede.",
         "defensiveExplanation": "Evidências são úteis para troubleshooting, mas devem ser tratadas como informação sensível.",
-        "mitigation": "Sanitização, controle de acesso a chamados e compartilhamento apenas com times autorizados."
+        "mitigation": "Sanitização antes de compartilhar, controle de acesso a chamados e compartilhamento apenas com times autorizados."
       }
     ],
     "monitoring": [
-      "Mudança de DNS em endpoints",
-      "Gateways inesperados por segmento",
+      "DNS configurado em endpoints diferente do inventário aprovado",
+      "Gateway ou MAC do gateway inesperado por VLAN",
       "Aumento de falhas de resolução DNS",
-      "Muitos hosts com IP APIPA",
-      "Alterações incomuns em ARP ou MAC do gateway",
-      "Falhas recorrentes no primeiro salto"
+      "Muitos hosts com IP APIPA (169.254.x.x) no mesmo segmento",
+      "Falhas recorrentes no primeiro salto (gateway)"
     ],
     "hardening": [
       "DHCP controlado",
@@ -398,10 +280,7 @@
       "Políticas de endpoint para impedir DNS/gateway manual indevido"
     ],
     "detectionIdeas": [
-      "Comparar DNS configurado em endpoints com inventário aprovado.",
-      "Alertar para gateways não esperados por VLAN.",
-      "Correlacionar chamados de indisponibilidade com logs DHCP/DNS/firewall.",
-      "Monitorar queda de disponibilidade do gateway por segmento."
+      "Correlacionar chamados de indisponibilidade com logs de DHCP, DNS e firewall."
     ]
   },
   "lab": {
@@ -413,9 +292,7 @@
     "topology": "Seu computador → rede local/Wi‑Fi → gateway → internet ou serviço autorizado → DNS configurado",
     "architecture": "Diagnóstico em camadas: host, rede local, gateway, caminho, DNS e próximo passo para serviço/aplicação.",
     "prerequisites": [
-      "Ter concluído as aulas 1.1 a 1.8.",
-      "Usar apenas sua própria máquina ou ambiente autorizado.",
-      "Ter permissão para executar comandos de diagnóstico básicos."
+      "Usar apenas sua própria máquina ou um ambiente em que você tenha permissão para executar comandos de diagnóstico."
     ],
     "tools": [
       "Windows PowerShell ou Prompt de Comando",
@@ -423,13 +300,12 @@
       "Conexão de rede autorizada",
       "Editor de texto para relatório"
     ],
-    "estimatedTimeMinutes": 75,
+    "estimatedTimeMinutes": 55,
     "cost": "zero",
     "safetyNotes": [
-      "Não faça varredura de redes sem autorização.",
-      "Não teste destinos internos sensíveis sem permissão.",
-      "Não compartilhe outputs com IPs, nomes internos ou domínios sem sanitizar.",
-      "Não altere DNS, gateway, rotas ou interface durante este laboratório."
+      "Não faça varredura de redes nem teste destinos internos sensíveis sem autorização.",
+      "Não altere DNS, gateway, rotas ou interface durante este laboratório.",
+      "Sanitize os outputs antes de compartilhar (passo 10)."
     ],
     "steps": [
       {
@@ -548,29 +424,14 @@
         "fix": "Verificar Wi‑Fi/cabo, VLAN, AP, DHCP e política da rede."
       },
       {
-        "symptom": "Gateway ausente",
-        "probableCause": "Configuração incompleta ou DHCP incorreto.",
-        "howToConfirm": "ipconfig /all ou ip route sem default gateway.",
-        "fix": "Revisar DHCP, perfil de rede ou configuração manual autorizada."
-      },
-      {
         "symptom": "DNS não resolve, mas ping por IP funciona",
         "probableCause": "DNS incorreto, inacessível ou split DNS ausente.",
         "howToConfirm": "nslookup mostra timeout, NXDOMAIN ou servidor inesperado.",
         "fix": "Validar DNS configurado e política com time responsável."
-      },
-      {
-        "symptom": "Tracert mostra asteriscos no meio",
-        "probableCause": "Filtro, rate limit ou roteador que não responde TTL expirado.",
-        "howToConfirm": "Verificar se destino final responde e comparar com outras evidências.",
-        "fix": "Não concluir falha apenas por esse sinal; correlacionar logs e testes."
       }
     ],
     "improvements": [
-      "Adicionar Test-NetConnection ou curl para testar porta específica em aula futura.",
-      "Comparar resultado dentro e fora de VPN autorizada.",
-      "Repetir teste em cabo e Wi‑Fi para comparar evidências.",
-      "Criar template padronizado de chamado com campos de evidência."
+      "Repetir o roteiro em cabo e em Wi‑Fi, ou dentro e fora de uma VPN autorizada, e comparar as evidências."
     ],
     "evidenceToCollect": [
       "IP/máscara/gateway/DNS sanitizados",
@@ -579,16 +440,7 @@
       "Resultado de tracert/traceroute sanitizado",
       "Resultado de nslookup",
       "Tabela de interpretação"
-    ],
-    "questions": [
-      "Qual comando responde se o host tem gateway?",
-      "Por que ping não prova que HTTP funciona?",
-      "O que ARP mostra e o que ele não mostra?",
-      "Quando DNS vira hipótese principal?",
-      "Que dados devem ser sanitizados antes de compartilhar evidências?"
-    ],
-    "challenge": "Monte um relatório de diagnóstico inicial para um usuário que acessa a internet por IP, mas não acessa sistemas por nome. Inclua comandos, evidências esperadas, interpretação e próximo encaminhamento.",
-    "solution": "A solução deve verificar configuração local, DNS configurado, ping por IP autorizado, nslookup para nome afetado, comparação com outro nome conhecido e sanitização. Se IP funciona e nomes falham, encaminhar com evidência para DNS/rede, sem concluir problema de aplicação."
+    ]
   },
   "mentorQuestions": [
     {
@@ -645,110 +497,110 @@
   "quiz": [
     {
       "id": "q1.9.1",
-      "type": "conceito",
-      "q": "Qual pergunta o comando ipconfig /all responde melhor?",
-      "opts": [
-        "Se a aplicação está autorizando o usuário",
+      "question": "Qual pergunta o comando ipconfig /all responde melhor?",
+      "options": [
+        "Se o destino responde a ICMP",
         "Qual configuração de rede local o host possui",
-        "Qual senha foi usada no login",
+        "Quais saltos existem até o destino",
         "Qual regra exata do firewall bloqueou o tráfego"
       ],
-      "a": 1,
-      "exp": "ipconfig /all mostra configuração local: IP, máscara, gateway, DNS, DHCP e interfaces.",
+      "answer": 1,
+      "explanation": "ipconfig /all mostra a configuração local: IP, máscara, gateway, DNS, DHCP e interfaces. Alcance ICMP, saltos e motivo de bloqueio são papel do ping, do tracert e dos logs do firewall.",
+      "topic": "configuração local",
       "difficulty": "iniciante",
-      "topic": "configuração local"
+      "type": "conceito"
     },
     {
       "id": "q1.9.2",
-      "type": "diagnóstico",
-      "q": "Um host acessa um destino por IP, mas falha por nome. Qual comando é mais apropriado para investigar a próxima hipótese?",
-      "opts": [
+      "question": "Um host acessa um destino por IP, mas falha por nome. Qual comando é mais apropriado para investigar a próxima hipótese?",
+      "options": [
         "arp -a",
+        "tracert",
         "nslookup",
-        "format",
-        "show version"
+        "ping <gateway>"
       ],
-      "a": 1,
-      "exp": "Se por IP funciona e por nome falha, DNS deve ser investigado com nslookup ou dig.",
+      "answer": 2,
+      "explanation": "Se o acesso por IP funciona, a configuração local, o gateway e o caminho já responderam. O que muda entre os dois testes é a resolução de nome, que se investiga com nslookup ou dig.",
+      "topic": "DNS",
       "difficulty": "iniciante",
-      "topic": "DNS"
+      "type": "diagnóstico"
     },
     {
-      "id": "q1.9.3",
-      "type": "segurança",
-      "q": "Qual prática é correta ao compartilhar evidências de ipconfig e tracert fora do time autorizado?",
-      "opts": [
-        "Enviar tudo sem alteração",
-        "Sanitizar IPs, nomes internos e domínios sensíveis",
-        "Alterar o gateway antes de enviar",
-        "Rodar varredura ampla para completar o relatório"
+      "id": "q1.9.7",
+      "question": "No Windows, ping 192.168.1.50 (mesma sub-rede) retorna “Resposta de 192.168.1.20: Host de destino inacessível”, e 192.168.1.20 é o IP do próprio host. Qual interpretação é mais coerente?",
+      "options": [
+        "O próprio host não conseguiu entregar: o ARP para 192.168.1.50 provavelmente ficou sem resposta, então investigue a rede local e o destino",
+        "O destino respondeu ao ping, mas a aplicação dele está fora",
+        "Um firewall na internet filtrou o ICMP",
+        "O DNS resolveu o nome para o IP errado"
       ],
-      "a": 1,
-      "exp": "Outputs de rede podem revelar topologia e nomes internos. Devem ser sanitizados.",
-      "difficulty": "iniciante",
-      "topic": "segurança"
+      "answer": 0,
+      "explanation": "A mensagem vem do IP do próprio host, que avisa que não conseguiu entregar. Na mesma sub-rede isso costuma acontecer quando o ARP não obtém o MAC do destino. Um filtro de ICMP costuma gerar “Esgotado o tempo limite do pedido”, e não há nome envolvido no teste.",
+      "topic": "ping",
+      "difficulty": "intermediário",
+      "type": "diagnóstico"
     },
     {
       "id": "q1.9.4",
-      "type": "comparação",
-      "q": "O que a tabela ARP mostra principalmente?",
-      "opts": [
-        "Associações locais entre IP e MAC",
-        "Todas as senhas salvas no navegador",
-        "A lista completa de sites visitados",
-        "A capacidade contratada do link"
+      "question": "O que a tabela ARP (arp -a) mostra principalmente?",
+      "options": [
+        "Os servidores DNS configurados no host",
+        "O MAC de cada servidor da internet que o host acessou",
+        "Os saltos até o destino e seus tempos",
+        "Associações entre IP e MAC de vizinhos da rede local, como o gateway"
       ],
-      "a": 0,
-      "exp": "ARP associa IPs locais ao endereço MAC correspondente dentro do escopo local ou próximo salto.",
+      "answer": 3,
+      "explanation": "ARP resolve apenas vizinhos do mesmo segmento. Para destinos remotos o host usa o MAC do gateway, por isso servidores da internet não aparecem na tabela.",
+      "topic": "ARP",
       "difficulty": "iniciante",
-      "topic": "ARP"
+      "type": "comparação"
     },
     {
       "id": "q1.9.5",
-      "type": "cenário",
-      "q": "O tracert mostra asteriscos em um salto intermediário, mas o destino final responde. Qual interpretação é mais prudente?",
-      "opts": [
+      "question": "O tracert mostra asteriscos em um salto intermediário, mas o destino final responde. Qual interpretação é mais prudente?",
+      "options": [
         "A rede está necessariamente quebrada no salto com asteriscos",
         "O roteador pode estar filtrando ou limitando respostas, e é preciso correlacionar evidências",
-        "O DNS sempre está errado",
-        "O cabo local está sempre desconectado"
+        "O salto com asteriscos está descartando todo o tráfego até o destino",
+        "O gateway local é a causa, porque é o primeiro salto"
       ],
-      "a": 1,
-      "exp": "Nem todo roteador responde a TTL expirado. Asteriscos não são prova isolada de falha.",
+      "answer": 1,
+      "explanation": "Nem todo roteador responde a TTL expirado. Asteriscos não são prova isolada de falha.",
+      "topic": "tracert",
       "difficulty": "intermediário",
-      "topic": "tracert"
+      "type": "cenário"
     },
     {
       "id": "q1.9.6",
-      "type": "diagnóstico",
-      "q": "Se o host não tem gateway padrão configurado, qual efeito é esperado?",
-      "opts": [
-        "Ele pode ter dificuldade para alcançar redes fora da rede local",
-        "Ele automaticamente ganha mais throughput",
-        "Ele ignora DNS para sempre",
-        "Ele passa a funcionar apenas com IPv6 público"
+      "question": "Se o host não tem gateway padrão configurado, qual efeito é esperado?",
+      "options": [
+        "Ele passa a usar o servidor DNS como gateway",
+        "Ele perde também a comunicação com hosts da mesma sub-rede",
+        "Ele alcança hosts da mesma sub-rede, mas não sabe para onde enviar tráfego destinado a outras redes",
+        "Ele resolve por ARP o MAC do destino remoto e envia direto"
       ],
-      "a": 0,
-      "exp": "Sem gateway, o host não sabe para onde enviar tráfego destinado a outras redes.",
+      "answer": 2,
+      "explanation": "O gateway padrão é a rota para fora da sub-rede. Sem ele, a comunicação local continua (o ARP resolve vizinhos), mas o tráfego para outras redes não tem para onde ir.",
+      "topic": "gateway",
       "difficulty": "iniciante",
-      "topic": "gateway"
+      "type": "diagnóstico"
     }
   ],
   "flashcards": [
     {
-      "id": "fc1.9.1",
-      "front": "Para que serve ipconfig /all?",
-      "back": "Para ver configuração local de rede no Windows: IP, máscara, gateway, DNS, DHCP e interfaces.",
+      "id": "fc1.9.7",
+      "front": "O ipconfig mostra IPv4 169.254.x.x. O que isso indica?",
+      "back": "APIPA: o host não recebeu configuração IPv4 via DHCP. Investigue cabo, Wi‑Fi, VLAN, AP e DHCP antes de DNS ou aplicação.",
       "tags": [
         "ipconfig",
-        "windows"
+        "dhcp"
       ],
       "difficulty": "iniciante"
     },
     {
-      "id": "fc1.9.2",
-      "front": "Ping testa aplicação?",
-      "back": "Não. Ping geralmente testa alcance ICMP e RTT aproximado; não prova HTTP, TCP, TLS ou autenticação.",
+      "id": "fc1.9.8",
+      "front": "O ping falha, mas o site abre no navegador. O que isso indica?",
+      "back": "Provavelmente o ICMP é filtrado no caminho ou no destino, enquanto o serviço responde em TCP/HTTPS. Falta de resposta ao ping não prova queda.",
       "tags": [
         "ping",
         "icmp"
@@ -756,9 +608,9 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc1.9.3",
-      "front": "O que arp -a mostra?",
-      "back": "Mostra associações conhecidas entre IPs locais e endereços MAC na tabela ARP do host.",
+      "id": "fc1.9.9",
+      "front": "Por que o MAC de um servidor da internet não aparece no arp -a?",
+      "back": "Porque o ARP só resolve vizinhos do mesmo segmento. Para um destino remoto, o host usa o MAC do gateway.",
       "tags": [
         "arp",
         "camada 2"
@@ -786,12 +638,12 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc1.9.6",
-      "front": "Qual é a primeira regra ao coletar evidências?",
-      "back": "Coletar apenas em ambiente autorizado e sanitizar dados sensíveis antes de compartilhar.",
+      "id": "fc1.9.10",
+      "front": "nslookup: qual a diferença entre NXDOMAIN e timeout?",
+      "back": "NXDOMAIN: o servidor DNS respondeu que o nome não existe para ele. Timeout: o servidor DNS não respondeu; teste o alcance até ele.",
       "tags": [
-        "segurança",
-        "evidência"
+        "dns",
+        "nslookup"
       ],
       "difficulty": "iniciante"
     }
@@ -812,11 +664,11 @@
       "explanation": "Como a rede local parece responder, a investigação avança para saída, política, caminho e destino."
     },
     {
-      "id": "ex1.9.3",
+      "id": "ex1.9.5",
       "type": "comando/output",
-      "prompt": "O usuário acessa 10.10.10.20, mas não acessa sistema.empresa.local. Qual comando você executa e por quê?",
-      "expectedAnswer": "nslookup sistema.empresa.local, porque é preciso verificar se o nome resolve para o IP esperado e qual DNS respondeu.",
-      "explanation": "A diferença entre acesso por IP e por nome aponta para DNS como hipótese inicial."
+      "prompt": "O ipconfig /all de um notebook mostra: Endereço IPv4 169.254.37.12, máscara 255.255.0.0, gateway padrão vazio, DHCP habilitado: Sim. Qual é a hipótese principal e por que ainda não faz sentido investigar DNS?",
+      "expectedAnswer": "O host não recebeu configuração via DHCP (endereço APIPA 169.254.x.x e sem gateway). Investigue cabo ou Wi‑Fi, VLAN, AP e servidor DHCP. DNS ainda não faz sentido porque, sem IP válido e sem gateway, o host nem alcança o servidor DNS.",
+      "explanation": "Suba a escada em ordem: sem configuração local válida, os degraus seguintes (gateway, caminho, DNS) não têm como funcionar."
     },
     {
       "id": "ex1.9.4",

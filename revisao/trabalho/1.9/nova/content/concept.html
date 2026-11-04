@@ -1,15 +1,16 @@
 <section class="lesson-section lesson-section--concept">
-  <h2>5. Conceito</h2>
-  <p>Diagnóstico inicial de rede é a coleta ordenada de evidências básicas para descobrir se o problema está na configuração local, na conectividade local, no caminho até o destino, na resolução de nomes ou em uma camada superior.</p>
-  <div class="definition-box"><strong>Definição:</strong> comandos de diagnóstico inicial são ferramentas de linha de comando usadas para observar configuração de rede, alcance, vizinhança ARP, caminho de roteamento e resolução DNS antes de formular hipóteses mais avançadas.</div>
-  <table class="data-table comparison-table">
-    <thead><tr><th>Comando</th><th>Pergunta principal</th><th>Camada mental</th><th>Erro comum</th></tr></thead>
+  <h2>Conceito</h2>
+  <div class="definition-box"><strong>Definição:</strong> diagnóstico inicial de rede é a coleta ordenada de evidências básicas (configuração local, vizinhança ARP, alcance, caminho e resolução DNS) para descobrir em que ponto está o problema antes de formular hipóteses mais avançadas.</div>
+  <p>Cada comando responde uma pergunta e tem um limite claro. Os equivalentes no Linux estão entre parênteses.</p>
+  <div class="responsive-table"><table class="data-table comparison-table">
+    <thead><tr><th>Comando</th><th>Pergunta principal</th><th>O que não prova</th><th>Erro comum</th></tr></thead>
     <tbody>
-      <tr><td><code>ipconfig</code></td><td>Meu host está configurado corretamente?</td><td>Configuração local</td><td>Ignorar máscara, gateway e DNS.</td></tr>
-      <tr><td><code>ping</code></td><td>O destino responde a ICMP?</td><td>Alcance básico</td><td>Concluir que a aplicação está saudável.</td></tr>
-      <tr><td><code>arp</code></td><td>O IP local virou MAC?</td><td>Camada local</td><td>Achar que ARP funciona pela internet.</td></tr>
-      <tr><td><code>tracert</code></td><td>Quais saltos aparecem até o destino?</td><td>Caminho</td><td>Interpretar salto sem resposta como falha definitiva.</td></tr>
-      <tr><td><code>nslookup</code></td><td>O nome resolve para IP?</td><td>DNS</td><td>Confundir DNS com conectividade completa.</td></tr>
+      <tr><td><code>ipconfig /all</code> (<code>ip addr</code>, <code>ip route</code>)</td><td>Meu host está configurado? Qual IP, máscara, gateway e DNS ele tem?</td><td>Que o caminho funciona.</td><td>Olhar só o IPv4 e ignorar máscara, gateway e DNS.</td></tr>
+      <tr><td><code>ping</code></td><td>O destino responde a ICMP? Qual o tempo de ida e volta?</td><td>Que a aplicação funciona: ICMP pode ser bloqueado ou tratado de forma diferente da aplicação.</td><td>Usar ping como único teste e concluir que o servidor está saudável (ou fora).</td></tr>
+      <tr><td><code>arp -a</code> (<code>ip neigh</code>)</td><td>O IP de um vizinho local (por exemplo, o gateway) virou MAC?</td><td>Nada além da LAN: ARP não atravessa roteadores.</td><td>Achar que a tabela ARP mostra dispositivos da internet.</td></tr>
+      <tr><td><code>tracert</code> (<code>traceroute</code>, <code>tracepath</code>)</td><td>Quais saltos aparecem até o destino?</td><td>Onde está a falha: filtros, rate limit e rotas assimétricas escondem saltos.</td><td>Interpretar salto sem resposta como falha definitiva.</td></tr>
+      <tr><td><code>nslookup</code> (<code>dig</code>)</td><td>O nome resolve? Para qual IP? Qual servidor DNS respondeu?</td><td>Porta, TLS, autenticação ou autorização.</td><td>Confundir DNS resolvido com conectividade completa.</td></tr>
+      <tr><td><code>Test-NetConnection</code>, <code>curl</code>, <code>nc</code></td><td>A porta ou a aplicação responde?</td><td>—</td><td>Já é a etapa seguinte ao diagnóstico inicial.</td></tr>
     </tbody>
-  </table>
+  </table></div>
 </section>
