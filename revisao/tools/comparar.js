@@ -1,31 +1,27 @@
 #!/usr/bin/env node
-// Uso: node revisao/tools/comparar.js <id>
-// Compara metricas_original.json x metricas_nova.json campo a campo (palavras visíveis e invisíveis)
-// para checar a 11.7: onde houve corte e onde houve acréscimo.
+// Uso: node revisao/tools/comparar.js <id> [--sumiram]
+// v2: compara a base (v1 ou original) com a nova versão: palavras por seção e frases da base que não existem mais na nova.
+// Use --sumiram para listar as frases removidas e montar o inventário de conceitos removidos.
 'use strict';
 const L = require('./lib.js');
-const { path } = L;
+const { fs, path } = L;
 const id = process.argv[2];
-const o = L.readJSON(path.join(L.REV, 'trabalho', id, 'metricas_original.json'));
-const n = L.readJSON(path.join(L.REV, 'trabalho', id, 'metricas_nova.json'));
-const linhas = []; let cortes = 0; let acrescimos = 0;
-for (const tipo of ['porCampoVisivel', 'porCampoInvisivel']) {
-  const ks = [...new Set([...Object.keys(o[tipo]), ...Object.keys(n[tipo])])];
-  for (const k of ks) {
-    const a = o[tipo][k] || 0; const b = n[tipo][k] || 0; const d = b - a;
-    if (tipo === 'porCampoVisivel') { if (d < 0) cortes -= d; else acrescimos += d; }
-    if (d) linhas.push(`${tipo === 'porCampoVisivel' ? 'V' : 'I'} ${k.padEnd(28)} ${String(a).padStart(5)} → ${String(b).padStart(5)} (${d > 0 ? '+' : ''}${d})`);
-  }
+const dir = path.join(L.WORK, id);
+const baseInfo = L.readJSON(path.join(dir, 'base.json'));
+const mb = L.readJSON(path.join(dir, `metricas_${baseInfo.base}.json`));
+const mn = L.readJSON(path.join(dir, 'metricas_nova.json'));
+const linhas = [];
+for (const grupo of ['porSecao', 'pratica', 'outros']) {
+  const ks = [...new Set([...Object.keys(mb[grupo]), ...Object.keys(mn[grupo])])];
+  for (const k of ks) { const a = mb[grupo][k] || 0; const b = mn[grupo][k] || 0; if (a !== b) linhas.push(`${k.padEnd(22)} ${String(a).padStart(5)} → ${String(b).padStart(5)} (${b - a > 0 ? '+' : ''}${b - a})`); }
 }
-console.log(linhas.join('\n'));
-// diff por frase (texto visível de content): frases do original que não existem mais na nova
-const VIS = ['security', 'troubleshooting', 'lab', 'quiz', 'flashcards', 'mentorQuestions', 'exercises', 'challenge', 'commentedSolution', 'glossary'];
-const frases = (obj) => { const t = Object.entries(obj.content || {}).filter(([k]) => L.VISIBLE_CONTENT.includes(k)).map(([, v]) => L.stripHtml(L.stripSvg(v))).join(' ') + ' ' + VIS.map((k) => L.deepText(obj[k])).join(' . ');
-  return new Set(t.split(/(?<=[.!?:])\s+/).map((x) => x.trim().toLowerCase()).filter((x) => x.split(/\s+/).length >= 5)); };
-const fo = frases(L.loadOriginal(id).obj); const fn = frases(L.loadNew(id).obj);
-const sumiram = [...fo].filter((x) => !fn.has(x)); const novas = [...fn].filter((x) => !fo.has(x));
+console.log(`Base: ${baseInfo.base}`); console.log(linhas.join('\n'));
+const VIS = ['security', 'troubleshooting', 'lab', 'quiz', 'flashcards', 'mentorQuestions', 'exercises', 'challenge', 'commentedSolution', 'glossary', 'objectives', 'learningOutcomes'];
+const frases = (obj) => { const t = Object.values(obj.content || {}).map((v) => L.stripHtml(L.stripSvg(v))).join(' ') + ' ' + VIS.map((k) => L.deepText(obj[k])).join(' . ');
+  return new Set(t.split(/(?<=[.!?:;])\s+/).map((x) => x.trim().toLowerCase()).filter((x) => x.split(/\s+/).length >= 5)); };
+const fb = frases(L.loadVersion(id, baseInfo.base).obj); const fn = frases(L.loadNew(id).obj);
+const sumiram = [...fb].filter((x) => !fn.has(x));
 const pal = (a) => a.reduce((s2, x) => s2 + x.split(/\s+/).length, 0);
-console.log(`texto visível: frases do original ausentes na nova ${sumiram.length}/${fo.size} (${pal(sumiram)} palavras) | frases novas/reescritas ${novas.length} (${pal(novas)} palavras)`);
-if (process.argv.includes('--sumiram')) { console.log('Frases do original ausentes na nova (confira se o conteúdo está coberto em outra forma):'); for (const x of sumiram) console.log(' - ' + x.slice(0, 220)); }
-else console.log('(use --sumiram para listar todas as frases do original que não existem mais na nova)');
-console.log(`Visíveis: ${o.palavras.visiveis} → ${n.palavras.visiveis} | cortes brutos ${cortes} (${Math.round(cortes / o.palavras.visiveis * 100)}%) | acréscimos brutos ${acrescimos} | T ${o.duracao.T} → ${n.duracao.T} min`);
+console.log(`frases da base ausentes na nova: ${sumiram.length}/${fb.size} (${pal(sumiram)} palavras)`);
+if (process.argv.includes('--sumiram')) { console.log('Frases da base ausentes na nova (cada uma: coberta de outra forma, repetição, prévia de outra aula ou conceito removido):'); for (const x of sumiram) console.log(' - ' + x.slice(0, 240)); }
+console.log(`Visíveis: ${mb.palavras.visiveis} → ${mn.palavras.visiveis} | teoria ${mb.palavras.teoria} → ${mn.palavras.teoria} | núcleo ${mb.duracao.nucleo} → ${mn.duracao.nucleo} min | prática extra ${mb.duracao.praticaExtra} → ${mn.duracao.praticaExtra} min`);

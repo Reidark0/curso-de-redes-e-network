@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 // Uso: node revisao/tools/quiz_embaralhar.js <id>
-// Redistribui a posição da resposta correta no quiz de revisao/trabalho/<id>/nova/meta.json quando o gabarito
+// Redistribui a posição da resposta correta no quiz de revisao/trabalho_v2/<id>/nova/meta.json quando o gabarito
 // está concentrado (>60% no mesmo índice). Troca a opção correta de lugar com a opção da posição-alvo (determinístico).
 // Seguro para o progresso salvo: o app calcula a nota pelo campo isCorrect salvo, não pelo índice escolhido.
 'use strict';
 const L = require('./lib.js');
 const { path } = L;
 const id = process.argv[2];
-const p = path.join(L.REV, 'trabalho', id, 'nova', 'meta.json');
+const p = path.join(L.WORK, id, 'nova', 'meta.json');
 const meta = L.readJSON(p);
 const quiz = meta.quiz || [];
 const dist = (q) => { const d = {}; q.forEach((x) => { d[x.answer] = (d[x.answer] || 0) + 1; }); return d; };

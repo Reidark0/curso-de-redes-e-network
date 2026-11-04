@@ -4,7 +4,7 @@ const GROUPS = [
   {
     id: "intro",
     title: "Introdução",
-    description: "Objetivos, resultados, motivação, resumo e glossário da aula antes do mergulho técnico.",
+    description: "Objetivos, motivação, resumo e glossário da aula antes do mergulho técnico.",
     items: [
       ["objectives", "Objetivos"],
       ["learningOutcomes", "Resultados de aprendizagem"],
@@ -16,7 +16,7 @@ const GROUPS = [
   {
     id: "contexto",
     title: "Contexto",
-    description: "A história, o problema real e a evolução que explicam por que o tema existe.",
+    description: "O problema real que explica por que o tema existe.",
     items: [
       ["history", "História"],
       ["problem", "Problema"],
@@ -37,10 +37,10 @@ const GROUPS = [
   {
     id: "exemplos",
     title: "Exemplos",
-    description: "Da analogia inicial ao uso doméstico, empresarial, cloud, DevSecOps e segurança.",
+    description: "Um exemplo concreto do tema e, quando ajuda, uma analogia.",
     collapsible: true,
     items: [
-      ["analogy", "Analogia", "A comparação que ajuda a criar um modelo mental, com seus limites."],
+      ["analogy", "Analogia", "Uma comparação que ajuda a criar um modelo mental."],
       ["simpleExample", "Exemplo simples", "Um cenário pequeno para entender sem ruído corporativo."],
       ["enterpriseExample", "Exemplo empresarial", "Como o tema aparece em empresa, SOC, filial, datacenter ou operação real."],
       ["cloudExample", "Exemplo em cloud", "Como a ideia aparece em AWS, Azure, Google Cloud ou redes virtuais."],
@@ -69,8 +69,8 @@ function renderGlossaryBlock(glossary = []) {
   if (!Array.isArray(glossary) || !glossary.length) return "";
   return `<article id="section-glossary" class="lesson-subsection lesson-subsection--glossary" data-section="glossary">
     <h3>Glossário</h3>
-    <p class="muted-text">Termos essenciais desta aula para consulta rápida antes e durante o estudo.</p>
-    <div class="glossary-inline-list">${glossary.map((g) => `<details class="content-card glossary-item"><summary><strong>${escapeHtml(g.term || "Termo")}</strong></summary><p>${escapeHtml(g.shortDefinition || g.definition || "")}</p>${g.longDefinition ? `<p>${escapeHtml(g.longDefinition)}</p>` : ""}${g.example ? `<p><strong>Exemplo:</strong> ${escapeHtml(g.example)}</p>` : ""}${asArray(g.relatedTerms).length ? `<p><strong>Relacionados:</strong> ${asArray(g.relatedTerms).map(escapeHtml).join(", ")}</p>` : ""}</details>`).join("")}</div>
+    <p class="muted-text">Termos citados nesta aula e explicados em outras aulas do curso.</p>
+    <div class="glossary-inline-list">${glossary.map((g) => `<details class="content-card glossary-item"><summary><strong>${escapeHtml(g.term || "Termo")}</strong></summary><p>${escapeHtml(g.shortDefinition || g.definition || "")}</p>${g.longDefinition ? `<p>${escapeHtml(g.longDefinition)}</p>` : ""}${g.example ? `<p><strong>Exemplo:</strong> ${escapeHtml(g.example)}</p>` : ""}${asArray(g.relatedTerms).length ? `<p><strong>Relacionados:</strong> ${asArray(g.relatedTerms).map(escapeHtml).join(", ")}</p>` : ""}${asArray(g.relatedLessons).length ? `<p><strong>Explicado na aula:</strong> ${asArray(g.relatedLessons).map((id) => `<button class="lesson-module-link" type="button" data-open-lesson="${escapeHtml(id)}">${escapeHtml(id)}</button>`).join(", ")}</p>` : ""}</details>`).join("")}</div>
   </article>`;
 }
 

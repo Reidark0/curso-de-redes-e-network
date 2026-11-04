@@ -284,6 +284,11 @@ export function markLessonPracticalEquivalent(lesson) {
   return markLessonEvidence(lesson.id, field);
 }
 
+// v2: o botão de prática só aparece quando as regras da aula pedem uma evidência além do quiz.
+export function hasPracticeCriterion(lesson) {
+  return allPolicyEvidenceFields(lesson).length > 0;
+}
+
 export function isPracticeCriterionDone(lesson) {
   const status = getLessonCompletionStatus(lesson);
   const practiceFields = new Set(allPolicyEvidenceFields(lesson));

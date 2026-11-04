@@ -19,8 +19,8 @@ export function renderSecurity(security) {
   if (!security) return "";
   return `<section id="section-security-structured" class="lesson-section operational-section operational-section--security">
     <span class="eyebrow">Segurança estruturada</span>
-    <h2>Boas práticas, riscos, monitoramento e hardening</h2>
-    <p>Esta seção organiza a leitura defensiva da aula em controles, erros comuns, riscos, mitigação e sinais de detecção.</p>
+    <h2>Riscos, proteção e detecção</h2>
+    <p>A leitura defensiva da aula: o risco e a mitigação, as boas práticas de proteção e os sinais de detecção.</p>
     <div class="ops-grid">
       ${list("Boas práticas", security.goodPractices)}
       ${list("Más práticas", security.badPractices)}

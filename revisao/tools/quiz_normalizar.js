@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Uso: node revisao/tools/quiz_normalizar.js <id>
-// Converte o quiz de revisao/trabalho/<id>/nova/meta.json para o padrão
+// Converte o quiz de revisao/trabalho_v2/<id>/nova/meta.json para o padrão
 // { id, question, options, answer:<índice base 0>, explanation, [topic, difficulty, type, domain] }.
 // Converte a/answer textual/correctAnswer/correctIndex. Questão sem id recebe id = String(índice original),
 // que é exatamente a chave que o app já usava para salvar a resposta (progress.js: question.id ?? index),
@@ -11,7 +11,7 @@ const L = require('./lib.js');
 const { path } = L;
 const id = process.argv[2];
 if (!id) { console.error('uso: quiz_normalizar <id>'); process.exit(2); }
-const p = path.join(L.REV, 'trabalho', id, 'nova', 'meta.json');
+const p = path.join(L.WORK, id, 'nova', 'meta.json');
 const meta = L.readJSON(p);
 const quiz = Array.isArray(meta.quiz) ? meta.quiz : [];
 const norm = (s) => String(s).trim().replace(/\s+/g, ' ').toLowerCase();

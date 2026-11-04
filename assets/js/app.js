@@ -4,6 +4,7 @@ import { buildSearchIndex, searchLessons } from "./services/search.js";
 import { getOverallProgress, getModuleProgress, markLessonOpened, findLastOpened, getLessonVisualState } from "./services/progress.js";
 import { isFavorite } from "./services/favorites.js";
 import { renderLesson } from "./renderers/renderLesson.js";
+import { renderFlashcards, bindFlashcards } from "./renderers/renderFlashcards.js";
 import { escapeHtml, truncate } from "./utils/text.js";
 
 configureStorage(courseData);
@@ -214,14 +215,32 @@ function renderModuleDetail(module) {
       <section class="content-card module-detail-section">
         <h3>Projeto ou entrega do módulo</h3>
         ${module.moduleProject?.title ? `<p><strong>${escapeHtml(module.moduleProject.title)}</strong></p>` : ""}
-        ${deliverables ? `<ul class="checklist module-objectives">${deliverables}</ul>` : `<p class="muted-text">Este módulo usa exercícios, quiz, desafios e práticas equivalentes dentro das aulas.</p>`}
+        ${deliverables ? `<ul class="checklist module-objectives">${deliverables}</ul>` : `<p class="muted-text">Este módulo usa quiz, laboratórios, exercícios e desafios dentro das aulas.</p>`}
       </section>
     </div>
     <section class="content-card module-detail-section module-lessons-panel">
       <div class="section-heading-row"><div><span class="eyebrow">Conteúdo</span><h3>Aulas do módulo</h3></div><span class="badge">${mp.total} aulas</span></div>
       <div class="module-lesson-list">${moduleLessonRows(module)}</div>
     </section>
+    ${renderModuleFlashcards(module)}
   </article>`;
+  bindFlashcards(moduleDetail);
+}
+
+// v2: os flashcards saem da página da aula e ficam reunidos aqui, com a aula de origem em cada card.
+function renderModuleFlashcards(module) {
+  const cards = (module.lessons || []).flatMap((lesson) => (lesson.flashcards || [])
+    .filter((fc) => fc && typeof fc === "object")
+    .map((fc) => ({ ...fc, lessonId: lesson.id })));
+  if (!cards.length) return "";
+  return `<section class="content-card module-detail-section module-flashcards-panel">
+      <div class="section-heading-row"><div><span class="eyebrow">Revisão</span><h3>Flashcards do módulo</h3></div><span class="badge">${cards.length} cards</span></div>
+      <p class="muted-text">Clique em um card para ver a resposta. Cada card indica a aula de origem.</p>
+      <details class="fixation-panel">
+        <summary><span>Mostrar os flashcards</span><small>Revisão rápida dos conceitos das aulas deste módulo.</small></summary>
+        <div class="fixation-panel__body">${renderFlashcards(cards, { title: "", sourceOf: (fc) => `Aula ${fc.lessonId}` })}</div>
+      </details>
+    </section>`;
 }
 
 function findLesson(lessonId) {

@@ -1,0 +1,103 @@
+{
+  "id": "0.1",
+  "versao": "original",
+  "titulo": "Como computadores representam informação",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 6801,
+    "teoria": 4116,
+    "praticaExtra": 1984,
+    "quiz": 347,
+    "flashcards": 139
+  },
+  "porGrupoTeoria": {
+    "introducao": 796,
+    "contexto": 769,
+    "conteudo": 731,
+    "exemplos": 1080,
+    "seguranca_troubleshooting": 740
+  },
+  "porSecao": {
+    "motivation": 260,
+    "summary": 78,
+    "history": 282,
+    "problem": 273,
+    "evolution": 214,
+    "concept": 239,
+    "internals": 306,
+    "architecture": 183,
+    "diagram": 3,
+    "analogy": 161,
+    "simpleExample": 182,
+    "enterpriseExample": 193,
+    "cloudExample": 186,
+    "devsecopsExample": 169,
+    "securityExample": 189,
+    "objectives": 77,
+    "learningOutcomes": 101,
+    "glossary": 280,
+    "security": 419,
+    "troubleshooting": 321,
+    "nextTheme": 55
+  },
+  "pratica": {
+    "quiz": 347,
+    "flashcards": 139,
+    "lab": 1044,
+    "mentorQuestions": 200,
+    "exercises": 247,
+    "challenge": 197,
+    "commentedSolution": 296
+  },
+  "outros": {
+    "title+subtitle": 27,
+    "nextTheme": 55,
+    "references": 76,
+    "linksToOtherCourses": 57
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 35,
+    "alternativa_5minPorPasso": 35,
+    "plausivel": true,
+    "override": null,
+    "palavras": 1044
+  },
+  "duracao": {
+    "declarada": "55-80 min",
+    "estimatedStudyTimeMinutes": 80,
+    "nucleo": 40.7,
+    "nucleoPartes": {
+      "teoria": 31.7,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 80,
+    "praticaExtraPartes": {
+      "lab": 35,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "35-50 min",
+    "praticaExtraArredondada": 80,
+    "recomendada": "35-50 min + 80 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 50
+  }
+}

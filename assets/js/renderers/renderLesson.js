@@ -1,14 +1,13 @@
 import { renderContentSections } from "./renderContentSections.js";
 import { renderFixation } from "./renderFixation.js";
 import { bindQuiz } from "./renderQuiz.js";
-import { bindFlashcards } from "./renderFlashcards.js";
 import { renderSecurity } from "./renderSecurity.js";
 import { renderTroubleshooting } from "./renderTroubleshooting.js";
 import { renderReferences } from "./renderReferences.js";
 import { escapeHtml, asArray } from "../utils/text.js";
 import { getNote, setNote } from "../services/notes.js";
 import { isFavorite, toggleFavorite } from "../services/favorites.js";
-import { isLessonComplete, isLessonMarked, markLessonComplete, unmarkLessonRead, getLessonCompletionStatus, markLessonPracticalEquivalent, isPracticeCriterionDone } from "../services/progress.js";
+import { isLessonComplete, isLessonMarked, markLessonComplete, unmarkLessonRead, getLessonCompletionStatus, markLessonPracticalEquivalent, isPracticeCriterionDone, hasPracticeCriterion } from "../services/progress.js";
 
 function hasContent(lesson, key) { return Boolean(lesson.content?.[key]); }
 function hasArray(value) { return Array.isArray(value) && value.length > 0; }
@@ -50,7 +49,6 @@ function buildTopicGroups(lesson) {
   const fixacao = [];
   if (lesson.lab) fixacao.push(["section-lab-structured", "Laboratório", true]);
   if (hasArray(lesson.quiz)) fixacao.push(["section-quiz", "Quiz", true]);
-  if (hasArray(lesson.flashcards)) fixacao.push(["section-flashcards", "Flashcards", true]);
   if (hasArray(lesson.mentorQuestions)) fixacao.push(["section-mentor", "Modo Mentor", true]);
   if (hasArray(lesson.exercises)) fixacao.push(["section-exercises", "Exercícios", true]);
   if (lesson.challenge) fixacao.push(["section-challenge", "Desafio", true]);
@@ -81,6 +79,14 @@ function metaBadges(lesson) {
 
 const PRACTICE_BUTTON_LABEL = "Marcar laboratório ou Prática equivalente";
 
+function bindGlossaryLessonLinks(container) {
+  container.querySelectorAll("[data-open-lesson]").forEach((button) => {
+    button.addEventListener("click", () => {
+      document.dispatchEvent(new CustomEvent("course:open-lesson", { detail: { lessonId: button.dataset.openLesson } }));
+    });
+  });
+}
+
 function renderProgressCard(lesson) {
   const status = getLessonCompletionStatus(lesson);
   const completeClass = status.complete ? "is-complete" : "";
@@ -89,9 +95,9 @@ function renderProgressCard(lesson) {
   return `<div class="aside-card lesson-progress-card ${completeClass}" data-progress-card>
     <h3>Seu progresso</h3>
     <ul class="checklist">${items}</ul>
-    <div class="lesson-progress-actions">
+    ${hasPracticeCriterion(lesson) ? `<div class="lesson-progress-actions">
       <button class="button button--secondary button--practice" data-progress-practice="true" ${practiceDone ? "disabled" : ""}>${PRACTICE_BUTTON_LABEL}</button>
-    </div>
+    </div>` : ""}
     <p class="sr-only" data-completion-feedback aria-live="polite"></p>
   </div>`;
 }
@@ -167,7 +173,7 @@ export function renderLesson(container, aside, module, lesson, navigation) {
   ${lesson.tags?.length ? `<div class="aside-card"><h3>Tags</h3><p>${asArray(lesson.tags).map((t) => `<span class="badge">${escapeHtml(t)}</span>`).join(" ")}</p></div>` : ""}`;
 
   bindQuiz(container);
-  bindFlashcards(container);
+  bindGlossaryLessonLinks(container);
   bindTopicPanelLinks(container, aside);
   bindProgressActions(aside, lesson);
   if (container.__quizProgressHandler) document.removeEventListener("course:quiz-updated", container.__quizProgressHandler);

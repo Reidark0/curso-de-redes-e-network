@@ -25,7 +25,7 @@ function lessonText(module, lesson) {
     stringifyNested(lesson.finalSimulation), stringifyNested(lesson.domainGapReport), stringifyNested(lesson.capstone),
     ...(lesson.glossary || []).map((g) => `${g.term} ${g.shortDefinition || ""} ${g.longDefinition || ""} ${g.example || ""} ${(g.relatedTerms || []).join(" ")} ${(g.relatedLessons || []).join(" ")}`),
     ...(lesson.flashcards || []).map((f) => `${f.front} ${f.back} ${(f.tags || []).join(" ")} ${f.difficulty || ""}`),
-    ...(lesson.quiz || []).map((q) => `${q.q} ${(q.opts || []).join(" ")} ${q.exp || ""} ${q.type || ""} ${q.topic || ""} ${q.difficulty || ""}`),
+    ...(lesson.quiz || []).map((q) => `${q.q || ""} ${(q.opts || []).join(" ")} ${q.exp || ""} ${q.question || ""} ${(q.options || []).join(" ")} ${q.explanation || ""} ${q.type || ""} ${q.topic || ""} ${q.difficulty || ""}`),
     ...(lesson.mentorQuestions || []).map((m) => `${m.type || ""} ${m.question || ""} ${(m.hints || []).join(" ")} ${(m.expectedIdeas || []).join(" ")} ${m.explanation || ""}`),
     ...(lesson.exercises || []).map((e) => `${e.type || ""} ${e.prompt || ""} ${e.expectedAnswer || ""} ${e.explanation || ""}`),
     challenge ? `${challenge.title || ""} ${challenge.scenario || ""} ${stringifyNested(challenge.tasks)} ${stringifyNested(challenge.constraints)} ${stringifyNested(challenge.expectedDeliverables)} ${stringifyNested(challenge.gradingRubric)}` : "",
