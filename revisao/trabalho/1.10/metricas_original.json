@@ -1,0 +1,88 @@
+{
+  "id": "1.10",
+  "versao": "original",
+  "titulo": "Revisão e mini-projeto: mapear sua rede",
+  "tipo": "ligação/revisão",
+  "palavras": {
+    "visiveis": 4094,
+    "invisiveis": 462,
+    "teoriaVisivel": 2141
+  },
+  "porCampoVisivel": {
+    "content.motivation": 175,
+    "content.history": 131,
+    "content.problem": 136,
+    "content.evolution": 120,
+    "content.concept": 71,
+    "content.internals": 117,
+    "content.architecture": 84,
+    "content.analogy": 91,
+    "content.simpleExample": 114,
+    "content.enterpriseExample": 85,
+    "content.cloudExample": 89,
+    "content.devsecopsExample": 76,
+    "content.securityExample": 111,
+    "content.diagram": 3,
+    "content.summary": 62,
+    "content.nextTheme": 59,
+    "security": 227,
+    "troubleshooting": 235,
+    "glossary": 155,
+    "title+subtitle": 26,
+    "objectives": 49,
+    "learningOutcomes": 61,
+    "quiz": 228,
+    "flashcards": 90,
+    "mentorQuestions": 139,
+    "exercises": 155,
+    "challenge": 138,
+    "commentedSolution": 153,
+    "references": 50,
+    "linksToOtherCourses": 43,
+    "lab": 821
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 35,
+    "content.exercisesIntro": 16,
+    "content.challengeIntro": 27,
+    "content.solutionIntro": 27,
+    "networkContext": 50,
+    "deepDive": 191,
+    "commonMistakes": 116
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 10,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 105,
+    "alternativa_5minPasso_maisLeitura": 56.3,
+    "plausivel": true,
+    "palavras": 821
+  },
+  "duracao": {
+    "declarada": "70-105 min",
+    "estimatedStudyTimeMinutes": 105,
+    "M": 87.5,
+    "T": 183.5,
+    "partes": {
+      "teoria": 16.5,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 105
+    },
+    "faixaRecomendada": "155-220 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 11
+  }
+}
