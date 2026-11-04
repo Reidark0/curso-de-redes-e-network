@@ -20,3 +20,17 @@ Registro de decisões tomadas sem consulta (regra 4), divergências entre o prom
 - **D14. Durações com travessão.** Três aulas (9.8, 9.9 e 9.10) usam "–" em `duration`. As novas versões usam o formato padrão "X-Y min".
 - **D15. Linha de base no navegador (single original).** `validar_single.js --browser` sobre `redes_e_network_v2_0_single.html`: sintaxe ok, 190 aulas e 18 módulos, nenhum erro de console, todas as aulas renderizam. Clicar na opção correta da 1ª questão só funciona em 157 aulas: falha em 33 (as 26 de `answer` textual e 7 das 16 com `correctAnswer`/`correctIndex`; nas outras 9, a 1ª questão já usa `a`, mas as demais não). Na 5.2, 5.4 e 5.5, o texto da resposta começa com número e o app usa esse número como índice (ex.: "254…" → opção 254).
 - **D16. Módulos em `aulas novas/modules/`.** As cópias mantêm os `import` originais (`../lessons/mXX/…`), como manda "não mexa no resto". Elas servem para o build do single, que remove os imports. Não são um app modular executável a partir de `aulas novas/`.
+
+## Piloto (0.1, 5.5, 17.12) — revisão crítica e ajustes
+
+- **D17. Resultado do piloto.** 0.1 e 5.5: os cortes preservaram o conhecimento (inventários com 40+ itens; só saíram itens duplicados ou que são de outras aulas, sempre com motivo), as versões ficaram mais diretas (tabelas no lugar de prosa comparativa, valores concretos, lacunas dos objetivos cobertas) e os critérios foram aplicados de forma coerente. Na 0.1, o diagrama tinha o fluxo errado (Sinal → Cloud → Ferramentas → Destino) e foi corrigido. Na 5.5, foram corrigidos um comando Cisco com `&&` (o IOS não aceita) e mitigações desalinhadas dos riscos. Observação: a fórmula 6.2 tem peso fixo de prática (6 min por exercício, 20 min de desafio), então a duração nova das aulas fundamentais tende a SUBIR (0.1: 55-80 → 105-150). A fórmula é fixa pelo prompt e foi mantida; a consequência para `estimatedHours` dos módulos entra no relatório final.
+- **D18. Ajustes de critério e ferramentas depois do piloto** (CRITERIOS 11.5, 11.6, 11.6b e 11.7):
+  - padrão de id para questões novas (seguir o padrão existente, ex.: `q0.1.7`);
+  - `comparar` com cortes e acréscimos brutos por campo e diff por frase em todo o texto visível (`--sumiram`);
+  - `metricas` e `validar` passam a apontar subcampos não renderizados e itens em string (a 17.12 tinha `mentorQuestions` em string, que o app mostrava como "Pergunta" vazia);
+  - comandos de troubleshooting e vulnerabilidades sem campos vazios;
+  - aproveitamento medido contra o T original;
+  - não reordenar as opções das questões mantidas;
+  - consolidação de rubricas conflitantes;
+  - para projeto, capstone e portfólio, `lab_override.json` com estimativa justificada do lab. Na 17.12, a regra de plausibilidade [0,5×; 2×] (D12) derrubou o lab de 720 para 220 min, o que contraria a 6.10 ("o tempo longo pode ser legítimo").
+- **D19. O que foi refeito.** Só o ajuste do lab de projeto muda o resultado de uma aula do piloto (a 17.12), então **a 17.12 foi refeita do zero** pelo loop: a análise anterior foi renomeada para `aula-17.12_descartada_2026-11-04.md` e a `nova/` anterior virou `nova_descartada_*`. 0.1 e 5.5 não são projetos e já atendem os demais ajustes (o `validar` atualizado passa sem erros, e os avisos estão justificados), então refazê-las produziria o mesmo resultado; elas foram mantidas. A partir daqui, os critérios estão **congelados**.

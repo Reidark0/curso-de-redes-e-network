@@ -1,0 +1,7 @@
+<section class="lesson-section lesson-section--exemplo-seguranca">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>Do ponto de vista de segurança, a arquitetura precisa reduzir movimento lateral, controlar egress, detectar beaconing, investigar possível exfiltração, proteger DNS, evitar exposição pública indevida, registrar eventos de identidade e preservar evidências. A pergunta não é “tem firewall?”, mas “os fluxos essenciais são permitidos, os fluxos perigosos são negados e os eventos relevantes são visíveis?”.</p>
+  <p>O cenário de incidente do capstone inclui três sintomas: erro intermitente na aplicação web, lentidão para usuários remotos e tráfego incomum saindo de um workload. O aluno deve construir hipóteses defensivas sem pular para conclusões. Pode ser falha de health check, DNS privado incorreto, rota assimétrica, política mal aplicada, processo legítimo ruidoso, C2 ou tentativa de exfiltração.</p>
+  <p>A resposta precisa ser proporcional: contenção mínima, preservação de evidências, comunicação clara, rollback quando necessário, RCA e backlog de melhoria. A investigação não deve incluir exploração ofensiva nem ações fora do escopo autorizado.</p>
+</section>
+<p><strong>Critério de maturidade:</strong> em qualquer resposta que envolva segurança, o aluno deve indicar escopo autorizado, evidência, mitigação, risco residual e forma de monitoramento. Respostas que apenas dizem “bloquear no firewall” ou “usar Zero Trust” sem fluxo, regra, log e justificativa não atingem domínio.</p>

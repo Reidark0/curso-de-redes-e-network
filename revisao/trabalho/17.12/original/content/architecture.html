@@ -1,0 +1,6 @@
+<section class="lesson-section lesson-section--arquitetura">
+  <h2>7. Arquitetura</h2>
+  <p>A arquitetura proposta usa camadas. Na borda pública ficam DNS público, CDN/WAF e Load Balancer. A aplicação reside em subnets privadas ou cluster Kubernetes com Ingress controlado. Dependências sensíveis, como banco gerenciado e storage, são acessadas por endpoints privados e DNS privado. O tráfego de saída passa por egress control, proxy ou firewall com logs.</p>
+  <p>A conectividade híbrida usa VPN ou link dedicado com BGP, rotas filtradas e hub de conectividade. A matriz e a filial ficam segmentadas por função: usuários, servidores, gerenciamento, voz, Wi-Fi corporativo, convidados e dispositivos especiais. O Wi-Fi usa autenticação corporativa e VLAN dinâmica quando aplicável. O acesso remoto usa identidade, MFA, postura do dispositivo e escopo mínimo.</p>
+  <p>A camada de segurança possui segmentação, firewall, SG/NSG/NACL, WAF, NAC, EDR, NDR, DLP, SIEM e playbooks. A camada de operação possui IaC, revisão de mudanças, testes sintéticos, alertas, runbooks, custos monitorados e RCA. A camada de evidência recebe flow logs, DNS logs, proxy logs, WAF/LB logs, cloud audit, Kubernetes audit, EDR e eventos de identidade.</p>
+</section>

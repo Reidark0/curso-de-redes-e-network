@@ -1,0 +1,6 @@
+<section class="lesson-section lesson-section--exemplo-simples">
+  <h2>9. Exemplo simples</h2>
+  <p>Em um exemplo simples, um usuário remoto precisa acessar uma aplicação interna. O fluxo esperado é: autenticação com MFA, VPN ou acesso privado, DNS interno resolvendo o nome correto, rota para a subnet da aplicação, firewall permitindo apenas porta necessária, aplicação respondendo via TLS e logs registrando identidade, origem, destino, horário e resultado.</p>
+  <p>Se falhar, você não altera tudo de uma vez. Primeiro confirma se o usuário está autenticado, depois se recebeu rotas, depois se o DNS interno resolve, depois se TCP conecta, depois se TLS é válido, depois se a aplicação responde e, por fim, se há bloqueio em firewall, WAF, LB ou backend.</p>
+  <p>Esse exemplo resume o capstone: fluxo legítimo, controle mínimo necessário, evidência em cada etapa e diagnóstico disciplinado.</p>
+</section>

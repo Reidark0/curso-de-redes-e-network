@@ -1,0 +1,77 @@
+{
+  "id": "17.12",
+  "versao": "nova",
+  "titulo": "Projeto final capstone: arquitetura, defesa e diagnóstico ponta a ponta",
+  "tipo": "capstone",
+  "palavras": {
+    "visiveis": 7755,
+    "invisiveis": 0,
+    "teoriaVisivel": 3243
+  },
+  "porCampoVisivel": {
+    "content.motivation": 122,
+    "content.problem": 155,
+    "content.concept": 903,
+    "content.internals": 157,
+    "content.architecture": 156,
+    "content.simpleExample": 114,
+    "content.enterpriseExample": 101,
+    "content.cloudExample": 134,
+    "content.devsecopsExample": 122,
+    "content.securityExample": 140,
+    "content.diagram": 44,
+    "content.summary": 110,
+    "content.nextTheme": 43,
+    "security": 442,
+    "troubleshooting": 409,
+    "glossary": 91,
+    "title+subtitle": 29,
+    "objectives": 98,
+    "learningOutcomes": 90,
+    "quiz": 473,
+    "flashcards": 111,
+    "mentorQuestions": 145,
+    "exercises": 108,
+    "challenge": 501,
+    "commentedSolution": 583,
+    "references": 137,
+    "linksToOtherCourses": 180,
+    "lab": 2057
+  },
+  "porCampoInvisivel": {},
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 19,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 220,
+    "alternativa_5minPasso_maisLeitura": 110.8,
+    "plausivel": true,
+    "palavras": 2057
+  },
+  "duracao": {
+    "declarada": "260-370 min",
+    "estimatedStudyTimeMinutes": 370,
+    "M": 315,
+    "T": 307.9,
+    "partes": {
+      "teoria": 24.9,
+      "diagramas": 3,
+      "quiz": 7,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 220
+    },
+    "faixaRecomendada": "260-370 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 9
+  }
+}

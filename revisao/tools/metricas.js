@@ -41,9 +41,9 @@ const glW = W((o.glossary || []).map((g) => [g.term, g.shortDefinition || g.defi
 const outrosVis = {
   'title+subtitle': W([o.title, o.subtitle]), objectives: W(o.objectives), learningOutcomes: W(o.learningOutcomes),
   quiz: W((o.quiz || []).map((q) => [q.q || q.question, q.opts || q.options, q.exp || q.explanation])),
-  flashcards: W((o.flashcards || []).map((f) => [f.front, f.back])),
-  mentorQuestions: W((o.mentorQuestions || []).map((m) => [m.question, m.hints, m.expectedIdeas, m.explanation])),
-  exercises: W((o.exercises || []).map((e) => [e.prompt || e.title, e.expectedAnswer, e.explanation])),
+  flashcards: W((o.flashcards || []).filter((f) => f && typeof f === 'object').map((f) => [f.front, f.back])),
+  mentorQuestions: W((o.mentorQuestions || []).filter((m) => m && typeof m === 'object').map((m) => [m.question, m.hints, m.expectedIdeas, m.explanation])),
+  exercises: W((o.exercises || []).filter((e) => e && typeof e === 'object').map((e) => [e.prompt || e.title, e.expectedAnswer, e.explanation])),
   challenge: W(o.challenge ? pick(o.challenge, ['title', 'scenario', 'tasks', 'constraints', 'expectedDeliverables', 'successCriteria', 'gradingRubric']) : null),
   commentedSolution: W(o.commentedSolution ? [o.commentedSolution.reasoning, o.commentedSolution.steps, o.commentedSolution.commonWrongAnswers || o.commentedSolution.commonMistakes, o.commentedSolution.finalAnswer] : null),
   references: W((o.references || []).map((r) => [r.title || r.type, r.organization, r.note])),
@@ -68,7 +68,8 @@ const SUB = { mentorQuestions: ['id', 'type', 'question', 'hints', 'expectedIdea
   references: ['type', 'title', 'organization', 'url', 'note'], linksToOtherCourses: ['course', 'module', 'lesson', 'reason'] };
 const SUBOBJ = { challenge: ['title', 'scenario', 'tasks', 'constraints', 'expectedDeliverables', 'successCriteria', 'gradingRubric', 'difficulty', 'estimatedTimeMinutes'],
   commentedSolution: ['reasoning', 'steps', 'commonWrongAnswers', 'commonMistakes', 'finalAnswer'] };
-for (const [k, keys] of Object.entries(SUB)) { const inv = (o[k] || []).flatMap((x) => Object.keys(x || {}).filter((kk) => !keys.includes(kk)).map((kk) => x[kk])); if (inv.length) porCampoInvisivel[`${k}.(subcampos ocultos)`] = W(inv); }
+for (const [k, keys] of Object.entries(SUB)) { const strs = (o[k] || []).filter((x) => typeof x === 'string'); if (strs.length) porCampoInvisivel[`${k}.(itens em string, não exibidos)`] = W(strs);
+  const inv = (o[k] || []).filter((x) => x && typeof x === 'object').flatMap((x) => Object.keys(x).filter((kk) => !keys.includes(kk)).map((kk) => x[kk])); if (inv.length) porCampoInvisivel[`${k}.(subcampos ocultos)`] = W(inv); }
 for (const [k, keys] of Object.entries(SUBOBJ)) { const x = o[k] || {}; const inv = Object.keys(x).filter((kk) => !keys.includes(kk)); if (inv.length) porCampoInvisivel[`${k}.(ocultos: ${inv.join(',')})`] = W(inv.map((kk) => x[kk])); }
 const visiveis = Object.values(porCampoVisivel).reduce((a, b) => a + b, 0);
 const invisiveis = Object.values(porCampoInvisivel).reduce((a, b) => a + b, 0);
@@ -83,7 +84,9 @@ const tTeoria = teoria / 130;
 const labAlt = labSteps * 5 + labWords / 130;
 const labDecl = Number(o.lab?.estimatedTimeMinutes || 0);
 const labPlaus = Boolean(o.lab) && labDecl > 0 && labDecl >= 0.5 * labAlt && labDecl <= 2 * labAlt;
-const tLab = !o.lab ? 0 : (labPlaus ? labDecl : labAlt);
+const ovPath = path.join(L.REV, 'trabalho', id, 'lab_override.json');
+const override = versao === 'nova' && o.lab && fs.existsSync(ovPath) ? L.readJSON(ovPath) : null;
+const tLab = !o.lab ? 0 : (override ? Number(override.minutos) : (labPlaus ? labDecl : labAlt));
 const parts = { teoria: tTeoria, diagramas: 3 * svg, quiz: q.quiz, flashcards: 0.5 * q.flashcards, mentor: 2 * q.mentor, exercicios: 6 * q.exercicios, desafio: q.desafio ? 20 : 0, lab: tLab };
 const T = Object.values(parts).reduce((a, b) => a + b, 0);
 const r5 = (x) => Math.max(5, Math.round(x / 5) * 5);
@@ -98,7 +101,7 @@ const res = {
   id, versao, titulo: o.title, tipo: o.type,
   palavras: { visiveis, invisiveis, teoriaVisivel: teoria },
   porCampoVisivel, porCampoInvisivel, quantidades: q,
-  lab: o.lab ? { estimatedTimeMinutes: labDecl, alternativa_5minPasso_maisLeitura: round1(labAlt), plausivel: labPlaus, palavras: labWords } : null,
+  lab: o.lab ? { override: override ? `${override.minutos} min — ${override.justificativa}` : null, estimatedTimeMinutes: labDecl, alternativa_5minPasso_maisLeitura: round1(labAlt), plausivel: labPlaus, palavras: labWords } : null,
   duracao: { declarada: o.duration, estimatedStudyTimeMinutes: o.estimatedStudyTimeMinutes, M, T: round1(T), partes: Object.fromEntries(Object.entries(parts).map(([k, v]) => [k, round1(v)])),
     faixaRecomendada: `${faixa[0]}-${faixa[1]} min`, vereditoAutomatico: veredito, pctTeoria: Math.round((tTeoria + 3 * svg) / T * 100) }
 };

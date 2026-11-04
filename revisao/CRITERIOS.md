@@ -260,6 +260,7 @@ Regra: o markup **novo** usa só classes estilizadas. Exemplos: `<div class="cal
 
 ### 11.6 Duração
 - T vem da fórmula 6.2 calculada pelo `metricas` (as palavras dentro de `<svg>` não entram na teoria; cada SVG vale 3 min). Lab "plausível" = `estimatedTimeMinutes` entre 0,5× e 2× de (5 min/passo + leitura). Se não for plausível, a ferramenta usa a alternativa. Você pode corrigir `lab.estimatedTimeMinutes` na nova versão para um valor coerente com os passos, registrando o motivo.
+- **Exceção para projeto, capstone e portfólio (6.10):** se o lab produz entregáveis cuja elaboração claramente não cabe em 5 min por passo, crie `revisao/trabalho/<id>/lab_override.json` com `{"minutos": N, "justificativa": "..."}` (estimativa por entregável, explicada) e ponha o mesmo N em `lab.estimatedTimeMinutes`. O `metricas nova` usa N. Não vale para outros tipos de aula.
 - O veredito automático não detecta DESEQUILIBRADA: esse julgamento é seu (ex.: 70% de leitura numa aula prática).
 - A nova `duration` sai da `faixaRecomendada` da **nova** versão. É normal que ela suba em relação à original quando a original estava SUBESTIMADA: a fórmula é fixa e vale para todas as aulas.
 
@@ -267,6 +268,9 @@ Regra: o markup **novo** usa só classes estilizadas. Exemplos: `<div class="cal
 - A % de aproveitamento (6.5) é medida contra o **T da fórmula da versão original**. Se ela for muito diferente contra a duração declarada, diga isso no comentário.
 - Em `troubleshooting.commands`, o app mostra os rótulos "Finalidade", "Esperado" e "Interpretação" mesmo vazios: preencha `purpose`, `expectedObservation` e `interpretation`. Em `security.vulnerabilities`, preencha `name`, `description`, `defensiveExplanation` e `mitigation`, coerentes entre si.
 - Subcampos que o app não mostra (ex.: `mentorQuestions[].expectedAnswer`, `challenge.deliverables`, `commentedSolution.summary`) são invisíveis: MOVA o conteúdo para o subcampo exibido equivalente (`expectedIdeas`, `expectedDeliverables`, `reasoning`/`finalAnswer`) e remova o subcampo. O `validar` avisa quando encontra um.
+- Itens de `quiz`, `flashcards`, `mentorQuestions`, `exercises` e `glossary` precisam ser **objetos**. Uma string vira um card vazio no app ("Pergunta" sem texto). O `validar` reprova.
+- Quando houver várias rubricas ou regras de aprovação conflitantes (exibidas e ocultas), consolide-as numa só, na versão exibida (`challenge.gradingRubric`/`successCriteria`), sem baixar a exigência (na dúvida, fique com o critério mais exigente) e registre a consolidação em "Revisão humana".
+- Para conferir perda de conhecimento, rode `node revisao/tools/comparar.js <id> --sumiram` e confira se cada frase que sumiu está coberta de outra forma, foi removida por redundância ou está no inventário como REMOVIDO com motivo.
 - Não reordene as opções das questões que você manteve: a resposta salva do aluno guarda o índice escolhido.
 
 ### 11.7 % de linguiça e escopo da reescrita
