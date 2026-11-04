@@ -1,0 +1,30 @@
+
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <div class="definition-box">
+    <strong>Definição:</strong> transportar dados fisicamente é converter bits em sinais capazes de atravessar um meio e depois reconverter esses sinais em bits com erro aceitável.
+  </div>
+  <p>
+    Um <strong>sinal físico</strong> é uma variação mensurável num meio, usada para representar informação. Em redes, essa variação é elétrica, óptica ou eletromagnética. A camada física define meio, conector, frequência, potência, codificação, sincronização, distância máxima, taxa nominal, modo de operação e os requisitos mínimos para que transmissor e receptor entendam o mesmo padrão.
+  </p>
+  <p>
+    Ela não decide endereço IP, rota, porta TCP, DNS nem política de firewall. Só oferece a base para as camadas superiores: se essa base falha, tudo acima fica instável.
+  </p>
+  <h3>Três meios, três jeitos de carregar bits</h3>
+  <p>
+    Telégrafo, telefone e rádio já dependiam de sinais físicos; as redes de computadores padronizaram maneiras de transformar bits em sinais e sinais em bits. Cada meio se popularizou por uma vantagem e carrega uma limitação típica:
+  </p>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead><tr><th>Meio</th><th>Representação física</th><th>Por que se usa</th><th>Limitação comum</th><th>Evolução técnica</th></tr></thead>
+      <tbody>
+        <tr><td>Cobre (par trançado)</td><td>Variação elétrica (tensão/corrente) em pares de fios</td><td>Barato, flexível, fácil de instalar; padrão em LAN</td><td>Interferência, limite de distância, qualidade de crimpagem</td><td>Pares trançados com cancelamento de interferência, categorias de cabo melhores, autonegociação de velocidade</td></tr>
+        <tr><td>Fibra óptica</td><td>Pulsos de luz guiados pela fibra</td><td>Longas distâncias, alta capacidade, imune a interferência eletromagnética</td><td>Transceivers, curvatura, limpeza de conectores, custo</td><td>Lasers e LEDs, diferentes comprimentos de onda, fibras monomodo e multimodo</td></tr>
+        <tr><td>Rádio / Wi‑Fi</td><td>Ondas eletromagnéticas moduladas no ar</td><td>Mobilidade e flexibilidade</td><td>Interferência, obstáculos, canal, meio compartilhado, regulação de espectro, maior exposição</td><td>Modulação mais eficiente, OFDM, MIMO (várias antenas), canais mais largos, bandas de 2,4/5/6 GHz</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Em datacenters modernos, cabos DAC (cobre de conexão direta), fibra e transceivers de alta velocidade sustentam o grande volume de tráfego leste‑oeste; o que continua difícil é custo, compatibilidade entre módulos e observabilidade física. Cada avanço aumentou capacidade e também a importância de instalação correta, compatibilidade e diagnóstico.
+  </p>
+</section>

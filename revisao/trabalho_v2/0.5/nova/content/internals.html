@@ -1,0 +1,36 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <p>
+    Os bytes que a aplicação quer enviar já viraram bits. A partir daí, a placa de rede (ou o rádio Wi‑Fi) e o meio fazem este caminho:</p>
+  <ol class="flow-list">
+    <li><strong>Conversão em sinal:</strong> a placa transforma os bits em padrões físicos: níveis de tensão, pulsos de luz ou variações numa onda de rádio. Os padrões reais não são só “alto = 1, baixo = 0”: usam vários níveis para levar mais bits por vez.</li>
+    <li><strong>Transmissão:</strong> o meio carrega o sinal até o outro lado.</li>
+    <li><strong>Atenuação:</strong> o sinal perde força com a distância, os conectores e as paredes.</li>
+    <li><strong>Ruído e interferência:</strong> sinais indesejados, de motores, fontes de energia e outros rádios, se somam ao sinal.</li>
+    <li><strong>Recepção:</strong> o receptor mede o que chegou e decide quais bits aquilo representa. Quanto maior a diferença entre a força do sinal e a do ruído (a <strong>relação sinal‑ruído</strong>, ou SNR), mais fácil decidir certo.</li>
+    <li><strong>Verificação:</strong> os dados viajam em blocos, e cada bloco leva no fim um código de verificação (o CRC). Se um único bit chegou trocado, o código não confere e o bloco inteiro é descartado; ele só volta se algum protocolo pedir o reenvio, o que custa tempo.</li>
+  </ol>
+  <p>
+    Por isso nem todo problema físico aparece como “cabo desconectado”. A camada física pode estar <strong>ausente</strong> (sem sinal, sem link) ou <strong>degradada</strong> (o link existe, mas com velocidade abaixo do esperado, perdas, quedas curtas ou Wi‑Fi oscilando). No cabo, um bom indicador é a <strong>velocidade negociada</strong>: ao conectar, as duas pontas combinam a maior velocidade que ambas suportam, e um cabo ruim pode deixá-la abaixo do esperado.</p>
+  <h3>Como isso aparece no seu computador</h3>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead><tr><th>O que você vê</th><th>Onde ver</th><th>O que sugere</th></tr></thead>
+      <tbody>
+        <tr><td><code>Disconnected</code> (Windows) ou <code>NO-CARRIER</code> e <code>state DOWN</code> (Linux)</td><td><code>Get-NetAdapter</code>, <code>ip link</code></td><td>Link ausente: cabo solto ou rompido, equipamento do outro lado desligado</td></tr>
+        <tr><td><code>Up</code> (Windows) ou <code>LOWER_UP</code> (Linux)</td><td><code>Get-NetAdapter</code>, <code>ip link</code></td><td>Há sinal; o link existe</td></tr>
+        <tr><td>Velocidade abaixo do esperado (100 Mbps em vez de 1 Gbps)</td><td><code>Get-NetAdapter</code>, <code>ethtool</code></td><td>Link degradado: cabo ruim, conector mal montado, porta antiga</td></tr>
+        <tr><td>Sinal fraco, taxa do Wi‑Fi variando</td><td><code>netsh wlan show interfaces</code>, <code>nmcli dev wifi list</code></td><td>Distância, paredes, interferência ou canal disputado</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout warning">
+    <strong>Erros comuns</strong>
+    <ul>
+      <li><strong>Ignorar a velocidade negociada.</strong> O ícone só diz “conectado”; um cabo ruim pode deixar em 100 Mbps um link de 1 Gbps.</li>
+      <li><strong>Tirar conclusão sobre o Wi‑Fi com um teste só.</strong> O rádio muda com o lugar, o horário e o número de aparelhos ativos.</li>
+      <li><strong>Culpar a camada física sem evidência.</strong> Com link na velocidade esperada e sinal bom, trocar cabos não resolve.</li>
+    </ul>
+  </div>
+</section>

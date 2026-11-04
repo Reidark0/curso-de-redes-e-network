@@ -1,0 +1,99 @@
+{
+  "id": "0.5",
+  "versao": "v1",
+  "titulo": "Como sinais físicos carregam dados",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5716,
+    "teoria": 3115,
+    "praticaExtra": 1697,
+    "quiz": 578,
+    "flashcards": 135
+  },
+  "porGrupoTeoria": {
+    "introducao": 749,
+    "contexto": 302,
+    "conteudo": 865,
+    "exemplos": 486,
+    "seguranca_troubleshooting": 713
+  },
+  "porSecao": {
+    "motivation": 192,
+    "summary": 116,
+    "problem": 302,
+    "concept": 313,
+    "internals": 411,
+    "architecture": 108,
+    "diagram": 33,
+    "analogy": 71,
+    "simpleExample": 110,
+    "enterpriseExample": 100,
+    "cloudExample": 116,
+    "devsecopsExample": 89,
+    "objectives": 61,
+    "learningOutcomes": 86,
+    "glossary": 294,
+    "security": 389,
+    "troubleshooting": 324,
+    "nextTheme": 39
+  },
+  "pratica": {
+    "quiz": 578,
+    "flashcards": 135,
+    "lab": 841,
+    "mentorQuestions": 179,
+    "exercises": 270,
+    "challenge": 194,
+    "commentedSolution": 213
+  },
+  "outros": {
+    "title+subtitle": 24,
+    "nextTheme": 39,
+    "references": 73,
+    "linksToOtherCourses": 55
+  },
+  "quantidades": {
+    "quiz": 8,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 7,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 40,
+    "alternativa_5minPorPasso": 35,
+    "plausivel": true,
+    "override": null,
+    "palavras": 841
+  },
+  "duracao": {
+    "declarada": "110-155 min",
+    "estimatedStudyTimeMinutes": 155,
+    "nucleo": 35,
+    "nucleoPartes": {
+      "teoria": 24,
+      "diagramas": 3,
+      "quiz": 8
+    },
+    "praticaExtra": 85,
+    "praticaExtraPartes": {
+      "lab": 40,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "30-40 min",
+    "praticaExtraArredondada": 85,
+    "recomendada": "30-40 min + 85 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 40
+  }
+}

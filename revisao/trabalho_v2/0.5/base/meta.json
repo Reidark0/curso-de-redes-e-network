@@ -1,0 +1,807 @@
+{
+  "id": "0.5",
+  "moduleId": "m00",
+  "order": 5,
+  "title": "Como sinais físicos carregam dados",
+  "subtitle": "Como cobre, fibra e rádio transformam bits em sinais reais — e por que isso muda troubleshooting, disponibilidade e segurança.",
+  "duration": "110-155 min",
+  "estimatedStudyTimeMinutes": 155,
+  "difficulty": "iniciante",
+  "type": "fundamental",
+  "xp": 175,
+  "tags": [
+    "fundamentos",
+    "camada física",
+    "sinais",
+    "cobre",
+    "fibra",
+    "wi-fi",
+    "rádio",
+    "ruído",
+    "interferência",
+    "troubleshooting",
+    "segurança"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.1",
+      "reason": "A aula 0.1 explica que computadores representam informação por estados interpretados como bits."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.2",
+      "reason": "A aula 0.2 apresenta bits e bytes, que serão transportados fisicamente."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.4",
+      "reason": "A aula 0.4 mostra que taxa de transmissão e throughput dependem do meio físico e de overhead."
+    }
+  ],
+  "objectives": [
+    "Explicar por que bits precisam ser convertidos em sinais físicos para atravessar uma rede.",
+    "Diferenciar, em nível conceitual, transmissão por cobre, fibra óptica e rádio/Wi‑Fi.",
+    "Relacionar ruído, atenuação, interferência, distância e meio compartilhado com sintomas reais de rede.",
+    "Identificar evidências básicas de problemas físicos em Windows, Linux e equipamentos Cisco.",
+    "Conectar camada física com segurança, disponibilidade, cloud, DevSecOps e troubleshooting profissional."
+  ],
+  "learningOutcomes": [
+    "Dado um sintoma de intermitência, o aluno consegue listar hipóteses de camada física antes de culpar DNS ou aplicação.",
+    "Dado um cenário com cabo, fibra ou Wi‑Fi, o aluno consegue apontar riscos e limitações do meio.",
+    "Dado um link com velocidade negociada abaixo do esperado, o aluno considera cabo, porta, driver, transceiver e negociação.",
+    "Dado um Wi‑Fi com baixa taxa, o aluno considera sinal, canal, obstáculos, interferência e concorrência.",
+    "Dado um ambiente corporativo, o aluno entende por que segurança física e rede lógica precisam trabalhar juntas."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Camada 1 - Física"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "Wi‑Fi",
+      "IEEE 802.3",
+      "IEEE 802.11"
+    ],
+    "dependsOn": [
+      "bits",
+      "bytes",
+      "taxa de transmissão",
+      "representação digital"
+    ],
+    "enables": [
+      "Ethernet",
+      "Wi‑Fi",
+      "camada de enlace",
+      "endereço MAC",
+      "switching",
+      "troubleshooting físico",
+      "segurança de acesso à rede"
+    ]
+  },
+  "troubleshooting": {
+    "symptoms": [
+      "Link down",
+      "Link alternando entre up e down",
+      "Velocidade negociada abaixo do esperado",
+      "Perda de pacotes intermitente",
+      "Wi‑Fi com sinal fraco ou oscilante",
+      "Erros CRC/input errors em interfaces",
+      "Throughput muito abaixo do esperado"
+    ],
+    "diagnosticQuestions": [
+      "O problema ocorre no cabo e no Wi‑Fi ou apenas em um meio?",
+      "A interface está up? Qual velocidade foi negociada?",
+      "Há contadores de erro na porta do switch?",
+      "O cabo, conector, patch panel ou transceiver foram alterados recentemente?",
+      "No Wi‑Fi, o problema varia por distância, sala, horário ou quantidade de usuários?",
+      "Há fonte de interferência, curva excessiva de fibra ou tomada em área pública?"
+    ],
+    "commands": [
+      {
+        "platform": "Windows",
+        "command": "Get-NetAdapter | Format-Table Name, Status, LinkSpeed\nipconfig /all",
+        "purpose": "Ver estado da interface, velocidade negociada e dados básicos de rede.",
+        "expectedObservation": "Interface conectada com velocidade coerente, como 1 Gbps no cabo ou taxa compatível no Wi‑Fi.",
+        "interpretation": "Se a velocidade estiver abaixo do esperado, investigue cabo, porta, driver, adaptador ou negociação."
+      },
+      {
+        "platform": "Linux",
+        "command": "ip link\nethtool eth0  # ajuste o nome da interface\nnmcli dev wifi list  # quando aplicável",
+        "purpose": "Ver interfaces, link, velocidade, duplex e redes Wi‑Fi visíveis.",
+        "expectedObservation": "Interface UP, velocidade e duplex coerentes, sem sinais óbvios de falha.",
+        "interpretation": "Velocidade reduzida, link oscilando ou ausência de carrier indica hipótese física."
+      },
+      {
+        "platform": "Cisco IOS",
+        "command": "show interfaces status\nshow interfaces counters errors\nshow interfaces gigabitEthernet 0/1",
+        "purpose": "Ver estado, VLAN, velocidade, duplex e erros físicos em portas de switch.",
+        "expectedObservation": "Porta connected, speed/duplex esperados e contadores de erro baixos ou zerados.",
+        "interpretation": "CRC, input errors, late collisions ou flaps indicam investigação física ou de negociação."
+      }
+    ],
+    "decisionTree": [
+      {
+        "if": "Interface está down",
+        "then": "Verificar cabo, porta, adaptador, energia do equipamento e estado administrativo da porta."
+      },
+      {
+        "if": "Interface está up, mas com velocidade baixa",
+        "then": "Trocar cabo, testar outra porta, validar categoria do cabo e autonegociação."
+      },
+      {
+        "if": "Wi‑Fi oscila por local",
+        "then": "Verificar sinal, obstáculos, canal, banda, potência, quantidade de clientes e roaming entre APs; para pontos fixos, considerar cabo."
+      },
+      {
+        "if": "Há erros CRC em switch",
+        "then": "Investigar cabo, conector, patch panel, interferência ou porta defeituosa."
+      },
+      {
+        "if": "Físico parece estável",
+        "then": "Subir para camada 2, IP, rota, DNS, firewall e aplicação."
+      }
+    ]
+  },
+  "security": {
+    "goodPractices": [
+      "Documentar pontos de rede, racks, patch panels e uplinks, com etiquetagem de cabos.",
+      "Desabilitar (shutdown) as portas de switch não utilizadas.",
+      "Usar 802.1X, NAC ou port security quando aplicável, com VLAN de quarentena para dispositivos desconhecidos.",
+      "Controlar o acesso físico a salas técnicas, racks e datacenters (fechadura, câmeras, lacres, registro de mudança).",
+      "Planejar o Wi‑Fi com site survey, segmentação, criptografia forte e rede de visitantes separada da corporativa.",
+      "Usar cabos e transceivers homologados."
+    ],
+    "badPractices": [
+      "Deixar tomadas de rede ativas em áreas públicas sem controle.",
+      "Manter racks destrancados.",
+      "Permitir APs pessoais ou switches não gerenciados na rede corporativa.",
+      "Ignorar alertas de porta flapping ou mudança de MAC.",
+      "Tratar Wi‑Fi corporativo como rede doméstica sem planejamento."
+    ],
+    "commonErrors": [
+      "Confundir conectividade física com autorização de acesso.",
+      "Achar que o firewall de borda protege contra acesso físico interno sem controles adicionais.",
+      "Desconsiderar que o sinal Wi‑Fi ultrapassa paredes e amplia a superfície de exposição.",
+      "Não registrar mudanças físicas em racks e portas."
+    ],
+    "vulnerabilities": [
+      {
+        "name": "Acesso físico a porta de rede ativa",
+        "description": "Uma porta habilitada pode permitir que um dispositivo não autorizado obtenha conectividade.",
+        "defensiveExplanation": "O risco não exige explorar protocolo avançado; basta acesso ao ponto físico e ausência de controle de autenticação.",
+        "mitigation": "Desabilitar portas não usadas, aplicar 802.1X/NAC, monitorar MACs novos e restringir VLANs."
+      },
+      {
+        "name": "Rogue access point",
+        "description": "Um AP não autorizado pode criar caminho sem fio para a rede interna.",
+        "defensiveExplanation": "O atacante ou usuário descuidado conecta um rádio à rede cabeada e expõe a LAN pelo ar.",
+        "mitigation": "Inventário, inspeção, monitoramento wireless, port security e políticas claras."
+      },
+      {
+        "name": "Rack ou sala técnica sem controle de acesso",
+        "description": "Quem alcança switches e patch panels pode desconectar, trocar ou adicionar cabos e dispositivos.",
+        "defensiveExplanation": "O acesso físico ao equipamento contorna controles lógicos: permite desconexão, sniffing local ou alteração de cabos sem passar por autenticação.",
+        "mitigation": "Controle de acesso físico, câmeras, lacres, etiquetagem e registro de toda mudança física."
+      },
+      {
+        "name": "Indisponibilidade por interferência ou sabotagem física",
+        "description": "Interferência, desconexão ou manipulação física pode degradar ou derrubar comunicação.",
+        "defensiveExplanation": "O impacto principal é disponibilidade; a resposta envolve monitoramento, redundância e controle físico.",
+        "mitigation": "Redundância, controle de acesso, câmeras, alertas de link, site survey e documentação."
+      }
+    ],
+    "monitoring": [
+      "Alertas de link up/down frequentes (flapping).",
+      "Mudanças de velocidade/duplex.",
+      "Contadores CRC/input errors crescentes.",
+      "Novos MACs em portas sensíveis.",
+      "APs desconhecidos ou SSIDs suspeitos próximos ao ambiente.",
+      "Eventos de autenticação 802.1X/NAC negados."
+    ],
+    "detectionIdeas": [
+      "Comparar o inventário esperado com os dispositivos conectados.",
+      "Correlacionar quedas de rede com mudanças físicas registradas."
+    ]
+  },
+  "lab": {
+    "id": "lab-0.5",
+    "title": "Observando evidências de camada física no computador",
+    "labType": "security",
+    "objective": "Identificar estado de interface, velocidade negociada e sinais básicos de diferença entre cabo, Wi‑Fi e meio físico.",
+    "scenario": "Você investiga se uma instabilidade pode estar relacionada à camada física. O laboratório é local: usa só comandos nativos no seu próprio computador, sem Packet Tracer nem acesso administrativo a equipamentos corporativos, e coleta evidências sem modificar a rede. Quando possível, compare cabo e Wi‑Fi.",
+    "topology": "Notebook ou desktop -> cabo Ethernet ou Wi‑Fi -> roteador/switch/AP -> rede local",
+    "architecture": "Um host final conectado por meio físico cabeado ou sem fio a um equipamento de acesso.",
+    "prerequisites": [
+      "Ter um computador com Windows ou Linux.",
+      "Ter acesso a uma rede local própria ou autorizada.",
+      "Opcional: conexão cabeada e Wi‑Fi para comparação."
+    ],
+    "tools": [
+      "Windows PowerShell ou Terminal Linux",
+      "Comandos nativos do sistema",
+      "Opcional: acesso somente leitura a switch/roteador em laboratório"
+    ],
+    "estimatedTimeMinutes": 40,
+    "cost": "zero",
+    "safetyNotes": [
+      "Colete informações apenas do seu próprio host ou de um laboratório autorizado.",
+      "Não desconecte cabos, não conecte dispositivos desconhecidos e não faça testes de interferência em redes de terceiros ou corporativas."
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "title": "Identificar interfaces no Windows",
+        "instruction": "No PowerShell, liste as interfaces e observe status e velocidade.",
+        "command": "Get-NetAdapter | Format-Table Name, InterfaceDescription, Status, LinkSpeed",
+        "expectedOutput": "Lista de interfaces com Status Up/Disconnected e LinkSpeed como 1 Gbps, 100 Mbps ou taxa Wi‑Fi.",
+        "explanation": "A velocidade negociada é uma evidência física. Um cabo ou porta ruim pode negociar abaixo do esperado."
+      },
+      {
+        "number": 2,
+        "title": "Identificar configuração IP no Windows",
+        "instruction": "Veja se a interface conectada recebeu IP, gateway e DNS.",
+        "command": "ipconfig /all",
+        "expectedOutput": "Interface ativa com IPv4, máscara, gateway e DNS quando conectada a uma rede comum.",
+        "explanation": "IP correto não prova que a camada física está perfeita, mas ajuda a separar ausência de link de falha de configuração."
+      },
+      {
+        "number": 3,
+        "title": "Identificar interfaces no Linux",
+        "instruction": "No Linux, veja estado das interfaces.",
+        "command": "ip link\nip addr",
+        "expectedOutput": "Interfaces com estados como UP, LOWER_UP ou DOWN e endereços associados.",
+        "explanation": "LOWER_UP indica que há sinal/carrier físico detectado em muitas interfaces."
+      },
+      {
+        "number": 4,
+        "title": "Ver velocidade e duplex no Linux",
+        "instruction": "Se tiver ethtool instalado e uma interface cabeada, consulte detalhes físicos.",
+        "command": "sudo ethtool eth0  # troque eth0 pelo nome real, como enp3s0",
+        "expectedOutput": "Speed, Duplex, Auto-negotiation e Link detected.",
+        "explanation": "Speed e Duplex ajudam a diagnosticar negociação incorreta, cabo ruim ou porta incompatível."
+      },
+      {
+        "number": 5,
+        "title": "Observar o Wi‑Fi",
+        "instruction": "Se estiver usando Wi‑Fi, veja sinal, canal e taxa da conexão (Windows) ou das redes visíveis (Linux).",
+        "command": "netsh wlan show interfaces  # Windows\nnmcli dev wifi list  # Linux",
+        "expectedOutput": "No Windows: SSID, tipo de rádio, canal, taxa de recepção/transmissão e sinal em %. No Linux: SSIDs, canal, taxa e barras/sinal.",
+        "explanation": "Wi‑Fi depende do ambiente. Sinal fraco ou canal disputado pode explicar baixa taxa e instabilidade."
+      },
+      {
+        "number": 6,
+        "title": "Comparar cabo e Wi‑Fi quando possível",
+        "instruction": "Faça um ping para o gateway usando cabo e depois Wi‑Fi, se ambos estiverem disponíveis. No Linux, limite a quantidade de pacotes.",
+        "command": "ping <IP_DO_GATEWAY>  # Windows envia 4 pacotes\nping -c 20 <IP_DO_GATEWAY>  # Linux",
+        "expectedOutput": "Respostas com baixa latência e 0% de perda em cenário normal.",
+        "explanation": "Diferenças grandes entre cabo e Wi‑Fi sugerem que o meio físico ou rádio pode ser parte do problema."
+      },
+      {
+        "number": 7,
+        "title": "Registrar evidências",
+        "instruction": "Monte uma tabela com: meio (cabo ou Wi‑Fi), interface, estado do link, velocidade/duplex ou sinal, latência média e perda do ping, e qualquer oscilação observada.",
+        "analysisTask": "Para cada meio testado, escreva se a evidência confirma ou descarta uma hipótese física (cabo, porta, negociação, sinal, interferência) e por quê.",
+        "expectedOutput": "Pequeno relatório com evidências de camada física.",
+        "explanation": "Troubleshooting profissional depende de evidência, não de impressão subjetiva."
+      }
+    ],
+    "expectedResult": "O aluno deve conseguir identificar a interface ativa, o meio usado, a velocidade negociada ou indícios de sinal, e relacionar essas evidências com sintomas de rede.",
+    "validation": [
+      {
+        "check": "Interface ativa identificada",
+        "command": "Get-NetAdapter  # Windows\nip link  # Linux",
+        "expected": "Interface conectada aparece como Up/LOWER_UP ou equivalente.",
+        "ifFails": "Verifique se o cabo está conectado, se o Wi‑Fi está ligado ou se a interface está desabilitada."
+      },
+      {
+        "check": "Velocidade ou meio físico registrado",
+        "command": "Get-NetAdapter  # Windows\nethtool <interface>  # Linux",
+        "expected": "Velocidade negociada ou informações de link disponíveis.",
+        "ifFails": "Use outro adaptador, instale ferramenta apropriada ou registre a limitação do ambiente."
+      },
+      {
+        "check": "Gateway responde",
+        "command": "ping <IP_DO_GATEWAY>",
+        "expected": "Respostas sem perda significativa em rede saudável.",
+        "ifFails": "Validar link, IP, gateway, firewall local ou isolamento da rede."
+      }
+    ],
+    "troubleshooting": [
+      {
+        "symptom": "Comando não mostra velocidade no Linux",
+        "probableCause": "Interface Wi‑Fi (ethtool não mostra velocidade de rádio), driver sem suporte ou ethtool não instalado.",
+        "howToConfirm": "Verificar nome da interface e instalar/usar ferramentas disponíveis.",
+        "fix": "Use ip link, nmcli ou ferramenta do ambiente e registre a limitação."
+      }
+    ],
+    "improvements": [
+      "Repetir o teste com outro cabo e comparar a velocidade negociada.",
+      "Comparar 2,4 GHz e 5/6 GHz, quando sua rede permitir.",
+      "Em laboratório com switch, coletar contadores de erro da porta (show interfaces counters errors)."
+    ],
+    "evidenceToCollect": [
+      "Saída do comando de interfaces.",
+      "Velocidade negociada ou meio utilizado.",
+      "Resultado de ping para o gateway.",
+      "Observações sobre cabo, Wi‑Fi, distância e ambiente.",
+      "Hipóteses físicas descartadas ou confirmadas."
+    ],
+    "questions": [
+      "Por que IP correto não garante camada física saudável?",
+      "Que diferença você observou entre cabo e Wi‑Fi?",
+      "Qual evidência indicaria cabo ruim?",
+      "Qual evidência indicaria interferência no Wi‑Fi?"
+    ],
+    "challenge": "Criar um checklist de 10 itens para investigar instabilidade de rede começando pela camada física.",
+    "solution": "Um bom checklist começa por link up/down, velocidade negociada, cabo, porta, patch panel, Wi‑Fi/sinal, distância, interferência, contadores de erro, mudanças recentes e comparação com outro meio. Só depois sobe para IP, rota, DNS e aplicação."
+  },
+  "mentorQuestions": [
+    {
+      "type": "reflexão",
+      "question": "Por que não basta dizer que redes transportam bits?",
+      "hints": [
+        "Pense no que existe entre dois computadores.",
+        "Bits precisam virar algo mensurável."
+      ],
+      "expectedIdeas": [
+        "sinal físico",
+        "meio",
+        "energia",
+        "luz",
+        "rádio",
+        "interpretação pelo receptor"
+      ],
+      "explanation": "A rede depende de uma tradução entre informação lógica e fenômeno físico. Sem isso, os bits não atravessam o meio."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "Um host tem IP e gateway corretos, mas perde pacotes de forma intermitente. O que verificar antes de culpar DNS?",
+      "hints": [
+        "Pense em link, cabo, Wi‑Fi e erros.",
+        "DNS não explica perda para o gateway."
+      ],
+      "expectedIdeas": [
+        "estado da interface",
+        "velocidade negociada",
+        "cabo",
+        "porta",
+        "sinal Wi‑Fi",
+        "erros de interface",
+        "ping para gateway"
+      ],
+      "explanation": "Perda intermitente para destinos básicos sugere validar camadas inferiores antes de investigar nomes ou aplicação."
+    },
+    {
+      "type": "cenário real",
+      "question": "Uma sala de reunião tem tomadas de rede ativas e acesso público. Qual é o risco e como mitigar?",
+      "hints": [
+        "Pense em acesso físico à LAN.",
+        "Firewall de borda não resolve tudo."
+      ],
+      "expectedIdeas": [
+        "porta exposta",
+        "dispositivo não autorizado",
+        "802.1X",
+        "NAC",
+        "desabilitar portas",
+        "monitorar MAC",
+        "VLAN restrita"
+      ],
+      "explanation": "Segurança de rede começa antes de IP: uma porta física ativa pode criar acesso interno sem autenticação se não houver controle."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q0.5.1",
+      "question": "O que a camada física faz em uma rede?",
+      "options": [
+        "Traduz nomes DNS em endereços IP.",
+        "Converte bits em sinais transportáveis por um meio e sinais de volta em bits.",
+        "Define regras de firewall entre sub-redes.",
+        "Escolhe a melhor rota BGP para a Internet."
+      ],
+      "answer": 1,
+      "explanation": "A camada física trata da transmissão real de sinais no meio. DNS, firewall e BGP pertencem a camadas/assuntos superiores.",
+      "topic": "camada física",
+      "difficulty": "iniciante",
+      "type": "conceito"
+    },
+    {
+      "id": "q0.5.2",
+      "question": "Qual alternativa descreve melhor a fibra óptica?",
+      "options": [
+        "Usa apenas tensão elétrica em pares de cobre.",
+        "Usa ondas de rádio e sempre tem menor latência que cabo.",
+        "Usa pulsos de luz e é menos suscetível a interferência eletromagnética.",
+        "É igual ao Wi‑Fi, mas com conector físico."
+      ],
+      "answer": 2,
+      "explanation": "Fibra óptica transporta luz e é útil para distâncias e capacidade, embora exija cuidados próprios.",
+      "topic": "fibra",
+      "difficulty": "iniciante",
+      "type": "comparação"
+    },
+    {
+      "id": "q0.5.3",
+      "question": "Um link cabeado esperado em 1 Gbps aparece como 100 Mbps. Qual hipótese física faz sentido testar primeiro?",
+      "options": [
+        "Cabo ou porta negociando abaixo do esperado.",
+        "Servidor DNS com cache expirado.",
+        "Senha incorreta no sistema operacional.",
+        "Certificado TLS vencido."
+      ],
+      "answer": 0,
+      "explanation": "Velocidade negociada abaixo do esperado aponta para cabo, porta, adaptador, autonegociação ou capacidade do equipamento.",
+      "topic": "troubleshooting",
+      "difficulty": "iniciante",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q0.5.4",
+      "question": "Por que uma tomada de rede ativa em área pública é risco de segurança?",
+      "options": [
+        "Porque IPv4 não funciona em ambientes públicos.",
+        "Porque DNS sempre fica público nessas tomadas.",
+        "Porque todo cabo Ethernet transmite senhas em texto claro.",
+        "Pode permitir que um dispositivo não autorizado obtenha conectividade à rede."
+      ],
+      "answer": 3,
+      "explanation": "O risco é acesso físico à rede sem controle adequado. Mitigações incluem desabilitar portas, 802.1X, NAC e monitoramento.",
+      "topic": "segurança física",
+      "difficulty": "iniciante",
+      "type": "segurança"
+    },
+    {
+      "id": "q0.5.5",
+      "question": "No Wi‑Fi, a taxa cai muito quando o usuário se afasta do AP. Qual explicação é mais provável?",
+      "options": [
+        "O servidor DHCP trocou o endereço IP do notebook.",
+        "O sinal de rádio foi degradado por distância, obstáculos ou interferência.",
+        "O DNS passou a responder mais devagar longe do AP.",
+        "A velocidade negociada do cabo do AP caiu para 100 Mbps."
+      ],
+      "answer": 1,
+      "explanation": "Wi‑Fi depende do ambiente físico. Distância, paredes e interferência reduzem a qualidade do sinal e a taxa útil. IP, DNS e o cabo do AP não mudam porque o usuário andou.",
+      "topic": "wi-fi",
+      "difficulty": "iniciante",
+      "type": "cenário"
+    },
+    {
+      "id": "q0.5.6",
+      "question": "Em cloud pública, a camada física deixa de existir?",
+      "options": [
+        "Sim. Apenas DNS existe em cloud.",
+        "Sim. Cloud é puramente lógica e não usa datacenters.",
+        "Não. Ela é abstraída pelo provedor, mas continua influenciando limites, latência e capacidade.",
+        "Não, mas o cliente sempre escolhe os cabos físicos."
+      ],
+      "answer": 2,
+      "explanation": "Cloud abstrai hardware físico, mas ele continua existindo no datacenter do provedor e aparece indiretamente em limites, métricas e SLAs.",
+      "topic": "cloud",
+      "difficulty": "intermediário",
+      "type": "arquitetura"
+    },
+    {
+      "id": "q0.5.7",
+      "question": "Um switch mostra a porta em 'connected', 1 Gbps full duplex, mas os contadores de CRC e input errors crescem a cada minuto. O que isso indica?",
+      "options": [
+        "A porta está desabilitada administrativamente.",
+        "Velocidade negociada abaixo do esperado.",
+        "Falha de resolução DNS no cliente.",
+        "Camada física degradada: o link está up, mas os quadros chegam corrompidos."
+      ],
+      "answer": 3,
+      "explanation": "Link up não significa camada física saudável. CRC e input errors crescentes mostram quadros corrompidos no meio (cabo, conector, patch panel ou interferência). A porta não está desabilitada, a velocidade está normal e DNS não gera erro de CRC.",
+      "topic": "troubleshooting",
+      "difficulty": "intermediário",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q0.5.8",
+      "question": "Por que o throughput de cada notebook cai quando muitos dispositivos usam o mesmo AP e canal Wi‑Fi?",
+      "options": [
+        "Porque o rádio é um meio compartilhado: os dispositivos disputam o mesmo canal.",
+        "Porque cada dispositivo recebe um endereço IP mais lento.",
+        "Porque o Wi‑Fi converte bits em pulsos de luz.",
+        "Porque o AP passa a usar half-duplex no cabo de cobre."
+      ],
+      "answer": 0,
+      "explanation": "No Wi‑Fi, o canal de rádio é compartilhado. Quanto mais dispositivos disputam o meio, menor a fatia de tempo de cada um e menor o throughput real.",
+      "topic": "wi-fi",
+      "difficulty": "iniciante",
+      "type": "conceito"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc0.5.1",
+      "front": "O que é sinal físico em redes?",
+      "back": "É uma variação elétrica, óptica ou eletromagnética usada para representar bits em um meio."
+    },
+    {
+      "id": "fc0.5.2",
+      "front": "Qual meio usa pulsos de luz?",
+      "back": "Fibra óptica."
+    },
+    {
+      "id": "fc0.5.3",
+      "front": "Por que Wi‑Fi é mais variável que cabo?",
+      "back": "Porque usa rádio em meio compartilhado, sujeito a distância, obstáculos, interferência e concorrência."
+    },
+    {
+      "id": "fc0.5.4",
+      "front": "O que pode indicar erro físico em switch?",
+      "back": "Contadores como CRC errors, input errors, link flapping ou velocidade/duplex inesperados."
+    },
+    {
+      "id": "fc0.5.7",
+      "front": "O que NO-CARRIER e LOWER_UP indicam na saída de ip link?",
+      "back": "LOWER_UP: a interface detecta sinal (carrier) físico. NO-CARRIER: nenhum sinal detectado, como cabo solto ou porta do outro lado desligada."
+    },
+    {
+      "id": "fc0.5.8",
+      "front": "O que é a relação sinal-ruído (SNR)?",
+      "back": "A relação entre a potência do sinal útil e a do ruído, normalmente expressa em dB. Quanto maior, mais fácil o receptor distinguir os símbolos e menos erros."
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex0.5.1",
+      "type": "conceitual",
+      "prompt": "Explique com suas palavras por que bits precisam virar sinais físicos.",
+      "expectedAnswer": "Porque bits são uma representação lógica. Para atravessar cabo, fibra ou ar, eles precisam ser codificados em variações elétricas, luz ou rádio que um receptor consiga medir e interpretar.",
+      "explanation": "A resposta deve separar informação abstrata de fenômeno físico."
+    },
+    {
+      "id": "ex0.5.2",
+      "type": "diagnóstico",
+      "prompt": "Um usuário consegue IP, mas a rede cai várias vezes ao dia. Liste cinco hipóteses de camada física.",
+      "expectedAnswer": "Cabo ruim, porta de switch com erro, conector/patch panel defeituoso, Wi‑Fi fraco/interferência, transceiver/fibra com problema, velocidade/duplex incorretos.",
+      "explanation": "IP obtido não exclui camada física degradada."
+    },
+    {
+      "id": "ex0.5.5",
+      "type": "diagnóstico",
+      "prompt": "Interprete duas evidências: (a) no Linux, ip link mostra a interface cabeada com NO-CARRIER e state DOWN; (b) em outro notebook, ethtool mostra Speed: 100Mb/s e Link detected: yes, numa porta que deveria operar em 1 Gbps. Qual a hipótese principal em cada caso e o que você testaria primeiro?",
+      "expectedAnswer": "(a) Não há sinal físico: cabo desconectado ou defeituoso, porta do switch desligada ou adaptador com problema; teste reconectar ou trocar o cabo e verificar a porta. (b) O link existe, mas negociou abaixo do esperado: cabo inadequado ou defeituoso, porta antiga ou autonegociação; teste outro cabo e outra porta.",
+      "explanation": "O primeiro caso é ausência de camada física; o segundo é camada física degradada. Distinguir os dois decide se você procura falta de link ou qualidade do link."
+    },
+    {
+      "id": "ex0.5.4",
+      "type": "comparação",
+      "prompt": "Compare cobre, fibra e Wi‑Fi em uma frase para cada: principal vantagem e principal limitação.",
+      "expectedAnswer": "Cobre: barato e comum, mas limitado por distância/interferência. Fibra: alta capacidade e distância, mas exige cuidado/custo. Wi‑Fi: mobilidade, mas sofre com interferência e meio compartilhado.",
+      "explanation": "A comparação ajuda a escolher o meio certo para cada cenário."
+    }
+  ],
+  "challenge": {
+    "title": "Diagnóstico de instabilidade em uma sala corporativa",
+    "scenario": "Uma empresa relata que uma sala de treinamento tem rede instável. Alguns notebooks usam cabo, outros usam Wi‑Fi. A aplicação interna cai durante aulas, mas funciona bem em outros setores.",
+    "tasks": [
+      "Criar uma lista ordenada de hipóteses começando pela camada física.",
+      "Definir evidências a coletar em Windows/Linux e no switch/AP.",
+      "Indicar quais testes comparariam cabo e Wi‑Fi.",
+      "Propor mitigações de curto e médio prazo.",
+      "Indicar controles de segurança para evitar dispositivos não autorizados."
+    ],
+    "constraints": [
+      "Não pode derrubar a rede durante horário de aula.",
+      "Não pode executar testes ofensivos.",
+      "Deve usar comandos e observações de baixo risco.",
+      "Deve separar hipótese física, enlace, rede e aplicação."
+    ],
+    "expectedDeliverables": [
+      "Checklist de diagnóstico.",
+      "Tabela de evidências.",
+      "Plano de teste sem impacto.",
+      "Mitigações propostas.",
+      "Resumo executivo para equipe de TI."
+    ],
+    "gradingRubric": [
+      {
+        "criterion": "Começa pela camada física sem ignorar camadas superiores",
+        "points": 25,
+        "description": "Lista cabo, Wi‑Fi, porta, erros e velocidade antes de DNS/aplicação."
+      },
+      {
+        "criterion": "Coleta evidências concretas",
+        "points": 25,
+        "description": "Usa comandos, contadores, ping, velocidade negociada e observações ambientais."
+      },
+      {
+        "criterion": "Inclui segurança",
+        "points": 20,
+        "description": "Considera portas públicas, dispositivos não autorizados e controle de acesso."
+      },
+      {
+        "criterion": "Propõe mitigação realista",
+        "points": 20,
+        "description": "Sugere troca de cabo, ajuste de AP, documentação, monitoramento e controle de portas."
+      },
+      {
+        "criterion": "Comunicação clara",
+        "points": 10,
+        "description": "Diferencia sintomas, hipóteses, testes e conclusão."
+      }
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "A situação afeta um local específico, então começa com hipótese física/ambiental. Como há cabo e Wi‑Fi, é preciso comparar os meios. Se apenas Wi‑Fi falha, investigar sinal, canal, AP e interferência. Se cabo e Wi‑Fi falham, investigar switch de acesso, uplink, energia, VLAN ou serviços comuns.",
+    "steps": [
+      "Registrar quais usuários e quais meios são afetados.",
+      "Verificar link e velocidade negociada nos notebooks cabeados.",
+      "Coletar ping para gateway em cabo e Wi‑Fi.",
+      "Verificar erros e flaps nas portas do switch.",
+      "Observar sinal, canal e carga do AP.",
+      "Checar mudanças recentes em cabeamento, rack ou AP.",
+      "Aplicar mitigação de baixo risco e monitorar."
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "Reinstalar a aplicação interna imediatamente.",
+        "whyItIsWrong": "O problema é localizado e intermitente; há forte chance de causa física ou de acesso antes da aplicação."
+      },
+      {
+        "answer": "Trocar o firewall de borda.",
+        "whyItIsWrong": "Outros setores funcionam bem; o escopo local sugere camada física, AP, switch ou cabeamento da sala."
+      },
+      {
+        "answer": "Aumentar a velocidade da internet.",
+        "whyItIsWrong": "A aplicação interna cai em uma sala específica; banda externa pode não ter relação."
+      }
+    ],
+    "finalAnswer": "A abordagem correta é comparar cabo e Wi‑Fi, coletar evidências de link, velocidade, perda, erros de porta e sinal, verificar mudanças físicas e aplicar correções proporcionais: trocar cabo/porta, revisar patch panel, ajustar AP/canal, limitar portas expostas e monitorar flaps e novos dispositivos. Só depois subir para DNS, firewall e aplicação."
+  },
+  "glossary": [
+    {
+      "term": "Camada física",
+      "shortDefinition": "Camada responsável por transportar sinais no meio físico.",
+      "longDefinition": "No modelo OSI, é a camada que define como bits são representados e transmitidos por cobre, fibra ou rádio.",
+      "example": "Um cabo Ethernet com link de 1 Gbps opera na camada física.",
+      "relatedTerms": [
+        "sinal",
+        "meio físico",
+        "Ethernet",
+        "Wi‑Fi"
+      ]
+    },
+    {
+      "term": "Atenuação",
+      "shortDefinition": "Perda de força do sinal ao longo do meio.",
+      "longDefinition": "Quanto maior distância, perda por conector, curvatura ou obstáculos, mais o sinal pode enfraquecer.",
+      "example": "Uma fibra dobrada demais pode aumentar perda óptica.",
+      "relatedTerms": [
+        "ruído",
+        "SNR",
+        "fibra"
+      ]
+    },
+    {
+      "term": "Interferência",
+      "shortDefinition": "Sinal indesejado que atrapalha a comunicação.",
+      "longDefinition": "Pode ocorrer por fontes elétricas, outros rádios, canais sobrepostos ou ambiente físico inadequado.",
+      "example": "Um micro-ondas ou muitas redes próximas podem afetar Wi‑Fi em 2,4 GHz.",
+      "relatedTerms": [
+        "Wi‑Fi",
+        "ruído",
+        "SNR"
+      ]
+    },
+    {
+      "term": "Transceiver",
+      "shortDefinition": "Componente que transmite e recebe sinais em um meio.",
+      "longDefinition": "Em redes, pode converter sinais elétricos em ópticos e vice-versa, como módulos SFP/SFP+.",
+      "example": "Um switch usa transceiver SFP para uplink de fibra.",
+      "relatedTerms": [
+        "fibra",
+        "switch",
+        "uplink"
+      ]
+    },
+    {
+      "term": "Velocidade negociada",
+      "shortDefinition": "Taxa acordada entre duas interfaces físicas.",
+      "longDefinition": "Interfaces Ethernet podem negociar 100 Mbps, 1 Gbps ou mais conforme cabo, porta e capacidade dos equipamentos.",
+      "example": "Um notebook negocia 100 Mbps quando o cabo não suporta 1 Gbps adequadamente.",
+      "relatedTerms": [
+        "duplex",
+        "Ethernet",
+        "throughput"
+      ]
+    },
+    {
+      "term": "Rogue AP",
+      "shortDefinition": "Ponto de acesso sem fio não autorizado.",
+      "longDefinition": "Dispositivo Wi‑Fi conectado indevidamente à rede cabeada, criando acesso sem fio fora do controle corporativo.",
+      "example": "Um usuário conecta um roteador doméstico em uma tomada de rede da empresa.",
+      "relatedTerms": [
+        "Wi‑Fi",
+        "NAC",
+        "segurança física"
+      ]
+    },
+    {
+      "term": "Duplex",
+      "shortDefinition": "Modo em que uma interface transmite e recebe.",
+      "longDefinition": "Em full duplex, a interface transmite e recebe ao mesmo tempo; em half duplex, alterna entre transmitir e receber. Os dois lados do link precisam operar no mesmo modo.",
+      "example": "Uma porta em half duplex ligada a outra em full duplex costuma mostrar late collisions, erros CRC e lentidão.",
+      "relatedTerms": [
+        "velocidade negociada",
+        "Ethernet",
+        "autonegociação"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "standard",
+      "title": "IEEE 802.3 Ethernet",
+      "organization": "IEEE",
+      "url": "",
+      "note": "Referência normativa para Ethernet; útil para aprofundar camada física e enlace Ethernet."
+    },
+    {
+      "type": "standard",
+      "title": "IEEE 802.11 Wireless LAN",
+      "organization": "IEEE",
+      "url": "",
+      "note": "Referência normativa para Wi‑Fi; será aprofundada no módulo de redes sem fio."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Aula 0.4",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "A aula anterior explica bit, byte, Mbps, MB/s e throughput."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Módulo 12",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Redes wireless, RF e segurança sem fio serão aprofundadas posteriormente."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "Datacenter, virtualização e plataformas",
+      "lesson": "a definir",
+      "reason": "Ambientes on-premises e híbridos dependem de cabeamento, uplinks, storage e rede física para sustentar plataformas."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "Controle de acesso corporativo",
+      "lesson": "a definir",
+      "reason": "Controles como 802.1X, NAC e acesso físico se conectam à identidade de dispositivos e usuários."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70,
+      "oneOf": [
+        "labMarkedDone",
+        "practicalExerciseDone"
+      ]
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "0.6"
+    ]
+  }
+}

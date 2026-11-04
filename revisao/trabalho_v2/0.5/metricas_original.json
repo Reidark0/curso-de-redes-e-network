@@ -1,0 +1,103 @@
+{
+  "id": "0.5",
+  "versao": "original",
+  "titulo": "Como sinais físicos carregam dados",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5589,
+    "teoria": 3305,
+    "praticaExtra": 1596,
+    "quiz": 373,
+    "flashcards": 113
+  },
+  "porGrupoTeoria": {
+    "introducao": 733,
+    "contexto": 613,
+    "conteudo": 514,
+    "exemplos": 778,
+    "seguranca_troubleshooting": 667
+  },
+  "porSecao": {
+    "motivation": 264,
+    "summary": 89,
+    "history": 204,
+    "problem": 203,
+    "evolution": 206,
+    "concept": 128,
+    "internals": 178,
+    "architecture": 160,
+    "diagram": 48,
+    "analogy": 110,
+    "simpleExample": 111,
+    "enterpriseExample": 118,
+    "cloudExample": 127,
+    "devsecopsExample": 113,
+    "securityExample": 199,
+    "objectives": 61,
+    "learningOutcomes": 86,
+    "glossary": 233,
+    "security": 351,
+    "troubleshooting": 316,
+    "nextTheme": 49
+  },
+  "pratica": {
+    "quiz": 373,
+    "flashcards": 113,
+    "lab": 828,
+    "mentorQuestions": 179,
+    "exercises": 182,
+    "challenge": 194,
+    "commentedSolution": 213
+  },
+  "outros": {
+    "title+subtitle": 25,
+    "nextTheme": 49,
+    "references": 73,
+    "linksToOtherCourses": 55
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 100,
+    "alternativa_5minPorPasso": 35,
+    "plausivel": false,
+    "override": null,
+    "palavras": 828
+  },
+  "duracao": {
+    "declarada": "70-100 min",
+    "estimatedStudyTimeMinutes": 100,
+    "nucleo": 34.4,
+    "nucleoPartes": {
+      "teoria": 25.4,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 80,
+    "praticaExtraPartes": {
+      "lab": 35,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "30-40 min",
+    "praticaExtraArredondada": 80,
+    "recomendada": "30-40 min + 80 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 40
+  }
+}

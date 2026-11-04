@@ -1,0 +1,54 @@
+
+<section class="lesson-section lesson-section--diagram">
+  <h2>Diagrama SVG</h2>
+  <p>
+    O mesmo dado lógico — os bits <code>10110010</code> — pode atravessar três meios, desde que seja convertido em variação elétrica, de luz ou eletromagnética. Os três estão sujeitos a ruído, atenuação e interferência.
+  </p>
+  <svg class="lesson-svg" viewBox="0 0 980 430" role="img" aria-labelledby="m00l05-title m00l05-desc">
+    <title id="m00l05-title">Bits representados por sinais físicos em cobre, fibra e rádio</title>
+    <desc id="m00l05-desc">Um transmissor converte bits em sinais que podem atravessar cabo de cobre, fibra óptica ou rádio até um receptor, sujeito a ruído, atenuação e interferência.</desc>
+    <defs>
+      <marker id="m00l05-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
+      </marker>
+    </defs>
+
+    <rect x="35" y="170" width="145" height="80" rx="14" class="svg-node svg-node--client" />
+    <text x="107" y="198" text-anchor="middle" class="svg-label">Transmissor</text>
+    <text x="107" y="224" text-anchor="middle" class="svg-label svg-label--small">bits: 10110010</text>
+
+    <rect x="790" y="170" width="150" height="80" rx="14" class="svg-node svg-node--server" />
+    <text x="865" y="198" text-anchor="middle" class="svg-label">Receptor</text>
+    <text x="865" y="224" text-anchor="middle" class="svg-label svg-label--small">interpreta sinais</text>
+
+    <rect x="250" y="45" width="460" height="80" rx="16" class="svg-zone" />
+    <text x="480" y="73" text-anchor="middle" class="svg-label">Cobre</text>
+    <path d="M290 100 L330 65 L370 100 L410 65 L450 100 L490 65 L530 100 L570 65 L610 100 L650 65" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l05-arrow)" />
+    <text x="480" y="118" text-anchor="middle" class="svg-label svg-label--small">variação elétrica: tensão/corrente</text>
+
+    <rect x="250" y="175" width="460" height="80" rx="16" class="svg-zone" />
+    <text x="480" y="203" text-anchor="middle" class="svg-label">Fibra óptica</text>
+    <line x1="295" y1="228" x2="665" y2="228" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m00l05-arrow)" />
+    <circle cx="335" cy="228" r="8" class="svg-badge" />
+    <circle cx="425" cy="228" r="8" class="svg-badge" />
+    <circle cx="515" cy="228" r="8" class="svg-badge" />
+    <circle cx="605" cy="228" r="8" class="svg-badge" />
+    <text x="480" y="248" text-anchor="middle" class="svg-label svg-label--small">pulsos de luz guiados pela fibra</text>
+
+    <rect x="250" y="305" width="460" height="80" rx="16" class="svg-zone" />
+    <text x="480" y="333" text-anchor="middle" class="svg-label">Rádio / Wi‑Fi</text>
+    <path d="M305 358 C365 318, 420 398, 480 358 S595 318, 655 358" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m00l05-arrow)" />
+    <text x="480" y="378" text-anchor="middle" class="svg-label svg-label--small">onda eletromagnética compartilhada no ar</text>
+
+    <line x1="180" y1="210" x2="250" y2="85" class="svg-flow" marker-end="url(#m00l05-arrow)" />
+    <line x1="180" y1="210" x2="250" y2="215" class="svg-flow" marker-end="url(#m00l05-arrow)" />
+    <line x1="180" y1="210" x2="250" y2="345" class="svg-flow" marker-end="url(#m00l05-arrow)" />
+
+    <line x1="710" y1="85" x2="790" y2="210" class="svg-flow" marker-end="url(#m00l05-arrow)" />
+    <line x1="710" y1="215" x2="790" y2="210" class="svg-flow" marker-end="url(#m00l05-arrow)" />
+    <line x1="710" y1="345" x2="790" y2="210" class="svg-flow" marker-end="url(#m00l05-arrow)" />
+
+    <rect x="350" y="5" width="260" height="30" rx="12" class="svg-node svg-node--security" />
+    <text x="480" y="26" text-anchor="middle" class="svg-label svg-label--small">Ruído, atenuação, interferência e erro</text>
+  </svg>
+</section>
