@@ -1,0 +1,17 @@
+
+<section class="lesson-section lesson-section--architecture">
+  <h2>7. Arquitetura</h2>
+  <p>
+    Protocolos aparecem em todas as camadas de uma arquitetura corporativa. Um usuário acessando uma aplicação web pode usar Wi‑Fi, Ethernet, IP, TCP, TLS, HTTP, DNS, autenticação federada, APIs internas, conexão com banco, filas e protocolos de observabilidade. Cada trecho pode estar funcionando ou falhando de maneira diferente.
+  </p>
+  <ul>
+    <li><strong>Camadas inferiores:</strong> Ethernet, ARP, IP, ICMP, TCP, UDP e roteamento criam conectividade.</li>
+    <li><strong>Camadas de aplicação:</strong> DNS, HTTP, SSH, SMTP, APIs e bancos organizam serviços.</li>
+    <li><strong>Camadas de segurança:</strong> TLS, Kerberos, SAML, OIDC, OAuth e mTLS criam confiança, identidade e proteção.</li>
+    <li><strong>Camadas de plataforma:</strong> Kubernetes, service mesh, ingress, API gateway e observabilidade usam protocolos para automatizar comunicação.</li>
+    <li><strong>Pontos de falha:</strong> versão incompatível, porta errada, certificado inválido, token vencido, payload malformado, timeout, proxy alterando header ou WAF bloqueando padrão.</li>
+  </ul>
+  <p>
+    Pensar em protocolo como arquitetura evita um erro comum: culpar a rede por qualquer falha de comunicação. Às vezes a rede entrega os bytes perfeitamente, mas a aplicação rejeita a mensagem porque o contrato não foi cumprido.
+  </p>
+</section>

@@ -1,0 +1,19 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>
+    Por dentro, um protocolo costuma combinar seis elementos: <strong>mensagens</strong>, <strong>campos</strong>, <strong>estados</strong>, <strong>temporização</strong>, <strong>erros</strong> e <strong>negociação</strong>. Nem todo protocolo tem todos esses elementos de forma complexa, mas quase todos possuem pelo menos parte deles.
+  </p>
+  <ol class="flow-list">
+    <li><strong>Início:</strong> uma entidade decide iniciar comunicação. Pode ser um cliente abrindo conexão TCP, um navegador enviando HTTP ou um resolver perguntando DNS.</li>
+    <li><strong>Mensagem inicial:</strong> a primeira mensagem carrega campos esperados. Pode haver versão, método, identificador, tamanho, flags ou destino.</li>
+    <li><strong>Interpretação:</strong> o receptor lê os campos de acordo com o protocolo. Se o formato estiver inválido, responde erro ou descarta.</li>
+    <li><strong>Estado:</strong> algumas conversas mudam de fase. Exemplo: antes de autenticar, durante autenticação, autenticado, encerrando.</li>
+    <li><strong>Resposta:</strong> o receptor responde com sucesso, erro, redirecionamento, desafio de autenticação, confirmação ou dado solicitado.</li>
+    <li><strong>Timeout e repetição:</strong> se algo demora demais, a implementação decide esperar, reenviar, abrir nova conexão ou falhar.</li>
+    <li><strong>Encerramento:</strong> a conversa termina por mensagem explícita, timeout, reset, erro ou fechamento do transporte.</li>
+  </ol>
+  <p>
+    Um ponto essencial é que protocolos são implementados em software e hardware. A especificação define o comportamento esperado, mas sistemas reais podem ter bugs, configurações incorretas, versões incompatíveis, limites de buffer, parsing inseguro, timeouts agressivos ou logs insuficientes. Por isso, troubleshooting de protocolo exige tanto teoria quanto evidência prática.
+  </p>
+</section>

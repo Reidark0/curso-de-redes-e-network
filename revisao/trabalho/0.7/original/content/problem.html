@@ -1,0 +1,22 @@
+
+<section class="lesson-section lesson-section--problem">
+  <h2>3. Problema</h2>
+  <p>
+    O problema técnico resolvido por protocolos é a ambiguidade. Bytes não carregam significado universal. A sequência <code>47 45 54</code>, por exemplo, pode ser apenas três bytes. Mas em uma requisição HTTP, esses bytes representam o texto <code>GET</code>, que indica um método de requisição. O significado nasce porque cliente e servidor concordam previamente sobre o protocolo.
+  </p>
+  <p>
+    Sem protocolo, cada sistema precisaria adivinhar formato, ordem e intenção. Isso quebraria automação, integração, troubleshooting, segurança e escalabilidade. Um servidor não saberia se o primeiro campo é tamanho, comando, versão, usuário, destino ou conteúdo. Um cliente não saberia se a ausência de resposta significa erro, processamento demorado, bloqueio, perda ou encerramento normal.
+  </p>
+  <ul class="flow-list">
+    <li><strong>Formato:</strong> quais campos existem, como são separados e que tamanho possuem.</li>
+    <li><strong>Significado:</strong> o que cada campo quer dizer e quais valores são válidos.</li>
+    <li><strong>Ordem:</strong> qual mensagem deve vir antes e qual deve vir depois.</li>
+    <li><strong>Tempo:</strong> quanto esperar antes de tentar novamente ou desistir.</li>
+    <li><strong>Estado:</strong> em qual fase da conversa cliente e servidor estão.</li>
+    <li><strong>Erro:</strong> como rejeitar, redirecionar, negar, repetir ou encerrar.</li>
+    <li><strong>Segurança:</strong> como autenticar, autorizar, criptografar, validar e registrar.</li>
+  </ul>
+  <div class="callout callout--warning">
+    <strong>Erro comum:</strong> achar que protocolo é sinônimo de porta. Porta é apenas um identificador usado em protocolos de transporte para separar conversas. O protocolo inclui regras de mensagem, estado, temporização, erro, versão e comportamento.
+  </div>
+</section>

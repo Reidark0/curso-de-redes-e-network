@@ -1,0 +1,19 @@
+
+<section class="lesson-section lesson-section--example">
+  <h2>9. Exemplo simples</h2>
+  <p>
+    Um exemplo simples é acessar um site. Você digita um endereço no navegador. Antes de ver a página, vários protocolos cooperam. O DNS traduz o nome para um IP. O TCP, em muitos casos, estabelece conexão. O TLS negocia criptografia e valida certificado quando o acesso é HTTPS. O HTTP envia uma requisição com método, caminho, headers e talvez corpo. O servidor responde com status code, headers e conteúdo.
+  </p>
+  <p>
+    Se algo falhar, a mensagem de erro depende da etapa. Se DNS falhar, o nome não resolve. Se TCP falhar, a porta pode estar fechada ou bloqueada. Se TLS falhar, pode haver problema de certificado, versão ou inspeção. Se HTTP falhar, você pode receber 401, 403, 404, 429 ou 500. Cada erro pertence a uma parte diferente da conversa.
+  </p>
+  <pre class="code-block"><code>GET / HTTP/1.1
+Host: exemplo.local
+User-Agent: navegador
+Accept: text/html
+
+</code></pre>
+  <p>
+    Essa pequena mensagem só faz sentido porque cliente e servidor conhecem HTTP. Sem esse contrato, seriam apenas bytes em uma conexão.
+  </p>
+</section>

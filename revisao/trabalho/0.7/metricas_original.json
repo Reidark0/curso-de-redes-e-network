@@ -1,0 +1,88 @@
+{
+  "id": "0.7",
+  "versao": "original",
+  "titulo": "O que é um protocolo",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5835,
+    "invisiveis": 607,
+    "teoriaVisivel": 3470
+  },
+  "porCampoVisivel": {
+    "content.motivation": 251,
+    "content.history": 275,
+    "content.problem": 212,
+    "content.evolution": 206,
+    "content.concept": 135,
+    "content.internals": 204,
+    "content.architecture": 162,
+    "content.analogy": 124,
+    "content.simpleExample": 160,
+    "content.enterpriseExample": 196,
+    "content.cloudExample": 158,
+    "content.devsecopsExample": 163,
+    "content.securityExample": 179,
+    "content.diagram": 3,
+    "content.summary": 70,
+    "content.nextTheme": 43,
+    "security": 365,
+    "troubleshooting": 330,
+    "glossary": 234,
+    "title+subtitle": 18,
+    "objectives": 80,
+    "learningOutcomes": 110,
+    "quiz": 333,
+    "flashcards": 126,
+    "mentorQuestions": 151,
+    "exercises": 178,
+    "challenge": 178,
+    "commentedSolution": 240,
+    "references": 72,
+    "linksToOtherCourses": 49,
+    "lab": 830
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 51,
+    "content.exercisesIntro": 23,
+    "content.challengeIntro": 25,
+    "content.solutionIntro": 28,
+    "networkContext": 49,
+    "deepDive": 269,
+    "commonMistakes": 162
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 105,
+    "alternativa_5minPasso_maisLeitura": 36.4,
+    "plausivel": false,
+    "palavras": 830
+  },
+  "duracao": {
+    "declarada": "75-105 min",
+    "estimatedStudyTimeMinutes": 105,
+    "M": 90,
+    "T": 125.1,
+    "partes": {
+      "teoria": 26.7,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 36.4
+    },
+    "faixaRecomendada": "105-150 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 24
+  }
+}
