@@ -1,0 +1,30 @@
+<section class="lesson-section lesson-section--diagram"><h2>Diagrama</h2>
+<svg class="lesson-svg" viewBox="0 0 980 430" role="img" aria-labelledby="arp-title arp-desc">
+  <title id="arp-title">ARP resolvendo IPv4 para MAC na rede local</title>
+  <desc id="arp-desc">Host cliente pergunta em broadcast quem possui o IP do gateway. O gateway responde com seu endereço MAC e o cliente passa a enviar o frame unicast.</desc>
+  <defs>
+    <marker id="m03l05-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" class="svg-arrow" /></marker>
+  </defs>
+  <rect x="40" y="72" width="170" height="86" rx="14" class="svg-node svg-node--client" />
+  <text x="125" y="105" text-anchor="middle" class="svg-label">Host A</text>
+  <text x="125" y="130" text-anchor="middle" class="svg-label svg-label--small">IP 192.168.10.25</text>
+  <text x="125" y="150" text-anchor="middle" class="svg-label svg-label--small">MAC aa:aa...</text>
+  <rect x="405" y="72" width="170" height="86" rx="14" class="svg-node svg-node--switch" />
+  <text x="490" y="105" text-anchor="middle" class="svg-label">Switch</text>
+  <text x="490" y="132" text-anchor="middle" class="svg-label svg-label--small">VLAN 10</text>
+  <rect x="770" y="72" width="170" height="86" rx="14" class="svg-node svg-node--router" />
+  <text x="855" y="105" text-anchor="middle" class="svg-label">Gateway</text>
+  <text x="855" y="130" text-anchor="middle" class="svg-label svg-label--small">IP 192.168.10.1</text>
+  <text x="855" y="150" text-anchor="middle" class="svg-label svg-label--small">MAC bb:bb...</text>
+  <line x1="210" y1="116" x2="405" y2="116" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m03l05-arrow)" />
+  <line x1="575" y1="116" x2="770" y2="116" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m03l05-arrow)" />
+  <text x="490" y="55" text-anchor="middle" class="svg-label svg-label--small">ARP Request: Quem tem 192.168.10.1? Diga para 192.168.10.25</text>
+  <line x1="770" y1="205" x2="575" y2="205" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m03l05-arrow)" />
+  <line x1="405" y1="205" x2="210" y2="205" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m03l05-arrow)" />
+  <text x="490" y="240" text-anchor="middle" class="svg-label svg-label--small">ARP Reply: 192.168.10.1 está em bb:bb:bb:bb:bb:bb</text>
+  <rect x="250" y="300" width="480" height="84" rx="14" class="svg-node svg-node--security" />
+  <text x="490" y="328" text-anchor="middle" class="svg-label">Cache ARP do Host A</text>
+  <text x="490" y="354" text-anchor="middle" class="svg-label svg-label--small">192.168.10.1 → bb:bb:bb:bb:bb:bb por tempo limitado</text>
+  <text x="490" y="376" text-anchor="middle" class="svg-label svg-label--small">Risco defensivo: ARP não autentica nativamente a resposta</text>
+</svg>
+</section>

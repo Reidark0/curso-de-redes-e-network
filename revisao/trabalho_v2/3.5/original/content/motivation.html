@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--motivation"><h2>1. Motivação</h2>
+<p>Você já aprendeu que Ethernet entrega frames usando endereços MAC e que IPv4 identifica hosts usando endereços IP. Agora aparece uma pergunta inevitável: se o usuário quer acessar <code>192.168.10.1</code>, mas a placa de rede só coloca um frame no cabo usando MAC de destino, como o computador descobre qual MAC corresponde àquele IP?</p>
+<p>Essa pergunta não é acadêmica. Ela aparece quando um notebook está com IP correto, máscara correta e gateway configurado, mas não consegue falar com o roteador local. Aparece em incidentes de rede local, em análise de pacotes, em troubleshooting de impressoras, em falhas de gateway, em redes com VLAN errada e em investigações defensivas de ARP spoofing.</p>
+<div class="callout callout--problem"><strong>Problema real:</strong> um host tenta acessar a internet. Ele sabe o IP do gateway, mas antes de enviar qualquer pacote para fora da rede, precisa descobrir o MAC do gateway dentro da LAN. Se ARP falhar, nada que dependa daquele próximo salto local funciona.</div>
+</section>

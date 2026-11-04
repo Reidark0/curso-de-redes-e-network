@@ -1,0 +1,4 @@
+<section class="lesson-section lesson-section--architecture"><h2>Arquitetura</h2>
+<p>O ARP vive na fronteira entre Camada 2 e Camada 3: usa broadcast Ethernet para resolver uma necessidade do IPv4. Cada componente da LAN tem um papel nele:</p>
+<ul><li><strong>Host final:</strong> mantém o cache ARP e envia ARP Requests quando precisa.</li><li><strong>Switch:</strong> encaminha o broadcast ARP dentro da VLAN e aprende MACs pelos frames que passam.</li><li><strong>Gateway:</strong> responde ARP pelo IP da sua interface local.</li><li><strong>Firewall roteado:</strong> pode ser o próprio gateway e responder ARP nas redes conectadas.</li><li><strong>VLAN:</strong> limita o alcance do broadcast ARP.</li><li><strong>Cloud/virtualização:</strong> pode esconder o ARP, mas continua trabalhando com interfaces, próximo salto e resolução local, controlada pelo provedor ou pelo hypervisor.</li></ul>
+</section>

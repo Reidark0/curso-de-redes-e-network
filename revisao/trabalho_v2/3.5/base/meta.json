@@ -1,0 +1,729 @@
+{
+  "id": "3.5",
+  "moduleId": "m03",
+  "order": 5,
+  "title": "ARP: transformando IPv4 em MAC na rede local",
+  "subtitle": "O protocolo que permite ao IPv4 usar Ethernet para entregar frames dentro da LAN.",
+  "duration": "90-125 min",
+  "estimatedStudyTimeMinutes": 125,
+  "difficulty": "iniciante-intermediário",
+  "type": "fundamental",
+  "xp": 215,
+  "tags": [
+    "redes",
+    "ethernet",
+    "arp",
+    "ipv4",
+    "mac",
+    "gateway",
+    "camada 2",
+    "camada 3",
+    "segurança",
+    "troubleshooting"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m03",
+      "lesson": "3.2",
+      "reason": "É necessário entender frame Ethernet e endereço MAC."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m03",
+      "lesson": "3.4",
+      "reason": "ARP usa broadcast dentro do domínio de broadcast."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m02",
+      "lesson": "2.5",
+      "reason": "É necessário entender IP, gateway e próximo salto."
+    }
+  ],
+  "objectives": [
+    "Explicar por que ARP existe.",
+    "Diferenciar IP, MAC, próximo salto e gateway.",
+    "Descrever ARP Request, ARP Reply e cache ARP.",
+    "Usar comandos defensivos para consultar e interpretar a tabela ARP.",
+    "Relacionar ARP com troubleshooting, segurança de LAN e mitigação de riscos."
+  ],
+  "learningOutcomes": [
+    "Dado um IP de destino, o aluno identifica se ARP buscará o MAC do destino ou do gateway.",
+    "Dada uma tabela ARP, o aluno interpreta associações IP-MAC e entradas suspeitas.",
+    "Dado um problema de conectividade local, o aluno valida IP, máscara, gateway, ARP e VLAN.",
+    "Dado um cenário de segurança, o aluno explica riscos defensivos de ARP spoofing sem executar ataque.",
+    "Dado um ambiente cloud ou virtual, o aluno transfere o modelo mental de próximo salto para redes abstraídas."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Camada 2",
+      "Camada 3"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede",
+      "Internet"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "IPv4",
+      "ARP",
+      "ICMP",
+      "802.1Q"
+    ],
+    "dependsOn": [
+      "Frame Ethernet",
+      "Endereço MAC",
+      "IPv4",
+      "Gateway",
+      "Broadcast"
+    ],
+    "enables": [
+      "Comunicação IPv4 local",
+      "Acesso ao gateway",
+      "Troubleshooting L2/L3",
+      "Segurança defensiva de LAN"
+    ]
+  },
+  "troubleshooting": {
+    "symptoms": [
+      "Host não pinga o gateway.",
+      "Gateway aparece com MAC diferente do esperado.",
+      "Conectividade intermitente com um IP local.",
+      "Acesso a nomes falha porque o gateway nem é alcançado.",
+      "Tabela ARP não recebe entrada para o próximo salto."
+    ],
+    "diagnosticQuestions": [
+      "O IP e a máscara do host estão corretos?",
+      "O destino está na mesma sub-rede ou precisa do gateway?",
+      "O gateway responde ARP?",
+      "A VLAN da porta está correta?",
+      "Há duplicidade de IP ou MAC flapping?",
+      "O problema é local, rota, DNS, transporte ou aplicação?"
+    ],
+    "commands": [
+      {
+        "platform": "Windows",
+        "command": "ipconfig /all\narp -a\nping <gateway>\ntracert 8.8.8.8",
+        "purpose": "Ver configuração, tabela ARP, alcance ao gateway e caminho inicial.",
+        "expectedObservation": "Gateway configurado, entrada ARP para o gateway e resposta ao ping quando ICMP não estiver bloqueado.",
+        "interpretation": "Sem ARP para gateway sugere problema local antes de DNS e internet."
+      },
+      {
+        "platform": "Linux",
+        "command": "ip addr\nip route\nip neigh\nping -c 4 <gateway>",
+        "purpose": "Ver IP, rota default, vizinhos ARP/NDP e alcance ao gateway.",
+        "expectedObservation": "Rota default via gateway e entrada REACHABLE/STALE em ip neigh.",
+        "interpretation": "Estado FAILED ou ausência persistente pode indicar falha L2/VLAN/gateway."
+      },
+      {
+        "platform": "Cisco IOS",
+        "command": "show ip interface brief\nshow arp\nshow mac address-table dynamic\nshow vlan brief",
+        "purpose": "Correlacionar IP, ARP, tabela MAC e VLAN no equipamento de rede.",
+        "expectedObservation": "Gateway ativo, ARP esperado, MAC aprendido na porta correta e VLAN correta.",
+        "interpretation": "Divergência entre ARP, MAC table e VLAN aponta para problema de Camada 2 ou endereçamento."
+      }
+    ],
+    "decisionTree": [
+      {
+        "if": "Host não tem IP ou gateway",
+        "then": "Verificar DHCP, configuração estática ou perfil de rede."
+      },
+      {
+        "if": "Host tem IP, mas não tem ARP do gateway",
+        "then": "Verificar VLAN, cabo/Wi-Fi, switch, gateway e firewall local."
+      },
+      {
+        "if": "ARP do gateway muda frequentemente",
+        "then": "Investigar failover legítimo, MAC flapping, IP duplicado ou spoofing."
+      },
+      {
+        "if": "ARP do gateway funciona, mas o site por nome não abre",
+        "then": "Testar o IP direto e rodar nslookup/dig; depois avançar para DNS, rota, porta, TLS e aplicação."
+      }
+    ]
+  },
+  "security": {
+    "goodPractices": [
+      "Segmentar redes por VLAN e função (usuários, servidores, visitantes, câmeras, gestão).",
+      "Usar DHCP snooping, Dynamic ARP Inspection (DAI) e port security quando disponíveis.",
+      "Monitorar mudanças de MAC para IPs críticos, como gateways.",
+      "Usar criptografia ponta a ponta para reduzir o impacto de interceptação local.",
+      "Sanitizar capturas e tabelas ARP (IPs, MACs, topologia) e controlar o acesso a elas antes de compartilhar evidências."
+    ],
+    "badPractices": [
+      "Manter rede plana com muitos ativos críticos: o ARP alcança todos, com mais ruído e mais superfície lateral.",
+      "Confiar apenas em MAC como controle de acesso.",
+      "Compartilhar PCAPs internos sem revisão.",
+      "Executar ferramentas ofensivas de ARP em rede real sem autorização.",
+      "Ignorar alertas de IP duplicado."
+    ],
+    "commonErrors": [
+      "Confundir conectividade local com autorização.",
+      "Achar que NAT ou VLAN elimina risco de ARP spoofing dentro da mesma VLAN.",
+      "Tratar mudança de MAC sempre como ataque, ignorando failover legítimo."
+    ],
+    "vulnerabilities": [
+      {
+        "name": "ARP spoofing",
+        "description": "Um agente responde ARP de forma indevida para convencer os hosts de que o MAC dele corresponde ao IP do gateway ou de outro host. Aparece como MAC do gateway mudando de forma inesperada. O impacto vai de negação de serviço a interceptação (em tráfego sem criptografia adequada) ou redirecionamento.",
+        "defensiveExplanation": "É possível porque o ARP não autentica respostas. O risco é local à VLAN; NAT ou VLAN não o eliminam dentro da mesma VLAN.",
+        "mitigation": "DAI, DHCP snooping, 802.1X/NAC, port security, VLANs menores, criptografia ponta a ponta, logs e investigação de mudanças de MAC."
+      },
+      {
+        "name": "IP duplicado",
+        "description": "Dois dispositivos usam o mesmo IP e respondem ARP de forma conflitante, causando conectividade intermitente.",
+        "defensiveExplanation": "Pode ser erro operacional ou sinal de comportamento indevido.",
+        "mitigation": "DHCP centralizado, reservas documentadas, alertas de duplicidade e inventário."
+      }
+    ],
+    "monitoring": [
+      "Mudança inesperada de MAC do gateway.",
+      "Volume anormal de ARP Requests/Replies.",
+      "Alertas de duplicate IP.",
+      "MAC flapping em portas de switch.",
+      "Broadcast ARP elevado por VLAN."
+    ],
+    "hardening": [
+      "Desabilitar portas não usadas.",
+      "Aplicar 802.1X/NAC onde possível.",
+      "Manter documentação dos gateways e dos MACs esperados."
+    ],
+    "detectionIdeas": [
+      "Comparar o ARP do host com a tabela MAC do switch.",
+      "Capturar apenas o tráfego necessário e autorizado.",
+      "Correlacionar logs de switch, DHCP e firewall."
+    ]
+  },
+  "lab": {
+    "id": "lab-3.5",
+    "title": "Observando ARP de forma defensiva",
+    "labType": "security",
+    "objective": "Identificar gateway, consultar tabela ARP, gerar tráfego leve e interpretar a associação IP-MAC do próximo salto.",
+    "scenario": "Você está em um notebook de laboratório ou estação autorizada e precisa confirmar se o host consegue resolver o MAC do gateway local.",
+    "topology": "Host do aluno -> switch/AP -> gateway local -> rede externa opcional",
+    "architecture": "Rede local IPv4 comum, com host em uma subnet e gateway padrão configurado.",
+    "prerequisites": [
+      "Ter concluído as aulas 3.1 a 3.4."
+    ],
+    "tools": [
+      "Windows PowerShell ou Terminal Linux",
+      "Opcional: Wireshark em ambiente autorizado (filtro arp) para ver Request e Reply"
+    ],
+    "estimatedTimeMinutes": 30,
+    "cost": "zero",
+    "safetyNotes": [
+      "Use apenas rede própria, doméstica ou laboratório autorizado; não capture tráfego de terceiros.",
+      "Use só comandos de consulta e tráfego leve: nada de spoofing ou flooding.",
+      "Sanitize IPs, MACs e nomes antes de compartilhar evidências."
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "title": "Identificar o gateway",
+        "instruction": "Descubra o gateway padrão do host.",
+        "command": "Windows: ipconfig /all\nLinux: ip route | grep default",
+        "expectedOutput": "Endereço IPv4 do gateway padrão.",
+        "explanation": "Esse é o IP cujo MAC normalmente será resolvido por ARP para tráfego fora da rede local."
+      },
+      {
+        "number": 2,
+        "title": "Consultar a tabela ARP atual",
+        "instruction": "Liste as associações IP-MAC conhecidas pelo host.",
+        "command": "Windows: arp -a\nLinux: ip neigh",
+        "expectedOutput": "Entradas contendo IPs locais e endereços MAC associados.",
+        "explanation": "A tabela mostra resoluções recentes ou conhecidas. Nem toda entrada indica tráfego ativo neste momento."
+      },
+      {
+        "number": 3,
+        "title": "Gerar tráfego leve para o gateway",
+        "instruction": "Envie poucos pacotes ICMP ao gateway para criar ou atualizar a entrada ARP.",
+        "command": "Windows: ping <gateway>\nLinux: ping -c 4 <gateway>",
+        "expectedOutput": "Respostas do gateway, se ele permitir ICMP. Mesmo sem resposta ao ping, a entrada ARP aparece, porque a resolução do MAC acontece antes do envio do primeiro pacote.",
+        "explanation": "O objetivo não é testar internet, mas observar a resolução local do próximo salto."
+      },
+      {
+        "number": 4,
+        "title": "Reconsultar ARP",
+        "instruction": "Verifique se o gateway aparece com um MAC associado.",
+        "command": "Windows: arp -a\nLinux: ip neigh show <gateway>",
+        "expectedOutput": "IP do gateway associado a um endereço MAC.",
+        "explanation": "Essa associação permite que o host entregue frames ao gateway."
+      },
+      {
+        "number": 5,
+        "title": "Interpretar evidências",
+        "instruction": "Registre as evidências coletadas numa tabela sanitizada.",
+        "analysisTask": "Monte uma tabela com IP do host, máscara, gateway, MAC do gateway (mascarado), estado da entrada (REACHABLE, STALE, dinâmico…) e uma linha dizendo o que essa entrada prova e o que não prova.",
+        "expectedOutput": "Tabela sanitizada com IPs/MACs mascarados quando necessário.",
+        "explanation": "O valor está na interpretação: a entrada prova que houve resolução IP-MAC do gateway, mas não prova que DNS, porta, TLS, HTTP, autenticação ou autorização funcionam."
+      }
+    ],
+    "expectedResult": "O aluno deve explicar por que o host precisa do MAC do gateway e como evidenciar essa resolução sem executar ações ofensivas.",
+    "validation": [
+      {
+        "check": "Gateway identificado",
+        "command": "ipconfig /all ou ip route",
+        "expected": "Gateway padrão configurado.",
+        "ifFails": "Verificar DHCP, configuração estática ou conectividade local."
+      },
+      {
+        "check": "Entrada ARP do gateway aparece",
+        "command": "arp -a ou ip neigh",
+        "expected": "IP do gateway associado a um MAC.",
+        "ifFails": "Pingue o gateway, confira VLAN, Wi-Fi/cabo e disponibilidade do gateway."
+      },
+      {
+        "check": "Interpretação correta",
+        "command": "Relatório do aluno",
+        "expected": "Explicação diferencia ARP, DNS, rota e porta.",
+        "ifFails": "Revisar aulas 2.5, 3.2 e 3.4."
+      }
+    ],
+    "troubleshooting": [
+      {
+        "symptom": "Gateway não aparece no ARP",
+        "probableCause": "Ainda não houve tráfego para o gateway, VLAN errada, gateway indisponível ou bloqueio local.",
+        "howToConfirm": "Validar IP/máscara, pingar o gateway, reconsultar o ARP e verificar o link.",
+        "fix": "Corrigir endereçamento, porta/VLAN ou disponibilidade do gateway."
+      }
+    ],
+    "improvements": [
+      "Capturar o ARP Request/Reply no Wireshark em laboratório próprio e conferir os campos Operation, Sender e Target.",
+      "Repetir em Packet Tracer com dois hosts e um gateway.",
+      "Comparar a tabela ARP do host com a tabela MAC do switch."
+    ],
+    "evidenceToCollect": [
+      "Gateway padrão e comando utilizado.",
+      "Entrada ARP do gateway (sanitizada).",
+      "Interpretação: o que a entrada prova e o que não prova."
+    ],
+    "questions": [
+      "Por que o ARP Request usa broadcast e o ARP Reply normalmente pode ser unicast?",
+      "Por que MAC não deve ser tratado como identidade forte?"
+    ]
+  },
+  "mentorQuestions": [
+    {
+      "type": "reflexão",
+      "question": "Por que o IPv4 precisou de ARP em redes Ethernet?",
+      "hints": [
+        "Pense na diferença entre IP e MAC.",
+        "Pense no frame Ethernet."
+      ],
+      "expectedIdeas": [
+        "IP é lógico",
+        "MAC é local",
+        "frame precisa de MAC de destino",
+        "ARP automatiza a descoberta"
+      ],
+      "explanation": "A resposta deve mostrar que ARP resolve uma necessidade de encapsulamento local."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "Um host tem IP correto, mas não tem entrada ARP para o gateway. O que você verificaria antes de culpar DNS?",
+      "hints": [
+        "Pense em Camada 2 e 3 local.",
+        "Pense em VLAN e gateway."
+      ],
+      "expectedIdeas": [
+        "máscara",
+        "gateway",
+        "link",
+        "VLAN",
+        "porta",
+        "gateway indisponível",
+        "firewall local"
+      ],
+      "explanation": "Valide o caminho local na ordem: IP/máscara/gateway, link e VLAN, ARP do gateway, tabela MAC do switch. Só depois avance para rota, DNS, porta e aplicação."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "Um host foi configurado com 192.168.1.50/16 em vez de /24; o gateway é 192.168.1.1. Ele tenta acessar 192.168.5.10, que fica em outra sub-rede /24, atrás do gateway. O que acontece com o ARP e por quê?",
+      "hints": [
+        "Com /16, quais IPs o host considera locais?",
+        "Quem recebe um ARP Request em broadcast?"
+      ],
+      "expectedIdeas": [
+        "com /16 o host acha que 192.168.5.10 está na mesma sub-rede",
+        "faz ARP direto para 192.168.5.10 em vez de usar o gateway",
+        "o broadcast fica na VLAN local e o destino não o recebe",
+        "sem resposta, a comunicação falha",
+        "a causa é a máscara, não o gateway nem o DNS",
+        "exceção: se o gateway tiver proxy ARP habilitado, ele responde no lugar do destino e o erro de máscara fica mascarado"
+      ],
+      "explanation": "A decisão de próximo salto vem antes do ARP. Máscara errada faz o host perguntar pelo alvo errado."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q3.5.1",
+      "question": "Qual é a função principal do ARP em IPv4 sobre Ethernet?",
+      "options": [
+        "Resolver nome DNS para IP público",
+        "Resolver IPv4 para MAC dentro da rede local",
+        "Criptografar frames Ethernet",
+        "Rotear pacotes entre ASNs"
+      ],
+      "answer": 1,
+      "explanation": "ARP descobre o MAC associado a um IPv4 local ou ao próximo salto local.",
+      "topic": "conceito",
+      "difficulty": "iniciante",
+      "type": "conceito"
+    },
+    {
+      "id": "q3.5.2",
+      "question": "Um host quer acessar um site externo. Para qual IP ele normalmente faz ARP primeiro?",
+      "options": [
+        "Para o IP do servidor DNS raiz",
+        "Para o IP público do site",
+        "Para o IP do gateway padrão",
+        "Para o endereço de broadcast da sub-rede"
+      ],
+      "answer": 2,
+      "explanation": "Para destinos fora da rede local, o próximo salto é o gateway padrão.",
+      "topic": "gateway",
+      "difficulty": "iniciante",
+      "type": "cenário"
+    },
+    {
+      "id": "q3.5.3",
+      "question": "Por que ARP spoofing é possível conceitualmente?",
+      "options": [
+        "Porque ARP não autentica nativamente respostas",
+        "Porque todo switch é roteador",
+        "Porque DNS sempre usa ARP",
+        "Porque TLS altera MACs"
+      ],
+      "answer": 0,
+      "explanation": "A ausência de autenticação nativa permite respostas indevidas em uma mesma VLAN.",
+      "topic": "segurança",
+      "difficulty": "intermediário",
+      "type": "segurança"
+    },
+    {
+      "id": "q3.5.8",
+      "question": "Você pingou o gateway 192.168.1.1, que bloqueia ICMP: nenhuma resposta. Em seguida, ip neigh mostra \"192.168.1.1 dev wlan0 lladdr aa:bb:cc:dd:ee:ff REACHABLE\". O que você conclui?",
+      "options": [
+        "O gateway está fora do ar, porque não respondeu ao ping",
+        "O host está na VLAN errada, porque o ping falhou",
+        "O DNS está funcionando, porque o gateway aparece com MAC",
+        "A resolução ARP do gateway funcionou; a falta de resposta ao ping não indica falha de Camada 2"
+      ],
+      "answer": 3,
+      "explanation": "A resolução do MAC acontece antes do envio do ping. Uma entrada REACHABLE mostra que o gateway respondeu ao ARP; o ping sem resposta só indica que o ICMP foi bloqueado.",
+      "topic": "comandos",
+      "difficulty": "intermediário",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q3.5.7",
+      "question": "O host 192.168.1.50/24 vai enviar dados para a impressora 192.168.1.80. Por qual IP ele faz ARP?",
+      "options": [
+        "192.168.1.1, o gateway padrão",
+        "192.168.1.80, a própria impressora",
+        "192.168.1.255, o broadcast da sub-rede",
+        "Nenhum: na mesma sub-rede não é preciso ARP"
+      ],
+      "answer": 1,
+      "explanation": "Com /24, 192.168.1.80 está na mesma sub-rede; o próximo salto é o próprio destino, e o ARP pergunta pelo MAC dele. Só destinos de fora usam o gateway.",
+      "topic": "próximo salto",
+      "difficulty": "iniciante",
+      "type": "cenário"
+    },
+    {
+      "id": "q3.5.6",
+      "question": "Se ARP para o gateway falha, qual hipótese é mais inicial?",
+      "options": [
+        "Porta 443 bloqueada no firewall de borda",
+        "Servidor DNS configurado incorretamente",
+        "Problema local: VLAN, link, máscara ou gateway",
+        "Certificado TLS expirado no site"
+      ],
+      "answer": 2,
+      "explanation": "Sem ARP para o gateway, nenhum pacote sai da LAN. DNS, firewall de borda e TLS só entram depois que o caminho local funciona.",
+      "topic": "troubleshooting",
+      "difficulty": "intermediário",
+      "type": "troubleshooting"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc3.5.7",
+      "front": "Como são enviados o ARP Request e o ARP Reply?",
+      "back": "Request: broadcast para ff:ff:ff:ff:ff:ff, alcançando toda a VLAN. Reply: normalmente unicast, direto para quem perguntou.",
+      "tags": [
+        "arp",
+        "broadcast"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc3.5.2",
+      "front": "ARP atravessa roteadores?",
+      "back": "Não. ARP é local ao domínio de broadcast/VLAN.",
+      "tags": [
+        "arp",
+        "roteamento"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc3.5.8",
+      "front": "Qual EtherType identifica o ARP e qual campo separa Request de Reply?",
+      "back": "EtherType 0x0806. O campo Operation: 1 = Request, 2 = Reply.",
+      "tags": [
+        "arp",
+        "campos"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc3.5.9",
+      "front": "Quais controles de switch reduzem o risco de ARP spoofing?",
+      "back": "DAI (Dynamic ARP Inspection), DHCP snooping, port security e 802.1X/NAC; VLANs menores e criptografia ponta a ponta reduzem o impacto.",
+      "tags": [
+        "segurança",
+        "arp spoofing"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc3.5.5",
+      "front": "Qual comando mostra ARP no Linux moderno?",
+      "back": "ip neigh, além de arp -a em sistemas que ainda possuem net-tools.",
+      "tags": [
+        "linux",
+        "comandos"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc3.5.6",
+      "front": "DNS e ARP fazem a mesma coisa?",
+      "back": "Não. DNS resolve nomes para IP; ARP resolve IPv4 para MAC local.",
+      "tags": [
+        "dns",
+        "arp"
+      ],
+      "difficulty": "iniciante"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex3.5.6",
+      "type": "comando/output",
+      "prompt": "Numa captura você vê um frame com destino Ethernet ff:ff:ff:ff:ff:ff, EtherType 0x0806, Operation = 1, Sender IP 192.168.10.25, Target IP 192.168.10.1 e Target MAC 00:00:00:00:00:00. Quem está perguntando o quê, e como deve chegar a resposta?",
+      "expectedAnswer": "É um ARP Request: o host 192.168.10.25 pergunta qual MAC tem 192.168.10.1 (provavelmente o gateway). O Target MAC vai zerado porque é o que se procura. A resposta deve ser um ARP Reply (Operation = 2), normalmente em unicast para o MAC de 192.168.10.25, com o MAC de 192.168.10.1 no campo Sender.",
+      "explanation": "Ler Operation, Sender e Target é o que permite separar perguntas de respostas e notar Replies que ninguém pediu."
+    },
+    {
+      "id": "ex3.5.5",
+      "type": "cálculo",
+      "prompt": "Um host tem IP 10.0.5.20/24 e gateway 10.0.5.1. Para cada destino, diga por qual IP ele fará ARP: (a) 10.0.5.200; (b) 10.0.6.7; (c) 8.8.8.8.",
+      "expectedAnswer": "(a) 10.0.5.200, porque está na mesma sub-rede 10.0.5.0/24; (b) 10.0.5.1, o gateway, porque 10.0.6.7 está em outra sub-rede; (c) 10.0.5.1, o gateway, porque o destino é externo.",
+      "explanation": "Primeiro se decide o próximo salto pela máscara; o ARP só resolve o MAC desse próximo salto."
+    },
+    {
+      "id": "ex3.5.3",
+      "type": "segurança",
+      "prompt": "Por que permitir muitos dispositivos críticos na mesma VLAN aumenta o risco relacionado a ARP?",
+      "expectedAnswer": "Porque ARP broadcast e possíveis manipulações ficam no mesmo domínio, ampliando descoberta, ruído e impacto lateral.",
+      "explanation": "Segmentação reduz escopo de broadcast e de incidentes locais."
+    }
+  ],
+  "challenge": {
+    "title": "Gateway com MAC suspeito",
+    "scenario": "Usuários de uma VLAN relatam queda intermitente. Em alguns hosts, o MAC associado ao gateway muda durante o expediente.",
+    "tasks": [
+      "Montar hipóteses defensivas.",
+      "Listar evidências seguras a coletar.",
+      "Separar falhas operacionais de suspeita de incidente.",
+      "Propor mitigação sem executar ataque."
+    ],
+    "constraints": [
+      "Não usar ferramentas ofensivas.",
+      "Não capturar tráfego de terceiros sem autorização.",
+      "Sanitizar evidências.",
+      "Considerar failover legítimo antes de concluir ataque."
+    ],
+    "expectedDeliverables": [
+      "Matriz de hipóteses",
+      "Lista de comandos",
+      "Plano de correlação com switch/DHCP/firewall",
+      "Recomendações de hardening"
+    ],
+    "gradingRubric": [
+      {
+        "criterion": "Raciocínio por camadas",
+        "points": 30,
+        "description": "Distingue ARP, VLAN, gateway, rota e aplicação."
+      },
+      {
+        "criterion": "Segurança defensiva",
+        "points": 30,
+        "description": "Inclui detecção, mitigação e limites éticos."
+      },
+      {
+        "criterion": "Evidências",
+        "points": 25,
+        "description": "Coleta dados úteis sem expor informações sensíveis."
+      },
+      {
+        "criterion": "Clareza operacional",
+        "points": 15,
+        "description": "Propõe próximos passos executáveis e seguros."
+      }
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "A mudança de MAC do gateway pode ser legítima ou problemática. Primeiro é preciso conhecer a arquitetura: existe HSRP/VRRP, cluster de firewall ou troca planejada? Depois correlacionar ARP nos hosts, MAC table no switch, logs de DHCP e eventos de porta.",
+    "steps": [
+      "Registrar horário e hosts afetados.",
+      "Verificar IP/máscara/gateway.",
+      "Consultar ARP nos hosts afetados.",
+      "Consultar tabela MAC e VLAN no switch.",
+      "Verificar se há protocolo de alta disponibilidade legítimo.",
+      "Procurar IP duplicado e MAC flapping.",
+      "Aplicar mitigação: segmentação, DAI, DHCP snooping, 802.1X e monitoramento."
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "É sempre ataque.",
+        "whyItIsWrong": "Ambientes com alta disponibilidade podem mudar MAC de forma legítima."
+      },
+      {
+        "answer": "Limpar ARP resolve definitivamente.",
+        "whyItIsWrong": "Limpar cache é teste temporário; não corrige causa raiz."
+      },
+      {
+        "answer": "Trocar DNS resolve.",
+        "whyItIsWrong": "O sintoma ocorre antes da resolução de nomes."
+      }
+    ],
+    "finalAnswer": "A investigação correta trata a mudança de MAC como evidência a correlacionar, não como conclusão. O plano deve validar arquitetura, VLAN, IP duplicado, MAC flapping e controles L2, mantendo foco defensivo."
+  },
+  "glossary": [
+    {
+      "term": "ARP",
+      "shortDefinition": "Protocolo que resolve IPv4 para MAC na rede local.",
+      "longDefinition": "Address Resolution Protocol permite que um host IPv4 descubra o endereço MAC do próximo salto local para encapsular pacotes IP em frames Ethernet.",
+      "example": "Descobrir o MAC do gateway 192.168.1.1.",
+      "relatedTerms": [
+        "MAC",
+        "IPv4",
+        "gateway",
+        "broadcast"
+      ]
+    },
+    {
+      "term": "ARP Request",
+      "shortDefinition": "Pergunta ARP enviada em broadcast.",
+      "longDefinition": "Enviado para ff:ff:ff:ff:ff:ff, alcança todos os hosts da VLAN; o campo Operation vale 1.",
+      "example": "Quem tem 192.168.1.1?",
+      "relatedTerms": [
+        "broadcast",
+        "VLAN"
+      ]
+    },
+    {
+      "term": "ARP Reply",
+      "shortDefinition": "Resposta ARP com associação IP-MAC.",
+      "longDefinition": "Enviada normalmente em unicast para quem perguntou; o campo Operation vale 2.",
+      "example": "192.168.1.1 está em aa:bb:cc:dd:ee:ff.",
+      "relatedTerms": [
+        "cache ARP",
+        "MAC"
+      ]
+    },
+    {
+      "term": "Cache ARP",
+      "shortDefinition": "Tabela temporária de associações IP-MAC.",
+      "longDefinition": "Tabela mantida pelo host para evitar perguntar repetidamente pelo mesmo IP local.",
+      "example": "arp -a no Windows ou ip neigh no Linux.",
+      "relatedTerms": [
+        "tabela ARP",
+        "neighbor table"
+      ]
+    },
+    {
+      "term": "Próximo salto",
+      "shortDefinition": "Dispositivo local para onde o host entrega o próximo frame/pacote.",
+      "longDefinition": "Pode ser o próprio destino se estiver na mesma rede ou o gateway se o destino estiver fora da rede local.",
+      "example": "Gateway padrão em uma LAN doméstica.",
+      "relatedTerms": [
+        "gateway",
+        "rota default"
+      ]
+    },
+    {
+      "term": "ARP spoofing",
+      "shortDefinition": "Anúncio ARP indevido usado para associar IP legítimo a MAC errado.",
+      "longDefinition": "Risco de Camada 2 em que respostas ARP falsas podem causar interceptação ou negação de serviço dentro da mesma VLAN.",
+      "example": "Anunciar falsamente o IP do gateway com outro MAC.",
+      "relatedTerms": [
+        "DAI",
+        "DHCP snooping",
+        "802.1X"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "rfc",
+      "title": "RFC 826 — An Ethernet Address Resolution Protocol",
+      "organization": "IETF",
+      "url": "https://www.rfc-editor.org/rfc/rfc826",
+      "note": "Referência clássica do ARP para IPv4 em Ethernet."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network — Aula 2.5",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Base para IP, gateway, roteamento e TTL."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network — Aula 3.4",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Base para broadcast e domínio de broadcast."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "Redes de laboratório e runners",
+      "lesson": "Ambientes locais e bridges virtuais",
+      "reason": "Bridges, VMs e runners podem depender do mesmo raciocínio de próximo salto local."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "Acesso seguro em redes corporativas",
+      "lesson": "NAC e identidade de dispositivo",
+      "reason": "ARP e MAC não substituem identidade forte; NAC e 802.1X complementam controles de acesso."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70,
+      "oneOf": [
+        "labMarkedDone",
+        "practicalExerciseDone"
+      ]
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "3.6"
+    ]
+  }
+}

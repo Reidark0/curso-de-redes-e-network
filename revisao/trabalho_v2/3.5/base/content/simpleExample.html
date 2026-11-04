@@ -1,0 +1,4 @@
+<section class="lesson-section lesson-section--example"><h2>Exemplo simples</h2>
+<p>Seu notebook tem IP <code>192.168.1.50/24</code> e gateway <code>192.168.1.1</code>. Você abre um site. O site está fora da sua rede, então o notebook sabe que deve entregar o pacote ao gateway; para pôr o frame no Wi-Fi, ele precisa do MAC do roteador.</p>
+<p>Se o cache ARP já contém <code>192.168.1.1 → aa:bb:cc:dd:ee:ff</code>, o envio segue sem pergunta nova. Se não contém, o notebook envia um ARP Request em broadcast, o roteador responde e a entrada passa a aparecer em <code>arp -a</code>. Só então o notebook consegue enviar frames ao gateway.</p>
+</section>

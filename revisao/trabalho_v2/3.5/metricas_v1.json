@@ -1,0 +1,97 @@
+{
+  "id": "3.5",
+  "versao": "v1",
+  "titulo": "ARP: transformando IPv4 em MAC na rede local",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4511,
+    "teoria": 2533,
+    "praticaExtra": 1326,
+    "quiz": 367,
+    "flashcards": 125
+  },
+  "porGrupoTeoria": {
+    "introducao": 557,
+    "contexto": 142,
+    "conteudo": 784,
+    "exemplos": 422,
+    "seguranca_troubleshooting": 628
+  },
+  "porSecao": {
+    "motivation": 114,
+    "summary": 108,
+    "problem": 142,
+    "concept": 239,
+    "internals": 438,
+    "architecture": 106,
+    "diagram": 1,
+    "analogy": 83,
+    "simpleExample": 90,
+    "enterpriseExample": 96,
+    "cloudExample": 153,
+    "objectives": 41,
+    "learningOutcomes": 79,
+    "glossary": 215,
+    "security": 334,
+    "troubleshooting": 294,
+    "nextTheme": 30
+  },
+  "pratica": {
+    "quiz": 367,
+    "flashcards": 125,
+    "lab": 594,
+    "mentorQuestions": 257,
+    "exercises": 213,
+    "challenge": 111,
+    "commentedSolution": 151
+  },
+  "outros": {
+    "title+subtitle": 22,
+    "nextTheme": 30,
+    "references": 48,
+    "linksToOtherCourses": 60
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 30,
+    "alternativa_5minPorPasso": 25,
+    "plausivel": true,
+    "override": null,
+    "palavras": 594
+  },
+  "duracao": {
+    "declarada": "90-125 min",
+    "estimatedStudyTimeMinutes": 125,
+    "nucleo": 28.5,
+    "nucleoPartes": {
+      "teoria": 19.5,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 69,
+    "praticaExtraPartes": {
+      "lab": 30,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 70,
+    "recomendada": "25-35 min + 70 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

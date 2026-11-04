@@ -1,0 +1,103 @@
+{
+  "id": "3.5",
+  "versao": "original",
+  "titulo": "ARP: transformando IPv4 em MAC na rede local",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4501,
+    "teoria": 2718,
+    "praticaExtra": 1259,
+    "quiz": 245,
+    "flashcards": 96
+  },
+  "porGrupoTeoria": {
+    "introducao": 553,
+    "contexto": 422,
+    "conteudo": 498,
+    "exemplos": 693,
+    "seguranca_troubleshooting": 552
+  },
+  "porSecao": {
+    "motivation": 156,
+    "summary": 67,
+    "history": 149,
+    "problem": 142,
+    "evolution": 131,
+    "concept": 157,
+    "internals": 188,
+    "architecture": 150,
+    "diagram": 3,
+    "analogy": 109,
+    "simpleExample": 91,
+    "enterpriseExample": 111,
+    "cloudExample": 129,
+    "devsecopsExample": 113,
+    "securityExample": 140,
+    "objectives": 41,
+    "learningOutcomes": 79,
+    "glossary": 210,
+    "security": 269,
+    "troubleshooting": 283,
+    "nextTheme": 52
+  },
+  "pratica": {
+    "quiz": 245,
+    "flashcards": 96,
+    "lab": 664,
+    "mentorQuestions": 147,
+    "exercises": 186,
+    "challenge": 111,
+    "commentedSolution": 151
+  },
+  "outros": {
+    "title+subtitle": 23,
+    "nextTheme": 52,
+    "references": 48,
+    "linksToOtherCourses": 60
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 125,
+    "alternativa_5minPorPasso": 25,
+    "plausivel": false,
+    "override": null,
+    "palavras": 664
+  },
+  "duracao": {
+    "declarada": "90-125 min",
+    "estimatedStudyTimeMinutes": 125,
+    "nucleo": 29.9,
+    "nucleoPartes": {
+      "teoria": 20.9,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 70,
+    "praticaExtraPartes": {
+      "lab": 25,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 70,
+    "recomendada": "25-35 min + 70 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}
