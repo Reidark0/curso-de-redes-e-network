@@ -1,0 +1,43 @@
+
+<section class="lesson-section lesson-section--diagram">
+  <h2>14. Diagrama SVG</h2>
+  <svg class="lesson-svg" viewBox="0 0 1040 520" role="img" aria-labelledby="m01l03-title m01l03-desc">
+    <title id="m01l03-title">Tipos de rede por alcance e finalidade</title>
+    <desc id="m01l03-desc">Diagrama comparando PAN, LAN, WLAN, CAN, MAN, WAN e SAN dentro de uma arquitetura corporativa.</desc>
+    <defs>
+      <marker id="m01l03-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
+      </marker>
+    </defs>
+    <rect x="35" y="55" width="135" height="70" rx="14" class="svg-node svg-node--client" />
+    <text x="102" y="84" text-anchor="middle" class="svg-label">PAN</text>
+    <text x="102" y="107" text-anchor="middle" class="svg-label svg-label--small">Pessoa</text>
+    <rect x="210" y="55" width="145" height="70" rx="14" class="svg-node svg-node--switch" />
+    <text x="282" y="84" text-anchor="middle" class="svg-label">LAN</text>
+    <text x="282" y="107" text-anchor="middle" class="svg-label svg-label--small">Sala / andar</text>
+    <rect x="395" y="55" width="145" height="70" rx="14" class="svg-node svg-node--cloud" />
+    <text x="467" y="84" text-anchor="middle" class="svg-label">WLAN</text>
+    <text x="467" y="107" text-anchor="middle" class="svg-label svg-label--small">Wi-Fi</text>
+    <rect x="580" y="55" width="145" height="70" rx="14" class="svg-node svg-node--router" />
+    <text x="652" y="84" text-anchor="middle" class="svg-label">CAN</text>
+    <text x="652" y="107" text-anchor="middle" class="svg-label svg-label--small">Campus</text>
+    <rect x="765" y="55" width="145" height="70" rx="14" class="svg-node svg-node--router" />
+    <text x="837" y="84" text-anchor="middle" class="svg-label">MAN</text>
+    <text x="837" y="107" text-anchor="middle" class="svg-label svg-label--small">Cidade</text>
+    <rect x="430" y="220" width="180" height="80" rx="14" class="svg-node svg-node--cloud" />
+    <text x="520" y="253" text-anchor="middle" class="svg-label">WAN</text>
+    <text x="520" y="278" text-anchor="middle" class="svg-label svg-label--small">Filiais / internet / cloud</text>
+    <rect x="720" y="220" width="185" height="80" rx="14" class="svg-node svg-node--server" />
+    <text x="812" y="253" text-anchor="middle" class="svg-label">SAN</text>
+    <text x="812" y="278" text-anchor="middle" class="svg-label svg-label--small">Storage crítico</text>
+    <line x1="170" y1="90" x2="210" y2="90" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l03-arrow)" />
+    <line x1="355" y1="90" x2="395" y2="90" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l03-arrow)" />
+    <line x1="540" y1="90" x2="580" y2="90" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l03-arrow)" />
+    <line x1="725" y1="90" x2="765" y2="90" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l03-arrow)" />
+    <path d="M650 125 C630 170, 590 200, 555 220" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l03-arrow)" />
+    <line x1="610" y1="260" x2="720" y2="260" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m01l03-arrow)" />
+    <rect x="120" y="365" width="800" height="95" rx="16" class="svg-node svg-node--security" />
+    <text x="520" y="400" text-anchor="middle" class="svg-label">Decisão arquitetural</text>
+    <text x="520" y="428" text-anchor="middle" class="svg-label svg-label--small">alcance + finalidade + meio + controle + custo + risco + evidência</text>
+  </svg>
+</section>
