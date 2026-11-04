@@ -4,7 +4,7 @@ Status: PENDENTE · EM ANDAMENTO · CONCLUÍDA · FALHOU. Atualizado pelo orques
 
 | id | arquivo | status | palavras visíveis antes→depois | duração declarada→nova | duração | linguiça | útil | aproveitamento |
 |---|---|---|---|---|---|---|---|---|
-| 0.1 | m00/lesson-00-01.js | PENDENTE |  |  |  |  |  |  |
+| 0.1 | m00/lesson-00-01.js | EM ANDAMENTO |  |  |  |  |  |  |
 | 0.2 | m00/lesson-00-02.js | PENDENTE |  |  |  |  |  |  |
 | 0.3 | m00/lesson-00-03.js | PENDENTE |  |  |  |  |  |  |
 | 0.4 | m00/lesson-00-04.js | PENDENTE |  |  |  |  |  |  |
