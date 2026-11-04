@@ -1,0 +1,88 @@
+{
+  "id": "0.9",
+  "versao": "original",
+  "titulo": "Laboratório integrador do Módulo 0",
+  "tipo": "ligação integradora",
+  "palavras": {
+    "visiveis": 5599,
+    "invisiveis": 663,
+    "teoriaVisivel": 2782
+  },
+  "porCampoVisivel": {
+    "content.motivation": 211,
+    "content.history": 157,
+    "content.problem": 172,
+    "content.evolution": 120,
+    "content.concept": 118,
+    "content.internals": 142,
+    "content.architecture": 130,
+    "content.analogy": 138,
+    "content.simpleExample": 114,
+    "content.enterpriseExample": 112,
+    "content.cloudExample": 102,
+    "content.devsecopsExample": 92,
+    "content.securityExample": 164,
+    "content.diagram": 3,
+    "content.summary": 51,
+    "content.nextTheme": 53,
+    "security": 328,
+    "troubleshooting": 341,
+    "glossary": 234,
+    "title+subtitle": 22,
+    "objectives": 72,
+    "learningOutcomes": 86,
+    "quiz": 294,
+    "flashcards": 130,
+    "mentorQuestions": 166,
+    "exercises": 175,
+    "challenge": 181,
+    "commentedSolution": 167,
+    "references": 56,
+    "linksToOtherCourses": 48,
+    "lab": 1420
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 47,
+    "content.exercisesIntro": 27,
+    "content.challengeIntro": 33,
+    "content.solutionIntro": 33,
+    "networkContext": 60,
+    "deepDive": 300,
+    "commonMistakes": 163
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 12,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 90,
+    "alternativa_5minPasso_maisLeitura": 70.9,
+    "plausivel": true,
+    "palavras": 1420
+  },
+  "duracao": {
+    "declarada": "80-120 min",
+    "estimatedStudyTimeMinutes": 120,
+    "M": 100,
+    "T": 173.4,
+    "partes": {
+      "teoria": 21.4,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 90
+    },
+    "faixaRecomendada": "145-210 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 14
+  }
+}
