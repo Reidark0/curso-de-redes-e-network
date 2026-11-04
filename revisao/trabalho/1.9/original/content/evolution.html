@@ -1,0 +1,15 @@
+<section class="lesson-section lesson-section--evolution">
+  <h2>4. Evolução</h2>
+  <p>O diagnóstico inicial evoluiu de comandos isolados para uma sequência de investigação. Antes, muitos testes eram feitos manualmente em hosts físicos dentro de uma LAN simples. Hoje, o mesmo raciocínio precisa funcionar em redes domésticas, empresas, VPN, cloud, VMs, containers e ambientes híbridos.</p>
+  <table class="data-table comparison-table">
+    <thead><tr><th>Fase</th><th>Ferramenta comum</th><th>O que respondia</th><th>Limitação</th></tr></thead>
+    <tbody>
+      <tr><td>Configuração local</td><td><code>ipconfig</code>, <code>ip addr</code></td><td>Qual IP, máscara, gateway e DNS o host possui?</td><td>Não prova que o caminho funciona.</td></tr>
+      <tr><td>Alcance básico</td><td><code>ping</code></td><td>Há resposta ICMP do destino?</td><td>ICMP pode ser bloqueado ou tratado diferente da aplicação.</td></tr>
+      <tr><td>Vizinhança local</td><td><code>arp</code></td><td>O IP local foi resolvido para um MAC?</td><td>Não mostra roteamento além da LAN.</td></tr>
+      <tr><td>Caminho</td><td><code>tracert</code>, <code>traceroute</code></td><td>Quais saltos aparecem até o destino?</td><td>Rotas assimétricas e filtros podem esconder saltos.</td></tr>
+      <tr><td>Nome para IP</td><td><code>nslookup</code>, <code>dig</code></td><td>DNS resolve corretamente?</td><td>Não testa aplicação nem autorização.</td></tr>
+      <tr><td>Serviço e porta</td><td><code>Test-NetConnection</code>, <code>curl</code>, <code>nc</code></td><td>A porta ou aplicação responde?</td><td>Já é uma etapa além do diagnóstico inicial.</td></tr>
+    </tbody>
+  </table>
+</section>

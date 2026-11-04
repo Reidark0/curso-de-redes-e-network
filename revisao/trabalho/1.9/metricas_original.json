@@ -1,0 +1,88 @@
+{
+  "id": "1.9",
+  "versao": "original",
+  "titulo": "Diagnóstico inicial: ipconfig, ping, arp, tracert e nslookup",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5253,
+    "invisiveis": 803,
+    "teoriaVisivel": 2847
+  },
+  "porCampoVisivel": {
+    "content.motivation": 182,
+    "content.history": 162,
+    "content.problem": 133,
+    "content.evolution": 154,
+    "content.concept": 146,
+    "content.internals": 164,
+    "content.architecture": 118,
+    "content.analogy": 111,
+    "content.simpleExample": 83,
+    "content.enterpriseExample": 120,
+    "content.cloudExample": 88,
+    "content.devsecopsExample": 98,
+    "content.securityExample": 136,
+    "content.diagram": 3,
+    "content.summary": 77,
+    "content.nextTheme": 33,
+    "security": 339,
+    "troubleshooting": 470,
+    "glossary": 230,
+    "title+subtitle": 24,
+    "objectives": 65,
+    "learningOutcomes": 79,
+    "quiz": 308,
+    "flashcards": 118,
+    "mentorQuestions": 164,
+    "exercises": 188,
+    "challenge": 172,
+    "commentedSolution": 227,
+    "references": 46,
+    "linksToOtherCourses": 57,
+    "lab": 958
+  },
+  "porCampoInvisivel": {
+    "content.labIntro": 51,
+    "content.exercisesIntro": 23,
+    "content.challengeIntro": 30,
+    "content.solutionIntro": 28,
+    "networkContext": 47,
+    "deepDive": 447,
+    "commonMistakes": 177
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 10,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 75,
+    "alternativa_5minPasso_maisLeitura": 57.4,
+    "plausivel": true,
+    "palavras": 958
+  },
+  "duracao": {
+    "declarada": "80-115 min",
+    "estimatedStudyTimeMinutes": 115,
+    "M": 97.5,
+    "T": 158.9,
+    "partes": {
+      "teoria": 21.9,
+      "diagramas": 3,
+      "quiz": 6,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 75
+    },
+    "faixaRecomendada": "135-190 min",
+    "vereditoAutomatico": "SUBESTIMADA",
+    "pctTeoria": 16
+  }
+}

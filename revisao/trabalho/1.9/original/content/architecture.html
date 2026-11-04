@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--architecture">
+  <h2>7. Arquitetura</h2>
+  <p>Em uma arquitetura real, o diagnóstico inicial deve seguir uma ordem que reduz hipóteses. Primeiro o host. Depois a rede local. Depois o gateway. Depois o caminho. Depois DNS. Depois serviço e aplicação.</p>
+  <ul class="flow-list">
+    <li><strong>Host:</strong> interface ativa, IP, máscara, gateway, DNS, rota default.</li>
+    <li><strong>Rede local:</strong> link, Wi‑Fi, VLAN, ARP, switch, AP, porta física.</li>
+    <li><strong>Gateway:</strong> primeiro salto para sair da rede local.</li>
+    <li><strong>Caminho:</strong> roteadores, firewall, WAN, VPN, internet, cloud.</li>
+    <li><strong>DNS:</strong> nome, servidor consultado, resposta esperada, split DNS, cache.</li>
+    <li><strong>Serviço:</strong> porta, protocolo, TLS, autenticação, autorização e aplicação.</li>
+  </ul>
+  <p>Essa arquitetura mental evita pular direto para conclusões. Um problema de DNS pode parecer “sistema fora”. Uma falha de ARP pode parecer “internet caiu”. Um firewall bloqueando ICMP pode parecer “servidor desligado”.</p>
+</section>

@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--devsecops">
+  <h2>12. Exemplo em DevSecOps</h2>
+  <p>Um pipeline falha ao baixar dependências de um registry interno. Antes de culpar o artefato, o diagnóstico verifica se o runner possui DNS correto, rota para a rede interna, acesso ao proxy, resolução do nome do registry e porta liberada. Em runners efêmeros, containers e Kubernetes, comandos equivalentes como <code>ip addr</code>, <code>ip route</code>, <code>nslookup</code>, <code>curl -v</code> e <code>ss</code> ajudam a provar se a falha é rede, DNS, TLS, proxy, credencial ou autorização.</p>
+  <p>Em IaC, essas evidências viram requisitos: rotas declaradas, regras mínimas, DNS privado, NetworkPolicy, service accounts, secrets corretos e testes automatizados de conectividade.</p>
+</section>
