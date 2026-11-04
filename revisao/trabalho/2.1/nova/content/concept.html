@@ -1,7 +1,7 @@
 <section class="lesson-section lesson-section--concept">
-  <h2>5. Conceito</h2>
-  <p>O Modelo OSI é um modelo conceitual de sete camadas usado para descrever responsabilidades envolvidas na comunicação entre sistemas. Ele organiza a comunicação desde o sinal físico até a aplicação percebida pelo usuário.</p>
-  <div class="definition-box"><strong>Definição:</strong> o Modelo OSI é uma referência em camadas que ajuda a explicar, diagnosticar e documentar comunicação em rede, separando responsabilidades como transmissão física, endereçamento local, roteamento, transporte, sessão, apresentação e aplicação.</div>
+  <h2>Conceito</h2>
+  <div class="definition-box"><strong>Definição:</strong> o Modelo OSI é um modelo conceitual de referência, com sete camadas, que descreve as responsabilidades da comunicação entre sistemas, do sinal físico até a aplicação. Ele serve para explicar, diagnosticar e documentar redes; não é um protocolo que roda nos equipamentos.</div>
+  <p>Cada camada responde a uma pergunta diferente:</p>
   <table class="data-table comparison-table">
     <thead><tr><th>Camada</th><th>Nome</th><th>Pergunta principal</th><th>Exemplos mentais</th></tr></thead>
     <tbody>
@@ -14,4 +14,16 @@
       <tr><td>1</td><td>Física</td><td>Como bits viram sinais no meio?</td><td>Cobre, fibra, rádio, conectores, potência, ruído</td></tr>
     </tbody>
   </table>
+  <h3>OSI × TCP/IP</h3>
+  <p>A internet usa a pilha TCP/IP, que tem menos camadas e agrupa responsabilidades que o OSI separa:</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>TCP/IP</th><th>Camadas OSI equivalentes</th><th>Exemplos</th></tr></thead>
+    <tbody>
+      <tr><td>Aplicação</td><td>7, 6 e 5</td><td>HTTP, DNS, TLS, SMTP</td></tr>
+      <tr><td>Transporte</td><td>4</td><td>TCP, UDP</td></tr>
+      <tr><td>Internet</td><td>3</td><td>IPv4, IPv6, ICMP</td></tr>
+      <tr><td>Acesso à rede</td><td>2 e 1</td><td>Ethernet, Wi-Fi, ARP, cabo, fibra</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout warning"><strong>Limites do modelo:</strong> o OSI não é a implementação exata da internet moderna. Nem todo protocolo cabe em uma única camada (o TLS aparece “conceitualmente” na camada 6, mas roda sobre TCP e é acionado pela aplicação). Firewalls, load balancers, proxies e WAFs operam em várias camadas, e criptografia, identidade e sessão atravessam fronteiras. Use o OSI como mapa de perguntas, não como substituto da documentação do protocolo (RFCs, documentação oficial) nem como motivo para encerrar a investigação só porque uma camada parece suspeita.</div>
 </section>

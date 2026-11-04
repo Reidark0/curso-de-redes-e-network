@@ -358,93 +358,93 @@
   "quiz": [
     {
       "id": "q2.1.1",
-      "type": "conceito",
-      "q": "Qual é a principal utilidade prática do Modelo OSI?",
-      "opts": [
+      "question": "Qual é a principal utilidade prática do Modelo OSI?",
+      "options": [
         "Substituir TCP/IP na internet moderna",
         "Organizar responsabilidades de comunicação em camadas",
         "Criptografar conexões HTTP automaticamente",
         "Aumentar a velocidade física do cabo"
       ],
-      "a": 1,
-      "exp": "O OSI é um modelo de referência que organiza responsabilidades e ajuda no ensino, documentação e troubleshooting.",
+      "answer": 1,
+      "explanation": "O OSI é um modelo de referência que organiza responsabilidades e ajuda no ensino, documentação e troubleshooting.",
+      "topic": "modelo osi",
       "difficulty": "iniciante",
-      "topic": "modelo osi"
+      "type": "conceito"
     },
     {
       "id": "q2.1.2",
-      "type": "diagnóstico",
-      "q": "Um cabo desconectado ou sinal Wi‑Fi inexistente está mais associado a qual camada?",
-      "opts": [
+      "question": "Um cabo desconectado ou sinal Wi‑Fi inexistente está mais associado a qual camada?",
+      "options": [
         "Camada 1 — Física",
         "Camada 4 — Transporte",
         "Camada 6 — Apresentação",
         "Camada 7 — Aplicação"
       ],
-      "a": 0,
-      "exp": "A camada física trata do meio, sinal, conectores, rádio, fibra, cobre e energia de transmissão.",
+      "answer": 0,
+      "explanation": "A camada física trata do meio, sinal, conectores, rádio, fibra, cobre e energia de transmissão.",
+      "topic": "camada física",
       "difficulty": "iniciante",
-      "topic": "camada física"
+      "type": "diagnóstico"
     },
     {
       "id": "q2.1.3",
-      "type": "comparação",
-      "q": "Por que ping bem-sucedido não prova que uma aplicação web está funcionando?",
-      "opts": [
+      "question": "Por que ping bem-sucedido não prova que uma aplicação web está funcionando?",
+      "options": [
         "Porque ping testa apenas DNS",
         "Porque ICMP/alcance não valida porta TCP, TLS, HTTP, autenticação ou aplicação",
         "Porque ping sempre usa camada 7",
         "Porque ping só funciona em redes sem roteador"
       ],
-      "a": 1,
-      "exp": "Ping pode indicar algum alcance ICMP, mas não valida os mecanismos de transporte e aplicação necessários para um serviço web.",
+      "answer": 1,
+      "explanation": "Ping pode indicar algum alcance ICMP, mas não valida os mecanismos de transporte e aplicação necessários para um serviço web.",
+      "topic": "troubleshooting",
       "difficulty": "iniciante-intermediário",
-      "topic": "troubleshooting"
+      "type": "comparação"
     },
     {
       "id": "q2.1.4",
-      "type": "segurança",
-      "q": "Qual é um exemplo de defesa em profundidade usando a lógica do OSI?",
-      "opts": [
+      "question": "Qual é um exemplo de defesa em profundidade usando a lógica do OSI?",
+      "options": [
         "Usar apenas NAT como segurança",
         "Proteger físico, segmentar rede, restringir portas e autenticar aplicação",
         "Liberar any-any para simplificar diagnóstico",
         "Desativar logs para reduzir ruído"
       ],
-      "a": 1,
-      "exp": "Defesa em profundidade distribui controles por camadas, reduzindo dependência de um único mecanismo.",
+      "answer": 1,
+      "explanation": "Defesa em profundidade distribui controles por camadas, reduzindo dependência de um único mecanismo.",
+      "topic": "segurança",
       "difficulty": "intermediário",
-      "topic": "segurança"
+      "type": "segurança"
     },
     {
       "id": "q2.1.5",
-      "type": "cloud",
-      "q": "Em cloud, uma VM alcança a porta do banco, mas recebe erro de permissão. Qual distinção o OSI ajuda a fazer?",
-      "opts": [
+      "question": "Em cloud, uma VM alcança a porta do banco, mas recebe erro de permissão. Qual distinção o OSI ajuda a fazer?",
+      "options": [
         "Conectividade não é o mesmo que autorização",
         "Todo erro de banco é camada 1",
         "Security group substitui IAM",
         "DNS sempre é a causa"
       ],
-      "a": 0,
-      "exp": "A porta aberta indica conectividade de transporte, mas permissão depende de identidade, política e aplicação.",
+      "answer": 0,
+      "explanation": "A porta aberta indica conectividade de transporte, mas permissão depende de identidade, política e aplicação.",
+      "topic": "cloud",
       "difficulty": "intermediário",
-      "topic": "cloud"
+      "type": "cloud"
     },
     {
       "id": "q2.1.6",
-      "type": "arquitetura",
-      "q": "Qual afirmação sobre OSI está correta?",
-      "opts": [
+      "question": "Qual afirmação sobre OSI está correta?",
+      "options": [
         "Todo produto moderno atua em uma única camada",
         "O OSI é um modelo conceitual; componentes reais podem operar em várias camadas",
         "O OSI elimina a necessidade de logs",
         "O OSI torna desnecessário entender TCP/IP"
       ],
-      "a": 1,
-      "exp": "O OSI é uma referência. Firewalls, proxies, WAFs e load balancers podem atuar em múltiplas camadas.",
+      "answer": 1,
+      "explanation": "O OSI é uma referência. Firewalls, proxies, WAFs e load balancers podem atuar em múltiplas camadas.",
+      "topic": "limitações",
       "difficulty": "intermediário",
-      "topic": "limitações"
+      "type": "arquitetura"
     }
   ],
   "flashcards": [

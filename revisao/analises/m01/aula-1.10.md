@@ -194,3 +194,5 @@ Conferência com o `comparar`: cortes brutos de 534 palavras (13%), coerentes co
   ]
 }
 ```
+
+> **Controle de qualidade do m01 (revisor independente):** APROVADA. Quiz conferido. Menores aceitos: `glossary[].relatedLessons` mantido (subcampo de metadado previsto no app); distratores fracos em q1.10.1 e q1.10.4; "Conferir DNS usado por estações", que o `monitoring` cobre.

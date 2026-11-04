@@ -186,3 +186,5 @@ Palavras visíveis: 4764 → 6187 (+30%; cortes brutos 652 = 14%, acréscimos 20
   ]
 }
 ```
+
+> **Controle de qualidade do m01 (revisor independente):** APROVADA. Todos os fatos novos foram conferidos (pinagem, categorias, 90+10 m, PoE 15,4/30/60/90 W, orçamento 117 W). Ajuste menor aplicado pelo orquestrador: no cabo cruzado, a nota de que o crossover gigabit completo também troca azul e marrom. Menores aceitos: "CFTV" e "mapa físico" saíram com a tabela do `securityExample`; "provedor/BGP" saiu do `cloudExample`.

@@ -19,7 +19,7 @@ Status: PENDENTE · EM ANDAMENTO · CONCLUÍDA · FALHOU. Atualizado pelo orques
 | 1.3 | m01/lesson-01-03.js | CONCLUÍDA | 3736→4085 (+9%) | 65-95 min→70-100 min | ORGANIZADA | BAIXA 13% | FORTE | BOM |
 | 1.4 | m01/lesson-01-04.js | CONCLUÍDA | 4954→5217 (+5%) | 75-105 min→135-190 min | SUBESTIMADA | BAIXA 11% | FORTE | BOM |
 | 1.5 | m01/lesson-01-05.js | CONCLUÍDA | 3693→4089 (+11%) | 75-110 min→70-100 min | ORGANIZADA | MÉDIA 15% | PARCIAL | BOM |
-| 1.6 | m01/lesson-01-06.js | CONCLUÍDA | 4764→6187 (+30%) | 80-115 min→130-180 min | SUBESTIMADA | MÉDIA 15% | PARCIAL | BOM |
+| 1.6 | m01/lesson-01-06.js | CONCLUÍDA | 4764→6202 (+30%) | 80-115 min→130-180 min | SUBESTIMADA | MÉDIA 15% | PARCIAL | BOM |
 | 1.7 | m01/lesson-01-07.js | CONCLUÍDA | 4072→4590 (+13%) | 80-115 min→75-105 min | ORGANIZADA | BAIXA 11% | FORTE | BOM |
 | 1.8 | m01/lesson-01-08.js | CONCLUÍDA | 4970→5779 (+16%) | 80-115 min→115-160 min | SUBESTIMADA | BAIXA 12% | FORTE | BOM |
 | 1.9 | m01/lesson-01-09.js | CONCLUÍDA | 5253→5138 (-2%) | 80-115 min→115-165 min | SUBESTIMADA | MEDIA 16% | FORTE | BOM |
@@ -198,3 +198,5 @@ Status: PENDENTE · EM ANDAMENTO · CONCLUÍDA · FALHOU. Atualizado pelo orques
 ## Resumos por módulo
 
 **m00 — Fundamentos da Computação (10/10 CONCLUÍDAS).** As palavras visíveis ficaram praticamente iguais (54.040 → 54.555, +1%): a linguiça cortada (12–18% por aula) foi compensada pelo conteúdo de `deepDive`/`commonMistakes` que passou a aparecer (invisíveis 6.217 → 439) e por valores concretos que faltavam. A duração declarada subiu em 9 de 10 aulas pela fórmula 6.2 (o original estava SUBESTIMADO), e o `estimatedHours` do módulo foi de 14 para 23. `requiredLabs` perdeu lab-0.4, lab-0.8 e lab-0.10, que não existem. Erros técnicos corrigidos: diagrama da 0.1, broadcast chamado de host na 0.2, `ss -tulpen` na 0.7, `curl -vk` na 0.8. Controle de qualidade: 0.2 aprovada; 0.1 reprovada por um erro pontual (Base64 com CR LF), já corrigido (D22).
+
+**m01 — Fundamentos de Redes (10/10 CONCLUÍDAS).** Palavras visíveis: 43.152 → 47.882 (+11%). A alta vem de dois fatores: a mudança dos campos invisíveis para a área visível (6.185 → 437 palavras invisíveis) e o conteúdo novo de 1.6 (cabeamento: pinagem, categorias, PoE, limites) e 1.8 (métricas), que cobre lacunas dos objetivos. A partir da 1.9 foi reforçada a meta de não somar itens (D23). O T total foi de 1.178 para 1.138 min (−3%), e o `estimatedHours` do módulo, de 24 para 23. `requiredLabs`: saíram 5 labs inexistentes. Correções técnicas: `&&` em comandos Windows/PowerShell (1.10), NAS chamado de "rede de armazenamento" (1.3), comando `ss` e mensagens de ping (1.9). Controle de qualidade: 1.10 e 1.6 aprovadas, e na 1.6 foi incluída uma nota sobre o crossover gigabit.

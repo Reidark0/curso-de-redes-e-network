@@ -4,14 +4,14 @@
   "titulo": "Cabeamento estruturado e padrões RJ-45",
   "tipo": "fundamental",
   "palavras": {
-    "visiveis": 6187,
+    "visiveis": 6202,
     "invisiveis": 28,
-    "teoriaVisivel": 3332
+    "teoriaVisivel": 3347
   },
   "porCampoVisivel": {
     "content.motivation": 119,
     "content.problem": 265,
-    "content.concept": 395,
+    "content.concept": 410,
     "content.internals": 701,
     "content.architecture": 183,
     "content.analogy": 62,
@@ -60,9 +60,9 @@
     "declarada": "130-180 min",
     "estimatedStudyTimeMinutes": 180,
     "M": 155,
-    "T": 150.1,
+    "T": 150.2,
     "partes": {
-      "teoria": 25.6,
+      "teoria": 25.7,
       "diagramas": 3,
       "quiz": 8,
       "flashcards": 3.5,

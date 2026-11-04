@@ -1,14 +1,24 @@
 <section class="lesson-section lesson-section--internals">
-  <h2>6. Funcionamento interno</h2>
-  <p>O OSI funciona como uma decomposição mental da comunicação. Ao enviar dados, cada camada adiciona ou interpreta informações necessárias para cumprir sua responsabilidade. Ao receber, o processo é invertido.</p>
+  <h2>Funcionamento interno</h2>
+  <p>Ao enviar dados, cada camada adiciona ou interpreta as informações de que precisa para cumprir sua responsabilidade e oferece um serviço à camada de cima:</p>
   <ol class="flow-list">
     <li><strong>Aplicação:</strong> o navegador, cliente de API ou serviço cria uma mensagem com significado para a aplicação.</li>
-    <li><strong>Apresentação:</strong> os dados são codificados, serializados, possivelmente comprimidos ou protegidos.</li>
-    <li><strong>Sessão:</strong> a comunicação mantém contexto, estado, autenticação ou continuidade lógica quando aplicável.</li>
-    <li><strong>Transporte:</strong> TCP ou UDP organiza fluxos, portas, confiabilidade ou entrega sem conexão.</li>
-    <li><strong>Rede:</strong> IP permite sair da rede local e atravessar roteadores até outra rede.</li>
-    <li><strong>Enlace:</strong> Ethernet, Wi-Fi ou outro enlace entrega quadros localmente usando endereços e regras do domínio local.</li>
-    <li><strong>Física:</strong> os bits são transmitidos como sinais elétricos, luz ou rádio.</li>
+    <li><strong>Apresentação:</strong> os dados são codificados, serializados e, se for o caso, comprimidos ou protegidos.</li>
+    <li><strong>Sessão:</strong> a comunicação mantém contexto, estado, autenticação ou continuidade lógica, quando aplicável.</li>
+    <li><strong>Transporte:</strong> TCP ou UDP organiza fluxos e portas, com confiabilidade (TCP) ou entrega sem conexão (UDP).</li>
+    <li><strong>Rede:</strong> o IP permite sair da rede local e atravessar roteadores até outra rede.</li>
+    <li><strong>Enlace:</strong> Ethernet, Wi-Fi ou outro enlace entrega quadros localmente, com endereços e regras do domínio local.</li>
+    <li><strong>Física:</strong> os bits viram sinais elétricos, luz ou rádio.</li>
   </ol>
-  <p>No destino, ocorre a leitura inversa: sinal vira bits, bits viram quadro, quadro contém pacote, pacote contém segmento, segmento contém dados de aplicação. Essa ideia será aprofundada na aula 2.2 com encapsulamento, desencapsulamento e PDUs.</p>
+  <p>No destino, a leitura é inversa: sinal vira bits, bits viram quadro, o quadro contém o pacote, o pacote contém o segmento e o segmento contém os dados da aplicação. A aula 2.2 aprofunda isso com encapsulamento, desencapsulamento e PDUs.</p>
+  <h3>Como isso vira diagnóstico</h3>
+  <p>Transforme cada camada em uma pergunta com uma evidência: a interface está ativa? O host tem IP e rota? A porta conecta? O TLS negocia? A aplicação responde? A primeira evidência que falha aponta a camada provável e deixa a hipótese mais precisa. Vá do básico para o específico, sem pular etapas.</p>
+  <div class="callout warning"><strong>Erros comuns:</strong>
+    <ul>
+      <li><strong>Decorar as sete camadas sem aplicar:</strong> você repete nomes, mas não investiga falhas. Associe cada camada a uma pergunta, uma evidência e um ponto de falha.</li>
+      <li><strong>Chamar qualquer falha de “problema de rede”:</strong> para o usuário, tudo parece rede; o time errado é acionado e o diagnóstico atrasa.</li>
+      <li><strong>Achar que ping bem-sucedido prova que o sistema funciona:</strong> o ping só mostra alcance ICMP. Ele não valida porta, TLS, HTTP, autenticação nem autorização. E o inverso também vale: o ICMP pode estar bloqueado enquanto TCP/443 funciona.</li>
+      <li><strong>Forçar todo produto em uma camada única:</strong> confunde a análise de proxies, WAFs, load balancers e service mesh, que são multicamada.</li>
+    </ul>
+  </div>
 </section>

@@ -1,12 +1,12 @@
 <section class="lesson-section lesson-section--architecture">
-  <h2>7. Arquitetura</h2>
-  <p>Em uma arquitetura real, o OSI ajuda a localizar componentes, evidências e pontos de falha.</p>
+  <h2>Arquitetura</h2>
+  <p>Em uma arquitetura real, o OSI ajuda a localizar componentes, evidências e pontos de falha:</p>
   <ul class="flow-list">
     <li><strong>Camada 1:</strong> cabos, fibra, rádio, energia, portas físicas, SFPs e interferência.</li>
-    <li><strong>Camada 2:</strong> switches, VLANs, MAC table, ARP e domínio de broadcast.</li>
-    <li><strong>Camada 3:</strong> roteadores, gateways, tabelas de rota, subnets e security routing.</li>
+    <li><strong>Camada 2:</strong> switches, VLANs, tabela MAC, ARP e domínio de broadcast.</li>
+    <li><strong>Camada 3:</strong> roteadores, gateways, tabelas de rota e subnets.</li>
     <li><strong>Camada 4:</strong> portas TCP/UDP, firewalls stateful, load balancers L4 e health checks.</li>
     <li><strong>Camadas 5 a 7:</strong> TLS, HTTP, DNS, autenticação, proxy, WAF, APIs e regras de aplicação.</li>
   </ul>
-  <p>Em cloud, esses elementos aparecem como VPC/VNet, subnet, route table, security group, NSG, load balancer, private endpoint, NAT gateway, firewall gerenciado, DNS privado e WAF. Em DevSecOps, aparecem em Terraform, Kubernetes Services, Ingress, NetworkPolicy, service mesh e testes automatizados de conectividade.</p>
+  <p>Em cloud, os mesmos papéis aparecem como VPC/VNet, subnet, route table, security group, NSG, load balancer, private endpoint, NAT gateway, firewall gerenciado, DNS privado e WAF. O caminho físico fica abstraído, mas o OSI continua separando overlay, rota, política e aplicação. Em DevSecOps, aparecem em Terraform, Kubernetes Services, Ingress, NetworkPolicy, service mesh e testes automatizados de conectividade.</p>
 </section>
