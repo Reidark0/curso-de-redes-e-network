@@ -1,0 +1,79 @@
+{
+  "id": "0.9",
+  "versao": "nova",
+  "titulo": "Laboratório integrador do Módulo 0",
+  "tipo": "ligação integradora",
+  "palavras": {
+    "visiveis": 5730,
+    "invisiveis": 60,
+    "teoriaVisivel": 2447
+  },
+  "porCampoVisivel": {
+    "content.motivation": 147,
+    "content.problem": 130,
+    "content.concept": 209,
+    "content.internals": 358,
+    "content.analogy": 110,
+    "content.simpleExample": 114,
+    "content.enterpriseExample": 109,
+    "content.cloudExample": 88,
+    "content.devsecopsExample": 79,
+    "content.securityExample": 158,
+    "content.diagram": 2,
+    "content.summary": 106,
+    "content.nextTheme": 36,
+    "security": 272,
+    "troubleshooting": 295,
+    "glossary": 234,
+    "title+subtitle": 22,
+    "objectives": 72,
+    "learningOutcomes": 86,
+    "quiz": 373,
+    "flashcards": 159,
+    "mentorQuestions": 230,
+    "exercises": 291,
+    "challenge": 234,
+    "commentedSolution": 278,
+    "references": 56,
+    "linksToOtherCourses": 48,
+    "lab": 1434
+  },
+  "porCampoInvisivel": {
+    "networkContext": 60
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 12,
+    "diagramasSvg": 1,
+    "desafio": true
+  },
+  "lab": {
+    "override": null,
+    "estimatedTimeMinutes": 90,
+    "alternativa_5minPasso_maisLeitura": 71,
+    "plausivel": true,
+    "palavras": 1434
+  },
+  "duracao": {
+    "declarada": "145-205 min",
+    "estimatedStudyTimeMinutes": 205,
+    "M": 175,
+    "T": 171.8,
+    "partes": {
+      "teoria": 18.8,
+      "diagramas": 3,
+      "quiz": 7,
+      "flashcards": 3,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 20,
+      "lab": 90
+    },
+    "faixaRecomendada": "145-205 min",
+    "vereditoAutomatico": "ORGANIZADA (checar equilíbrio)",
+    "pctTeoria": 13
+  }
+}

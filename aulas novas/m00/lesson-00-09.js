@@ -1,0 +1,950 @@
+export const lesson0009 = {
+  "id": "0.9",
+  "moduleId": "m00",
+  "order": 9,
+  "title": "Laboratório integrador do Módulo 0",
+  "subtitle": "Reunindo representação digital, bases numéricas, codificação, métricas, sinais, protocolos e pensamento em camadas em um diagnóstico único.",
+  "duration": "145-205 min",
+  "estimatedStudyTimeMinutes": 205,
+  "difficulty": "iniciante-intermediário",
+  "type": "ligação integradora",
+  "xp": 190,
+  "tags": [
+    "fundamentos",
+    "laboratório",
+    "troubleshooting",
+    "evidências",
+    "camadas",
+    "protocolo",
+    "segurança",
+    "cloud",
+    "devsecops"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.1",
+      "reason": "O laboratório parte da ideia de que toda informação digital precisa ser representada em bits."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.2",
+      "reason": "A conversão entre decimal, binário e hexadecimal será usada para interpretar endereços, bytes e evidências."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.3",
+      "reason": "A análise de texto, UTF-8 e Base64 será aplicada em payloads, logs e exemplos de API."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.4",
+      "reason": "O aluno precisará diferenciar Mbps, MB/s, volume, throughput e overhead."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.5",
+      "reason": "O laboratório inclui coleta de evidências de camada física e enlace."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.6",
+      "reason": "O laboratório mede latência, caminho e tempo de resposta."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.7",
+      "reason": "A análise usa a ideia de protocolo como contrato de comunicação."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.8",
+      "reason": "O relatório final organiza hipóteses por camadas."
+    }
+  ],
+  "objectives": [
+    "Integrar os conceitos das aulas 0.1 a 0.8 em uma investigação prática e segura.",
+    "Coletar evidências técnicas sem depender de achismo ou conclusão prematura.",
+    "Relacionar bytes, codificação, sinais, métricas, protocolos e camadas em um mesmo fluxo de comunicação.",
+    "Construir um relatório de diagnóstico básico com comandos, observações, interpretação e riscos.",
+    "Preparar o aluno para o Módulo 1, onde redes deixam de ser abstração e passam a ser topologia, enlace, endereçamento e serviços."
+  ],
+  "learningOutcomes": [
+    "Dado um computador conectado a uma rede comum, o aluno consegue coletar IP, gateway, DNS, interface, evidências de link e caminho.",
+    "Dado um endereço IPv4, o aluno consegue relacionar decimal, binário, hexadecimal e octetos.",
+    "Dado um texto simples, o aluno consegue observar representação em UTF-8 e Base64 sem confundir codificação com criptografia.",
+    "Dado um sintoma de rede lenta, o aluno consegue separar latência, throughput, perda, DNS, porta e aplicação.",
+    "Dado um conjunto de evidências, o aluno consegue montar um diagnóstico por camadas com próximos testes recomendados."
+  ],
+  "content": {
+    "motivation": "\n<section class=\"lesson-section lesson-section--motivation\">\n  <h2>Motivação</h2>\n  <p>\n    Até aqui você estudou peças que parecem separadas: bits, bytes, binário, hexadecimal, UTF-8, Base64, bit por segundo e byte por segundo, sinais físicos, latência, throughput, protocolo e camadas. Se elas ficarem em gavetas isoladas, no trabalho você vai continuar dizendo só <strong>\"a rede está ruim\"</strong>, <strong>\"o sistema caiu\"</strong> ou <strong>\"deve ser DNS\"</strong>.\n  </p>\n  <div class=\"callout callout--problem\">\n    <strong>Problema real:</strong> uma aplicação interna está lenta. O usuário diz que \"a internet está ruim\". O time de aplicação diz que \"deve ser rede\". O time de redes diz que \"ping está normal\". O time de segurança suspeita do proxy. Sem método, cada equipe olha uma parte. Com método, você organiza as evidências: interface, endereço, gateway, DNS, latência, rota, porta, protocolo, payload, codificação, logs e risco.\n  </div>\n  <p>\n    Neste laboratório você monta seu primeiro dossiê técnico: comandos executados, saídas relevantes, o que cada saída prova e não prova, hipóteses descartadas, riscos de segurança e próximos passos.\n  </p>\n</section>\n",
+    "problem": "\n<section class=\"lesson-section lesson-section--problem\">\n  <h2>Problema</h2>\n  <p>\n    O problema é o conhecimento fragmentado. Você pode saber que um byte tem oito bits e não enxergar isso nos quatro octetos de um endereço IPv4. Pode saber que Base64 não é criptografia e não reconhecer um segredo codificado em um arquivo de configuração. Pode medir ping e não saber que ele não prova acesso à aplicação. Pode conhecer a camada física e ignorar velocidade negociada, Wi-Fi instável ou cabo ruim.\n  </p>\n  <ul>\n    <li><strong>O que quebra:</strong> o diagnóstico vira lista de comandos sem interpretação.</li>\n    <li><strong>Confusões típicas:</strong> codificação com criptografia, banda com throughput, ping com saúde da aplicação, autenticação com autorização.</li>\n    <li><strong>Risco:</strong> decisões sem evidência abrem regras de firewall desnecessárias, expõem credenciais em logs, compram banda sem resolver latência ou culpam o DNS quando o erro está em TLS, autorização ou aplicação.</li>\n  </ul>\n</section>\n",
+    "concept": "\n<section class=\"lesson-section lesson-section--concept\">\n  <h2>Conceito</h2>\n  <div class=\"definition-box\">\n    <strong>Definição:</strong> neste curso, laboratório integrador é uma prática guiada de coleta, organização e interpretação de evidências técnicas, que conecta os fundamentos digitais a um cenário real de comunicação em rede, troubleshooting e segurança defensiva.\n  </div>\n  <p>\n    Em vez de perguntar \"o que é um byte?\" ou \"o que é latência?\", o laboratório pergunta como bytes, codificação, sinais, métricas, protocolos e camadas aparecem juntos quando um computador fala com outro sistema. Para cada teste, você escreve uma interpretação honesta:\n  </p>\n  <div class=\"callout\">\n    <strong>\"Este teste mostra X, não mostra Y, e por isso o próximo teste deve ser Z.\"</strong>\n  </div>\n  <p>\n    O resultado é um relatório técnico curto, com comandos, saídas relevantes, tabelas de conversão, hipóteses, interpretação por camada, riscos e próximos passos. Ele não precisa ser perfeito; precisa ser rastreável: outra pessoa deve conseguir refazer cada teste e chegar à mesma leitura.\n  </p>\n  <div class=\"callout warning\">\n    <strong>Limites deste laboratório:</strong>\n    <ul>\n      <li>Ele usa comandos locais e destinos comuns; não substitui ferramentas corporativas de observabilidade.</li>\n      <li>Ping, traceroute e curl podem ser filtrados, alterados por proxy ou tratados de forma diferente em redes reais.</li>\n      <li>Sem captura de pacotes ou logs do servidor, algumas conclusões continuam sendo hipóteses.</li>\n      <li>Redes corporativas podem bloquear comandos ou mascarar informações por política de segurança, e o resultado de uma rede doméstica não prova o comportamento de uma rede corporativa.</li>\n    </ul>\n  </div>\n</section>\n",
+    "internals": "\n<section class=\"lesson-section lesson-section--internals\">\n  <h2>Funcionamento interno</h2>\n  <p>\n    O laboratório é uma cadeia de evidências. Você começa na máquina local, vê como ela representa dados, verifica como está conectada, mede sinais indiretos de rede, testa a resolução de nomes, testa um protocolo de aplicação e organiza tudo em camadas. A topologia é simples: <strong>seu host → interface (Wi-Fi, Ethernet, WSL, VM ou adaptador virtual) → rede local (gateway e DNS) → destino HTTPS de teste</strong>. Em empresa, a mesma cadeia passa por switches, roteadores, firewalls, proxies, VPN, DNS interno, balanceadores e IdP; a escala muda, a disciplina de evidência não.\n  </p>\n  <div class=\"responsive-table\">\n    <table class=\"data-table\">\n      <thead><tr><th>Etapa</th><th>Comando (Windows / Linux)</th><th>O que prova</th><th>O que não prova</th></tr></thead>\n      <tbody>\n        <tr><td>Representação</td><td>Python ou PowerShell: bytes, hex e Base64 de um texto; octetos de um IPv4</td><td>Como texto e números viram bytes, binário e hexadecimal</td><td>Base64 não protege nada: é codificação reversível</td></tr>\n        <tr><td>Meio, enlace e interface</td><td><code>ipconfig /all</code> / <code>ip addr</code></td><td>Tipo e estado do adaptador, IP e máscara/prefixo</td><td>Que o enlace está estável ou na velocidade esperada</td></tr>\n        <tr><td>Rede local</td><td><code>route print</code> / <code>ip route</code>; DNS no <code>ipconfig /all</code> ou <code>resolvectl status</code></td><td>Gateway (rota default) e servidores DNS configurados</td><td>Que gateway e DNS estão respondendo</td></tr>\n        <tr><td>Latência</td><td><code>ping</code> / <code>ping -c 4</code></td><td>Resposta ICMP e RTT aproximado; perda</td><td>TCP 443, TLS ou HTTP. Se falhar, não prova que o destino está fora: ICMP pode ser bloqueado</td></tr>\n        <tr><td>Nome</td><td><code>Resolve-DnsName</code> / <code>getent hosts</code></td><td>O nome resolve para um ou mais IPs</td><td>Porta aberta, TLS válido ou permissão do usuário</td></tr>\n        <tr><td>Caminho</td><td><code>tracert</code> / <code>traceroute</code> ou <code>tracepath</code></td><td>Os saltos até o destino</td><td>Salto sem resposta não prova queda: roteadores podem não responder ICMP</td></tr>\n        <tr><td>Porta</td><td><code>Test-NetConnection -Port 443</code> / no Linux, o próprio <code>curl</code></td><td>O destino aceita conexão TCP na porta</td><td>Que o HTTP responde ou que o usuário tem acesso</td></tr>\n        <tr><td>Aplicação</td><td><code>curl -I https://…</code></td><td>Há comunicação HTTP acima de TCP/TLS; o status (200, 301, 403…) diz o resultado</td><td>Que um usuário específico tem autorização</td></tr>\n        <tr><td>Taxa e volume</td><td>Cálculo: Mbps ÷ 8 = MB/s</td><td>Quanto um link nominal permite em bytes, antes de overhead</td><td>O throughput útil real</td></tr>\n      </tbody>\n    </table>\n  </div>\n  <p>\n    Por fim, duas etapas fecham a cadeia: <strong>segurança</strong> (a sanitização de evidência: mascarar o que nas saídas não pode ser exposto, e evitar conclusões perigosas) e <strong>relatório</strong> (as observações viram diagnóstico por camadas).\n  </p>\n</section>\n",
+    "analogy": "\n<section class=\"lesson-section lesson-section--analogy\">\n  <h2>Analogia</h2>\n  <p>\n    Pense no laboratório como a perícia de uma encomenda atrasada. Não basta dizer \"os Correios estão ruins\". Você verifica se o pacote foi embalado, se o endereço estava correto, se saiu do remetente, por quais centros passou, onde parou, quem assinou e se houve restrição de acesso no prédio.\n  </p>\n  <p>\n    Em redes, a encomenda são os dados; a embalagem, os protocolos e encapsulamentos; o endereço aparece em várias camadas; o caminho são as rotas; a portaria do prédio lembra firewall, proxy, TLS, autenticação e autorização; o recibo lembra logs e evidências.\n  </p>\n  <div class=\"callout callout--warning\">\n    <strong>Limite da analogia:</strong> dados não viajam como caixas intactas; podem ser fragmentados, retransmitidos, criptografados, cacheados e balanceados no caminho.\n  </div>\n</section>\n",
+    "simpleExample": "\n<section class=\"lesson-section lesson-section--example\">\n  <h2>Exemplo simples</h2>\n  <p>\n    Em casa, um site demora a abrir. O diagnóstico fraco é \"minha internet está ruim\". O diagnóstico melhor coleta evidências: o Wi-Fi está conectado? O IP foi recebido? O gateway responde? O DNS resolve o nome? O caminho tem perda? A porta 443 responde? O site retorna status HTTP? A lentidão ocorre em todos os destinos ou só em um?\n  </p>\n  <p>\n    Depois você liga cada resposta a um fundamento: o plano contratado é medido em bits por segundo, o download aparece em bytes por segundo, a latência mede tempo, o HTTP é protocolo, o texto da resposta usa uma codificação, o TLS protege o conteúdo e o diagnóstico por camadas evita conclusões apressadas.\n  </p>\n</section>\n",
+    "enterpriseExample": "\n<section class=\"lesson-section lesson-section--enterprise\">\n  <h2>Exemplo empresarial</h2>\n  <p>\n    Um usuário não consegue acessar o sistema financeiro. O caminho pode envolver notebook corporativo, Wi-Fi com 802.1X, VLAN, switch, roteador, firewall, proxy, DNS interno, balanceador, TLS, aplicação, banco de dados e autenticação no diretório corporativo.\n  </p>\n  <p>\n    O método evita pular etapas. Se o notebook não tem IP, a falha está antes da aplicação. Se o DNS resolve para o IP errado, o problema é outro. Se a porta responde mas o HTTP retorna 403, a conectividade básica existe e a investigação sobe para autorização ou política. Se o acesso falha só pela VPN, o escopo muda para rota, split tunnel, DNS interno, firewall ou política de acesso remoto.\n  </p>\n</section>\n",
+    "cloudExample": "\n<section class=\"lesson-section lesson-section--cloud\">\n  <h2>Exemplo em cloud</h2>\n  <p>\n    Em cloud, uma aplicação pode falhar por security group, network security group, route table, subnet, DNS privado, endpoint privado, NAT Gateway, load balancer, certificado, WAF, IAM ou pelo próprio código. Comprar mais capacidade ou abrir \"any-any\" no firewall pode mascarar o problema, gerar custo e criar exposição. O relatório por camadas diz a cada equipe o que validar: cloud networking, rota e política de rede; segurança, WAF, logs e exposição; plataforma, ingress e DNS interno; aplicação, código e status HTTP; IAM, token, claims e autorização.\n  </p>\n</section>\n",
+    "devsecopsExample": "\n<section class=\"lesson-section lesson-section--devsecops\">\n  <h2>Exemplo em DevSecOps</h2>\n  <p>\n    Em pipelines, muitos erros parecem \"rede\", mas estão em camadas diferentes: runner sem saída para a internet, proxy sem configuração, DNS interno inacessível, TLS interceptado, token expirado, registry fora do ar, secret mal codificado, política de egress bloqueando ou permissão insuficiente no provedor cloud. Um pipeline maduro não diz só \"deploy failed\": ele registra resolução de nome, conectividade de porta, status HTTP, autenticação e autorização, e correlaciona a falha com mudanças recentes de infraestrutura como código.\n  </p>\n</section>\n",
+    "securityExample": "\n<section class=\"lesson-section lesson-section--security\">\n  <h2>Exemplo em Segurança</h2>\n  <p>\n    Um alerta de exfiltração depende de vários fundamentos ao mesmo tempo: volume em bytes, taxa em bits por segundo, destino, protocolo, porta, codificação do payload, padrão de DNS, logs de proxy, autenticação e horário. Um segredo em Base64 parece protegido para quem não entende codificação. Um ping normal pode esconder uma aplicação vulnerável. Um bloqueio de WAF parece erro de rede para o usuário.\n  </p>\n  <div class=\"responsive-table\">\n    <table class=\"data-table risk-table\">\n      <thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead>\n      <tbody>\n        <tr><td>Conclusão por evidência fraca</td><td>\"Ping funciona, então não é rede\"</td><td>Incidente ou falha real passa despercebida</td><td>Validar por camadas e registrar os limites do teste</td></tr>\n        <tr><td>Segredo codificado exposto</td><td>Token em Base64 no log ou arquivo</td><td>Credencial reutilizada por atacante</td><td>Mascaramento, cofre de segredos e revisão de logs</td></tr>\n        <tr><td>Alteração insegura</td><td>Abrir firewall sem prova da causa</td><td>Ampliação da superfície de ataque</td><td>Mudança controlada, escopo mínimo e evidência</td></tr>\n        <tr><td>Confundir autenticação e autorização</td><td>Usuário loga, mas recebe 403</td><td>Diagnóstico e escalonamento incorretos</td><td>Separar identidade, token, grupos, claims e política</td></tr>\n      </tbody>\n    </table>\n  </div>\n</section>\n",
+    "diagram": "\n<section class=\"lesson-section lesson-section--diagram\">\n  <h2>Diagrama SVG</h2>\n  <svg class=\"lesson-svg\" viewBox=\"0 0 1040 520\" role=\"img\" aria-labelledby=\"m00l09-title m00l09-desc\">\n    <title id=\"m00l09-title\">Laboratório integrador do Módulo 0</title>\n    <desc id=\"m00l09-desc\">Fluxo de coleta de evidências conectando representação digital, interface, rede local, caminho, protocolo, segurança e relatório final.</desc>\n    <defs>\n      <marker id=\"m00l09-arrow\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\" markerUnits=\"strokeWidth\">\n        <path d=\"M0,0 L0,6 L9,3 z\" class=\"svg-arrow\" />\n      </marker>\n    </defs>\n    <rect x=\"40\" y=\"70\" width=\"170\" height=\"78\" rx=\"14\" class=\"svg-node svg-node--client\" />\n    <text x=\"125\" y=\"104\" text-anchor=\"middle\" class=\"svg-label\">Host</text>\n    <text x=\"125\" y=\"128\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">bytes, IP, interface</text>\n    <rect x=\"260\" y=\"70\" width=\"170\" height=\"78\" rx=\"14\" class=\"svg-node svg-node--switch\" />\n    <text x=\"345\" y=\"104\" text-anchor=\"middle\" class=\"svg-label\">Rede local</text>\n    <text x=\"345\" y=\"128\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Wi-Fi, gateway, DNS</text>\n    <rect x=\"480\" y=\"70\" width=\"170\" height=\"78\" rx=\"14\" class=\"svg-node svg-node--router\" />\n    <text x=\"565\" y=\"104\" text-anchor=\"middle\" class=\"svg-label\">Caminho</text>\n    <text x=\"565\" y=\"128\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">rota, RTT, perda</text>\n    <rect x=\"700\" y=\"70\" width=\"170\" height=\"78\" rx=\"14\" class=\"svg-node svg-node--server\" />\n    <text x=\"785\" y=\"104\" text-anchor=\"middle\" class=\"svg-label\">Protocolo</text>\n    <text x=\"785\" y=\"128\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">HTTP, TLS, status</text>\n    <line x1=\"210\" y1=\"109\" x2=\"260\" y2=\"109\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m00l09-arrow)\" />\n    <line x1=\"430\" y1=\"109\" x2=\"480\" y2=\"109\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m00l09-arrow)\" />\n    <line x1=\"650\" y1=\"109\" x2=\"700\" y2=\"109\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m00l09-arrow)\" />\n    <rect x=\"170\" y=\"225\" width=\"700\" height=\"78\" rx=\"14\" class=\"svg-node svg-node--security\" />\n    <text x=\"520\" y=\"257\" text-anchor=\"middle\" class=\"svg-label\">Interpretação defensiva</text>\n    <text x=\"520\" y=\"282\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">o que a evidência prova, o que não prova, riscos e próximos testes</text>\n    <line x1=\"785\" y1=\"148\" x2=\"785\" y2=\"225\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m00l09-arrow)\" />\n    <line x1=\"125\" y1=\"148\" x2=\"255\" y2=\"225\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m00l09-arrow)\" />\n    <rect x=\"260\" y=\"375\" width=\"520\" height=\"82\" rx=\"14\" class=\"svg-node svg-node--cloud\" />\n    <text x=\"520\" y=\"407\" text-anchor=\"middle\" class=\"svg-label\">Relatório técnico</text>\n    <text x=\"520\" y=\"432\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">comandos, saídas, interpretação, camadas, segurança e próximos passos</text>\n    <line x1=\"520\" y1=\"303\" x2=\"520\" y2=\"375\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m00l09-arrow)\" />\n    <rect x=\"910\" y=\"214\" width=\"90\" height=\"100\" rx=\"12\" class=\"svg-node svg-node--attacker\" />\n    <text x=\"955\" y=\"250\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Riscos</text>\n    <text x=\"955\" y=\"274\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">logs</text>\n    <text x=\"955\" y=\"296\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">segredos</text>\n    <line x1=\"870\" y1=\"264\" x2=\"910\" y2=\"264\" class=\"svg-flow svg-flow--blocked animated-flow\" marker-end=\"url(#m00l09-arrow)\" />\n  </svg>\n</section>",
+    "summary": "\n<section class=\"lesson-section lesson-section--summary\">\n  <h2>Resumo</h2>\n  <ul>\n    <li><strong>Modelo mental:</strong> o laboratório não procura uma resposta mágica; ele constrói uma trilha de evidências: dado bruto, comando, observação, interpretação, limite da evidência, hipótese e próximo teste.</li>\n    <li><strong>O que lembrar:</strong> cada comando prova uma coisa limitada (ping prova ICMP, DNS prova tradução de nome, curl prova resposta HTTP); registre também o que ele não prova.</li>\n    <li><strong>Fundamentos em uso:</strong> octetos de IPv4 em binário e hex, texto em UTF-8 e Base64 (codificação, não proteção), Mbps ÷ 8 = MB/s antes de overhead.</li>\n    <li><strong>Erro comum:</strong> transformar um teste parcial em conclusão total.</li>\n    <li><strong>Uso real:</strong> chamados de troubleshooting, SOC, cloud, DevSecOps, IAM e resposta a incidentes, sempre com evidências sanitizadas.</li>\n  </ul>\n</section>\n",
+    "nextTheme": "\n<section class=\"lesson-section lesson-section--next\">\n  <h2>Próximo tema</h2>\n  <p>\n    Na aula 0.10, Revisão do Módulo 0, você consolida estes conceitos em mapa mental, checklist e simulado antes do Módulo 1 — Fundamentos de Redes, onde redes passam a ser topologias, endereços, enlaces e protocolos.\n  </p>\n</section>\n"
+  },
+  "networkContext": {
+    "osiLayers": [
+      "Preparatório para Camada 1",
+      "Preparatório para Camada 2",
+      "Preparatório para Camada 3",
+      "Preparatório para Camada 4",
+      "Preparatório para Camada 7"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede",
+      "Internet",
+      "Transporte",
+      "Aplicação"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "IPv4",
+      "ICMP",
+      "DNS",
+      "TCP",
+      "TLS",
+      "HTTP"
+    ],
+    "dependsOn": [
+      "representação digital",
+      "binário",
+      "hexadecimal",
+      "UTF-8",
+      "Base64",
+      "bit vs byte",
+      "sinais físicos",
+      "latência",
+      "throughput",
+      "protocolos",
+      "camadas"
+    ],
+    "enables": [
+      "fundamentos de redes",
+      "Modelo OSI",
+      "troubleshooting profissional",
+      "análise de tráfego",
+      "segurança defensiva"
+    ]
+  },
+  "troubleshooting": {
+    "symptoms": [
+      "Sistema lento",
+      "Site não abre",
+      "API retorna timeout",
+      "Pipeline falha ao baixar dependência",
+      "Usuário autentica mas recebe acesso negado",
+      "Download abaixo do esperado"
+    ],
+    "diagnosticQuestions": [
+      "Qual é o sintoma exato e quando começou?",
+      "A interface está ativa e com endereço válido?",
+      "O gateway e o DNS estão configurados?",
+      "O nome resolve para um IP esperado?",
+      "Há latência alta, perda ou caminho inesperado?",
+      "A porta de aplicação responde?",
+      "O protocolo retorna status ou erro legível?",
+      "Existe autenticação e autorização envolvida?",
+      "Alguma mudança recente em rede, firewall, proxy, cloud, pipeline ou IAM coincide com o problema?"
+    ],
+    "commands": [
+      {
+        "platform": "Windows",
+        "command": "ipconfig /all\nroute print\nResolve-DnsName example.com\nping example.com\ntracert example.com\nTest-NetConnection example.com -Port 443\ncurl.exe -I https://example.com",
+        "purpose": "Coletar evidências de interface, rota, DNS, latência, porta TCP e resposta HTTP.",
+        "expectedObservation": "IP, gateway e DNS configurados; resolução de nome; alguma resposta ICMP ou caminho; porta 443 acessível; headers HTTP.",
+        "interpretation": "Cada comando valida uma parte limitada. Falhas devem ser organizadas por camada antes de concluir causa."
+      },
+      {
+        "platform": "Linux",
+        "command": "ip addr\nip route\ngetent hosts example.com\nping -c 4 example.com\ntraceroute example.com\ncurl -I https://example.com",
+        "purpose": "Coletar evidências equivalentes em Linux.",
+        "expectedObservation": "Interface ativa, rota default, resolução de nome, RTT aproximado, caminho e status HTTP.",
+        "interpretation": "Ausência de rota default, DNS falhando, perda alta ou erro HTTP apontam para camadas diferentes."
+      }
+    ],
+    "decisionTree": [
+      {
+        "if": "Sem IP válido na interface",
+        "then": "Investigar DHCP, configuração manual, adaptador, Wi-Fi, cabo ou VLAN antes de testar aplicação."
+      },
+      {
+        "if": "DNS não resolve nome",
+        "then": "Testar servidor DNS, sufixo de busca, VPN, DNS privado ou bloqueio de saída."
+      },
+      {
+        "if": "Porta TCP não responde mas DNS resolve",
+        "then": "Investigar rota, firewall, proxy, serviço de destino ou política de egress."
+      },
+      {
+        "if": "Porta responde mas HTTP retorna 401 ou 403",
+        "then": "Subir para autenticação, autorização, token, grupos, claims ou política de aplicação."
+      },
+      {
+        "if": "Throughput baixo com latência e perda altas",
+        "then": "Investigar Wi-Fi, congestionamento, caminho, VPN, proxy, QoS ou problemas físicos."
+      }
+    ]
+  },
+  "security": {
+    "goodPractices": [
+      "Executar apenas testes autorizados e não invasivos.",
+      "Mascarar tokens, IPs internos sensíveis, nomes reais de sistemas e dados pessoais antes de compartilhar evidências.",
+      "Registrar o limite de cada evidência para evitar decisões perigosas.",
+      "Documentar alterações propostas com escopo mínimo e justificativa técnica."
+    ],
+    "badPractices": [
+      "Abrir firewall sem prova de que a porta é a causa do problema.",
+      "Colar logs com credenciais em tickets ou chats.",
+      "Concluir causa definitiva sem evidências suficientes."
+    ],
+    "commonErrors": [
+      "Confundir codificação (Base64) com criptografia.",
+      "Confundir disponibilidade de porta com autorização de usuário.",
+      "Ignorar proxy, VPN, WAF e IdP em diagnósticos modernos."
+    ],
+    "vulnerabilities": [
+      {
+        "name": "Exposição de segredo em evidência técnica",
+        "description": "Tokens, cookies, Basic Auth, chaves ou strings em Base64 podem aparecer em headers, logs ou comandos colados no relatório.",
+        "defensiveExplanation": "O laboratório ensina a reconhecer e mascarar dados sensíveis, não a explorá-los.",
+        "mitigation": "Mascarar valores, usar cofre de segredos, evitar logs verbosos com credenciais e revisar as evidências antes de compartilhar."
+      },
+      {
+        "name": "Ampliação indevida da superfície de ataque",
+        "description": "Uma equipe abre portas ou regras amplas por concluir, sem prova, que o firewall é a causa.",
+        "defensiveExplanation": "Mudanças de rede devem se basear em evidência e ter escopo mínimo.",
+        "mitigation": "Testar porta e origem específicas, em janela controlada, com aprovação e rollback."
+      }
+    ],
+    "monitoring": [
+      "Logs de proxy e firewall",
+      "Eventos de DNS",
+      "Métricas de latência e perda",
+      "Falhas de autenticação",
+      "Códigos HTTP 401, 403, 404, 429 e 5xx",
+      "Volume de tráfego anormal"
+    ],
+    "hardening": [
+      "Menor privilégio em regras de rede",
+      "Mascaramento de segredo em logs",
+      "Controle de acesso a evidências",
+      "Padronização de runbooks",
+      "Observabilidade por camadas"
+    ],
+    "detectionIdeas": [
+      "Comparar falhas por origem, destino e usuário",
+      "Correlacionar mudanças recentes com aumento de erro",
+      "Detectar tráfego incomum por taxa e volume",
+      "Alertar exposição de padrões de segredo em logs"
+    ]
+  },
+  "lab": {
+    "id": "lab-0.9",
+    "title": "Dossiê técnico de fundamentos: do byte ao diagnóstico por camadas",
+    "labType": "cloud",
+    "objective": "Criar um relatório técnico simples que integre representação digital, codificação, métricas, interface de rede, DNS, latência, protocolo e segurança defensiva.",
+    "scenario": "Você recebeu um chamado genérico: 'o acesso a um site ou sistema está lento/intermitente'. Seu trabalho é coletar evidências locais e montar uma análise por camadas, sem executar testes invasivos e sem concluir mais do que as evidências permitem.",
+    "topology": "Host do aluno -> interface Wi-Fi/Ethernet/virtual -> rede local -> gateway/DNS -> destino HTTPS de teste",
+    "architecture": "Laboratório local sem custo, usando terminal do sistema operacional, comandos de rede, conversões simples e relatório manual.",
+    "prerequisites": [
+      "Ter concluído as aulas 0.1 a 0.8",
+      "Ter acesso a um terminal Windows PowerShell ou Linux",
+      "Ter conexão de rede comum",
+      "Opcional: Python 3 instalado"
+    ],
+    "tools": [
+      "Windows PowerShell ou Terminal Linux",
+      "Comandos ipconfig/ip/route/ping/traceroute/curl",
+      "Editor de texto para relatório",
+      "Opcional: Python 3",
+      "Opcional: Wireshark apenas para observação passiva"
+    ],
+    "estimatedTimeMinutes": 90,
+    "cost": "zero",
+    "safetyNotes": [
+      "Execute apenas comandos de diagnóstico local, contra destinos próprios ou serviços públicos de teste legítimos; não faça varredura de portas em terceiros.",
+      "Não publique IPs internos, tokens, cookies ou nomes reais de sistemas corporativos: mascare os dados sensíveis antes de compartilhar evidências.",
+      "Em rede corporativa, respeite as políticas internas antes de executar comandos."
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "title": "Criar o arquivo de relatório",
+        "instruction": "Abra um editor de texto e crie seções: ambiente, representação, interface, DNS, latência, protocolo, segurança, diagnóstico por camadas e próximos passos.",
+        "command": "# Exemplo de estrutura\nAmbiente:\nRepresentação digital:\nInterface e rede local:\nDNS e caminho:\nProtocolo e resposta:\nSegurança:\nDiagnóstico por camadas:\nPróximos passos:",
+        "expectedOutput": "Um arquivo de relatório vazio com seções preparadas.",
+        "explanation": "Preparar onde registrar as evidências antes de rodar comandos evita perder informação e melhora a interpretação."
+      },
+      {
+        "number": 2,
+        "title": "Registrar ambiente local",
+        "instruction": "Identifique sistema operacional, tipo de conexão e horário aproximado do teste.",
+        "command": "# Windows\nGet-ComputerInfo | Select-Object OsName, OsVersion\nGet-Date\n\n# Linux\nuname -a\ndate",
+        "expectedOutput": "Nome do sistema, versão e horário aproximado.",
+        "explanation": "Ambiente e horário ajudam a correlacionar evidências com mudanças, logs e sintomas."
+      },
+      {
+        "number": 3,
+        "title": "Observar representação de texto em bytes",
+        "instruction": "Converta uma palavra curta para bytes UTF-8, hexadecimal e Base64. O bloco Python usa a sintaxe de heredoc do bash (Linux, WSL ou Git Bash); no Windows sem bash, use a linha de PowerShell.",
+        "command": "# Python (bash)\npython - <<'PY'\nimport base64\ntexto = 'Rede'\nb = texto.encode('utf-8')\nprint('texto:', texto)\nprint('bytes decimais:', list(b))\nprint('hex:', b.hex())\nprint('base64:', base64.b64encode(b).decode())\nPY\n\n# PowerShell\n$texto='Rede'; $bytes=[Text.Encoding]::UTF8.GetBytes($texto); $bytes; [BitConverter]::ToString($bytes); [Convert]::ToBase64String($bytes)",
+        "expectedOutput": "Para 'Rede': bytes decimais [82, 101, 100, 101], hex 52656465 (no PowerShell, 52-65-64-65) e Base64 UmVkZQ==.",
+        "explanation": "Esse passo conecta texto, byte, hexadecimal, UTF-8 e Base64. Registre no relatório que Base64 é codificação reversível, não proteção."
+      },
+      {
+        "number": 4,
+        "title": "Converter um IPv4 em octetos binários e hexadecimais",
+        "instruction": "Escolha um IP privado fictício, como 192.168.10.50, e converta cada octeto para binário de 8 bits e hexadecimal.",
+        "command": "# Python (bash)\npython - <<'PY'\nip = '192.168.10.50'\nfor octeto in ip.split('.'):\n    n=int(octeto)\n    print(octeto, format(n,'08b'), format(n,'02X'))\nPY\n\n# PowerShell\n'192.168.10.50'.Split('.') | ForEach-Object { $n=[int]$_; '{0} {1} {2:X2}' -f $_, [Convert]::ToString($n,2).PadLeft(8,'0'), $n }",
+        "expectedOutput": "192 11000000 C0 · 168 10101000 A8 · 10 00001010 0A · 50 00110010 32",
+        "explanation": "Cada octeto é um byte. Ler octetos em binário e hex prepara para máscaras, endereços MAC, dumps e leitura de bytes em ferramentas de rede."
+      },
+      {
+        "number": 5,
+        "title": "Coletar interface, IP, gateway e DNS",
+        "instruction": "Cole no relatório apenas as linhas relevantes, mascarando dados sensíveis se necessário.",
+        "command": "# Windows\nipconfig /all\nroute print\n\n# Linux\nip addr\nip route\nresolvectl status 2>/dev/null || cat /etc/resolv.conf",
+        "expectedOutput": "Interface ativa, IP, máscara/prefixo, gateway/rota default e DNS.",
+        "explanation": "Esse passo valida a base local. Sem IP, gateway ou DNS coerentes, testes de aplicação falham por motivos de camadas inferiores."
+      },
+      {
+        "number": 6,
+        "title": "Medir latência básica",
+        "instruction": "Execute ping para o gateway anotado no passo 5 e para um destino de teste legítimo. Registre RTT aproximado e perda.",
+        "command": "# Windows\nping <IP do gateway>\nping 8.8.8.8\n\n# Linux\nping -c 4 <IP do gateway>\nping -c 4 8.8.8.8",
+        "expectedOutput": "Respostas com tempo aproximado ou indicação de bloqueio/perda.",
+        "explanation": "Ping mede ICMP e RTT aproximado. Se falhar, não conclua que o destino está fora: ICMP pode ser bloqueado."
+      },
+      {
+        "number": 7,
+        "title": "Testar resolução de nomes",
+        "instruction": "Resolva um domínio de teste. Compare falha de DNS com falha de conectividade.",
+        "command": "# Windows\nResolve-DnsName example.com\nnslookup example.com\n\n# Linux\ngetent hosts example.com\nnslookup example.com 2>/dev/null || true",
+        "expectedOutput": "Um ou mais endereços IP associados ao nome.",
+        "explanation": "DNS traduz nome em endereço. Ele não prova que a porta está aberta, que TLS é válido ou que o usuário tem permissão."
+      },
+      {
+        "number": 8,
+        "title": "Observar caminho até o destino",
+        "instruction": "Execute traceroute/tracert e registre se há saltos, perda aparente ou bloqueio. Não force testes repetitivos.",
+        "command": "# Windows\ntracert example.com\n\n# Linux\ntraceroute example.com 2>/dev/null || tracepath example.com",
+        "expectedOutput": "Lista de saltos ou indicação de bloqueio/limitação.",
+        "explanation": "O caminho ajuda, mas pode ser filtrado. Salto sem resposta não prova queda: roteadores podem não responder ICMP."
+      },
+      {
+        "number": 9,
+        "title": "Testar protocolo de aplicação",
+        "instruction": "Use curl para solicitar apenas headers HTTP de um destino HTTPS de teste.",
+        "command": "curl -I https://example.com",
+        "expectedOutput": "Headers HTTP com um status como 200, 301 ou 403. Se o TLS falhar, o curl mostra erro de certificado ou de handshake em vez dos headers.",
+        "explanation": "Se o curl retorna status HTTP, existe comunicação acima de TCP/TLS; o significado depende do código, e nenhum código prova a autorização de um usuário específico."
+      },
+      {
+        "number": 10,
+        "title": "Relacionar bit, byte, taxa e volume",
+        "instruction": "Calcule quanto tempo teórico levaria para transferir 100 MB em um link útil de 40 MB/s e compare com um link anunciado em 500 Mbps.",
+        "command": "100 MB / 40 MB/s = 2,5 s\n500 Mbps / 8 = 62,5 MB/s antes de overhead -> 100 MB / 62,5 MB/s = 1,6 s\n40 MB/s x 8 = 320 Mbps = 64% de 500 Mbps",
+        "expectedOutput": "Cálculo registrado no relatório.",
+        "explanation": "Esse passo reforça a diferença entre taxa nominal em bits, volume em bytes e throughput útil: compare sempre na mesma unidade."
+      },
+      {
+        "number": 11,
+        "title": "Montar tabela por camadas",
+        "instruction": "Classifique suas evidências em físico/enlace, rede, transporte, aplicação, identidade/segurança e observabilidade.",
+        "command": "Camada | Evidência | O que prova | O que não prova | Próximo teste",
+        "expectedOutput": "Tabela preenchida com pelo menos seis evidências.",
+        "explanation": "A tabela força o aluno a não misturar camadas nem superestimar comandos."
+      },
+      {
+        "number": 12,
+        "title": "Escrever conclusão defensiva",
+        "instruction": "Escreva uma conclusão curta com hipóteses priorizadas, riscos e próximos passos. Evite afirmar causa definitiva sem evidência.",
+        "command": "Conclusão sugerida:\nAs evidências indicam que...\nAinda não foi provado que...\nPróximos testes seguros são...\nDados sensíveis foram mascarados? Sim/Não.",
+        "expectedOutput": "Conclusão com fatos, limites e próximos passos.",
+        "explanation": "A habilidade central é raciocinar com responsabilidade técnica e segurança."
+      }
+    ],
+    "expectedResult": "Um relatório técnico simples contendo evidências de representação digital, interface, DNS, latência, caminho, protocolo, segurança e diagnóstico por camadas.",
+    "validation": [
+      {
+        "check": "Relatório possui evidências de representação digital",
+        "command": "Verificar se há bytes, hex e Base64 de uma palavra",
+        "expected": "Bytes decimais, hexadecimal e Base64 registrados",
+        "ifFails": "Refazer passos 3 e 4 com comandos alternativos ou calculadora local."
+      },
+      {
+        "check": "Relatório possui evidências de rede local",
+        "command": "Verificar se há IP, gateway/rota default e DNS",
+        "expected": "Interface ativa e configuração mínima registrada",
+        "ifFails": "Reexecutar comandos de interface e mascarar dados sensíveis."
+      },
+      {
+        "check": "Relatório separa camadas",
+        "command": "Verificar tabela Camada | Evidência | O que prova | O que não prova | Próximo teste",
+        "expected": "Pelo menos seis evidências classificadas",
+        "ifFails": "Revisar aula 0.8 e reorganizar evidências."
+      },
+      {
+        "check": "Relatório evita conclusão indevida",
+        "command": "Ler conclusão final",
+        "expected": "Há limites explícitos e próximos passos seguros",
+        "ifFails": "Reescrever conclusão separando fato, hipótese e ação."
+      }
+    ],
+    "troubleshooting": [
+      {
+        "symptom": "Python não está instalado",
+        "probableCause": "Ambiente não possui Python no PATH",
+        "howToConfirm": "Executar python --version ou python3 --version",
+        "fix": "Usar alternativa em PowerShell ou fazer conversão manual com tabela."
+      },
+      {
+        "symptom": "traceroute não existe no Linux",
+        "probableCause": "Pacote não instalado",
+        "howToConfirm": "Executar which traceroute",
+        "fix": "Usar tracepath se disponível ou registrar indisponibilidade da ferramenta."
+      },
+      {
+        "symptom": "ping falha para destino público",
+        "probableCause": "ICMP bloqueado, firewall, rede restritiva ou destino filtrando",
+        "howToConfirm": "Testar curl -I https://example.com e DNS separadamente",
+        "fix": "Registrar que ICMP falhou e não concluir indisponibilidade total."
+      },
+      {
+        "symptom": "curl não está disponível no Windows antigo",
+        "probableCause": "Versão antiga ou PATH sem curl",
+        "howToConfirm": "Executar curl.exe --version",
+        "fix": "Usar navegador, PowerShell Invoke-WebRequest -Method Head ou instalar ferramenta autorizada."
+      },
+      {
+        "symptom": "Saída contém dados sensíveis",
+        "probableCause": "Comandos mostram DNS interno, domínio corporativo, IP privado ou token",
+        "howToConfirm": "Revisar relatório antes de compartilhar",
+        "fix": "Mascarar valores, substituir por exemplos e remover segredos."
+      }
+    ],
+    "improvements": [
+      "Adicionar captura passiva no Wireshark de DNS e TLS ClientHello em laboratório autorizado.",
+      "Repetir os testes em Wi-Fi e cabo para comparar estabilidade.",
+      "Executar o mesmo roteiro dentro de uma VM ou WSL e comparar adaptadores virtuais."
+    ],
+    "evidenceToCollect": [
+      "Arquivo de relatório preenchido",
+      "Tabela de conversão de texto e IPv4",
+      "Saída sanitizada de interface/rota/DNS",
+      "Medição de latência",
+      "Resultado de resolução de nome",
+      "Resultado de curl ou equivalente",
+      "Tabela por camadas",
+      "Conclusão final com limites"
+    ],
+    "questions": [
+      "Qual evidência do seu relatório mostra apenas a camada de rede, e não a aplicação?",
+      "Qual evidência do seu relatório poderia conter dado sensível?",
+      "Qual conclusão seria exagerada com base apenas em ping?"
+    ],
+    "solution": "Uma solução adequada registra evidências sem exagerar conclusões. Por exemplo: IP e rota default confirmam configuração local básica; DNS resolvendo confirma tradução de nome; ping com RTT razoável sugere caminho ICMP funcional, mas não prova HTTP; curl com status HTTP confirma comunicação de aplicação, mas não prova autorização do usuário. Dados sensíveis devem ser mascarados e próximos testes devem respeitar escopo e autorização."
+  },
+  "mentorQuestions": [
+    {
+      "type": "diagnóstico",
+      "question": "O usuário diz que o sistema 'às vezes não abre'. Você roda os testes agora e tudo funciona. O que você registra e o que faz para que essa evidência sirva?",
+      "hints": [
+        "Pense no horário de cada teste (passo 2 do laboratório).",
+        "Uma rodada que funcionou não prova que a falha não existe."
+      ],
+      "expectedIdeas": [
+        "horário de cada teste",
+        "repetir os mesmos testes no momento da falha",
+        "comparar a rodada que funciona com a que falha",
+        "Wi-Fi versus cabo",
+        "não concluir que está tudo bem"
+      ],
+      "explanation": "Em falha intermitente, um teste bem-sucedido só prova o estado naquele horário. Registrar o horário e repetir os mesmos testes quando a falha ocorre permite comparar evidências e correlacioná-las com mudanças e logs."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "DNS resolve, ping responde, mas curl para HTTPS falha. Que camadas você investigaria antes de culpar a aplicação?",
+      "hints": [
+        "Pense em porta, firewall, proxy e TLS.",
+        "Ping não testa TCP 443."
+      ],
+      "expectedIdeas": [
+        "transporte",
+        "porta",
+        "firewall",
+        "proxy",
+        "TLS",
+        "rota"
+      ],
+      "explanation": "DNS e ICMP funcionando não provam que TCP/TLS/HTTP funcionam. O próximo teste deve focar porta e protocolo de aplicação."
+    },
+    {
+      "type": "cenário real",
+      "question": "Você precisa enviar o relatório do laboratório para outro time. O que deve ser removido ou mascarado antes de compartilhar?",
+      "hints": [
+        "Pense em dados internos e segredos.",
+        "Pense em IPs, nomes, tokens e cookies."
+      ],
+      "expectedIdeas": [
+        "tokens",
+        "cookies",
+        "IPs internos sensíveis",
+        "nomes de sistemas",
+        "usuários",
+        "domínios internos"
+      ],
+      "explanation": "Evidência técnica pode conter informação sensível. Segurança também é saber compartilhar contexto sem vazar detalhes desnecessários."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q0.9.2",
+      "question": "Se ping responde, qual conclusão é segura?",
+      "options": [
+        "A aplicação está saudável",
+        "Há alguma resposta ICMP/caminho parcial, mas isso não prova HTTP, TLS ou autorização",
+        "O usuário tem permissão",
+        "Não existe firewall no caminho"
+      ],
+      "answer": 1,
+      "explanation": "Ping é evidência limitada. Ele não valida porta TCP, TLS, HTTP, autenticação ou autorização.",
+      "topic": "limite de evidência",
+      "difficulty": "iniciante",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q0.9.3",
+      "question": "Por que Base64 deve ser tratado com cuidado em relatórios?",
+      "options": [
+        "Porque não pode representar bytes",
+        "Porque é criptografia forte",
+        "Porque pode carregar segredos codificados de forma reversível",
+        "Porque só existe em redes Wi-Fi"
+      ],
+      "answer": 2,
+      "explanation": "Base64 é codificação reversível. Se codificar um segredo, o segredo continua exposto.",
+      "topic": "segurança",
+      "difficulty": "iniciante",
+      "type": "segurança"
+    },
+    {
+      "id": "q0.9.4",
+      "question": "Um plano de 500 Mbps equivale teoricamente a quantos MB/s antes de overhead?",
+      "options": [
+        "62,5 MB/s",
+        "500 MB/s",
+        "40 MB/s",
+        "8 MB/s"
+      ],
+      "answer": 0,
+      "explanation": "500 megabits por segundo dividido por 8 resulta em 62,5 megabytes por segundo, antes de overhead e limitações reais.",
+      "topic": "bit vs byte",
+      "difficulty": "iniciante",
+      "type": "métricas"
+    },
+    {
+      "id": "q0.9.8",
+      "question": "No IP 192.168.10.50, como o octeto 168 aparece em binário de 8 bits e em hexadecimal?",
+      "options": [
+        "11000000 e C0",
+        "10100100 e A4",
+        "10101000 e 168",
+        "10101000 e A8"
+      ],
+      "answer": 3,
+      "explanation": "168 = 128 + 32 + 8, logo 10101000. Em hex, 1010 = A e 1000 = 8, logo A8. 11000000 e C0 correspondem ao octeto 192.",
+      "topic": "bases numéricas",
+      "difficulty": "iniciante",
+      "type": "conversão"
+    },
+    {
+      "id": "q0.9.5",
+      "question": "Qual item melhor representa uma conclusão responsável?",
+      "options": [
+        "Ping falhou, então o servidor está invadido",
+        "DNS resolveu, porta 443 falhou; investigar firewall, proxy, rota ou serviço antes de concluir causa",
+        "Curl retornou 403, então o cabo está ruim",
+        "Base64 apareceu, então está criptografado"
+      ],
+      "answer": 1,
+      "explanation": "A conclusão responsável separa evidência de hipótese e sugere próximos testes coerentes.",
+      "topic": "diagnóstico",
+      "difficulty": "intermediário",
+      "type": "arquitetura"
+    },
+    {
+      "id": "q0.9.7",
+      "question": "No tracert para example.com, alguns saltos intermediários aparecem como * (sem resposta), mas o destino final responde. O que isso indica?",
+      "options": [
+        "O DNS falhou ao resolver o nome desses roteadores",
+        "O caminho está quebrado nesses saltos e o tráfego não chega ao destino",
+        "Os roteadores desses saltos podem não responder ICMP; isso sozinho não prova queda",
+        "A porta 443 está bloqueada nesses saltos"
+      ],
+      "answer": 2,
+      "explanation": "Roteadores intermediários podem filtrar ou não gerar respostas ICMP. Se o destino final responde, o tráfego passou por esses saltos.",
+      "topic": "limite de evidência",
+      "difficulty": "iniciante",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q0.9.6",
+      "question": "Em cloud, por que o mesmo método por camadas é útil?",
+      "options": [
+        "Porque IAM substitui firewall",
+        "Porque cloud elimina problemas de rede",
+        "Porque ping sempre funciona em cloud",
+        "Porque evita confundir rota, DNS privado, security group, load balancer, WAF, IAM e aplicação"
+      ],
+      "answer": 3,
+      "explanation": "Cloud adiciona camadas gerenciadas; o método ajuda a separar responsabilidades e evitar mudanças inseguras.",
+      "topic": "cloud",
+      "difficulty": "intermediário",
+      "type": "cloud"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc0.9.1",
+      "front": "O que é evidência técnica?",
+      "back": "É uma observação registrada, obtida por comando, log, métrica ou teste, que sustenta uma hipótese dentro de um escopo.",
+      "tags": [
+        "troubleshooting"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.9.2",
+      "front": "Por que ping não prova que uma aplicação funciona?",
+      "back": "Porque ping testa ICMP/caminho parcial, não TCP, TLS, HTTP, autenticação, autorização ou lógica da aplicação.",
+      "tags": [
+        "icmp",
+        "camadas"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.9.4",
+      "front": "O que deve existir em uma conclusão técnica responsável?",
+      "back": "Fatos observados, limites da evidência, hipóteses, riscos e próximos testes seguros.",
+      "tags": [
+        "relatório"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.9.5",
+      "front": "Qual é a diferença entre Mbps e MB/s?",
+      "back": "Mbps mede megabits por segundo; MB/s mede megabytes por segundo. Em teoria, divide-se Mbps por 8 para converter para MB/s antes de overhead.",
+      "tags": [
+        "métricas"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc0.9.6",
+      "front": "O que é diagnóstico por camadas?",
+      "back": "É organizar hipóteses e evidências por responsabilidades: físico/enlace, rede, transporte, aplicação, identidade, segurança e observabilidade.",
+      "tags": [
+        "camadas"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc0.9.7",
+      "front": "A porta 443 responde, mas o HTTP retorna 403. Para onde a investigação sobe?",
+      "back": "Para autorização e política: identidade, token, grupos, claims, regras da aplicação ou WAF. A conectividade básica já existe; cabo e DNS não explicam um 403.",
+      "tags": [
+        "camadas",
+        "autorização"
+      ],
+      "difficulty": "intermediário"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex0.9.1",
+      "type": "conceitual",
+      "prompt": "Explique por que executar comandos sem registrar interpretação não é suficiente para troubleshooting profissional.",
+      "expectedAnswer": "Porque o valor está na evidência interpretada: o comando precisa ser acompanhado do que foi observado, do que aquilo prova, do que não prova e do próximo teste coerente.",
+      "explanation": "Diagnóstico profissional não é ritual de comando; é raciocínio rastreável."
+    },
+    {
+      "id": "ex0.9.2",
+      "type": "prático",
+      "prompt": "Converta 300 Mbps para MB/s teórico antes de overhead.",
+      "expectedAnswer": "37,5 MB/s.",
+      "explanation": "300 megabits por segundo dividido por 8 resulta em 37,5 megabytes por segundo."
+    },
+    {
+      "id": "ex0.9.5",
+      "type": "diagnóstico",
+      "prompt": "Test-NetConnection para o sistema na porta 443 mostra TcpTestSucceeded : True, e curl -I para o mesmo endereço retorna HTTP 403. Escreva a interpretação no formato: mostra X, não mostra Y, próximo teste Z.",
+      "expectedAnswer": "Mostra que o nome resolveu, que há caminho até o destino, que a porta TCP 443 aceita conexão e que o servidor respondeu em HTTP (o TLS foi negociado). Não mostra problema de cabo, Wi-Fi ou DNS, nem que o usuário tem permissão. Próximo teste: verificar autenticação e autorização (identidade, token, grupos, claims), a política da aplicação ou um bloqueio de WAF/proxy.",
+      "explanation": "403 é uma resposta da aplicação ou de um intermediário: a investigação sobe para autorização e política, não desce para a rede."
+    },
+    {
+      "id": "ex0.9.6",
+      "type": "segurança",
+      "prompt": "Um log de aplicação contém o header Authorization: Basic dXN1YXJpbzpzZW5oYTEyMw==. Decodifique o valor (PowerShell: [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('dXN1YXJpbzpzZW5oYTEyMw==')); Linux: echo 'dXN1YXJpbzpzZW5oYTEyMw==' | base64 -d) e diga o que fazer antes de anexar esse log a um chamado.",
+      "expectedAnswer": "O valor decodificado é usuario:senha123, ou seja, usuário e senha legíveis. Antes de anexar: mascarar o valor (Authorization: Basic <mascarado>), remover outros tokens, cookies e credenciais, limitar quem recebe o log, avisar o responsável para trocar a credencial exposta e registrar que Base64 é codificação reversível, não proteção.",
+      "explanation": "Basic Auth apenas codifica usuario:senha em Base64; qualquer pessoa com acesso ao log recupera a credencial."
+    }
+  ],
+  "challenge": {
+    "title": "Relatório de triagem para sistema lento",
+    "scenario": "Um usuário relata que um sistema HTTPS está lento e às vezes não abre. Você não tem acesso ao servidor, mas pode coletar evidências no host do usuário e propor próximos testes. O relatório será anexado ao chamado: outra pessoa precisa entender o que foi testado, o que foi observado, o que foi descartado e o que ainda falta investigar.",
+    "tasks": [
+      "Coletar evidências de interface, IP, gateway e DNS.",
+      "Testar resolução de nome, caminho e porta/protocolo de aplicação, sem varredura.",
+      "Repetir os testes em dois momentos (quando o sistema abre e quando falha, se possível) e registrar o horário de cada rodada.",
+      "Calcular a diferença entre taxa nominal e throughput útil em um exemplo.",
+      "Montar a tabela por camadas.",
+      "Escrever a conclusão com fatos, limites, hipóteses priorizadas e próximos passos."
+    ],
+    "constraints": [
+      "Usar apenas comandos locais e destinos autorizados; não executar varredura de portas.",
+      "Não expor tokens, IPs sensíveis ou nomes internos no relatório compartilhado.",
+      "Não concluir causa definitiva sem evidência."
+    ],
+    "expectedDeliverables": [
+      "Relatório sanitizado",
+      "Tabela de evidências por camada",
+      "Cálculo de bit/byte",
+      "Lista de hipóteses priorizadas",
+      "Próximos testes seguros"
+    ],
+    "gradingRubric": [
+      {
+        "criterion": "Coleta de evidências",
+        "points": 25,
+        "description": "Inclui comandos e saídas relevantes de interface, DNS, caminho e protocolo."
+      },
+      {
+        "criterion": "Interpretação por camadas",
+        "points": 25,
+        "description": "Separa corretamente físico/enlace, rede, transporte, aplicação e segurança."
+      },
+      {
+        "criterion": "Segurança e ética",
+        "points": 20,
+        "description": "Mascarou dados sensíveis e evitou testes não autorizados."
+      },
+      {
+        "criterion": "Conclusão responsável",
+        "points": 20,
+        "description": "Diferencia fato, hipótese, limite e próximo passo."
+      },
+      {
+        "criterion": "Clareza",
+        "points": 10,
+        "description": "Relatório organizado e compreensível por outro time."
+      }
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "A resposta ideal não é uma causa única inventada; é um conjunto de hipóteses priorizadas com próximos testes. A solução começa pela base (ambiente, horário e interface), valida DNS e caminho, testa o protocolo de aplicação e organiza as evidências por camada, sem conclusões indevidas. Como a falha é intermitente, compara as rodadas de teste pelo horário.",
+    "steps": [
+      "Registrar ambiente e horário.",
+      "Coletar IP, gateway, DNS e rota default.",
+      "Testar DNS antes de culpar aplicação.",
+      "Medir latência com cuidado, reconhecendo bloqueios de ICMP.",
+      "Repetir as medições no momento da falha e comparar com a rodada em que o sistema abriu.",
+      "Testar headers HTTP/TLS com curl ou equivalente.",
+      "Classificar evidências por camada.",
+      "Mascarar dados sensíveis.",
+      "Escrever conclusão com fatos, hipóteses e próximos testes."
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "Ping respondeu, então não é rede.",
+        "whyItIsWrong": "Ping não valida TCP, TLS, HTTP, proxy, autenticação nem autorização."
+      },
+      {
+        "answer": "Base64 apareceu no log, então está seguro.",
+        "whyItIsWrong": "Base64 é reversível e pode expor segredo."
+      },
+      {
+        "answer": "Abrir any-any no firewall para testar.",
+        "whyItIsWrong": "É mudança ampla e insegura sem evidência suficiente."
+      },
+      {
+        "answer": "Comprar mais banda resolve lentidão.",
+        "whyItIsWrong": "Lentidão pode ser latência, perda, DNS, proxy, servidor, TLS ou aplicação."
+      },
+      {
+        "answer": "Rodei os comandos e funcionou, não precisa anotar nada.",
+        "whyItIsWrong": "Sem comando, horário, saída relevante e interpretação registrados, não há evidência para comparar, escalar ou revisar."
+      },
+      {
+        "answer": "O teste mostrou 40 MB/s e o plano é de 500 Mbps, então recebo menos de 10% do contratado.",
+        "whyItIsWrong": "40 MB/s x 8 = 320 Mbps, cerca de 64% dos 500 Mbps nominais; compare sempre na mesma unidade e considere o overhead."
+      }
+    ],
+    "finalAnswer": "Um relatório correto apresenta evidências sanitizadas, organiza cada teste por camada, registra limites do que foi provado e propõe próximos testes seguros. Ele não transforma uma observação parcial em causa definitiva."
+  },
+  "glossary": [
+    {
+      "term": "Evidência técnica",
+      "shortDefinition": "Observação registrada que sustenta ou enfraquece uma hipótese.",
+      "longDefinition": "Pode vir de comando, log, métrica, captura, status HTTP, tabela de roteamento ou saída de ferramenta. Deve ser interpretada dentro de escopo e camada.",
+      "example": "Test-NetConnection indicando falha na porta 443 é evidência para investigar transporte, firewall, proxy ou serviço.",
+      "relatedTerms": [
+        "hipótese",
+        "troubleshooting",
+        "observabilidade"
+      ],
+      "relatedLessons": [
+        "0.6",
+        "0.8",
+        "0.9"
+      ]
+    },
+    {
+      "term": "Hipótese",
+      "shortDefinition": "Explicação possível para um sintoma, ainda não comprovada.",
+      "longDefinition": "Uma hipótese deve gerar próximos testes. Ela não deve ser apresentada como causa enquanto as evidências forem insuficientes.",
+      "example": "DNS resolveu, mas porta falhou; uma hipótese é bloqueio de firewall.",
+      "relatedTerms": [
+        "diagnóstico",
+        "evidência"
+      ],
+      "relatedLessons": [
+        "0.8",
+        "0.9"
+      ]
+    },
+    {
+      "term": "Relatório técnico",
+      "shortDefinition": "Documento com comandos, evidências, interpretação, limites e próximos passos.",
+      "longDefinition": "Em troubleshooting, um relatório técnico ajuda outros times a entender o que foi testado e evita repetição ou conclusões equivocadas.",
+      "example": "Um relatório pode listar IP, rota, DNS, RTT, status HTTP e hipóteses por camada.",
+      "relatedTerms": [
+        "runbook",
+        "playbook",
+        "evidência"
+      ],
+      "relatedLessons": [
+        "0.9"
+      ]
+    },
+    {
+      "term": "Sanitização de evidência",
+      "shortDefinition": "Remoção ou mascaramento de dados sensíveis antes de compartilhar logs ou saídas.",
+      "longDefinition": "Inclui esconder tokens, cookies, IPs internos sensíveis, nomes reais de sistemas, usuários e informações que possam ajudar um atacante.",
+      "example": "Substituir Authorization: Bearer eyJ... por Authorization: Bearer <mascarado>.",
+      "relatedTerms": [
+        "segredo",
+        "log",
+        "Base64"
+      ],
+      "relatedLessons": [
+        "0.3",
+        "0.9"
+      ]
+    },
+    {
+      "term": "Limite da evidência",
+      "shortDefinition": "Aquilo que um teste não consegue provar.",
+      "longDefinition": "Todo teste tem escopo. Ping pode mostrar resposta ICMP, mas não prova aplicação. DNS pode resolver nome, mas não prova porta aberta.",
+      "example": "curl -I pode provar resposta HTTP, mas não prova que um usuário específico tem autorização.",
+      "relatedTerms": [
+        "camada",
+        "diagnóstico"
+      ],
+      "relatedLessons": [
+        "0.7",
+        "0.8",
+        "0.9"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Aula 0.1",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Base sobre representação de informação."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Aula 0.8",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Base sobre pensamento em camadas."
+    },
+    {
+      "type": "official-doc",
+      "title": "curl manual",
+      "organization": "curl project",
+      "url": "https://curl.se/docs/manpage.html",
+      "note": "Referência para uso defensivo de curl em testes HTTP."
+    },
+    {
+      "type": "standard",
+      "title": "The Unicode Standard",
+      "organization": "Unicode Consortium",
+      "url": "https://www.unicode.org/standard/standard.html",
+      "note": "Referência conceitual para Unicode e codificação de texto."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "Troubleshooting e Observabilidade",
+      "lesson": "a definir",
+      "reason": "O relatório por evidências será usado em pipelines, logs, métricas e automação."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "Fundamentos de autenticação e autorização",
+      "lesson": "a definir",
+      "reason": "A separação entre conectividade, autenticação e autorização será essencial em IAM."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70,
+      "anyOf": [
+        "quizScoreAtLeast",
+        "checklistDone"
+      ]
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "0.10"
+    ]
+  }
+};
