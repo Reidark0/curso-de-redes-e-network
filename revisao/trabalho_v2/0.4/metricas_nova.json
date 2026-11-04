@@ -1,0 +1,85 @@
+{
+  "id": "0.4",
+  "versao": "nova",
+  "titulo": "Bit vs Byte em redes",
+  "tipo": "intermediária",
+  "palavras": {
+    "visiveis": 2761,
+    "teoria": 1446,
+    "praticaExtra": 650,
+    "quiz": 327,
+    "flashcards": 170
+  },
+  "porGrupoTeoria": {
+    "introducao": 412,
+    "contexto": 134,
+    "conteudo": 739,
+    "exemplos": 161,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 124,
+    "summary": 87,
+    "problem": 134,
+    "concept": 352,
+    "internals": 386,
+    "diagram": 1,
+    "analogy": 51,
+    "simpleExample": 110,
+    "objectives": 78,
+    "learningOutcomes": 0,
+    "glossary": 123,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 34
+  },
+  "pratica": {
+    "quiz": 327,
+    "flashcards": 170,
+    "lab": 0,
+    "mentorQuestions": 201,
+    "exercises": 131,
+    "challenge": 111,
+    "commentedSolution": 207
+  },
+  "outros": {
+    "title+subtitle": 19,
+    "nextTheme": 34,
+    "references": 50,
+    "linksToOtherCourses": 65
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 8,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 5,
+    "exemplosPorAmbiente": []
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "15-25 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 20.1,
+    "nucleoPartes": {
+      "teoria": 11.1,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 31,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-25 min",
+    "praticaExtraArredondada": 30,
+    "recomendada": "15-25 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

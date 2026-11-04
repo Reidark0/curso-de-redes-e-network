@@ -2,32 +2,26 @@
 <section class="lesson-section lesson-section--internals">
   <h2>Funcionamento interno</h2>
   <p>
-    Quando você baixa um arquivo, a aplicação recebe bytes úteis. Para esses bytes chegarem, cada camada adiciona informações de controle. Num download HTTPS por Ethernet, um pedaço do arquivo vai dentro de uma mensagem HTTP, que passa por TLS, TCP, IP e Ethernet:
+    Quando você baixa um arquivo, ele não viaja sozinho. A rede o divide em pedaços, e cada pedaço sai acompanhado de bytes de controle chamados <strong>cabeçalhos</strong>, um para cada protocolo do caminho: o do Ethernet (entrega no cabo local), o do IP (endereço de destino), o do TCP (ordem e confirmação de recebimento) e, num site com https, o do TLS (criptografia). Esses bytes ocupam o link, mas não fazem parte do arquivo: são o overhead. Como cada protocolo acrescenta o seu cabeçalho é o tema da aula 2.2.
   </p>
-  <ol class="flow-list">
-    <li><strong>A aplicação</strong> solicita dados, por exemplo um arquivo via HTTPS.</li>
-    <li><strong>HTTP</strong> organiza requisição e resposta em mensagens de aplicação.</li>
-    <li><strong>TLS</strong> protege confidencialidade e integridade, adicionando custo de criptografia e registros próprios.</li>
-    <li><strong>TCP</strong> divide o fluxo, controla a ordem, confirma o recebimento e retransmite quando necessário.</li>
-    <li><strong>IP</strong> endereça origem e destino entre redes.</li>
-    <li><strong>Ethernet ou Wi-Fi</strong> transporta quadros no enlace local.</li>
-    <li><strong>A placa de rede e o meio físico</strong> transmitem sinais que representam bits.</li>
-  </ol>
   <h3>Quanto o overhead custa num caso bom</h3>
   <p>
-    Em Ethernet com MTU de 1500 bytes, cada quadro ocupa no fio cerca de 1538 bytes (preâmbulo, cabeçalho Ethernet, FCS e intervalo entre quadros incluídos). Desses, 20 bytes vão para o cabeçalho IPv4 e 20 para o TCP, sobrando 1460 bytes de dados. Então 1460 ÷ 1538 ≈ 95%: numa porta de 1 Gbps, o máximo útil do TCP fica perto de 949 Mbps, ou cerca de 118 MB/s, e não 125 MB/s. Opções TCP, TLS, túneis de VPN (que acrescentam cabeçalhos e reduzem o espaço útil de cada pacote) e retransmissões tiram mais um pouco.
+    Em Ethernet, cada pacote leva no máximo 1500 bytes. No cabo, somando os bytes de controle do próprio Ethernet e a pausa obrigatória entre um envio e outro, ele ocupa o equivalente a cerca de 1538 bytes. Dos 1500, 20 vão para o cabeçalho IP e 20 para o TCP, e sobram 1460 bytes do arquivo. Então 1460 ÷ 1538 ≈ 95%: numa porta de 1 Gbps, o máximo útil fica perto de 949 Mbps, ou cerca de 118 MB/s, e não 125 MB/s. TLS e retransmissões (pedaços perdidos que precisam ser enviados de novo) tiram mais um pouco.
   </p>
   <p>
-    Em redes boas, essa perda é pequena. A distância entre nominal e útil cresce com VPN, fragmentação, retransmissões, alta latência, janela TCP pequena, inspeção de TLS, servidor remoto lento, storage ou CPU. No Wi-Fi ela é ainda maior: a taxa de link anunciada não é throughput útil, porque o meio é compartilhado, sujeito a interferência e, na prática, half-duplex.
+    Em redes boas, a perda fica nesses poucos por cento. Ela cresce quando outro ponto do caminho vira gargalo e limita a taxa: uma VPN acrescenta o próprio cabeçalho e criptografia a cada pacote; o Wi-Fi divide o ar com outros aparelhos e sofre interferência, por isso a taxa que ele anuncia não é taxa útil; e o servidor de origem, o disco ou a CPU podem não acompanhar o link. A conta mostra o teto; a medição mostra onde você está.
   </p>
   <div class="content-card">
     <strong>Fórmulas práticas:</strong>
     <ul>
-      <li><code>MB/s ≈ Mbps ÷ 8</code></li>
-      <li><code>Mbps ≈ MB/s × 8</code></li>
-      <li><code>tamanho em megabits = tamanho em megabytes × 8</code></li>
-      <li><code>tempo em segundos ≈ tamanho em megabits ÷ taxa em Mbps</code></li>
-      <li><code>volume ≈ taxa × tempo</code> (ex.: 25 MB/s × 60 s = 1500 MB)</li>
+      <li><code>MB/s ≈ Mbps ÷ 8</code> e <code>Mbps ≈ MB/s × 8</code></li>
+      <li><code>tempo em segundos ≈ tamanho em MB × 8 ÷ taxa em Mbps</code> (ex.: 1 GB = 1000 MB = 8000 megabits; 8000 ÷ 100 Mbps = 80 s)</li>
+      <li><code>volume ≈ taxa × tempo</code> (ex.: 100 Mbps = 12,5 MB/s; em 24 h, ou 86.400 s, são cerca de 1.080.000 MB, perto de 1 TB)</li>
     </ul>
   </div>
+  <div class="callout warning"><strong>Erros comuns</strong><ul>
+    <li>Testar pelo Wi-Fi e concluir que o provedor está ruim: para medir o link contratado, teste por cabo, perto do roteador.</li>
+    <li>Testar com a VPN ligada e atribuir ao link a perda que vem do túnel.</li>
+    <li>Baixar de um único servidor lento e culpar a rede: repita com outro destino antes de concluir.</li>
+  </ul></div>
 </section>

@@ -2,24 +2,9 @@
 <section class="lesson-section lesson-section--problem">
   <h2>Problema</h2>
   <p>
-    A mesma transferência pode ser descrita por unidades diferentes. Um arquivo de 1 GB numa conexão de 100 Mbps não baixa em 10 segundos só porque 100 parece maior que 1: 1 GB são cerca de 8000 megabits, e 8000 ÷ 100 = 80 segundos no melhor caso. E ainda há overhead, porque a rede não transporta só o conteúdo do arquivo: transporta também quadros, pacotes, segmentos, cabeçalhos, confirmações, criptografia, retransmissões e controle.
+    É isso que acontece quando dois jeitos de medir se encontram sem conversão. Redes e operadoras medem a capacidade de transmissão em bits por segundo, porque o meio transmite sinais que representam bits, um após o outro. Já arquivos são contados em bytes, e por isso navegadores e sistemas mostram a transferência em bytes por segundo. A mesma transferência ganha dois números diferentes.
   </p>
   <p>
-    Errar a unidade leva a decisões erradas: tratar um teste normal como falha, comprar link acima ou abaixo do necessário, subestimar uma exfiltração, errar o custo de tráfego em cloud ou culpar a rede por um pipeline cujo gargalo está no registry, no disco, na CPU ou na inspeção TLS.
+    A conta ingênua também engana no tempo: um arquivo de 1 GB numa conexão de 100 Mbps não baixa em 10 segundos, e sim em cerca de 80 no melhor caso. E nem o melhor caso chega inteiro à aplicação, porque a rede transporta, além do arquivo, bytes de controle. Esta aula mostra como converter as unidades, quanto esse controle custa e como estimar tempo e volume de uma transferência.
   </p>
-  <h3>Erros comuns</h3>
-  <div class="responsive-table">
-  <table class="data-table">
-    <thead>
-      <tr><th>Erro</th><th>Por que acontece</th><th>Consequência</th><th>Correção</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Esperar ver 500 Mbps como 500 MB/s no navegador (comparar Mbps com MB/s diretamente)</td><td>As siglas são parecidas e muita gente não diferencia b minúsculo de B maiúsculo</td><td>Diagnóstico incorreto e chamados desnecessários</td><td>Dividir Mbps por 8 para obter o teto teórico em MB/s</td></tr>
-      <tr><td>Esperar taxa útil igual à taxa nominal do link</td><td>A conta Mbps ÷ 8 parece exata demais</td><td>Expectativa irreal sobre a taxa útil</td><td>Considerar cabeçalhos, criptografia, retransmissões e gargalos</td></tr>
-      <tr><td>Testar o link por Wi-Fi e concluir que o provedor está ruim</td><td>Wi-Fi é mais conveniente para um teste rápido</td><td>Culpa atribuída ao ponto errado</td><td>Testar cabeado, perto do roteador/switch, sem VPN e com vários destinos</td></tr>
-      <tr><td>Baixar de um servidor lento e culpar a rede local</td><td>O teste mede o caminho inteiro, inclusive a origem</td><td>Investigação no lugar errado</td><td>Repetir com outro servidor antes de concluir</td></tr>
-      <tr><td>Confundir velocidade instantânea com volume mensal</td><td>Os dois aparecem como "dados trafegados"</td><td>Erro em custo cloud, janela de backup e capacidade do SIEM</td><td>Separar taxa por segundo (Mbps, MB/s) de volume acumulado (GB/dia, GB/mês)</td></tr>
-    </tbody>
-  </table>
-  </div>
 </section>

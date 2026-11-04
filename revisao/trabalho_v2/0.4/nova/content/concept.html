@@ -2,22 +2,21 @@
 <section class="lesson-section lesson-section--concept">
   <h2>Conceito</h2>
   <p>
-    <strong>Bit</strong> é a menor unidade lógica de informação binária, 0 ou 1. <strong>Byte</strong> é um grupo de 8 bits. Em redes, a capacidade de transmissão é medida em bits por segundo (bps, Kbps, Mbps, Gbps). Arquivos são medidos em bytes (B, KB, MB, GB) e a transferência deles, em bytes por segundo (MB/s). Repare na letra: <strong>b</strong> minúsculo é bit; <strong>B</strong> maiúsculo é byte.
+    <strong>Bit</strong> é a menor unidade de informação digital, 0 ou 1. <strong>Byte</strong> é um grupo de 8 bits. Em redes, a capacidade de transmissão é medida em bits por segundo (bps, Kbps, Mbps, Gbps). Arquivos são medidos em bytes (B, KB, MB, GB), e a transferência deles, em bytes por segundo (MB/s). Repare na letra: <strong>b</strong> minúsculo é bit; <strong>B</strong> maiúsculo é byte.
   </p>
   <div class="definition-box">
-    <strong>Definição operacional:</strong> Mbps mede quantos milhões de bits podem ser transmitidos por segundo. MB/s mede quantos milhões de bytes são transferidos por segundo. Como 1 byte = 8 bits, divida Mbps por 8 para obter MB/s e multiplique MB/s por 8 para obter Mbps. Exemplo: 100 Mbps equivalem teoricamente a 12,5 MB/s antes de overhead.
+    <strong>Definição operacional:</strong> Mbps mede quantos milhões de bits passam por segundo; MB/s mede quantos milhões de bytes passam por segundo. Como 1 byte = 8 bits, divida Mbps por 8 para obter MB/s e multiplique MB/s por 8 para obter Mbps. Exemplo: 100 Mbps equivalem a 12,5 MB/s, antes de overhead.
   </div>
   <div class="responsive-table">
   <table class="data-table comparison-table">
     <thead>
-      <tr><th>Link anunciado</th><th>Conta rápida</th><th>Teto teórico em MB/s</th><th>Observação</th></tr>
+      <tr><th>Link anunciado</th><th>Conta rápida</th><th>Teto teórico em MB/s</th></tr>
     </thead>
     <tbody>
-      <tr><td>100 Mbps</td><td>100 ÷ 8</td><td>12,5 MB/s</td><td>Antes de overhead</td></tr>
-      <tr><td>300 Mbps</td><td>300 ÷ 8</td><td>37,5 MB/s</td><td>Wi-Fi e servidor podem reduzir</td></tr>
-      <tr><td>500 Mbps</td><td>500 ÷ 8</td><td>62,5 MB/s</td><td>Boa referência para fibra doméstica</td></tr>
-      <tr><td>1 Gbps</td><td>1000 ÷ 8</td><td>125 MB/s</td><td>Porta gigabit raramente entrega 125 MB/s úteis</td></tr>
-      <tr><td>10 Gbps</td><td>10000 ÷ 8</td><td>1250 MB/s</td><td>Exige NIC, cabo, switch, CPU e storage adequados</td></tr>
+      <tr><td>100 Mbps</td><td>100 ÷ 8</td><td>12,5 MB/s</td></tr>
+      <tr><td>300 Mbps</td><td>300 ÷ 8</td><td>37,5 MB/s</td></tr>
+      <tr><td>500 Mbps</td><td>500 ÷ 8</td><td>62,5 MB/s</td></tr>
+      <tr><td>1 Gbps</td><td>1000 ÷ 8</td><td>125 MB/s</td></tr>
     </tbody>
   </table>
   </div>
@@ -26,18 +25,18 @@
   <div class="responsive-table">
   <table class="data-table comparison-table">
     <thead>
-      <tr><th>Conceito</th><th>O que significa</th><th>Exemplo</th><th>Limitação</th></tr>
+      <tr><th>Conceito</th><th>O que significa</th><th>Exemplo</th></tr>
     </thead>
     <tbody>
-      <tr><td>Velocidade nominal</td><td>Capacidade anunciada ou negociada do link</td><td>1 Gbps na placa de rede</td><td>Não garante taxa útil de aplicação</td></tr>
-      <tr><td>Throughput útil (goodput)</td><td>Dados reais entregues à aplicação por tempo</td><td>90 MB/s copiando arquivo</td><td>Depende de protocolos e gargalos</td></tr>
-      <tr><td>Overhead</td><td>Bytes extras de controle, cabeçalho, criptografia e retransmissão</td><td>Ethernet + IP + TCP + TLS</td><td>Reduz a carga útil visível</td></tr>
-      <tr><td>Volume transferido</td><td>Total de dados movimentados num período</td><td>500 GB/mês em cloud</td><td>Não informa velocidade instantânea</td></tr>
+      <tr><td>Velocidade nominal</td><td>Capacidade anunciada ou negociada do link</td><td>1 Gbps na placa de rede</td></tr>
+      <tr><td>Taxa útil (throughput)</td><td>Dados do arquivo que chegam à aplicação por segundo</td><td>90 MB/s copiando um arquivo</td></tr>
+      <tr><td>Overhead</td><td>Bytes extras de controle que viajam junto com os dados</td><td>Cabeçalhos de Ethernet, IP, TCP e TLS</td></tr>
+      <tr><td>Volume transferido</td><td>Total de dados movimentados num período; não diz a velocidade</td><td>500 GB por mês</td></tr>
     </tbody>
   </table>
   </div>
   <h3>Prefixos decimais e binários: GB × GiB</h3>
   <p>
-    Em taxas de rede, os prefixos são decimais: 1 Mbps = 1.000.000 bits por segundo e 1 Gbps = 1.000 Mbps. Em armazenamento existem duas convenções. A decimal (SI) usa 1 GB = 10<sup>9</sup> bytes. A binária (IEC) usa 1 KiB = 1024 bytes, 1 MiB = 1024 KiB e 1 GiB = 1.073.741.824 bytes, cerca de 7% a mais que 1 GB. Alguns sistemas mostram "GB" calculando em GiB: é por isso que um disco de 1 TB (10<sup>12</sup> bytes) aparece no Windows como cerca de 931 GB. Para a conta rápida de velocidade a diferença é pequena; em auditoria, cobrança ou estimativa de volume precisa, confira qual convenção cada ferramenta usa.
+    Em taxas de rede, os prefixos são decimais: 1 Mbps = 1.000.000 bits por segundo e 1 Gbps = 1.000 Mbps. Em armazenamento existem duas convenções. A decimal usa 1 GB = 10<sup>9</sup> bytes. A binária usa 1 KiB = 1024 bytes, 1 MiB = 1024 KiB e 1 GiB = 1.073.741.824 bytes, cerca de 7% a mais que 1 GB. Alguns sistemas mostram "GB" calculando em GiB: por isso um disco de 1 TB (10<sup>12</sup> bytes) aparece no Windows como cerca de 931 GB. Os bytes são os mesmos; muda só a convenção. Na conta rápida de velocidade a diferença é pequena, mas em cobrança ou estimativa de volume confira qual convenção a ferramenta usa.
   </p>
 </section>
