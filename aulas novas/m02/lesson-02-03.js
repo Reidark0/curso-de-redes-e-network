@@ -4,8 +4,8 @@ export const lesson0203 = {
   "order": 3,
   "title": "Camada 1 — Física: bits no fio, luz e rádio",
   "subtitle": "Onde a comunicação deixa de ser abstração e vira sinal elétrico, pulso de luz ou onda de rádio.",
-  "duration": "100-140 min",
-  "estimatedStudyTimeMinutes": 140,
+  "duration": "15-25 min + 45 min de prática extra",
+  "estimatedStudyTimeMinutes": 25,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 195,
@@ -19,8 +19,7 @@ export const lesson0203 = {
     "wi-fi",
     "sinal",
     "ruído",
-    "troubleshooting",
-    "segurança física"
+    "troubleshooting"
   ],
   "prerequisites": [
     {
@@ -46,34 +45,19 @@ export const lesson0203 = {
     }
   ],
   "objectives": [
-    "Explicar o papel da Camada 1 no Modelo OSI.",
-    "Diferenciar bits abstratos de sinais físicos reais.",
-    "Relacionar cobre, fibra e rádio com distância, interferência, ruído, atenuação e velocidade.",
-    "Identificar sintomas típicos de falhas de camada física.",
-    "Coletar evidências básicas de link, velocidade negociada, erros e qualidade do sinal.",
-    "Conectar camada física com segurança, disponibilidade, cloud híbrida e operação corporativa."
-  ],
-  "learningOutcomes": [
-    "Dado um sintoma como link intermitente, o aluno consegue levantar hipóteses de camada física antes de culpar aplicação.",
-    "Dado um ambiente com cabo, fibra e Wi-Fi, o aluno consegue explicar vantagens e limitações de cada meio.",
-    "Dado um output de interface, o aluno reconhece velocidade, estado de link, erros e possível duplex mismatch.",
-    "Dado um cenário de escritório ou rack, o aluno identifica riscos físicos e controles básicos.",
-    "Dado um problema em cloud híbrida, o aluno diferencia rede virtual de dependências físicas subjacentes."
+    "Explicar o que a Camada 1 faz (transformar bits em sinal elétrico, luz ou rádio e reconstruí-los no receptor) e o que ela não faz.",
+    "Relacionar cobre, fibra e rádio com seus limites (distância, atenuação, interferência, canal compartilhado) e com os sintomas que eles produzem.",
+    "Ler as evidências de Camada 1 de uma interface (link, velocidade e duplex negociados, erros CRC, RSSI e SNR) e reconhecer velocidade reduzida e duplex mismatch."
   ],
   "content": {
-    "motivation": "<section class=\"lesson-section lesson-section--motivation\">\n  <h2>Motivação</h2>\n  <p>Em muitas investigações de rede, a equipe começa olhando DNS, firewall, aplicação, certificado ou rota. Às vezes o problema está num cabo ruim, numa porta negociando em velocidade errada, numa fibra com atenuação alta, num rádio sofrendo interferência ou numa energia PoE insuficiente.</p>\n  <p>Sem a Camada 1 funcionando, todas as camadas acima ficam sem base, e os sintomas aparecem lá em cima, na aplicação.</p>\n  <div class=\"callout callout--problem\"><strong>Problema real:</strong> um usuário reclama que a VPN cai, o sistema web trava e o Teams fica picotando. O firewall não mostra bloqueio, o DNS resolve e a rota existe. Depois de horas, alguém percebe que a porta do switch acumulava erros CRC e o cabo estava danificado. A falha era física, mas parecia aplicação.</div>\n</section>\n",
-    "problem": "<section class=\"lesson-section lesson-section--problem\">\n  <h2>Problema</h2>\n  <p>O problema que a Camada 1 resolve é simples de dizer e difícil de executar bem: como transportar bits por um meio físico de forma confiável o suficiente para que as camadas superiores consigam trabalhar?</p>\n  <ul class=\"flow-list\">\n    <li><strong>Bits são abstrações:</strong> 0 e 1 precisam virar sinais mensuráveis.</li>\n    <li><strong>Meios físicos têm limites:</strong> cabo tem distância, fibra tem atenuação, rádio sofre interferência.</li>\n    <li><strong>Ambientes reais são imperfeitos:</strong> conectores oxidam, cabos dobram, racks aquecem, canais Wi-Fi congestionam.</li>\n    <li><strong>Alta velocidade exige precisão:</strong> quanto maior a taxa, menor a tolerância a ruído, erro e instalação ruim.</li>\n    <li><strong>Falhas físicas enganam:</strong> sintomas podem parecer DNS, firewall, VPN, aplicação ou cloud.</li>\n  </ul>\n</section>\n",
-    "concept": "<section class=\"lesson-section lesson-section--concept\">\n  <h2>Conceito</h2>\n  <div class=\"definition-box\"><strong>Definição:</strong> no Modelo OSI, a Camada 1 (camada física) é responsável pela transmissão e recepção de bits brutos através de um meio físico, como cabo de cobre, fibra óptica ou rádio.</div>\n  <p>Ela trata de sinal, meio, conector, frequência, potência, temporização, codificação, modulação, velocidade e distância. Ela não aprende MAC, não roteia, não resolve DNS e não autentica usuário: só cria a condição para que quadros, pacotes e dados existam nas camadas de cima.</p>\n  <div class=\"responsive-table\"><table class=\"data-table\">\n    <thead><tr><th>Meio</th><th>Sinal</th><th>Distância típica</th><th>Ponto fraco</th><th>Onde aparece</th></tr></thead>\n    <tbody>\n      <tr><td>Par trançado de cobre</td><td>Variações elétricas</td><td>Até 100 m por segmento Ethernet</td><td>Interferência, crimpagem ruim, categoria inadequada</td><td>Estações, acesso, PoE</td></tr>\n      <tr><td>Fibra óptica</td><td>Pulsos de luz</td><td>Centenas de metros (multimodo) a quilômetros (monomodo)</td><td>Custo, transceptor compatível, curvatura, conector sujo</td><td>Uplinks, backbone, datacenter, WAN</td></tr>\n      <tr><td>Rádio (Wi-Fi)</td><td>Ondas eletromagnéticas</td><td>Dezenas de metros em ambiente interno</td><td>Paredes, distância, interferência, canal compartilhado</td><td>Mobilidade, escritórios, convidados</td></tr>\n    </tbody>\n  </table></div>\n  <p>No Wi-Fi, os clientes de um mesmo canal se revezam para transmitir. Por isso a qualidade varia com o número de clientes e com o ruído, e não só com a distância.</p>\n</section>\n",
-    "internals": "<section class=\"lesson-section lesson-section--internals\">\n  <h2>Funcionamento interno</h2>\n  <ol class=\"flow-list\">\n    <li>A camada de enlace entrega à placa de rede os bits de um quadro.</li>\n    <li>A interface física aplica codificação e temporização adequadas ao padrão usado.</li>\n    <li>No cobre, o equipamento gera variações elétricas controladas; na fibra, um transceptor (ex.: SFP) converte o sinal elétrico em pulsos de luz; no rádio, o transmissor modula ondas num canal.</li>\n    <li>O receptor mede o sinal, tenta distinguir ruído de informação e reconstrói bits.</li>\n    <li>Se a qualidade for ruim, surgem erros, retransmissões, perda, baixa taxa ou queda de link.</li>\n  </ol>\n  <h3>Autonegociação, velocidade, duplex e CRC</h3>\n  <p>Ao conectar o cabo, as duas pontas usam a <strong>autonegociação</strong> para escolher a maior velocidade e o duplex que ambas suportam. <strong>Full duplex</strong> transmite e recebe ao mesmo tempo; <strong>half duplex</strong>, herança dos meios compartilhados antigos, alterna e tem colisões.</p>\n  <ul>\n    <li><strong>Velocidade abaixo do esperado:</strong> 1 Gbps (1000BASE-T) usa os quatro pares do cabo; 100 Mbps usa só dois. Com um par rompido, crimpagem ruim ou patch cord inadequado, muitos equipamentos sobem a 100 Mbps.</li>\n    <li><strong>Duplex mismatch:</strong> se um lado está fixo (ex.: 100/full) e o outro em automático, o automático detecta a velocidade, mas não o duplex, e assume half. O lado half registra <em>late collisions</em>; o full, erros FCS/CRC e runts. O ping funciona, mas a vazão despenca sob carga. Configure os dois lados iguais, de preferência ambos em automático.</li>\n    <li><strong>Erro CRC:</strong> o transmissor anexa ao quadro um código de verificação (FCS); o receptor recalcula e, se não bater, descarta o quadro e soma no contador de CRC. A verificação é da Camada 2, mas a causa costuma ser física: cabo, conector, interferência, transceptor ou porta.</li>\n  </ul>\n  <p>Na fibra, o switch pode mostrar a potência óptica recebida (<code>show interfaces transceiver</code> no Cisco, se o SFP suportar); em APs e câmeras, o status PoE (<code>show power inline</code>). Os contadores de erro acumulam desde o último boot ou <code>clear counters</code>: compare duas leituras e veja se crescem.</p>\n  <div class=\"callout warning\"><strong>Erros comuns:</strong>\n    <ul>\n      <li>\"O LED está aceso\": link aceso não descarta CRC, velocidade baixa ou flaps.</li>\n      <li>\"Sinal Wi-Fi cheio, rede boa\": as barras mostram força (RSSI), não qualidade; olhe SNR, canal e retransmissões.</li>\n      <li>Trocar switch ou firewall antes de testar o patch cord: comece pelo simples e reversível.</li>\n      <li>Insistir na Camada 1 com link up, velocidade certa e erros estáveis: aí a investigação sobe de camada.</li>\n    </ul>\n  </div>\n</section>\n",
-    "architecture": "<section class=\"lesson-section lesson-section--architecture\">\n  <h2>Arquitetura</h2>\n  <p>Numa rede real, a Camada 1 aparece em cada trecho do caminho:</p>\n  <ul class=\"flow-list\">\n    <li><strong>Host:</strong> NIC física ou virtual, velocidade e link.</li>\n    <li><strong>Acesso:</strong> cabo do usuário, tomada, patch cord, patch panel, porta do switch de acesso ou rádio do AP, energia PoE.</li>\n    <li><strong>Distribuição/core:</strong> uplinks de fibra, transceptores, cabeamento de datacenter e redundância.</li>\n    <li><strong>WAN/cloud:</strong> links de operadora, cross-connects, Direct Connect, ExpressRoute ou VPN sobre internet.</li>\n    <li><strong>Segurança:</strong> portas físicas, racks, salas técnicas, APs e pontos expostos.</li>\n  </ul>\n  <p>Do host você vê só o próprio link. Muitas evidências (contadores da porta, potência óptica, PoE, interferência no canal) estão no switch, no AP ou no controlador, e ferramentas de software mostram sintomas, mas não certificam cabo, fibra ou rádio.</p>\n</section>\n",
-    "analogy": "<section class=\"lesson-section lesson-section--analogy\">\n  <h2>Analogia</h2>\n  <p>Pense na Camada 1 como a estrada, os trilhos ou o encanamento por onde algo precisa passar. Você pode ter uma carga bem endereçada, documentação correta e destino conhecido, mas se a ponte caiu, o trilho está quebrado ou o cano está obstruído, a entrega falha.</p>\n  <div class=\"callout callout--warning\"><strong>Limite da analogia:</strong> o sinal não viaja intacto como um caminhão; o receptor reconstrói os bits a partir de um sinal sujeito a ruído e atenuação.</div>\n</section>\n",
-    "simpleExample": "<section class=\"lesson-section lesson-section--example\">\n  <h2>Exemplo simples</h2>\n  <p>Seu notebook está conectado por cabo ao roteador, mas a internet fica instável. Você troca DNS, reinicia navegador e culpa o provedor. Depois percebe que o conector RJ-45 está frouxo e o link alterna entre conectado e desconectado. O problema era Camada 1.</p>\n  <p>Outro exemplo: no Wi-Fi, você está longe do roteador, com paredes entre os dispositivos. O sinal chega fraco, a taxa cai e há retransmissões. O site parece lento, mas o problema real começa no rádio.</p>\n</section>",
-    "enterpriseExample": "<section class=\"lesson-section lesson-section--enterprise\">\n  <h2>Exemplo empresarial</h2>\n  <p>Em uma empresa, uma estação de trabalho negocia a 100 Mbps em vez de 1 Gbps. O usuário reclama que acessar arquivos no servidor demora. O switch mostra muitos erros CRC na porta. A causa pode ser cabo ruim, tomada danificada, crimpagem incorreta, patch cord defeituoso ou interferência. O diagnóstico correto começa na porta física e nas evidências do switch.</p>\n  <p>Em datacenter, uma fibra mal encaixada ou transceptor incompatível pode derrubar um uplink. Em Wi-Fi corporativo, canal mal planejado pode afetar dezenas de usuários, chamadas de vídeo, autenticação 802.1X e acesso a sistemas internos.</p>\n</section>\n",
-    "cloudExample": "<section class=\"lesson-section lesson-section--cloud\">\n  <h2>Exemplo em cloud</h2>\n  <p>Na cloud pública, você não vê a Camada 1: cria VPC, VNet, subnet, NIC virtual e security group. A rede física continua existindo no datacenter do provedor, e ela volta a aparecer quando você contrata conexão dedicada (ExpressRoute, Direct Connect, Interconnect): cross-connects, óptica, operadora, redundância, SLA e custo recorrente.</p>\n  <p>Mesmo sem acesso físico, decisões de arquitetura dependem dela: zonas de disponibilidade, regiões, latência entre localidades, redundância de links e falhas de energia. Abstração não elimina dependência física.</p>\n</section>\n",
-    "devsecopsExample": "<section class=\"lesson-section lesson-section--devsecops\">\n  <h2>Exemplo em DevSecOps</h2>\n  <p>Um runner self-hosted conectado por Wi-Fi instável pode falhar no meio dos builds, e um cluster Kubernetes on-premises pode sofrer com uplinks sem redundância. Infrastructure as Code não substitui a validação física: o Terraform cria uma VNet perfeita, mas uma VPN site-to-site sobre um link ruim continua instável.</p>\n</section>\n",
-    "securityExample": "<section class=\"lesson-section lesson-section--security\">\n  <h2>Exemplo em Segurança</h2>\n  <p>Quem tem acesso físico pode contornar controles lógicos: conectar um dispositivo numa tomada ativa, desconectar cabos num rack aberto ou plugar um AP que cria um caminho fora do controle.</p>\n  <table class=\"data-table risk-table\">\n    <thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead>\n    <tbody>\n      <tr><td>Porta física exposta</td><td>Tomada ativa em recepção ou sala pública.</td><td>Acesso não autorizado à rede.</td><td>Desativar portas sem uso, 802.1X, NAC, segmentação e logs.</td></tr>\n      <tr><td>Rogue AP</td><td>Dispositivo Wi-Fi não autorizado conectado à LAN.</td><td>Bypass de controles e exposição de tráfego.</td><td>Inventário, varredura RF, controle de portas e política de rede.</td></tr>\n      <tr><td>Rack aberto</td><td>Patch panel e switches acessíveis sem controle.</td><td>Sabotagem, mudança indevida ou indisponibilidade.</td><td>Controle físico, câmera, registro de acesso e etiquetagem.</td></tr>\n      <tr><td>Link único</td><td>Sem redundância de uplink ou operadora.</td><td>Indisponibilidade de serviços críticos.</td><td>Redundância, monitoramento, failover e teste periódico.</td></tr>\n    </tbody>\n  </table>\n</section>\n",
+    "motivation": "<section class=\"lesson-section lesson-section--motivation\">\n  <h2>Motivação</h2>\n  <p>Um colega reclama que a VPN cai, o sistema web trava e as chamadas de vídeo picotam. Você confere o que já aprendeu: o computador tem IP, o DNS resolve, o ping para o gateway responde e o firewall não mostra bloqueio. Depois de horas mexendo em configurações, alguém olha a porta do switch: o contador de erros crescia sem parar, e o cabo estava amassado atrás da mesa. A falha era física, mas todos os sintomas apareciam lá em cima, na aplicação.</p>\n  <p>Sem olhar a Camada 1, você gasta horas nas camadas erradas e às vezes troca equipamento caro por causa de um cabo de poucos reais. Nesta aula você aprende a ler as evidências do próprio link. Elas também importam para segurança: quem pluga um cabo numa tomada ativa ou abre um rack contorna boa parte dos controles lógicos.</p>\n</section>\n",
+    "problem": "<section class=\"lesson-section lesson-section--problem\">\n  <h2>Problema</h2>\n  <p>É isso que acontece quando as camadas de cima herdam um meio ruim. Bits são abstrações: para atravessar um cabo, uma fibra ou o ar, 0 e 1 precisam virar algo mensurável, e o receptor precisa reconstruí-los a partir de um sinal que chega mais fraco e com ruído.</p>\n  <p>Cada meio tem limites próprios, como distância máxima, atenuação e interferência, e ambientes reais pioram tudo: conectores oxidam, cabos dobram, canais Wi-Fi lotam. Quanto maior a velocidade, menor a tolerância a erro. Esta aula mostra como a Camada 1 faz essa conversão, como as duas pontas de um cabo combinam velocidade e duplex e quais evidências mostram que o meio está falhando.</p>\n</section>\n",
+    "concept": "<section class=\"lesson-section lesson-section--concept\">\n  <h2>Conceito</h2>\n  <div class=\"definition-box\"><strong>Definição:</strong> no Modelo OSI, a Camada 1 (camada física) transmite e recebe bits brutos através de um meio físico, como cabo de cobre, fibra óptica ou rádio.</div>\n  <p>Ela define o meio, o conector, o tipo de sinal, a velocidade e a distância máxima. Ela não aprende MAC, não roteia, não resolve DNS e não autentica usuário: só cria a condição para que quadros, pacotes e dados existam nas camadas de cima.</p>\n  <div class=\"responsive-table\"><table class=\"data-table\">\n    <thead><tr><th>Meio</th><th>Sinal</th><th>Distância típica</th><th>Ponto fraco</th><th>Onde aparece</th></tr></thead>\n    <tbody>\n      <tr><td>Par trançado de cobre</td><td>Variações elétricas</td><td>Até 100 m por segmento Ethernet</td><td>Interferência, crimpagem ruim, categoria inadequada</td><td>Estações, acesso, PoE</td></tr>\n      <tr><td>Fibra óptica</td><td>Pulsos de luz</td><td>Centenas de metros (multimodo) a quilômetros (monomodo)</td><td>Custo, transceptor compatível, curvatura, conector sujo</td><td>Uplinks, backbone, datacenter, WAN</td></tr>\n      <tr><td>Rádio (Wi-Fi)</td><td>Ondas eletromagnéticas</td><td>Dezenas de metros em ambiente interno</td><td>Paredes, distância, interferência, canal compartilhado</td><td>Mobilidade, escritórios, convidados</td></tr>\n    </tbody>\n  </table></div>\n  <p>No Wi-Fi, os clientes de um mesmo canal se revezam para transmitir. Por isso a qualidade varia com o número de clientes e com o ruído, e não só com a distância. A força do sinal recebido se chama <strong>RSSI</strong> e é medida em dBm, um número negativo: −50 dBm é um sinal forte, e perto de −80 dBm ele já é fraco. O que decide a qualidade, porém, é a <strong>SNR</strong> (relação sinal-ruído): quanto o sinal fica acima do ruído, em dB. Sinal forte com ruído alto ainda dá SNR baixa e rede ruim.</p>\n</section>\n",
+    "internals": "<section class=\"lesson-section lesson-section--internals\">\n  <h2>Funcionamento interno</h2>\n  <ol class=\"flow-list\">\n    <li>A camada de enlace entrega à placa de rede os bits de um quadro.</li>\n    <li>A interface física transforma esses bits em sinal, seguindo o padrão do meio (por exemplo, 1000BASE-T para 1 Gbps no cobre): no cobre, variações elétricas controladas; na fibra, pulsos de luz emitidos por um transceptor (o módulo que converte sinal elétrico em luz, como um SFP); no rádio, ondas num canal.</li>\n    <li>O receptor mede o sinal, separa o que é informação do que é ruído e reconstrói os bits.</li>\n    <li>Se a qualidade for ruim, surgem erros, retransmissões, perda, taxa baixa ou queda de link.</li>\n  </ol>\n  <h3>Autonegociação, velocidade, duplex e CRC</h3>\n  <p>Ao conectar o cabo, as duas pontas usam a <strong>autonegociação</strong> para escolher a maior velocidade e o duplex que ambas suportam. <strong>Full duplex</strong> transmite e recebe ao mesmo tempo; <strong>half duplex</strong>, herança dos meios compartilhados antigos, alterna e tem colisões.</p>\n  <ul>\n    <li><strong>Velocidade abaixo do esperado:</strong> 1 Gbps (1000BASE-T) usa os quatro pares do cabo; 100 Mbps usa só dois. Com um par rompido, crimpagem ruim ou patch cord inadequado, muitos equipamentos sobem a 100 Mbps.</li>\n    <li><strong>Duplex mismatch:</strong> se um lado está fixo (ex.: 100/full) e o outro em automático, o automático detecta a velocidade, mas não o duplex, e assume half. O lado half registra <em>late collisions</em> (colisões tardias); o full, erros FCS/CRC. O ping funciona, mas a vazão despenca sob carga. Configure os dois lados iguais, de preferência ambos em automático.</li>\n    <li><strong>Erro CRC:</strong> o transmissor anexa ao quadro um código de verificação (FCS); o receptor recalcula e, se não bater, descarta o quadro e soma no contador de CRC. A verificação é da Camada 2, mas a causa costuma ser física: cabo, conector, interferência, transceptor ou porta.</li>\n  </ul>\n  <p>Os contadores de erro acumulam desde que o equipamento ligou ou desde que alguém os zerou: um número alto pode ser de ontem. Compare duas leituras com alguns minutos de intervalo; só o contador crescendo indica falha agora. E lembre que, do seu computador, você vê só o próprio link: os contadores da porta do switch e a visão do AP ficam nesses equipamentos.</p>\n  <div class=\"callout warning\"><strong>Erros comuns:</strong>\n    <ul>\n      <li>\"O LED está aceso\": link aceso não descarta CRC, velocidade baixa ou quedas rápidas do link.</li>\n      <li>Trocar switch ou firewall antes de testar o patch cord: comece pelo simples e reversível.</li>\n      <li>Insistir na Camada 1 com link up, velocidade certa e erros estáveis: aí a investigação sobe de camada.</li>\n    </ul>\n  </div>\n</section>\n",
+    "analogy": "<section class=\"lesson-section lesson-section--analogy\">\n  <h2>Analogia</h2>\n  <p>Pense na Camada 1 como a estrada por onde a carga passa: mesmo com endereço e documentos corretos, a entrega falha se a ponte caiu. A diferença é que o sinal não chega intacto como um caminhão: o receptor reconstrói os bits a partir de um sinal enfraquecido e com ruído.</p>\n</section>\n",
+    "simpleExample": "<section class=\"lesson-section lesson-section--example\">\n  <h2>Exemplo simples</h2>\n  <p>Seu notebook está ligado por cabo ao roteador, mas a internet fica instável. Você troca o DNS, reinicia o navegador e culpa o provedor. Depois percebe que o conector RJ-45 está frouxo: no <code>Get-NetAdapter</code>, o Status da placa alterna entre Up e Disconnected. Cada queda do link derruba tudo o que estava em cima dele. O problema era Camada 1, e a solução foi trocar o patch cord.</p>\n  <p>No Wi-Fi, o mesmo notebook longe do roteador, com duas paredes no caminho, recebe sinal fraco: a taxa cai e o rádio retransmite muitos quadros. O site parece lento, mas o problema começa no rádio. Levar o notebook para perto do roteador, ou ligá-lo no cabo, é o teste que separa as duas coisas.</p>\n</section>\n",
     "diagram": "<section class=\"lesson-section lesson-section--diagram\">\n  <h2>Diagrama SVG</h2>\n  <svg class=\"lesson-svg\" viewBox=\"0 0 960 420\" role=\"img\" aria-labelledby=\"m02l03-title m02l03-desc\">\n    <title id=\"m02l03-title\">Camada 1: bits virando sinais físicos</title>\n    <desc id=\"m02l03-desc\">Diagrama mostrando bits saindo de um host e sendo transmitidos por cobre, fibra e rádio até equipamentos de rede.</desc>\n    <defs>\n      <marker id=\"m02l03-arrow\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\" markerUnits=\"strokeWidth\">\n        <path d=\"M0,0 L0,6 L9,3 z\" class=\"svg-arrow\" />\n      </marker>\n    </defs>\n    <rect x=\"40\" y=\"150\" width=\"140\" height=\"70\" rx=\"12\" class=\"svg-node svg-node--client\" />\n    <text x=\"110\" y=\"178\" text-anchor=\"middle\" class=\"svg-label\">Host</text>\n    <text x=\"110\" y=\"202\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">bits 0/1</text>\n    <rect x=\"250\" y=\"60\" width=\"150\" height=\"70\" rx=\"12\" class=\"svg-node\" />\n    <text x=\"325\" y=\"88\" text-anchor=\"middle\" class=\"svg-label\">Cobre</text>\n    <text x=\"325\" y=\"112\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">sinal elétrico</text>\n    <rect x=\"250\" y=\"175\" width=\"150\" height=\"70\" rx=\"12\" class=\"svg-node\" />\n    <text x=\"325\" y=\"203\" text-anchor=\"middle\" class=\"svg-label\">Fibra</text>\n    <text x=\"325\" y=\"227\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">pulsos de luz</text>\n    <rect x=\"250\" y=\"290\" width=\"150\" height=\"70\" rx=\"12\" class=\"svg-node\" />\n    <text x=\"325\" y=\"318\" text-anchor=\"middle\" class=\"svg-label\">Rádio</text>\n    <text x=\"325\" y=\"342\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">onda no ar</text>\n    <rect x=\"520\" y=\"150\" width=\"150\" height=\"70\" rx=\"12\" class=\"svg-node svg-node--switch\" />\n    <text x=\"595\" y=\"178\" text-anchor=\"middle\" class=\"svg-label\">Equipamento</text>\n    <text x=\"595\" y=\"202\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">reconstrói bits</text>\n    <rect x=\"760\" y=\"150\" width=\"150\" height=\"70\" rx=\"12\" class=\"svg-node svg-node--security\" />\n    <text x=\"835\" y=\"178\" text-anchor=\"middle\" class=\"svg-label\">Evidências</text>\n    <text x=\"835\" y=\"202\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">link, erros, SNR</text>\n    <line x1=\"180\" y1=\"185\" x2=\"250\" y2=\"95\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m02l03-arrow)\" />\n    <line x1=\"180\" y1=\"185\" x2=\"250\" y2=\"210\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m02l03-arrow)\" />\n    <line x1=\"180\" y1=\"185\" x2=\"250\" y2=\"325\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m02l03-arrow)\" />\n    <line x1=\"400\" y1=\"95\" x2=\"520\" y2=\"185\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l03-arrow)\" />\n    <line x1=\"400\" y1=\"210\" x2=\"520\" y2=\"185\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l03-arrow)\" />\n    <line x1=\"400\" y1=\"325\" x2=\"520\" y2=\"185\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l03-arrow)\" />\n    <line x1=\"670\" y1=\"185\" x2=\"760\" y2=\"185\" class=\"svg-flow svg-flow--blocked animated-flow\" marker-end=\"url(#m02l03-arrow)\" />\n    <text x=\"480\" y=\"35\" text-anchor=\"middle\" class=\"svg-label\">Camada 1 não interpreta aplicação: ela transporta sinais</text>\n    <text x=\"480\" y=\"390\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Ruído, atenuação, interferência, distância e energia afetam todas as camadas acima.</text>\n  </svg>\n</section>",
-    "summary": "<section class=\"lesson-section lesson-section--summary\">\n  <h2>Resumo</h2>\n  <ul>\n    <li><strong>Ideia central:</strong> a Camada 1 transforma bits em sinais físicos e sinais em bits; se o meio falha, todas as camadas acima herdam a instabilidade.</li>\n    <li><strong>Meios:</strong> cobre (até 100 m, sensível a interferência), fibra (longa distância, depende de transceptor e conector limpo) e rádio (mobilidade, canal compartilhado).</li>\n    <li><strong>Evidências:</strong> estado do link, velocidade e duplex negociados, CRC crescendo, RSSI/SNR.</li>\n    <li><strong>Erro comum:</strong> culpar DNS, firewall ou aplicação antes de verificar link, velocidade e erros físicos.</li>\n    <li><strong>Segurança:</strong> portas expostas, racks abertos e APs não autorizados são riscos físicos com efeito lógico.</li>\n  </ul>\n</section>\n",
+    "summary": "<section class=\"lesson-section lesson-section--summary\">\n  <h2>Resumo</h2>\n  <ul>\n    <li><strong>Ideia central:</strong> a Camada 1 transforma bits em sinal e sinal em bits; se o meio falha, as camadas acima herdam a falha.</li>\n    <li>Cobre: até 100 m. Fibra: quilômetros. Rádio: canal compartilhado.</li>\n    <li>Evidências: link, velocidade e duplex, CRC crescendo entre duas leituras, RSSI e SNR.</li>\n    <li>100 Mbps no lugar de 1 Gbps sugere par danificado; lado fixo contra automático gera duplex mismatch.</li>\n    <li>Olhe link e erros antes de culpar DNS, firewall ou aplicação.</li>\n  </ul>\n  <p><em>Já domina isso? Faça o quiz: com 70% ou mais, você pode seguir.</em></p>\n</section>\n",
     "nextTheme": "<section class=\"lesson-section lesson-section--next\">\n  <h2>Próximo tema</h2>\n  <p>Na aula 2.4, Camada 2 — Enlace: frames, MAC, switch, VLAN e ARP, você vai ver como a rede local organiza esses bits em quadros e entrega o tráfego dentro da LAN.</p>\n</section>\n"
   },
   "networkContext": {
@@ -107,164 +91,19 @@ export const lesson0203 = {
       "troubleshooting físico"
     ]
   },
-  "troubleshooting": {
-    "symptoms": [
-      "Link cai e volta",
-      "Velocidade negociada abaixo do esperado",
-      "Erros CRC na porta",
-      "Wi-Fi com jitter alto",
-      "PoE falha em câmera ou AP",
-      "Upload oscila sem bloqueio aparente"
-    ],
-    "diagnosticQuestions": [
-      "A velocidade negociada é a esperada?",
-      "O problema ocorre em cabo, fibra ou Wi-Fi?",
-      "Trocar cabo/porta altera o sintoma?",
-      "Existe evento físico recente: mudança de rack, obra, crimpagem, patch ou energia?"
-    ],
-    "commands": [
-      {
-        "platform": "Windows",
-        "command": "Get-NetAdapter | Format-Table Name, InterfaceDescription, Status, LinkSpeed",
-        "purpose": "Ver estado, tipo (pela descrição) e velocidade negociada das interfaces.",
-        "expectedObservation": "Interface principal em Up com velocidade coerente (ex.: 1 Gbps no cabo).",
-        "interpretation": "Velocidade menor que a esperada pode indicar cabo, porta, driver ou autonegociação; velocidades muito altas costumam ser de interfaces virtuais."
-      },
-      {
-        "platform": "Windows",
-        "command": "netsh wlan show interfaces",
-        "purpose": "Ver SSID, rádio, canal, sinal e taxas do Wi-Fi.",
-        "expectedObservation": "Sinal (em %) e taxas coerentes com a distância do AP.",
-        "interpretation": "Sinal fraco ou taxa oscilando aponta para distância, obstáculos ou interferência."
-      },
-      {
-        "platform": "Linux",
-        "command": "ethtool eth0 && ip -s link show eth0",
-        "purpose": "Ver velocidade, duplex, autonegociação e link (ethtool) e os contadores de erro (ip -s link).",
-        "expectedObservation": "Speed: 1000Mb/s, Duplex: Full, Link detected: yes; RX/TX errors estáveis entre duas leituras.",
-        "interpretation": "100Mb/s onde deveria haver 1 Gbps sugere par danificado; Duplex: Half sugere duplex mismatch; errors crescendo indicam cabo, porta ou driver."
-      },
-      {
-        "platform": "Linux",
-        "command": "iw dev wlan0 link",
-        "purpose": "Ver estado do link Wi-Fi e qualidade básica.",
-        "expectedObservation": "SSID, signal (em dBm) e tx bitrate coerentes.",
-        "interpretation": "Sinal ruim ou bitrate baixo apontam para distância, interferência ou canal congestionado."
-      },
-      {
-        "platform": "Cisco IOS",
-        "command": "show interfaces status",
-        "purpose": "Ver estado, VLAN, duplex e speed das portas.",
-        "expectedObservation": "Portas connected com a-full e a-1000 (a- indica valor autonegociado).",
-        "interpretation": "Porta notconnect, half ou velocidade menor exige investigação física; valor sem a- é fixo e pode causar duplex mismatch."
-      },
-      {
-        "platform": "Cisco IOS",
-        "command": "show interfaces counters errors",
-        "purpose": "Ver erros de interface: FCS-Err (CRC), Late-Col, Runts e outros.",
-        "expectedObservation": "Contadores zerados ou estáveis entre duas leituras.",
-        "interpretation": "FCS-Err crescendo sugere cabo, conector, transceptor ou porta; Late-Col sugere duplex mismatch. Os contadores acumulam desde o último clear counters."
-      }
-    ],
-    "decisionTree": [
-      {
-        "if": "Interface está down",
-        "then": "Verificar cabo, porta, energia, transceptor, patch panel e se a porta está administrativamente habilitada."
-      },
-      {
-        "if": "Interface está up mas com velocidade baixa",
-        "then": "Verificar categoria e pares do cabo, patch cord, autonegociação, porta e driver."
-      },
-      {
-        "if": "Há CRC errors crescendo",
-        "then": "Suspeitar de meio físico, conector, interferência, transceptor ou porta; trocar patch cord ou porta em janela autorizada e comparar."
-      },
-      {
-        "if": "Um lado mostra half duplex ou late collisions",
-        "then": "Verificar se um lado está fixo e o outro em automático; deixar os dois iguais, de preferência em automático."
-      },
-      {
-        "if": "Wi-Fi tem bom IP mas alta perda",
-        "then": "Verificar sinal, SNR, canal, interferência, distância e quantidade de clientes."
-      },
-      {
-        "if": "Link up, velocidade e duplex certos e erros estáveis",
-        "then": "A Camada 1 não explica o sintoma: subir a investigação para enlace, IP, DNS ou aplicação."
-      }
-    ]
-  },
-  "security": {
-    "goodPractices": [
-      "Manter racks e salas técnicas trancados, com registro de acesso.",
-      "Desativar portas físicas não utilizadas e usar port security ou 802.1X/NAC nas ativas.",
-      "Documentar e etiquetar patch panels, cabos e pontos de rede.",
-      "Monitorar flaps, erros de interface e APs não autorizados.",
-      "Planejar redundância para links críticos."
-    ],
-    "badPractices": [
-      "Deixar tomadas públicas ativas sem controle.",
-      "Conectar APs domésticos na rede corporativa.",
-      "Ignorar logs físicos e de switch durante incidentes."
-    ],
-    "commonErrors": [
-      "Confundir disponibilidade física com autorização lógica.",
-      "Achar que firewall compensa rack aberto.",
-      "Tratar Wi-Fi apenas como comodidade e não como perímetro sem fio.",
-      "Compartilhar fotos de rack com dados sensíveis sem sanitização."
-    ],
-    "vulnerabilities": [
-      {
-        "name": "Acesso físico não autorizado",
-        "description": "Portas, racks e equipamentos acessíveis permitem conectar, alterar ou interromper a rede.",
-        "defensiveExplanation": "Não exige exploração sofisticada: acesso físico compromete disponibilidade e controle.",
-        "mitigation": "Controle físico, câmeras, portas desativadas, 802.1X/NAC e inventário de portas."
-      },
-      {
-        "name": "AP não autorizado",
-        "description": "Um access point conectado sem controle abre uma ponte sem fio para a rede interna.",
-        "defensiveExplanation": "O foco defensivo é detectar e remover o dispositivo, não explorar clientes.",
-        "mitigation": "Varredura RF, controle de portas, segmentação e política de Wi-Fi."
-      }
-    ],
-    "monitoring": [
-      "Interface up/down e link flapping",
-      "CRC errors",
-      "PoE status",
-      "RSSI/SNR",
-      "APs e SSIDs desconhecidos"
-    ],
-    "detectionIdeas": [
-      "Alertar flaps repetidos.",
-      "Correlacionar nova porta ativa ou MAC desconhecido em porta pública com o inventário.",
-      "Investigar aumento de erros de interface."
-    ]
-  },
   "lab": {
     "id": "lab-2.3",
-    "title": "Coletando evidências seguras de Camada 1",
+    "title": "Lendo as evidências de Camada 1 do seu computador",
     "labType": "security",
-    "objective": "Identificar o meio de conexão, estado de link, velocidade negociada e evidências físicas/RF sem executar testes invasivos.",
-    "scenario": "Você fará um inventário básico da sua conexão atual, separando o que é evidência de Camada 1 do que pertence às camadas superiores.",
-    "topology": "Host do aluno -> cabo ou Wi-Fi -> switch/AP/roteador -> rede local.",
-    "architecture": "Ambiente local simples com pelo menos uma interface de rede ativa. Opcionalmente, um switch gerenciável ou roteador/AP para consulta visual.",
+    "objective": "Identificar o meio da sua conexão e ler estado do link, velocidade, duplex, erros e sinal Wi-Fi com comandos só de leitura.",
     "prerequisites": [
-      "Ter concluído as aulas 1.5, 1.6, 1.7 e 2.2.",
-      "Ter acesso ao terminal do próprio computador.",
-      "Não alterar configurações corporativas sem autorização."
+      "Ter acesso ao terminal do próprio computador. Os comandos só leem informações; nada é alterado."
     ],
     "tools": [
       "Windows PowerShell",
-      "Terminal Linux",
-      "Opcional: interface administrativa do roteador doméstico",
-      "Opcional: switch Cisco em laboratório"
+      "Terminal Linux (ip, ethtool e iw)"
     ],
-    "estimatedTimeMinutes": 35,
-    "cost": "zero",
-    "safetyNotes": [
-      "Execute apenas comandos de leitura.",
-      "Não desconecte cabos nem entre em racks ou salas técnicas de ambiente corporativo sem autorização.",
-      "Não compartilhe fotos de etiquetas, racks, SSIDs internos ou endereços sem sanitizar."
-    ],
+    "estimatedTimeMinutes": 15,
     "steps": [
       {
         "number": 1,
@@ -277,112 +116,23 @@ export const lesson0203 = {
       {
         "number": 2,
         "title": "Verificar velocidade, duplex e erros (cabo)",
-        "instruction": "Se estiver no cabo, anote velocidade, duplex e contadores de erro. Repita a leitura dos erros depois de alguns minutos.",
+        "instruction": "Se estiver no cabo, anote velocidade, duplex e contadores de erro. Espere alguns minutos e leia os erros de novo. No Linux, troque eth0 pelo nome da sua interface cabeada visto no passo 1.",
         "command": "Windows: netstat -e\nLinux: ethtool eth0 && ip -s link show eth0",
         "expectedOutput": "Linux: Speed e Duplex esperados (ex.: 1000Mb/s, Full) e RX/TX errors iguais nas duas leituras. Windows: a velocidade veio no passo 1; netstat -e mostra Errors e Discards, que também devem ficar estáveis.",
-        "explanation": "Velocidade abaixo do esperado pode indicar cabo, porta, driver ou autonegociação; erros crescendo indicam problema no meio."
+        "explanation": "Velocidade abaixo do esperado (100 Mb/s onde deveria haver 1000) sugere par danificado, patch cord ruim ou autonegociação; Duplex: Half sugere duplex mismatch; erros crescendo entre as duas leituras indicam problema no meio agora. Se o ethtool não estiver instalado, use só o ip -s link."
       },
       {
         "number": 3,
         "title": "Coletar evidência Wi-Fi, se aplicável",
-        "instruction": "Se estiver no Wi-Fi, veja sinal, rádio, canal e taxa de transmissão.",
+        "instruction": "Se estiver no Wi-Fi, veja sinal, canal e taxa de transmissão. Depois, afaste-se do roteador (ou coloque uma parede no caminho) e repita o comando. No Linux, troque wlan0 pelo nome da sua interface sem fio.",
         "command": "Windows: netsh wlan show interfaces\nLinux: iw dev wlan0 link",
-        "expectedOutput": "SSID, sinal (% no Windows, dBm no Linux), rádio/canal e bitrate.",
-        "explanation": "O 802.11 define camada física e de enlace; sinal fraco afeta todas as camadas superiores."
-      },
-      {
-        "number": 4,
-        "title": "Separar evidência física de evidência lógica",
-        "instruction": "Monte uma tabela com as colunas Evidência, Camada provável e Interpretação, com pelo menos cinco linhas (inclua também evidências lógicas, como IP e DNS, para treinar a separação).",
-        "expectedOutput": "Tabela com pelo menos cinco evidências classificadas.",
-        "explanation": "O objetivo é treinar raciocínio: nem tudo que aparece em diagnóstico é camada física."
-      },
-      {
-        "number": 5,
-        "title": "Registrar limites da investigação",
-        "instruction": "Anote o que você não consegue verificar sem acesso ao switch, rack ou AP.",
-        "expectedOutput": "Lista de limitações, como ausência de counters de switch, potência óptica ou status PoE.",
-        "explanation": "Um relatório técnico honesto separa fato, hipótese e limitação."
+        "expectedOutput": "SSID, sinal (% no Windows, dBm no Linux), canal e taxa. Longe do roteador, o sinal e a taxa caem.",
+        "explanation": "Você vê na prática que o rádio varia com a distância e com obstáculos. O comando mostra a força do sinal (RSSI), não a SNR: sinal bom com rede ruim pede olhar canal, ruído e número de clientes."
       }
     ],
-    "expectedResult": "Ao final, o aluno terá um pequeno relatório de Camada 1 com meio usado, estado de link, velocidade/sinal, hipóteses físicas e limitações.",
-    "validation": [
-      {
-        "check": "Interface principal identificada",
-        "command": "Get-NetAdapter ou ip link show",
-        "expected": "Interface ativa identificada corretamente.",
-        "ifFails": "Verifique se está usando o terminal correto e se há permissão para listar interfaces."
-      },
-      {
-        "check": "Velocidade ou sinal registrado",
-        "command": "Get-NetAdapter, ethtool ou netsh wlan show interfaces",
-        "expected": "Valor de LinkSpeed, Speed, signal ou bitrate anotado.",
-        "ifFails": "Use o comando alternativo da sua plataforma ou registre limitação."
-      },
-      {
-        "check": "Relatório separa camada física de lógica",
-        "command": "Revisão manual",
-        "expected": "Evidências físicas não misturadas com DNS, rota ou aplicação.",
-        "ifFails": "Revise aulas 0.8, 1.8 e 2.1."
-      }
-    ],
-    "troubleshooting": [
-      {
-        "symptom": "Comando ethtool não existe",
-        "probableCause": "Pacote não instalado ou interface diferente.",
-        "howToConfirm": "Execute which ethtool e ip link show.",
-        "fix": "Instale ethtool em laboratório próprio ou use ip link e registre a limitação."
-      },
-      {
-        "symptom": "Interface Wi-Fi não aparece",
-        "probableCause": "Nome da interface é diferente ou driver abstrai informação.",
-        "howToConfirm": "Liste interfaces com ip link ou Get-NetAdapter.",
-        "fix": "Use a interface correta ou registre limitação."
-      },
-      {
-        "symptom": "Velocidade parece muito alta ou virtual",
-        "probableCause": "Interface virtual, VPN, WSL, Hyper-V ou Docker.",
-        "howToConfirm": "Verifique nome da interface e descrição.",
-        "fix": "Diferencie interface física de virtual no relatório."
-      }
-    ],
-    "improvements": [
-      "Adicionar counters de switch se estiver em laboratório Cisco.",
-      "Comparar cabo e Wi-Fi no mesmo ambiente."
-    ],
-    "evidenceToCollect": [
-      "Nome da interface",
-      "Meio usado",
-      "Estado de link",
-      "Velocidade negociada ou sinal Wi-Fi",
-      "Limitações",
-      "Hipóteses físicas",
-      "Prints sanitizados"
-    ],
-    "questions": [
-      "Qual evidência pertence à Camada 2 ou 3?",
-      "Que risco de segurança física existe no seu cenário?"
-    ],
-    "challenge": "Monte um plano para investigar uma estação que alterna entre 1 Gbps e 100 Mbps, sem trocar equipamentos caros imediatamente.",
-    "solution": "Comece coletando estado e velocidade, verifique cabo e patch cord, teste outra porta conhecida, observe counters de erro, valide patch panel/tomada, registre se há flaps, só depois escale para driver, NIC ou switch. Documente evidências antes de trocar hardware."
+    "expectedResult": "Você sabe qual meio sustenta sua conexão e anotou o estado do link, a velocidade e o duplex (ou o sinal e a taxa do Wi-Fi) e se os contadores de erro estão estáveis ou crescendo."
   },
   "mentorQuestions": [
-    {
-      "type": "reflexão",
-      "question": "Por que uma falha física pode parecer falha de aplicação?",
-      "hints": [
-        "Pense nas camadas superiores herdando instabilidade.",
-        "Pense em retransmissões e quedas intermitentes."
-      ],
-      "expectedIdeas": [
-        "camadas dependem da física",
-        "perda",
-        "jitter",
-        "retransmissão",
-        "link instável"
-      ],
-      "explanation": "Quando o meio físico falha, TCP, DNS, HTTP e aplicações manifestam sintomas, mas não são necessariamente a causa raiz."
-    },
     {
       "type": "diagnóstico",
       "question": "Um usuário diz: \"meu Wi-Fi está com sinal cheio, então o problema não é a rede\". Como você responderia e que evidências pediria?",
@@ -401,21 +151,20 @@ export const lesson0203 = {
       "explanation": "Sinal forte com ruído alto ainda dá SNR baixo, e canal cheio ou com interferência gera retransmissões e jitter. Repetir o teste no cabo isola o rádio."
     },
     {
-      "type": "cenário real",
-      "question": "Como você reduziria risco de acesso físico indevido em uma rede de escritório?",
+      "type": "aplicação",
+      "question": "Uma estação alterna entre 1 Gbps e 100 Mbps ao longo do dia. Como você investigaria, em que ordem, sem trocar equipamentos caros logo de cara?",
       "hints": [
-        "Pense em portas, racks e autenticação.",
-        "Pense em controle físico e lógico."
+        "Quantos pares 1 Gbps usa, e quantos 100 Mbps usa?",
+        "Que testes são baratos e reversíveis? Troque um elemento por vez."
       ],
       "expectedIdeas": [
-        "desativar portas",
-        "rack trancado",
-        "802.1X",
-        "NAC",
-        "inventário",
-        "monitoramento"
+        "coletar velocidade e erros antes de mexer",
+        "trocar o patch cord",
+        "testar outra porta ou tomada conhecida",
+        "comparar contadores de erro em duas leituras",
+        "só depois suspeitar de placa ou switch"
       ],
-      "explanation": "Segurança de rede começa também pelo controle do ponto físico de conexão."
+      "explanation": "A queda para 100 Mbps aponta para um par com problema. Comece pelas evidências e pelo mais simples: patch cord, depois tomada e porta. Trocando um elemento por vez, você descobre qual deles leva o defeito junto."
     }
   ],
   "quiz": [
@@ -440,11 +189,11 @@ export const lesson0203 = {
       "options": [
         "DNS lento reduzindo a velocidade do link",
         "Par danificado no cabo ou no patch cord",
-        "VLAN errada na porta",
+        "Rota padrão errada na estação",
         "Firewall limitando a banda da estação"
       ],
       "answer": 1,
-      "explanation": "1 Gbps usa os quatro pares e 100 Mbps só dois; com um par ruim, muitos equipamentos sobem a 100 Mbps. DNS, VLAN e firewall não mudam a velocidade negociada.",
+      "explanation": "1 Gbps usa os quatro pares e 100 Mbps só dois; com um par ruim, muitos equipamentos sobem a 100 Mbps. DNS, rota e firewall não mudam a velocidade negociada.",
       "topic": "autonegociação",
       "difficulty": "intermediário",
       "type": "diagnóstico"
@@ -465,49 +214,49 @@ export const lesson0203 = {
       "type": "cenário"
     },
     {
-      "id": "q2.3.4",
-      "question": "Qual prática reduz risco de acesso não autorizado por porta física?",
-      "options": [
-        "Bloquear a tomada no firewall de internet",
-        "Desativar portas sem uso e exigir 802.1X/NAC nas ativas",
-        "Trocar o DNS por um resolvedor público",
-        "Manter as portas ativas e confiar no antivírus"
-      ],
-      "answer": 1,
-      "explanation": "802.1X/NAC exige autenticação antes de liberar a porta, e portas sem uso ficam desligadas. O firewall de internet não vê quem se conecta dentro da LAN.",
-      "topic": "segurança física",
-      "difficulty": "intermediário",
-      "type": "segurança"
-    },
-    {
-      "id": "q2.3.5",
-      "question": "Em cloud pública, por que ainda faz sentido entender Camada 1?",
-      "options": [
-        "Porque o cliente configura os cabos do provedor pelo console",
-        "Porque zonas, latência e links dedicados dependem de infraestrutura física real",
-        "Porque security groups atuam na Camada 1",
-        "Porque a Camada 1 substitui o IAM"
-      ],
-      "answer": 1,
-      "explanation": "O cliente não opera a camada física do provedor, mas zonas de disponibilidade, latência entre regiões e conexões dedicadas dependem dela.",
-      "topic": "cloud",
-      "difficulty": "intermediário",
-      "type": "cloud"
-    },
-    {
       "id": "q2.3.6",
-      "question": "Você suspeita de cabo ou porta com defeito num switch Cisco. Qual comando traz a evidência mais direta?",
+      "question": "Você suspeita de cabo ou porta com defeito numa estação ligada por cabo. Qual evidência é a mais direta?",
       "options": [
-        "show ip route",
-        "show mac address-table",
-        "show running-config",
-        "show interfaces counters errors"
+        "O contador de erros CRC da interface crescendo entre duas leituras",
+        "A rota padrão presente na tabela de rotas",
+        "O nome do site resolvido pelo DNS",
+        "O certificado TLS do servidor válido"
       ],
-      "answer": 3,
-      "explanation": "Os contadores mostram FCS-Err (CRC), Late-Col e runts; crescendo entre duas leituras, apontam para meio físico ou duplex mismatch. Rota, tabela MAC e configuração não mostram a qualidade do sinal.",
-      "topic": "cisco",
+      "answer": 0,
+      "explanation": "Erros CRC crescendo mostram quadros chegando corrompidos, o que costuma ter causa física: cabo, conector, interferência ou porta. Rota, DNS e certificado são de outras camadas e não mostram a qualidade do sinal.",
+      "topic": "evidências",
       "difficulty": "intermediário",
       "type": "diagnóstico"
+    },
+    {
+      "id": "q2.3.8",
+      "question": "Numa sala de reunião, o Wi-Fi funciona bem com 3 pessoas, mas fica lento quando 30 entram, todas com sinal forte. Qual a explicação mais provável?",
+      "options": [
+        "O roteador passou a bloquear o DNS",
+        "Os clientes do mesmo canal se revezam para transmitir, e o tempo de cada um diminui",
+        "O cabo de cobre da sala passou de 100 m",
+        "Cada cliente novo precisa de um cabo de cobre adicional"
+      ],
+      "answer": 1,
+      "explanation": "O rádio é um meio compartilhado: no mesmo canal, os clientes se revezam. Com mais clientes, cada um transmite menos tempo, e a força do sinal não mostra isso.",
+      "topic": "wi-fi",
+      "difficulty": "iniciante-intermediário",
+      "type": "cenário"
+    },
+    {
+      "id": "q2.3.9",
+      "question": "Dois prédios a 10 km de distância precisam de um link cabeado entre seus switches. Qual meio é o adequado?",
+      "options": [
+        "Par trançado de cobre, direto entre os prédios",
+        "Rádio Wi-Fi do escritório",
+        "Fibra óptica monomodo",
+        "Fibra óptica multimodo"
+      ],
+      "answer": 2,
+      "explanation": "O cobre vai até 100 m por segmento, a fibra multimodo alcança centenas de metros e o Wi-Fi interno, dezenas. Para quilômetros, a fibra monomodo é a escolha.",
+      "topic": "meios",
+      "difficulty": "iniciante",
+      "type": "aplicação"
     }
   ],
   "flashcards": [
@@ -554,113 +303,68 @@ export const lesson0203 = {
     {
       "id": "fc2.3.5",
       "front": "Camada 1 autentica usuários?",
-      "back": "Não. Autenticação pertence a camadas superiores e sistemas de identidade, embora controles como 802.1X envolvam acesso ao meio.",
+      "back": "Não. A Camada 1 só transmite e recebe sinais; autenticação é tarefa de camadas superiores e de sistemas de identidade.",
       "tags": [
-        "segurança",
-        "iam"
+        "camada física"
       ],
       "difficulty": "intermediário"
     },
     {
       "id": "fc2.3.8",
       "front": "Um contador de CRC alto prova que o problema está acontecendo agora?",
-      "back": "Não. Contadores acumulam desde o último boot ou clear counters. Compare duas leituras: só o contador crescendo indica falha atual.",
+      "back": "Não. Contadores acumulam desde que o equipamento ligou ou desde que foram zerados. Compare duas leituras: só o contador crescendo indica falha atual.",
       "tags": [
         "troubleshooting"
       ],
       "difficulty": "intermediário"
+    },
+    {
+      "id": "fc2.3.9",
+      "front": "Por que um cabo com um par danificado costuma subir a 100 Mbps em vez de 1 Gbps?",
+      "back": "1 Gbps (1000BASE-T) usa os quatro pares do cabo; 100 Mbps usa só dois. Sem um dos pares, a autonegociação cai para a velocidade que ainda funciona.",
+      "tags": [
+        "autonegociação",
+        "cobre"
+      ],
+      "difficulty": "iniciante-intermediário"
     }
   ],
   "exercises": [
     {
-      "id": "ex2.3.1",
-      "type": "conceitual",
-      "prompt": "Explique em suas palavras por que um cabo ruim pode causar sintomas em HTTP ou VPN.",
-      "expectedAnswer": "Porque as camadas superiores dependem da transmissão física. Erros, perda ou instabilidade no meio geram retransmissões, queda de sessão, jitter e falhas percebidas na aplicação.",
-      "explanation": "A causa raiz pode estar abaixo, mesmo que o sintoma apareça acima."
-    },
-    {
-      "id": "ex2.3.2",
-      "type": "diagnóstico",
-      "prompt": "Liste cinco evidências que você coletaria para suspeitar de problema físico em uma porta de switch.",
-      "expectedAnswer": "Estado da porta, velocidade/duplex, CRC errors, input/output errors, histórico de flaps, cabo/patch cord, transceptor e mudança recente.",
-      "explanation": "Evidências físicas devem vir antes de troca de equipamentos caros."
+      "id": "ex2.3.6",
+      "type": "classificação",
+      "prompt": "Classifique cada evidência como Camada 1 ou outra camada: (a) ethtool mostra Speed: 100Mb/s numa porta de 1 Gbps; (b) o nslookup não resolve o nome do site; (c) RX errors cresce entre duas leituras; (d) o Wi-Fi mostra sinal de -82 dBm; (e) o computador não tem rota padrão; (f) ethtool mostra Link detected: no.",
+      "expectedAnswer": "(a) Camada 1: velocidade negociada abaixo do esperado. (b) Outra camada: resolução de nomes (DNS). (c) Camada 1: quadros corrompidos no meio, contados pela verificação da Camada 2. (d) Camada 1: sinal de rádio fraco. (e) Outra camada: roteamento (Camada 3). (f) Camada 1: não há link físico.",
+      "explanation": "Separar o que é do meio do que é lógico evita gastar horas na camada errada."
     },
     {
       "id": "ex2.3.5",
       "type": "diagnóstico",
-      "prompt": "O ethtool do servidor mostra Speed: 100Mb/s, Duplex: Half. A porta do switch aparece como full/100 (sem a-) e o FCS-Err cresce. O ping funciona, mas cópias de arquivo são lentíssimas. O que está acontecendo e como corrigir?",
+      "prompt": "O ethtool do servidor mostra Speed: 100Mb/s, Duplex: Half. A porta do switch foi configurada fixa em 100/full, e o contador de erros FCS/CRC dela cresce. O ping funciona, mas cópias de arquivo são lentíssimas. O que está acontecendo e como corrigir?",
       "expectedAnswer": "Duplex mismatch: a porta do switch está fixa em 100/full; o servidor, em automático, detecta a velocidade mas não o duplex e assume half. O lado full acumula FCS/CRC; o half, late collisions. Configure os dois lados iguais (de preferência automático) em janela autorizada e confirme que os contadores param de crescer.",
       "explanation": "Ping gera pouco tráfego; sob carga, colisões e descartes derrubam a vazão."
-    },
-    {
-      "id": "ex2.3.4",
-      "type": "arquitetura",
-      "prompt": "Em uma filial crítica, quando faria sentido pagar por dois links físicos?",
-      "expectedAnswer": "Quando a indisponibilidade tem impacto relevante; links redundantes reduzem ponto único de falha, especialmente com operadoras ou caminhos distintos.",
-      "explanation": "Redundância física tem custo direto (e recorrente, no caso de links de operadora), mas reduz o ponto único de falha."
     }
   ],
   "challenge": {
     "title": "Diagnóstico de queda intermitente no escritório",
     "scenario": "Uma equipe reclama que o sistema interno cai várias vezes ao dia. O firewall não mostra bloqueio e o DNS resolve normalmente. Alguns usuários estão por cabo e outros por Wi-Fi. Há relatos de mudança recente no rack.",
     "tasks": [
-      "Montar hipóteses de Camada 1.",
-      "Definir evidências a coletar no host, switch e AP.",
-      "Separar o que pode ser feito sem impacto do que exige janela de mudança.",
-      "Propor mitigação de curto prazo e correção definitiva."
-    ],
-    "constraints": [
-      "Não desconectar cabos sem autorização.",
-      "Não alterar configuração de produção durante expediente.",
-      "Sanitizar evidências antes de compartilhar.",
-      "Priorizar evidências antes de trocar equipamentos."
+      "Montar hipóteses de Camada 1 para os usuários no cabo e para os usuários no Wi-Fi.",
+      "Dizer quais evidências coletar no computador, no switch e no AP, e em que ordem.",
+      "Propor uma correção reversível e dizer como confirmar que ela funcionou."
     ],
     "expectedDeliverables": [
-      "Tabela de hipóteses",
-      "Lista de comandos de leitura",
-      "Plano de coleta",
-      "Plano de mitigação",
-      "Resumo executivo"
-    ],
-    "gradingRubric": [
-      {
-        "criterion": "Hipóteses físicas",
-        "points": 25,
-        "description": "Inclui cabo, porta, patch panel, transceptor, Wi-Fi, PoE e link flap."
-      },
-      {
-        "criterion": "Evidências",
-        "points": 25,
-        "description": "Define comandos e observações por host, switch e AP."
-      },
-      {
-        "criterion": "Segurança e mudança",
-        "points": 20,
-        "description": "Respeita autorização, janela e sanitização."
-      },
-      {
-        "criterion": "Mitigação",
-        "points": 20,
-        "description": "Propõe ações de curto e longo prazo."
-      },
-      {
-        "criterion": "Clareza",
-        "points": 10,
-        "description": "Diferencia fato, hipótese e limitação."
-      }
+      "Uma lista de hipóteses com a evidência que confirma ou descarta cada uma."
     ]
   },
   "commentedSolution": {
-    "reasoning": "O cenário tem sintomas de aplicação, mas DNS e firewall não indicam causa imediata. A mudança recente no rack aumenta a probabilidade de cabo, patch panel, porta, transceptor ou uplink. Usuários Wi-Fi e cabeados exigem separar domínio físico de cada grupo.",
+    "reasoning": "Os sintomas aparecem na aplicação, mas DNS e firewall estão normais e houve mudança recente no rack. Isso torna cabo, patch panel, porta ou uplink suspeitos. Usuários no cabo e no Wi-Fi precisam ser analisados separadamente.",
     "steps": [
-      "Identificar quais usuários são afetados e por qual meio se conectam.",
-      "Coletar estado de link, velocidade e eventos no host.",
-      "No switch, verificar flaps, CRC errors, input/output errors e velocidade/duplex.",
-      "No AP/controlador, verificar sinal, canal, retransmissões e clientes afetados.",
-      "Relacionar horário dos sintomas com mudanças no rack e logs.",
-      "Executar mitigação reversível, como trocar patch cord em janela autorizada ou mover usuário para porta testada.",
-      "Documentar causa provável, evidências e correção definitiva."
+      "Descobrir quais usuários são afetados e por qual meio se conectam: se só os do cabo caem, o rack sobe na lista.",
+      "Nos computadores afetados, ler estado do link, velocidade e duplex, e ver se o link cai junto com o sistema.",
+      "No switch, ler duas vezes os contadores de erro das portas afetadas e verificar se o link delas cai e volta.",
+      "No AP, ver sinal, canal e número de clientes dos usuários do Wi-Fi.",
+      "Trocar o patch cord ou mover o usuário para uma porta testada, em janela autorizada, e confirmar que os erros param de crescer e as quedas somem."
     ],
     "commonWrongAnswers": [
       {
@@ -670,121 +374,34 @@ export const lesson0203 = {
       {
         "answer": "Comprar um firewall novo.",
         "whyItIsWrong": "O firewall não mostra bloqueio e a hipótese física ainda não foi descartada."
-      },
-      {
-        "answer": "Desconectar cabos no rack para testar rapidamente.",
-        "whyItIsWrong": "Pode causar impacto e viola controle de mudança."
       }
     ],
-    "finalAnswer": "A abordagem correta é coletar evidências de Camada 1 e enlace baixo, correlacionar com a mudança recente no rack, separar usuários cabeados e Wi-Fi, executar testes reversíveis autorizados e só então escalar para camadas superiores."
+    "finalAnswer": "Comece pelas evidências de Camada 1, correlacione com a mudança no rack, separe usuários no cabo e no Wi-Fi e faça testes reversíveis autorizados. Só suba de camada quando link, velocidade e erros estiverem normais."
   },
   "glossary": [
     {
-      "term": "Camada física",
-      "shortDefinition": "Camada 1 do OSI, responsável por transmitir bits como sinais físicos.",
-      "longDefinition": "Trata de meio, sinal, conector, modulação, potência, velocidade e temporização.",
-      "example": "Cabo Ethernet, fibra óptica e rádio Wi-Fi são exemplos de meios da camada física.",
-      "relatedTerms": [
-        "sinal",
-        "ruído",
-        "atenuação"
-      ],
-      "relatedLessons": [
-        "0.5",
-        "1.5",
-        "2.3"
-      ]
-    },
-    {
       "term": "Atenuação",
-      "shortDefinition": "Redução da intensidade do sinal ao longo do caminho.",
-      "longDefinition": "Pode ocorrer em cobre, fibra ou rádio e afetar a capacidade do receptor de reconstruir os bits corretamente.",
-      "example": "Fibra dobrada demais pode aumentar atenuação.",
-      "relatedTerms": [
-        "sinal",
-        "fibra",
-        "ruído"
-      ],
+      "shortDefinition": "Perda de intensidade do sinal ao longo do meio de transmissão.",
+      "longDefinition": "Acontece em cobre, fibra e rádio e aumenta com a distância. Quando o sinal chega fraco demais, o receptor erra os bits.",
+      "example": "Fibra dobrada demais ou conector sujo aumentam a atenuação.",
       "relatedLessons": [
-        "1.5",
-        "2.3"
+        "1.5"
       ]
     },
     {
-      "term": "SNR",
-      "shortDefinition": "Relação sinal-ruído.",
-      "longDefinition": "Mede, em dB, quanto o sinal útil se destaca do ruído. Não confunda com RSSI, a força do sinal recebido (geralmente em dBm): sinal forte com ruído alto ainda dá SNR baixo.",
-      "example": "Wi-Fi com SNR ruim pode ter baixa taxa e muitas retransmissões.",
-      "relatedTerms": [
-        "RSSI",
-        "ruído",
-        "Wi-Fi"
-      ],
+      "term": "Patch cord",
+      "shortDefinition": "Cabo curto que liga o computador à tomada ou a porta do switch ao patch panel.",
+      "example": "Trocar o patch cord é o primeiro teste barato quando uma porta mostra erros ou velocidade baixa.",
       "relatedLessons": [
-        "1.5",
-        "2.3",
-        "12.1"
+        "1.6"
       ]
     },
     {
-      "term": "CRC error",
-      "shortDefinition": "Quadro descartado porque o código de verificação (FCS) não bateu no receptor.",
-      "longDefinition": "A verificação é da Camada 2, mas a causa costuma ser física: cabo, porta, transceptor ou interferência.",
-      "example": "Uma porta Cisco com CRC crescente sugere investigar cabo e transceptor.",
-      "relatedTerms": [
-        "FCS",
-        "Ethernet",
-        "troubleshooting"
-      ],
+      "term": "Quadro",
+      "shortDefinition": "Unidade de dados da Camada 2: o que a placa de rede entrega à Camada 1 para virar sinal.",
+      "example": "O FCS no fim do quadro permite ao receptor detectar bits trocados no caminho.",
       "relatedLessons": [
-        "2.3",
-        "2.4",
-        "3.1"
-      ]
-    },
-    {
-      "term": "Autonegociação",
-      "shortDefinition": "Processo em que interfaces ajustam velocidade e duplex.",
-      "longDefinition": "Permite que dois lados de um enlace definam parâmetros compatíveis, mas falhas podem gerar velocidade menor ou duplex incorreto.",
-      "example": "Uma porta esperada em 1 Gbps negocia a 100 Mbps por cabo inadequado.",
-      "relatedTerms": [
-        "duplex",
-        "velocidade",
-        "link"
-      ],
-      "relatedLessons": [
-        "1.6",
-        "2.3"
-      ]
-    },
-    {
-      "term": "Duplex",
-      "shortDefinition": "Modo de uso do enlace: full duplex transmite e recebe ao mesmo tempo; half duplex alterna.",
-      "longDefinition": "Quando os dois lados de um enlace ficam em modos diferentes (duplex mismatch), surgem late collisions no lado half e erros FCS/CRC no lado full.",
-      "example": "Switch fixo em 100/full e servidor em automático: o servidor assume half e a vazão cai sob carga.",
-      "relatedTerms": [
-        "autonegociação",
-        "CRC error",
-        "colisão"
-      ],
-      "relatedLessons": [
-        "2.3",
-        "2.4"
-      ]
-    },
-    {
-      "term": "Transceptor",
-      "shortDefinition": "Componente que transmite e recebe sinais, especialmente em fibra.",
-      "longDefinition": "Módulos como SFP/SFP+ convertem sinais elétricos do equipamento em sinais ópticos e vice-versa.",
-      "example": "Um SFP incompatível pode impedir o uplink de subir.",
-      "relatedTerms": [
-        "fibra",
-        "SFP",
-        "uplink"
-      ],
-      "relatedLessons": [
-        "1.5",
-        "2.3"
+        "2.2"
       ]
     }
   ],
@@ -835,11 +452,7 @@ export const lesson0203 = {
   "progressRules": {
     "completeWhen": {
       "read": true,
-      "quizScoreAtLeast": 70,
-      "oneOf": [
-        "labMarkedDone",
-        "practicalExerciseDone"
-      ]
+      "quizScoreAtLeast": 70
     },
     "accessPolicy": {
       "freeAccess": true,

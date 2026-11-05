@@ -1,0 +1,91 @@
+{
+  "id": "2.3",
+  "versao": "nova",
+  "titulo": "Camada 1 — Física: bits no fio, luz e rádio",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3292,
+    "teoria": 1334,
+    "praticaExtra": 1127,
+    "quiz": 469,
+    "flashcards": 205
+  },
+  "porGrupoTeoria": {
+    "introducao": 412,
+    "contexto": 112,
+    "conteudo": 634,
+    "exemplos": 176,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 142,
+    "summary": 87,
+    "problem": 112,
+    "concept": 235,
+    "internals": 397,
+    "diagram": 2,
+    "analogy": 52,
+    "simpleExample": 124,
+    "objectives": 71,
+    "learningOutcomes": 0,
+    "glossary": 112,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 33
+  },
+  "pratica": {
+    "quiz": 469,
+    "flashcards": 205,
+    "lab": 388,
+    "mentorQuestions": 201,
+    "exercises": 226,
+    "challenge": 99,
+    "commentedSolution": 213
+  },
+  "outros": {
+    "title+subtitle": 27,
+    "nextTheme": 33,
+    "references": 53,
+    "linksToOtherCourses": 44
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 7,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 3,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 3,
+    "exemplosPorAmbiente": []
+  },
+  "lab": {
+    "estimatedTimeMinutes": 15,
+    "alternativa_5minPorPasso": 15,
+    "plausivel": true,
+    "override": null,
+    "palavras": 388
+  },
+  "duracao": {
+    "declarada": "15-25 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 19.3,
+    "nucleoPartes": {
+      "teoria": 10.3,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 46,
+    "praticaExtraPartes": {
+      "lab": 15,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-25 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "15-25 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

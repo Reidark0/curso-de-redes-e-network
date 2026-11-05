@@ -1,7 +1,7 @@
 <section class="lesson-section lesson-section--concept">
   <h2>Conceito</h2>
-  <div class="definition-box"><strong>Definição:</strong> no Modelo OSI, a Camada 1 (camada física) é responsável pela transmissão e recepção de bits brutos através de um meio físico, como cabo de cobre, fibra óptica ou rádio.</div>
-  <p>Ela trata de sinal, meio, conector, frequência, potência, temporização, codificação, modulação, velocidade e distância. Ela não aprende MAC, não roteia, não resolve DNS e não autentica usuário: só cria a condição para que quadros, pacotes e dados existam nas camadas de cima.</p>
+  <div class="definition-box"><strong>Definição:</strong> no Modelo OSI, a Camada 1 (camada física) transmite e recebe bits brutos através de um meio físico, como cabo de cobre, fibra óptica ou rádio.</div>
+  <p>Ela define o meio, o conector, o tipo de sinal, a velocidade e a distância máxima. Ela não aprende MAC, não roteia, não resolve DNS e não autentica usuário: só cria a condição para que quadros, pacotes e dados existam nas camadas de cima.</p>
   <div class="responsive-table"><table class="data-table">
     <thead><tr><th>Meio</th><th>Sinal</th><th>Distância típica</th><th>Ponto fraco</th><th>Onde aparece</th></tr></thead>
     <tbody>
@@ -10,5 +10,5 @@
       <tr><td>Rádio (Wi-Fi)</td><td>Ondas eletromagnéticas</td><td>Dezenas de metros em ambiente interno</td><td>Paredes, distância, interferência, canal compartilhado</td><td>Mobilidade, escritórios, convidados</td></tr>
     </tbody>
   </table></div>
-  <p>No Wi-Fi, os clientes de um mesmo canal se revezam para transmitir. Por isso a qualidade varia com o número de clientes e com o ruído, e não só com a distância.</p>
+  <p>No Wi-Fi, os clientes de um mesmo canal se revezam para transmitir. Por isso a qualidade varia com o número de clientes e com o ruído, e não só com a distância. A força do sinal recebido se chama <strong>RSSI</strong> e é medida em dBm, um número negativo: −50 dBm é um sinal forte, e perto de −80 dBm ele já é fraco. O que decide a qualidade, porém, é a <strong>SNR</strong> (relação sinal-ruído): quanto o sinal fica acima do ruído, em dB. Sinal forte com ruído alto ainda dá SNR baixa e rede ruim.</p>
 </section>

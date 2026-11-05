@@ -2,23 +2,21 @@
   <h2>Funcionamento interno</h2>
   <ol class="flow-list">
     <li>A camada de enlace entrega à placa de rede os bits de um quadro.</li>
-    <li>A interface física aplica codificação e temporização adequadas ao padrão usado.</li>
-    <li>No cobre, o equipamento gera variações elétricas controladas; na fibra, um transceptor (ex.: SFP) converte o sinal elétrico em pulsos de luz; no rádio, o transmissor modula ondas num canal.</li>
-    <li>O receptor mede o sinal, tenta distinguir ruído de informação e reconstrói bits.</li>
-    <li>Se a qualidade for ruim, surgem erros, retransmissões, perda, baixa taxa ou queda de link.</li>
+    <li>A interface física transforma esses bits em sinal, seguindo o padrão do meio (por exemplo, 1000BASE-T para 1 Gbps no cobre): no cobre, variações elétricas controladas; na fibra, pulsos de luz emitidos por um transceptor (o módulo que converte sinal elétrico em luz, como um SFP); no rádio, ondas num canal.</li>
+    <li>O receptor mede o sinal, separa o que é informação do que é ruído e reconstrói os bits.</li>
+    <li>Se a qualidade for ruim, surgem erros, retransmissões, perda, taxa baixa ou queda de link.</li>
   </ol>
   <h3>Autonegociação, velocidade, duplex e CRC</h3>
   <p>Ao conectar o cabo, as duas pontas usam a <strong>autonegociação</strong> para escolher a maior velocidade e o duplex que ambas suportam. <strong>Full duplex</strong> transmite e recebe ao mesmo tempo; <strong>half duplex</strong>, herança dos meios compartilhados antigos, alterna e tem colisões.</p>
   <ul>
     <li><strong>Velocidade abaixo do esperado:</strong> 1 Gbps (1000BASE-T) usa os quatro pares do cabo; 100 Mbps usa só dois. Com um par rompido, crimpagem ruim ou patch cord inadequado, muitos equipamentos sobem a 100 Mbps.</li>
-    <li><strong>Duplex mismatch:</strong> se um lado está fixo (ex.: 100/full) e o outro em automático, o automático detecta a velocidade, mas não o duplex, e assume half. O lado half registra <em>late collisions</em>; o full, erros FCS/CRC e runts. O ping funciona, mas a vazão despenca sob carga. Configure os dois lados iguais, de preferência ambos em automático.</li>
+    <li><strong>Duplex mismatch:</strong> se um lado está fixo (ex.: 100/full) e o outro em automático, o automático detecta a velocidade, mas não o duplex, e assume half. O lado half registra <em>late collisions</em> (colisões tardias); o full, erros FCS/CRC. O ping funciona, mas a vazão despenca sob carga. Configure os dois lados iguais, de preferência ambos em automático.</li>
     <li><strong>Erro CRC:</strong> o transmissor anexa ao quadro um código de verificação (FCS); o receptor recalcula e, se não bater, descarta o quadro e soma no contador de CRC. A verificação é da Camada 2, mas a causa costuma ser física: cabo, conector, interferência, transceptor ou porta.</li>
   </ul>
-  <p>Na fibra, o switch pode mostrar a potência óptica recebida (<code>show interfaces transceiver</code> no Cisco, se o SFP suportar); em APs e câmeras, o status PoE (<code>show power inline</code>). Os contadores de erro acumulam desde o último boot ou <code>clear counters</code>: compare duas leituras e veja se crescem.</p>
+  <p>Os contadores de erro acumulam desde que o equipamento ligou ou desde que alguém os zerou: um número alto pode ser de ontem. Compare duas leituras com alguns minutos de intervalo; só o contador crescendo indica falha agora. E lembre que, do seu computador, você vê só o próprio link: os contadores da porta do switch e a visão do AP ficam nesses equipamentos.</p>
   <div class="callout warning"><strong>Erros comuns:</strong>
     <ul>
-      <li>"O LED está aceso": link aceso não descarta CRC, velocidade baixa ou flaps.</li>
-      <li>"Sinal Wi-Fi cheio, rede boa": as barras mostram força (RSSI), não qualidade; olhe SNR, canal e retransmissões.</li>
+      <li>"O LED está aceso": link aceso não descarta CRC, velocidade baixa ou quedas rápidas do link.</li>
       <li>Trocar switch ou firewall antes de testar o patch cord: comece pelo simples e reversível.</li>
       <li>Insistir na Camada 1 com link up, velocidade certa e erros estáveis: aí a investigação sobe de camada.</li>
     </ul>

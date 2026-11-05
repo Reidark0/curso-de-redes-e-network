@@ -1,5 +1,5 @@
 <section class="lesson-section lesson-section--example">
   <h2>Exemplo simples</h2>
-  <p>Seu notebook está conectado por cabo ao roteador, mas a internet fica instável. Você troca DNS, reinicia navegador e culpa o provedor. Depois percebe que o conector RJ-45 está frouxo e o link alterna entre conectado e desconectado. O problema era Camada 1.</p>
-  <p>Outro exemplo: no Wi-Fi, você está longe do roteador, com paredes entre os dispositivos. O sinal chega fraco, a taxa cai e há retransmissões. O site parece lento, mas o problema real começa no rádio.</p>
+  <p>Seu notebook está ligado por cabo ao roteador, mas a internet fica instável. Você troca o DNS, reinicia o navegador e culpa o provedor. Depois percebe que o conector RJ-45 está frouxo: no <code>Get-NetAdapter</code>, o Status da placa alterna entre Up e Disconnected. Cada queda do link derruba tudo o que estava em cima dele. O problema era Camada 1, e a solução foi trocar o patch cord.</p>
+  <p>No Wi-Fi, o mesmo notebook longe do roteador, com duas paredes no caminho, recebe sinal fraco: a taxa cai e o rádio retransmite muitos quadros. O site parece lento, mas o problema começa no rádio. Levar o notebook para perto do roteador, ou ligá-lo no cabo, é o teste que separa as duas coisas.</p>
 </section>
