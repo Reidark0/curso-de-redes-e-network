@@ -1,0 +1,97 @@
+{
+  "id": "2.1",
+  "versao": "original",
+  "titulo": "Por que o Modelo OSI existe",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3897,
+    "teoria": 2579,
+    "praticaExtra": 730,
+    "quiz": 314,
+    "flashcards": 85
+  },
+  "porGrupoTeoria": {
+    "introducao": 612,
+    "contexto": 429,
+    "conteudo": 453,
+    "exemplos": 497,
+    "seguranca_troubleshooting": 588
+  },
+  "porSecao": {
+    "motivation": 180,
+    "summary": 72,
+    "history": 143,
+    "problem": 139,
+    "evolution": 147,
+    "concept": 175,
+    "internals": 157,
+    "architecture": 118,
+    "diagram": 3,
+    "analogy": 102,
+    "simpleExample": 64,
+    "enterpriseExample": 68,
+    "cloudExample": 65,
+    "devsecopsExample": 68,
+    "securityExample": 130,
+    "objectives": 69,
+    "learningOutcomes": 73,
+    "glossary": 218,
+    "security": 319,
+    "troubleshooting": 269,
+    "nextTheme": 41
+  },
+  "pratica": {
+    "quiz": 314,
+    "flashcards": 85,
+    "lab": 0,
+    "mentorQuestions": 167,
+    "exercises": 197,
+    "challenge": 174,
+    "commentedSolution": 192
+  },
+  "outros": {
+    "title+subtitle": 22,
+    "nextTheme": 41,
+    "references": 71,
+    "linksToOtherCourses": 55
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 5,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "80-115 min",
+    "estimatedStudyTimeMinutes": 115,
+    "nucleo": 28.8,
+    "nucleoPartes": {
+      "teoria": 19.8,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "25-35 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

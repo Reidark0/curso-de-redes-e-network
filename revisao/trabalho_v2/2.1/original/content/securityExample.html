@@ -1,0 +1,14 @@
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>Segurança usa o OSI para aplicar defesa em profundidade. Controle físico protege portas e racks. Controles de enlace reduzem riscos de VLAN indevida e ARP spoofing. Camada 3 segmenta redes. Camada 4 restringe portas. Camada 7 aplica autenticação, WAF, validação de entrada e políticas de API.</p>
+  <table class="data-table risk-table">
+    <thead><tr><th>Camada</th><th>Risco</th><th>Como aparece</th><th>Mitigação</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Acesso físico indevido</td><td>Porta de rede exposta em área pública</td><td>NAC, bloqueio de portas, racks protegidos</td></tr>
+      <tr><td>2</td><td>Abuso local</td><td>ARP suspeito, VLAN indevida, MAC desconhecido</td><td>Port security, segmentação, monitoramento</td></tr>
+      <tr><td>3</td><td>Rota indevida</td><td>Subnets sensíveis alcançáveis sem necessidade</td><td>Rotas mínimas, ACLs, revisão de arquitetura</td></tr>
+      <tr><td>4</td><td>Porta exposta</td><td>Serviço escutando em porta não aprovada</td><td>Firewall, hardening, inventário de portas</td></tr>
+      <tr><td>7</td><td>Falha de aplicação</td><td>Bypass de autenticação, abuso de API, payload malicioso</td><td>WAF, validação, autenticação forte, logs</td></tr>
+    </tbody>
+  </table>
+</section>

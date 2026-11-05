@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--cloud">
+  <h2>Exemplo em cloud e DevSecOps</h2>
+  <p>Uma VM não acessa um banco privado. Na camada 3, pode ser subnet ou route table. Na camada 4, um security group ou NSG bloqueando a porta. Na camada 7, endpoint errado, string de conexão incorreta ou autenticação negada. Alcançar a porta não significa ter permissão para usar o banco: conectividade não é autorização.</p>
+  <p>O mesmo vale para um pipeline que falha ao publicar uma imagem no registry interno. O runner resolve o nome? Tem rota? A porta 443 abre? O TLS é confiável? A API do registry responde? O token tem permissão? Separar essas perguntas evita tratar erro de autorização como falha de rede, ou bloqueio de porta como falha de credencial.</p>
+</section>

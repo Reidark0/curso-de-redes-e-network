@@ -1,0 +1,23 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <p>Ao enviar dados, cada camada adiciona ou interpreta as informações de que precisa para cumprir sua responsabilidade e oferece um serviço à camada de cima:</p>
+  <ol class="flow-list">
+    <li><strong>Aplicação:</strong> o navegador, cliente de API ou serviço cria uma mensagem com significado para a aplicação.</li>
+    <li><strong>Apresentação:</strong> os dados são codificados, serializados e, se for o caso, comprimidos ou protegidos.</li>
+    <li><strong>Sessão:</strong> a comunicação mantém contexto, estado, autenticação ou continuidade lógica, quando aplicável.</li>
+    <li><strong>Transporte:</strong> TCP ou UDP organiza fluxos e portas, com confiabilidade (TCP) ou entrega sem conexão (UDP).</li>
+    <li><strong>Rede:</strong> o IP permite sair da rede local e atravessar roteadores até outra rede.</li>
+    <li><strong>Enlace:</strong> Ethernet, Wi-Fi ou outro enlace entrega quadros localmente, com endereços e regras do domínio local.</li>
+    <li><strong>Física:</strong> os bits viram sinais elétricos, luz ou rádio.</li>
+  </ol>
+  <p>No destino, a leitura é inversa: sinal vira bits, bits viram quadro, o quadro contém o pacote, o pacote contém o segmento e o segmento contém os dados da aplicação. A aula 2.2 aprofunda isso com encapsulamento, desencapsulamento e PDUs.</p>
+  <p>No diagnóstico, transforme cada camada em uma pergunta com evidência e vá do básico para o específico, sem pular etapas: a primeira evidência que falha aponta a camada provável.</p>
+  <div class="callout warning"><strong>Erros comuns:</strong>
+    <ul>
+      <li><strong>Decorar as camadas sem aplicar:</strong> associe cada uma a uma pergunta, uma evidência e um ponto de falha.</li>
+      <li><strong>Chamar qualquer falha de “problema de rede”:</strong> o time errado é acionado e o diagnóstico atrasa.</li>
+      <li><strong>Tratar ping como prova de saúde:</strong> ele só mostra alcance ICMP; não valida porta, TLS, HTTP, autenticação nem autorização. E o ICMP pode estar bloqueado enquanto TCP/443 funciona.</li>
+      <li><strong>Forçar todo produto em uma camada:</strong> proxies, WAFs, load balancers e service mesh são multicamada.</li>
+    </ul>
+  </div>
+</section>

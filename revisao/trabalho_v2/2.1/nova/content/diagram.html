@@ -1,0 +1,45 @@
+<section class="lesson-section lesson-section--diagram">
+  <h2>Diagrama SVG</h2>
+  <svg class="lesson-svg" viewBox="0 0 980 520" role="img" aria-labelledby="m02l01-title m02l01-desc">
+    <title id="m02l01-title">Modelo OSI como pilha de diagnóstico</title>
+    <desc id="m02l01-desc">Diagrama mostrando as sete camadas do Modelo OSI e como elas conectam sintomas, evidências e controles de segurança.</desc>
+    <defs>
+      <marker id="m02l01-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow"></path>
+      </marker>
+    </defs>
+    <rect x="70" y="40" width="300" height="52" rx="10" class="svg-node svg-node--server"></rect>
+    <text x="220" y="73" text-anchor="middle" class="svg-label">7 Aplicação — HTTP, DNS, API</text>
+    <rect x="70" y="100" width="300" height="52" rx="10" class="svg-node svg-node--security"></rect>
+    <text x="220" y="133" text-anchor="middle" class="svg-label">6 Apresentação — formato, TLS, encoding</text>
+    <rect x="70" y="160" width="300" height="52" rx="10" class="svg-node svg-node--cloud"></rect>
+    <text x="220" y="193" text-anchor="middle" class="svg-label">5 Sessão — estado e continuidade</text>
+    <rect x="70" y="220" width="300" height="52" rx="10" class="svg-node svg-node--firewall"></rect>
+    <text x="220" y="253" text-anchor="middle" class="svg-label">4 Transporte — TCP, UDP, portas</text>
+    <rect x="70" y="280" width="300" height="52" rx="10" class="svg-node svg-node--router"></rect>
+    <text x="220" y="313" text-anchor="middle" class="svg-label">3 Rede — IP, rota, gateway</text>
+    <rect x="70" y="340" width="300" height="52" rx="10" class="svg-node svg-node--switch"></rect>
+    <text x="220" y="373" text-anchor="middle" class="svg-label">2 Enlace — MAC, switch, VLAN, ARP</text>
+    <rect x="70" y="400" width="300" height="52" rx="10" class="svg-node svg-node--client"></rect>
+    <text x="220" y="433" text-anchor="middle" class="svg-label">1 Física — cabo, fibra, rádio, sinal</text>
+
+    <rect x="555" y="75" width="300" height="110" rx="14" class="svg-node svg-node--security"></rect>
+    <text x="705" y="108" text-anchor="middle" class="svg-label">Sintoma</text>
+    <text x="705" y="135" text-anchor="middle" class="svg-label svg-label--small">“o sistema não abre”</text>
+    <text x="705" y="160" text-anchor="middle" class="svg-label svg-label--small">não é diagnóstico</text>
+
+    <rect x="555" y="225" width="300" height="110" rx="14" class="svg-node svg-node--cloud"></rect>
+    <text x="705" y="258" text-anchor="middle" class="svg-label">Evidências por camada</text>
+    <text x="705" y="285" text-anchor="middle" class="svg-label svg-label--small">link, IP, rota, porta, TLS, HTTP</text>
+    <text x="705" y="310" text-anchor="middle" class="svg-label svg-label--small">logs, métricas e capturas</text>
+
+    <rect x="555" y="375" width="300" height="90" rx="14" class="svg-node svg-node--server"></rect>
+    <text x="705" y="410" text-anchor="middle" class="svg-label">Hipótese responsável</text>
+    <text x="705" y="438" text-anchor="middle" class="svg-label svg-label--small">não pule etapas</text>
+
+    <line x1="370" y1="250" x2="555" y2="130" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m02l01-arrow)"></line>
+    <line x1="705" y1="185" x2="705" y2="225" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m02l01-arrow)"></line>
+    <line x1="705" y1="335" x2="705" y2="375" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m02l01-arrow)"></line>
+    <text x="490" y="495" text-anchor="middle" class="svg-label">O OSI não é decoração: é um mapa para transformar sintoma em evidência e evidência em hipótese.</text>
+  </svg>
+</section>

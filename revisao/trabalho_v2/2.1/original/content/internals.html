@@ -1,0 +1,14 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>O OSI funciona como uma decomposição mental da comunicação. Ao enviar dados, cada camada adiciona ou interpreta informações necessárias para cumprir sua responsabilidade. Ao receber, o processo é invertido.</p>
+  <ol class="flow-list">
+    <li><strong>Aplicação:</strong> o navegador, cliente de API ou serviço cria uma mensagem com significado para a aplicação.</li>
+    <li><strong>Apresentação:</strong> os dados são codificados, serializados, possivelmente comprimidos ou protegidos.</li>
+    <li><strong>Sessão:</strong> a comunicação mantém contexto, estado, autenticação ou continuidade lógica quando aplicável.</li>
+    <li><strong>Transporte:</strong> TCP ou UDP organiza fluxos, portas, confiabilidade ou entrega sem conexão.</li>
+    <li><strong>Rede:</strong> IP permite sair da rede local e atravessar roteadores até outra rede.</li>
+    <li><strong>Enlace:</strong> Ethernet, Wi-Fi ou outro enlace entrega quadros localmente usando endereços e regras do domínio local.</li>
+    <li><strong>Física:</strong> os bits são transmitidos como sinais elétricos, luz ou rádio.</li>
+  </ol>
+  <p>No destino, ocorre a leitura inversa: sinal vira bits, bits viram quadro, quadro contém pacote, pacote contém segmento, segmento contém dados de aplicação. Essa ideia será aprofundada na aula 2.2 com encapsulamento, desencapsulamento e PDUs.</p>
+</section>

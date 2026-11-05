@@ -1,0 +1,93 @@
+{
+  "id": "2.1",
+  "versao": "v1",
+  "titulo": "Por que o Modelo OSI existe",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3753,
+    "teoria": 2455,
+    "praticaExtra": 676,
+    "quiz": 350,
+    "flashcards": 96
+  },
+  "porGrupoTeoria": {
+    "introducao": 582,
+    "contexto": 158,
+    "conteudo": 694,
+    "exemplos": 440,
+    "seguranca_troubleshooting": 581
+  },
+  "porSecao": {
+    "motivation": 130,
+    "summary": 92,
+    "problem": 158,
+    "concept": 289,
+    "internals": 272,
+    "architecture": 131,
+    "diagram": 2,
+    "analogy": 81,
+    "simpleExample": 63,
+    "enterpriseExample": 65,
+    "cloudExample": 118,
+    "securityExample": 113,
+    "objectives": 69,
+    "learningOutcomes": 73,
+    "glossary": 218,
+    "security": 312,
+    "troubleshooting": 269,
+    "nextTheme": 28
+  },
+  "pratica": {
+    "quiz": 350,
+    "flashcards": 96,
+    "lab": 0,
+    "mentorQuestions": 167,
+    "exercises": 143,
+    "challenge": 174,
+    "commentedSolution": 192
+  },
+  "outros": {
+    "title+subtitle": 22,
+    "nextTheme": 28,
+    "references": 71,
+    "linksToOtherCourses": 55
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 5,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "65-90 min",
+    "estimatedStudyTimeMinutes": 90,
+    "nucleo": 27.9,
+    "nucleoPartes": {
+      "teoria": 18.9,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 39,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 40,
+    "recomendada": "25-35 min + 40 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}
