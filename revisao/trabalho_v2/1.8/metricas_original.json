@@ -1,0 +1,103 @@
+{
+  "id": "1.8",
+  "versao": "original",
+  "titulo": "Métricas: latência, jitter, perda, throughput e disponibilidade",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4969,
+    "teoria": 2879,
+    "praticaExtra": 1529,
+    "quiz": 255,
+    "flashcards": 127
+  },
+  "porGrupoTeoria": {
+    "introducao": 582,
+    "contexto": 450,
+    "conteudo": 492,
+    "exemplos": 682,
+    "seguranca_troubleshooting": 673
+  },
+  "porSecao": {
+    "motivation": 167,
+    "summary": 69,
+    "history": 173,
+    "problem": 141,
+    "evolution": 136,
+    "concept": 135,
+    "internals": 186,
+    "architecture": 148,
+    "diagram": 23,
+    "analogy": 102,
+    "simpleExample": 101,
+    "enterpriseExample": 117,
+    "cloudExample": 111,
+    "devsecopsExample": 99,
+    "securityExample": 152,
+    "objectives": 70,
+    "learningOutcomes": 65,
+    "glossary": 211,
+    "security": 367,
+    "troubleshooting": 306,
+    "nextTheme": 40
+  },
+  "pratica": {
+    "quiz": 255,
+    "flashcards": 127,
+    "lab": 821,
+    "mentorQuestions": 153,
+    "exercises": 223,
+    "challenge": 157,
+    "commentedSolution": 175
+  },
+  "outros": {
+    "title+subtitle": 23,
+    "nextTheme": 40,
+    "references": 65,
+    "linksToOtherCourses": 51
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 45,
+    "alternativa_5minPorPasso": 30,
+    "plausivel": true,
+    "override": null,
+    "palavras": 821
+  },
+  "duracao": {
+    "declarada": "80-115 min",
+    "estimatedStudyTimeMinutes": 115,
+    "nucleo": 31.1,
+    "nucleoPartes": {
+      "teoria": 22.1,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 90,
+    "praticaExtraPartes": {
+      "lab": 45,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 90,
+    "recomendada": "25-35 min + 90 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

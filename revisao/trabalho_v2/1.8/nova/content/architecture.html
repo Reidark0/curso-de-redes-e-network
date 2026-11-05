@@ -1,0 +1,19 @@
+<section class="lesson-section lesson-section--architecture">
+  <h2>Arquitetura</h2>
+  <p>Analise as métricas por trecho e por camada. Um caminho empresarial pode incluir notebook, Wi‑Fi, switch, firewall, proxy, VPN, operadora, balanceador, serviço cloud, banco de dados e identidade. Cada trecho pode piorar uma métrica diferente.</p>
+  <ul class="flow-list">
+    <li><strong>Camada física:</strong> erros, CRC, sinal fraco, interferência e cabo ruim podem causar perda.</li>
+    <li><strong>Camada de enlace:</strong> duplex, VLAN, STP, Wi‑Fi e porta de switch influenciam a estabilidade local.</li>
+    <li><strong>Camada de rede:</strong> rota, distância, caminho assimétrico e NAT influenciam latência e disponibilidade.</li>
+    <li><strong>Camada de transporte:</strong> TCP reage à perda e à latência retransmitindo e reduzindo a vazão; UDP sofre mais visivelmente com jitter e perda.</li>
+    <li><strong>Camada de aplicação:</strong> HTTP, DNS, TLS, autenticação e banco podem adicionar tempo sem que a “rede” esteja fisicamente ruim.</li>
+  </ul>
+  <h3>Limites de cada medição</h3>
+  <ul>
+    <li>O ping pode ser bloqueado ou tratado com prioridade diferente do tráfego real da aplicação.</li>
+    <li>O traceroute dá uma pista do caminho de ida, mas nem sempre mostra caminhos assimétricos ou políticas intermediárias.</li>
+    <li>Um teste de velocidade mede um cenário específico; não garante a performance de todas as aplicações nem prova a qualidade de uma rede corporativa.</li>
+    <li>A disponibilidade medida de um único ponto (por exemplo, só de dentro do datacenter) pode não representar todos os usuários; medir de vários pontos é mais confiável.</li>
+  </ul>
+  <p>Um gráfico mostra que algo piorou; cruzá-lo com logs, eventos de segurança e mudanças no mesmo horário mostra por quê.</p>
+</section>
