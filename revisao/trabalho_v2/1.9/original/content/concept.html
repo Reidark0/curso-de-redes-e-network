@@ -1,0 +1,15 @@
+<section class="lesson-section lesson-section--concept">
+  <h2>5. Conceito</h2>
+  <p>Diagnóstico inicial de rede é a coleta ordenada de evidências básicas para descobrir se o problema está na configuração local, na conectividade local, no caminho até o destino, na resolução de nomes ou em uma camada superior.</p>
+  <div class="definition-box"><strong>Definição:</strong> comandos de diagnóstico inicial são ferramentas de linha de comando usadas para observar configuração de rede, alcance, vizinhança ARP, caminho de roteamento e resolução DNS antes de formular hipóteses mais avançadas.</div>
+  <table class="data-table comparison-table">
+    <thead><tr><th>Comando</th><th>Pergunta principal</th><th>Camada mental</th><th>Erro comum</th></tr></thead>
+    <tbody>
+      <tr><td><code>ipconfig</code></td><td>Meu host está configurado corretamente?</td><td>Configuração local</td><td>Ignorar máscara, gateway e DNS.</td></tr>
+      <tr><td><code>ping</code></td><td>O destino responde a ICMP?</td><td>Alcance básico</td><td>Concluir que a aplicação está saudável.</td></tr>
+      <tr><td><code>arp</code></td><td>O IP local virou MAC?</td><td>Camada local</td><td>Achar que ARP funciona pela internet.</td></tr>
+      <tr><td><code>tracert</code></td><td>Quais saltos aparecem até o destino?</td><td>Caminho</td><td>Interpretar salto sem resposta como falha definitiva.</td></tr>
+      <tr><td><code>nslookup</code></td><td>O nome resolve para IP?</td><td>DNS</td><td>Confundir DNS com conectividade completa.</td></tr>
+    </tbody>
+  </table>
+</section>

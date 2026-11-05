@@ -1,0 +1,6 @@
+<section class="lesson-section lesson-section--motivation">
+  <h2>Motivação</h2>
+  <p>Quando alguém diz que “a internet caiu”, que “o sistema não abre” ou que um servidor “sumiu”, não comece reiniciando equipamentos no escuro. Primeiro colete evidências básicas: qual IP o host recebeu, qual é o gateway, se o gateway responde, se o MAC dele foi resolvido, por onde o tráfego passa e se o nome DNS vira um IP.</p>
+  <p>Os comandos <code>ipconfig</code>, <code>ping</code>, <code>arp</code>, <code>tracert</code> e <code>nslookup</code> fazem essa coleta. O valor deles não está na sintaxe, e sim em saber que pergunta cada um responde e o que ele <strong>não</strong> prova.</p>
+  <div class="callout callout--problem"><strong>Problema real:</strong> um usuário abre alguns sites, mas não acessa o sistema interno. O time de aplicação diz que o serviço está online e o firewall não mostra bloqueio evidente. Antes de abrir um chamado genérico para “a rede”, você precisa verificar IP, gateway, ARP, caminho e DNS.</div>
+</section>

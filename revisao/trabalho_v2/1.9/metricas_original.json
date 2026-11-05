@@ -1,0 +1,103 @@
+{
+  "id": "1.9",
+  "versao": "original",
+  "titulo": "Diagnóstico inicial: ipconfig, ping, arp, tracert e nslookup",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5252,
+    "teoria": 2958,
+    "praticaExtra": 1708,
+    "quiz": 308,
+    "flashcards": 118
+  },
+  "porGrupoTeoria": {
+    "introducao": 633,
+    "contexto": 449,
+    "conteudo": 431,
+    "exemplos": 636,
+    "seguranca_troubleshooting": 809
+  },
+  "porSecao": {
+    "motivation": 182,
+    "summary": 77,
+    "history": 162,
+    "problem": 133,
+    "evolution": 154,
+    "concept": 146,
+    "internals": 164,
+    "architecture": 118,
+    "diagram": 3,
+    "analogy": 111,
+    "simpleExample": 83,
+    "enterpriseExample": 120,
+    "cloudExample": 88,
+    "devsecopsExample": 98,
+    "securityExample": 136,
+    "objectives": 65,
+    "learningOutcomes": 79,
+    "glossary": 230,
+    "security": 339,
+    "troubleshooting": 470,
+    "nextTheme": 33
+  },
+  "pratica": {
+    "quiz": 308,
+    "flashcards": 118,
+    "lab": 957,
+    "mentorQuestions": 164,
+    "exercises": 188,
+    "challenge": 172,
+    "commentedSolution": 227
+  },
+  "outros": {
+    "title+subtitle": 24,
+    "nextTheme": 33,
+    "references": 46,
+    "linksToOtherCourses": 57
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 10,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 75,
+    "alternativa_5minPorPasso": 50,
+    "plausivel": true,
+    "override": null,
+    "palavras": 957
+  },
+  "duracao": {
+    "declarada": "80-115 min",
+    "estimatedStudyTimeMinutes": 115,
+    "nucleo": 31.8,
+    "nucleoPartes": {
+      "teoria": 22.8,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 120,
+    "praticaExtraPartes": {
+      "lab": 75,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-40 min",
+    "praticaExtraArredondada": 120,
+    "recomendada": "25-40 min + 120 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 40
+  }
+}

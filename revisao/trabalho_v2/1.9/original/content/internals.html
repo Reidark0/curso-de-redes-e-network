@@ -1,0 +1,12 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>O valor desses comandos aparece quando você entende o mecanismo por trás deles.</p>
+  <ol class="flow-list">
+    <li><strong><code>ipconfig /all</code>:</strong> lê a configuração de interfaces no Windows, incluindo endereço IPv4, máscara, gateway, DNS, DHCP, sufixo DNS e estado da interface.</li>
+    <li><strong><code>ping</code>:</strong> normalmente envia mensagens ICMP Echo Request e aguarda ICMP Echo Reply. Ele mede tempo de ida e volta, mas não testa TCP, UDP, HTTP ou autenticação.</li>
+    <li><strong><code>arp -a</code>:</strong> mostra a tabela ARP, isto é, associações conhecidas entre IPs locais e endereços MAC. Ela ajuda a investigar comunicação dentro da mesma rede local ou com o gateway.</li>
+    <li><strong><code>tracert</code>:</strong> envia pacotes com TTL crescente. Cada roteador que decrementa o TTL até zero pode responder, revelando um salto do caminho.</li>
+    <li><strong><code>nslookup</code>:</strong> consulta servidores DNS para descobrir como um nome é resolvido em registros como A, AAAA, CNAME ou MX, dependendo da consulta.</li>
+  </ol>
+  <div class="callout callout--warning"><strong>Atenção:</strong> respostas ausentes nem sempre significam falha. Firewalls e roteadores podem bloquear ICMP, não responder a TTL expirado, aplicar rate limit ou responder por caminhos diferentes.</div>
+</section>

@@ -1,0 +1,25 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <ol class="flow-list">
+    <li><strong><code>ipconfig /all</code>:</strong> lê a configuração das interfaces no Windows: endereço IPv4, máscara, gateway padrão, servidores DNS, DHCP habilitado ou não, servidor DHCP, sufixo DNS e estado da interface.</li>
+    <li><strong><code>ping</code>:</strong> envia ICMP Echo Request e espera ICMP Echo Reply. Mede o tempo de ida e volta (RTT), mas não testa TCP, UDP, HTTP ou autenticação.</li>
+    <li><strong><code>arp -a</code>:</strong> mostra a tabela (cache) ARP, com as associações já conhecidas entre IPs da rede local e endereços MAC. Para um destino remoto, o host só precisa do MAC do gateway, por isso o destino remoto não aparece ali.</li>
+    <li><strong><code>tracert</code>:</strong> envia pacotes com TTL crescente (1, 2, 3…). Cada roteador que decrementa o TTL até zero pode devolver um aviso de TTL expirado, revelando um salto do caminho.</li>
+    <li><strong><code>nslookup</code>:</strong> consulta um servidor DNS e mostra qual servidor respondeu e os registros retornados (A, AAAA, CNAME ou MX, conforme a consulta).</li>
+  </ol>
+  <h3>Como ler os resultados</h3>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>O que você vê</th><th>O que indica</th><th>Próximo passo</th></tr></thead>
+    <tbody>
+      <tr><td><code>ipconfig</code> com IPv4 <code>169.254.x.x</code> (APIPA)</td><td>O host não recebeu configuração IPv4 via DHCP.</td><td>Investigar cabo, Wi‑Fi, VLAN, AP e DHCP antes de DNS ou aplicação.</td></tr>
+      <tr><td>Gateway padrão vazio</td><td>Sem rota padrão: o host fala com a própria sub-rede, mas não sabe para onde mandar tráfego de outras redes.</td><td>Revisar DHCP, perfil de rede ou configuração manual.</td></tr>
+      <tr><td>Servidor DNS desconhecido (não é o corporativo nem o do roteador)</td><td>Configuração manual, DHCP indevido ou comprometimento.</td><td>Comparar com o padrão esperado e acionar segurança se não houver explicação.</td></tr>
+      <tr><td><code>ping</code>: “Esgotado o tempo limite do pedido”</td><td>Nenhuma resposta voltou: ICMP filtrado, destino fora ou caminho de volta quebrado.</td><td>Testar o gateway e outros destinos para isolar o ponto.</td></tr>
+      <tr><td><code>ping</code>: “Resposta de &lt;IP&gt;: Host de destino inacessível”</td><td>O equipamento cujo IP aparece (o próprio host ou um roteador) avisou que não consegue entregar, por exemplo por ARP sem resposta ou falta de rota.</td><td>Se o IP for o do próprio host, olhar ARP e rede local; se for um roteador, olhar a rota a partir dele.</td></tr>
+      <tr><td><code>tracert</code> com <code>* * *</code> em um salto, mas o destino final responde</td><td>Esse roteador não responde a TTL expirado ou limita respostas.</td><td>Não concluir falha; correlacionar com outras evidências.</td></tr>
+      <tr><td><code>nslookup</code> com NXDOMAIN (“Non-existent domain”)</td><td>O servidor DNS respondeu que o nome não existe para ele.</td><td>Conferir o nome, o servidor consultado e se é um nome interno que exige DNS interno ou VPN (split DNS).</td></tr>
+      <tr><td><code>nslookup</code> com timeout</td><td>O servidor DNS não respondeu.</td><td>Testar alcance até o servidor DNS e se o DNS configurado é o esperado.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout callout--warning"><strong>Atenção:</strong> resposta ausente nem sempre significa falha. Firewalls e roteadores podem bloquear ICMP, não responder a TTL expirado, aplicar rate limit ou responder por caminhos diferentes.</div>
+</section>

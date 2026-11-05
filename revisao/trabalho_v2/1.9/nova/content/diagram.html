@@ -1,0 +1,56 @@
+<section class="lesson-section lesson-section--diagram">
+  <h2>Diagrama</h2>
+  <svg class="lesson-svg" viewBox="0 0 980 430" role="img" aria-labelledby="m01l09-title m01l09-desc">
+    <title id="m01l09-title">Sequência de diagnóstico inicial de rede</title>
+    <desc id="m01l09-desc">Fluxo mostrando host, configuração local, ARP, gateway, caminho, DNS e serviço, associado aos comandos ipconfig, ping, arp, tracert e nslookup.</desc>
+    <defs>
+      <marker id="m01l09-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow"></path>
+      </marker>
+    </defs>
+    <rect x="35" y="60" width="145" height="70" rx="12" class="svg-node svg-node--client"></rect>
+    <text x="107" y="88" text-anchor="middle" class="svg-label">Host</text>
+    <text x="107" y="112" text-anchor="middle" class="svg-label svg-label--small">ipconfig</text>
+
+    <rect x="235" y="60" width="145" height="70" rx="12" class="svg-node svg-node--switch"></rect>
+    <text x="307" y="88" text-anchor="middle" class="svg-label">Rede local</text>
+    <text x="307" y="112" text-anchor="middle" class="svg-label svg-label--small">arp -a</text>
+
+    <rect x="435" y="60" width="145" height="70" rx="12" class="svg-node svg-node--router"></rect>
+    <text x="507" y="88" text-anchor="middle" class="svg-label">Gateway</text>
+    <text x="507" y="112" text-anchor="middle" class="svg-label svg-label--small">ping gateway</text>
+
+    <rect x="635" y="60" width="145" height="70" rx="12" class="svg-node svg-node--firewall"></rect>
+    <text x="707" y="88" text-anchor="middle" class="svg-label">Caminho</text>
+    <text x="707" y="112" text-anchor="middle" class="svg-label svg-label--small">tracert</text>
+
+    <rect x="835" y="60" width="110" height="70" rx="12" class="svg-node svg-node--server"></rect>
+    <text x="890" y="88" text-anchor="middle" class="svg-label">Serviço</text>
+    <text x="890" y="112" text-anchor="middle" class="svg-label svg-label--small">destino</text>
+
+    <line x1="180" y1="95" x2="235" y2="95" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l09-arrow)"></line>
+    <line x1="380" y1="95" x2="435" y2="95" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l09-arrow)"></line>
+    <line x1="580" y1="95" x2="635" y2="95" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l09-arrow)"></line>
+    <line x1="780" y1="95" x2="835" y2="95" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l09-arrow)"></line>
+
+    <rect x="90" y="210" width="180" height="90" rx="12" class="svg-node svg-node--cloud"></rect>
+    <text x="180" y="240" text-anchor="middle" class="svg-label">DNS</text>
+    <text x="180" y="265" text-anchor="middle" class="svg-label svg-label--small">nslookup</text>
+    <text x="180" y="285" text-anchor="middle" class="svg-label svg-label--small">nome → IP</text>
+
+    <rect x="360" y="205" width="255" height="105" rx="12" class="svg-node svg-node--security"></rect>
+    <text x="487" y="235" text-anchor="middle" class="svg-label">Interpretação</text>
+    <text x="487" y="260" text-anchor="middle" class="svg-label svg-label--small">configuração, alcance, ARP, rota, DNS</text>
+    <text x="487" y="282" text-anchor="middle" class="svg-label svg-label--small">evidência antes da hipótese</text>
+
+    <rect x="700" y="210" width="200" height="90" rx="12" class="svg-node svg-node--attacker"></rect>
+    <text x="800" y="238" text-anchor="middle" class="svg-label">Riscos</text>
+    <text x="800" y="263" text-anchor="middle" class="svg-label svg-label--small">DNS suspeito</text>
+    <text x="800" y="285" text-anchor="middle" class="svg-label svg-label--small">gateway/ARP inesperado</text>
+
+    <line x1="235" y1="210" x2="360" y2="250" class="svg-flow svg-flow--response" marker-end="url(#m01l09-arrow)"></line>
+    <line x1="615" y1="250" x2="700" y2="250" class="svg-flow svg-flow--blocked" marker-end="url(#m01l09-arrow)"></line>
+
+    <text x="490" y="370" text-anchor="middle" class="svg-label">Diagnóstico inicial: colete sinais pequenos, interprete em ordem e só então formule a hipótese.</text>
+  </svg>
+</section>
