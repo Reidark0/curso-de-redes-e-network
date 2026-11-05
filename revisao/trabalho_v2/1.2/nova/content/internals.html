@@ -1,15 +1,13 @@
 
 <section class="lesson-section lesson-section--internals">
   <h2>Funcionamento interno</h2>
-  <p>Acompanhe um notebook (10.10.1.25) abrindo <code>https://intranet.empresa.local</code>, uma aplicação interna. Os endereços são ilustrativos; o que importa é o papel de cada elemento em cada passo.</p>
+  <p>Acompanhe um notebook (10.10.1.25) abrindo <code>https://intranet.empresa.local</code>, o sistema interno da empresa. Os endereços são ilustrativos; o que importa é o papel de cada elemento em cada passo.</p>
   <ol class="flow-list">
-    <li><strong>Cliente inicia:</strong> o navegador do notebook (dispositivo final de origem) gera a requisição.</li>
-    <li><strong>Nome é resolvido:</strong> o serviço DNS interno traduz <code>intranet.empresa.local</code> para um IP, por exemplo 10.20.0.15.</li>
-    <li><strong>Tráfego sai do host:</strong> a placa de rede envia sinais pelo meio físico ou sem fio.</li>
-    <li><strong>Intermediários encaminham:</strong> o AP ou o switch comuta os quadros dentro da LAN; o roteador encaminha entre redes; um balanceador pode distribuir a requisição entre servidores.</li>
-    <li><strong>Políticas são aplicadas:</strong> firewalls, ACLs, proxies, security groups ou WAFs permitem, negam ou registram a conexão para a porta 443.</li>
-    <li><strong>Serviço responde:</strong> a aplicação web, hospedada em um servidor, VM ou container (dispositivo final de destino), escuta na porta 443 e processa a solicitação.</li>
-    <li><strong>Evidências são geradas:</strong> logs, tabelas ARP, tabela de conexões, eventos de firewall e métricas registram partes do caminho.</li>
+    <li><strong>Origem:</strong> o navegador do notebook (dispositivo final) cria o pedido.</li>
+    <li><strong>Nome:</strong> o serviço DNS da empresa traduz <code>intranet.empresa.local</code> para um endereço, por exemplo 10.20.0.15.</li>
+    <li><strong>Caminho:</strong> o access point ou o switch leva o tráfego dentro da rede local; o roteador o encaminha para a rede dos servidores; um balanceador de carga pode repartir os pedidos entre vários servidores iguais.</li>
+    <li><strong>Política:</strong> o firewall entre a rede dos usuários e a dos servidores permite ou nega a conexão para a porta 443.</li>
+    <li><strong>Serviço:</strong> o programa do site, rodando num servidor (dispositivo final de destino), atende na porta 443 e responde.</li>
   </ol>
-  <p>Essa decomposição evita uma armadilha comum: achar que “o servidor está fora” só porque um serviço não responde. O host pode estar vivo e, mesmo assim, o processo estar parado, a porta fechada, a rota errada, o DNS apontar para outro IP ou uma política estar bloqueando.</p>
+  <p>Cada passo vira uma hipótese com dono quando algo falha: o notebook (suporte), o DNS e o servidor (sistemas), o caminho (rede), a regra (segurança). E cada elemento deixa registros do que viu, que servem de evidência.</p>
 </section>

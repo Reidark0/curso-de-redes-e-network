@@ -3,7 +3,7 @@
   <h2>Diagrama</h2>
   <svg class="lesson-svg" viewBox="0 0 980 430" role="img" aria-labelledby="m01l02-title m01l02-desc">
     <title id="m01l02-title">Dispositivos finais, intermediários e serviços</title>
-    <desc id="m01l02-desc">Um cliente acessa um serviço passando por access point, switch, firewall, roteador e balanceador.</desc>
+    <desc id="m01l02-desc">Um dispositivo final de origem acessa um serviço passando por intermediários (access point ou switch, roteador ou balanceador) e por uma política (firewall). O serviço roda num servidor, o dispositivo final de destino. Cada elemento deixa evidências.</desc>
     <defs>
       <marker id="m01l02-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
         <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
@@ -18,9 +18,9 @@
     <rect x="470" y="55" width="150" height="80" rx="14" class="svg-node svg-node--firewall" />
     <text x="545" y="88" text-anchor="middle" class="svg-label">Política</text>
     <text x="545" y="112" text-anchor="middle" class="svg-label svg-label--small">Firewall / ACL</text>
-    <rect x="680" y="55" width="150" height="80" rx="14" class="svg-node svg-node--router" />
+    <rect x="670" y="55" width="170" height="80" rx="14" class="svg-node svg-node--router" />
     <text x="755" y="88" text-anchor="middle" class="svg-label">Intermediário</text>
-    <text x="755" y="112" text-anchor="middle" class="svg-label svg-label--small">Roteador / LB</text>
+    <text x="755" y="112" text-anchor="middle" class="svg-label svg-label--small">Roteador / balanceador</text>
     <rect x="790" y="250" width="160" height="85" rx="14" class="svg-node svg-node--server" />
     <text x="870" y="284" text-anchor="middle" class="svg-label">Dispositivo final</text>
     <text x="870" y="309" text-anchor="middle" class="svg-label svg-label--small">Servidor / VM</text>
@@ -29,7 +29,7 @@
     <text x="595" y="309" text-anchor="middle" class="svg-label svg-label--small">DNS / HTTP / API</text>
     <line x1="200" y1="95" x2="260" y2="95" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l02-arrow)" />
     <line x1="410" y1="95" x2="470" y2="95" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l02-arrow)" />
-    <line x1="620" y1="95" x2="680" y2="95" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l02-arrow)" />
+    <line x1="620" y1="95" x2="670" y2="95" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l02-arrow)" />
     <path d="M755 135 C760 190, 740 235, 695 275" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l02-arrow)" />
     <line x1="695" y1="292" x2="790" y2="292" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m01l02-arrow)" />
     <text x="500" y="185" text-anchor="middle" class="svg-label svg-label--small">Perguntas do diagnóstico: quem iniciou? quem encaminhou? qual serviço? qual política?</text>

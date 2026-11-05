@@ -1,0 +1,85 @@
+{
+  "id": "1.2",
+  "versao": "nova",
+  "titulo": "Dispositivos finais, intermediários e serviços",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 2620,
+    "teoria": 1220,
+    "praticaExtra": 673,
+    "quiz": 417,
+    "flashcards": 155
+  },
+  "porGrupoTeoria": {
+    "introducao": 425,
+    "contexto": 132,
+    "conteudo": 487,
+    "exemplos": 176,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 131,
+    "summary": 83,
+    "problem": 132,
+    "concept": 322,
+    "internals": 164,
+    "diagram": 1,
+    "analogy": 39,
+    "simpleExample": 137,
+    "objectives": 66,
+    "learningOutcomes": 0,
+    "glossary": 145,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 33
+  },
+  "pratica": {
+    "quiz": 417,
+    "flashcards": 155,
+    "lab": 0,
+    "mentorQuestions": 192,
+    "exercises": 182,
+    "challenge": 97,
+    "commentedSolution": 202
+  },
+  "outros": {
+    "title+subtitle": 21,
+    "nextTheme": 33,
+    "references": 56,
+    "linksToOtherCourses": 45
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 4,
+    "exemplosPorAmbiente": []
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "15-20 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutes": 20,
+    "nucleo": 18.4,
+    "nucleoPartes": {
+      "teoria": 9.4,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 31,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-20 min",
+    "praticaExtraArredondada": 30,
+    "recomendada": "15-20 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 20
+  }
+}

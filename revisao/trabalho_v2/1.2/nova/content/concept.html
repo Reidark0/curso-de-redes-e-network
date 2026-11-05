@@ -1,15 +1,16 @@
 
 <section class="lesson-section lesson-section--concept">
   <h2>Conceito</h2>
-  <div class="definition-box"><strong>Definição:</strong> <strong>dispositivo final</strong> é uma origem ou destino de comunicação; <strong>dispositivo intermediário</strong> é um elemento que encaminha, comuta, filtra, traduz, concentra ou inspeciona tráfego; <strong>serviço</strong> é uma função exposta pela rede para ser consumida por clientes ou outros sistemas. Um quarto papel atravessa os três: a <strong>política</strong>, a regra que decide o que pode trafegar.</div>
-  <p>Classifique pelo <strong>papel no fluxo analisado</strong>, não pelo nome do equipamento, porque um mesmo elemento pode acumular papéis. Um servidor é dispositivo final quando recebe tráfego, hospeda vários serviços ao mesmo tempo e pode até atuar como proxy (intermediário) para outros fluxos. Um firewall é intermediário para o tráfego dos outros, mas é destino quando você acessa a interface de administração dele ou a VPN que ele oferece. Um access point é intermediário para os clientes Wi-Fi e também oferece gerenciamento, logs e autenticação.</p>
-  <p>A classificação é o primeiro mapa mental, não um diagnóstico: ela não substitui a análise por camada e não prova a causa de uma falha. Ela organiza as hipóteses e indica quem é o dono de cada uma (endpoint, rede, segurança, sistemas ou aplicação).</p>
-  <div class="callout warning"><strong>Erros comuns:</strong>
+  <div class="definition-box"><strong>Definição:</strong> <strong>dispositivo final</strong> é a origem ou o destino de uma comunicação (notebook, celular, servidor, impressora, câmera). <strong>Dispositivo intermediário</strong> fica no caminho e encaminha, filtra, traduz ou inspeciona o tráfego dos outros (switch, roteador, access point, firewall). <strong>Serviço</strong> é uma função oferecida pela rede para outros usarem (DNS, que traduz nomes em endereços IP; DHCP, que entrega endereços IP aos aparelhos; um site; uma pasta compartilhada). Um quarto papel atravessa os três: a <strong>política</strong>, a regra que decide o que pode passar, normalmente aplicada num intermediário como o firewall.</div>
+  <h3>Servidor não é serviço</h3>
+  <p>Servidor é a máquina, física ou virtual. Serviço é o programa que atende pedidos nela, cada um numa porta: a mesma máquina pode hospedar o site da empresa (HTTPS, porta 443), o acesso remoto dos administradores (SSH, porta 22) e um banco de dados. Por isso a máquina pode estar ligada e responder ao ping enquanto o site está parado.</p>
+  <h3>Classifique pelo papel, não pelo nome</h3>
+  <p>O mesmo equipamento muda de papel conforme o fluxo que você analisa. O firewall é intermediário para o tráfego dos outros, mas é destino quando você abre a página de administração dele. O roteador Wi-Fi de casa acumula cinco funções: access point, switch, roteador, NAT e servidor DHCP. Pergunte sempre: neste fluxo, o que esse elemento está fazendo?</p>
+  <div class="callout warning"><strong>Erros comuns</strong>
     <ul>
-      <li><strong>Confundir servidor com serviço.</strong> “O servidor caiu” costuma querer dizer “o sistema não responde”, e a equipe reinicia o host errado sem verificar se o serviço está escutando. Servidor é o equipamento ou workload; serviço é a função exposta (HTTP, DNS, SSH, banco de dados).</li>
-      <li><strong>Chamar todo equipamento de rede de roteador.</strong> Em casa, o roteador Wi-Fi acumula AP, switch, roteador, NAT e DHCP. Separe as funções: comutar na LAN, rotear entre redes, oferecer Wi-Fi, distribuir IP, filtrar tráfego.</li>
-      <li><strong>Deixar impressoras, câmeras e IoT fora da conta.</strong> Como não parecem computadores, ficam sem inventário, patching e monitoramento. Todo dispositivo com IP, serviço, firmware ou credencial é ativo de rede.</li>
-      <li><strong>Achar que o intermediário só transporta.</strong> Intermediários podem encaminhar, bloquear, traduzir (NAT), registrar, inspecionar e até modificar tráfego (proxy, WAF, inspeção TLS, balanceador).</li>
+      <li><strong>Achar que o intermediário só transporta.</strong> Ele pode bloquear, traduzir endereços, registrar e inspecionar o tráfego. Como concentra o tráfego e as regras de muitos aparelhos, quem o invade ou o configura mal afeta todos os fluxos que passam por ele.</li>
+      <li><strong>Deixar impressoras, câmeras e outros aparelhos “inteligentes” fora da conta.</strong> Todo aparelho com IP, firmware ou senha é dispositivo final: sem inventário, ele fica com firmware antigo e senha de fábrica sem ninguém perceber.</li>
+      <li><strong>Tratar a classificação como diagnóstico.</strong> Ela organiza as hipóteses e diz quem é o dono de cada uma (suporte, rede, segurança, sistemas), mas não prova a causa.</li>
     </ul>
   </div>
 </section>

@@ -1,12 +1,12 @@
 
 <section class="lesson-section lesson-section--example">
   <h2>Exemplo simples</h2>
-  <p>Em casa, seu celular abre um vídeo. O celular é dispositivo final. O roteador Wi-Fi funciona ao mesmo tempo como access point, switch, roteador, NAT e, muitas vezes, servidor DHCP. O streaming é o serviço acessado. O DNS traduz o nome do serviço. O provedor interconecta sua rede doméstica com a internet.</p>
+  <p>Em casa, seu celular abre um vídeo. O celular é dispositivo final. O roteador Wi-Fi é intermediário (access point, switch, roteador e NAT) e ainda oferece o serviço DHCP. O DNS do provedor traduz o nome do site de vídeo, e o site é o serviço acessado.</p>
   <p>Se o vídeo não carrega, não basta dizer “a internet caiu”. Teste papel por papel:</p>
   <ol>
-    <li>o celular está conectado ao Wi-Fi e recebeu IP?</li>
-    <li>o gateway responde?</li>
-    <li>os nomes resolvem?</li>
-    <li>outros sites abrem, ou só aquele serviço está indisponível?</li>
+    <li>O celular está no Wi-Fi e recebeu um IP? Se sim, o access point e o DHCP fizeram sua parte.</li>
+    <li>O gateway (o próprio roteador) responde ao ping? Se sim, o caminho até ele funciona.</li>
+    <li>Os nomes resolvem? Se o IP e o gateway estão certos e só os nomes falham, a suspeita é o DNS.</li>
+    <li>Outros sites abrem? Se sim, só aquele serviço está fora, e o problema não é sua rede.</li>
   </ol>
 </section>
