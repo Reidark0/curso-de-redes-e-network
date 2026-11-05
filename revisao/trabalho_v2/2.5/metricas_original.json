@@ -1,0 +1,103 @@
+{
+  "id": "2.5",
+  "versao": "original",
+  "titulo": "Camada 3 — Rede: IP, roteamento, gateway e TTL",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4641,
+    "teoria": 2671,
+    "praticaExtra": 1432,
+    "quiz": 249,
+    "flashcards": 107
+  },
+  "porGrupoTeoria": {
+    "introducao": 593,
+    "contexto": 437,
+    "conteudo": 432,
+    "exemplos": 633,
+    "seguranca_troubleshooting": 576
+  },
+  "porSecao": {
+    "motivation": 157,
+    "summary": 64,
+    "history": 151,
+    "problem": 151,
+    "evolution": 135,
+    "concept": 114,
+    "internals": 191,
+    "architecture": 124,
+    "diagram": 3,
+    "analogy": 118,
+    "simpleExample": 81,
+    "enterpriseExample": 99,
+    "cloudExample": 117,
+    "devsecopsExample": 85,
+    "securityExample": 133,
+    "objectives": 59,
+    "learningOutcomes": 86,
+    "glossary": 227,
+    "security": 274,
+    "troubleshooting": 302,
+    "nextTheme": 41
+  },
+  "pratica": {
+    "quiz": 249,
+    "flashcards": 107,
+    "lab": 779,
+    "mentorQuestions": 147,
+    "exercises": 145,
+    "challenge": 165,
+    "commentedSolution": 196
+  },
+  "outros": {
+    "title+subtitle": 28,
+    "nextTheme": 41,
+    "references": 66,
+    "linksToOtherCourses": 47
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 120,
+    "alternativa_5minPorPasso": 30,
+    "plausivel": false,
+    "override": null,
+    "palavras": 779
+  },
+  "duracao": {
+    "declarada": "85-120 min",
+    "estimatedStudyTimeMinutes": 120,
+    "nucleo": 29.5,
+    "nucleoPartes": {
+      "teoria": 20.5,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 75,
+    "praticaExtraPartes": {
+      "lab": 30,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 75,
+    "recomendada": "25-35 min + 75 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

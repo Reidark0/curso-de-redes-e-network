@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--architecture">
+  <h2>7. Arquitetura</h2>
+  <p>Em uma arquitetura real, a Camada 3 aparece em roteadores, firewalls, gateways, interfaces virtuais, SVIs, route tables, VPNs, NAT gateways, peering de redes, links dedicados e malhas de conectividade entre ambientes.</p>
+  <ul class="flow-list">
+    <li><strong>Host:</strong> possui IP, máscara, gateway e rotas locais.</li>
+    <li><strong>Gateway padrão:</strong> primeiro roteador usado para destinos fora da rede local.</li>
+    <li><strong>Roteador/firewall:</strong> encaminha ou bloqueia pacotes entre redes.</li>
+    <li><strong>Route table:</strong> define quais destinos usam quais próximos saltos.</li>
+    <li><strong>Cloud:</strong> subnets, route tables, Internet Gateway, NAT Gateway, VPN Gateway e peering.</li>
+    <li><strong>Segurança:</strong> segmentação, ACLs, firewall, logs de fluxo e controle de rotas.</li>
+  </ul>
+  <p>A arquitetura de Camada 3 é onde conectividade e política começam a se encontrar. Um caminho pode existir tecnicamente, mas ser bloqueado por firewall, ACL, security group, NSG, NetworkPolicy ou regra de roteamento.</p>
+</section>

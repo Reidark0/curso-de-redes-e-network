@@ -1,0 +1,99 @@
+{
+  "id": "2.5",
+  "versao": "v1",
+  "titulo": "Camada 3 — Rede: IP, roteamento, gateway e TTL",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5108,
+    "teoria": 2745,
+    "praticaExtra": 1580,
+    "quiz": 484,
+    "flashcards": 125
+  },
+  "porGrupoTeoria": {
+    "introducao": 499,
+    "contexto": 141,
+    "conteudo": 982,
+    "exemplos": 462,
+    "seguranca_troubleshooting": 661
+  },
+  "porSecao": {
+    "motivation": 112,
+    "summary": 114,
+    "problem": 141,
+    "concept": 204,
+    "internals": 649,
+    "architecture": 128,
+    "diagram": 1,
+    "analogy": 94,
+    "simpleExample": 87,
+    "enterpriseExample": 90,
+    "cloudExample": 116,
+    "devsecopsExample": 75,
+    "objectives": 59,
+    "learningOutcomes": 86,
+    "glossary": 128,
+    "security": 353,
+    "troubleshooting": 308,
+    "nextTheme": 37
+  },
+  "pratica": {
+    "quiz": 484,
+    "flashcards": 125,
+    "lab": 762,
+    "mentorQuestions": 235,
+    "exercises": 222,
+    "challenge": 165,
+    "commentedSolution": 196
+  },
+  "outros": {
+    "title+subtitle": 24,
+    "nextTheme": 37,
+    "references": 66,
+    "linksToOtherCourses": 47
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 3,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 30,
+    "alternativa_5minPorPasso": 25,
+    "plausivel": true,
+    "override": null,
+    "palavras": 762
+  },
+  "duracao": {
+    "declarada": "90-130 min",
+    "estimatedStudyTimeMinutes": 130,
+    "nucleo": 30.1,
+    "nucleoPartes": {
+      "teoria": 21.1,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 69,
+    "praticaExtraPartes": {
+      "lab": 30,
+      "mentor": 6,
+      "exercicios": 18,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 70,
+    "recomendada": "25-35 min + 70 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

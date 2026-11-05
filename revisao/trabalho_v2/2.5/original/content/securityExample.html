@@ -1,0 +1,10 @@
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>Em segurança, Camada 3 é uma fronteira crítica para segmentação e controle de movimento lateral. Um atacante que compromete um host em uma rede tenta descobrir quais outras redes são alcançáveis. Por isso, rotas, gateways e firewalls internos importam tanto quanto endpoint protection.</p>
+  <table class="data-table risk-table"><thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead><tbody>
+    <tr><td>Rede plana</td><td>Muitas sub-redes alcançáveis sem controle.</td><td>Movimento lateral amplo.</td><td>Segmentação, ACLs, firewall interno e menor privilégio.</td></tr>
+    <tr><td>Rota indevida</td><td>Subnet sensível acessível a partir de rede de usuários.</td><td>Exposição de serviços críticos.</td><td>Revisão de rotas, flow logs e gestão de mudanças.</td></tr>
+    <tr><td>TTL e traceroute expõem caminho</td><td>Saltos internos aparecem em diagnóstico.</td><td>Revelação parcial de topologia.</td><td>Sanitizar evidências e controlar exposição externa.</td></tr>
+    <tr><td>Rota de retorno ausente</td><td>Conexão sai, mas resposta não volta.</td><td>Falhas intermitentes e troubleshooting difícil.</td><td>Validar caminhos bidirecionais e logs.</td></tr>
+  </tbody></table>
+</section>

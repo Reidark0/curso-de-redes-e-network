@@ -1,0 +1,5 @@
+<section class="lesson-section lesson-section--example">
+  <h2>Exemplo simples</h2>
+  <p>Em casa, seu notebook tem IP <code>192.168.1.50/24</code> e gateway <code>192.168.1.1</code>. Ao acessar outro dispositivo em <code>192.168.1.80</code>, o tráfego é local. Ao acessar <code>8.8.8.8</code>, o destino não está em <code>192.168.1.0/24</code>, então o notebook envia o pacote ao gateway.</p>
+  <p>Repare: o frame Ethernet que sai do notebook tem como MAC de destino o MAC do roteador, mas o pacote IP dentro dele tem destino <code>8.8.8.8</code>. O roteador recebe, remove o frame local, decrementa o TTL e encaminha o pacote pelo próximo enlace, dentro de um frame novo.</p>
+</section>
