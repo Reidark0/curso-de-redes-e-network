@@ -1,12 +1,11 @@
 <section class="lesson-section lesson-section--example">
   <h2>Exemplo simples</h2>
-  <p>Seu notebook está conectado ao Wi‑Fi, mas nenhum site abre. Uma sequência básica:</p>
+  <p>Seu notebook está conectado ao Wi‑Fi de casa, mas nenhum site abre. Você sobe os degraus em ordem:</p>
   <ol class="flow-list">
-    <li>Rode <code>ipconfig /all</code> para ver se recebeu IP válido, gateway e DNS.</li>
-    <li>Rode <code>ping &lt;gateway&gt;</code> para testar alcance até o roteador local.</li>
-    <li>Rode <code>arp -a</code> para verificar se o gateway tem endereço MAC conhecido.</li>
-    <li>Rode <code>ping 8.8.8.8</code> ou outro destino autorizado para testar saída por IP.</li>
-    <li>Rode <code>nslookup exemplo.com</code> para testar resolução de nomes.</li>
-    <li>Se IP funciona e nome não, a hipótese de DNS ganha força.</li>
+    <li><code>ipconfig /all</code> mostra IPv4 <code>192.168.0.23</code>, máscara <code>255.255.255.0</code>, gateway <code>192.168.0.1</code> e servidor DNS <code>192.168.0.1</code> (o próprio roteador). Configuração local: ok.</li>
+    <li><code>ping 192.168.0.1</code> recebe 4 respostas em cerca de 3 ms, e <code>arp -a</code> mostra o IP <code>192.168.0.1</code> associado a um MAC. Gateway: ok.</li>
+    <li><code>ping 8.8.8.8</code> (um servidor público do Google) recebe respostas em cerca de 20 ms. A saída para a internet por IP funciona.</li>
+    <li><code>nslookup example.com</code> termina em timeout: o servidor DNS <code>192.168.0.1</code> não respondeu.</li>
   </ol>
+  <p>Conclusão: o problema não é o Wi‑Fi nem “a internet”, e sim a resolução de nomes. Para confirmar, pergunte a outro servidor: <code>nslookup example.com 8.8.8.8</code>. Se esse responder com um IP, o defeito está no DNS do roteador, e é isso que você relata, em vez de “a internet caiu”.</p>
 </section>

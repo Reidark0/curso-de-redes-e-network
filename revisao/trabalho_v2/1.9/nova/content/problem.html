@@ -1,13 +1,5 @@
 <section class="lesson-section lesson-section--problem">
   <h2>Problema</h2>
-  <p>Sintomas de rede são ambíguos. “Não acessa” pode ser IP inválido, gateway ausente, DNS quebrado, ARP não resolvido, firewall bloqueando, rota incorreta, servidor fora, porta fechada, proxy mal configurado ou autenticação falhando. Sem uma sequência mínima, o diagnóstico vira tentativa e erro.</p>
-  <ul class="flow-list">
-    <li><strong>Sem verificar IP:</strong> você pode investigar DNS enquanto o host nem recebeu endereço válido.</li>
-    <li><strong>Sem verificar gateway:</strong> você pode culpar a internet quando falta rota padrão.</li>
-    <li><strong>Sem verificar ARP:</strong> você pode ignorar uma falha local entre host, switch, VLAN e gateway.</li>
-    <li><strong>Sem testar alcance:</strong> você não sabe se o destino responde ou se o bloqueio ocorre antes.</li>
-    <li><strong>Sem verificar DNS:</strong> você pode confundir problema de nome com problema de conectividade.</li>
-    <li><strong>Sem registrar evidências:</strong> você não consegue comparar antes/depois, acionar outro time ou provar a causa.</li>
-  </ul>
-  <p>Esses comandos continuam úteis em cloud, VPN, containers e Kubernetes. Eles não resolvem tudo, mas produzem a primeira linha de evidência antes de ferramentas como Wireshark, tcpdump, NetFlow, logs de firewall ou SIEM.</p>
+  <p>É isso que acontece quando se tenta resolver um sintoma sem saber em que ponto ele nasce. Para o usuário, “não acessa” é sempre igual, mas a causa pode ser um host sem endereço válido, a falta do gateway (o roteador que leva o tráfego para fora da rede local), um gateway que não responde, um caminho interrompido, um nome que não vira IP ou o próprio serviço fora do ar.</p>
+  <p>Testar ao acaso gasta tempo e leva a conclusões erradas, como investigar o DNS de um host que nem recebeu IP. A saída é testar em ordem, do mais próximo para o mais distante, e só subir um degrau quando o anterior estiver confirmado. Esta aula mostra essa sequência, o que cada comando revela e como ler as respostas mais comuns.</p>
 </section>

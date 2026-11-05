@@ -1,0 +1,90 @@
+{
+  "id": "1.9",
+  "versao": "nova",
+  "titulo": "Diagnóstico inicial: ipconfig, ping, arp, tracert e nslookup",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3480,
+    "teoria": 1557,
+    "praticaExtra": 1104,
+    "quiz": 494,
+    "flashcards": 173
+  },
+  "porGrupoTeoria": {
+    "introducao": 459,
+    "contexto": 133,
+    "conteudo": 820,
+    "exemplos": 145,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 143,
+    "summary": 87,
+    "problem": 133,
+    "concept": 300,
+    "internals": 519,
+    "diagram": 1,
+    "simpleExample": 145,
+    "objectives": 65,
+    "learningOutcomes": 0,
+    "glossary": 164,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 25
+  },
+  "pratica": {
+    "quiz": 494,
+    "flashcards": 173,
+    "lab": 402,
+    "mentorQuestions": 212,
+    "exercises": 167,
+    "challenge": 111,
+    "commentedSolution": 212
+  },
+  "outros": {
+    "title+subtitle": 24,
+    "nextTheme": 25,
+    "references": 46,
+    "linksToOtherCourses": 57
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 4,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 5,
+    "exemplosPorAmbiente": []
+  },
+  "lab": {
+    "estimatedTimeMinutes": 20,
+    "alternativa_5minPorPasso": 20,
+    "plausivel": true,
+    "override": null,
+    "palavras": 402
+  },
+  "duracao": {
+    "declarada": "20-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 21,
+    "nucleoPartes": {
+      "teoria": 12,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 51,
+    "praticaExtraPartes": {
+      "lab": 20,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "20-25 min",
+    "praticaExtraArredondada": 50,
+    "recomendada": "20-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}
