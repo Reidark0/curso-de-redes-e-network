@@ -1,0 +1,94 @@
+{
+  "id": "1.7",
+  "versao": "v1",
+  "titulo": "Equipamentos de rede: NIC, hub, switch, roteador, AP e firewall",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4590,
+    "teoria": 3034,
+    "praticaExtra": 670,
+    "quiz": 522,
+    "flashcards": 191
+  },
+  "porGrupoTeoria": {
+    "introducao": 690,
+    "contexto": 303,
+    "conteudo": 761,
+    "exemplos": 507,
+    "seguranca_troubleshooting": 773
+  },
+  "porSecao": {
+    "motivation": 163,
+    "summary": 98,
+    "problem": 113,
+    "evolution": 190,
+    "concept": 104,
+    "internals": 472,
+    "architecture": 183,
+    "diagram": 2,
+    "analogy": 95,
+    "simpleExample": 103,
+    "enterpriseExample": 107,
+    "cloudExample": 129,
+    "devsecopsExample": 73,
+    "objectives": 66,
+    "learningOutcomes": 74,
+    "glossary": 289,
+    "security": 476,
+    "troubleshooting": 297,
+    "nextTheme": 34
+  },
+  "pratica": {
+    "quiz": 522,
+    "flashcards": 191,
+    "lab": 0,
+    "mentorQuestions": 147,
+    "exercises": 165,
+    "challenge": 152,
+    "commentedSolution": 206
+  },
+  "outros": {
+    "title+subtitle": 25,
+    "nextTheme": 34,
+    "references": 62,
+    "linksToOtherCourses": 52
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 7,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "75-105 min",
+    "estimatedStudyTimeMinutes": 105,
+    "nucleo": 33.3,
+    "nucleoPartes": {
+      "teoria": 23.3,
+      "diagramas": 3,
+      "quiz": 7
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "30-40 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "30-40 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 40
+  }
+}

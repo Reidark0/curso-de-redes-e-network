@@ -1,0 +1,97 @@
+{
+  "id": "1.7",
+  "versao": "original",
+  "titulo": "Equipamentos de rede: NIC, hub, switch, roteador, AP e firewall",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4072,
+    "teoria": 2816,
+    "praticaExtra": 670,
+    "quiz": 283,
+    "flashcards": 129
+  },
+  "porGrupoTeoria": {
+    "introducao": 664,
+    "contexto": 462,
+    "conteudo": 442,
+    "exemplos": 652,
+    "seguranca_troubleshooting": 596
+  },
+  "porSecao": {
+    "motivation": 195,
+    "summary": 67,
+    "history": 170,
+    "problem": 119,
+    "evolution": 173,
+    "concept": 113,
+    "internals": 180,
+    "architecture": 146,
+    "diagram": 3,
+    "analogy": 114,
+    "simpleExample": 104,
+    "enterpriseExample": 108,
+    "cloudExample": 92,
+    "devsecopsExample": 87,
+    "securityExample": 147,
+    "objectives": 66,
+    "learningOutcomes": 74,
+    "glossary": 262,
+    "security": 321,
+    "troubleshooting": 275,
+    "nextTheme": 35
+  },
+  "pratica": {
+    "quiz": 283,
+    "flashcards": 129,
+    "lab": 0,
+    "mentorQuestions": 147,
+    "exercises": 165,
+    "challenge": 152,
+    "commentedSolution": 206
+  },
+  "outros": {
+    "title+subtitle": 25,
+    "nextTheme": 35,
+    "references": 62,
+    "linksToOtherCourses": 52
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "80-115 min",
+    "estimatedStudyTimeMinutes": 115,
+    "nucleo": 30.7,
+    "nucleoPartes": {
+      "teoria": 21.7,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "25-35 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}
