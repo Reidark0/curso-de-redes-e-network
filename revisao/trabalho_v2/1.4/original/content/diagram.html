@@ -1,0 +1,51 @@
+
+<section class="lesson-section lesson-section--diagram">
+  <h2>14. Diagrama SVG</h2>
+  <svg class="lesson-svg" viewBox="0 0 980 540" role="img" aria-labelledby="m01l04-title m01l04-desc">
+    <title id="m01l04-title">Topologia física e topologia lógica</title>
+    <desc id="m01l04-desc">Diagrama comparando a conexão física por switch central com caminhos lógicos separados por VLAN, firewall, WAN e cloud.</desc>
+    <defs>
+      <marker id="m01l04-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
+      </marker>
+    </defs>
+    <rect x="35" y="35" width="420" height="210" rx="18" class="svg-zone" />
+    <text x="245" y="68" text-anchor="middle" class="svg-label">Topologia física</text>
+    <rect x="190" y="125" width="115" height="62" rx="12" class="svg-node svg-node--switch" />
+    <text x="247" y="162" text-anchor="middle" class="svg-label svg-label--small">Switch</text>
+    <rect x="65" y="115" width="95" height="50" rx="10" class="svg-node svg-node--client" />
+    <text x="112" y="145" text-anchor="middle" class="svg-label svg-label--small">Usuário</text>
+    <rect x="335" y="115" width="90" height="50" rx="10" class="svg-node svg-node--server" />
+    <text x="380" y="145" text-anchor="middle" class="svg-label svg-label--small">Servidor</text>
+    <rect x="85" y="185" width="95" height="42" rx="10" class="svg-node svg-node--client" />
+    <text x="132" y="211" text-anchor="middle" class="svg-label svg-label--small">Impressora</text>
+    <line x1="160" y1="140" x2="190" y2="150" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l04-arrow)" />
+    <line x1="305" y1="150" x2="335" y2="140" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l04-arrow)" />
+    <line x1="180" y1="205" x2="205" y2="180" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l04-arrow)" />
+    <rect x="525" y="35" width="420" height="430" rx="18" class="svg-zone" />
+    <text x="735" y="68" text-anchor="middle" class="svg-label">Topologia lógica</text>
+    <rect x="565" y="105" width="120" height="60" rx="12" class="svg-node svg-node--client" />
+    <text x="625" y="130" text-anchor="middle" class="svg-label svg-label--small">VLAN Usuários</text>
+    <text x="625" y="150" text-anchor="middle" class="svg-label svg-label--small">10.10.10.0/24</text>
+    <rect x="760" y="105" width="120" height="60" rx="12" class="svg-node svg-node--server" />
+    <text x="820" y="130" text-anchor="middle" class="svg-label svg-label--small">VLAN Servidores</text>
+    <text x="820" y="150" text-anchor="middle" class="svg-label svg-label--small">10.10.20.0/24</text>
+    <rect x="655" y="230" width="120" height="62" rx="12" class="svg-node svg-node--firewall" />
+    <text x="715" y="255" text-anchor="middle" class="svg-label svg-label--small">Firewall</text>
+    <text x="715" y="275" text-anchor="middle" class="svg-label svg-label--small">Política</text>
+    <rect x="565" y="365" width="125" height="62" rx="12" class="svg-node svg-node--router" />
+    <text x="627" y="390" text-anchor="middle" class="svg-label svg-label--small">WAN</text>
+    <text x="627" y="410" text-anchor="middle" class="svg-label svg-label--small">Filial</text>
+    <rect x="755" y="365" width="125" height="62" rx="12" class="svg-node svg-node--cloud" />
+    <text x="817" y="390" text-anchor="middle" class="svg-label svg-label--small">Cloud</text>
+    <text x="817" y="410" text-anchor="middle" class="svg-label svg-label--small">VPC/VNet</text>
+    <path d="M625 165 C640 190, 670 210, 695 230" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l04-arrow)" />
+    <path d="M820 165 C800 195, 760 215, 735 230" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m01l04-arrow)" />
+    <line x1="690" y1="292" x2="640" y2="365" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l04-arrow)" />
+    <line x1="745" y1="292" x2="805" y2="365" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l04-arrow)" />
+    <rect x="70" y="330" width="380" height="105" rx="16" class="svg-node svg-node--security" />
+    <text x="260" y="365" text-anchor="middle" class="svg-label">Lição principal</text>
+    <text x="260" y="393" text-anchor="middle" class="svg-label svg-label--small">mesmo cabo não significa mesmo segmento</text>
+    <text x="260" y="418" text-anchor="middle" class="svg-label svg-label--small">mesmo segmento não significa mesmo acesso</text>
+  </svg>
+</section>

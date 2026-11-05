@@ -1,0 +1,12 @@
+
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <p>A topologia física diz quais caminhos existem. A lógica nasce das decisões que cada equipamento toma no meio do caminho. Acompanhe um computador enviando dados a um servidor:</p>
+  <ol class="flow-list">
+    <li><strong>O computador decide:</strong> o destino está na mesma rede local ou fora dela? Se está fora, ele entrega os dados ao gateway, o equipamento que leva o tráfego para outras redes.</li>
+    <li><strong>O primeiro equipamento recebe:</strong> o switch ou o ponto de acesso Wi-Fi a que o computador está ligado leva os dados adiante, até o destino local ou até o gateway.</li>
+    <li><strong>Cada intermediário aplica sua lógica:</strong> o switch escolhe a porta de saída e respeita a separação em VLANs; o roteador escolhe a próxima rede; o firewall permite ou bloqueia conforme as regras.</li>
+    <li><strong>O caminho pode mudar:</strong> se há caminhos redundantes e um enlace cai, os equipamentos passam a usar outro. Numa estrela sem redundância, não há para onde desviar.</li>
+  </ol>
+  <p>Por isso topologia não é um desenho estático: uma mudança de regra altera a topologia lógica sem que nenhum cabo saia do lugar, e é assim que um diagrama fica desatualizado.</p>
+</section>

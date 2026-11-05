@@ -1,0 +1,29 @@
+
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <p>Topologia de rede é a forma como os elementos de uma rede estão organizados e conectados. Ela pode ser vista de dois jeitos.</p>
+  <div class="definition-box"><strong>Definição:</strong> a <strong>topologia física</strong> descreve como cabos, enlaces de rádio, portas e equipamentos estão ligados. A <strong>topologia lógica</strong> descreve como o tráfego realmente flui: que grupos de dispositivos existem, que caminhos são usados e que regras controlam a comunicação.</div>
+  <p>As duas podem ser bem diferentes. Um switch pode ser configurado para dividir suas portas em redes separadas, chamadas VLANs: dois computadores no mesmo switch, em VLANs diferentes, só se falam se um roteador ou firewall deixar.</p>
+  <p>Em cloud, você não vê cabos nem switches: a topologia física fica com o provedor. A lógica continua existindo, em redes virtuais, rotas e regras, e é você quem a define.</p>
+  <p>A topologia lógica também define o estrago de uma invasão. Numa <strong>rede plana</strong>, em que todos ficam no mesmo grupo lógico, um computador invadido alcança todos os outros sem passar por nenhuma barreira. Separar a rede em grupos e controlar a passagem entre eles limita o alcance do invasor (tema da aula 9.4).</p>
+  <h3>Formas comuns de ligar uma rede</h3>
+  <div class="responsive-table">
+  <table class="data-table comparison-table">
+    <thead><tr><th>Topologia</th><th>Como se liga</th><th>Vantagem</th><th>Limitação</th></tr></thead>
+    <tbody>
+      <tr><td>Barramento</td><td>Todos compartilham um mesmo meio (quase sumiu)</td><td>Simples e barato em pequena escala</td><td>Transmissões simultâneas se atrapalham; uma falha no meio derruba todos</td></tr>
+      <tr><td>Anel</td><td>Cada nó ligado ao seguinte, fechando um círculo (anéis de fibra de operadoras)</td><td>Caminho previsível</td><td>Sem caminho reserva, um trecho com falha interrompe o anel</td></tr>
+      <tr><td>Estrela</td><td>Todos ligados a um ponto central (quase toda rede local)</td><td>Fácil de operar; um cabo ruim afeta só um dispositivo</td><td>O equipamento central é ponto único de falha</td></tr>
+      <tr><td>Árvore</td><td>Estrelas ligadas em hierarquia (redes de empresas)</td><td>Organiza andares, prédios e campus</td><td>Os níveis de cima concentram tráfego e podem virar gargalo</td></tr>
+      <tr><td>Malha</td><td>Vários caminhos entre os nós (núcleo de operadoras, Wi-Fi mesh)</td><td>Se um enlace cai, o tráfego usa outro</td><td>Mais enlaces, portas, custo e complexidade</td></tr>
+      <tr><td>Hub-and-spoke</td><td>Pontas (spokes) ligadas só a um centro (hub), como filiais à matriz</td><td>Controle centralizado</td><td>Dependência do hub; tráfego entre pontas dá a volta pelo centro</td></tr>
+      <tr><td>Spine-leaf</td><td>Cada switch leaf (folha) ligado a todos os spines (espinha), em datacenters</td><td>Servidores em leafs diferentes ficam sempre à mesma distância (leaf, spine, leaf); cresce acrescentando switches</td><td>Mais portas, cabos, planejamento e custo</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Um <strong>ponto único de falha</strong> é um componente sem alternativa cuja queda derruba uma função inteira, como o switch central de uma estrela. As formas com mais caminhos eliminam esses pontos, mas custam mais.</p>
+  <div class="callout warning"><strong>Erros comuns</strong><ul>
+    <li><strong>Usar o diagrama como decoração:</strong> um bom diagrama responde quem fala com quem, por onde e sob qual regra. Simples demais esconde riscos; complexo demais ninguém usa.</li>
+    <li><strong>Confiar num diagrama antigo:</strong> redes mudam. Se o diagrama contradiz o que você observa na rede, vale a observação, e o diagrama precisa ser atualizado.</li>
+  </ul></div>
+</section>

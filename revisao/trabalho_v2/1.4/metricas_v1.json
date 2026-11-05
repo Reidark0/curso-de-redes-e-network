@@ -1,0 +1,100 @@
+{
+  "id": "1.4",
+  "versao": "v1",
+  "titulo": "Topologias físicas e lógicas",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5216,
+    "teoria": 2761,
+    "praticaExtra": 1692,
+    "quiz": 422,
+    "flashcards": 145
+  },
+  "porGrupoTeoria": {
+    "introducao": 581,
+    "contexto": 399,
+    "conteudo": 538,
+    "exemplos": 478,
+    "seguranca_troubleshooting": 765
+  },
+  "porSecao": {
+    "motivation": 129,
+    "summary": 100,
+    "problem": 137,
+    "evolution": 262,
+    "concept": 240,
+    "internals": 159,
+    "architecture": 138,
+    "diagram": 1,
+    "analogy": 98,
+    "simpleExample": 88,
+    "enterpriseExample": 80,
+    "cloudExample": 129,
+    "devsecopsExample": 83,
+    "objectives": 61,
+    "learningOutcomes": 49,
+    "glossary": 242,
+    "security": 424,
+    "troubleshooting": 341,
+    "nextTheme": 37
+  },
+  "pratica": {
+    "quiz": 422,
+    "flashcards": 145,
+    "lab": 913,
+    "mentorQuestions": 229,
+    "exercises": 188,
+    "challenge": 174,
+    "commentedSolution": 188
+  },
+  "outros": {
+    "title+subtitle": 21,
+    "nextTheme": 37,
+    "references": 68,
+    "linksToOtherCourses": 70
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 75,
+    "alternativa_5minPorPasso": 35,
+    "plausivel": false,
+    "override": null,
+    "palavras": 913
+  },
+  "duracao": {
+    "declarada": "135-190 min",
+    "estimatedStudyTimeMinutes": 190,
+    "nucleo": 31.2,
+    "nucleoPartes": {
+      "teoria": 21.2,
+      "diagramas": 3,
+      "quiz": 7
+    },
+    "praticaExtra": 80,
+    "praticaExtraPartes": {
+      "lab": 35,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 80,
+    "recomendada": "25-35 min + 80 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

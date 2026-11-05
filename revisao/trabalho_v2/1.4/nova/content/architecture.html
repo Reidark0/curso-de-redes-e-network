@@ -1,0 +1,11 @@
+
+<section class="lesson-section lesson-section--architecture">
+  <h2>Arquitetura</h2>
+  <p>Em empresas, a árvore costuma ser organizada em três níveis:</p>
+  <ul class="flow-list">
+    <li><strong>Acesso:</strong> switches e pontos de acesso Wi-Fi onde usuários, impressoras e câmeras se conectam, em estrela.</li>
+    <li><strong>Distribuição:</strong> switches que agregam os de acesso de um andar ou prédio; aqui começam a separação em VLANs e as regras entre elas.</li>
+    <li><strong>Núcleo (core):</strong> ligações de alta capacidade entre prédios, datacenter, internet e firewalls.</li>
+  </ul>
+  <p>O cabo que liga um switch de acesso à distribuição (o <em>uplink</em>) e cada switch de distribuição são pontos únicos de falha para quem está abaixo deles. Dobrá-los aproxima a árvore de uma malha, mas custa mais switches, portas e energia: superdimensionar desperdiça orçamento; subdimensionar aumenta o risco de queda.</p>
+</section>

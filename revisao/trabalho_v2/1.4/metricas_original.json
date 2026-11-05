@@ -1,0 +1,103 @@
+{
+  "id": "1.4",
+  "versao": "original",
+  "titulo": "Topologias físicas e lógicas",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4953,
+    "teoria": 2650,
+    "praticaExtra": 1710,
+    "quiz": 265,
+    "flashcards": 128
+  },
+  "porGrupoTeoria": {
+    "introducao": 552,
+    "contexto": 450,
+    "conteudo": 374,
+    "exemplos": 605,
+    "seguranca_troubleshooting": 669
+  },
+  "porSecao": {
+    "motivation": 146,
+    "summary": 54,
+    "history": 119,
+    "problem": 145,
+    "evolution": 186,
+    "concept": 105,
+    "internals": 142,
+    "architecture": 124,
+    "diagram": 3,
+    "analogy": 107,
+    "simpleExample": 89,
+    "enterpriseExample": 91,
+    "cloudExample": 91,
+    "devsecopsExample": 87,
+    "securityExample": 140,
+    "objectives": 61,
+    "learningOutcomes": 49,
+    "glossary": 242,
+    "security": 328,
+    "troubleshooting": 341,
+    "nextTheme": 41
+  },
+  "pratica": {
+    "quiz": 265,
+    "flashcards": 128,
+    "lab": 996,
+    "mentorQuestions": 164,
+    "exercises": 188,
+    "challenge": 174,
+    "commentedSolution": 188
+  },
+  "outros": {
+    "title+subtitle": 21,
+    "nextTheme": 41,
+    "references": 68,
+    "linksToOtherCourses": 70
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 7,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 75,
+    "alternativa_5minPorPasso": 35,
+    "plausivel": false,
+    "override": null,
+    "palavras": 996
+  },
+  "duracao": {
+    "declarada": "75-105 min",
+    "estimatedStudyTimeMinutes": 105,
+    "nucleo": 29.4,
+    "nucleoPartes": {
+      "teoria": 20.4,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 80,
+    "praticaExtraPartes": {
+      "lab": 35,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 80,
+    "recomendada": "25-35 min + 80 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

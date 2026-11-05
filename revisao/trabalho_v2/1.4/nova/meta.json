@@ -1,0 +1,469 @@
+{
+  "id": "1.4",
+  "moduleId": "m01",
+  "order": 4,
+  "title": "Topologias físicas e lógicas",
+  "subtitle": "Como separar o desenho dos cabos do caminho real do tráfego para diagnosticar, proteger e evoluir redes.",
+  "duration": "15-25 min + 50 min de prática extra",
+  "estimatedStudyTimeMinutes": 25,
+  "difficulty": "iniciante-intermediário",
+  "type": "fundamental",
+  "xp": 185,
+  "tags": [
+    "redes",
+    "fundamentos",
+    "topologia física",
+    "topologia lógica",
+    "estrela",
+    "malha",
+    "barramento",
+    "anel",
+    "hub-and-spoke",
+    "spine-leaf",
+    "cloud",
+    "segurança",
+    "troubleshooting"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m01",
+      "lesson": "1.1",
+      "reason": "É necessário entender rede como sistema de comunicação antes de analisar seu desenho."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m01",
+      "lesson": "1.2",
+      "reason": "Topologias envolvem dispositivos finais, intermediários, serviços e políticas."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m01",
+      "lesson": "1.3",
+      "reason": "O tipo de rede influencia quais topologias fazem sentido em cada escala."
+    },
+    {
+      "type": "module",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.8",
+      "reason": "Pensar em camadas ajuda a separar caminho físico, caminho lógico e serviço percebido pelo usuário."
+    }
+  ],
+  "objectives": [
+    "Diferenciar topologia física (como os equipamentos estão ligados) de topologia lógica (por onde o tráfego passa e sob quais regras) e explicar por que computadores no mesmo switch podem estar em redes lógicas diferentes.",
+    "Reconhecer as topologias barramento, anel, estrela, árvore, malha, hub-and-spoke e spine-leaf, com a vantagem e a limitação de cada uma.",
+    "Apontar pontos únicos de falha numa topologia e relacionar redundância com disponibilidade e custo."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Camada 1",
+      "Camada 2",
+      "Camada 3",
+      "Camada 4",
+      "Camada 7"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede",
+      "Internet",
+      "Transporte",
+      "Aplicação"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "Wi-Fi",
+      "STP",
+      "ARP",
+      "IPv4",
+      "IPv6",
+      "TCP",
+      "UDP",
+      "DNS",
+      "HTTP",
+      "TLS",
+      "BGP",
+      "OSPF"
+    ],
+    "dependsOn": [
+      "rede como sistema",
+      "dispositivos finais",
+      "dispositivos intermediários",
+      "tipos de rede",
+      "pensamento em camadas"
+    ],
+    "enables": [
+      "meios de transmissão",
+      "cabeamento estruturado",
+      "switching",
+      "VLAN",
+      "roteamento",
+      "firewall",
+      "cloud networking",
+      "troubleshooting profissional"
+    ]
+  },
+  "lab": {
+    "id": "lab-1.4",
+    "title": "Mapa físico e lógico da sua rede",
+    "labType": "local",
+    "objective": "Descobrir por onde o tráfego do seu computador sai para a internet e desenhar sua rede nas duas visões.",
+    "tools": [
+      "Windows: Prompt de Comando ou PowerShell. Linux/macOS: terminal",
+      "Papel ou editor de texto para os desenhos"
+    ],
+    "estimatedTimeMinutes": 20,
+    "steps": [
+      {
+        "number": 1,
+        "title": "Ver sua interface e seu gateway",
+        "instruction": "Descubra por qual interface seu computador está conectado (cabo ou Wi-Fi) e qual é o gateway padrão.",
+        "command": "Windows: ipconfig /all\nLinux: ip addr && ip route\nmacOS: ifconfig && netstat -rn",
+        "expectedOutput": "A interface ativa (Ethernet ou Wi-Fi) com um endereço IP e uma linha de gateway padrão (no Linux, a linha que começa com default via).",
+        "explanation": "A interface diz como você se liga fisicamente: cabo ou rádio. O gateway é o primeiro passo do caminho lógico para fora da rede local; em casa, costuma ser o roteador Wi-Fi."
+      },
+      {
+        "number": 2,
+        "title": "Ver o caminho até a internet",
+        "instruction": "Liste os equipamentos que encaminham seus dados até um destino público.",
+        "command": "Windows: tracert 1.1.1.1\nLinux: traceroute 1.1.1.1 (ou tracepath 1.1.1.1)\nmacOS: traceroute 1.1.1.1",
+        "expectedOutput": "Uma lista numerada de saltos: o primeiro é o seu gateway; os seguintes são da operadora e da internet. Alguns podem aparecer como *.",
+        "explanation": "Este é o caminho lógico do seu tráfego, que nenhum cabo à vista mostra. Um * só indica que aquele equipamento não respondeu ao teste."
+      },
+      {
+        "number": 3,
+        "title": "Desenhar o mapa físico",
+        "instruction": "Desenhe seu computador, o roteador ou ponto de acesso, o modem ou a fibra da operadora e os outros dispositivos que você conhece. Indique o que é cabo e o que é rádio.",
+        "expectedOutput": "Um desenho simples, provavelmente uma estrela com o roteador no centro.",
+        "explanation": "O que você não viu nem mediu fica marcado como hipótese."
+      },
+      {
+        "number": 4,
+        "title": "Desenhar o mapa lógico e os pontos únicos de falha",
+        "instruction": "Em outro desenho, mostre a rede local, o gateway do passo 1 e o caminho do passo 2. Se houver rede de visitantes, desenhe-a separada. Circule cada componente cuja queda deixaria todos sem internet.",
+        "expectedOutput": "Um mapa lógico com rede local, gateway e saída para a internet, e pelo menos dois pontos únicos de falha circulados, como o roteador e o link da operadora.",
+        "explanation": "São os mesmos equipamentos vistos de outro jeito. Os pontos circulados são onde uma redundância faria diferença, e custaria dinheiro."
+      }
+    ],
+    "expectedResult": "Dois desenhos da sua rede, o físico e o lógico, com o gateway, o caminho até a internet e os pontos únicos de falha marcados."
+  },
+  "mentorQuestions": [
+    {
+      "type": "diagnóstico",
+      "question": "Metade dos usuários de um andar perdeu acesso aos servidores; a outra metade continua funcionando. Como a topologia ajuda a localizar a causa antes de mexer em qualquer equipamento?",
+      "hints": [
+        "Procure o que os afetados têm em comum e os outros não têm.",
+        "Olhe as duas visões: switch de acesso e ponto de acesso Wi-Fi no físico; VLAN, gateway e regras no lógico."
+      ],
+      "expectedIdeas": [
+        "ponto comum",
+        "switch de acesso ou uplink",
+        "VLAN",
+        "regra de firewall",
+        "diagrama atualizado"
+      ],
+      "explanation": "Comparar afetados e não afetados nos dois mapas revela o componente que só os afetados compartilham: um switch, um uplink, uma VLAN ou uma regra. Se o diagrama contradiz o que você observa, vale a observação."
+    },
+    {
+      "type": "cenário real",
+      "question": "Uma empresa tem a matriz e 5 filiais, e todas precisam acessar o sistema que fica na matriz. Compare ligar cada filial só à matriz (hub-and-spoke) com ligar todas as unidades entre si (malha completa): custo, controle e o que acontece se a matriz cair.",
+      "hints": [
+        "Conte os enlaces de cada desenho.",
+        "Uma malha ajuda se o próprio sistema, na matriz, estiver fora do ar?"
+      ],
+      "expectedIdeas": [
+        "hub-and-spoke: 5 enlaces",
+        "malha completa: 15 enlaces",
+        "hub é ponto único de falha",
+        "redundância na matriz"
+      ],
+      "explanation": "Hub-and-spoke usa 5 enlaces e centraliza o controle, mas a matriz vira ponto único de falha. A malha completa de 6 unidades usa 15 enlaces (6 × 5 ÷ 2) e dá caminhos alternativos, com mais custo e complexidade. Como o sistema está na matriz, a malha não resolve a queda dela: para isso é preciso redundância na própria matriz."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1.4.1",
+      "question": "Qual alternativa descreve melhor topologia lógica?",
+      "options": [
+        "A disposição de cabos, portas e racks que ligam os equipamentos",
+        "O caminho e as regras de comunicação percebidos pelo tráfego",
+        "A lista de equipamentos e modelos instalados na rede",
+        "A velocidade contratada do link de internet"
+      ],
+      "answer": 1,
+      "explanation": "Topologia lógica descreve grupos, caminhos e regras do tráfego. Cabos, portas e racks são a topologia física.",
+      "topic": "topologia lógica",
+      "difficulty": "iniciante",
+      "type": "conceito"
+    },
+    {
+      "id": "q1.4.2",
+      "question": "Dois computadores estão no mesmo switch, mas em VLANs diferentes. O que é correto afirmar?",
+      "options": [
+        "Eles obrigatoriamente estão na mesma rede lógica",
+        "Eles se comunicam diretamente porque compartilham o switch",
+        "Eles podem estar fisicamente próximos e logicamente separados",
+        "Só um cabo diferente poderia separá-los"
+      ],
+      "answer": 2,
+      "explanation": "A topologia física é a mesma, mas a lógica separa os dois em VLANs diferentes: eles só se falam se um roteador ou firewall deixar.",
+      "topic": "VLAN",
+      "difficulty": "iniciante",
+      "type": "cenário"
+    },
+    {
+      "id": "q1.4.3",
+      "question": "Qual topologia tende a oferecer maior resistência a falhas por ter vários caminhos, mas aumenta custo e complexidade?",
+      "options": [
+        "Malha",
+        "Barramento",
+        "Estrela",
+        "Hub-and-spoke"
+      ],
+      "answer": 0,
+      "explanation": "A malha cria caminhos alternativos, mas exige mais enlaces, portas, planejamento e custo.",
+      "topic": "malha",
+      "difficulty": "iniciante-intermediário",
+      "type": "comparação"
+    },
+    {
+      "id": "q1.4.4",
+      "question": "Por que uma rede plana, com todos os dispositivos no mesmo grupo lógico, é problemática em segurança?",
+      "options": [
+        "Porque impede a comunicação entre usuários e servidores",
+        "Porque exige um switch para cada computador",
+        "Porque precisa de mais firewalls internos",
+        "Porque um computador invadido alcança todos os outros sem passar por nenhuma barreira"
+      ],
+      "answer": 3,
+      "explanation": "Sem separação em grupos e sem controle entre eles, um computador comprometido alcança todos os outros. Separar a rede limita o alcance do invasor.",
+      "topic": "segurança",
+      "difficulty": "iniciante-intermediário",
+      "type": "segurança"
+    },
+    {
+      "id": "q1.4.5",
+      "question": "Em cloud, você não vê cabos nem switches. O que é correto afirmar sobre a topologia?",
+      "options": [
+        "Não existe topologia, porque tudo é virtual",
+        "A física fica com o provedor, mas a lógica continua existindo em redes virtuais, rotas e regras que você define",
+        "A topologia lógica fica escondida, mas a física é igual à de uma rede local",
+        "A topologia passa a ser sempre uma malha completa"
+      ],
+      "answer": 1,
+      "explanation": "O provedor esconde switches, racks e cabos, mas a topologia lógica continua em redes virtuais, rotas e regras, definidas por você.",
+      "topic": "cloud",
+      "difficulty": "iniciante",
+      "type": "cloud"
+    },
+    {
+      "id": "q1.4.7",
+      "type": "comparação",
+      "question": "Em um datacenter spine-leaf, cada leaf se conecta a todos os spines. Qual é o principal benefício e o principal custo desse desenho?",
+      "options": [
+        "Controle centralizado em um hub, ao custo de caminhos mais longos",
+        "Cabeamento mínimo, ao custo de transmissões que se atrapalham no meio compartilhado",
+        "Caminho circular previsível, ao custo de um trecho com falha interromper o círculo",
+        "Mesma distância entre servidores em leafs diferentes e crescimento simples, ao custo de mais portas e planejamento"
+      ],
+      "answer": 3,
+      "explanation": "Em spine-leaf, servidores em leafs diferentes sempre passam por leaf, spine e leaf, e a rede cresce acrescentando switches; o preço é mais portas, cabos e planejamento. As outras opções descrevem hub-and-spoke, barramento e anel.",
+      "difficulty": "iniciante-intermediário",
+      "topic": "spine-leaf"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc1.4.1",
+      "front": "O que é topologia física?",
+      "back": "É o desenho das ligações reais: cabos, enlaces de rádio, portas e equipamentos como switches, roteadores e pontos de acesso.",
+      "tags": [
+        "topologia"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.4.2",
+      "front": "O que é topologia lógica?",
+      "back": "É a forma como o tráfego realmente flui: que grupos de dispositivos existem (como VLANs), que caminhos são usados e que regras controlam a comunicação.",
+      "tags": [
+        "topologia lógica"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.4.8",
+      "front": "O que é um ponto único de falha?",
+      "back": "Um componente sem alternativa cuja queda derruba uma função inteira, como o switch central de uma estrela ou o único link de internet.",
+      "tags": [
+        "disponibilidade"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.4.4",
+      "front": "Qual o risco de topologia hub-and-spoke?",
+      "back": "O hub pode virar gargalo ou ponto único de falha se não houver redundância e capacidade adequada.",
+      "tags": [
+        "WAN",
+        "arquitetura"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc1.4.7",
+      "front": "Na árvore de acesso, distribuição e núcleo (core), onde começam a separação em VLANs e as regras entre elas?",
+      "back": "Na distribuição, que agrega os switches de acesso. O acesso conecta usuários e dispositivos; o núcleo liga prédios, datacenter, internet e firewalls.",
+      "tags": [
+        "arquitetura",
+        "árvore"
+      ],
+      "difficulty": "iniciante-intermediário"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex1.4.5",
+      "type": "diagnóstico",
+      "prompt": "Uma loja tem 8 computadores ligados por cabo a um switch. O switch se liga ao roteador, que se liga ao modem da operadora. (a) Qual é a topologia física da loja? (b) Quais são os pontos únicos de falha para o acesso à internet? (c) Proponha uma melhoria para um deles e diga quanto ela custa em equipamentos ou enlaces.",
+      "expectedAnswer": "(a) Estrela, com o switch no centro. (b) O switch, o roteador, o modem e o link da operadora. (c) Por exemplo, um segundo link de outra operadora com um roteador capaz de usar os dois: custa mais um contrato e, conforme o caso, mais um equipamento.",
+      "explanation": "Cada ponto único de falha pode ser eliminado, mas toda redundância tem preço."
+    },
+    {
+      "id": "ex1.4.6",
+      "type": "classificação",
+      "prompt": "Qual topologia da tabela do Conceito descreve cada caso? (a) 30 filiais, cada uma ligada só à matriz; (b) 4 roteadores de uma operadora, cada um ligado aos outros 3; (c) um escritório com todos os computadores ligados a um switch; (d) um datacenter onde cada switch dos servidores se liga a todos os switches centrais; (e) um prédio com um switch por andar, todos ligados a um switch central.",
+      "expectedAnswer": "(a) hub-and-spoke; (b) malha; (c) estrela; (d) spine-leaf; (e) árvore.",
+      "explanation": "Reconhecer a forma é o primeiro passo para achar o ponto único de falha e o gargalo."
+    }
+  ],
+  "challenge": {
+    "title": "Desenhe duas visões de uma rede pequena",
+    "scenario": "Uma empresa tem 20 usuários, Wi-Fi corporativo, Wi-Fi de visitantes, dois servidores internos, uma impressora, um switch, um firewall e um link de internet. Os visitantes não podem acessar os servidores nem a impressora.",
+    "tasks": [
+      "Desenhar a topologia física simplificada.",
+      "Desenhar a topologia lógica, separando usuários, visitantes e servidores.",
+      "Indicar onde fica o controle que impede visitantes de chegar aos servidores.",
+      "Apontar dois pontos únicos de falha."
+    ],
+    "expectedDeliverables": [
+      "Mapa físico",
+      "Mapa lógico",
+      "Lista de pontos únicos de falha"
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "Separe o que existe fisicamente do que precisa existir logicamente, agrupe os dispositivos por necessidade e decida onde a passagem entre os grupos é controlada.",
+    "steps": [
+      "Mapa físico: uma estrela. Computadores, impressora, servidores e pontos de acesso Wi-Fi ligados ao switch; o switch ao firewall; o firewall ao link de internet.",
+      "Mapa lógico: três redes separadas, por exemplo VLANs: usuários (com a impressora), visitantes e servidores. Cada Wi-Fi entra na rede do seu grupo.",
+      "Controle: o tráfego entre as redes passa pelo firewall, que deixa visitantes irem só para a internet.",
+      "Pontos únicos de falha: switch, firewall e link de internet."
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "Colocar todos na mesma rede e confiar na senha do Wi-Fi.",
+        "whyItIsWrong": "Senha de Wi-Fi não separa ninguém: um visitante ou um dispositivo invadido alcançaria os servidores."
+      },
+      {
+        "answer": "Desenhar uma só figura misturando cabos e regras.",
+        "whyItIsWrong": "Esconde que usuários e visitantes usam o mesmo switch, mas estão em redes lógicas diferentes."
+      }
+    ],
+    "finalAnswer": "Fisicamente, uma estrela em torno do switch, com o firewall entre o switch e a internet. Logicamente, redes separadas para usuários, visitantes e servidores, com o firewall controlando a passagem: visitantes só vão para a internet."
+  },
+  "glossary": [
+    {
+      "term": "VLAN",
+      "shortDefinition": "Rede lógica separada criada dentro de um switch: portas em VLANs diferentes não se falam diretamente.",
+      "example": "Usuários e servidores no mesmo switch, em VLANs diferentes, só se comunicam por um roteador ou firewall.",
+      "relatedLessons": [
+        "3.7"
+      ]
+    },
+    {
+      "term": "Gateway",
+      "shortDefinition": "O equipamento, geralmente um roteador, para o qual o computador envia o tráfego destinado a outras redes.",
+      "example": "Em casa, o gateway costuma ser o próprio roteador Wi-Fi.",
+      "relatedLessons": [
+        "4.5"
+      ]
+    },
+    {
+      "term": "Firewall",
+      "shortDefinition": "Equipamento ou software que permite ou bloqueia tráfego conforme regras.",
+      "example": "Um firewall entre a rede de visitantes e a de servidores bloqueia o acesso dos visitantes.",
+      "relatedLessons": [
+        "1.7",
+        "9.3"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Módulo 0",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Base de camadas, sinais, protocolos e métricas."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Aula 1.3",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Tipos de rede usados como contexto para topologias."
+    },
+    {
+      "type": "standard",
+      "title": "IEEE 802 family",
+      "organization": "IEEE",
+      "url": "",
+      "note": "Família de padrões relacionada a LANs, Ethernet e Wi-Fi."
+    },
+    {
+      "type": "official-doc",
+      "title": "Cloud networking architecture documentation",
+      "organization": "AWS, Microsoft Azure e Google Cloud",
+      "url": "",
+      "note": "Usar documentação oficial do provedor ao desenhar topologias cloud reais."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "Cloud e IaC",
+      "lesson": "Terraform e redes cloud",
+      "reason": "Topologia lógica em cloud costuma ser criada como código."
+    },
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "Kubernetes",
+      "lesson": "Services, Ingress e NetworkPolicies",
+      "reason": "Kubernetes possui topologias lógicas próprias acima da rede física."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "Zero Trust",
+      "lesson": "Acesso baseado em identidade e contexto",
+      "reason": "Zero Trust depende de entender caminhos, zonas e pontos de decisão de política."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "1.5"
+    ]
+  }
+}
