@@ -1,10 +1,9 @@
 <section class="lesson-section lesson-section--problem">
   <h2>Problema</h2>
-  <p>Se todos os dispositivos do mundo dependessem só de MAC e broadcast, a rede global seria inviável: excesso de broadcast, nenhuma hierarquia, nenhuma sumarização e pouco controle. O MAC identifica uma interface dentro de um enlace; ele não diz <em>onde</em> o host está. O IP nasceu, como parte da arquitetura da internet, para resolver isso: ele indica a posição do host numa estrutura lógica de redes e sub-redes, o que permite conectar LANs, WANs, datacenters, provedores e nuvens.</p>
+  <p>Sair da rede local é justamente o que a Camada 2 não faz. Na aula 2.4 você viu que ela entrega quadros pelo MAC dentro da rede local. Mas o MAC identifica uma interface; ele não diz <em>onde</em> ela está. Se a internet inteira dependesse de MAC e broadcast, cada equipamento teria de conhecer todos os outros, e o broadcast inundaria tudo. O IP, criado com a própria internet para interligar redes diferentes, resolve isso com um endereço hierárquico: uma parte indica a rede, a outra indica o host. Com ele, a Camada 3 cuida de três coisas:</p>
   <ul class="flow-list">
     <li><strong>Endereçamento lógico:</strong> identificar redes e hosts de forma hierárquica.</li>
-    <li><strong>Decisão de caminho:</strong> escolher para onde enviar pacotes destinados a outras redes.</li>
+    <li><strong>Decisão de caminho:</strong> escolher para onde enviar o que vai para outra rede.</li>
     <li><strong>Controle de loops:</strong> o TTL impede que um pacote circule para sempre.</li>
   </ul>
-  <p>Com a Camada 3 mal configurada, o host acessa a LAN mas não sai dela, duas sub-redes não se comunicam ou a VPN conecta mas não alcança os sistemas.</p>
 </section>

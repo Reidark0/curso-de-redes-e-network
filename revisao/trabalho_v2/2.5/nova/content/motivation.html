@@ -1,5 +1,5 @@
 <section class="lesson-section lesson-section--motivation">
   <h2>Motivação</h2>
-  <p>A Camada 2 entrega quadros dentro de uma rede local. Ela não explica como um notebook na sua LAN chega a um servidor em outra filial, a um site na internet ou a uma API em cloud. Isso é trabalho da Camada 3: endereçamento lógico (IP), decisão de caminho (rotas e gateway) e limite de vida do pacote (TTL).</p>
-  <div class="callout callout--problem"><strong>Problema real:</strong> um usuário pinga o gateway local, mas não acessa sistemas em outra filial. A placa funciona, a VLAN parece correta e o switch aprendeu o MAC. O problema provavelmente não é Camada 1 nem 2: é hora de investigar IP, máscara, gateway, tabela de rotas, firewall e caminho entre redes.</div>
+  <p>Você abre um site hospedado em outro país, numa rede que seu notebook nunca viu, e a página carrega em menos de um segundo. Seu notebook não conhece esse caminho. Ele sabe só o próprio endereço IP, a máscara e o endereço do roteador de casa, o gateway. Todo o resto é decidido salto a salto, por roteadores que ele também não conhece.</p>
+  <p>Quando uma dessas peças está errada, o sintoma engana: a impressora da sala funciona, mas nenhum site abre, nem digitando um IP como <code>8.8.8.8</code>. Quem não entende a Camada 3 reinicia o roteador, troca o DNS ou culpa o provedor sem olhar onde o pacote parou. É o mesmo raciocínio que resolve, numa empresa ou em cloud, a filial que não alcança o datacenter ou a máquina virtual que não sai para a internet.</p>
 </section>

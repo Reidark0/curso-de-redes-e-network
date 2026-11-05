@@ -1,6 +1,0 @@
-<section class="lesson-section lesson-section--cloud">
-  <h2>Exemplo em cloud</h2>
-  <p>Em cloud, a Camada 3 aparece em VPC/VNet, subnets, route tables, gateways (Internet, NAT, VPN, Transit Gateway), peering, links dedicados (ExpressRoute, Direct Connect), Network Security Groups e firewalls gerenciados.</p>
-  <p>Erro comum: criar uma VM numa subnet e assumir que ela terá internet ou acesso privado automaticamente. Ela precisa de rota para o gateway adequado e de políticas que permitam o tráfego. Outro erro: criar peering entre redes e esquecer as rotas, o DNS privado ou as regras de retorno.</p>
-  <div class="callout callout--warning"><strong>Custo:</strong> NAT Gateways, firewalls gerenciados, VPNs, links dedicados, tráfego entre zonas e flow logs têm custo recorrente. Uma rota mal desenhada pode mandar tráfego entre zonas ou regiões sem necessidade e aumentar a cobrança.</div>
-</section>

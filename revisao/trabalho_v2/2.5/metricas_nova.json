@@ -1,0 +1,91 @@
+{
+  "id": "2.5",
+  "versao": "nova",
+  "titulo": "Camada 3 — Rede: IP, roteamento, gateway e TTL",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3679,
+    "teoria": 1627,
+    "praticaExtra": 1268,
+    "quiz": 488,
+    "flashcards": 125
+  },
+  "porGrupoTeoria": {
+    "introducao": 378,
+    "contexto": 133,
+    "conteudo": 958,
+    "exemplos": 158,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 138,
+    "summary": 87,
+    "problem": 133,
+    "concept": 323,
+    "internals": 634,
+    "diagram": 1,
+    "analogy": 71,
+    "simpleExample": 87,
+    "objectives": 80,
+    "learningOutcomes": 0,
+    "glossary": 73,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 34
+  },
+  "pratica": {
+    "quiz": 488,
+    "flashcards": 125,
+    "lab": 438,
+    "mentorQuestions": 257,
+    "exercises": 206,
+    "challenge": 118,
+    "commentedSolution": 249
+  },
+  "outros": {
+    "title+subtitle": 24,
+    "nextTheme": 34,
+    "references": 66,
+    "linksToOtherCourses": 47
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 4,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 3,
+    "exemplosPorAmbiente": []
+  },
+  "lab": {
+    "estimatedTimeMinutes": 20,
+    "alternativa_5minPorPasso": 20,
+    "plausivel": true,
+    "override": null,
+    "palavras": 438
+  },
+  "duracao": {
+    "declarada": "20-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 21.5,
+    "nucleoPartes": {
+      "teoria": 12.5,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 51,
+    "praticaExtraPartes": {
+      "lab": 20,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "20-25 min",
+    "praticaExtraArredondada": 50,
+    "recomendada": "20-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

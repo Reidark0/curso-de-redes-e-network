@@ -4,8 +4,8 @@
   "order": 5,
   "title": "Camada 3 — Rede: IP, roteamento, gateway e TTL",
   "subtitle": "A camada que leva pacotes entre redes com endereços IP, tabelas de rotas, gateways e TTL.",
-  "duration": "90-130 min",
-  "estimatedStudyTimeMinutes": 130,
+  "duration": "20-25 min + 50 min de prática extra",
+  "estimatedStudyTimeMinutes": 25,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 205,
@@ -52,19 +52,9 @@
     }
   ],
   "objectives": [
-    "Explicar o papel da Camada 3 no Modelo OSI.",
-    "Diferenciar IP, máscara, rede local, gateway, rota e TTL.",
-    "Descrever como um host decide se envia localmente ou para o gateway.",
-    "Interpretar tabela de rotas e rota default em nível introdutório.",
-    "Relacionar Camada 3 com cloud networking, DevSecOps, segurança e troubleshooting.",
-    "Coletar evidências básicas com Windows, Linux e Cisco IOS."
-  ],
-  "learningOutcomes": [
-    "Dado um IP e uma máscara, o aluno identifica se o destino está na mesma rede ou exige gateway.",
-    "Dado um sintoma de alcance remoto, o aluno verifica gateway, rota e caminho antes de culpar DNS ou aplicação.",
-    "Dado um traceroute, o aluno entende que TTL revela saltos intermediários de forma aproximada.",
-    "Dado um cenário cloud, o aluno reconhece que subnet, route table e gateway são peças de Camada 3.",
-    "Dado um risco de movimento lateral, o aluno explica como rotas e segmentação influenciam o impacto."
+    "Explicar o papel da Camada 3: levar pacotes entre redes diferentes com endereços IP, decidindo salto a salto em gateways e roteadores.",
+    "Usar IP e máscara para decidir se um destino é local ou vai ao gateway, e ler uma tabela de rotas (ip route, route print) escolhendo a rota mais específica.",
+    "Explicar o que o TTL evita, como o traceroute o usa e por que os MACs mudam a cada enlace enquanto os IPs de origem e destino ficam."
   ],
   "networkContext": {
     "osiLayers": [
@@ -102,291 +92,53 @@
       "UDP"
     ]
   },
-  "troubleshooting": {
-    "symptoms": [
-      "Host acessa rede local, mas não acessa internet.",
-      "Ping no gateway funciona, mas rede remota não responde.",
-      "VPN conecta, mas sistemas internos não abrem.",
-      "Traceroute para em determinado salto.",
-      "Cloud VM não acessa internet ou rede pareada."
-    ],
-    "diagnosticQuestions": [
-      "IP e máscara estão corretos?",
-      "Gateway padrão existe e responde?",
-      "A rota para o destino existe (e a VPN anuncia a rede remota)?",
-      "Há rota de retorno?",
-      "Firewall, ACL, SG ou NSG permite o fluxo?",
-      "O caminho exige NAT?"
-    ],
-    "commands": [
-      {
-        "platform": "Windows",
-        "command": "ipconfig /all && route print",
-        "purpose": "Ver IP, máscara, gateway, DNS e tabela de rotas.",
-        "expectedObservation": "Interface com IPv4, máscara e gateway; rota default 0.0.0.0/0 apontando para o gateway.",
-        "interpretation": "Sem gateway ou rota default, o host pode ficar preso à rede local."
-      },
-      {
-        "platform": "Windows",
-        "command": "tracert 8.8.8.8",
-        "purpose": "Observar saltos até um destino externo.",
-        "expectedObservation": "Primeiro salto geralmente é o gateway local.",
-        "interpretation": "Falha no primeiro salto indica problema local/gateway; falha depois pode indicar rota, firewall ou provedor."
-      },
-      {
-        "platform": "Linux",
-        "command": "ip addr && ip route",
-        "purpose": "Ver endereços, máscaras e rotas configuradas.",
-        "expectedObservation": "Rota default via gateway apropriado.",
-        "interpretation": "A ausência de default via impede saída para destinos fora das rotas conhecidas."
-      },
-      {
-        "platform": "Linux",
-        "command": "traceroute 8.8.8.8 || tracepath 8.8.8.8",
-        "purpose": "Observar caminho e possíveis limites de MTU/rota.",
-        "expectedObservation": "Lista de saltos ou ponto de parada.",
-        "interpretation": "A saída é evidência parcial e pode ser filtrada por dispositivos."
-      },
-      {
-        "platform": "Cisco IOS",
-        "command": "show ip interface brief && show ip route",
-        "purpose": "Ver interfaces, IPs, estado e tabela de rotas.",
-        "expectedObservation": "Interfaces up/up e rotas conectadas, estáticas ou dinâmicas.",
-        "interpretation": "Interface down, rota ausente ou rota errada afetam alcance entre redes."
-      }
-    ],
-    "decisionTree": [
-      {
-        "if": "Host não pinga o gateway",
-        "then": "Revisar Camada 1, Camada 2, IP, máscara e VLAN antes de culpar roteamento externo."
-      },
-      {
-        "if": "Gateway responde, mas destino externo não",
-        "then": "Verificar rota default, firewall, NAT e caminho upstream."
-      },
-      {
-        "if": "Destino recebe, mas resposta não volta",
-        "then": "Verificar rota de retorno, NAT, firewall stateful e políticas no sentido inverso."
-      },
-      {
-        "if": "Traceroute mostra loop ou TTL expirado",
-        "then": "Investigar rotas conflitantes, redistribuição incorreta ou rota default circular."
-      }
-    ]
-  },
-  "security": {
-    "goodPractices": [
-      "Documentar sub-redes, gateways, rotas e responsáveis.",
-      "Segmentar por função e criticidade, com firewall/ACL entre redes sensíveis.",
-      "Revisar route tables em mudanças de cloud e VPN.",
-      "Sanitizar traceroutes e tabelas de rota antes de compartilhar."
-    ],
-    "badPractices": [
-      "Criar rotas amplas sem justificativa.",
-      "Permitir any-any entre segmentos internos.",
-      "Assumir que a rede interna é confiável.",
-      "Ignorar a rota de retorno em projetos híbridos."
-    ],
-    "commonErrors": [
-      "Confundir conectividade com autorização.",
-      "Achar que NAT é firewall.",
-      "Diagnosticar DNS antes de validar gateway e rota."
-    ],
-    "vulnerabilities": [
-      {
-        "name": "Movimento lateral por alcance excessivo",
-        "description": "Um host comprometido é usado para descobrir quais redes são alcançáveis. Numa rede plana ou com rotas permissivas (ex.: subnet sensível alcançável a partir da rede de usuários), o atacante chega a muitos segmentos.",
-        "defensiveExplanation": "O risco não é só a existência da rota, mas a ausência de política e de monitoramento entre as redes.",
-        "mitigation": "Segmentação, firewall interno, ACLs, menor privilégio, flow logs e revisão de rotas com gestão de mudanças."
-      },
-      {
-        "name": "Exposição pública por rota indevida",
-        "description": "Uma subnet ou instância pode ganhar entrada ou saída pública por uma rota para o gateway de internet sem os controles adequados.",
-        "defensiveExplanation": "Em cloud, route tables e security groups precisam ser avaliados em conjunto: a rota abre o caminho, a política decide o que passa.",
-        "mitigation": "Revisão de IaC, policy as code, configuração privada por padrão e alertas de exposição."
-      },
-      {
-        "name": "Revelação de topologia por TTL e traceroute",
-        "description": "Cada roteador que zera o TTL responde com ICMP Time Exceeded; por isso um traceroute lista saltos e endereços internos.",
-        "defensiveExplanation": "Evidências de diagnóstico sem sanitização, ou respostas ICMP liberadas para fora, revelam parte da topologia.",
-        "mitigation": "Sanitizar evidências antes de compartilhar e controlar a exposição externa de respostas ICMP."
-      }
-    ],
-    "monitoring": [
-      "Flow logs entre sub-redes.",
-      "Alterações de route table.",
-      "Conexões incomuns entre segmentos.",
-      "Logs de firewall e VPN."
-    ],
-    "hardening": [
-      "Aplicar menor privilégio de rede: remover rotas desnecessárias e bloquear tráfego lateral não justificado.",
-      "Usar bastion, private endpoints e ZTNA quando adequado.",
-      "Controlar quem pode alterar route tables e gateways."
-    ],
-    "detectionIdeas": [
-      "Comparar fluxos reais com a matriz de comunicação esperada.",
-      "Alertar sobre novas rotas para 0.0.0.0/0 em subnets sensíveis.",
-      "Detectar varreduras e traceroutes incomuns entre redes internas.",
-      "Monitorar ICMP TTL exceeded repetido, indício de loop de roteamento."
-    ]
-  },
   "lab": {
     "id": "lab-2.5",
     "title": "Coletando evidências de Camada 3: IP, gateway, rotas e TTL",
     "labType": "local",
-    "objective": "Identificar configuração IP, gateway, tabela de rotas e caminho básico até um destino externo ou interno, interpretando evidências sem alterar a rede.",
-    "scenario": "Você está em um notebook de trabalho ou laboratório e precisa montar um relatório defensivo de Camada 3 para diferenciar problema local, gateway, rota e caminho.",
-    "topology": "Host do aluno -> switch/AP -> gateway local -> roteador/firewall/provedor -> destino de teste.",
-    "architecture": "Rede local com host configurado por DHCP ou IP estático, gateway padrão e acesso a pelo menos um destino de teste permitido.",
-    "prerequisites": [
-      "Ter concluído as aulas 2.1 a 2.4.",
-      "Ter permissão para executar comandos locais de diagnóstico."
-    ],
+    "objective": "Encontrar o IP, a máscara e o gateway do seu computador, ler a tabela de rotas e ver, com o traceroute, os saltos até um destino externo.",
     "tools": [
-      "Windows PowerShell ou Prompt",
-      "Terminal Linux",
-      "Opcional: Cisco Packet Tracer",
-      "Editor de texto para relatório"
+      "Windows: Prompt de Comando ou PowerShell",
+      "Linux: terminal (traceroute ou tracepath)"
     ],
-    "estimatedTimeMinutes": 30,
-    "cost": "zero",
-    "safetyNotes": [
-      "Use apenas destinos próprios, públicos de teste ou autorizados.",
-      "Não execute scan de portas nem descoberta agressiva.",
-      "Não compartilhe IPs públicos, nomes internos ou rotas privadas sem sanitizar.",
-      "Em ambiente corporativo, siga a política interna de coleta de evidências."
-    ],
+    "estimatedTimeMinutes": 20,
     "steps": [
       {
         "number": 1,
         "title": "Coletar IP, máscara e gateway",
-        "instruction": "Na interface ativa, identifique IPv4, máscara, gateway padrão e servidores DNS.",
-        "command": "ipconfig /all   # Windows\nip addr         # Linux",
-        "expectedOutput": "Interface ativa com IPv4, máscara (ou prefixo, como /24), gateway padrão e DNS.",
-        "explanation": "Esses dados mostram se o host tem a configuração mínima de Camada 3 para sair da rede local."
+        "instruction": "Na interface ativa, identifique o IPv4, a máscara (ou o prefixo) e o gateway padrão. Aplique a máscara ao seu IP e escreva qual é a sua rede local.",
+        "command": "Windows: ipconfig /all\nLinux: ip addr",
+        "expectedOutput": "A interface ativa com IPv4 e máscara (no Linux, um prefixo como 192.168.1.50/24). O Windows também mostra o gateway padrão; no Linux, ele aparece no passo 2.",
+        "explanation": "IP, máscara e gateway são as três peças que o host usa para decidir entre entrega local e gateway. Com 192.168.1.50/24, por exemplo, a rede local é 192.168.1.0/24."
       },
       {
         "number": 2,
         "title": "Ler a tabela de rotas",
-        "instruction": "Liste a tabela de rotas e localize a rota default e a rota da rede conectada.",
-        "command": "route print  # Windows\nip route     # Linux",
-        "analysisTask": "Para dois destinos, um IP da sua própria rede e 8.8.8.8, indique qual rota da tabela será usada e qual é o próximo salto.",
-        "expectedOutput": "Rota default (0.0.0.0/0 ou default via <gateway>) e rota da rede conectada. O IP local usa a rede conectada; 8.8.8.8 usa a default.",
-        "explanation": "A tabela determina o próximo salto de cada destino; quando várias rotas combinam, vence a mais específica."
+        "instruction": "Liste a tabela de rotas e localize a rota default e a rota da rede conectada. Depois, para dois destinos, um IP da sua própria rede e 8.8.8.8, diga qual rota vence e qual é o próximo salto.",
+        "command": "Windows: route print\nLinux: ip route",
+        "expectedOutput": "Uma rota default (default via <gateway> no Linux; destino 0.0.0.0 com máscara 0.0.0.0 no Windows) e a rota da rede conectada. O IP da sua rede usa a rede conectada; 8.8.8.8 só combina com a default e vai ao gateway.",
+        "explanation": "Quando várias rotas combinam com o destino, vence a mais específica (maior prefixo). A default só é usada quando nenhuma outra combina."
       },
       {
         "number": 3,
-        "title": "Testar alcance do gateway",
-        "instruction": "Pingue o gateway identificado, quando ICMP for permitido.",
+        "title": "Testar o gateway",
+        "instruction": "Pingue o gateway encontrado no passo 1.",
         "command": "ping <IP_DO_GATEWAY>",
-        "expectedOutput": "Respostas com baixa latência, ou indicação de bloqueio se ICMP for filtrado.",
-        "explanation": "Se o gateway não responde, investigue Camada 1/2, IP, máscara, VLAN ou política local. Se responde, isso ainda não prova que o caminho até redes remotas existe."
+        "expectedOutput": "Respostas em poucos milissegundos, ou nenhuma resposta se o gateway filtrar ICMP.",
+        "explanation": "Se o gateway responde, a saída da rede local está ok, mas isso não prova que existe caminho até redes remotas. Se não responde e o ICMP não é filtrado, o problema está antes dele: cabo, Wi-Fi, IP, máscara ou VLAN."
       },
       {
         "number": 4,
-        "title": "Observar o caminho pelo TTL",
-        "instruction": "Execute traceroute/tracert para um destino permitido.",
-        "command": "tracert 8.8.8.8        # Windows\ntraceroute 8.8.8.8     # Linux, se instalado\ntracepath 8.8.8.8      # Linux, alternativa comum",
-        "expectedOutput": "Lista de saltos, começando normalmente pelo gateway, ou pontos de filtragem (asteriscos).",
-        "explanation": "Cada salto normalmente é um roteador que zerou o TTL da sonda e devolveu ICMP Time Exceeded."
-      },
-      {
-        "number": 5,
-        "title": "Registrar a interpretação",
-        "instruction": "Monte uma tabela com as colunas evidência, camada, interpretação e hipótese descartada.",
-        "analysisTask": "Registre uma linha para cada evidência dos passos 1 a 4. Exemplo: gateway responde ao ping → Camada 3 local ok → descartada a hipótese de IP, máscara ou gateway errados.",
-        "expectedOutput": "Relatório com IP, gateway, rota default, teste do gateway e caminho observado.",
-        "explanation": "O objetivo é transformar comandos em raciocínio técnico, não apenas colar saídas."
+        "title": "Observar os saltos pelo TTL",
+        "instruction": "Rode o traceroute até 8.8.8.8 e compare o primeiro salto com o gateway do passo 1.",
+        "command": "Windows: tracert 8.8.8.8\nLinux: traceroute 8.8.8.8 (ou tracepath 8.8.8.8)",
+        "expectedOutput": "Uma lista numerada de saltos; o primeiro é o seu gateway. Alguns saltos podem aparecer como asteriscos.",
+        "explanation": "Cada salto é um roteador em que o TTL da sonda chegou a zero e que devolveu um ICMP Time Exceeded. O primeiro é o gateway porque é para ele que a rota default manda tudo o que não é local."
       }
     ],
-    "expectedResult": "Ao final, o aluno terá um relatório sanitizado de Camada 3 com IP, máscara, gateway, rota default, teste de caminho e hipóteses de diagnóstico.",
-    "validation": [
-      {
-        "check": "Gateway identificado",
-        "command": "ipconfig /all ou ip route",
-        "expected": "Gateway padrão/default via presente.",
-        "ifFails": "Verificar DHCP, IP estático, interface ativa ou política da rede."
-      },
-      {
-        "check": "Rota default presente",
-        "command": "route print ou ip route",
-        "expected": "0.0.0.0/0 ou default via gateway.",
-        "ifFails": "Sem rota default, o host pode não alcançar destinos externos."
-      },
-      {
-        "check": "Caminho observado",
-        "command": "tracert/traceroute/tracepath",
-        "expected": "Primeiro salto ou indicação de filtragem.",
-        "ifFails": "ICMP pode estar bloqueado; usar evidência alternativa e registrar limite."
-      }
-    ],
-    "troubleshooting": [
-      {
-        "symptom": "Traceroute para no primeiro salto",
-        "probableCause": "Gateway sem rota, firewall, NAT ausente ou política upstream.",
-        "howToConfirm": "Testar outros destinos e verificar rota default/firewall.",
-        "fix": "Corrigir rota, NAT ou política conforme autorização."
-      },
-      {
-        "symptom": "Traceroute mostra asteriscos",
-        "probableCause": "Dispositivo não responde ICMP/UDP TTL exceeded ou filtra diagnóstico.",
-        "howToConfirm": "Testar com outro protocolo ou validar logs.",
-        "fix": "Registrar limitação; não assumir indisponibilidade apenas por asteriscos."
-      }
-    ],
-    "improvements": [
-      "Repetir o teste em rede cabeada e Wi-Fi para comparar caminhos.",
-      "Comparar com a route table de uma cloud ou de um laboratório Packet Tracer."
-    ],
-    "evidenceToCollect": [
-      "IP e máscara sanitizados.",
-      "Gateway padrão.",
-      "Rota default.",
-      "Resultado do teste ao gateway.",
-      "Traceroute/tracert sanitizado.",
-      "Interpretação em tabela."
-    ],
-    "questions": [
-      "Qual evidência mostra que o host tem rota para fora da rede local?",
-      "Por que o primeiro salto costuma ser o gateway?",
-      "Por que traceroute pode estar incompleto mesmo quando a aplicação funciona?"
-    ],
-    "challenge": "Explique por que uma VM em cloud com IP privado pode não acessar a internet mesmo tendo DNS configurado.",
-    "solution": "DNS apenas traduz nomes. Para sair para a internet, a VM precisa de rota adequada para NAT Gateway, firewall ou Internet Gateway, além de políticas permitindo o tráfego e rota de retorno. Em subnets privadas, a ausência de NAT/rota ou bloqueio por security group/NSG impede o acesso."
+    "expectedResult": "Você identificou a sua rede local, viu a rota default apontando para o gateway, escolheu a rota que vence para dois destinos e viu o gateway como primeiro salto do traceroute."
   },
   "mentorQuestions": [
-    {
-      "type": "reflexão",
-      "question": "Por que a Camada 3 precisou existir se a Camada 2 já entrega quadros?",
-      "hints": [
-        "Pense em redes diferentes.",
-        "Pense em broadcast e escala."
-      ],
-      "expectedIdeas": [
-        "endereçamento lógico",
-        "roteamento",
-        "gateway",
-        "escala",
-        "internet"
-      ],
-      "explanation": "Camada 2 resolve entrega local; Camada 3 permite atravessar redes diferentes de forma hierárquica."
-    },
-    {
-      "type": "diagnóstico",
-      "question": "Um host pinga o gateway, mas não acessa uma rede remota. O que você verificaria em seguida?",
-      "hints": [
-        "Pense em rota default.",
-        "Pense em rota de retorno e firewall."
-      ],
-      "expectedIdeas": [
-        "route print/ip route",
-        "traceroute",
-        "firewall",
-        "NAT",
-        "rota de retorno"
-      ],
-      "explanation": "O gateway local responder não prova que existe caminho completo até a rede remota."
-    },
     {
       "type": "diagnóstico",
       "question": "Um host 192.168.10.50 foi configurado por engano com máscara /16 em vez de /24. Ele acessa a internet, mas não alcança o servidor 192.168.20.10, que fica em outra sub-rede /24 atrás do roteador. Por quê?",
@@ -396,12 +148,25 @@
       ],
       "expectedIdeas": [
         "com /16, 192.168.20.10 parece estar na rede local",
-        "o host tenta ARP direto pelo servidor em vez de usar o gateway",
+        "o host tenta entregar direto via ARP, em vez de usar o gateway",
         "ninguém responde ao ARP na LAN",
-        "8.8.8.8 continua fora da rede e vai ao gateway",
-        "corrigir a máscara"
+        "8.8.8.8 continua fora da /16 e vai ao gateway"
       ],
       "explanation": "Com /16, a rede local vira 192.168.0.0/16 e 192.168.20.10 parece fazer parte dela. O host tenta entregar localmente via ARP, mas o servidor está em outro segmento e não responde. Destinos como 8.8.8.8 continuam fora da /16 e seguem para o gateway, por isso a internet funciona."
+    },
+    {
+      "type": "diagnóstico",
+      "question": "Você roda tracert até um site. O salto 1 é 192.168.1.1, o salto 3 aparece como * * * e os saltos 4 a 9 respondem normalmente, até o destino. O roteador do salto 3 está com defeito? O que esse resultado mostra?",
+      "hints": [
+        "Os pacotes passaram pelo salto 3 para chegar aos saltos seguintes?",
+        "Lembre o que o asterisco significa no traceroute."
+      ],
+      "expectedIdeas": [
+        "os saltos seguintes responderam, então o salto 3 encaminhou o tráfego",
+        "ele só não devolveu o ICMP Time Exceeded (filtro)",
+        "traceroute é evidência parcial"
+      ],
+      "explanation": "As sondas passaram pelo salto 3 para chegar aos seguintes: ele encaminha pacotes, só não responde quando o TTL zera nele, provavelmente por filtrar ICMP. Falha seria a lista parar ali e nunca chegar ao destino."
     }
   ],
   "quiz": [
@@ -484,7 +249,7 @@
       "id": "q2.5.6",
       "question": "O que o TTL ajuda a evitar?",
       "options": [
-        "Fragmentação de pacotes maiores que o MTU.",
+        "Que dois hosts usem o mesmo endereço IP na rede local.",
         "Perda de pacotes por congestionamento no enlace.",
         "Pacotes circulando indefinidamente em loops de roteamento.",
         "Entrega de pacotes ao MAC de destino errado."
@@ -558,173 +323,76 @@
   ],
   "exercises": [
     {
-      "id": "ex2.5.5",
-      "type": "conceitual",
-      "prompt": "Seu notebook 192.168.1.50/24, com gateway 192.168.1.1, acessa 8.8.8.8. No frame que sai do notebook, qual é o MAC de destino e qual é o IP de destino? O que muda depois que o roteador encaminha o pacote?",
-      "expectedAnswer": "MAC de destino: o MAC do gateway 192.168.1.1, descoberto via ARP. IP de destino: 8.8.8.8. Depois do roteador, o frame é novo (MACs do próximo enlace), o IP de destino continua 8.8.8.8 e o TTL foi decrementado em 1.",
-      "explanation": "O frame de Camada 2 é refeito a cada enlace; o IP de destino fica de ponta a ponta. (Num roteador doméstico com NAT o IP de origem muda, por isso a pergunta trata só do destino.)"
-    },
-    {
-      "id": "ex2.5.2",
-      "type": "diagnóstico",
-      "prompt": "Um host tem IP 192.168.10.50/24 e quer acessar 192.168.20.10. O destino é local? O que o host deve usar?",
-      "expectedAnswer": "Não é local, pois está em outra rede /24. O host deve enviar ao gateway padrão.",
-      "explanation": "192.168.10.0/24 e 192.168.20.0/24 são redes diferentes."
-    },
-    {
       "id": "ex2.5.6",
       "type": "comando/output",
       "prompt": "Um host tem esta tabela: default via 10.1.1.1; 172.16.0.0/16 via 10.1.1.254; 10.1.1.0/24 conectada. Para 172.16.5.9, 10.1.1.77 e 1.1.1.1, qual rota vence e qual é o próximo salto?",
       "expectedAnswer": "172.16.5.9: rota 172.16.0.0/16, próximo salto 10.1.1.254. 10.1.1.77: rede conectada 10.1.1.0/24, entrega local via ARP. 1.1.1.1: só a default combina, próximo salto 10.1.1.1.",
       "explanation": "Vence a rota mais específica que combina com o destino; a default só é usada quando nenhuma outra combina."
+    },
+    {
+      "id": "ex2.5.7",
+      "type": "conceitual",
+      "prompt": "Seu notebook 192.168.50.20/24, com gateway 192.168.50.1, acessa o servidor 203.0.113.20. O pacote sai com TTL 64 e passa por três roteadores (o gateway e mais dois) até o servidor. (a) No quadro que sai do notebook, qual é o MAC de destino e qual é o IP de destino? (b) Com que TTL o pacote chega ao servidor? E se, por um erro de rotas, ele ficasse girando entre dois roteadores?",
+      "expectedAnswer": "(a) MAC de destino: o do gateway 192.168.50.1, descoberto via ARP; IP de destino: 203.0.113.20. (b) 64 - 3 = 61. Num loop, cada passagem tira 1 do TTL; quando ele chega a zero, o roteador descarta o pacote e pode devolver um ICMP Time Exceeded.",
+      "explanation": "O quadro é refeito a cada enlace, o IP de destino fica de ponta a ponta e cada roteador tira 1 do TTL."
     }
   ],
   "challenge": {
     "title": "Filial acessa internet, mas não acessa sistema no datacenter",
-    "scenario": "Uma filial usa a rede 10.20.10.0/24. Os usuários acessam a internet normalmente, mas não conseguem acessar o sistema 10.50.30.20 no datacenter. O gateway local responde. O DNS resolve o nome do sistema para o IP correto.",
+    "scenario": "Uma filial usa a rede 10.20.10.0/24 e se liga ao datacenter, que usa 10.50.30.0/24, por um link entre os roteadores das duas pontas. Os usuários acessam a internet normalmente, mas não conseguem acessar o sistema 10.50.30.20 no datacenter. O gateway local responde ao ping e o DNS resolve o nome do sistema para o IP correto.",
     "tasks": [
-      "Listar hipóteses de Camada 3 em ordem lógica.",
-      "Indicar comandos ou evidências para validar cada hipótese.",
-      "Separar problema de rota, firewall, NAT e rota de retorno.",
-      "Propor mitigação operacional e melhoria de documentação."
-    ],
-    "constraints": [
-      "Não executar varredura de portas.",
-      "Não alterar configuração de roteadores ou firewalls.",
-      "Sanitizar evidências antes de compartilhar.",
-      "Trabalhar apenas com comandos de diagnóstico autorizados."
+      "Listar hipóteses de Camada 3 em ordem lógica, do host até o datacenter e de volta.",
+      "Indicar o comando ou a evidência que confirma ou descarta cada hipótese.",
+      "Explicar para onde vai o pacote se o gateway da filial não tiver rota para 10.50.30.0/24."
     ],
     "expectedDeliverables": [
-      "Tabela de hipóteses e evidências.",
-      "Diagrama lógico simples do caminho.",
-      "Lista de comandos.",
-      "Resumo executivo para equipe de rede/segurança."
-    ],
-    "gradingRubric": [
-      {
-        "criterion": "Ordem de diagnóstico",
-        "points": 30,
-        "description": "Verifica IP local, gateway, rota, caminho, firewall e retorno sem pular etapas."
-      },
-      {
-        "criterion": "Evidências corretas",
-        "points": 30,
-        "description": "Usa route print/ip route, traceroute e logs adequados."
-      },
-      {
-        "criterion": "Segurança e ética",
-        "points": 20,
-        "description": "Evita scans e sanitiza informações."
-      },
-      {
-        "criterion": "Clareza do relatório",
-        "points": 20,
-        "description": "Comunica achados e próximos passos de forma objetiva."
-      }
+      "Uma tabela curta com hipótese, evidência e resultado esperado."
     ]
   },
   "commentedSolution": {
-    "reasoning": "Como internet funciona e DNS resolve, a falha provavelmente está no caminho específico para 10.50.30.20, em política ou em retorno. O diagnóstico deve validar primeiro se a filial possui rota para 10.50.30.0/24 ou rota via VPN/MPLS, depois onde o caminho para, e então se firewall/NAT/retorno bloqueiam.",
+    "reasoning": "Internet funcionando e DNS resolvendo descartam IP, máscara e gateway do host e a resolução de nomes. A falha está no caminho específico até 10.50.30.20 ou na volta. Siga o pacote salto a salto.",
     "steps": [
-      "Confirmar IP, máscara e gateway do host.",
-      "Verificar tabela de rotas local.",
-      "Executar traceroute/tracert para 10.50.30.20 se autorizado.",
-      "Validar se gateway/firewall da filial conhece a rota para o datacenter.",
-      "Validar rota de retorno do datacenter para 10.20.10.0/24.",
-      "Checar políticas de firewall/ACL entre filial e datacenter.",
-      "Registrar evidências sanitizadas e encaminhar para equipe responsável."
+      "Host: route print ou ip route. 10.50.30.20 não está na rede local 10.20.10.0/24, então o pacote vai ao gateway.",
+      "Caminho: tracert 10.50.30.20. O primeiro salto deve ser o gateway da filial; veja onde a lista para.",
+      "Rota de ida: o gateway da filial precisa de uma rota para 10.50.30.0/24 (ou uma rede maior que a contenha) apontando para o link do datacenter. Sem ela, o destino só combina com a default e o pacote vai para o provedor de internet: o traceroute mostra saltos do provedor.",
+      "Rota de volta: o roteador do datacenter precisa de uma rota para 10.20.10.0/24. Sem ela, o pedido chega, mas a resposta se perde.",
+      "Política: com rota nos dois sentidos, verifique com a equipe responsável se um firewall entre as redes bloqueia o fluxo."
     ],
     "commonWrongAnswers": [
       {
-        "answer": "Trocar DNS imediatamente.",
-        "whyItIsWrong": "O enunciado diz que DNS resolve corretamente; o problema está depois da tradução de nome."
+        "answer": "Trocar o DNS.",
+        "whyItIsWrong": "O enunciado diz que o DNS resolve corretamente; o problema está depois da tradução do nome."
       },
       {
-        "answer": "Concluir que o servidor está fora sem validar rota.",
-        "whyItIsWrong": "A falha pode estar em caminho, firewall ou retorno."
-      },
-      {
-        "answer": "Fazer scan agressivo no datacenter.",
-        "whyItIsWrong": "Além de não ser necessário, pode violar política e gerar alerta de segurança."
+        "answer": "Concluir que o servidor está fora do ar sem validar as rotas.",
+        "whyItIsWrong": "A falha pode estar na rota de ida, na de volta ou num firewall no caminho."
       }
     ],
-    "finalAnswer": "A hipótese principal é falha de rota/política entre a rede 10.20.10.0/24 e o datacenter 10.50.30.0/24, incluindo rota ausente, firewall bloqueando ou rota de retorno inexistente. A solução é coletar evidências de Camada 3, validar caminho e acionar a equipe responsável com relatório claro."
+    "finalAnswer": "Hipótese principal: falta rota entre 10.20.10.0/24 e 10.50.30.0/24, na ida (o pacote segue a default para a internet) ou na volta; depois, um firewall no caminho. Confirme com ip route/route print, tracert e as tabelas de rotas dos roteadores."
   },
   "glossary": [
     {
-      "term": "Camada 3",
-      "shortDefinition": "Camada de rede responsável por endereçamento lógico e encaminhamento entre redes.",
-      "example": "IPv4 encaminhado de uma LAN para a internet via gateway.",
-      "relatedTerms": [
-        "IP",
-        "roteamento",
-        "gateway"
-      ],
-      "relatedLessons": [
-        "2.1",
-        "2.2",
-        "2.5"
-      ]
-    },
-    {
-      "term": "Gateway padrão",
-      "shortDefinition": "Próximo salto usado para destinos fora da rede local.",
-      "example": "192.168.1.1 em uma rede doméstica.",
-      "relatedTerms": [
-        "rota default",
-        "roteador"
-      ],
+      "term": "ICMP",
+      "shortDefinition": "Protocolo de mensagens de controle e de erro do IP. O ping e o Time Exceeded que o traceroute recebe são mensagens ICMP.",
       "relatedLessons": [
         "1.9",
-        "2.5"
+        "4.8"
       ]
     },
     {
-      "term": "Tabela de rotas",
-      "shortDefinition": "Conjunto de destinos e próximos saltos usados para encaminhamento.",
-      "example": "default via 192.168.1.1 no Linux.",
-      "relatedTerms": [
-        "route print",
-        "ip route"
-      ],
+      "term": "ARP",
+      "shortDefinition": "Protocolo que descobre o MAC correspondente a um IP da rede local, como o MAC do gateway.",
       "relatedLessons": [
-        "2.5"
+        "2.4",
+        "3.5"
       ]
     },
     {
-      "term": "TTL",
-      "shortDefinition": "Campo que limita a vida de um pacote IP.",
-      "example": "Traceroute explora TTL para descobrir saltos.",
-      "relatedTerms": [
-        "ICMP",
-        "traceroute"
-      ],
+      "term": "NAT",
+      "shortDefinition": "Tradução de endereços: o roteador troca o IP de origem dos computadores da rede interna pelo seu próprio IP ao enviar para a internet, e desfaz a troca na resposta.",
       "relatedLessons": [
-        "2.5"
-      ]
-    },
-    {
-      "term": "Rota default",
-      "shortDefinition": "Rota usada quando nenhuma rota mais específica combina com o destino.",
-      "example": "0.0.0.0/0 via 192.168.1.1.",
-      "relatedTerms": [
-        "gateway",
-        "default via"
-      ],
-      "relatedLessons": [
-        "2.5"
-      ]
-    },
-    {
-      "term": "Próximo salto",
-      "shortDefinition": "Roteador ou gateway para onde o pacote será enviado em seguida.",
-      "example": "Um firewall pode ser o próximo salto para redes remotas.",
-      "relatedTerms": [
-        "roteamento",
-        "gateway"
-      ],
-      "relatedLessons": [
-        "2.5"
+        "6.7",
+        "7.8"
       ]
     }
   ],
@@ -775,11 +443,7 @@
   "progressRules": {
     "completeWhen": {
       "read": true,
-      "quizScoreAtLeast": 70,
-      "oneOf": [
-        "labMarkedDone",
-        "practicalExerciseDone"
-      ]
+      "quizScoreAtLeast": 70
     },
     "accessPolicy": {
       "freeAccess": true,
