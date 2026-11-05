@@ -1,0 +1,91 @@
+{
+  "id": "1.5",
+  "versao": "v1",
+  "titulo": "Meios de transmissão: cobre, fibra e rádio",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4089,
+    "teoria": 2583,
+    "praticaExtra": 670,
+    "quiz": 534,
+    "flashcards": 159
+  },
+  "porGrupoTeoria": {
+    "introducao": 647,
+    "contexto": 164,
+    "conteudo": 780,
+    "exemplos": 321,
+    "seguranca_troubleshooting": 671
+  },
+  "porSecao": {
+    "motivation": 139,
+    "summary": 113,
+    "problem": 164,
+    "concept": 305,
+    "internals": 311,
+    "architecture": 163,
+    "diagram": 1,
+    "analogy": 71,
+    "simpleExample": 88,
+    "enterpriseExample": 91,
+    "cloudExample": 71,
+    "objectives": 55,
+    "learningOutcomes": 46,
+    "glossary": 294,
+    "security": 312,
+    "troubleshooting": 359,
+    "nextTheme": 33
+  },
+  "pratica": {
+    "quiz": 534,
+    "flashcards": 159,
+    "lab": 0,
+    "mentorQuestions": 157,
+    "exercises": 213,
+    "challenge": 126,
+    "commentedSolution": 174
+  },
+  "outros": {
+    "title+subtitle": 26,
+    "nextTheme": 33,
+    "references": 36,
+    "linksToOtherCourses": 48
+  },
+  "quantidades": {
+    "quiz": 7,
+    "flashcards": 7,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 7,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "70-100 min",
+    "estimatedStudyTimeMinutes": 100,
+    "nucleo": 29.9,
+    "nucleoPartes": {
+      "teoria": 19.9,
+      "diagramas": 3,
+      "quiz": 7
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "25-35 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

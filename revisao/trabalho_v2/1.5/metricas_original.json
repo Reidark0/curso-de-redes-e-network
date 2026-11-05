@@ -1,0 +1,97 @@
+{
+  "id": "1.5",
+  "versao": "original",
+  "titulo": "Meios de transmissão: cobre, fibra e rádio",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3693,
+    "teoria": 2509,
+    "praticaExtra": 624,
+    "quiz": 291,
+    "flashcards": 117
+  },
+  "porGrupoTeoria": {
+    "introducao": 566,
+    "contexto": 409,
+    "conteudo": 396,
+    "exemplos": 559,
+    "seguranca_troubleshooting": 579
+  },
+  "porSecao": {
+    "motivation": 166,
+    "summary": 59,
+    "history": 136,
+    "problem": 128,
+    "evolution": 145,
+    "concept": 107,
+    "internals": 172,
+    "architecture": 114,
+    "diagram": 3,
+    "analogy": 84,
+    "simpleExample": 87,
+    "enterpriseExample": 83,
+    "cloudExample": 77,
+    "devsecopsExample": 87,
+    "securityExample": 141,
+    "objectives": 55,
+    "learningOutcomes": 46,
+    "glossary": 240,
+    "security": 280,
+    "troubleshooting": 299,
+    "nextTheme": 42
+  },
+  "pratica": {
+    "quiz": 291,
+    "flashcards": 117,
+    "lab": 0,
+    "mentorQuestions": 157,
+    "exercises": 167,
+    "challenge": 126,
+    "commentedSolution": 174
+  },
+  "outros": {
+    "title+subtitle": 26,
+    "nextTheme": 42,
+    "references": 36,
+    "linksToOtherCourses": 48
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "75-110 min",
+    "estimatedStudyTimeMinutes": 110,
+    "nucleo": 28.3,
+    "nucleoPartes": {
+      "teoria": 19.3,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "25-35 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

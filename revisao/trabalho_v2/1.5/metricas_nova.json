@@ -1,0 +1,85 @@
+{
+  "id": "1.5",
+  "versao": "nova",
+  "titulo": "Meios de transmissão: cobre, fibra e rádio",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 2779,
+    "teoria": 1351,
+    "praticaExtra": 615,
+    "quiz": 489,
+    "flashcards": 180
+  },
+  "porGrupoTeoria": {
+    "introducao": 423,
+    "contexto": 131,
+    "conteudo": 607,
+    "exemplos": 190,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 139,
+    "summary": 85,
+    "problem": 131,
+    "concept": 277,
+    "internals": 329,
+    "diagram": 1,
+    "analogy": 54,
+    "simpleExample": 136,
+    "objectives": 71,
+    "learningOutcomes": 0,
+    "glossary": 128,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 34
+  },
+  "pratica": {
+    "quiz": 489,
+    "flashcards": 180,
+    "lab": 0,
+    "mentorQuestions": 177,
+    "exercises": 180,
+    "challenge": 94,
+    "commentedSolution": 164
+  },
+  "outros": {
+    "title+subtitle": 26,
+    "nextTheme": 34,
+    "references": 36,
+    "linksToOtherCourses": 48
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 7,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 4,
+    "exemplosPorAmbiente": []
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "15-25 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 19.4,
+    "nucleoPartes": {
+      "teoria": 10.4,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 31,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-25 min",
+    "praticaExtraArredondada": 30,
+    "recomendada": "15-25 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

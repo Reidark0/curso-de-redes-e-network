@@ -1,0 +1,405 @@
+{
+  "id": "1.5",
+  "moduleId": "m01",
+  "order": 5,
+  "title": "Meios de transmissão: cobre, fibra e rádio",
+  "subtitle": "Como sinais atravessam cabos metálicos, fibras ópticas e o ar, e como isso muda desempenho, custo, risco e troubleshooting.",
+  "duration": "15-25 min + 30 min de prática extra",
+  "estimatedStudyTimeMinutes": 25,
+  "difficulty": "iniciante-intermediário",
+  "type": "fundamental",
+  "xp": 190,
+  "tags": [
+    "redes",
+    "fundamentos",
+    "camada física",
+    "cobre",
+    "fibra",
+    "rádio",
+    "wi-fi",
+    "interferência",
+    "atenuação",
+    "troubleshooting",
+    "segurança física"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m00",
+      "lesson": "0.5",
+      "reason": "A aula 0.5 explicou como sinais físicos carregam dados em nível introdutório."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m01",
+      "lesson": "1.4",
+      "reason": "Topologias dizem como os pontos se conectam; meios de transmissão explicam por onde os sinais passam."
+    }
+  ],
+  "objectives": [
+    "Diferenciar cobre, fibra óptica e rádio pelo tipo de sinal, pelo alcance, pelo custo e pelo uso típico.",
+    "Explicar como atenuação, ruído, interferência e meio compartilhado degradam o sinal e aparecem como erros CRC, velocidade negociada menor, reenvios e quedas.",
+    "Escolher o meio adequado para um caso simples (ponto fixo, ligação longa, usuário móvel) e reconhecer quando um sintoma aponta para o meio físico, e não para IP, DNS ou aplicação."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Camada 1",
+      "Camada 2"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "Wi-Fi",
+      "PoE",
+      "LLDP",
+      "CDP"
+    ],
+    "dependsOn": [
+      "representação digital",
+      "sinais físicos",
+      "topologia física e lógica"
+    ],
+    "enables": [
+      "cabeamento estruturado",
+      "switching",
+      "Wi-Fi",
+      "troubleshooting físico",
+      "segurança de portas"
+    ]
+  },
+  "mentorQuestions": [
+    {
+      "type": "diagnóstico",
+      "question": "Num escritório, um usuário reclama de lentidão pelo Wi‑Fi, mas pelo cabo o mesmo sistema funciona bem. Que hipóteses você testaria primeiro, e por quê?",
+      "hints": [
+        "Pelo cabo funciona: o que muda é só o trecho de rádio."
+      ],
+      "expectedIdeas": [
+        "sinal fraco ou distância",
+        "interferência ou canal congestionado",
+        "access point sobrecarregado"
+      ],
+      "explanation": "Pelo cabo funciona, então servidor, DNS e aplicação estão bem. Sobra o rádio: distância e obstáculos (atenuação), redes no mesmo canal (interferência) e muitos clientes no access point (meio compartilhado)."
+    },
+    {
+      "type": "cenário real",
+      "question": "Uma empresa vai interligar dois prédios a 300 m um do outro. Por que fibra é mais justificável do que cobre nesse caso, e quando a fibra seria exagero?",
+      "hints": [
+        "Lembre o limite do par trançado.",
+        "Pense em interferência e em ligar eletricamente dois prédios."
+      ],
+      "expectedIdeas": [
+        "300 m passa dos 100 m do cobre",
+        "imune a interferência elétrica",
+        "isolamento elétrico",
+        "exagero para pontos perto do switch"
+      ],
+      "explanation": "300 m passam do limite de 100 m do par trançado, e a fibra não sofre interferência elétrica e isola os prédios. Para um computador a 20 m do switch, fibra seria custo sem necessidade."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1.5.1",
+      "question": "Qual alternativa descreve corretamente a diferença entre cobre, fibra e rádio?",
+      "options": [
+        "Cobre e fibra usam sinais elétricos; só o rádio usa ondas eletromagnéticas.",
+        "Cobre usa sinais elétricos, fibra usa luz e rádio usa ondas eletromagnéticas.",
+        "Fibra usa ondas de rádio guiadas; cobre usa pulsos de luz.",
+        "Os três usam o mesmo sinal elétrico; muda só o conector."
+      ],
+      "answer": 1,
+      "explanation": "Cobre leva variações elétricas, a fibra leva pulsos de luz gerados por transceptores e o rádio modula ondas eletromagnéticas no ar.",
+      "topic": "meios",
+      "difficulty": "iniciante",
+      "type": "conceito"
+    },
+    {
+      "id": "q1.5.2",
+      "question": "Uma porta de switch mostra muitos erros CRC. Qual hipótese deve ser considerada?",
+      "options": [
+        "DNS respondendo com o endereço errado.",
+        "Senha incorreta do usuário na aplicação.",
+        "Problema físico: cabo, conector, porta ou interferência.",
+        "Certificado TLS expirado."
+      ],
+      "answer": 2,
+      "explanation": "O CRC é o código de verificação que viaja com cada quadro. Muitos erros CRC significam quadros corrompidos no caminho, quase sempre por cabo, conector, porta ou interferência. Senha, DNS e certificado não corrompem quadros.",
+      "topic": "troubleshooting",
+      "difficulty": "iniciante-intermediário",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q1.5.3",
+      "question": "Qual é uma vantagem comum da fibra óptica?",
+      "options": [
+        "Maior alcance e menor suscetibilidade a interferência eletromagnética.",
+        "Dispensa transceptores nas portas do switch.",
+        "Custa menos que o cobre por ponto de usuário.",
+        "Tolera curvatura e conector sujo sem perder sinal."
+      ],
+      "answer": 0,
+      "explanation": "A fibra é forte em ligações longas e de alta capacidade e não sofre interferência elétrica, mas exige transceptores, conectores limpos e cuidado com curvas, e custa mais por ponto.",
+      "topic": "fibra",
+      "difficulty": "iniciante",
+      "type": "comparação"
+    },
+    {
+      "id": "q1.5.4",
+      "question": "Qual prática reduz risco de portas físicas expostas?",
+      "options": [
+        "Trocar os cabos por Wi‑Fi com uma senha única para todos.",
+        "Deixar as portas ativas para facilitar o suporte.",
+        "Confiar que só funcionários usam as tomadas da recepção.",
+        "Desativar as portas que não estão em uso e proteger racks e salas técnicas."
+      ],
+      "answer": 3,
+      "explanation": "Link ativo não é autorização: uma tomada ativa deixa qualquer pessoa conectar um equipamento. Com a porta desativada e o rack trancado, conectar um cabo não dá acesso à rede.",
+      "topic": "segurança",
+      "difficulty": "iniciante",
+      "type": "segurança"
+    },
+    {
+      "id": "q1.5.5",
+      "question": "Por que Wi‑Fi não deve ser tratado como cabo invisível?",
+      "options": [
+        "Porque o Wi‑Fi não usa protocolos de camada 2.",
+        "Porque rádio é meio compartilhado, sujeito a interferência, obstáculos e variação de sinal.",
+        "Porque o Wi‑Fi sempre entrega mais banda que o cabo.",
+        "Porque o sinal do Wi‑Fi fica restrito à sala do AP."
+      ],
+      "answer": 1,
+      "explanation": "Quem está no mesmo canal disputa o tempo de transmissão, o sinal varia com distância e obstáculos e atravessa paredes. Wi‑Fi não oferece a estabilidade de um cabo dedicado.",
+      "topic": "wi-fi",
+      "difficulty": "iniciante-intermediário",
+      "type": "cenário"
+    },
+    {
+      "id": "q1.5.7",
+      "question": "Uma câmera IP está ligada ao switch por um cabo de par trançado de 130 m, e o link cai e volta várias vezes ao dia. Qual é a causa mais provável?",
+      "options": [
+        "O servidor DNS está respondendo devagar.",
+        "O canal Wi‑Fi do local está congestionado.",
+        "O firewall bloqueia a câmera em alguns horários.",
+        "O cabo passa do limite de 100 m do par trançado, e a atenuação deixa o sinal no limite."
+      ],
+      "answer": 3,
+      "explanation": "O canal Ethernet em par trançado vai até 100 m; acima disso a atenuação gera erros e o link cai e volta. DNS e firewall não derrubam o link físico, e a câmera está cabeada, não no Wi‑Fi.",
+      "topic": "cobre",
+      "difficulty": "iniciante-intermediário",
+      "type": "diagnóstico"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc1.5.1",
+      "front": "O que é meio de transmissão?",
+      "back": "É o caminho físico ou sem fio pelo qual o sinal de rede se propaga: cobre (eletricidade), fibra (luz) ou rádio (ondas no ar).",
+      "tags": [
+        "camada física"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.5.2",
+      "front": "Como o cobre transporta dados?",
+      "back": "Por variações elétricas em fios, normalmente pares trançados em redes Ethernet modernas.",
+      "tags": [
+        "cobre"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.5.3",
+      "front": "Como a fibra transporta dados?",
+      "back": "Por pulsos de luz convertidos por transceptores ópticos.",
+      "tags": [
+        "fibra"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.5.7",
+      "front": "O que é atenuação?",
+      "back": "Perda de intensidade do sinal ao longo do meio. Cresce com a distância e piora com cabo longo demais, conector sujo ou obstáculos no Wi‑Fi.",
+      "tags": [
+        "atenuação"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.5.8",
+      "front": "O que significa SNR baixa?",
+      "back": "O sinal útil está pouco acima do ruído: o receptor erra mais bits e, no Wi‑Fi, a taxa cai.",
+      "tags": [
+        "rádio",
+        "interferência"
+      ],
+      "difficulty": "iniciante-intermediário"
+    },
+    {
+      "id": "fc1.5.9",
+      "front": "Por que o rádio é um meio compartilhado?",
+      "back": "Porque os dispositivos de um mesmo canal disputam o tempo de transmissão; mais clientes significam menos tempo de ar para cada um.",
+      "tags": [
+        "rádio",
+        "wi-fi"
+      ],
+      "difficulty": "iniciante-intermediário"
+    },
+    {
+      "id": "fc1.5.6",
+      "front": "Qual risco existe em portas de rede ativas em áreas públicas?",
+      "back": "Qualquer pessoa pode conectar um equipamento e ganhar acesso à rede: link ativo não é autorização. Desative portas sem uso e proteja racks e salas técnicas.",
+      "tags": [
+        "segurança"
+      ],
+      "difficulty": "intermediário"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex1.5.2",
+      "type": "diagnóstico",
+      "prompt": "Um desktop cabeado negocia a 100 Mbps em uma rede esperada de 1 Gbps. Liste três hipóteses.",
+      "expectedAnswer": "Um par danificado ou conector mal crimpado (sem os quatro pares, o link cai para 100 Mbps); cabo de categoria inadequada ou longo demais; porta, placa ou equipamento no caminho limitado a 100 Mbps.",
+      "explanation": "1 Gbps em cobre precisa dos quatro pares. Velocidade negociada abaixo do esperado aponta primeiro para o meio e para os equipamentos, não para IP ou aplicação."
+    },
+    {
+      "id": "ex1.5.5",
+      "type": "prática",
+      "prompt": "Veja por qual meio seu computador está conectado e com que qualidade. Windows: Get-NetAdapter | Select-Object Name, Status, LinkSpeed e, no Wi-Fi, netsh wlan show interfaces. Linux: ethtool <interface> (cabo) ou iw dev <interface> link (Wi-Fi). Se estiver no Wi-Fi, afaste-se do roteador e rode de novo.",
+      "expectedAnswer": "No cabo, uma velocidade fixa, como 1 Gbps. No Wi-Fi, canal, sinal e taxa; longe do roteador, sinal e taxa caem. Cabo em 100 Mbps numa rede de 1 Gbps indica suspeita de cabo ou porta.",
+      "explanation": "O cabo negocia uma velocidade estável; no rádio, a taxa acompanha o sinal, que cai com distância e obstáculos (atenuação)."
+    }
+  ],
+  "challenge": {
+    "title": "Escolha de meios para uma pequena empresa",
+    "scenario": "Uma empresa tem recepção aberta ao público, sala administrativa com computadores fixos, estoque com coletores móveis, câmeras IP, Wi‑Fi para visitantes e um rack central. No ano que vem, vai ocupar um segundo prédio a 250 m.",
+    "tasks": [
+      "Definir onde usar cobre, fibra e rádio, justificando cada escolha.",
+      "Apontar um risco ou limite de cada meio nesse cenário.",
+      "Dizer como verificaria se cada meio está saudável."
+    ],
+    "constraints": [
+      "Evitar gasto desnecessário.",
+      "Visitantes não podem entrar na rede interna pelas tomadas da recepção."
+    ],
+    "expectedDeliverables": [
+      "Tabela com área, meio, justificativa, risco e verificação."
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "Separe o que é fixo, móvel, crítico e público; depois escolha por distância, mobilidade, estabilidade, custo e exposição.",
+    "steps": [
+      "Cobre para computadores e câmeras, fixos e a menos de 100 m do rack; com PoE, as câmeras recebem energia pelo cabo.",
+      "Rádio para coletores e visitantes, que precisam de mobilidade; visitantes numa rede separada.",
+      "Fibra até o segundo prédio: 250 m passam do limite do cobre.",
+      "Tomadas sem uso da recepção desativadas e rack trancado.",
+      "Verificação: velocidade e erros nas portas de cobre, sinal e taxa do Wi‑Fi no galpão, estado do link de fibra."
+    ],
+    "commonWrongAnswers": [
+      {
+        "answer": "Wi‑Fi para tudo, porque é mais fácil.",
+        "whyItIsWrong": "Câmeras e computadores fixos ficam mais estáveis no cabo; o rádio é compartilhado."
+      },
+      {
+        "answer": "Cobre até o segundo prédio.",
+        "whyItIsWrong": "250 m passam do limite de 100 m do par trançado."
+      },
+      {
+        "answer": "Fibra para todos os pontos.",
+        "whyItIsWrong": "Caro e desnecessário perto do rack."
+      }
+    ],
+    "finalAnswer": "Cobre com PoE para pontos fixos e câmeras, rádio para mobilidade e visitantes (rede separada), fibra entre os prédios e tomadas públicas desativadas."
+  },
+  "glossary": [
+    {
+      "term": "Quadro",
+      "shortDefinition": "O bloco de dados que a placa de rede envia de uma vez pelo meio, com endereços e um código de verificação.",
+      "example": "Um quadro corrompido por um cabo ruim é descartado ao chegar.",
+      "relatedLessons": [
+        "2.4"
+      ]
+    },
+    {
+      "term": "CRC",
+      "shortDefinition": "Código de verificação calculado sobre o quadro e enviado junto com ele; o receptor recalcula e compara para detectar erros.",
+      "example": "Uma porta de switch com o contador de erros CRC subindo indica quadros corrompidos no caminho.",
+      "relatedLessons": [
+        "3.1"
+      ]
+    },
+    {
+      "term": "PoE",
+      "shortDefinition": "Power over Ethernet: energia elétrica entregue pelo mesmo cabo de rede que leva os dados.",
+      "example": "Um access point ou uma câmera IP alimentados pelo switch, sem tomada elétrica separada.",
+      "relatedLessons": [
+        "1.6"
+      ]
+    },
+    {
+      "term": "SNR",
+      "shortDefinition": "Relação sinal-ruído: quanto o sinal útil está acima do ruído.",
+      "example": "Um notebook longe do access point, com muitas redes vizinhas no mesmo canal, tem SNR baixa.",
+      "relatedLessons": [
+        "12.2"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "standard",
+      "title": "IEEE 802.3 Ethernet",
+      "organization": "IEEE",
+      "url": "https://standards.ieee.org/standard/802_3-2022.html",
+      "note": "Referência técnica para Ethernet cabeada."
+    },
+    {
+      "type": "standard",
+      "title": "IEEE 802.11 Wireless LAN",
+      "organization": "IEEE",
+      "url": "https://standards.ieee.org/standard/802_11-2020.html",
+      "note": "Referência técnica para redes sem fio Wi‑Fi."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Aula 0.5",
+      "organization": "Deixando de ser TBN",
+      "url": "internal://redes/m00/0.5",
+      "note": "Base conceitual sobre sinais físicos."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "m02",
+      "lesson": "infra física e virtualização",
+      "reason": "Racks, servidores, links e redes físicas sustentam plataformas e clusters."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "m01",
+      "lesson": "controle de acesso",
+      "reason": "Controle físico e acesso à rede são parte da superfície de identidade e autorização do ambiente."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "1.6"
+    ]
+  }
+}

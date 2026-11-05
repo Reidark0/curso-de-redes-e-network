@@ -1,0 +1,39 @@
+<section class="lesson-section lesson-section--diagram">
+  <h2>Diagrama</h2>
+  <svg class="lesson-svg" viewBox="0 0 980 420" role="img" aria-labelledby="m01l05-title m01l05-desc">
+    <title id="m01l05-title">Cobre, fibra e rádio como meios de transmissão</title>
+    <desc id="m01l05-desc">O diagrama mostra cliente Wi-Fi, ponto de acesso, switch, fibra para core e serviço, destacando ruído, atenuação e limites do meio.</desc>
+    <defs>
+      <marker id="m01l05-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
+      </marker>
+    </defs>
+    <rect x="35" y="70" width="170" height="80" rx="14" class="svg-node svg-node--client" />
+    <text x="120" y="105" text-anchor="middle" class="svg-label">Notebook</text>
+    <text x="120" y="130" text-anchor="middle" class="svg-label svg-label--small">Rádio/Wi‑Fi</text>
+    <rect x="285" y="70" width="170" height="80" rx="14" class="svg-node" />
+    <text x="370" y="105" text-anchor="middle" class="svg-label">Access Point</text>
+    <text x="370" y="130" text-anchor="middle" class="svg-label svg-label--small">Cobre + PoE</text>
+    <rect x="535" y="70" width="170" height="80" rx="14" class="svg-node svg-node--switch" />
+    <text x="620" y="105" text-anchor="middle" class="svg-label">Switch</text>
+    <text x="620" y="130" text-anchor="middle" class="svg-label svg-label--small">Uplink</text>
+    <rect x="785" y="70" width="170" height="80" rx="14" class="svg-node svg-node--server" />
+    <text x="870" y="105" text-anchor="middle" class="svg-label">Core/Serviço</text>
+    <text x="870" y="130" text-anchor="middle" class="svg-label svg-label--small">Fibra</text>
+    <path d="M205 110 C235 40, 255 180, 285 110" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l05-arrow)" />
+    <line x1="455" y1="110" x2="535" y2="110" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l05-arrow)" />
+    <line x1="705" y1="110" x2="785" y2="110" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l05-arrow)" />
+    <rect x="60" y="235" width="240" height="105" rx="14" class="svg-zone" />
+    <text x="180" y="265" text-anchor="middle" class="svg-label">Rádio</text>
+    <text x="180" y="292" text-anchor="middle" class="svg-label svg-label--small">mobilidade, canal, obstáculos</text>
+    <text x="180" y="318" text-anchor="middle" class="svg-label svg-label--small">interferência e meio compartilhado</text>
+    <rect x="370" y="235" width="240" height="105" rx="14" class="svg-zone" />
+    <text x="490" y="265" text-anchor="middle" class="svg-label">Cobre</text>
+    <text x="490" y="292" text-anchor="middle" class="svg-label svg-label--small">baixo custo, PoE, até o acesso</text>
+    <text x="490" y="318" text-anchor="middle" class="svg-label svg-label--small">distância, conector, ruído</text>
+    <rect x="680" y="235" width="240" height="105" rx="14" class="svg-zone" />
+    <text x="800" y="265" text-anchor="middle" class="svg-label">Fibra</text>
+    <text x="800" y="292" text-anchor="middle" class="svg-label svg-label--small">alta taxa e longo alcance</text>
+    <text x="800" y="318" text-anchor="middle" class="svg-label svg-label--small">transceptor, limpeza, curvatura</text>
+  </svg>
+</section>

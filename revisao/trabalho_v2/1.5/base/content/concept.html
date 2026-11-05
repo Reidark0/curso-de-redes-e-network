@@ -1,0 +1,26 @@
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <div class="definition-box"><strong>Definição:</strong> meio de transmissão é o caminho físico ou sem fio pelo qual o sinal de rede se propaga entre dispositivos. O cobre usa variações elétricas; a fibra usa luz; o rádio usa ondas eletromagnéticas no ar.</div>
+  <p>O meio não define o protocolo, o endereço nem a aplicação, mas impõe limites de velocidade, distância, estabilidade, custo e risco. Perda, jitter, renegociação, desconexão e instabilidade intermitente podem nascer aqui.</p>
+  <div class="responsive-table">
+    <table class="data-table comparison-table">
+      <thead><tr><th>Aspecto</th><th>Cobre (par trançado)</th><th>Fibra óptica</th><th>Rádio (Wi‑Fi)</th></tr></thead>
+      <tbody>
+        <tr><td>Sinal</td><td>Elétrico, em pares de fios</td><td>Pulsos de luz em vidro ou plástico</td><td>Ondas eletromagnéticas pelo ar</td></tr>
+        <tr><td>Vantagens</td><td>Barato, comum, PoE</td><td>Longo alcance, alta taxa, pouca sensibilidade a interferência eletromagnética, isolamento elétrico</td><td>Mobilidade, instalação rápida</td></tr>
+        <tr><td>Limitações</td><td>Distância (canal Ethernet de até 100 m), categoria do cabo, conector, interferência, negociação</td><td>Transceptor compatível com o tipo de fibra, conectores limpos, raio de curvatura, potência e orçamento óptico</td><td>Meio compartilhado: canal, potência, obstáculos, ruído, densidade de clientes; sinal atravessa paredes</td></tr>
+        <tr><td>Custo</td><td>Menor por ponto de acesso</td><td>Maior em transceptores, instalação e manutenção</td><td>Menos cabos, mas exige APs, gestão, site survey e manutenção</td></tr>
+        <tr><td>Uso típico</td><td>Estações, impressoras, APs, câmeras, telefones IP</td><td>Backbone, datacenter, campus, operadora, entre prédios</td><td>Usuários móveis, visitantes, IoT, locais sem cabeamento</td></tr>
+        <tr><td>Evite quando</td><td>A distância passa da especificação</td><td>Faltam controle físico, limpeza e documentação</td><td>O sistema é crítico e fixo (câmeras, backbone) e não houve avaliação</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout warning"><strong>Erros comuns:</strong>
+    <ul>
+      <li><strong>Luz da porta acesa = link saudável.</strong> Erros e retransmissões continuam ocultos: confira velocidade negociada, duplex, contadores de erro e histórico de flaps.</li>
+      <li><strong>Wi‑Fi como cabo invisível.</strong> Planeje cobertura, canal, potência, autenticação e capacidade.</li>
+      <li><strong>Fibra só por ser “mais rápida”.</strong> Justifique por distância, backbone, imunidade a ruído, taxa ou isolamento elétrico; senão é custo sem necessidade.</li>
+      <li><strong>Esquecer a segurança física.</strong> Com foco só em firewall e senha, um visitante conecta um equipamento indevido. Use controle de portas, NAC/802.1X, inventário e travamento físico.</li>
+    </ul>
+  </div>
+</section>

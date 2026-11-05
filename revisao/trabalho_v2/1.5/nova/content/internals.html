@@ -1,0 +1,21 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <p>Nos três meios, o transmissor converte bits em sinal, o meio o propaga e o receptor tenta reconhecer os bits no que recebeu.</p>
+  <ol class="flow-list">
+    <li><strong>Cobre:</strong> a placa de rede ou a porta do switch transforma bits em variações elétricas nos pares de fios. Ao conectar, as duas pontas combinam a velocidade do link (a <em>velocidade negociada</em>). Em 1 Gbps (1000BASE-T) o cabo usa os quatro pares; em 100 Mbps (100BASE-TX), só dois. Por isso um par danificado pode fazer a porta subir a 100 Mbps, ou nem subir.</li>
+    <li><strong>Fibra:</strong> um transceptor converte o sinal elétrico em pulsos de luz, e o transceptor da outra ponta converte a luz de volta em sinal elétrico.</li>
+    <li><strong>Rádio:</strong> o rádio modula a informação em ondas eletromagnéticas. O receptor precisa separar o sinal útil do ruído e da interferência.</li>
+    <li><strong>Validação:</strong> cada bloco de dados enviado (o quadro) leva um código de verificação, o CRC. Se o sinal chegou degradado, o código não confere, o quadro é descartado e precisa ser reenviado. O usuário percebe lentidão ou queda.</li>
+  </ol>
+  <div class="responsive-table">
+    <table class="data-table">
+      <thead><tr><th>Fenômeno</th><th>O que é</th><th>Exemplo</th><th>Como reduzir</th></tr></thead>
+      <tbody>
+        <tr><td>Atenuação</td><td>Perda de intensidade do sinal ao longo do meio; cresce com a distância</td><td>Cabo longo demais, conector de fibra sujo, cliente longe do access point</td><td>Respeitar a distância, limpar conectores, aproximar ou reposicionar o access point</td></tr>
+        <tr><td>Ruído e interferência</td><td>Energia indesejada somada ao sinal. Com SNR (relação sinal-ruído) baixa, o receptor erra mais bits e, no Wi‑Fi, a taxa cai</td><td>Cabo de cobre passando junto a fiação elétrica; muitas redes Wi‑Fi no mesmo canal</td><td>Instalar e testar os cabos corretamente; escolher canais menos ocupados</td></tr>
+        <tr><td>Meio compartilhado</td><td>No rádio, todos no mesmo canal disputam o tempo de transmissão</td><td>Access point lotado, rede lenta no horário de pico</td><td>Distribuir os clientes, separar canais, cabear o que é fixo</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>É por isso que um problema físico aparece como problema de aplicação: os dados precisam ser reenviados várias vezes, a página demora a carregar e o usuário diz apenas “o sistema caiu”.</p>
+</section>
