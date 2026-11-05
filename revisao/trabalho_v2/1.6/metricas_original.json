@@ -1,0 +1,103 @@
+{
+  "id": "1.6",
+  "versao": "original",
+  "titulo": "Cabeamento estruturado e padrões RJ-45",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4763,
+    "teoria": 2735,
+    "praticaExtra": 1513,
+    "quiz": 239,
+    "flashcards": 122
+  },
+  "porGrupoTeoria": {
+    "introducao": 643,
+    "contexto": 447,
+    "conteudo": 436,
+    "exemplos": 579,
+    "seguranca_troubleshooting": 630
+  },
+  "porSecao": {
+    "motivation": 175,
+    "summary": 71,
+    "history": 187,
+    "problem": 115,
+    "evolution": 145,
+    "concept": 121,
+    "internals": 175,
+    "architecture": 137,
+    "diagram": 3,
+    "analogy": 69,
+    "simpleExample": 90,
+    "enterpriseExample": 106,
+    "cloudExample": 81,
+    "devsecopsExample": 84,
+    "securityExample": 149,
+    "objectives": 66,
+    "learningOutcomes": 70,
+    "glossary": 261,
+    "security": 304,
+    "troubleshooting": 326,
+    "nextTheme": 39
+  },
+  "pratica": {
+    "quiz": 239,
+    "flashcards": 122,
+    "lab": 877,
+    "mentorQuestions": 134,
+    "exercises": 154,
+    "challenge": 160,
+    "commentedSolution": 188
+  },
+  "outros": {
+    "title+subtitle": 25,
+    "nextTheme": 39,
+    "references": 41,
+    "linksToOtherCourses": 49
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 8,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 60,
+    "alternativa_5minPorPasso": 40,
+    "plausivel": true,
+    "override": null,
+    "palavras": 877
+  },
+  "duracao": {
+    "declarada": "80-115 min",
+    "estimatedStudyTimeMinutes": 115,
+    "nucleo": 30,
+    "nucleoPartes": {
+      "teoria": 21,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 105,
+    "praticaExtraPartes": {
+      "lab": 60,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 105,
+    "recomendada": "25-35 min + 105 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

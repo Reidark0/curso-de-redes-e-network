@@ -1,0 +1,43 @@
+<section class="lesson-section lesson-section--diagram">
+  <h2>Diagrama SVG</h2>
+  <svg class="lesson-svg" viewBox="0 0 1040 430" role="img" aria-labelledby="m01l06-title m01l06-desc">
+    <title id="m01l06-title">Caminho do cabeamento estruturado até o switch</title>
+    <desc id="m01l06-desc">O diagrama mostra dispositivo final, patch cord, tomada, cabo horizontal, patch panel, patch cord de rack, switch e documentação de porta.</desc>
+    <defs>
+      <marker id="m01l06-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
+      </marker>
+    </defs>
+    <rect x="30" y="95" width="135" height="72" rx="12" class="svg-node svg-node--client" />
+    <text x="97" y="125" text-anchor="middle" class="svg-label">Notebook</text>
+    <text x="97" y="148" text-anchor="middle" class="svg-label svg-label--small">dispositivo final</text>
+    <rect x="220" y="95" width="135" height="72" rx="12" class="svg-node" />
+    <text x="287" y="125" text-anchor="middle" class="svg-label">Tomada</text>
+    <text x="287" y="148" text-anchor="middle" class="svg-label svg-label--small">keystone</text>
+    <rect x="410" y="95" width="135" height="72" rx="12" class="svg-node" />
+    <text x="477" y="125" text-anchor="middle" class="svg-label">Cabo horizontal</text>
+    <text x="477" y="148" text-anchor="middle" class="svg-label svg-label--small">infraestrutura</text>
+    <rect x="600" y="95" width="135" height="72" rx="12" class="svg-node" />
+    <text x="667" y="125" text-anchor="middle" class="svg-label">Patch panel</text>
+    <text x="667" y="148" text-anchor="middle" class="svg-label svg-label--small">porta identificada</text>
+    <rect x="790" y="95" width="135" height="72" rx="12" class="svg-node svg-node--switch" />
+    <text x="857" y="125" text-anchor="middle" class="svg-label">Switch</text>
+    <text x="857" y="148" text-anchor="middle" class="svg-label svg-label--small">porta/VLAN/PoE</text>
+    <line x1="165" y1="131" x2="220" y2="131" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l06-arrow)" />
+    <line x1="355" y1="131" x2="410" y2="131" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l06-arrow)" />
+    <line x1="545" y1="131" x2="600" y2="131" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l06-arrow)" />
+    <line x1="735" y1="131" x2="790" y2="131" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l06-arrow)" />
+    <rect x="70" y="245" width="260" height="105" rx="14" class="svg-zone" />
+    <text x="200" y="275" text-anchor="middle" class="svg-label">Padrão físico</text>
+    <text x="200" y="302" text-anchor="middle" class="svg-label svg-label--small">categoria, distância, terminação</text>
+    <text x="200" y="328" text-anchor="middle" class="svg-label svg-label--small">T568A/B e qualidade do conector</text>
+    <rect x="390" y="245" width="260" height="105" rx="14" class="svg-zone" />
+    <text x="520" y="275" text-anchor="middle" class="svg-label">Operação</text>
+    <text x="520" y="302" text-anchor="middle" class="svg-label svg-label--small">etiqueta, inventário, patching</text>
+    <text x="520" y="328" text-anchor="middle" class="svg-label svg-label--small">teste, certificação e mudança</text>
+    <rect x="710" y="245" width="260" height="105" rx="14" class="svg-zone svg-node--security" />
+    <text x="840" y="275" text-anchor="middle" class="svg-label">Segurança</text>
+    <text x="840" y="302" text-anchor="middle" class="svg-label svg-label--small">porta física, 802.1X, VLAN</text>
+    <text x="840" y="328" text-anchor="middle" class="svg-label svg-label--small">rastreabilidade e menor exposição</text>
+  </svg>
+</section>

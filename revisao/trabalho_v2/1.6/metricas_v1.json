@@ -1,0 +1,97 @@
+{
+  "id": "1.6",
+  "versao": "v1",
+  "titulo": "Cabeamento estruturado e padrões RJ-45",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 6201,
+    "teoria": 3446,
+    "praticaExtra": 1746,
+    "quiz": 658,
+    "flashcards": 187
+  },
+  "porGrupoTeoria": {
+    "introducao": 799,
+    "contexto": 265,
+    "conteudo": 1296,
+    "exemplos": 349,
+    "seguranca_troubleshooting": 737
+  },
+  "porSecao": {
+    "motivation": 119,
+    "summary": 121,
+    "problem": 265,
+    "concept": 410,
+    "internals": 701,
+    "architecture": 183,
+    "diagram": 2,
+    "analogy": 62,
+    "simpleExample": 104,
+    "enterpriseExample": 105,
+    "cloudExample": 78,
+    "objectives": 66,
+    "learningOutcomes": 70,
+    "glossary": 423,
+    "security": 374,
+    "troubleshooting": 363,
+    "nextTheme": 37
+  },
+  "pratica": {
+    "quiz": 658,
+    "flashcards": 187,
+    "lab": 860,
+    "mentorQuestions": 144,
+    "exercises": 306,
+    "challenge": 192,
+    "commentedSolution": 244
+  },
+  "outros": {
+    "title+subtitle": 28,
+    "nextTheme": 37,
+    "references": 50,
+    "linksToOtherCourses": 49
+  },
+  "quantidades": {
+    "quiz": 8,
+    "flashcards": 7,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 8,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 8,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 60,
+    "alternativa_5minPorPasso": 40,
+    "plausivel": true,
+    "override": null,
+    "palavras": 860
+  },
+  "duracao": {
+    "declarada": "130-180 min",
+    "estimatedStudyTimeMinutes": 180,
+    "nucleo": 37.5,
+    "nucleoPartes": {
+      "teoria": 26.5,
+      "diagramas": 3,
+      "quiz": 8
+    },
+    "praticaExtra": 105,
+    "praticaExtraPartes": {
+      "lab": 60,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "30-45 min",
+    "praticaExtraArredondada": 105,
+    "recomendada": "30-45 min + 105 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 45
+  }
+}

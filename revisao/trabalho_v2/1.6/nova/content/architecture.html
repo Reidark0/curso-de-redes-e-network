@@ -1,0 +1,20 @@
+<section class="lesson-section lesson-section--architecture">
+  <h2>Arquitetura</h2>
+  <p>Na arquitetura física, o cabeamento estruturado divide o ambiente em áreas com função definida:</p>
+  <ul class="flow-list">
+    <li><strong>Área de trabalho:</strong> onde ficam usuários, estações, telefones, impressoras e access points.</li>
+    <li><strong>Cabeamento horizontal:</strong> liga as tomadas da área de trabalho à sala de telecomunicações (o trecho de até 90 m).</li>
+    <li><strong>Sala de telecomunicações:</strong> concentra rack, patch panels, switches de acesso e organização de cabos.</li>
+    <li><strong>Backbone:</strong> interliga racks, andares, prédios ou datacenters, frequentemente com fibra, porque as distâncias passam dos 100 m do cobre.</li>
+    <li><strong>Documentação:</strong> liga o mundo físico ao inventário lógico: tomada, porta do patch panel, porta do switch, sala, VLAN, serviço e responsável.</li>
+  </ul>
+  <h3>Decisões típicas por ponto</h3>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Situação</th><th>Escolha recomendada</th><th>Por quê</th><th>Risco se não fizer</th></tr></thead>
+    <tbody>
+      <tr><td>Mesa nova em área administrativa</td><td>Ponto identificado no patch panel e no inventário</td><td>Permite manutenção e rastreabilidade</td><td>Incidentes e mudanças ficam lentos</td></tr>
+      <tr><td>Access point no teto</td><td>Cabo estruturado com PoE dimensionado</td><td>Dispensa fonte externa e simplifica a instalação</td><td>Sem orçamento PoE, o AP reinicia ou não liga</td></tr>
+      <tr><td>Porta na recepção</td><td>Desativada, ou em VLAN restrita com autenticação</td><td>Área pública aumenta o risco de conexão indevida</td><td>Acesso físico vira acesso lógico</td></tr>
+    </tbody>
+  </table></div>
+</section>

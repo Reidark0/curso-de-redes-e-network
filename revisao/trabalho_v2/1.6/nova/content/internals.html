@@ -1,0 +1,42 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <h3>O caminho de um ponto de rede</h3>
+  <p>Um ponto de rede estruturado não é um cabo único entre o computador e o switch. É um caminho com várias partes, e cada uma pode introduzir falhas.</p>
+  <ol class="flow-list">
+    <li><strong>Dispositivo final:</strong> notebook, desktop, telefone IP, impressora, câmera ou access point.</li>
+    <li><strong>Patch cord da área de trabalho:</strong> cabo flexível que liga o equipamento à tomada de rede.</li>
+    <li><strong>Tomada/keystone:</strong> ponto fixo onde o cabo horizontal termina no ambiente do usuário.</li>
+    <li><strong>Cabo horizontal:</strong> cabo fixo, instalado pela infraestrutura do prédio (parede, piso, eletrocalha), da tomada até o rack.</li>
+    <li><strong>Patch panel:</strong> painel no rack onde os cabos horizontais terminam de forma organizada e identificada.</li>
+    <li><strong>Patch cord de rack:</strong> cabo curto que liga a porta do patch panel à porta do switch.</li>
+    <li><strong>Switch:</strong> equipamento ativo que negocia velocidade e duplex, fornece PoE quando aplicável e encaminha quadros Ethernet.</li>
+  </ol>
+  <p>Quando uma estação não conecta, verifique cada etapa. Um link apagado pode ser cabo solto, tomada errada, patch panel mal identificado, conector danificado, porta ou interface desabilitada, equipamento sem energia ou política de segurança bloqueando o acesso.</p>
+  <h3>Categoria, distância e interferência</h3>
+  <p>A categoria diz até que frequência o cabo foi projetado e, portanto, que velocidade ele sustenta. Em todas elas o limite do canal de par trançado é <strong>100 m</strong>: até 90 m de cabo horizontal fixo mais até 10 m somados de patch cords (área de trabalho e rack). Acima disso a atenuação cresce, os erros aumentam e a porta pode negociar velocidade menor ou nem subir.</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Categoria</th><th>Frequência</th><th>O que sustenta</th></tr></thead>
+    <tbody>
+      <tr><td>Cat5e</td><td>100 MHz</td><td>1 Gbps (1000BASE-T) até 100 m</td></tr>
+      <tr><td>Cat6</td><td>250 MHz</td><td>1 Gbps até 100 m; 10 Gbps só em trechos curtos (até cerca de 55 m)</td></tr>
+      <tr><td>Cat6A</td><td>500 MHz</td><td>10 Gbps (10GBASE-T) até 100 m</td></tr>
+    </tbody>
+  </table></div>
+  <p>O trançado dos pares é o que cancela o ruído. Por isso a interferência aparece quando a instalação desfaz essa proteção: cabo UTP correndo junto de cabos de energia, motores ou reatores de iluminação; pares destrançados demais na terminação (o recomendado é destrançar o mínimo possível, por volta de 13 mm); dobras fechadas ou abraçadeiras apertadas que esmagam o cabo. O sintoma típico são erros CRC e lentidão intermitente, não a falta total de link.</p>
+  <h3>PoE: energia pelo mesmo cabo</h3>
+  <p>Com PoE (Power over Ethernet), a porta do switch envia energia pelo mesmo cabo dos dados para APs, câmeras e telefones IP. Os padrões IEEE mais comuns são 802.3af (PoE, até 15,4 W por porta), 802.3at (PoE+, até 30 W) e 802.3bt (até 60 W ou 90 W). Além do limite por porta, o switch tem um <strong>orçamento PoE</strong>: a potência total que consegue entregar a todas as portas juntas. Exemplo com valores ilustrativos: 3 APs de 25 W e 6 câmeras de 7 W somam 75 + 42 = 117 W. Se o orçamento do switch for menor, alguns dispositivos não ligam ou reiniciam. Confira o consumo no datasheet de cada equipamento.</p>
+  <h3>Continuidade não é certificação</h3>
+  <ul>
+    <li><strong>Testador de continuidade:</strong> mostra se cada fio chega ao pino certo na outra ponta (mapa de fios). Detecta fio aberto, curto, fios de um par invertidos entre si e pares trocados de posição.</li>
+    <li><strong>O que ele não pega:</strong> desempenho. O caso clássico é o <strong>par dividido</strong> (split pair): cada pino está ligado ao pino correto do outro lado, mas os dois fios de um sinal pertencem a pares diferentes. A continuidade passa, o trançado não cancela o ruído, e a porta gera erros sob carga.</li>
+    <li><strong>Certificador:</strong> mede comprimento, perda (atenuação), diafonia (NEXT) e perda de retorno, e compara com os limites da categoria. É o que garante que um ponto Cat6 se comporta como Cat6.</li>
+  </ul>
+  <div class="callout warning"><strong>Erros comuns:</strong>
+    <ul>
+      <li>Achar que qualquer cabo com RJ-45 serve para qualquer velocidade. Por fora os cabos parecem iguais; confira categoria, comprimento, terminação e os contadores da porta.</li>
+      <li>Misturar T568A e T568B sem motivo, por decorar cores sem entender o padrão de ponta a ponta. O resultado são cabos cruzados por acidente e manutenção confusa.</li>
+      <li>Não identificar tomadas e patch panel porque "a rede é pequena". Cada mudança vira tentativa e erro, e a documentação fica obsoleta se as mudanças não forem registradas.</li>
+      <li>Deixar portas ativas em áreas públicas por conveniência. Um ponto físico correto não garante autorização nem segurança lógica.</li>
+    </ul>
+  </div>
+</section>
