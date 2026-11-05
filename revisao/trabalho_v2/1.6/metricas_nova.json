@@ -1,0 +1,91 @@
+{
+  "id": "1.6",
+  "versao": "nova",
+  "titulo": "Cabeamento estruturado e padrões RJ-45",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3803,
+    "teoria": 1775,
+    "praticaExtra": 1170,
+    "quiz": 502,
+    "flashcards": 187
+  },
+  "porGrupoTeoria": {
+    "introducao": 416,
+    "contexto": 137,
+    "conteudo": 1069,
+    "exemplos": 153,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 147,
+    "summary": 90,
+    "problem": 137,
+    "concept": 372,
+    "internals": 695,
+    "diagram": 2,
+    "analogy": 49,
+    "simpleExample": 104,
+    "objectives": 83,
+    "learningOutcomes": 0,
+    "glossary": 96,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 42
+  },
+  "pratica": {
+    "quiz": 502,
+    "flashcards": 187,
+    "lab": 423,
+    "mentorQuestions": 207,
+    "exercises": 212,
+    "challenge": 144,
+    "commentedSolution": 184
+  },
+  "outros": {
+    "title+subtitle": 28,
+    "nextTheme": 42,
+    "references": 50,
+    "linksToOtherCourses": 49
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 7,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 4,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 4,
+    "exemplosPorAmbiente": []
+  },
+  "lab": {
+    "estimatedTimeMinutes": 20,
+    "alternativa_5minPorPasso": 20,
+    "plausivel": true,
+    "override": null,
+    "palavras": 423
+  },
+  "duracao": {
+    "declarada": "20-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 22.7,
+    "nucleoPartes": {
+      "teoria": 13.7,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 51,
+    "praticaExtraPartes": {
+      "lab": 20,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "20-25 min",
+    "praticaExtraArredondada": 50,
+    "recomendada": "20-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

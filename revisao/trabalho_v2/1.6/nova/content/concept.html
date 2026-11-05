@@ -1,10 +1,10 @@
 <section class="lesson-section lesson-section--concept">
   <h2>Conceito</h2>
-  <div class="definition-box"><strong>Definição:</strong> cabeamento estruturado é a infraestrutura física planejada que liga as áreas de trabalho ao rack de telecomunicações de forma padronizada, identificável, testável e preparada para mudanças. Inclui cabos, tomadas, patch panels, racks, caminhos, etiquetas, documentação, testes e critérios de instalação.</div>
+  <div class="definition-box"><strong>Definição:</strong> cabeamento estruturado é a infraestrutura física planejada que liga as áreas de trabalho ao rack de forma padronizada, identificada, testada e preparada para mudanças. Inclui cabos, tomadas, patch panels, racks, etiquetas, documentação e testes.</div>
   <h3>O conector RJ-45</h3>
-  <p>O conector das pontas dos cabos Ethernet de par trançado é chamado de RJ-45 na prática de TI. O nome técnico é <strong>8P8C</strong> (8 posições, 8 contatos): "RJ-45" vem da telefonia, mas virou o nome popular. O cabo tem <strong>4 pares trançados</strong> (laranja, verde, azul e marrom), e cada par tem um fio de cor sólida e um fio branco listrado.</p>
+  <p>O conector das pontas dos cabos Ethernet de par trançado é chamado de RJ-45 na prática de TI. O nome técnico é <strong>8P8C</strong> (8 posições, 8 contatos); "RJ-45" vem da telefonia, mas virou o nome popular. O cabo tem <strong>4 pares trançados</strong> (laranja, verde, azul e marrom), e cada par tem um fio de cor sólida e um fio branco listrado.</p>
   <h3>T568A e T568B: o que muda de verdade</h3>
-  <p>T568A e T568B são as duas ordens padronizadas para encaixar os 8 fios nos pinos do conector. Elas são eletricamente equivalentes. A única diferença é que <strong>os pares laranja e verde trocam de lugar</strong>; azul e marrom ficam nos mesmos pinos. Você não precisa decorar a tabela: basta lembrar que o pino 1 é branco-verde no A e branco-laranja no B, e que os pinos 4, 5, 7 e 8 são iguais nos dois.</p>
+  <p>T568A e T568B são as duas ordens padronizadas para encaixar os 8 fios nos pinos do conector. Elas são eletricamente equivalentes. A única diferença é que <strong>os pares laranja e verde trocam de lugar</strong>; azul e marrom ficam nos mesmos pinos. Você não precisa decorar a tabela: basta lembrar que o pino 1 é branco-verde no A e branco-laranja no B.</p>
   <div class="responsive-table"><table class="data-table">
     <thead><tr><th>Pino</th><th>T568A</th><th>T568B</th><th>Uso em 10/100 Mbps</th></tr></thead>
     <tbody>
@@ -19,8 +19,8 @@
     </tbody>
   </table></div>
   <ul>
-    <li><strong>Cabo direto:</strong> o mesmo padrão nas duas pontas (A–A ou B–B). É o cabo comum entre computador e tomada, ou entre patch panel e switch. Escolha um padrão e documente-o para o ambiente inteiro.</li>
-    <li><strong>Cabo cruzado (crossover):</strong> A numa ponta e B na outra, o que liga a transmissão de um lado à recepção do outro (vale para 10/100 Mbps; num crossover gigabit completo, os pares azul e marrom também trocam). Era usado entre equipamentos iguais (PC–PC, switch–switch). Hoje a maioria das portas tem <strong>Auto-MDI-X</strong>, que detecta e corrige isso sozinha; por isso um cabo misturado por engano pode até funcionar, mas foge do padrão documentado e confunde a manutenção.</li>
-    <li><strong>Por que os pares importam no diagnóstico:</strong> 10 e 100 Mbps usam só os pinos 1, 2, 3 e 6 (dois pares). 1 Gbps (1000BASE-T) usa os <strong>quatro pares</strong>. Um cabo com o par azul ou marrom rompido, mal crimpado ou trocado pode dar link a 100 Mbps e nunca chegar a 1 Gbps. É a causa clássica do sintoma "porta em 100 Mbps em vez de 1 Gbps".</li>
+    <li><strong>Cabo direto:</strong> o mesmo padrão nas duas pontas (A–A ou B–B). É o cabo comum entre computador e tomada, ou entre patch panel e switch. Escolha um padrão e use-o no ambiente inteiro.</li>
+    <li><strong>Cabo cruzado (crossover):</strong> A numa ponta e B na outra, o que liga a transmissão de um lado à recepção do outro. Era usado entre equipamentos iguais (PC–PC, switch–switch). Hoje a maioria das portas tem <strong>Auto-MDI-X</strong>, que detecta e corrige isso sozinha. Por isso um cabo misturado por engano pode até funcionar, mas foge do padrão e confunde a manutenção.</li>
+    <li><strong>Por que os pares importam:</strong> 10 e 100 Mbps usam só os pinos 1, 2, 3 e 6 (dois pares). 1 Gbps (1000BASE-T) usa os <strong>quatro pares</strong>. Um cabo com o par azul ou marrom rompido, mal crimpado ou trocado pode dar link a 100 Mbps e nunca chegar a 1 Gbps. É a causa clássica do sintoma "porta em 100 Mbps em vez de 1 Gbps".</li>
   </ul>
 </section>
