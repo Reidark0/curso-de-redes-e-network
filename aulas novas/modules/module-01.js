@@ -15,7 +15,7 @@ export const module01 = {
   title: "Fundamentos de Redes",
   subtitle: "O primeiro bloco propriamente de redes: o que é uma rede, quem participa dela, seus tipos, topologias, meios, equipamentos, métricas e diagnóstico inicial.",
   level: "iniciante",
-  estimatedHours: 23,
+  estimatedHours: 4,
   icon: "network",
   unlockedByDefault: false,
   prerequisites: [
