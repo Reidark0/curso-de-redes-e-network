@@ -1,6 +1,11 @@
 <section class="lesson-section lesson-section--concept">
   <h2>Conceito</h2>
-  <p>Equipamentos de rede são componentes físicos ou virtuais que participam da comunicação entre dispositivos: interfaces de acesso, repetidores, comutadores, roteadores, pontes sem fio e pontos de controle de segurança.</p>
-  <div class="definition-box"><strong>Definição:</strong> entender um equipamento de rede é responder sete perguntas: que problema ele resolve, em que camada atua, que informação lê, que tabela mantém, que decisão toma, que falhas produz e que evidências registra.</div>
-  <p>Não basta saber que a caixa se chama “switch”: o que importa é que ela aprende MACs e encaminha quadros dentro de um domínio de camada 2. O nome comercial também engana, porque uma mesma caixa pode acumular vários papéis.</p>
+  <div class="definition-box"><strong>Definição:</strong> um equipamento de rede é um componente, físico ou virtual, que participa da comunicação lendo uma informação do tráfego e tomando uma decisão sobre ele. Para entender qualquer um, responda três perguntas: o que ele lê, que tabela ou regra consulta e o que decide.</div>
+  <p>Duas informações aparecem o tempo todo nessas decisões:</p>
+  <ul>
+    <li><strong>Endereço MAC:</strong> identifica uma placa de rede dentro da rede local. Vem gravado na placa e é escrito em hexadecimal, como <code>00:1a:2b:3c:4d:5e</code>. Viaja no quadro, o bloco de dados que circula na rede local (aula 1.5).</li>
+    <li><strong>Endereço IP:</strong> identifica o dispositivo entre redes, como <code>192.168.10.25</code>. Viaja no pacote, que vai dentro do quadro e atravessa várias redes até o destino.</li>
+  </ul>
+  <p>Na linguagem das camadas (aula 0.8), o MAC é informação da camada 2 (enlace) e o IP, da camada 3 (rede). Por isso se diz que o switch é um equipamento de camada 2 e o roteador, de camada 3.</p>
+  <p>O nome da caixa engana. O roteador de casa é, ao mesmo tempo, switch, access point, roteador e firewall básico; um firewall de empresa também roteia. O que define o papel é a decisão tomada, não o nome na etiqueta.</p>
 </section>

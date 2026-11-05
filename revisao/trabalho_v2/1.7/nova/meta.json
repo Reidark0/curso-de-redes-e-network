@@ -4,8 +4,8 @@
   "order": 7,
   "title": "Equipamentos de rede: NIC, hub, switch, roteador, AP e firewall",
   "subtitle": "Como entender o papel de cada equipamento antes de configurar, diagnosticar ou proteger uma rede.",
-  "duration": "75-105 min",
-  "estimatedStudyTimeMinutes": 105,
+  "duration": "15-25 min + 30 min de prática extra",
+  "estimatedStudyTimeMinutes": 25,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 195,
@@ -46,18 +46,9 @@
     }
   ],
   "objectives": [
-    "Diferenciar NIC, hub, switch, roteador, access point e firewall.",
-    "Entender o papel de cada equipamento por camada, tabela interna e decisão de encaminhamento.",
-    "Evitar confusões comuns entre conectar, comutar, rotear, distribuir Wi‑Fi e filtrar tráfego.",
-    "Relacionar equipamentos físicos com equivalentes virtuais em cloud e DevSecOps.",
-    "Diagnosticar problemas iniciais escolhendo o equipamento certo para investigar.",
-    "Compreender riscos de segurança criados por equipamentos mal posicionados ou mal configurados."
-  ],
-  "learningOutcomes": [
-    "Dado um diagrama simples, o aluno identifica quais equipamentos estão atuando como finais, intermediários e controles de segurança.",
-    "Dado um sintoma de falha, o aluno propõe se deve investigar NIC, cabo, switch, roteador, AP, firewall ou serviço.",
-    "Dado um cenário de cloud, o aluno reconhece equivalentes como NIC virtual, route table, security group, NAT gateway, load balancer e firewall gerenciado.",
-    "Dado um incidente de segurança, o aluno identifica quais equipamentos podem fornecer evidências úteis."
+    "Diferenciar NIC, hub, switch, roteador, access point e firewall pela informação que cada um lê e pela decisão que toma.",
+    "Explicar como o switch usa a tabela MAC (aprender, encaminhar, inundar) e como o roteador usa a tabela de rotas (rede conectada e rota default).",
+    "Diante de um sintoma (sem link, só o Wi-Fi falha, a rede local funciona mas a internet não), apontar qual equipamento investigar primeiro."
   ],
   "networkContext": {
     "osiLayers": [
@@ -102,196 +93,32 @@
       "troubleshooting"
     ]
   },
-  "troubleshooting": {
-    "symptoms": [
-      "Sem link físico",
-      "Wi‑Fi conectado sem internet",
-      "Apenas uma sala sem rede",
-      "Apenas uma VLAN sem acesso",
-      "Firewall bloqueando tráfego esperado",
-      "Cloud VM sem saída para internet"
-    ],
-    "diagnosticQuestions": [
-      "O problema ocorre em um host, vários hosts, uma porta, um switch, um SSID ou uma rede inteira?",
-      "A interface tem link, IP, máscara, gateway e DNS?",
-      "O tráfego falha dentro da LAN, entre redes ou na saída para internet/cloud?",
-      "Existe política de firewall ou security group bloqueando?",
-      "Há logs no switch, AP, firewall, roteador ou host?"
-    ],
-    "commands": [
-      {
-        "platform": "Windows",
-        "command": "ipconfig /all\ngetmac /v\nGet-NetAdapter\nTest-NetConnection 8.8.8.8 -Port 53",
-        "purpose": "Ver interface, MAC, IP, gateway, DNS e teste básico de conectividade.",
-        "expectedObservation": "Adaptador ativo, endereço IPv4 válido, gateway e DNS configurados.",
-        "interpretation": "Se a interface está desconectada ou sem IP, investigue NIC, cabo, Wi‑Fi, DHCP ou política local."
-      },
-      {
-        "platform": "Linux",
-        "command": "ip link\nip addr\nip route\nss -tulpen",
-        "purpose": "Ver interfaces, endereços, rotas e serviços ouvindo no host.",
-        "expectedObservation": "Interface UP, IP válido e rota default quando necessário.",
-        "interpretation": "Sem rota default, o host pode falar localmente mas não sair para outras redes."
-      },
-      {
-        "platform": "Cisco IOS",
-        "command": "show ip interface brief\nshow mac address-table\nshow cdp neighbors\nshow interfaces status",
-        "purpose": "Ver portas, IPs, vizinhos, tabela MAC e estado físico em equipamentos Cisco.",
-        "expectedObservation": "Interfaces relevantes em up/up, MACs aprendidos e vizinhos esperados.",
-        "interpretation": "Porta down, sem MAC aprendido ou vizinho inesperado indica caminho físico/lógico a investigar."
-      }
-    ],
-    "decisionTree": [
-      {
-        "if": "Um único host falha",
-        "then": "Verificar NIC, IP, cabo/Wi‑Fi, DHCP, DNS e firewall local."
-      },
-      {
-        "if": "Todos os hosts do mesmo switch falham",
-        "then": "Verificar switch, uplink, energia, VLAN, STP e porta de distribuição. Falha coletiva aponta para equipamento compartilhado: não analise host por host."
-      },
-      {
-        "if": "Somente tráfego para outra rede falha",
-        "then": "Verificar gateway, rota, firewall e ACL/security group."
-      },
-      {
-        "if": "Somente Wi‑Fi falha",
-        "then": "Verificar AP, SSID, autenticação, rádio, interferência e VLAN associada. Comprar mais banda de internet não resolve falha restrita ao rádio."
-      }
-    ]
-  },
-  "security": {
-    "goodPractices": [
-      "Desativar portas físicas ociosas ou colocá-las em VLAN restrita.",
-      "Usar 802.1X, port security ou NAC quando o risco justificar.",
-      "Separar redes por função e aplicar firewall entre zonas.",
-      "Manter firmware de switches, roteadores, APs e firewalls atualizado.",
-      "Registrar logs de firewall, APs e equipamentos críticos em local centralizado.",
-      "Proteger documentação de rede e backups de configuração.",
-      "Inventariar NICs e interfaces, físicas e virtuais, para rastrear dispositivos finais e não deixar interfaces expostas sem necessidade."
-    ],
-    "badPractices": [
-      "Usar AP doméstico não autorizado em rede corporativa.",
-      "Manter firewall com regra any-any sem justificativa e revisão.",
-      "Conectar switches não gerenciáveis em áreas críticas sem inventário.",
-      "Não trocar senhas padrão de equipamentos.",
-      "Não saber qual equipamento fornece evidência em incidente.",
-      "Deixar porta de switch em VLAN indevida, dando ao dispositivo acesso a uma rede que ele não deveria alcançar.",
-      "Usar hub em produção (ele só tem lugar em laboratório didático controlado)."
-    ],
-    "commonErrors": [
-      "Confundir conectividade com autorização.",
-      "Achar que NAT substitui firewall.",
-      "Achar que SSID oculto é controle de segurança suficiente.",
-      "Achar que cloud não tem rede porque não há equipamento físico visível.",
-      "Achar que o firewall compensa uma arquitetura ruim mesmo com regras permissivas demais."
-    ],
-    "vulnerabilities": [
-      {
-        "name": "Porta física exposta",
-        "description": "Tomadas ou portas de switch ativas em áreas acessíveis podem permitir conexão não autorizada.",
-        "defensiveExplanation": "O risco é a entrada de um dispositivo não gerenciado na rede interna.",
-        "mitigation": "Desativar portas não usadas, usar 802.1X, VLAN de quarentena, port security e monitoramento."
-      },
-      {
-        "name": "Firewall permissivo",
-        "description": "Regras amplas permitem tráfego além do necessário entre redes.",
-        "defensiveExplanation": "Isso aumenta superfície de ataque e facilita movimento lateral após comprometimento.",
-        "mitigation": "Aplicar menor privilégio, revisar regras, registrar justificativas e monitorar hits."
-      },
-      {
-        "name": "AP não autorizado",
-        "description": "Um access point conectado sem controle pode criar ponte insegura para a rede cabeada.",
-        "defensiveExplanation": "Usuários ou atacantes próximos podem tentar acessar a rede por rádio.",
-        "mitigation": "Inventário, detecção de rogue AP, 802.1X, segmentação e políticas físicas."
-      },
-      {
-        "name": "AP mal configurado",
-        "description": "Senha fraca, SSID inadequado ou falta de isolamento entre clientes expõem a rede sem fio.",
-        "defensiveExplanation": "Quem está ao alcance do rádio pode entrar na rede ou alcançar outros clientes conectados.",
-        "mitigation": "WPA3 ou WPA2-Enterprise, rede de visitantes segmentada e isolada, e monitoramento de associações."
-      },
-      {
-        "name": "Roteamento incorreto",
-        "description": "Uma rota errada ou não documentada faz o tráfego passar por um caminho não previsto.",
-        "defensiveExplanation": "O tráfego pode ficar indisponível ou atravessar um trecho sem a inspeção e o registro esperados.",
-        "mitigation": "Controlar e documentar rotas, validar cada mudança e monitorar rotas criadas para destinos inesperados."
-      }
-    ],
-    "monitoring": [
-      "Logs de firewall",
-      "Tabela MAC e eventos de porta",
-      "Eventos de associação Wi‑Fi",
-      "Flow logs em cloud",
-      "Mudanças de configuração",
-      "Alertas de portas novas ou MACs desconhecidos"
-    ],
-    "hardening": [
-      "Senhas fortes e únicas",
-      "Gerenciamento fora da rede de usuários",
-      "SSH/HTTPS em vez de protocolos inseguros",
-      "Backup de configuração",
-      "MFA para consoles cloud",
-      "Controle de acesso baseado em função"
-    ],
-    "detectionIdeas": [
-      "MAC novo em porta sensível",
-      "Aumento de bloqueios no firewall",
-      "Cliente Wi‑Fi associado em horário incomum",
-      "Regra de security group alterada",
-      "Rota criada para destino inesperado"
-    ]
-  },
   "mentorQuestions": [
     {
-      "type": "reflexão",
-      "question": "Por que não basta dizer que um equipamento ‘passa internet’?",
+      "type": "aplicação",
+      "question": "Um switch acabou de ser ligado, com a tabela MAC vazia. O PC A (porta 1) envia um quadro para o PC B (porta 5), B responde e A envia outro quadro. O que o switch faz com cada quadro?",
       "hints": [
-        "Pense em papel e decisão.",
-        "Compare switch, roteador e firewall."
+        "Ele aprende sempre pelo MAC de origem."
       ],
       "expectedIdeas": [
-        "camadas",
-        "MAC",
-        "IP",
-        "política",
-        "evidência"
+        "aprende A e inunda",
+        "aprende B e envia só pela porta 1",
+        "envia só pela porta 5"
       ],
-      "explanation": "Equipamentos diferentes tomam decisões diferentes. Sem separar papéis, o diagnóstico fica impreciso."
-    },
-    {
-      "type": "diagnóstico",
-      "question": "Um host consegue pingar outro host da mesma LAN, mas não acessa a internet. Qual equipamento você investigaria primeiro depois do host?",
-      "hints": [
-        "A LAN parece funcionar.",
-        "A saída para outra rede depende do próximo salto."
-      ],
-      "expectedIdeas": [
-        "gateway",
-        "roteador",
-        "firewall",
-        "rota",
-        "NAT",
-        "DNS"
-      ],
-      "explanation": "Se a LAN funciona, o problema provavelmente está em roteamento, firewall, NAT, DNS ou link externo, não no switch local inicialmente."
+      "explanation": "1º quadro: anota A na porta 1 e, sem conhecer B, inunda. Resposta: anota B na porta 5 e envia só pela porta 1. 3º quadro: os dois estão na tabela, e o quadro sai só pela porta 5."
     },
     {
       "type": "cenário real",
-      "question": "Em uma empresa, por que APs domésticos conectados sem autorização são perigosos?",
+      "question": "Um funcionário liga um roteador Wi-Fi doméstico numa tomada da empresa para melhorar o sinal na sala. Usando o papel do AP, explique o risco.",
       "hints": [
-        "Pense em ponte entre rádio e rede interna.",
-        "Pense em autenticação e segmentação."
+        "O que o AP faz entre o rádio e o cabo?"
       ],
       "expectedIdeas": [
-        "rogue AP",
-        "acesso indevido",
-        "segmentação",
-        "WPA",
-        "802.1X",
-        "monitoramento"
+        "o AP liga o rádio à rede cabeada",
+        "quem alcança o sinal entra na rede interna",
+        "senha fora do controle da equipe"
       ],
-      "explanation": "Um AP não autorizado pode expor a rede cabeada pelo rádio e contornar controles corporativos."
+      "explanation": "O AP repassa quadros entre o rádio e o cabo. Ligado na tomada, dá a quem estiver ao alcance do sinal, até fora do prédio, uma entrada para a rede interna, com uma senha que a equipe de rede não controla."
     }
   ],
   "quiz": [
@@ -326,21 +153,6 @@
       "type": "comparação"
     },
     {
-      "id": "q1.7.3",
-      "question": "Qual prática reduz risco de conexão indevida em uma tomada de rede pública?",
-      "options": [
-        "Ocultar o SSID da rede corporativa",
-        "Ativar NAT no roteador de borda",
-        "Usar 802.1X ou desativar a porta/colocá-la em VLAN restrita",
-        "Trocar o switch da sala por um hub"
-      ],
-      "answer": 2,
-      "explanation": "Porta física exposta exige controle de acesso (802.1X), desativação ou segmentação restrita. SSID oculto e NAT não controlam quem se conecta a uma tomada cabeada, e hub só piora a privacidade.",
-      "topic": "segurança física",
-      "difficulty": "iniciante-intermediário",
-      "type": "segurança"
-    },
-    {
       "id": "q1.7.4",
       "question": "Usuários cabeados funcionam, mas usuários Wi‑Fi oscilam. Qual componente deve ganhar prioridade na investigação?",
       "options": [
@@ -354,21 +166,6 @@
       "topic": "Wi‑Fi",
       "difficulty": "iniciante",
       "type": "diagnóstico"
-    },
-    {
-      "id": "q1.7.5",
-      "question": "Em cloud, qual elemento se parece conceitualmente com uma regra de firewall aplicada a uma instância ou interface?",
-      "options": [
-        "Route table da VPC",
-        "NAT gateway",
-        "Load balancer",
-        "Security group ou NSG"
-      ],
-      "answer": 3,
-      "explanation": "Security groups e NSGs aplicam políticas de tráfego a recursos virtuais. Route table decide caminho, NAT gateway traduz endereços para saída e load balancer distribui conexões.",
-      "topic": "cloud",
-      "difficulty": "iniciante-intermediário",
-      "type": "cloud"
     },
     {
       "id": "q1.7.6",
@@ -390,22 +187,37 @@
       "question": "Um switch recebe um quadro para um MAC de destino que ainda não está na tabela MAC. O que ele faz?",
       "options": [
         "Descarta o quadro e registra um log",
-        "Envia o quadro por todas as portas da VLAN, exceto a de origem",
+        "Envia o quadro por todas as portas, exceto a de entrada",
         "Consulta a tabela de rotas e envia ao gateway",
         "Devolve o quadro para a porta de origem"
       ],
       "answer": 1,
-      "explanation": "Sem entrada para o destino, o switch inunda o quadro pelas portas da mesma VLAN, exceto a de entrada. Quando o destino responde, o switch aprende o MAC dele pela origem do quadro de resposta.",
+      "explanation": "Sem entrada para o destino, o switch inunda o quadro por todas as portas, exceto a de entrada (num switch dividido em VLANs, só pelas portas da mesma VLAN). Quando o destino responde, o switch aprende o MAC dele pela origem do quadro de resposta.",
       "topic": "switch",
       "difficulty": "iniciante-intermediário",
+      "type": "mecanismo"
+    },
+    {
+      "id": "q1.7.8",
+      "question": "Um roteador tem duas rotas: 192.168.10.0/24 conectada à interface LAN e 0.0.0.0/0 via 203.0.113.1. Para onde ele envia um pacote com destino 8.8.8.8?",
+      "options": [
+        "Para a interface LAN, porque é a primeira rota da tabela",
+        "Para todas as interfaces, porque o destino não está na tabela",
+        "Para o próximo salto 203.0.113.1, pela rota default",
+        "Para o switch, que procura 8.8.8.8 na tabela MAC"
+      ],
+      "answer": 2,
+      "explanation": "8.8.8.8 não está entre 192.168.10.0 e 192.168.10.255, então não casa com a rede conectada. Sobra a rota default, que manda tudo o que não casa com outra rota para 203.0.113.1. Inundar é comportamento do switch, e a tabela MAC guarda MACs, não IPs.",
+      "topic": "tabela de rotas",
+      "difficulty": "iniciante",
       "type": "mecanismo"
     }
   ],
   "flashcards": [
     {
       "id": "fc1.7.8",
-      "front": "O que a NIC negocia e de que ela depende?",
-      "back": "Negocia link, velocidade e duplex e tem um endereço MAC. Depende de driver e da configuração do sistema operacional; por isso falhas de driver, energia ou velocidade aparecem como “sem rede”.",
+      "front": "O que a NIC faz e de que ela depende?",
+      "back": "Negocia o link e a velocidade, tem um endereço MAC e envia e recebe quadros. Depende de driver e da configuração do sistema; por isso falhas de driver, energia ou velocidade aparecem como “sem rede”.",
       "tags": [
         "NIC",
         "troubleshooting"
@@ -435,7 +247,7 @@
     {
       "id": "fc1.7.4",
       "front": "Qual é o papel de um AP?",
-      "back": "Conectar clientes sem fio à rede, gerenciando SSID, rádio, associação e autenticação Wi‑Fi.",
+      "back": "Ligar clientes sem fio à rede cabeada: anuncia o SSID, autentica os clientes e repassa os quadros entre o rádio e o cabo.",
       "tags": [
         "AP",
         "Wi‑Fi"
@@ -445,7 +257,7 @@
     {
       "id": "fc1.7.5",
       "front": "Firewall é igual a roteador?",
-      "back": "Não. Ele pode rotear, mas seu papel principal é aplicar política, inspeção e registro entre zonas ou contextos.",
+      "back": "Não. Ele pode rotear, mas seu papel principal é comparar conexões com regras, permitir ou bloquear e registrar o que fez.",
       "tags": [
         "firewall",
         "segurança"
@@ -454,222 +266,74 @@
     },
     {
       "id": "fc1.7.9",
-      "front": "Hub, switch e roteador: o que cada um faz com domínios de colisão e de broadcast?",
-      "back": "Hub: todas as portas num único domínio de colisão. Switch: cada porta é um domínio de colisão, mas a VLAN inteira é um domínio de broadcast. Roteador: separa domínios de broadcast.",
+      "front": "Hub, switch e roteador: quem recebe o tráfego?",
+      "back": "Hub: repete tudo em todas as portas. Switch: entrega cada quadro só na porta do destino, mas broadcast e destino desconhecido vão para todas as portas. Roteador: não repassa broadcast de uma rede para outra.",
       "tags": [
         "hub",
         "switch",
         "roteador",
-        "domínios"
-      ],
-      "difficulty": "iniciante-intermediário"
-    },
-    {
-      "id": "fc1.7.7",
-      "front": "NAT substitui firewall?",
-      "back": "Não. NAT altera endereçamento; política explícita, inspeção e registro são papel do firewall.",
-      "tags": [
-        "NAT",
-        "firewall"
+        "broadcast"
       ],
       "difficulty": "iniciante-intermediário"
     }
   ],
   "exercises": [
     {
-      "id": "ex1.7.1",
-      "type": "conceitual",
-      "prompt": "Explique, com suas palavras, a diferença entre switch, roteador e firewall.",
-      "expectedAnswer": "Switch conecta dispositivos na LAN usando MAC; roteador interliga redes usando IP; firewall aplica políticas e inspeção entre zonas, redes ou contextos.",
-      "explanation": "A resposta deve separar decisão de camada 2, camada 3 e política de segurança."
-    },
-    {
       "id": "ex1.7.2",
       "type": "diagnóstico",
-      "prompt": "Um usuário está conectado ao Wi‑Fi, mas não recebe IP. Quais hipóteses você levantaria?",
-      "expectedAnswer": "Problema no AP, VLAN associada ao SSID, DHCP, autenticação, alcance/interferência ou política de rede.",
-      "explanation": "Conexão ao SSID não garante DHCP nem acesso à rede correta."
+      "prompt": "O celular de um usuário aparece conectado ao Wi-Fi da empresa, mas não recebe endereço IP. Outros celulares no mesmo AP funcionam. Que hipóteses você levanta e quais descarta?",
+      "expectedAnswer": "Descarte AP, switch e o caminho até o DHCP (atendem os outros celulares) e também rota, firewall e provedor (só importam depois que há IP). Sobram o próprio celular (placa ou sistema; teste esquecer a rede e reconectar) e o DHCP sem endereços livres para distribuir.",
+      "explanation": "Aplica a pergunta da aula: o que funciona e o que falha têm em comum? Aqui, só o celular é diferente."
     },
     {
-      "id": "ex1.7.3",
-      "type": "arquitetura",
-      "prompt": "Desenhe uma rede pequena com notebook, switch, AP, firewall e internet. Indique o papel de cada componente.",
-      "expectedAnswer": "Notebook como dispositivo final/NIC; switch como camada 2; AP como ponte Wi‑Fi; firewall como política/borda; internet como rede externa.",
-      "explanation": "O objetivo é mapear papéis, não marcas comerciais."
-    },
-    {
-      "id": "ex1.7.4",
-      "type": "segurança",
-      "prompt": "Liste três riscos de segurança relacionados a equipamentos de rede mal configurados.",
-      "expectedAnswer": "Porta física exposta, firewall permissivo, AP não autorizado, firmware desatualizado, senha padrão, logs ausentes.",
-      "explanation": "Equipamentos são controles e também podem ser pontos fracos."
+      "id": "ex1.7.5",
+      "type": "classificação",
+      "prompt": "Diga qual papel (NIC, hub, switch, roteador, AP ou firewall) tomou cada decisão: (a) um quadro entrou na porta 2 e saiu só pela porta 7; (b) um pacote para 200.150.10.5 foi enviado ao provedor; (c) uma conexão para a porta 3389 de um servidor foi bloqueada e registrada; (d) o nome Escritorio apareceu na lista de redes do celular; (e) o sinal saiu por todas as portas sem nenhum endereço ser lido; (f) o notebook negociou link de 1 Gbps com a porta do switch.",
+      "expectedAnswer": "(a) switch; (b) roteador, pela rota default; (c) firewall; (d) AP, que anuncia o SSID; (e) hub; (f) NIC.",
+      "explanation": "Cada caso descreve uma decisão, não uma caixa: assim você reconhece os papéis mesmo dentro do roteador de casa."
     }
   ],
   "challenge": {
-    "title": "Organize os papéis de rede de uma pequena empresa",
-    "scenario": "Uma empresa possui um roteador doméstico fazendo Wi‑Fi, um switch não gerenciável, algumas câmeras IP, computadores administrativos e um servidor local. Ninguém sabe onde aplicar política, onde coletar logs ou como separar visitantes.",
+    "title": "Três chamados no mesmo escritório",
+    "scenario": "Um escritório tem: um switch de 16 portas, com 8 PCs, uma impressora de rede e um AP no teto; do switch, o tráfego para fora passa pelo roteador e pelo firewall até o modem do provedor. Na mesma manhã chegam três chamados: (1) o PC da recepção mostra “cabo de rede desconectado”, e os outros PCs funcionam; (2) nenhum PC encontra a impressora, mas todos navegam na internet; (3) ninguém, no cabo ou no Wi-Fi, abre o site de um fornecedor, mas todos os outros sites abrem.",
     "tasks": [
-      "Identificar os papéis existentes",
-      "Propor separação mínima de funções",
-      "Indicar onde aplicar firewall e segmentação",
-      "Indicar quais evidências coletar em incidente",
-      "Sugerir melhorias sem gastar demais"
-    ],
-    "constraints": [
-      "A empresa tem orçamento limitado",
-      "Visitantes não devem acessar servidor local",
-      "Câmeras precisam ficar isoladas",
-      "A solução deve ser explicável para equipe júnior"
+      "Para cada chamado, dizer qual equipamento investigar primeiro e por quê.",
+      "Dizer o que verificar nele e quais equipamentos ficam descartados."
     ],
     "expectedDeliverables": [
-      "Tabela de equipamentos e papéis",
-      "Diagrama físico/lógico simples",
-      "Lista de riscos",
-      "Plano de melhorias por prioridade",
-      "Comandos ou evidências de validação"
-    ],
-    "gradingRubric": [
-      {
-        "criterion": "Identificação correta dos papéis",
-        "points": 30,
-        "description": "Distingue switch, roteador, AP, firewall, host e serviço."
-      },
-      {
-        "criterion": "Segurança e segmentação",
-        "points": 30,
-        "description": "Propõe isolamento de visitantes, câmeras e servidor."
-      },
-      {
-        "criterion": "Viabilidade operacional",
-        "points": 20,
-        "description": "Considera custo, documentação, equipe e manutenção."
-      },
-      {
-        "criterion": "Evidências e validação",
-        "points": 20,
-        "description": "Define como confirmar conectividade, políticas e logs."
-      }
+      "Uma tabela: chamado, suspeito, o que verificar, o que foi descartado."
     ]
   },
   "commentedSolution": {
-    "reasoning": "Primeiro separamos papéis: quem conecta hosts, quem distribui Wi‑Fi, quem interliga redes e quem aplica política. Depois identificamos riscos: rede plana, visitantes misturados, câmeras acessíveis, ausência de logs e equipamentos domésticos. Em seguida propomos melhorias graduais.",
+    "reasoning": "Compare o que falha com o que funciona e procure o equipamento que só o caso com falha usa.",
     "steps": [
-      "Inventariar equipamentos e portas",
-      "Separar rede administrativa, visitantes, câmeras e servidor",
-      "Usar firewall ou roteador com VLANs se disponível",
-      "Trocar AP doméstico por AP corporativo quando possível",
-      "Registrar logs de firewall e eventos de Wi‑Fi",
-      "Documentar gateway, SSIDs, VLANs e regras"
+      "Chamado 1: só um PC, sem link. Suspeitos: NIC, patch cord ou porta do switch; confira a luz de link e troque cabo ou porta. Switch, roteador e firewall atendem os outros PCs.",
+      "Chamado 2: todos perdem só a impressora, e a internet funciona, então switch, roteador e firewall estão bem. Suspeitos: NIC, cabo ou porta da impressora; confira se ela está ligada e com link.",
+      "Chamado 3: todos perdem um único site, no cabo e no Wi-Fi. A rota default funciona (os outros sites abrem), e AP e switch não decidem nada sobre sites. Confirme pelo 4G do celular que o site está no ar; se estiver, procure nos registros do firewall um bloqueio para o endereço do fornecedor."
     ],
-    "commonWrongAnswers": [
-      {
-        "answer": "Comprar um switch maior resolve tudo.",
-        "whyItIsWrong": "Mais portas não criam segmentação, política ou logs por si só."
-      },
-      {
-        "answer": "Colocar senha forte no Wi‑Fi resolve todos os riscos.",
-        "whyItIsWrong": "Senha forte ajuda, mas não separa visitantes, câmeras, servidores e usuários internos."
-      },
-      {
-        "answer": "NAT já é firewall suficiente.",
-        "whyItIsWrong": "NAT altera endereçamento, mas não substitui política explícita, inspeção e registro adequados."
-      }
+    "commonMistakes": [
+      "Reiniciar o roteador nos três casos: ele é comum a tudo o que funciona.",
+      "Culpar o AP no chamado 3: a falha também acontece no cabo."
     ],
-    "finalAnswer": "Uma solução mínima seria usar um firewall/roteador capaz de VLANs, switch gerenciável e AP com SSIDs separados. Administrativos, visitantes, câmeras e servidor ficam em redes distintas. O firewall controla tráfego entre elas, visitantes não acessam servidor, câmeras acessam apenas o necessário, e logs de firewall/AP são preservados. Se o orçamento for muito baixo, a prioridade é documentar o ambiente, desativar portas desnecessárias, separar Wi‑Fi de visitantes e planejar substituição gradual dos equipamentos não gerenciáveis."
+    "finalAnswer": "1: NIC, cabo ou porta do PC. 2: NIC, cabo ou porta da impressora. 3: se o site abre de fora, regra do firewall. O suspeito é sempre o que só o caso com falha usa."
   },
   "glossary": [
     {
-      "term": "NIC",
-      "shortDefinition": "Interface de rede de um dispositivo final.",
-      "longDefinition": "Componente físico ou virtual que permite que um host participe da rede, possuindo endereço MAC, driver e estado de link.",
-      "example": "A placa Ethernet ou Wi‑Fi do notebook é uma NIC.",
-      "relatedTerms": [
-        "MAC",
-        "interface",
-        "driver"
-      ],
+      "term": "VLAN",
+      "shortDefinition": "Divisão das portas de um switch em redes locais separadas.",
+      "example": "Num switch com VLANs, um broadcast da VLAN 10 não chega às portas da VLAN 20.",
+      "relatedLessons": [
+        "1.4",
+        "3.7"
+      ]
+    },
+    {
+      "term": "NAT",
+      "shortDefinition": "Tradução dos endereços internos da rede para o endereço que o provedor fornece, feita normalmente pelo roteador de borda.",
+      "example": "Os aparelhos de casa usam 192.168.x.x, mas na internet todos aparecem com o mesmo IP público.",
       "relatedLessons": [
         "1.2",
-        "1.5",
-        "1.7"
-      ]
-    },
-    {
-      "term": "Switch",
-      "shortDefinition": "Equipamento que comuta quadros em uma LAN usando endereços MAC.",
-      "longDefinition": "Dispositivo de camada 2 que aprende MACs por porta e encaminha quadros dentro da rede local; quando não conhece o destino, envia o quadro por todas as portas da VLAN, exceto a de origem.",
-      "example": "Um switch de acesso conecta computadores, impressoras e APs em uma sala.",
-      "relatedTerms": [
-        "MAC",
-        "VLAN",
-        "tabela MAC"
-      ],
-      "relatedLessons": [
-        "1.7",
-        "3.1"
-      ]
-    },
-    {
-      "term": "Roteador",
-      "shortDefinition": "Equipamento que encaminha pacotes entre redes IP diferentes.",
-      "longDefinition": "Dispositivo de camada 3 que usa tabela de rotas para decidir o próximo salto de pacotes IP.",
-      "example": "O gateway padrão da rede local costuma ser um roteador ou firewall roteando para fora da LAN.",
-      "relatedTerms": [
-        "gateway",
-        "rota",
-        "IP"
-      ],
-      "relatedLessons": [
-        "1.7",
-        "4.1",
-        "11.1"
-      ]
-    },
-    {
-      "term": "Access point",
-      "shortDefinition": "Equipamento que conecta clientes Wi‑Fi à rede.",
-      "longDefinition": "Dispositivo que gerencia rádio, SSID, associação, autenticação Wi‑Fi e ponte entre rede sem fio e cabeada.",
-      "example": "O AP corporativo no teto fornece acesso Wi‑Fi para notebooks e celulares.",
-      "relatedTerms": [
-        "SSID",
-        "WLAN",
-        "802.11"
-      ],
-      "relatedLessons": [
-        "1.3",
-        "1.7",
-        "12.1"
-      ]
-    },
-    {
-      "term": "Firewall",
-      "shortDefinition": "Controle que aplica política de tráfego entre redes, zonas ou contextos.",
-      "longDefinition": "Equipamento ou serviço que permite, bloqueia, inspeciona e registra tráfego com base em regras, estado, aplicação, usuário ou contexto.",
-      "example": "Um firewall bloqueia acesso de visitantes ao servidor interno.",
-      "relatedTerms": [
-        "ACL",
-        "zona",
-        "política",
-        "NGFW"
-      ],
-      "relatedLessons": [
-        "1.7",
-        "9.1"
-      ]
-    },
-    {
-      "term": "Hub",
-      "shortDefinition": "Equipamento legado que repete sinais para todas as portas.",
-      "longDefinition": "Repetidor multiporta sem inteligência de comutação e sem tabela MAC: todas as portas formam um único domínio de colisão, com limitações importantes de desempenho e privacidade.",
-      "example": "Um hub em laboratório pode ajudar a demonstrar repetição, mas não deve ser usado em produção moderna.",
-      "relatedTerms": [
-        "repetidor",
-        "colisão",
-        "camada 1"
-      ],
-      "relatedLessons": [
-        "1.7",
-        "3.1"
+        "9.5"
       ]
     }
   ],
@@ -720,11 +384,7 @@
   "progressRules": {
     "completeWhen": {
       "read": true,
-      "quizScoreAtLeast": 70,
-      "oneOf": [
-        "exerciseDone",
-        "practicalExerciseDone"
-      ]
+      "quizScoreAtLeast": 70
     },
     "accessPolicy": {
       "freeAccess": true,

@@ -1,33 +1,31 @@
 <section class="lesson-section lesson-section--internals">
   <h2>Funcionamento interno</h2>
-  <p>Cada equipamento decide com base em informações diferentes. Essa é a chave para diagnosticar.</p>
+  <p>Cada equipamento lê uma informação diferente e toma uma decisão diferente:</p>
   <ol class="flow-list">
-    <li><strong>NIC:</strong> negocia link, velocidade e duplex; possui endereço MAC; envia e recebe quadros; depende de driver e da configuração do sistema operacional.</li>
-    <li><strong>Hub:</strong> recebe o sinal numa porta e repete para todas as outras. Não aprende MAC, não filtra e não entende destino.</li>
-    <li><strong>Switch:</strong> lê o MAC de origem de cada quadro e anota em que porta ele está (tabela MAC). Para encaminhar, procura o MAC de destino na tabela e envia só pela porta correspondente. Se o destino ainda não está na tabela, ou se o quadro é broadcast, envia por todas as portas da VLAN, exceto a de origem.</li>
-    <li><strong>Roteador:</strong> lê o endereço IP de destino, consulta a tabela de rotas e decide o próximo salto para alcançar outra rede.</li>
-    <li><strong>Access point:</strong> conecta clientes Wi‑Fi à rede cabeada, gerenciando SSID, autenticação Wi‑Fi, canal, potência, associação e roaming.</li>
-    <li><strong>Firewall:</strong> compara o tráfego com políticas, estado de conexão, zonas, portas, protocolos, aplicações, usuários e contexto; permite, bloqueia e registra eventos.</li>
+    <li><strong>NIC (placa de rede):</strong> liga o dispositivo final ao cabo ou ao rádio. Negocia o link e a velocidade com a outra ponta, tem o endereço MAC e envia e recebe quadros. Depende de driver e da configuração do sistema: quando algo falha aqui, o sistema mostra “sem rede”.</li>
+    <li><strong>Hub:</strong> recebe o sinal numa porta e o repete em todas as outras. Não lê endereço nenhum. Todos dividem o mesmo meio: enquanto um transmite, os outros esperam, e qualquer porta vê o tráfego de todas.</li>
+    <li><strong>Switch:</strong> lê os endereços MAC dos quadros e mantém a <strong>tabela MAC</strong>, que diz em que porta está cada MAC. Ele <em>aprende</em> (anota o MAC de origem de cada quadro e a porta por onde ele entrou), <em>encaminha</em> (se o MAC de destino está na tabela, envia o quadro só por aquela porta) e <em>inunda</em> (se o destino ainda não está na tabela, ou se o quadro é um broadcast, endereçado a todos, envia por todas as portas, exceto a de entrada; num switch dividido em VLANs, só pelas portas da mesma VLAN). Quando o destino responde, o switch aprende onde ele está.</li>
+    <li><strong>Roteador:</strong> lê o endereço IP de destino do pacote, consulta a <strong>tabela de rotas</strong> e escolhe o próximo salto, o próximo equipamento no caminho até a rede de destino. Ele não repassa broadcasts de uma rede para outra.</li>
+    <li><strong>Access point (AP):</strong> liga clientes sem fio à rede cabeada. Anuncia o nome da rede (SSID), autentica quem tem a senha, usa um canal de rádio e repassa os quadros entre o rádio e o cabo. Depois dele, o tráfego ainda depende do switch, do roteador e do resto.</li>
+    <li><strong>Firewall:</strong> compara cada conexão com regras (origem, destino, porta e protocolo; nos mais avançados, também aplicação e usuário). Permite, bloqueia e registra o que fez. Muitos firewalls também roteiam, mas o papel deles é decidir o que pode passar.</li>
   </ol>
-  <p>Daí vem a diferença de alcance: no hub, todas as portas compartilham um único domínio de colisão; no switch, cada porta é um domínio de colisão separado, mas as portas da mesma VLAN continuam no mesmo domínio de broadcast; o roteador separa domínios de broadcast, porque não repassa broadcast de camada 2 de uma rede para outra.</p>
   <h3>As duas tabelas, com valores</h3>
   <div class="responsive-table">
   <table class="data-table">
     <thead><tr><th>Tabela</th><th>Entrada de exemplo</th><th>Leitura</th></tr></thead>
     <tbody>
-      <tr><td>Tabela MAC (switch)</td><td>VLAN 10 · 00:1a:2b:3c:4d:5e · Gi0/3</td><td>Quadros para esse MAC, na VLAN 10, saem só pela porta Gi0/3.</td></tr>
-      <tr><td>Tabela de rotas (roteador)</td><td>192.168.10.0/24 · conectada · Gi0/0</td><td>Destinos dessa rede estão diretamente ligados à interface Gi0/0.</td></tr>
-      <tr><td>Tabela de rotas (roteador)</td><td>0.0.0.0/0 · via 203.0.113.1</td><td>Rota default: o que não casa com outra rota vai para o próximo salto 203.0.113.1.</td></tr>
+      <tr><td>Tabela MAC (switch)</td><td>00:1a:2b:3c:4d:5e · porta 3</td><td>Quadros para esse MAC saem só pela porta 3.</td></tr>
+      <tr><td>Tabela de rotas (roteador)</td><td>192.168.10.0/24 · conectada · interface LAN</td><td>Destinos de 192.168.10.0 a 192.168.10.255 estão na rede ligada direto à interface LAN.</td></tr>
+      <tr><td>Tabela de rotas (roteador)</td><td>0.0.0.0/0 · via 203.0.113.1</td><td>Rota default: o que não casa com nenhuma outra rota segue para o próximo salto 203.0.113.1 (o provedor).</td></tr>
     </tbody>
   </table>
   </div>
-  <p>Equipamentos modernos acumulam papéis. O roteador residencial costuma reunir switch, AP, NAT, DHCP e firewall básico na mesma caixa, e um switch L3 também roteia. Em empresa, a separação costuma ser mais clara para ganhar controle, escala e visibilidade.</p>
-  <div class="callout warning"><strong>Erros comuns:</strong>
+  <p>O <code>/24</code> indica o tamanho da rede (aqui, os 256 endereços de 192.168.10.0 a 192.168.10.255); você aprende a calcular isso na aula 4.3.</p>
+  <div class="callout warning"><strong>Erros comuns</strong>
     <ul>
-      <li><strong>Switch e roteador fazem a mesma coisa:</strong> a confusão vem do roteador doméstico, que tem os dois na mesma caixa. Switch comuta quadros por MAC dentro da LAN; roteador encaminha pacotes por IP entre redes. Misturar os dois leva a procurar um problema entre redes na LAN, ou o contrário.</li>
-      <li><strong>Firewall é roteador com bloqueio:</strong> muitos firewalls também roteiam, mas o papel principal é política e inspeção. Quem pensa só em rota ignora regras, zonas, estado e logs.</li>
-      <li><strong>AP é sinônimo de internet:</strong> o AP só conecta o cliente sem fio à rede. DNS, rota, firewall e provedor também precisam funcionar.</li>
-      <li><strong>Ignorar NIC e driver:</strong> a interface é invisível quando funciona, e falhas de driver, energia, velocidade ou MAC passam despercebidas. Comece verificando interface, link, IP, gateway, DNS e logs locais.</li>
+      <li><strong>Switch e roteador fazem a mesma coisa:</strong> a confusão vem do roteador de casa, que tem os dois na mesma caixa. Misturar os papéis leva a procurar na rede local um problema que está entre redes, ou o contrário.</li>
+      <li><strong>Firewall é roteador com bloqueio:</strong> quem pensa só em rota ignora as regras e os registros, que são justamente onde o firewall mostra por que bloqueou uma conexão.</li>
+      <li><strong>Ignorar a NIC:</strong> a placa de rede é invisível quando funciona. Driver, energia ou velocidade errada aparecem como “sem rede”; comece verificando link e configuração do próprio host.</li>
     </ul>
   </div>
 </section>

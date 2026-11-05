@@ -1,0 +1,85 @@
+{
+  "id": "1.7",
+  "versao": "nova",
+  "titulo": "Equipamentos de rede: NIC, hub, switch, roteador, AP e firewall",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3072,
+    "teoria": 1457,
+    "praticaExtra": 748,
+    "quiz": 506,
+    "flashcards": 188
+  },
+  "porGrupoTeoria": {
+    "introducao": 363,
+    "contexto": 123,
+    "conteudo": 715,
+    "exemplos": 256,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 143,
+    "summary": 89,
+    "problem": 123,
+    "concept": 195,
+    "internals": 518,
+    "diagram": 2,
+    "analogy": 83,
+    "simpleExample": 173,
+    "objectives": 68,
+    "learningOutcomes": 0,
+    "glossary": 63,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 34
+  },
+  "pratica": {
+    "quiz": 506,
+    "flashcards": 188,
+    "lab": 0,
+    "mentorQuestions": 202,
+    "exercises": 220,
+    "challenge": 125,
+    "commentedSolution": 201
+  },
+  "outros": {
+    "title+subtitle": 25,
+    "nextTheme": 34,
+    "references": 62,
+    "linksToOtherCourses": 52
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 2,
+    "exemplosPorAmbiente": []
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "15-25 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 20.2,
+    "nucleoPartes": {
+      "teoria": 11.2,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 31,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-25 min",
+    "praticaExtraArredondada": 30,
+    "recomendada": "15-25 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

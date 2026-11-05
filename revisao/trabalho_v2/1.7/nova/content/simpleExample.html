@@ -1,5 +1,9 @@
 <section class="lesson-section lesson-section--example">
   <h2>Exemplo simples</h2>
-  <p>Em casa, seu notebook usa uma NIC Wi‑Fi para se conectar ao roteador residencial. Essa caixa provavelmente combina AP, switch, roteador, NAT, DHCP e firewall básico. Quando você conecta um cabo Ethernet nela, a parte de switch recebe seu quadro. Quando você acessa a internet, a parte de roteamento/NAT encaminha o tráfego para a rede do provedor.</p>
-  <p>Se o Wi‑Fi está conectado, mas nada abre, o problema pode não ser o AP. Pode ser DNS, rota, firewall, link do provedor ou serviço remoto. Se o cabo não acende link, o problema provavelmente está mais próximo de NIC, cabo, porta ou energia.</p>
+  <p>Em casa, seu notebook usa a NIC Wi‑Fi para falar com o roteador residencial. Essa caixa cumpre vários papéis: o AP recebe o sinal de rádio; as portas LAN da parte de trás formam um pequeno switch; a parte de roteador envia ao provedor tudo o que não é da rede de casa (a rota default); e um firewall básico bloqueia conexões que chegam da internet sem terem sido pedidas. Ela ainda distribui endereços IP (DHCP) e faz NAT, como você viu na aula 1.2.</p>
+  <p>Separar os papéis ajuda a diagnosticar. Pergunte: o que funciona e o que falha passam por quais equipamentos em comum?</p>
+  <ul>
+    <li><strong>O notebook no cabo não acende a luz de link:</strong> a falha está perto da NIC, do cabo ou da porta. Rádio, rota e provedor nem entram em jogo.</li>
+    <li><strong>O notebook no Wi‑Fi imprime na impressora de casa, mas nenhum site abre:</strong> AP e switch estão funcionando, porque a rede local responde. O problema está do roteador para fora: rota, DNS, firewall ou link do provedor.</li>
+  </ul>
 </section>
