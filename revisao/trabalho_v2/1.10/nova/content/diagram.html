@@ -1,0 +1,46 @@
+<section class="lesson-section lesson-section--diagram">
+  <h2>Diagrama SVG</h2>
+  <svg class="lesson-svg" viewBox="0 0 980 470" role="img" aria-labelledby="m01l10-title m01l10-desc">
+    <title id="m01l10-title">Mini-projeto de mapeamento de rede</title>
+    <desc id="m01l10-desc">Diagrama mostrando host do aluno, rede local, gateway, serviços e internet, e embaixo as evidências que alimentam o mapa e os riscos que ele revela.</desc>
+    <defs>
+      <marker id="m01l10-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow"></path>
+      </marker>
+    </defs>
+    <rect x="40" y="70" width="145" height="75" rx="12" class="svg-node svg-node--client"></rect>
+    <text x="112" y="100" text-anchor="middle" class="svg-label">Seu host</text>
+    <text x="112" y="123" text-anchor="middle" class="svg-label svg-label--small">IP, DNS, gateway</text>
+    <rect x="250" y="70" width="145" height="75" rx="12" class="svg-node svg-node--switch"></rect>
+    <text x="322" y="100" text-anchor="middle" class="svg-label">Acesso</text>
+    <text x="322" y="123" text-anchor="middle" class="svg-label svg-label--small">switch/AP/meio</text>
+    <rect x="460" y="70" width="145" height="75" rx="12" class="svg-node svg-node--router"></rect>
+    <text x="532" y="100" text-anchor="middle" class="svg-label">Gateway</text>
+    <text x="532" y="123" text-anchor="middle" class="svg-label svg-label--small">rota padrão</text>
+    <rect x="670" y="70" width="145" height="75" rx="12" class="svg-node svg-node--firewall"></rect>
+    <text x="742" y="100" text-anchor="middle" class="svg-label">Política</text>
+    <text x="742" y="123" text-anchor="middle" class="svg-label svg-label--small">firewall</text>
+    <rect x="835" y="70" width="110" height="75" rx="12" class="svg-node svg-node--cloud"></rect>
+    <text x="890" y="100" text-anchor="middle" class="svg-label">Serviços</text>
+    <text x="890" y="123" text-anchor="middle" class="svg-label svg-label--small">DNS, web</text>
+    <line x1="185" y1="108" x2="250" y2="108" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l10-arrow)"></line>
+    <line x1="395" y1="108" x2="460" y2="108" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l10-arrow)"></line>
+    <line x1="605" y1="108" x2="670" y2="108" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l10-arrow)"></line>
+    <line x1="815" y1="108" x2="835" y2="108" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l10-arrow)"></line>
+    <rect x="90" y="230" width="220" height="105" rx="12" class="svg-node svg-node--security"></rect>
+    <text x="200" y="260" text-anchor="middle" class="svg-label">Evidências</text>
+    <text x="200" y="285" text-anchor="middle" class="svg-label svg-label--small">ipconfig, ping, arp</text>
+    <text x="200" y="307" text-anchor="middle" class="svg-label svg-label--small">tracert, nslookup</text>
+    <rect x="380" y="230" width="220" height="105" rx="12" class="svg-node svg-node--server"></rect>
+    <text x="490" y="260" text-anchor="middle" class="svg-label">Mapa</text>
+    <text x="490" y="285" text-anchor="middle" class="svg-label svg-label--small">físico + lógico</text>
+    <text x="490" y="307" text-anchor="middle" class="svg-label svg-label--small">serviços + métricas</text>
+    <rect x="670" y="230" width="220" height="105" rx="12" class="svg-node svg-node--attacker"></rect>
+    <text x="780" y="260" text-anchor="middle" class="svg-label">Riscos</text>
+    <text x="780" y="285" text-anchor="middle" class="svg-label svg-label--small">rede plana, Wi-Fi</text>
+    <text x="780" y="307" text-anchor="middle" class="svg-label svg-label--small">ativo desconhecido</text>
+    <line x1="310" y1="282" x2="380" y2="282" class="svg-flow svg-flow--response" marker-end="url(#m01l10-arrow)"></line>
+    <line x1="600" y1="282" x2="670" y2="282" class="svg-flow svg-flow--blocked" marker-end="url(#m01l10-arrow)"></line>
+    <text x="490" y="405" text-anchor="middle" class="svg-label">Mini-projeto: desenhar, evidenciar, interpretar, apontar riscos e preparar o Modelo OSI.</text>
+  </svg>
+</section>

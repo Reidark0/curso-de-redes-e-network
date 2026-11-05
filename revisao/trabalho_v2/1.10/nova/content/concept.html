@@ -1,0 +1,21 @@
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <div class="definition-box"><strong>Definição:</strong> um mapa de rede é um documento que reúne visão física, visão lógica, inventário, serviços, evidências, métricas e riscos de uma rede, para apoiar diagnóstico, operação e segurança.</div>
+  <p>Pense no mapa como uma <strong>hipótese documentada</strong> sobre como a comunicação acontece. Ele mostra o que você sabe, como sabe (qual comando, quando e de qual máquina) e o que ainda não sabe. Cada afirmação recebe uma de três etiquetas:</p>
+  <ul>
+    <li><strong>Fato:</strong> confirmado por evidência com data e origem. Ex.: “gateway 192.168.0.1, visto no <code>ipconfig /all</code> do notebook em 05/11, 14h”.</li>
+    <li><strong>Hipótese:</strong> deduzido, ainda não confirmado. Ex.: “o tráfego provavelmente sai pelo roteador do provedor”.</li>
+    <li><strong>Lacuna:</strong> o que você não conseguiu confirmar. Ex.: “não sei o que é o aparelho 192.168.0.30”.</li>
+  </ul>
+  <h3>Inventário e as duas visões</h3>
+  <p>O <strong>inventário</strong> é a lista do que existe na rede, com cada item classificado pelo papel que exerce (aula 1.2): <strong>dispositivo final</strong> (notebook, celular, impressora), <strong>intermediário</strong> (switch, AP, roteador), <strong>serviço</strong> (DNS, DHCP, internet) ou <strong>meio</strong> (cabo, fibra, rádio). Classifique pelo papel, não pelo nome comercial: o “roteador” de casa costuma ser roteador, switch e AP ao mesmo tempo.</p>
+  <p>A <strong>visão física</strong> mostra onde as coisas estão e como se ligam: cabos, Wi-Fi, portas, aparelhos e cômodos. A <strong>visão lógica</strong> mostra como a comunicação acontece: IPs, gateway, DNS, serviços e o caminho provável até a internet. As duas ficam em seções separadas, porque um mesmo cabo pode levar tráfego para destinos muito diferentes (aula 1.4).</p>
+  <h3>Mapa é documento sensível</h3>
+  <p>Um mapa revela IPs, nomes internos, caminhos e controles de segurança: tudo o que um atacante gostaria de saber antes de agir. Por isso, mapeie só redes suas ou com autorização, sem varreduras, e <strong>sanitize</strong> antes de compartilhar: mascare o que identifica a rede, como <code>192.168.1.23</code> → <code>192.168.x.23</code> e <code>servidor-financeiro.empresa.local</code> → <code>servidor-A</code>. Faça o mesmo com MACs e nomes de usuário.</p>
+  <div class="callout warning"><strong>Erros comuns</strong>
+    <ul>
+      <li><strong>Misturar físico e lógico:</strong> parece que o cabo decide sozinho o caminho do tráfego. Separe as visões.</li>
+      <li><strong>Concluir com uma única evidência:</strong> o primeiro comando parece confirmar a hipótese favorita. Cruze configuração, alcance, nome e caminho.</li>
+    </ul>
+  </div>
+</section>

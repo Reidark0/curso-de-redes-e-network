@@ -1,0 +1,423 @@
+{
+  "id": "1.10",
+  "moduleId": "m01",
+  "order": 10,
+  "title": "Revisão e mini-projeto: mapear sua rede",
+  "subtitle": "Consolide os fundamentos do Módulo 1 criando um mapa físico e lógico com inventário, evidências, métricas, riscos e próximos passos.",
+  "duration": "15-25 min + 65 min de prática extra",
+  "estimatedStudyTimeMinutes": 25,
+  "difficulty": "iniciante-intermediário",
+  "type": "ligação/revisão",
+  "xp": 205,
+  "tags": [
+    "redes",
+    "fundamentos",
+    "revisão",
+    "mini-projeto",
+    "mapeamento",
+    "inventário",
+    "topologia",
+    "diagnóstico",
+    "segurança",
+    "documentação"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m01",
+      "lesson": "1.1",
+      "reason": "É necessário entender o conceito de rede como sistema de comunicação."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m01",
+      "lesson": "1.7",
+      "reason": "É necessário distinguir papéis de NIC, switch, roteador, AP e firewall."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m01",
+      "lesson": "1.9",
+      "reason": "O mini-projeto usa comandos de diagnóstico inicial para coletar evidências."
+    }
+  ],
+  "objectives": [
+    "Montar o inventário de uma rede pequena, classificando cada item como dispositivo final, intermediário, serviço ou meio, e separar a visão física da visão lógica.",
+    "Usar ipconfig, arp, ping, tracert e nslookup como evidências do mapa, registrando data, origem e limite de cada uma e separando fato, hipótese e lacuna.",
+    "Apontar riscos iniciais revelados pelo mapa e sanitizá-lo antes de compartilhar."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Camada 1 - Física",
+      "Camada 2 - Enlace",
+      "Camada 3 - Rede",
+      "Camada 4 - Transporte",
+      "Camada 7 - Aplicação"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede",
+      "Internet",
+      "Transporte",
+      "Aplicação"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "Wi-Fi",
+      "ARP",
+      "ICMP",
+      "DNS",
+      "DHCP",
+      "HTTP",
+      "TCP",
+      "UDP"
+    ],
+    "dependsOn": [
+      "bits e sinais",
+      "protocolos",
+      "métricas",
+      "equipamentos de rede",
+      "diagnóstico inicial"
+    ],
+    "enables": [
+      "Modelo OSI",
+      "troubleshooting estruturado",
+      "segmentação",
+      "segurança de redes",
+      "cloud networking"
+    ]
+  },
+  "lab": {
+    "id": "lab-1.10",
+    "title": "Mini-projeto: mapear sua rede com evidências",
+    "labType": "security",
+    "objective": "Montar um mapa inicial da sua rede (inventário, visão física e lógica, riscos e lacunas) com evidências dos comandos do módulo, sem expor dados sensíveis.",
+    "prerequisites": [
+      "Usar apenas a sua rede (de casa, por exemplo) ou uma rede com autorização explícita.",
+      "Ter um terminal: Windows PowerShell ou Prompt de Comando, ou Linux."
+    ],
+    "tools": [
+      "Terminal Windows ou Linux",
+      "Editor de texto ou planilha"
+    ],
+    "estimatedTimeMinutes": 30,
+    "steps": [
+      {
+        "number": 1,
+        "title": "Coletar a configuração do host",
+        "instruction": "Anote a data, a hora e a máquina de onde você coleta. Registre IP, máscara, gateway, DNS e tipo de conexão (cabo ou Wi-Fi).",
+        "command": "Windows: ipconfig /all\nLinux: ip addr; ip route",
+        "expectedOutput": "IP, máscara, gateway e DNS da interface ativa. No Linux, o gateway aparece na linha default via.",
+        "explanation": "Esses são os primeiros fatos do mapa e a base da visão lógica."
+      },
+      {
+        "number": 2,
+        "title": "Ver a vizinhança e testar o alcance",
+        "instruction": "Liste os vizinhos locais e teste o gateway e um destino externo. Anote latência média e perda.",
+        "command": "Windows: arp -a, depois ping <gateway> e ping 8.8.8.8\nLinux: ip neigh, depois ping -c 4 <gateway> e ping -c 4 8.8.8.8 (o -c 4 para depois de 4 pacotes)",
+        "expectedOutput": "O gateway na lista de vizinhos, com seu MAC, e respostas do ping com latência e perda, ou as falhas registradas.",
+        "explanation": "Gateway no ARP e respondendo ao ping é fato. Ping sem resposta não prova queda, porque o ICMP pode ser bloqueado: anote como limite."
+      },
+      {
+        "number": 3,
+        "title": "Verificar caminho e nomes",
+        "instruction": "Veja os saltos até um destino externo e teste a resolução de um nome comum.",
+        "command": "Windows: tracert 8.8.8.8\nLinux: tracepath 8.8.8.8\nAmbos: nslookup example.com",
+        "expectedOutput": "Saltos visíveis ou asteriscos; o nome resolvido para um endereço IP e o servidor DNS que respondeu.",
+        "explanation": "Asteriscos entram como limite, não como prova de queda. Se o destino responde por IP e o nome falha, a hipótese passa para o DNS."
+      },
+      {
+        "number": 4,
+        "title": "Montar e sanitizar o mapa",
+        "instruction": "Monte o inventário (item, tipo, meio, evidência), separe a visão física da lógica e marque cada afirmação como fato, hipótese ou lacuna. Liste pelo menos dois riscos ou lacunas. Antes de compartilhar, mascare IPs, MACs e nomes.",
+        "command": "Exemplo de sanitização: 192.168.1.23 -> 192.168.x.23; nome interno -> host-A",
+        "expectedOutput": "Um documento de uma página com inventário, visão física, visão lógica, riscos e lacunas, sem dados que identifiquem a rede.",
+        "explanation": "Aparelhos que o ARP não mostrou são lacuna, não prova de que eles não existem."
+      }
+    ],
+    "expectedResult": "Um mapa curto da sua rede: inventário classificado, visões física e lógica separadas, cada afirmação marcada como fato (com comando, data e origem), hipótese ou lacuna, e nenhum dado sensível exposto."
+  },
+  "mentorQuestions": [
+    {
+      "type": "diagnóstico",
+      "question": "Seu mapa mostra o gateway respondendo e o ping para 8.8.8.8 funcionando, mas nenhum site abre pelo nome. Qual hipótese ganha força e qual comando a testa?",
+      "hints": [
+        "O destino responde por IP?",
+        "O que transforma nome em IP?"
+      ],
+      "expectedIdeas": [
+        "DNS",
+        "resolução de nomes",
+        "nslookup"
+      ],
+      "explanation": "Se a conectividade por IP funciona e os nomes falham, o DNS vira a hipótese principal. O nslookup mostra se o nome resolve e qual servidor respondeu."
+    },
+    {
+      "type": "cenário real",
+      "question": "No mapa de um escritório, aparece um aparelho que ninguém sabe o que é. O que fazer de forma segura e profissional?",
+      "hints": [
+        "Não ataque nem tente acessar o aparelho.",
+        "Pense em registro, responsável e autorização."
+      ],
+      "expectedIdeas": [
+        "registrar como lacuna, com IP, MAC, data e origem",
+        "perguntar ao responsável pela rede",
+        "consultar a lista de dispositivos do roteador, se autorizado",
+        "não varrer sem permissão"
+      ],
+      "explanation": "Ativo desconhecido é risco, mas a resposta segue processo autorizado: registrar a evidência, perguntar a quem responde pela rede e conferir nas fontes que você pode consultar."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1.10.1",
+      "question": "Qual é a melhor definição de mapa de rede no contexto deste módulo?",
+      "options": [
+        "Um desenho decorativo da internet",
+        "Um documento com visão física, lógica, serviços, evidências, métricas e riscos",
+        "Uma lista de senhas de roteadores",
+        "Um comando que descobre tudo automaticamente"
+      ],
+      "answer": 1,
+      "explanation": "Mapa útil combina várias visões e evidências, não apenas desenho.",
+      "topic": "mapeamento",
+      "difficulty": "iniciante",
+      "type": "conceito"
+    },
+    {
+      "id": "q1.10.2",
+      "question": "Qual item pertence mais claramente à visão física?",
+      "options": [
+        "DNS primário",
+        "Cabo entre tomada e switch",
+        "Regra de firewall",
+        "Nome de um site, como example.com"
+      ],
+      "answer": 1,
+      "explanation": "Cabos, portas, rack, patch panel e APs fazem parte da visão física.",
+      "topic": "topologia",
+      "difficulty": "iniciante",
+      "type": "comparação"
+    },
+    {
+      "id": "q1.10.7",
+      "question": "No seu mapa, o host tem IP válido, mas o ping para o gateway falha. Onde a investigação deve começar?",
+      "options": [
+        "No servidor DNS configurado",
+        "No provedor de internet",
+        "Na aplicação que o usuário tentou abrir",
+        "No caminho até o gateway: cabo ou Wi-Fi, switch ou AP, ou o próprio gateway"
+      ],
+      "answer": 3,
+      "explanation": "Sem alcançar o gateway, o problema está antes dele. DNS, provedor e aplicação só entram depois que o gateway responde.",
+      "topic": "troubleshooting",
+      "difficulty": "intermediário",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q1.10.4",
+      "question": "Por que mapas de rede devem ser protegidos?",
+      "options": [
+        "Porque sempre consomem muita CPU",
+        "Porque podem revelar IPs, caminhos, nomes internos e controles",
+        "Porque impedem DHCP",
+        "Porque substituem firewall"
+      ],
+      "answer": 1,
+      "explanation": "Mapas internos ajudam defesa, mas também podem ajudar reconhecimento ofensivo se vazarem.",
+      "topic": "segurança",
+      "difficulty": "intermediário",
+      "type": "segurança"
+    },
+    {
+      "id": "q1.10.5",
+      "question": "Um tracert mostra asteriscos em alguns saltos. Qual interpretação é mais correta?",
+      "options": [
+        "A internet inteira caiu",
+        "Asteriscos sempre indicam invasão",
+        "Alguns dispositivos podem não responder ICMP ou filtrar respostas",
+        "O DNS está sempre incorreto"
+      ],
+      "answer": 2,
+      "explanation": "Ausência de resposta em um salto não prova queda: o equipamento pode não responder ICMP ou filtrar as respostas.",
+      "topic": "troubleshooting",
+      "difficulty": "intermediário",
+      "type": "cenário"
+    },
+    {
+      "id": "q1.10.8",
+      "question": "Você rodou arp -a no notebook e o servidor de arquivos, que fica em outra rede, não aparece na lista. O que registrar no mapa?",
+      "options": [
+        "Uma lacuna: ARP só mostra a vizinhança local recente",
+        "Que o servidor de arquivos está desligado",
+        "Que o switch bloqueou o servidor",
+        "Que a tabela ARP está corrompida"
+      ],
+      "answer": 0,
+      "explanation": "Para falar com um servidor de outra rede, o host usa o gateway; por isso o servidor nunca aparece no ARP local, e a ausência não prova nada sobre ele.",
+      "topic": "evidências",
+      "difficulty": "intermediário",
+      "type": "cenário"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc1.10.1",
+      "front": "O que é mapa físico?",
+      "back": "Representação de cabos, portas, Wi-Fi, aparelhos, localização e meios de transmissão.",
+      "tags": [
+        "topologia"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.10.2",
+      "front": "O que é mapa lógico?",
+      "back": "Representação de IPs, gateway, DNS, serviços e caminho provável até a internet.",
+      "tags": [
+        "topologia"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.10.3",
+      "front": "Por que registrar data da evidência?",
+      "back": "Porque redes mudam; sem data, a evidência pode estar obsoleta.",
+      "tags": [
+        "documentação"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.10.7",
+      "front": "Como sanitizar 192.168.1.23 e servidor-financeiro.empresa.local antes de compartilhar?",
+      "back": "Mascare: 192.168.x.23 e servidor-A (ou host-A). Faça o mesmo com MACs, domínios e nomes de usuário.",
+      "tags": [
+        "segurança"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.10.5",
+      "front": "Qual comando mostra gateway e DNS no Windows?",
+      "back": "ipconfig /all.",
+      "tags": [
+        "comandos"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc1.10.8",
+      "front": "No mapa, qual a diferença entre fato, hipótese e lacuna?",
+      "back": "Fato: confirmado por evidência com data e origem. Hipótese: deduzido, como o caminho provável. Lacuna: o que ainda não foi confirmado.",
+      "tags": [
+        "documentação"
+      ],
+      "difficulty": "iniciante"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex1.10.5",
+      "type": "classificação",
+      "prompt": "Classifique cada item como dispositivo final, intermediário, serviço ou meio, e diga se ele entra na visão física, na lógica ou nas duas: notebook, AP, roteador doméstico, servidor DNS, impressora, cabo do notebook até o switch.",
+      "expectedAnswer": "Notebook e impressora: finais, físicos e lógicos (têm IP). AP: intermediário, físico. Roteador doméstico: intermediário que acumula gateway, switch e AP, físico e lógico. Servidor DNS: serviço, lógico. Cabo: meio, só físico.",
+      "explanation": "Classifique pelo papel, não pelo nome comercial."
+    },
+    {
+      "id": "ex1.10.3",
+      "type": "segurança",
+      "prompt": "Você vai pedir ajuda num fórum e quer colar estas linhas que anotou do ipconfig /all: nome do host FIN-NOTE-07; IPv4 192.168.10.23; endereço físico 3C-52-82-1A-4F-9B; gateway 192.168.10.1; sufixo DNS financeiro.empresa.local. Reescreva as linhas sanitizadas, mantendo o que ajuda no diagnóstico.",
+      "expectedAnswer": "host-A; 192.168.x.23; 3C-52-82-xx-xx-xx (ou omitido); gateway 192.168.x.1; empresa-A.local (ou omitido). Continua visível o que ajuda no diagnóstico: host e gateway na mesma rede.",
+      "explanation": "Sanitizar é mascarar o que identifica a empresa, a pessoa ou o aparelho, sem apagar a informação técnica de que quem ajuda precisa."
+    },
+    {
+      "id": "ex1.10.4",
+      "type": "arquitetura",
+      "prompt": "Num escritório, visitantes e funcionários usam o mesmo Wi-Fi, com a mesma senha, e o servidor de arquivos está nessa rede. Que risco você registra no mapa e que melhoria inicial propõe?",
+      "expectedAnswer": "Risco: qualquer visitante fica na mesma rede do servidor de arquivos e dos computadores de trabalho e pode tentar acessá-los. Melhoria inicial: uma rede separada para visitantes (muitos roteadores e APs têm a opção de rede de convidados) e nova senha na rede interna.",
+      "explanation": "O mapa transforma uma observação em recomendação. Em empresas, essa separação é feita com VLANs e firewall, temas das aulas 3.7 e 9.4."
+    }
+  ],
+  "challenge": {
+    "title": "Fato, hipótese ou lacuna?",
+    "scenario": "No escritório da Motivação, você coletou no notebook da recepção, em 05/11 às 14h: ipconfig /all mostra IP 192.168.0.42, gateway 192.168.0.1 e DNS 192.168.0.1; arp -a lista 192.168.0.1 e 192.168.0.30; ping 192.168.0.1 responde com 0% de perda e 2 ms; nslookup intranet.escritorio.local responde que o nome não existe. A dona diz que há um servidor de arquivos no armário, mas ninguém sabe o IP dele.",
+    "tasks": [
+      "Separar o que é fato, hipótese e lacuna.",
+      "Apontar um risco que o mapa já revela.",
+      "Propor o próximo passo para a lacuna mais importante, sem varrer a rede."
+    ],
+    "expectedDeliverables": [
+      "Uma lista em três blocos (fatos, hipóteses, lacunas), um risco e um próximo passo."
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "Comece pelo que tem comando, data e origem: isso é fato. O que você deduz é hipótese; o que só foi dito ou não foi visto é lacuna.",
+    "steps": [
+      "Fatos (notebook da recepção, 05/11, 14h): IP 192.168.0.42; gateway e DNS em 192.168.0.1, que responde ao ping (0% de perda, 2 ms); o notebook falou há pouco com 192.168.0.30; o DNS diz que intranet.escritorio.local não existe.",
+      "Hipóteses: 192.168.0.1 é o roteador, que também responde como DNS; 192.168.0.30 pode ser o servidor de arquivos ou a impressora.",
+      "Lacunas: o que é 192.168.0.30; o IP do servidor do armário (é relato, não evidência); que outros aparelhos existem (o ARP só mostra vizinhos recentes); se a intranet existe com outro nome.",
+      "Risco: um servidor de arquivos sem documentação nem responsável técnico.",
+      "Próximo passo: perguntar à dona quem instalou o servidor e, com autorização, ver a lista de dispositivos no painel do roteador para identificar 192.168.0.30."
+    ],
+    "commonMistakes": [
+      "Escrever servidor de arquivos = 192.168.0.30 como fato: é só hipótese.",
+      "Concluir que a intranet está fora do ar: o DNS só disse que não conhece esse nome.",
+      "Achar que a rede tem poucos aparelhos porque o ARP listou poucos."
+    ],
+    "finalAnswer": "Quatro fatos com comando, data e origem, duas hipóteses e quatro lacunas. O risco imediato é o servidor sem documentação; identifique-o pelas fontes autorizadas (a dona e o painel do roteador), não por varredura."
+  },
+  "references": [
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Módulo 0",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Base de bits, sinais, métricas, protocolos e pensamento em camadas."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Módulo 1",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Fundamentos de redes usados no mini-projeto."
+    },
+    {
+      "type": "standard",
+      "title": "ISO/IEC 7498-1 — Basic Reference Model",
+      "organization": "ISO/IEC",
+      "url": "",
+      "note": "Referência conceitual para o próximo módulo sobre OSI."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "m00",
+      "lesson": "fundamentos de infraestrutura",
+      "reason": "Mapas de rede evoluem para documentação de infraestrutura e automação."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "m00",
+      "lesson": "fundamentos de identidade",
+      "reason": "Serviços e acessos dependem de rede, DNS, caminhos e políticas bem documentadas."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "2.1"
+    ]
+  }
+}

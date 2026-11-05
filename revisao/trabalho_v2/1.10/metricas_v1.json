@@ -1,0 +1,97 @@
+{
+  "id": "1.10",
+  "versao": "v1",
+  "titulo": "Revisão e mini-projeto: mapear sua rede",
+  "tipo": "ligação/revisão",
+  "palavras": {
+    "visiveis": 4251,
+    "teoria": 2187,
+    "praticaExtra": 1465,
+    "quiz": 320,
+    "flashcards": 114
+  },
+  "porGrupoTeoria": {
+    "introducao": 504,
+    "contexto": 177,
+    "conteudo": 560,
+    "exemplos": 459,
+    "seguranca_troubleshooting": 487
+  },
+  "porSecao": {
+    "motivation": 138,
+    "summary": 101,
+    "problem": 177,
+    "concept": 186,
+    "internals": 249,
+    "architecture": 123,
+    "diagram": 2,
+    "analogy": 77,
+    "simpleExample": 173,
+    "enterpriseExample": 90,
+    "securityExample": 119,
+    "objectives": 49,
+    "learningOutcomes": 61,
+    "glossary": 155,
+    "security": 207,
+    "troubleshooting": 280,
+    "nextTheme": 46
+  },
+  "pratica": {
+    "quiz": 320,
+    "flashcards": 114,
+    "lab": 787,
+    "mentorQuestions": 139,
+    "exercises": 199,
+    "challenge": 170,
+    "commentedSolution": 170
+  },
+  "outros": {
+    "title+subtitle": 26,
+    "nextTheme": 46,
+    "references": 50,
+    "linksToOtherCourses": 43
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 10,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 5,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 60,
+    "alternativa_5minPorPasso": 50,
+    "plausivel": true,
+    "override": null,
+    "palavras": 787
+  },
+  "duracao": {
+    "declarada": "120-165 min",
+    "estimatedStudyTimeMinutes": 165,
+    "nucleo": 25.8,
+    "nucleoPartes": {
+      "teoria": 16.8,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 105,
+    "praticaExtraPartes": {
+      "lab": 60,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "20-30 min",
+    "praticaExtraArredondada": 105,
+    "recomendada": "20-30 min + 105 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 30
+  }
+}

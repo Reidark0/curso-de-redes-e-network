@@ -1,0 +1,103 @@
+{
+  "id": "1.10",
+  "versao": "original",
+  "titulo": "Revisão e mini-projeto: mapear sua rede",
+  "tipo": "ligação/revisão",
+  "palavras": {
+    "visiveis": 4093,
+    "teoria": 2192,
+    "praticaExtra": 1405,
+    "quiz": 228,
+    "flashcards": 90
+  },
+  "porGrupoTeoria": {
+    "introducao": 502,
+    "contexto": 387,
+    "conteudo": 275,
+    "exemplos": 566,
+    "seguranca_troubleshooting": 462
+  },
+  "porSecao": {
+    "motivation": 175,
+    "summary": 62,
+    "history": 131,
+    "problem": 136,
+    "evolution": 120,
+    "concept": 71,
+    "internals": 117,
+    "architecture": 84,
+    "diagram": 3,
+    "analogy": 91,
+    "simpleExample": 114,
+    "enterpriseExample": 85,
+    "cloudExample": 89,
+    "devsecopsExample": 76,
+    "securityExample": 111,
+    "objectives": 49,
+    "learningOutcomes": 61,
+    "glossary": 155,
+    "security": 227,
+    "troubleshooting": 235,
+    "nextTheme": 59
+  },
+  "pratica": {
+    "quiz": 228,
+    "flashcards": 90,
+    "lab": 820,
+    "mentorQuestions": 139,
+    "exercises": 155,
+    "challenge": 138,
+    "commentedSolution": 153
+  },
+  "outros": {
+    "title+subtitle": 26,
+    "nextTheme": 59,
+    "references": 50,
+    "linksToOtherCourses": 43
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 10,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 5,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 105,
+    "alternativa_5minPorPasso": 50,
+    "plausivel": false,
+    "override": null,
+    "palavras": 820
+  },
+  "duracao": {
+    "declarada": "70-105 min",
+    "estimatedStudyTimeMinutes": 105,
+    "nucleo": 25.9,
+    "nucleoPartes": {
+      "teoria": 16.9,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 95,
+    "praticaExtraPartes": {
+      "lab": 50,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "20-30 min",
+    "praticaExtraArredondada": 95,
+    "recomendada": "20-30 min + 95 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 30
+  }
+}

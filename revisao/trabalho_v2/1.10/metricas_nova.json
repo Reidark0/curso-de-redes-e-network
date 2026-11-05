@@ -1,0 +1,91 @@
+{
+  "id": "1.10",
+  "versao": "nova",
+  "titulo": "Revisão e mini-projeto: mapear sua rede",
+  "tipo": "ligação/revisão",
+  "palavras": {
+    "visiveis": 3054,
+    "teoria": 1278,
+    "praticaExtra": 1172,
+    "quiz": 333,
+    "flashcards": 114
+  },
+  "porGrupoTeoria": {
+    "introducao": 278,
+    "contexto": 134,
+    "conteudo": 647,
+    "exemplos": 219,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 129,
+    "summary": 88,
+    "problem": 134,
+    "concept": 340,
+    "internals": 305,
+    "diagram": 2,
+    "analogy": 52,
+    "simpleExample": 167,
+    "objectives": 61,
+    "learningOutcomes": 0,
+    "glossary": 0,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 38
+  },
+  "pratica": {
+    "quiz": 333,
+    "flashcards": 114,
+    "lab": 418,
+    "mentorQuestions": 159,
+    "exercises": 260,
+    "challenge": 112,
+    "commentedSolution": 223
+  },
+  "outros": {
+    "title+subtitle": 26,
+    "nextTheme": 38,
+    "references": 50,
+    "linksToOtherCourses": 43
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 2,
+    "exercicios": 3,
+    "passosLab": 4,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 0,
+    "exemplosPorAmbiente": []
+  },
+  "lab": {
+    "estimatedTimeMinutes": 30,
+    "alternativa_5minPorPasso": 20,
+    "plausivel": true,
+    "override": null,
+    "palavras": 418
+  },
+  "duracao": {
+    "declarada": "15-25 min + 65 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 18.8,
+    "nucleoPartes": {
+      "teoria": 9.8,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 67,
+    "praticaExtraPartes": {
+      "lab": 30,
+      "mentor": 4,
+      "exercicios": 18,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-25 min",
+    "praticaExtraArredondada": 65,
+    "recomendada": "15-25 min + 65 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

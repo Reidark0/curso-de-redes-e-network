@@ -1,0 +1,16 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <p>Um mapa útil nasce de perguntas feitas em ordem: do seu host para fora. Cada etapa tem uma evidência típica e um limite que você precisa anotar.</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Etapa</th><th>O que registrar</th><th>Evidência (Windows · Linux)</th><th>Limite da evidência</th></tr></thead>
+    <tbody>
+      <tr><td>1. Host</td><td>Nome, sistema, interface, IP, máscara, gateway, DNS e tipo de conexão (cabo ou Wi-Fi)</td><td><code>ipconfig /all</code> · <code>ip addr</code>, <code>ip route</code></td><td>Mostra só o host onde você rodou o comando</td></tr>
+      <tr><td>2. Vizinhança</td><td>Gateway e seu MAC, outros vizinhos, switch/AP quando conhecido, meio usado</td><td><code>arp -a</code> · <code>ip neigh</code></td><td>ARP só mostra a vizinhança local recente, não a rede inteira</td></tr>
+      <tr><td>3. Serviços</td><td>DNS, DHCP, internet, impressora, servidor interno, aplicação ou API</td><td><code>nslookup exemplo.com</code> e a lista de serviços conhecidos</td><td>Serviço que você não usa não aparece</td></tr>
+      <tr><td>4. Caminho</td><td>Saltos visíveis, roteador, firewall, proxy, VPN ou link WAN</td><td><code>tracert 8.8.8.8</code> · <code>tracepath 8.8.8.8</code></td><td>Saltos que não respondem ICMP aparecem como asteriscos; comandos locais não mostram as regras de firewall</td></tr>
+      <tr><td>5. Métricas</td><td>Latência, perda, jitter aproximado, throughput percebido, disponibilidade observada</td><td><code>ping &lt;gateway&gt;</code>, <code>ping 8.8.8.8</code></td><td>ICMP pode ser bloqueado; um teste rápido pode não reproduzir um sintoma intermitente</td></tr>
+      <tr><td>6. Riscos</td><td>Wi-Fi fraco, porta exposta, DNS suspeito, rede plana, documentação ausente, caminho crítico sem redundância</td><td>Observação + resultado das etapas anteriores</td><td>O que não foi confirmado entra como lacuna, não como fato</td></tr>
+    </tbody>
+  </table></div>
+  <p>Toda a tabela vale para um momento: DHCP troca endereços, a qualidade do Wi-Fi varia e rotas mudam. Por isso cada evidência leva <strong>data e origem</strong>, e o mapa precisa ser atualizado, ou fica obsoleto.</p>
+</section>

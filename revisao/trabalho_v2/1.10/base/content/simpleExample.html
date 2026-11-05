@@ -1,0 +1,16 @@
+<section class="lesson-section lesson-section--example">
+  <h2>Exemplo simples</h2>
+  <p>Um inventário inicial de uma casa, já classificado e sanitizado:</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Item</th><th>Tipo</th><th>Meio</th><th>Evidência</th></tr></thead>
+    <tbody>
+      <tr><td>Notebook (host-A)</td><td>Dispositivo final</td><td>Wi-Fi</td><td><code>ipconfig /all</code>: IP 192.168.x.23, gateway 192.168.x.1</td></tr>
+      <tr><td>Celular e smart TV</td><td>Dispositivos finais</td><td>Wi-Fi</td><td>Lista de dispositivos conectados no roteador (se você o administra)</td></tr>
+      <tr><td>Impressora</td><td>Dispositivo final</td><td>Rede local</td><td>Aparece em <code>arp -a</code> depois de você imprimir</td></tr>
+      <tr><td>Roteador do provedor</td><td>Intermediário (gateway, AP Wi-Fi e NAT no mesmo aparelho)</td><td>Fibra até o provedor</td><td><code>arp -a</code> mostra o gateway; ping responde</td></tr>
+      <tr><td>DNS entregue por DHCP</td><td>Serviço</td><td>—</td><td><code>ipconfig /all</code> e <code>nslookup</code></td></tr>
+      <tr><td>Internet via fibra</td><td>Serviço (link)</td><td>Fibra</td><td><code>tracert 8.8.8.8</code></td></tr>
+    </tbody>
+  </table></div>
+  <p>O mapa também anota sintomas: Wi-Fi ruim no quarto, latência maior em jogos e perda de sinal quando a porta do cômodo fecha. Mesmo simples, ele já orienta o diagnóstico. Se só o notebook falha, o problema pode estar no host. Se todos falham, a suspeita vai para gateway, link ou provedor. Se nomes não resolvem, DNS entra na investigação. Se só o quarto tem problema, o meio rádio e a posição do AP viram hipótese.</p>
+</section>
