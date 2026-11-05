@@ -29,7 +29,7 @@ Status: PENDENTE · EM ANDAMENTO · CONCLUÍDA · FALHOU. Atualizado pelo orques
 | 2.1 | m02/lesson-02-01.js | CONCLUÍDA | 3897→3753 (-4%) | 80-115 min→65-90 min | INFLADA | BAIXA 14% | FORTE | BOM | CONCLUÍDA | 3897→3753→2657 | 80-115 min → 65-90 min → 15-25 min + 30 min de prática extra |
 | 2.2 | m02/lesson-02-02.js | CONCLUÍDA | 4182→4375 (+5%) | 85-120 min→70-100 min | INFLADA | MÉDIA 18% | PARCIAL | BOM | CONCLUÍDA | 4182→4375→3354 | 85-120 min → 70-100 min → 20-25 min + 35 min de prática extra |
 | 2.3 | m02/lesson-02-03.js | CONCLUÍDA | 4514→4857 (+8%) | 80-115 min→100-140 min | SUBESTIMADA | MÉDIA 15% | PARCIAL | BOM | CONCLUÍDA | 4513→4856→3292 | 80-115 min → 100-140 min → 15-25 min + 45 min de prática extra |
-| 2.4 | m02/lesson-02-04.js | CONCLUÍDA | 4918→5406 (+10%) | 85-120 min→110-155 min | SUBESTIMADA | MÉDIA 16% | PARCIAL | BOM | PENDENTE | | |
+| 2.4 | m02/lesson-02-04.js | CONCLUÍDA | 4918→5406 (+10%) | 85-120 min→110-155 min | SUBESTIMADA | MÉDIA 16% | PARCIAL | BOM | EM ANDAMENTO |  |  |
 | 2.5 | m02/lesson-02-05.js | CONCLUÍDA | 4642→5109 (+10%) | 85-120 min→90-130 min | ORGANIZADA | MÉDIA 15% | PARCIAL | MÉDIO | PENDENTE | | |
 | 2.6 | m02/lesson-02-06.js | CONCLUÍDA | 4680→5105 (+9%) | 90-125 min→110-155 min | SUBESTIMADA | MÉDIA 20% | PARCIAL | BOM | PENDENTE | | |
 | 2.7 | m02/lesson-02-07.js | CONCLUÍDA | 4055→4239 (+5%) | 85-120 min→65-90 min | INFLADA | MÉDIA 17% | FORTE | BOM | PENDENTE | | |
