@@ -4,8 +4,8 @@ export const lesson0202 = {
   "order": 2,
   "title": "Encapsulamento, desencapsulamento e PDUs",
   "subtitle": "Como dados de aplicação viram segmentos, pacotes, quadros e bits — e por que isso muda o troubleshooting.",
-  "duration": "70-100 min",
-  "estimatedStudyTimeMinutes": 100,
+  "duration": "20-25 min + 35 min de prática extra",
+  "estimatedStudyTimeMinutes": 25,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 200,
@@ -44,34 +44,21 @@ export const lesson0202 = {
     }
   ],
   "objectives": [
-    "Explicar o que é encapsulamento e desencapsulamento.",
-    "Diferenciar dados, segmento, datagrama, pacote, quadro e bits.",
-    "Entender por que cada camada adiciona cabeçalhos, trailers ou metadados.",
-    "Relacionar PDUs com Wireshark, tcpdump, firewalls, roteadores e switches.",
-    "Explicar como VPNs, overlays e cloud podem adicionar encapsulamentos extras.",
-    "Identificar riscos de segurança e troubleshooting ligados a MTU, overhead e captura de pacotes."
-  ],
-  "learningOutcomes": [
-    "Dado um fluxo HTTP, o aluno consegue descrever as PDUs envolvidas desde aplicação até camada física.",
-    "Dado um print de captura, o aluno entende por que há cabeçalhos Ethernet, IP, TCP/UDP e aplicação.",
-    "Dado um problema de VPN com pacotes grandes, o aluno considera overhead, MTU e MSS como hipóteses.",
-    "Dado um equipamento de rede, o aluno identifica quais PDUs ele provavelmente inspeciona.",
-    "Dado um relatório de evidências, o aluno usa nomes precisos para dados, segmento, pacote e quadro."
+    "Explicar encapsulamento e desencapsulamento: o que cada camada acrescenta e como o destino usa cada cabeçalho para saber o que vem dentro.",
+    "Diferenciar dados, segmento, datagrama, pacote, quadro e bits, e dizer o que switch e roteador leem e por que o quadro é refeito a cada salto.",
+    "Calcular quanto os cabeçalhos ocupam numa MTU de 1500 bytes e explicar por que um túnel (VPN) faz pacotes grandes falharem enquanto os pequenos passam."
   ],
   "content": {
-    "motivation": "<section class=\"lesson-section lesson-section--motivation\">\n  <h2>Motivação</h2>\n  <p>Quando o navegador envia uma requisição, ela não sai pelo cabo como “página web”. Cada camada acrescenta o que precisa (portas, endereços IP, endereços MAC) e, no fim, tudo vira sinal elétrico, luz ou rádio. Esse processo é o <strong>encapsulamento</strong>; o inverso, no destino, é o <strong>desencapsulamento</strong>. É ele que explica o que você vê no Wireshark e no tcpdump, o que um switch, roteador ou firewall consegue inspecionar e por que VPNs mexem com MTU, MSS e fragmentação.</p>\n  <div class=\"callout callout--problem\"><strong>Problema real:</strong> um sistema interno falha apenas quando acessado pela VPN. O DNS resolve, o TCP conecta às vezes, mas uploads grandes falham. Sem entender encapsulamento, alguém culpa “a aplicação”. Com encapsulamento, você passa a suspeitar de MTU, overhead da VPN, fragmentação, MSS ou bloqueio do ICMP de que o Path MTU Discovery precisa.</div>\n</section>\n",
-    "problem": "<section class=\"lesson-section lesson-section--problem\">\n  <h2>Problema</h2>\n  <p>Dados de aplicação (uma string JSON, uma requisição HTTP, um arquivo) não dizem, sozinhos, como atravessar a rede. Cada camada acrescenta a informação que falta:</p>\n  <ul class=\"flow-list\">\n    <li><strong>Sem transporte:</strong> o destino não sabe qual processo ou porta deve receber a conversa.</li>\n    <li><strong>Sem rede:</strong> não há endereço lógico para encaminhar entre redes.</li>\n    <li><strong>Sem enlace:</strong> não há entrega local ao próximo salto.</li>\n    <li><strong>Sem física:</strong> não há transmissão real pelo cabo, fibra ou rádio.</li>\n    <li><strong>Sem desencapsulamento:</strong> o destino não consegue remover as informações de cada camada e entregar só os dados úteis à aplicação.</li>\n  </ul>\n  <p>Por isso a falha pode estar em qualquer envelope: o segmento não chega à porta certa, o pacote é descartado por falta de rota ou por firewall, o quadro cai na VLAN errada ou é corrompido por erro físico, ou um pacote maior que a MTU do caminho some enquanto os pequenos passam.</p>\n</section>\n",
-    "concept": "<section class=\"lesson-section lesson-section--concept\">\n  <h2>Conceito</h2>\n  <p><strong>Encapsulamento</strong> é o processo no qual os dados de uma camada superior recebem informações adicionais para serem tratados pela camada inferior: quase sempre um <strong>cabeçalho</strong>, na frente, e às vezes um <strong>trailer</strong>, no fim. Na Ethernet, o trailer é o FCS (Frame Check Sequence), de 4 bytes, que permite detectar quadros corrompidos. <strong>Desencapsulamento</strong> é o inverso: o destino valida, interpreta e remove essas informações camada por camada até entregar os dados à aplicação.</p>\n  <div class=\"definition-box\"><strong>Definição:</strong> PDU (Protocol Data Unit) é a unidade de dados tratada por uma camada específica. O nome varia conforme a literatura; o uso mais comum é <em>segmento</em> para TCP e <em>datagrama</em> para UDP.</div>\n  <div class=\"responsive-table\"><table class=\"data-table comparison-table\">\n    <thead><tr><th>Camada</th><th>PDU comum</th><th>Informação adicionada</th><th>Exemplo</th></tr></thead>\n    <tbody>\n      <tr><td>Aplicação</td><td>Dados</td><td>Mensagem da aplicação</td><td>HTTP request, consulta DNS, payload JSON</td></tr>\n      <tr><td>Transporte</td><td>Segmento ou datagrama</td><td>Portas, estado, controle de fluxo ou checksum</td><td>TCP 443, UDP 53</td></tr>\n      <tr><td>Rede</td><td>Pacote</td><td>IP de origem, IP de destino, TTL, protocolo</td><td>IPv4 ou IPv6</td></tr>\n      <tr><td>Enlace</td><td>Quadro</td><td>MAC de origem, MAC de destino, EtherType, FCS</td><td>Ethernet</td></tr>\n      <tr><td>Física</td><td>Bits/sinais</td><td>Codificação física no meio</td><td>Cobre, fibra ou rádio</td></tr>\n    </tbody>\n  </table></div>\n  <div class=\"callout warning\"><strong>Erros comuns:</strong>\n    <ul>\n      <li><strong>Chamar toda PDU de pacote.</strong> O diagnóstico passa a misturar quadro, pacote e segmento. Use “pacote” para a camada de rede e “PDU” como termo genérico.</li>\n      <li><strong>Achar que o MAC de destino é o do servidor final.</strong> O IP é fim a fim; o MAC é do próximo salto. Fora da LAN, é normalmente o MAC do gateway local.</li>\n      <li><strong>Confundir encapsulamento com criptografia.</strong> Encapsular acrescenta contexto; cifrar esconde conteúdo.</li>\n    </ul>\n  </div>\n</section>\n",
-    "internals": "<section class=\"lesson-section lesson-section--internals\">\n  <h2>Funcionamento interno</h2>\n  <p>Acompanhe um navegador enviando uma requisição a <code>https://intranet.exemplo.local</code>, com o nome já resolvido e a conexão já estabelecida:</p>\n  <ol class=\"flow-list\">\n    <li><strong>Aplicação cria dados:</strong> por exemplo, uma requisição HTTP.</li>\n    <li><strong>Transporte adiciona portas:</strong> porta de origem, porta de destino e checksum; o TCP também acrescenta sequência e estado.</li>\n    <li><strong>Rede adiciona endereços IP:</strong> origem, destino e informações para roteamento, como TTL.</li>\n    <li><strong>Enlace adiciona endereços locais:</strong> MAC de origem e MAC do próximo salto, que pode ser o destino local ou o gateway.</li>\n    <li><strong>Física transmite sinais:</strong> o quadro vira sinais elétricos, luz ou rádio.</li>\n    <li><strong>Destino desencapsula:</strong> a placa recebe os bits, valida o quadro, entrega o pacote IP, que entrega o segmento à porta correta, e a aplicação interpreta os dados.</li>\n  </ol>\n  <p>No caminho, cada equipamento lê só o envelope de que precisa: o roteador encaminha pelo cabeçalho IP sem entender o HTML; o switch encaminha pelo MAC sem entender o IP (salvo recursos avançados). Por isso ferramentas diferentes enxergam partes diferentes da mesma comunicação.</p>\n\n  <h3>Quanto cada envelope ocupa: MTU e MSS</h3>\n  <p>A <strong>MTU</strong> (Maximum Transmission Unit) é o maior pacote que uma interface transmite sem fragmentar: 1500 bytes na Ethernet comum, contados a partir do cabeçalho IP. O <strong>MSS</strong> (Maximum Segment Size) é o maior volume de dados que o TCP põe num segmento; cada lado anuncia o seu no SYN.</p>\n  <div class=\"responsive-table\"><table class=\"data-table\">\n    <thead><tr><th>Parte</th><th>Bytes</th></tr></thead>\n    <tbody>\n      <tr><td>Cabeçalho Ethernet + FCS</td><td>14 + 4 (fora da MTU)</td></tr>\n      <tr><td>Cabeçalho IPv4 sem opções</td><td>20 (IPv6: 40)</td></tr>\n      <tr><td>Cabeçalho TCP sem opções</td><td>20 (UDP: 8)</td></tr>\n      <tr><td>MSS com MTU 1500, IPv4 e TCP</td><td>1500 − 20 − 20 = 1460</td></tr>\n    </tbody>\n  </table></div>\n  <p><strong>Túneis somam envelopes.</strong> Uma VPN ou overlay põe o pacote inteiro dentro de outro. GRE acrescenta 24 bytes (IPv4 externo de 20 + GRE de 4): sobre um link de 1500, o pacote interno só pode ter 1476. VXLAN acrescenta 50 bytes (Ethernet, IP e UDP externos + VXLAN), por isso overlays costumam usar MTU 1450. IPsec e WireGuard têm overhead que varia com o modo e os algoritmos.</p>\n  <p><strong>Quando o pacote não cabe:</strong> sem o bit DF (Don't Fragment), o roteador IPv4 fragmenta o pacote, com custo de desempenho. Com o DF ligado, o roteador descarta o pacote e devolve um ICMP “Fragmentation Needed” (tipo 3, código 4) com a MTU suportada, e a origem reduz o tamanho. Isso é o <strong>Path MTU Discovery (PMTUD)</strong>. Se um firewall bloqueia esse ICMP, a origem nunca descobre o limite: login e páginas pequenas passam, uploads grandes travam. As correções usuais são ajustar a MTU do túnel ou fazer <strong>MSS clamping</strong>: o roteador ou concentrador VPN reescreve o MSS do SYN para um valor que caiba (ex.: 1436 num túnel GRE de 1476).</p>\n\n  <h3>O que você vê numa captura</h3>\n  <p>O Wireshark mostra o desencapsulamento de fora para dentro: <code>Frame</code> (metadados da captura), <code>Ethernet II</code> (MACs; EtherType 0x0800 = IPv4), <code>Internet Protocol Version 4</code> (IPs, TTL; protocolo 6 = TCP), <code>Transmission Control Protocol</code> (portas, sequência, flags) e, por fim, <code>TLS</code> ou <code>HTTP</code>. Ao capturar no próprio host, o <em>offloading</em> da placa calcula checksums e divide segmentos depois da captura: checksums “incorretos” e segmentos maiores que a MTU não são, necessariamente, o que trafegou no fio.</p>\n</section>\n",
-    "architecture": "<section class=\"lesson-section lesson-section--architecture\">\n  <h2>Arquitetura</h2>\n  <p>O encapsulamento se refaz a cada salto. O host monta todos os envelopes e entrega o quadro ao gateway. O roteador desencapsula o quadro recebido, lê o pacote IP, decide o próximo salto, decrementa o TTL e monta um <strong>novo quadro</strong> para o enlace seguinte. Resultado: os MACs mudam a cada salto, e os IPs de origem e destino seguem iguais de ponta a ponta (salvo NAT).</p>\n  <div class=\"responsive-table\"><table class=\"data-table\">\n    <thead><tr><th>Componente</th><th>O que examina</th><th>O que decide ou faz</th></tr></thead>\n    <tbody>\n      <tr><td>Switch</td><td>Quadro (MAC)</td><td>Porta de saída dentro da LAN</td></tr>\n      <tr><td>Roteador</td><td>Pacote (IP)</td><td>Próximo salto; troca o quadro a cada enlace</td></tr>\n      <tr><td>Firewall</td><td>IP, porta e estado; alguns também a aplicação</td><td>Permitir ou bloquear o fluxo</td></tr>\n      <tr><td>Tags, VPN e overlay</td><td>O pacote ou quadro inteiro</td><td>Acrescenta uma tag (VLAN 802.1Q) ou encapsula tudo em outro pacote (PPPoE, GRE, IPsec, VXLAN, WireGuard)</td></tr>\n      <tr><td>Cloud</td><td>Interfaces virtuais, overlays e políticas</td><td>Encaminha sobre infraestrutura física que o cliente não vê</td></tr>\n    </tbody>\n  </table></div>\n  <p>Firewalls modernos, proxies e service meshes atuam em várias camadas ao mesmo tempo; a tabela mostra o mínimo que cada um precisa ler.</p>\n</section>\n",
-    "analogy": "<section class=\"lesson-section lesson-section--analogy\">\n  <h2>Analogia</h2>\n  <p>Pense em uma carta enviada por uma empresa. O texto é o dado da aplicação. A carta entra num envelope com o destinatário, depois num malote, depois numa caixa, depois num caminhão; cada embalagem é lida por pessoas diferentes no caminho. O destinatário faz o inverso e não lê a etiqueta do caminhão como parte da carta, assim como a aplicação não recebe cabeçalhos Ethernet ou IP como conteúdo.</p>\n  <div class=\"callout callout--warning\"><strong>Limite da analogia:</strong> na rede, cada roteador descarta a “caixa” (o quadro) e monta outra para o próximo trecho, e alguns equipamentos abrem várias embalagens ao mesmo tempo.</div>\n</section>\n",
-    "simpleExample": "<section class=\"lesson-section lesson-section--example\">\n  <h2>Exemplo simples</h2>\n  <p>Do seu notebook (192.168.1.20) você abre um site que resolve para 203.0.113.10. A aplicação cria a requisição. O TCP usa uma porta de origem temporária (ex.: 51514) e a porta de destino 443. O IP usa 192.168.1.20 como origem e 203.0.113.10 como destino. O quadro (Ethernet no cabo, 802.11 no Wi-Fi) usa o MAC da sua placa como origem e o MAC do gateway 192.168.1.1 como destino, porque o servidor está fora da sua rede. O meio transforma tudo em sinais.</p>\n  <p>Se o site não abre, cada camada gera uma hipótese diferente: Wi-Fi desconectado, sem IP, gateway incorreto, DNS falhando, porta 443 bloqueada, certificado inválido ou aplicação fora. O encapsulamento mostra onde procurar.</p>\n</section>\n",
-    "enterpriseExample": "<section class=\"lesson-section lesson-section--enterprise\">\n  <h2>Exemplo empresarial</h2>\n  <p>Um usuário acessa um sistema financeiro interno passando por switch de acesso, switch de distribuição, firewall interno, balanceador, proxy, servidor de aplicação e banco de dados. Em cada trecho, um envelope diferente é examinado: o firewall pode liberar IP e porta e o WAF bloquear a requisição de aplicação; o switch pode encaminhar certo e uma VLAN errada pôr o host no segmento incorreto; o roteador pode ter rota e a VPN causar problema de MTU. Diagnosticar é reconhecer qual envelope cada componente inspeciona.</p>\n</section>\n",
-    "cloudExample": "<section class=\"lesson-section lesson-section--cloud\">\n  <h2>Exemplo em cloud</h2>\n  <p>Em cloud, a instância tem uma interface virtual numa subnet, com route tables e security groups ou NSGs, e pode passar por NAT Gateway, load balancer, firewall gerenciado ou private endpoint. Por baixo, o provedor usa overlays sobre infraestrutura física compartilhada, invisíveis para você. O que você observa são partes desse encapsulamento: flow logs, packet capture da VPC/VNet e logs de load balancer e firewall.</p>\n  <p>No Kubernetes, um pacote pode atravessar Pod, interface virtual, bridge, CNI, overlay, node, Service, kube-proxy e ingress. Se o CNI usa overlay (ex.: VXLAN), a MTU dos pods precisa descontar esse overhead; senão, os sintomas da VPN aparecem dentro do cluster. Service mesh com mTLS acrescenta mais um envelope.</p>\n</section>\n",
-    "securityExample": "<section class=\"lesson-section lesson-section--security\">\n  <h2>Exemplo em Segurança</h2>\n  <p>Segurança depende de saber em qual envelope cada controle atua. Liberar TCP 443 num firewall de camada 4 não diz nada sobre o conteúdo HTTPS que passa por ali. Um WAF inspeciona a aplicação, mas não corrige uma rota insegura. O TLS cifra os dados da aplicação, mas os cabeçalhos IP e TCP ficam fora dele: IPs, portas, tamanhos e horários continuam visíveis para quem observa o caminho. Uma VPN protege o túnel, mas carrega dentro dele qualquer tráfego que a política permitir, inclusive tráfego que contorna controles intermediários.</p>\n</section>\n",
-    "diagram": "<section class=\"lesson-section lesson-section--diagram\">\n  <h2>Diagrama</h2>\n  <p>O diagrama abaixo mostra a ideia central: a mensagem da aplicação desce pela pilha, ganha cabeçalhos e vira uma PDU diferente em cada grupo de camadas; no destino, o processo é invertido.</p>\n  <svg class=\"lesson-svg\" viewBox=\"0 0 960 520\" role=\"img\" aria-labelledby=\"m02l02-title m02l02-desc\">\n    <title id=\"m02l02-title\">Encapsulamento e desencapsulamento no Modelo OSI</title>\n    <desc id=\"m02l02-desc\">Cliente encapsula dados em segmento, pacote, quadro e bits; servidor desencapsula na ordem inversa.</desc>\n    <defs>\n      <marker id=\"m02l02-arrow\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\" markerUnits=\"strokeWidth\">\n        <path d=\"M0,0 L0,6 L9,3 z\" class=\"svg-arrow\" />\n      </marker>\n    </defs>\n\n    <rect x=\"40\" y=\"40\" width=\"250\" height=\"420\" rx=\"18\" class=\"svg-zone\" />\n    <text x=\"165\" y=\"75\" text-anchor=\"middle\" class=\"svg-label\">Origem: encapsula</text>\n\n    <rect x=\"670\" y=\"40\" width=\"250\" height=\"420\" rx=\"18\" class=\"svg-zone\" />\n    <text x=\"795\" y=\"75\" text-anchor=\"middle\" class=\"svg-label\">Destino: desencapsula</text>\n\n    <rect x=\"90\" y=\"105\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node svg-node--client\" />\n    <text x=\"165\" y=\"134\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Dados</text>\n\n    <rect x=\"90\" y=\"170\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node\" />\n    <text x=\"165\" y=\"199\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Segmento TCP/UDP</text>\n\n    <rect x=\"90\" y=\"235\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node svg-node--router\" />\n    <text x=\"165\" y=\"264\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Pacote IP</text>\n\n    <rect x=\"90\" y=\"300\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node svg-node--switch\" />\n    <text x=\"165\" y=\"329\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Quadro Ethernet</text>\n\n    <rect x=\"90\" y=\"365\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node\" />\n    <text x=\"165\" y=\"394\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Bits / Sinais</text>\n\n    <line x1=\"165\" y1=\"151\" x2=\"165\" y2=\"170\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n    <line x1=\"165\" y1=\"216\" x2=\"165\" y2=\"235\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n    <line x1=\"165\" y1=\"281\" x2=\"165\" y2=\"300\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n    <line x1=\"165\" y1=\"346\" x2=\"165\" y2=\"365\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n\n    <rect x=\"355\" y=\"210\" width=\"250\" height=\"100\" rx=\"18\" class=\"svg-node svg-node--cloud\" />\n    <text x=\"480\" y=\"245\" text-anchor=\"middle\" class=\"svg-label\">Rede</text>\n    <text x=\"480\" y=\"276\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Switches, roteadores, firewalls</text>\n\n    <line x1=\"240\" y1=\"388\" x2=\"355\" y2=\"280\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n    <line x1=\"605\" y1=\"280\" x2=\"720\" y2=\"388\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n\n    <rect x=\"720\" y=\"365\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node\" />\n    <text x=\"795\" y=\"394\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Bits / Sinais</text>\n\n    <rect x=\"720\" y=\"300\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node svg-node--switch\" />\n    <text x=\"795\" y=\"329\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Quadro Ethernet</text>\n\n    <rect x=\"720\" y=\"235\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node svg-node--router\" />\n    <text x=\"795\" y=\"264\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Pacote IP</text>\n\n    <rect x=\"720\" y=\"170\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node\" />\n    <text x=\"795\" y=\"199\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Segmento TCP/UDP</text>\n\n    <rect x=\"720\" y=\"105\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node svg-node--server\" />\n    <text x=\"795\" y=\"134\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Dados</text>\n\n    <line x1=\"795\" y1=\"365\" x2=\"795\" y2=\"346\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n    <line x1=\"795\" y1=\"300\" x2=\"795\" y2=\"281\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n    <line x1=\"795\" y1=\"235\" x2=\"795\" y2=\"216\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n    <line x1=\"795\" y1=\"170\" x2=\"795\" y2=\"151\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n\n    <text x=\"480\" y=\"360\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">PDU muda conforme a camada: dados → segmento → pacote → quadro → bits</text>\n  </svg>\n</section>",
-    "summary": "<section class=\"lesson-section lesson-section--summary\">\n  <h2>Resumo</h2>\n  <ul>\n    <li><strong>Modelo mental:</strong> cada camada recebe a PDU de cima, acrescenta seu contexto e entrega para baixo; no destino, cada camada remove o que entende e passa o resto para cima.</li>\n    <li><strong>PDUs:</strong> dados, segmento (TCP) ou datagrama (UDP), pacote, quadro e bits. Chamar tudo de “pacote” tira a precisão do diagnóstico.</li>\n    <li><strong>Cada equipamento lê parte do envelope:</strong> o switch lê o quadro; o roteador lê o pacote e refaz o quadro a cada salto.</li>\n    <li><strong>Túneis somam cabeçalhos</strong> e reduzem a MTU efetiva; com o ICMP do PMTUD bloqueado, pacotes grandes somem e os pequenos passam.</li>\n    <li><strong>Segurança:</strong> o TLS esconde o conteúdo, não os metadados; capturas são evidência sensível.</li>\n  </ul>\n</section>\n",
-    "nextTheme": "<section class=\"lesson-section lesson-section--next\">\n  <h2>Próximo tema</h2>\n  <p>Na próxima aula, Camada 1 — Física: bits no fio, luz e rádio, você verá como os bits do fim da pilha viram sinais no cobre, na fibra e no rádio, e quais limites cada meio impõe.</p>\n</section>\n"
+    "motivation": "<section class=\"lesson-section lesson-section--motivation\">\n  <h2>Motivação</h2>\n  <p>Você trabalha de casa pela VPN da empresa. O login funciona, o sistema interno abre e as páginas carregam. Mas, ao anexar um arquivo de alguns megabytes, o envio fica parado e termina em erro. No escritório, sem VPN, o mesmo envio funciona. A reação comum é culpar o sistema, reinstalar o cliente da VPN ou pedir mais banda, e nada disso resolve.</p>\n  <p>O que separa o que passa do que trava não é o conteúdo, é o tamanho. Tudo o que sai do seu computador vai embrulhado em vários cabeçalhos, um por camada, e a VPN acrescenta mais um embrulho. Nesta aula você vê como esse embrulho é montado e desmontado, quanto espaço ele ocupa e por que ele explica esse sintoma. É a mesma base que permite a quem trabalha com segurança ler uma captura de tráfego e saber o que cada equipamento do caminho conseguiu ver.</p>\n</section>\n",
+    "problem": "<section class=\"lesson-section lesson-section--problem\">\n  <h2>Problema</h2>\n  <p>É isso que acontece quando não se enxerga que uma mensagem viaja dentro de vários envelopes. Os dados da aplicação (uma requisição HTTP, uma consulta DNS, um arquivo) não dizem, sozinhos, como atravessar a rede. Falta responder:</p>\n  <ul>\n    <li>qual programa do destino deve receber os dados (a porta, na camada de transporte);</li>\n    <li>para qual computador, em qual rede, eles vão (o endereço IP, na camada de rede);</li>\n    <li>para qual equipamento do enlace local entregar agora (o endereço MAC, na camada de enlace);</li>\n    <li>como virar sinal no cabo, na fibra ou no rádio (a camada física).</li>\n  </ul>\n  <p>Cada camada responde à sua pergunta acrescentando um cabeçalho, e o destino precisa desfazer tudo na ordem inversa. Esses cabeçalhos ocupam bytes num espaço limitado, e é por isso que um envelope a mais pode deixar os pacotes grandes sem lugar.</p>\n</section>\n",
+    "concept": "<section class=\"lesson-section lesson-section--concept\">\n  <h2>Conceito</h2>\n  <p><strong>Encapsulamento</strong> é o processo em que os dados recebidos da camada de cima ganham as informações de que a camada de baixo precisa: quase sempre um <strong>cabeçalho</strong>, na frente, e às vezes um <strong>trailer</strong>, no fim. Na Ethernet, o trailer é o FCS (Frame Check Sequence), de 4 bytes, que permite ao receptor detectar um quadro corrompido. <strong>Desencapsulamento</strong> é o inverso: o destino lê, confere e remove essas informações, camada por camada, até entregar só os dados à aplicação.</p>\n  <div class=\"definition-box\"><strong>Definição:</strong> PDU (Protocol Data Unit) é o nome genérico da unidade de dados de uma camada, com o cabeçalho dessa camada. Cada camada dá um nome à sua PDU.</div>\n  <div class=\"responsive-table\"><table class=\"data-table comparison-table\">\n    <thead><tr><th>Camada</th><th>PDU</th><th>O que a camada acrescenta</th><th>Exemplo</th></tr></thead>\n    <tbody>\n      <tr><td>Aplicação</td><td>Dados</td><td>A mensagem da aplicação</td><td>Requisição HTTP, consulta DNS</td></tr>\n      <tr><td>Transporte</td><td>Segmento (TCP) ou datagrama (UDP)</td><td>Portas de origem e destino; no TCP, também sequência e controle</td><td>TCP 443, UDP 53</td></tr>\n      <tr><td>Rede</td><td>Pacote</td><td>IP de origem, IP de destino, TTL, protocolo de dentro</td><td>IPv4 ou IPv6</td></tr>\n      <tr><td>Enlace</td><td>Quadro</td><td>MAC de origem, MAC de destino, tipo do conteúdo e FCS</td><td>Ethernet, Wi-Fi</td></tr>\n      <tr><td>Física</td><td>Bits</td><td>Nada: transforma o quadro em sinal</td><td>Cobre, fibra ou rádio</td></tr>\n    </tbody>\n  </table></div>\n  <div class=\"callout warning\"><strong>Erros comuns</strong>\n    <ul>\n      <li><strong>Chamar toda PDU de pacote.</strong> O diagnóstico passa a misturar quadro, pacote e segmento. Use “pacote” só para a camada de rede e “PDU” como termo genérico.</li>\n      <li><strong>Confundir encapsular com cifrar.</strong> Encapsular acrescenta contexto; cifrar esconde conteúdo. Num site com https, o TLS cifra só os dados da aplicação: os cabeçalhos TCP, IP e Ethernet que vêm por fora continuam legíveis, porque os equipamentos do caminho precisam deles. Quem observa o caminho vê IPs, portas e tamanhos, mas não o conteúdo.</li>\n    </ul>\n  </div>\n</section>\n",
+    "internals": "<section class=\"lesson-section lesson-section--internals\">\n  <h2>Funcionamento interno</h2>\n  <p>Acompanhe seu notebook (IP 192.168.1.20, gateway 192.168.1.1) enviando uma requisição a um site em 203.0.113.10, com o nome já resolvido e a conexão já aberta:</p>\n  <ol class=\"flow-list\">\n    <li><strong>Aplicação:</strong> o navegador cria a requisição HTTP. São os <strong>dados</strong>.</li>\n    <li><strong>Transporte:</strong> o TCP acrescenta um cabeçalho com a porta de origem, temporária (ex.: 51514), a porta de destino 443, o número de sequência e um checksum. Agora é um <strong>segmento</strong>.</li>\n    <li><strong>Rede:</strong> o IP acrescenta a origem 192.168.1.20, o destino 203.0.113.10, o TTL (um contador que cada roteador diminui, para o pacote não circular para sempre) e o número do protocolo de dentro (6 = TCP). Agora é um <strong>pacote</strong>.</li>\n    <li><strong>Enlace:</strong> a placa acrescenta o MAC dela como origem e, como destino, o MAC do gateway, porque o site está fora da sua rede. Acrescenta também o tipo do conteúdo (EtherType 0x0800 = IPv4) e, no fim, o FCS. Agora é um <strong>quadro</strong>.</li>\n    <li><strong>Física:</strong> o quadro vira bits e os bits viram sinal elétrico, luz ou rádio.</li>\n  </ol>\n  <p>No servidor, o desencapsulamento usa os próprios cabeçalhos para saber o que vem dentro: a placa confere o FCS e lê o EtherType 0x0800 (é IPv4); o IP confere que o destino é ele e lê o protocolo 6 (é TCP); o TCP lê a porta 443 e entrega os dados ao programa que atende nela. A aplicação recebe só a requisição, sem nenhum cabeçalho.</p>\n\n  <h3>Quanto espaço os envelopes ocupam: MTU</h3>\n  <p>Cada enlace aceita um tamanho máximo de pacote, a <strong>MTU</strong> (Maximum Transmission Unit): 1500 bytes na Ethernet comum, contados a partir do cabeçalho IP. Tudo o que as camadas acrescentam sai desse espaço:</p>\n  <div class=\"responsive-table\"><table class=\"data-table\">\n    <thead><tr><th>Parte</th><th>Bytes</th></tr></thead>\n    <tbody>\n      <tr><td>Cabeçalho Ethernet + FCS</td><td>14 + 4 (fora da MTU)</td></tr>\n      <tr><td>Cabeçalho IPv4 sem opções</td><td>20 (IPv6: 40)</td></tr>\n      <tr><td>Cabeçalho TCP sem opções</td><td>20 (UDP: 8)</td></tr>\n      <tr><td>Dados que cabem num pacote cheio, com IPv4 e TCP</td><td>1500 − 20 − 20 = 1460</td></tr>\n    </tbody>\n  </table></div>\n  <p>Esse limite de 1460 bytes de dados por segmento tem nome, <strong>MSS</strong> (Maximum Segment Size), e volta na aula 6.4.</p>\n  <p><strong>Túneis somam envelopes.</strong> Uma VPN pega o pacote inteiro (cabeçalho IP, cabeçalho TCP e dados), em geral o cifra, e o põe dentro de outro pacote, com cabeçalhos novos. Num túnel GRE, um dos tipos mais simples, são 24 bytes a mais (um cabeçalho IPv4 externo de 20 e o GRE de 4): sobre um enlace de 1500, o pacote de dentro só pode ter 1476. Pacotes pequenos cabem com folga; os grandes, como os de um upload, não.</p>\n  <p>Quando um pacote não cabe, o roteador o divide em pedaços (fragmentação) ou, se ele vem marcado para não ser dividido, o descarta e avisa a origem com uma mensagem ICMP, para ela mandar pacotes menores. Esse mecanismo é o <strong>Path MTU Discovery (PMTUD)</strong>. Se um firewall do caminho bloqueia esse ICMP, a origem nunca fica sabendo: o login e as páginas pequenas passam, e o upload trava.</p>\n</section>\n",
+    "architecture": "<section class=\"lesson-section lesson-section--architecture\">\n  <h2>Arquitetura</h2>\n  <p>O encapsulamento não acontece só na origem: ele se refaz a cada salto. O notebook monta todos os envelopes e entrega o quadro ao gateway. O roteador abre o quadro, lê o pacote IP, escolhe o próximo salto, diminui o TTL em 1 e monta um <strong>quadro novo</strong> para o enlace seguinte, com os MACs desse enlace. Resultado: os MACs mudam a cada salto, e os IPs de origem e destino seguem iguais de ponta a ponta (exceto quando há NAT).</p>\n  <div class=\"responsive-table\"><table class=\"data-table\">\n    <thead><tr><th>Equipamento</th><th>O que lê</th><th>O que decide ou faz</th></tr></thead>\n    <tbody>\n      <tr><td>Switch</td><td>Quadro (MAC)</td><td>Por qual porta sai o quadro, dentro da LAN</td></tr>\n      <tr><td>Roteador</td><td>Pacote (IP)</td><td>Qual é o próximo salto; monta um quadro novo a cada enlace</td></tr>\n      <tr><td>Firewall</td><td>IP, porta e estado da conexão; alguns também a aplicação</td><td>Permite ou bloqueia o fluxo</td></tr>\n    </tbody>\n  </table></div>\n  <p>Por isso equipamentos e ferramentas diferentes enxergam partes diferentes da mesma comunicação: o roteador encaminha sem entender a página, e o switch, sem olhar o IP.</p>\n</section>\n",
+    "analogy": "<section class=\"lesson-section lesson-section--analogy\">\n  <h2>Analogia</h2>\n  <p>Pense numa carta: o texto vai num envelope com o destinatário, o envelope vai num malote e o malote vai num caminhão. Cada pessoa no caminho lê só a sua etiqueta, e quem recebe abre tudo na ordem inversa e lê só a carta. Na rede, a diferença é que cada roteador troca o “caminhão” (o quadro) a cada trecho e mantém o envelope (o pacote).</p>\n</section>\n",
+    "simpleExample": "<section class=\"lesson-section lesson-section--example\">\n  <h2>Exemplo simples</h2>\n  <p>No mesmo notebook, você roda <code>nslookup example.com 8.8.8.8</code> com o Wireshark capturando. Ao clicar no pacote da consulta, o Wireshark mostra o desencapsulamento de fora para dentro, uma linha por camada (resumido):</p>\n  <pre class=\"code-block\">Frame 1: 71 bytes on wire\nEthernet II, Src: (MAC do notebook), Dst: (MAC do gateway 192.168.1.1)\nInternet Protocol Version 4, Src: 192.168.1.20, Dst: 8.8.8.8\nUser Datagram Protocol, Src Port: 53124, Dst Port: 53\nDomain Name System (query)</pre>\n  <p>Leia cada linha como uma PDU: <code>Frame</code> é o que a placa capturou; <code>Ethernet II</code> é o quadro, com destino no gateway, e não no 8.8.8.8, porque o servidor está fora da sua rede; <code>Internet Protocol Version 4</code> é o pacote, com o destino final; <code>User Datagram Protocol</code> é o datagrama, que aponta a porta 53 do DNS; e <code>Domain Name System</code> são os dados.</p>\n  <p>Some os bytes: 14 do cabeçalho Ethernet + 20 do IPv4 + 8 do UDP + 29 da consulta = 71 (a captura normalmente não mostra os 4 bytes do FCS). Numa mensagem pequena como essa, 42 dos 71 bytes são envelope.</p>\n</section>\n",
+    "diagram": "<section class=\"lesson-section lesson-section--diagram\">\n  <h2>Diagrama</h2>\n  <svg class=\"lesson-svg\" viewBox=\"0 0 960 520\" role=\"img\" aria-labelledby=\"m02l02-title m02l02-desc\">\n    <title id=\"m02l02-title\">Encapsulamento e desencapsulamento no Modelo OSI</title>\n    <desc id=\"m02l02-desc\">Cliente encapsula dados em segmento, pacote, quadro e bits; servidor desencapsula na ordem inversa.</desc>\n    <defs>\n      <marker id=\"m02l02-arrow\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\" markerUnits=\"strokeWidth\">\n        <path d=\"M0,0 L0,6 L9,3 z\" class=\"svg-arrow\" />\n      </marker>\n    </defs>\n\n    <rect x=\"40\" y=\"40\" width=\"250\" height=\"420\" rx=\"18\" class=\"svg-zone\" />\n    <text x=\"165\" y=\"75\" text-anchor=\"middle\" class=\"svg-label\">Origem: encapsula</text>\n\n    <rect x=\"670\" y=\"40\" width=\"250\" height=\"420\" rx=\"18\" class=\"svg-zone\" />\n    <text x=\"795\" y=\"75\" text-anchor=\"middle\" class=\"svg-label\">Destino: desencapsula</text>\n\n    <rect x=\"90\" y=\"105\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node svg-node--client\" />\n    <text x=\"165\" y=\"134\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Dados</text>\n\n    <rect x=\"90\" y=\"170\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node\" />\n    <text x=\"165\" y=\"199\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Segmento TCP/UDP</text>\n\n    <rect x=\"90\" y=\"235\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node svg-node--router\" />\n    <text x=\"165\" y=\"264\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Pacote IP</text>\n\n    <rect x=\"90\" y=\"300\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node svg-node--switch\" />\n    <text x=\"165\" y=\"329\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Quadro Ethernet</text>\n\n    <rect x=\"90\" y=\"365\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node\" />\n    <text x=\"165\" y=\"394\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Bits / Sinais</text>\n\n    <line x1=\"165\" y1=\"151\" x2=\"165\" y2=\"170\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n    <line x1=\"165\" y1=\"216\" x2=\"165\" y2=\"235\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n    <line x1=\"165\" y1=\"281\" x2=\"165\" y2=\"300\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n    <line x1=\"165\" y1=\"346\" x2=\"165\" y2=\"365\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n\n    <rect x=\"355\" y=\"210\" width=\"250\" height=\"100\" rx=\"18\" class=\"svg-node svg-node--cloud\" />\n    <text x=\"480\" y=\"245\" text-anchor=\"middle\" class=\"svg-label\">Rede</text>\n    <text x=\"480\" y=\"276\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Switches, roteadores, firewalls</text>\n\n    <line x1=\"240\" y1=\"388\" x2=\"355\" y2=\"280\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n    <line x1=\"605\" y1=\"280\" x2=\"720\" y2=\"388\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n\n    <rect x=\"720\" y=\"365\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node\" />\n    <text x=\"795\" y=\"394\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Bits / Sinais</text>\n\n    <rect x=\"720\" y=\"300\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node svg-node--switch\" />\n    <text x=\"795\" y=\"329\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Quadro Ethernet</text>\n\n    <rect x=\"720\" y=\"235\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node svg-node--router\" />\n    <text x=\"795\" y=\"264\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Pacote IP</text>\n\n    <rect x=\"720\" y=\"170\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node\" />\n    <text x=\"795\" y=\"199\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Segmento TCP/UDP</text>\n\n    <rect x=\"720\" y=\"105\" width=\"150\" height=\"46\" rx=\"10\" class=\"svg-node svg-node--server\" />\n    <text x=\"795\" y=\"134\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Dados</text>\n\n    <line x1=\"795\" y1=\"365\" x2=\"795\" y2=\"346\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n    <line x1=\"795\" y1=\"300\" x2=\"795\" y2=\"281\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n    <line x1=\"795\" y1=\"235\" x2=\"795\" y2=\"216\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n    <line x1=\"795\" y1=\"170\" x2=\"795\" y2=\"151\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l02-arrow)\" />\n\n    <text x=\"480\" y=\"360\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">PDU muda conforme a camada: dados → segmento → pacote → quadro → bits</text>\n  </svg>\n</section>",
+    "summary": "<section class=\"lesson-section lesson-section--summary\">\n  <h2>Resumo</h2>\n  <ul>\n    <li><strong>Ideia central:</strong> cada camada acrescenta seu cabeçalho ao que vem de cima; no destino, cada uma lê o seu e o remove.</li>\n    <li>PDUs: dados, segmento (TCP) ou datagrama (UDP), pacote, quadro e bits.</li>\n    <li>O roteador lê o pacote e monta um quadro novo a cada salto: o MAC muda, o IP fica.</li>\n    <li>Com MTU 1500, sobram 1460 bytes de dados num segmento TCP sobre IPv4.</li>\n    <li>Túneis somam cabeçalhos: pacotes grandes deixam de caber; os pequenos passam.</li>\n  </ul>\n  <p><em>Já domina isso? Faça o quiz: com 70% ou mais, você pode seguir.</em></p>\n</section>\n",
+    "nextTheme": "<section class=\"lesson-section lesson-section--next\">\n  <h2>Próximo tema</h2>\n  <p>Na aula 2.3, “Camada 1 — Física: bits no fio, luz e rádio”, você vê como os bits do fim da pilha viram sinais no cobre, na fibra e no rádio, e quais limites cada meio impõe.</p>\n</section>\n"
   },
   "networkContext": {
     "osiLayers": [
@@ -123,174 +110,34 @@ export const lesson0202 = {
       "Kubernetes networking"
     ]
   },
-  "troubleshooting": {
-    "symptoms": [
-      "Upload grande falha pela VPN",
-      "Site abre parcialmente",
-      "Ping funciona mas HTTPS falha",
-      "Captura mostra retransmissões TCP",
-      "Aplicação funciona localmente mas falha em cloud",
-      "Firewall libera porta mas aplicação não responde"
-    ],
-    "diagnosticQuestions": [
-      "Qual PDU está sendo observada: quadro, pacote, segmento ou dado de aplicação?",
-      "Existe túnel, VPN, proxy ou overlay adicionando overhead?",
-      "O caminho altera MTU efetiva?",
-      "O problema ocorre com pacotes pequenos e grandes?",
-      "O firewall inspeciona camada 3, 4 ou 7?",
-      "Há retransmissões, fragmentação ou ICMP bloqueado?"
-    ],
-    "commands": [
-      {
-        "platform": "Windows",
-        "command": "ping 8.8.8.8\nping -f -l 1472 8.8.8.8\ntracert 8.8.8.8\nTest-NetConnection example.com -Port 443\nnetsh interface ipv4 show subinterfaces",
-        "purpose": "Observar alcance, caminho, porta e MTU. O ping com -f (não fragmentar) e -l 1472 gera um pacote IP de 1500 bytes (1472 + 8 de ICMP + 20 de IP).",
-        "expectedObservation": "Respostas ICMP quando permitidas, rota até o destino, porta 443 conectável, MTU por interface e resposta ao ping de 1472 se o caminho suporta 1500.",
-        "interpretation": "Se o ping de 1472 com -f falha e valores menores passam, a MTU do caminho é menor que 1500: reduza o -l até achar o limite. Se a porta conecta mas uploads falham, considere MTU, proxy, TLS ou aplicação."
-      },
-      {
-        "platform": "Linux",
-        "command": "ip link\nip route\ntracepath example.com\nping -M do -s 1472 example.com\ncurl -v https://example.com",
-        "purpose": "Ver MTU local, rota, PMTU estimada, teste de tamanho com DF ligado (-M do) e a conexão HTTP/TLS.",
-        "expectedObservation": "Interfaces com MTU, rota default, caminho com PMTU estimada, ping de 1472 respondido e negociação HTTP/TLS básica.",
-        "interpretation": "Se o ping de 1472 com -M do falha e um menor passa, há limite de MTU no caminho; tracepath indica onde a PMTU cai; curl mostra em que etapa a conexão falha."
-      },
-      {
-        "platform": "Cisco IOS",
-        "command": "show interfaces\nshow ip interface brief\nshow ip route\nshow access-lists",
-        "purpose": "Ver estado e MTU das interfaces, erros, rotas e ACLs que podem descartar tráfego.",
-        "expectedObservation": "Interfaces up/up com a MTU esperada, poucos erros, rotas esperadas e ACLs coerentes.",
-        "interpretation": "Erros físicos, rota ausente ou ACL incorreta mudam a hipótese por camada."
-      }
-    ],
-    "decisionTree": [
-      {
-        "if": "Pacotes pequenos funcionam e grandes falham",
-        "then": "Investigar MTU, MSS, fragmentação, VPN, túnel e bloqueio de ICMP."
-      },
-      {
-        "if": "Ping funciona mas porta TCP falha",
-        "then": "Investigar camada 4, firewall, rota assimétrica ou serviço parado."
-      },
-      {
-        "if": "Porta TCP conecta mas aplicação retorna erro",
-        "then": "Investigar TLS, HTTP, proxy, autenticação, autorização e logs de aplicação."
-      },
-      {
-        "if": "Captura mostra ARP sem resposta",
-        "then": "Investigar enlace local, VLAN, gateway, interface ou segurança de switch."
-      }
-    ]
-  },
-  "security": {
-    "goodPractices": [
-      "Nomear evidências pela camada e PDU corretas.",
-      "Sanitizar PCAPs antes de compartilhar.",
-      "Documentar túneis, overlays e pontos de inspeção.",
-      "Validar MTU/MSS em VPNs e links críticos."
-    ],
-    "badPractices": [
-      "Liberar porta 443 e assumir que todo conteúdo é seguro.",
-      "Compartilhar capturas com cookies, tokens e dados pessoais.",
-      "Criar túneis sem monitoramento e sem política de egress.",
-      "Bloquear ICMP indiscriminadamente e quebrar o PMTUD e diagnósticos úteis."
-    ],
-    "commonErrors": [
-      "Confundir encapsulamento com criptografia.",
-      "Achar que VPN resolve autorização.",
-      "Ignorar overhead de overlays em cloud e Kubernetes."
-    ],
-    "vulnerabilities": [
-      {
-        "name": "Exposição de dados em captura",
-        "description": "Capturas podem conter tokens, cookies, nomes internos, IPs, payloads e dados pessoais.",
-        "defensiveExplanation": "PCAP é evidência sensível e deve ser tratado como material restrito.",
-        "mitigation": "Coletar mínimo necessário, sanitizar, criptografar armazenamento e controlar acesso."
-      },
-      {
-        "name": "Túnel sem governança",
-        "description": "Encapsular tráfego em VPN ou overlay pode reduzir visibilidade de controles intermediários.",
-        "defensiveExplanation": "O túnel pode carregar tráfego permitido e indevido dentro do mesmo envelope.",
-        "mitigation": "Políticas de egress, inspeção adequada, logs, segmentação e revisão de arquitetura."
-      },
-      {
-        "name": "Falsa segurança por porta",
-        "description": "Permitir apenas portas conhecidas não garante que o conteúdo seja benigno.",
-        "defensiveExplanation": "Camada 4 não entende todo o significado da camada 7.",
-        "mitigation": "Combinar firewall, proxy, WAF, identidade, observabilidade e validação de aplicação."
-      }
-    ],
-    "monitoring": [
-      "Flow logs",
-      "Firewall logs",
-      "Proxy/WAF logs",
-      "NetFlow/IPFIX",
-      "Capturas controladas",
-      "Métricas de MTU, retransmissão e perda",
-      "Logs de VPN"
-    ],
-    "hardening": [
-      "Documentar túneis e overlays",
-      "Controlar egress para impedir túneis não autorizados",
-      "Manter visibilidade de metadados relevantes"
-    ],
-    "detectionIdeas": [
-      "Aumento de tráfego encapsulado inesperado",
-      "Túneis não autorizados",
-      "Retransmissões TCP anormais",
-      "Falhas de conexão apenas com payloads grandes",
-      "Queda de PMTU percebida"
-    ]
-  },
   "mentorQuestions": [
     {
       "type": "reflexão",
-      "question": "Por que dados de aplicação não podem simplesmente ser enviados pelo cabo sem encapsulamento?",
+      "question": "Por que o roteador monta um quadro novo a cada salto, em vez de repassar o quadro que recebeu? Pense num caminho em que o primeiro trecho é Wi-Fi e o segundo é a fibra da operadora.",
       "hints": [
-        "Pense em porta, IP, MAC e sinal físico.",
-        "Pense em quem precisa tomar decisão no caminho."
+        "Para quem o MAC de destino do quadro original aponta?",
+        "Os dois trechos usam a mesma tecnologia de enlace?"
       ],
       "expectedIdeas": [
-        "endereçamento",
-        "processo de destino",
-        "roteamento",
-        "entrega local",
-        "meio físico"
+        "o MAC só vale no enlace local",
+        "cada enlace tem sua tecnologia e seus endereços",
+        "o IP basta para o caminho todo"
       ],
-      "explanation": "A aplicação não possui todo o contexto necessário para transporte, roteamento, enlace e transmissão física."
+      "explanation": "O quadro só leva os dados ao próximo equipamento do mesmo enlace. No trecho seguinte, os endereços e às vezes a tecnologia são outros; o roteador guarda o pacote e o põe num quadro feito para aquele enlace."
     },
     {
-      "type": "diagnóstico",
-      "question": "Um ping pequeno funciona, mas upload grande pela VPN falha. Que hipótese ligada a encapsulamento deve aparecer?",
+      "type": "aplicação",
+      "question": "Um colega propõe resolver os uploads que travam na VPN aumentando a MTU do notebook para 9000 bytes. Por que isso não ajuda?",
       "hints": [
-        "Pense em overhead.",
-        "Pense em MTU e MSS."
+        "Onde está o limite: no notebook ou no caminho?",
+        "O pacote de dentro do túnel precisa caber em quê?"
       ],
       "expectedIdeas": [
-        "VPN adiciona cabeçalhos",
-        "MTU efetiva menor",
-        "fragmentação",
-        "PMTUD",
-        "MSS clamp"
+        "o limite é a MTU do caminho e do túnel",
+        "pacotes maiores cabem ainda menos",
+        "a solução é reduzir o tamanho, não aumentar"
       ],
-      "explanation": "Túneis adicionam encapsulamento extra e podem reduzir o tamanho útil transportável."
-    },
-    {
-      "type": "cenário real",
-      "question": "Um firewall libera TCP 443. Isso prova que a aplicação HTTPS é segura e funcional?",
-      "hints": [
-        "Camada 4 não interpreta tudo.",
-        "Pense em TLS, HTTP, identidade e aplicação."
-      ],
-      "expectedIdeas": [
-        "porta não garante conteúdo",
-        "precisa logs de camada 7",
-        "TLS",
-        "WAF",
-        "autenticação",
-        "autorização"
-      ],
-      "explanation": "Liberação de porta é apenas uma evidência de transporte/política; não garante segurança ou saúde da aplicação."
+      "explanation": "O limite está no caminho: o pacote de dentro mais o envelope do túnel precisam caber em 1500 bytes. Pacotes de 9000 cabem menos ainda. O ajuste é o contrário: pacotes menores dentro do túnel."
     }
   ],
   "quiz": [
@@ -340,21 +187,6 @@ export const lesson0202 = {
       "type": "diagnóstico"
     },
     {
-      "id": "q2.2.4",
-      "question": "Por que um arquivo PCAP deve ser tratado como sensível?",
-      "options": [
-        "Porque apaga logs do firewall",
-        "Porque sempre contém senhas descriptografadas",
-        "Porque não pode ser aberto offline",
-        "Pode conter tokens, cookies, IPs internos e payloads"
-      ],
-      "answer": 3,
-      "explanation": "Capturas podem conter dados sensíveis e metadados relevantes. Devem ser coletadas e compartilhadas com controle.",
-      "topic": "segurança",
-      "difficulty": "iniciante",
-      "type": "segurança"
-    },
-    {
       "id": "q2.2.5",
       "question": "Em tráfego para um servidor fora da LAN, o endereço MAC de destino do quadro local normalmente é de quem?",
       "options": [
@@ -370,19 +202,34 @@ export const lesson0202 = {
       "type": "arquitetura"
     },
     {
-      "id": "q2.2.7",
-      "question": "Num túnel, pacotes pequenos passam e pacotes grandes somem sem erro. O firewall do caminho bloqueia todo ICMP. Qual mecanismo provavelmente foi quebrado?",
+      "id": "q2.2.8",
+      "question": "Você acessa um site com https. Alguém captura o tráfego num cabo entre o seu notebook e o servidor. O que essa pessoa consegue ler?",
       "options": [
-        "Resolução ARP do gateway",
-        "Three-way handshake do TCP",
-        "Path MTU Discovery (PMTUD)",
-        "Resolução DNS do destino"
+        "Nada: o TLS cifra todos os cabeçalhos e os dados",
+        "O conteúdo da requisição, mas não os IPs",
+        "Só os bits, sem nenhuma informação de camada",
+        "Os IPs, as portas e os tamanhos, mas não o conteúdo da requisição"
       ],
-      "answer": 2,
-      "explanation": "O PMTUD depende do ICMP “Fragmentation Needed” para avisar a origem de que o pacote com DF não cabe. Sem ele, a origem segue mandando pacotes grandes demais, que são descartados. ARP, handshake e DNS falhariam também para pacotes pequenos.",
-      "topic": "mtu",
-      "difficulty": "intermediário",
-      "type": "diagnóstico"
+      "answer": 3,
+      "explanation": "O TLS cifra os dados da aplicação. Os cabeçalhos TCP, IP e Ethernet ficam por fora e continuam legíveis, porque os equipamentos do caminho precisam deles para entregar o tráfego.",
+      "topic": "encapsulamento e criptografia",
+      "difficulty": "iniciante",
+      "type": "segurança"
+    },
+    {
+      "id": "q2.2.9",
+      "question": "Um pacote sai do seu notebook e passa por dois roteadores até o servidor, sem NAT no caminho. O que muda a cada salto?",
+      "options": [
+        "Os MACs do quadro e o TTL; os IPs de origem e destino continuam os mesmos",
+        "O IP de destino, que passa a ser o do próximo roteador",
+        "Nada: o quadro que saiu do notebook chega intacto ao servidor",
+        "A porta de destino, que cada roteador troca pela sua"
+      ],
+      "answer": 0,
+      "explanation": "Cada roteador lê o pacote, diminui o TTL e monta um quadro novo, com os MACs do enlace seguinte. Os IPs indicam a origem e o destino final e não mudam; as portas estão no segmento, que o roteador não altera.",
+      "topic": "encapsulamento por salto",
+      "difficulty": "iniciante",
+      "type": "arquitetura"
     }
   ],
   "flashcards": [
@@ -418,21 +265,11 @@ export const lesson0202 = {
     },
     {
       "id": "fc2.2.4",
-      "front": "VPN reduz MTU por quê?",
-      "back": "Porque adiciona cabeçalhos extras ao encapsular tráfego dentro de outro tráfego.",
+      "front": "Por que uma VPN reduz o tamanho útil dos pacotes?",
+      "back": "Porque põe o pacote inteiro dentro de outro, com cabeçalhos extras. Num túnel GRE sobre um enlace de 1500 bytes, o pacote de dentro só pode ter 1476.",
       "tags": [
         "vpn",
         "mtu"
-      ],
-      "difficulty": "intermediário"
-    },
-    {
-      "id": "fc2.2.5",
-      "front": "TLS elimina todos os metadados?",
-      "back": "Não. TLS protege conteúdo, mas IPs, portas, tamanhos e tempos ainda podem ser observáveis em muitos cenários.",
-      "tags": [
-        "tls",
-        "segurança"
       ],
       "difficulty": "intermediário"
     },
@@ -445,22 +282,43 @@ export const lesson0202 = {
         "mtu"
       ],
       "difficulty": "intermediário"
+    },
+    {
+      "id": "fc2.2.8",
+      "front": "O que muda e o que fica quando o pacote passa por um roteador?",
+      "back": "Mudam os MACs (o roteador monta um quadro novo para o enlace seguinte) e o TTL, que diminui 1. Os IPs de origem e destino ficam, exceto com NAT.",
+      "tags": [
+        "roteador",
+        "encapsulamento"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc2.2.9",
+      "front": "Como o destino sabe que um quadro Ethernet carrega IPv4 e que o pacote carrega TCP?",
+      "back": "Pelos próprios cabeçalhos: o EtherType 0x0800 indica IPv4, e o campo de protocolo 6 no IP indica TCP. Cada cabeçalho diz o que vem dentro.",
+      "tags": [
+        "desencapsulamento",
+        "ethernet",
+        "ip"
+      ],
+      "difficulty": "iniciante"
     }
   ],
   "exercises": [
     {
-      "id": "ex2.2.1",
-      "type": "conceitual",
-      "prompt": "Descreva o encapsulamento de uma requisição HTTPS do seu notebook até o meio físico, citando a PDU e uma informação adicionada em cada camada. Depois diga o que o servidor faz ao receber.",
-      "expectedAnswer": "Dados (requisição HTTP) → segmento TCP (porta de origem temporária, porta de destino 443) → pacote IP (IP de origem e destino, TTL) → quadro Ethernet (MAC de origem e MAC do gateway, FCS) → bits/sinais. O servidor desencapsula na ordem inversa: valida o quadro, lê o pacote, entrega o segmento à porta 443 e a aplicação interpreta os dados.",
-      "explanation": "A resposta deve mostrar a direção do processo, o nome correto de cada PDU e que o destino remove cada cabeçalho antes de entregar os dados."
+      "id": "ex2.2.6",
+      "type": "cálculo",
+      "prompt": "O navegador envia uma requisição HTTP de 400 bytes por TCP sobre IPv4, numa rede Ethernet, sem opções nos cabeçalhos. Quantos bytes tem o quadro, contando o FCS? Quantos desses bytes são envelope?",
+      "expectedAnswer": "400 + 20 (TCP) + 20 (IPv4) + 14 (Ethernet) + 4 (FCS) = 458 bytes. O envelope são 58 bytes, cerca de 13% do quadro.",
+      "explanation": "O exercício aplica a tabela de cabeçalhos a uma mensagem concreta. Quanto menor a mensagem, maior a fração de envelope."
     },
     {
-      "id": "ex2.2.2",
-      "type": "classificação",
-      "prompt": "Classifique: Ethernet frame, IPv4 packet, TCP segment e HTTP request.",
-      "expectedAnswer": "Ethernet frame = enlace; IPv4 packet = rede; TCP segment = transporte; HTTP request = aplicação.",
-      "explanation": "A classificação ajuda a usar vocabulário preciso em captura e troubleshooting."
+      "id": "ex2.2.7",
+      "type": "diagnóstico",
+      "prompt": "No seu notebook (192.168.1.20, gateway 192.168.1.1), você captura a resposta que o servidor 203.0.113.10 mandou à sua requisição. Quais IPs e quais MACs de origem e de destino você espera ver nesse quadro?",
+      "expectedAnswer": "IP de origem 203.0.113.10 e IP de destino 192.168.1.20. MAC de origem: o do gateway (foi ele que montou o último quadro). MAC de destino: o do notebook.",
+      "explanation": "Na volta, o último salto é o gateway, então o quadro que chega ao notebook vem do MAC dele, mesmo que o IP de origem seja o do servidor."
     },
     {
       "id": "ex2.2.3",
@@ -468,183 +326,68 @@ export const lesson0202 = {
       "prompt": "Um firewall L4 libera TCP 443, mas a aplicação retorna HTTP 403. O problema está necessariamente na rede?",
       "expectedAnswer": "Não. TCP 443 pode estar liberado, mas HTTP 403 indica resposta de aplicação/autorização/política em camada superior.",
       "explanation": "Porta aberta não garante autorização ou sucesso da aplicação."
-    },
-    {
-      "id": "ex2.2.5",
-      "type": "cálculo",
-      "prompt": "Um cluster passa a usar overlay VXLAN, que acrescenta 50 bytes, sobre uma rede física com MTU 1500. Qual MTU os pods devem usar e o que acontece se ficarem com 1500?",
-      "expectedAnswer": "1450 (1500 − 50). Com 1500, pacotes internos grandes não cabem no pacote externo: são fragmentados ou descartados. Pings e requisições pequenas funcionam, mas transferências grandes falham ou ficam lentas.",
-      "explanation": "É o mesmo raciocínio da VPN: cada envelope extra reduz o espaço útil."
     }
   ],
   "challenge": {
-    "title": "Diagnosticar falha de upload grande via VPN",
-    "scenario": "Usuários remotos acessam um portal interno pela VPN. Login funciona, páginas pequenas carregam, mas upload de arquivos acima de alguns megabytes falha ou fica intermitente.",
+    "title": "O que a captura mostra quando a VPN está ligada",
+    "scenario": "Em casa, com a VPN da empresa ligada, você abre o sistema interno em 10.2.30.40, porta 443, e captura o tráfego na placa Wi-Fi do notebook. Para sua surpresa, o endereço 10.2.30.40 não aparece em nenhum pacote: só há pacotes UDP entre o seu notebook e o servidor da VPN, 198.51.100.20.",
     "tasks": [
-      "Criar hipóteses por camada.",
-      "Explicar onde entra encapsulamento extra.",
-      "Listar evidências a coletar.",
-      "Indicar riscos de segurança na coleta.",
-      "Propor próximos passos sem alterar produção às cegas."
-    ],
-    "constraints": [
-      "Não capturar dados sensíveis sem autorização.",
-      "Não mudar MTU global sem janela e rollback.",
-      "Separar evidência de suposição.",
-      "Considerar aplicação, VPN, firewall e rede."
+      "Explicar por que 10.2.30.40 não aparece na captura.",
+      "Listar os envelopes de um pacote da sua requisição, de fora para dentro.",
+      "Dizer o que o provedor de internet consegue ver desse tráfego.",
+      "Explicar por que o pacote de dentro não pode ter 1500 bytes."
     ],
     "expectedDeliverables": [
-      "Matriz de camadas",
-      "Lista de comandos",
-      "Plano de coleta",
-      "Hipóteses priorizadas",
-      "Recomendação de mitigação"
-    ],
-    "gradingRubric": [
-      {
-        "criterion": "Precisão conceitual",
-        "points": 25,
-        "description": "Usa corretamente PDU, MTU, overhead, pacote, quadro e segmento."
-      },
-      {
-        "criterion": "Diagnóstico por evidência",
-        "points": 25,
-        "description": "Propõe testes e logs adequados antes de concluir."
-      },
-      {
-        "criterion": "Segurança",
-        "points": 20,
-        "description": "Trata capturas e logs como evidências sensíveis."
-      },
-      {
-        "criterion": "Aplicabilidade operacional",
-        "points": 20,
-        "description": "Propõe ações realistas, reversíveis e documentadas."
-      },
-      {
-        "criterion": "Clareza",
-        "points": 10,
-        "description": "Explica para redes, segurança, aplicação e gestão."
-      }
+      "Uma explicação de 5 a 8 linhas, com a lista de envelopes."
     ]
   },
   "commentedSolution": {
-    "reasoning": "Como páginas pequenas funcionam, conectividade básica, DNS, autenticação inicial e parte da aplicação provavelmente estão operacionais. A falha em uploads grandes aponta para tamanho de payload, timeout, inspeção, limite de aplicação ou problema de MTU/MSS causado por encapsulamento da VPN.",
+    "reasoning": "Um túnel põe o pacote inteiro, com seus cabeçalhos, dentro de outro pacote. A placa Wi-Fi só enxerga o envelope de fora.",
     "steps": [
-      "Confirmar se a falha ocorre só pela VPN.",
-      "Comparar arquivos pequenos e grandes.",
-      "Verificar logs da aplicação para limite de upload ou timeout.",
-      "Verificar logs de VPN e firewall, inclusive ICMP descartado.",
-      "Consultar a MTU das interfaces e o tipo de túnel.",
-      "Testar a PMTU com tracepath ou ping com DF (ex.: ping -f -l 1472 no Windows, ping -M do -s 1472 no Linux), quando permitido.",
-      "Avaliar MSS clamping ou ajuste de MTU em janela controlada, com rollback.",
-      "Documentar evidências e sanitizar dados."
+      "O pacote para 10.2.30.40 é cifrado pela VPN e vira os dados de um datagrama UDP entre o notebook e 198.51.100.20; por isso só esse par de IPs aparece.",
+      "De fora para dentro: quadro Wi-Fi (notebook → gateway), pacote IP externo (notebook → 198.51.100.20), datagrama UDP, cabeçalho da VPN e, cifrados, o pacote IP interno (→ 10.2.30.40), o segmento TCP para a porta 443 e os dados.",
+      "O provedor vê só o envelope de fora: que você fala com o servidor da VPN, por UDP, com certos tamanhos e horários.",
+      "O pacote de dentro mais os cabeçalhos externos precisam caber nos 1500 bytes do caminho: é a conta do GRE (1500 − 24 = 1476), com um envelope maior."
     ],
-    "commonWrongAnswers": [
-      {
-        "answer": "Aumentar a banda da internet",
-        "whyItIsWrong": "O sintoma não aponta inicialmente para falta de banda, mas para falha específica com tamanho/encapsulamento."
-      },
-      {
-        "answer": "Culpar a aplicação sem logs",
-        "whyItIsWrong": "A aplicação pode estar envolvida, mas a hipótese de MTU/VPN precisa ser verificada."
-      },
-      {
-        "answer": "Desativar a VPN",
-        "whyItIsWrong": "Remove segurança e não resolve a causa de forma aceitável."
-      }
+    "commonMistakes": [
+      "Achar que a requisição não saiu: ela está dentro dos pacotes UDP.",
+      "Achar que a VPN esconde tudo: o envelope de fora continua visível."
     ],
-    "finalAnswer": "A hipótese principal é interação entre upload grande, overhead da VPN, MTU/MSS e possível bloqueio de fragmentação ou PMTUD. A solução deve coletar evidências em VPN, firewall, host e aplicação, proteger dados sensíveis e aplicar ajuste controlado se confirmado."
+    "finalAnswer": "A requisição viaja cifrada dentro de pacotes UDP para o servidor da VPN, e a placa Wi-Fi só vê esse envelope. Os cabeçalhos extras consomem parte dos 1500 bytes, por isso o pacote de dentro precisa ser menor."
   },
   "glossary": [
     {
-      "term": "Encapsulamento",
-      "shortDefinition": "Processo de adicionar informações de camada a dados recebidos da camada superior.",
-      "longDefinition": "Permite que dados de aplicação sejam transportados pelas camadas inferiores, cada uma acrescentando cabeçalho, trailer ou metadados.",
-      "example": "HTTP é carregado por TCP, que é carregado por IP, que é carregado por Ethernet.",
-      "relatedTerms": [
-        "PDU",
-        "cabeçalho",
-        "túnel"
-      ],
-      "relatedLessons": [
-        "2.1",
-        "2.2",
-        "6.1",
-        "10.1"
-      ]
-    },
-    {
-      "term": "Desencapsulamento",
-      "shortDefinition": "Processo de remover e interpretar informações de camada no destino.",
-      "longDefinition": "O receptor valida e remove o que cada camada acrescentou até entregar os dados à aplicação.",
-      "example": "A placa recebe quadro Ethernet, entrega pacote IP, que entrega segmento TCP, que entrega dados HTTP.",
-      "relatedTerms": [
-        "encapsulamento",
-        "PDU"
-      ],
-      "relatedLessons": [
-        "2.2"
-      ]
-    },
-    {
-      "term": "PDU",
-      "shortDefinition": "Unidade de dados de uma camada de protocolo.",
-      "longDefinition": "Protocol Data Unit: nome genérico para segmento, datagrama, pacote ou quadro.",
-      "example": "Um quadro Ethernet é uma PDU de camada 2.",
-      "relatedTerms": [
-        "segmento",
-        "pacote",
-        "quadro"
-      ],
-      "relatedLessons": [
-        "2.2"
-      ]
-    },
-    {
-      "term": "MTU",
-      "shortDefinition": "Maior unidade que pode ser transmitida em um enlace sem fragmentação naquele contexto.",
-      "longDefinition": "Maximum Transmission Unit limita o tamanho do pacote transportável em uma interface ou caminho. Túneis reduzem a MTU efetiva, e o MSS do TCP é a MTU menos os cabeçalhos IP e TCP.",
-      "example": "Ethernet comum usa MTU 1500 (MSS 1460 com IPv4 e TCP); um túnel GRE reduz a MTU efetiva para 1476.",
-      "relatedTerms": [
-        "MSS",
-        "fragmentação",
-        "PMTUD",
-        "VPN"
-      ],
-      "relatedLessons": [
-        "2.2",
-        "10.2",
-        "15.4"
-      ]
-    },
-    {
-      "term": "Overhead",
-      "shortDefinition": "Dados extras necessários para controle, endereçamento, segurança ou transporte.",
-      "longDefinition": "Cabeçalhos, trailers e metadados não são conteúdo útil da aplicação, mas a comunicação depende deles.",
-      "example": "Cabeçalhos IPsec adicionam overhead a uma VPN.",
-      "relatedTerms": [
-        "encapsulamento",
-        "MTU"
-      ],
-      "relatedLessons": [
-        "0.4",
-        "2.2"
-      ]
-    },
-    {
-      "term": "Túnel",
-      "shortDefinition": "Técnica de encapsular tráfego dentro de outro tráfego.",
-      "longDefinition": "VPNs e overlays carregam pacotes internos dentro de pacotes externos para criar conectividade lógica sobre outra rede.",
-      "example": "Uma VPN site-to-site pode transportar pacotes privados dentro de pacotes públicos criptografados.",
-      "relatedTerms": [
-        "VPN",
-        "overlay",
-        "encapsulamento"
-      ],
+      "term": "VPN",
+      "shortDefinition": "Rede privada virtual: um túnel, em geral cifrado, que leva pacotes de uma rede privada por dentro de outra rede, como a internet.",
+      "example": "Em casa, a VPN da empresa leva seus pacotes para o sistema interno dentro de pacotes enviados ao servidor da VPN.",
       "relatedLessons": [
         "10.1",
-        "14.6"
+        "10.2"
+      ]
+    },
+    {
+      "term": "TLS",
+      "shortDefinition": "Protocolo que cifra os dados da aplicação entre o programa e o servidor; é o que faz o https.",
+      "example": "Com https, o conteúdo da requisição é cifrado, mas os cabeçalhos TCP e IP continuam legíveis.",
+      "relatedLessons": [
+        "8.3"
+      ]
+    },
+    {
+      "term": "ICMP",
+      "shortDefinition": "Protocolo de mensagens de controle e erro do IP; é o que o ping usa.",
+      "example": "Um roteador manda à origem uma mensagem ICMP quando um pacote grande demais não pode ser dividido.",
+      "relatedLessons": [
+        "4.8"
+      ]
+    },
+    {
+      "term": "NAT",
+      "shortDefinition": "Tradução de endereços: o roteador troca o IP de origem (ou de destino) dos pacotes, como o roteador de casa faz com os IPs privados.",
+      "example": "O pacote sai do notebook com origem 192.168.1.20 e chega à internet com o IP público do roteador.",
+      "relatedLessons": [
+        "6.7",
+        "9.5"
       ]
     }
   ],
@@ -702,11 +445,7 @@ export const lesson0202 = {
   "progressRules": {
     "completeWhen": {
       "read": true,
-      "quizScoreAtLeast": 70,
-      "oneOf": [
-        "exerciseDone",
-        "practicalExerciseDone"
-      ]
+      "quizScoreAtLeast": 70
     },
     "accessPolicy": {
       "freeAccess": true,

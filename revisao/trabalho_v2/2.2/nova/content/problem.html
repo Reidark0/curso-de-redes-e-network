@@ -1,12 +1,11 @@
 <section class="lesson-section lesson-section--problem">
   <h2>Problema</h2>
-  <p>Dados de aplicação (uma string JSON, uma requisição HTTP, um arquivo) não dizem, sozinhos, como atravessar a rede. Cada camada acrescenta a informação que falta:</p>
-  <ul class="flow-list">
-    <li><strong>Sem transporte:</strong> o destino não sabe qual processo ou porta deve receber a conversa.</li>
-    <li><strong>Sem rede:</strong> não há endereço lógico para encaminhar entre redes.</li>
-    <li><strong>Sem enlace:</strong> não há entrega local ao próximo salto.</li>
-    <li><strong>Sem física:</strong> não há transmissão real pelo cabo, fibra ou rádio.</li>
-    <li><strong>Sem desencapsulamento:</strong> o destino não consegue remover as informações de cada camada e entregar só os dados úteis à aplicação.</li>
+  <p>É isso que acontece quando não se enxerga que uma mensagem viaja dentro de vários envelopes. Os dados da aplicação (uma requisição HTTP, uma consulta DNS, um arquivo) não dizem, sozinhos, como atravessar a rede. Falta responder:</p>
+  <ul>
+    <li>qual programa do destino deve receber os dados (a porta, na camada de transporte);</li>
+    <li>para qual computador, em qual rede, eles vão (o endereço IP, na camada de rede);</li>
+    <li>para qual equipamento do enlace local entregar agora (o endereço MAC, na camada de enlace);</li>
+    <li>como virar sinal no cabo, na fibra ou no rádio (a camada física).</li>
   </ul>
-  <p>Por isso a falha pode estar em qualquer envelope: o segmento não chega à porta certa, o pacote é descartado por falta de rota ou por firewall, o quadro cai na VLAN errada ou é corrompido por erro físico, ou um pacote maior que a MTU do caminho some enquanto os pequenos passam.</p>
+  <p>Cada camada responde à sua pergunta acrescentando um cabeçalho, e o destino precisa desfazer tudo na ordem inversa. Esses cabeçalhos ocupam bytes num espaço limitado, e é por isso que um envelope a mais pode deixar os pacotes grandes sem lugar.</p>
 </section>

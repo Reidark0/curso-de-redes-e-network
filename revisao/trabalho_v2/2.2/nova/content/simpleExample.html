@@ -1,5 +1,11 @@
 <section class="lesson-section lesson-section--example">
   <h2>Exemplo simples</h2>
-  <p>Do seu notebook (192.168.1.20) você abre um site que resolve para 203.0.113.10. A aplicação cria a requisição. O TCP usa uma porta de origem temporária (ex.: 51514) e a porta de destino 443. O IP usa 192.168.1.20 como origem e 203.0.113.10 como destino. O quadro (Ethernet no cabo, 802.11 no Wi-Fi) usa o MAC da sua placa como origem e o MAC do gateway 192.168.1.1 como destino, porque o servidor está fora da sua rede. O meio transforma tudo em sinais.</p>
-  <p>Se o site não abre, cada camada gera uma hipótese diferente: Wi-Fi desconectado, sem IP, gateway incorreto, DNS falhando, porta 443 bloqueada, certificado inválido ou aplicação fora. O encapsulamento mostra onde procurar.</p>
+  <p>No mesmo notebook, você roda <code>nslookup example.com 8.8.8.8</code> com o Wireshark capturando. Ao clicar no pacote da consulta, o Wireshark mostra o desencapsulamento de fora para dentro, uma linha por camada (resumido):</p>
+  <pre class="code-block">Frame 1: 71 bytes on wire
+Ethernet II, Src: (MAC do notebook), Dst: (MAC do gateway 192.168.1.1)
+Internet Protocol Version 4, Src: 192.168.1.20, Dst: 8.8.8.8
+User Datagram Protocol, Src Port: 53124, Dst Port: 53
+Domain Name System (query)</pre>
+  <p>Leia cada linha como uma PDU: <code>Frame</code> é o que a placa capturou; <code>Ethernet II</code> é o quadro, com destino no gateway, e não no 8.8.8.8, porque o servidor está fora da sua rede; <code>Internet Protocol Version 4</code> é o pacote, com o destino final; <code>User Datagram Protocol</code> é o datagrama, que aponta a porta 53 do DNS; e <code>Domain Name System</code> são os dados.</p>
+  <p>Some os bytes: 14 do cabeçalho Ethernet + 20 do IPv4 + 8 do UDP + 29 da consulta = 71 (a captura normalmente não mostra os 4 bytes do FCS). Numa mensagem pequena como essa, 42 dos 71 bytes são envelope.</p>
 </section>

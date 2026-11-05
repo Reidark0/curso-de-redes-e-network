@@ -1,0 +1,86 @@
+{
+  "id": "2.2",
+  "versao": "nova",
+  "titulo": "Encapsulamento, desencapsulamento e PDUs",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3354,
+    "teoria": 1753,
+    "praticaExtra": 738,
+    "quiz": 473,
+    "flashcards": 201
+  },
+  "porGrupoTeoria": {
+    "introducao": 471,
+    "contexto": 136,
+    "conteudo": 904,
+    "exemplos": 242,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 150,
+    "summary": 90,
+    "problem": 136,
+    "concept": 273,
+    "internals": 470,
+    "architecture": 160,
+    "diagram": 1,
+    "analogy": 67,
+    "simpleExample": 175,
+    "objectives": 73,
+    "learningOutcomes": 0,
+    "glossary": 158,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 38
+  },
+  "pratica": {
+    "quiz": 473,
+    "flashcards": 201,
+    "lab": 0,
+    "mentorQuestions": 216,
+    "exercises": 207,
+    "challenge": 117,
+    "commentedSolution": 198
+  },
+  "outros": {
+    "title+subtitle": 21,
+    "nextTheme": 38,
+    "references": 79,
+    "linksToOtherCourses": 51
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 7,
+    "mentor": 2,
+    "exercicios": 3,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 4,
+    "exemplosPorAmbiente": []
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "20-25 min + 35 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 22.5,
+    "nucleoPartes": {
+      "teoria": 13.5,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 37,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 4,
+      "exercicios": 18,
+      "desafio": 15
+    },
+    "faixaNucleo": "20-25 min",
+    "praticaExtraArredondada": 35,
+    "recomendada": "20-25 min + 35 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

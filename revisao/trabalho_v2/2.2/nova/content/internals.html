@@ -1,30 +1,27 @@
 <section class="lesson-section lesson-section--internals">
   <h2>Funcionamento interno</h2>
-  <p>Acompanhe um navegador enviando uma requisição a <code>https://intranet.exemplo.local</code>, com o nome já resolvido e a conexão já estabelecida:</p>
+  <p>Acompanhe seu notebook (IP 192.168.1.20, gateway 192.168.1.1) enviando uma requisição a um site em 203.0.113.10, com o nome já resolvido e a conexão já aberta:</p>
   <ol class="flow-list">
-    <li><strong>Aplicação cria dados:</strong> por exemplo, uma requisição HTTP.</li>
-    <li><strong>Transporte adiciona portas:</strong> porta de origem, porta de destino e checksum; o TCP também acrescenta sequência e estado.</li>
-    <li><strong>Rede adiciona endereços IP:</strong> origem, destino e informações para roteamento, como TTL.</li>
-    <li><strong>Enlace adiciona endereços locais:</strong> MAC de origem e MAC do próximo salto, que pode ser o destino local ou o gateway.</li>
-    <li><strong>Física transmite sinais:</strong> o quadro vira sinais elétricos, luz ou rádio.</li>
-    <li><strong>Destino desencapsula:</strong> a placa recebe os bits, valida o quadro, entrega o pacote IP, que entrega o segmento à porta correta, e a aplicação interpreta os dados.</li>
+    <li><strong>Aplicação:</strong> o navegador cria a requisição HTTP. São os <strong>dados</strong>.</li>
+    <li><strong>Transporte:</strong> o TCP acrescenta um cabeçalho com a porta de origem, temporária (ex.: 51514), a porta de destino 443, o número de sequência e um checksum. Agora é um <strong>segmento</strong>.</li>
+    <li><strong>Rede:</strong> o IP acrescenta a origem 192.168.1.20, o destino 203.0.113.10, o TTL (um contador que cada roteador diminui, para o pacote não circular para sempre) e o número do protocolo de dentro (6 = TCP). Agora é um <strong>pacote</strong>.</li>
+    <li><strong>Enlace:</strong> a placa acrescenta o MAC dela como origem e, como destino, o MAC do gateway, porque o site está fora da sua rede. Acrescenta também o tipo do conteúdo (EtherType 0x0800 = IPv4) e, no fim, o FCS. Agora é um <strong>quadro</strong>.</li>
+    <li><strong>Física:</strong> o quadro vira bits e os bits viram sinal elétrico, luz ou rádio.</li>
   </ol>
-  <p>No caminho, cada equipamento lê só o envelope de que precisa: o roteador encaminha pelo cabeçalho IP sem entender o HTML; o switch encaminha pelo MAC sem entender o IP (salvo recursos avançados). Por isso ferramentas diferentes enxergam partes diferentes da mesma comunicação.</p>
+  <p>No servidor, o desencapsulamento usa os próprios cabeçalhos para saber o que vem dentro: a placa confere o FCS e lê o EtherType 0x0800 (é IPv4); o IP confere que o destino é ele e lê o protocolo 6 (é TCP); o TCP lê a porta 443 e entrega os dados ao programa que atende nela. A aplicação recebe só a requisição, sem nenhum cabeçalho.</p>
 
-  <h3>Quanto cada envelope ocupa: MTU e MSS</h3>
-  <p>A <strong>MTU</strong> (Maximum Transmission Unit) é o maior pacote que uma interface transmite sem fragmentar: 1500 bytes na Ethernet comum, contados a partir do cabeçalho IP. O <strong>MSS</strong> (Maximum Segment Size) é o maior volume de dados que o TCP põe num segmento; cada lado anuncia o seu no SYN.</p>
+  <h3>Quanto espaço os envelopes ocupam: MTU</h3>
+  <p>Cada enlace aceita um tamanho máximo de pacote, a <strong>MTU</strong> (Maximum Transmission Unit): 1500 bytes na Ethernet comum, contados a partir do cabeçalho IP. Tudo o que as camadas acrescentam sai desse espaço:</p>
   <div class="responsive-table"><table class="data-table">
     <thead><tr><th>Parte</th><th>Bytes</th></tr></thead>
     <tbody>
       <tr><td>Cabeçalho Ethernet + FCS</td><td>14 + 4 (fora da MTU)</td></tr>
       <tr><td>Cabeçalho IPv4 sem opções</td><td>20 (IPv6: 40)</td></tr>
       <tr><td>Cabeçalho TCP sem opções</td><td>20 (UDP: 8)</td></tr>
-      <tr><td>MSS com MTU 1500, IPv4 e TCP</td><td>1500 − 20 − 20 = 1460</td></tr>
+      <tr><td>Dados que cabem num pacote cheio, com IPv4 e TCP</td><td>1500 − 20 − 20 = 1460</td></tr>
     </tbody>
   </table></div>
-  <p><strong>Túneis somam envelopes.</strong> Uma VPN ou overlay põe o pacote inteiro dentro de outro. GRE acrescenta 24 bytes (IPv4 externo de 20 + GRE de 4): sobre um link de 1500, o pacote interno só pode ter 1476. VXLAN acrescenta 50 bytes (Ethernet, IP e UDP externos + VXLAN), por isso overlays costumam usar MTU 1450. IPsec e WireGuard têm overhead que varia com o modo e os algoritmos.</p>
-  <p><strong>Quando o pacote não cabe:</strong> sem o bit DF (Don't Fragment), o roteador IPv4 fragmenta o pacote, com custo de desempenho. Com o DF ligado, o roteador descarta o pacote e devolve um ICMP “Fragmentation Needed” (tipo 3, código 4) com a MTU suportada, e a origem reduz o tamanho. Isso é o <strong>Path MTU Discovery (PMTUD)</strong>. Se um firewall bloqueia esse ICMP, a origem nunca descobre o limite: login e páginas pequenas passam, uploads grandes travam. As correções usuais são ajustar a MTU do túnel ou fazer <strong>MSS clamping</strong>: o roteador ou concentrador VPN reescreve o MSS do SYN para um valor que caiba (ex.: 1436 num túnel GRE de 1476).</p>
-
-  <h3>O que você vê numa captura</h3>
-  <p>O Wireshark mostra o desencapsulamento de fora para dentro: <code>Frame</code> (metadados da captura), <code>Ethernet II</code> (MACs; EtherType 0x0800 = IPv4), <code>Internet Protocol Version 4</code> (IPs, TTL; protocolo 6 = TCP), <code>Transmission Control Protocol</code> (portas, sequência, flags) e, por fim, <code>TLS</code> ou <code>HTTP</code>. Ao capturar no próprio host, o <em>offloading</em> da placa calcula checksums e divide segmentos depois da captura: checksums “incorretos” e segmentos maiores que a MTU não são, necessariamente, o que trafegou no fio.</p>
+  <p>Esse limite de 1460 bytes de dados por segmento tem nome, <strong>MSS</strong> (Maximum Segment Size), e volta na aula 6.4.</p>
+  <p><strong>Túneis somam envelopes.</strong> Uma VPN pega o pacote inteiro (cabeçalho IP, cabeçalho TCP e dados), em geral o cifra, e o põe dentro de outro pacote, com cabeçalhos novos. Num túnel GRE, um dos tipos mais simples, são 24 bytes a mais (um cabeçalho IPv4 externo de 20 e o GRE de 4): sobre um enlace de 1500, o pacote de dentro só pode ter 1476. Pacotes pequenos cabem com folga; os grandes, como os de um upload, não.</p>
+  <p>Quando um pacote não cabe, o roteador o divide em pedaços (fragmentação) ou, se ele vem marcado para não ser dividido, o descarta e avisa a origem com uma mensagem ICMP, para ela mandar pacotes menores. Esse mecanismo é o <strong>Path MTU Discovery (PMTUD)</strong>. Se um firewall do caminho bloqueia esse ICMP, a origem nunca fica sabendo: o login e as páginas pequenas passam, e o upload trava.</p>
 </section>
