@@ -1,0 +1,7 @@
+<section class="lesson-section lesson-section--example">
+  <h2>Exemplo simples</h2>
+  <p>Em casa, seu notebook (192.168.0.15/24) acessa um site. Como o site está fora da rede 192.168.0.0/24, o quadro sai com o MAC de destino do roteador de casa (o gateway 192.168.0.1), e não com o do servidor do site. Se o notebook ainda não conhece esse MAC, faz ARP. Depois de um <code>ping 192.168.0.1</code>, a tabela ARP no Linux mostra algo como (valores ilustrativos):</p>
+  <pre class="code-block">$ ip neigh
+192.168.0.1 dev wlan0 lladdr a4:2b:b0:12:34:56 REACHABLE</pre>
+  <p>Leitura: o IP do gateway está associado a um MAC (<code>lladdr</code>), e a entrada foi confirmada há pouco (REACHABLE; STALE indica uma entrada ainda guardada, mas não confirmada há algum tempo). No Windows, <code>arp -a</code> mostra a mesma associação. Se aparecer <code>FAILED</code>, sem <code>lladdr</code>, o ARP não teve resposta: o problema está na entrega local (Wi-Fi, cabo, VLAN ou o próprio gateway), mesmo que pareça "internet fora do ar".</p>
+</section>

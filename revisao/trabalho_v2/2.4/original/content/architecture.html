@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--architecture">
+  <h2>7. Arquitetura</h2>
+  <p>Na arquitetura corporativa, a Camada 2 aparece nos switches de acesso, links trunk, VLANs de usuários, VLANs de servidores, VLANs de voz, VLANs de visitantes, uplinks para distribuição, interfaces virtuais, bridges, redes de virtualização e domínios de broadcast.</p>
+  <ul class="flow-list">
+    <li><strong>Host:</strong> possui uma NIC com endereço MAC.</li>
+    <li><strong>Switch de acesso:</strong> conecta dispositivos finais e aprende MACs por porta.</li>
+    <li><strong>VLAN:</strong> separa domínios lógicos de Camada 2.</li>
+    <li><strong>Trunk:</strong> transporta múltiplas VLANs entre switches ou até hipervisores.</li>
+    <li><strong>Gateway:</strong> faz a transição para Camada 3 quando o destino está fora da VLAN.</li>
+    <li><strong>Segurança:</strong> port security, NAC, 802.1X, DHCP snooping, Dynamic ARP Inspection e monitoramento.</li>
+  </ul>
+  <p>Em cloud, a Camada 2 física costuma ser abstraída. Você trabalha com subnets, route tables e security groups, mas tecnologias internas de virtualização ainda precisam resolver entrega local, encapsulamento e isolamento entre tenants.</p>
+</section>

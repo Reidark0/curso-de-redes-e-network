@@ -1,0 +1,14 @@
+<section class="lesson-section lesson-section--architecture">
+  <h2>Arquitetura</h2>
+  <p>Numa rede corporativa, a Camada 2 está nos switches de acesso, nos links trunk e uplinks para a distribuição, nas VLANs (usuários, servidores, voz, visitantes, gerenciamento) e nas bridges de virtualização.</p>
+  <ul class="flow-list">
+    <li><strong>Host:</strong> tem uma NIC com endereço MAC.</li>
+    <li><strong>Switch de acesso:</strong> conecta dispositivos finais e aprende MACs por porta.</li>
+    <li><strong>VLAN:</strong> separa domínios lógicos de Camada 2.</li>
+    <li><strong>Porta access:</strong> pertence a uma única VLAN; o host envia e recebe frames comuns, sem marcação de VLAN.</li>
+    <li><strong>Trunk:</strong> transporta várias VLANs no mesmo link entre switches ou até hipervisores. Cada frame leva uma tag IEEE 802.1Q com o número da VLAN (VLAN ID), para que o outro lado saiba a qual VLAN ele pertence. A VLAN nativa do trunk trafega sem tag.</li>
+    <li><strong>Gateway:</strong> faz a passagem para a Camada 3 quando o destino está fora da VLAN; em geral há um gateway por VLAN.</li>
+    <li><strong>Controles:</strong> port security, NAC/802.1X, DHCP snooping, Dynamic ARP Inspection e STP com BPDU Guard contra loops.</li>
+  </ul>
+  <p>Consequência prática: se a VLAN do usuário não estiver na lista de VLANs permitidas no trunk até o gateway ou o servidor DHCP, a porta de acesso pode estar certa e mesmo assim o host fica isolado.</p>
+</section>

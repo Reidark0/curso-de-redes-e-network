@@ -1,0 +1,444 @@
+{
+  "id": "2.4",
+  "moduleId": "m02",
+  "order": 4,
+  "title": "Camada 2 — Enlace: frames, MAC, switch, VLAN e ARP",
+  "subtitle": "Como bits viram quadros e são entregues dentro da LAN por MAC, switches, VLANs e ARP.",
+  "duration": "15-25 min + 50 min de prática extra",
+  "estimatedStudyTimeMinutes": 25,
+  "difficulty": "iniciante-intermediário",
+  "type": "fundamental",
+  "xp": 205,
+  "tags": [
+    "redes",
+    "modelo osi",
+    "camada 2",
+    "ethernet",
+    "frame",
+    "mac",
+    "switch",
+    "vlan",
+    "arp",
+    "lan",
+    "troubleshooting",
+    "segurança"
+  ],
+  "prerequisites": [
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m02",
+      "lesson": "2.1",
+      "reason": "A aula 2.1 apresentou o Modelo OSI como método de diagnóstico."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m02",
+      "lesson": "2.2",
+      "reason": "A aula 2.2 explicou encapsulamento e PDUs, incluindo o quadro como PDU de Camada 2."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m02",
+      "lesson": "2.3",
+      "reason": "A aula 2.3 mostrou que bits precisam atravessar cobre, fibra ou rádio antes de serem organizados em quadros."
+    },
+    {
+      "type": "lesson",
+      "course": "Redes e Network",
+      "module": "m01",
+      "lesson": "1.7",
+      "reason": "A aula 1.7 apresentou switch, AP, firewall e outros equipamentos de rede."
+    }
+  ],
+  "objectives": [
+    "Explicar o papel da Camada 2: organizar bits em quadros e entregá-los dentro da rede local por endereço MAC, sem rotear entre redes.",
+    "Descrever como o switch aprende endereços MAC e encaminha quadros (unicast ou flooding) e por que a VLAN limita o broadcast a um domínio.",
+    "Explicar como o ARP descobre o MAC do destino local ou do gateway e ler a tabela ARP (arp -a, ip neigh) para reconhecer uma falha de entrega local."
+  ],
+  "networkContext": {
+    "osiLayers": [
+      "Camada 2"
+    ],
+    "tcpIpLayers": [
+      "Acesso à rede"
+    ],
+    "relatedProtocols": [
+      "Ethernet",
+      "ARP",
+      "802.1Q",
+      "STP",
+      "LLDP",
+      "CDP"
+    ],
+    "dependsOn": [
+      "Camada 1",
+      "bits",
+      "sinais",
+      "frames",
+      "encapsulamento",
+      "dispositivos de rede"
+    ],
+    "enables": [
+      "IPv4",
+      "gateway padrão",
+      "switching",
+      "VLAN",
+      "ARP",
+      "segurança de LAN",
+      "troubleshooting local"
+    ]
+  },
+  "lab": {
+    "id": "lab-2.4",
+    "title": "Ver o ARP em ação no seu computador",
+    "labType": "security",
+    "objective": "Ver o seu MAC, a entrada ARP do gateway e o que acontece quando o ARP não recebe resposta.",
+    "prerequisites": [
+      "Um computador ligado à rede de casa ou do trabalho e um terminal. Não é preciso acesso ao switch."
+    ],
+    "tools": [
+      "Windows: Prompt de Comando ou PowerShell",
+      "Linux: terminal com o comando ip"
+    ],
+    "estimatedTimeMinutes": 20,
+    "steps": [
+      {
+        "number": 1,
+        "title": "Ver o MAC, o IP e o gateway",
+        "instruction": "Descubra o MAC da interface que está em uso, o seu IP com a máscara e o gateway. Anote o IP do gateway.",
+        "command": "Windows: ipconfig /all\nLinux: ip addr && ip route",
+        "expectedOutput": "Windows: Endereço Físico (o MAC), Endereço IPv4, Máscara de Sub-rede e Gateway Padrão. Linux: link/ether (o MAC), inet 192.168.0.15/24 e default via 192.168.0.1.",
+        "explanation": "O gateway é o vizinho que recebe os quadros sempre que o destino está fora da rede local."
+      },
+      {
+        "number": 2,
+        "title": "Ver o ARP do gateway",
+        "instruction": "Faça ping para o gateway e, em seguida, liste a tabela ARP.",
+        "command": "Windows: ping <IP_DO_GATEWAY>, depois arp -a\nLinux: ping -c 3 <IP_DO_GATEWAY>, depois ip neigh",
+        "expectedOutput": "Respostas do gateway e uma linha que liga o IP dele a um MAC (Linux: REACHABLE ou STALE; Windows: dinâmico).",
+        "explanation": "Para enviar o ping, o computador precisou do MAC do gateway; se não o tinha, fez um ARP Request e guardou a resposta."
+      },
+      {
+        "number": 3,
+        "title": "Pingar um destino fora da rede",
+        "instruction": "Faça ping para 8.8.8.8 e liste a tabela ARP de novo. Procure uma linha com 8.8.8.8.",
+        "command": "Windows: ping 8.8.8.8, depois arp -a\nLinux: ping -c 3 8.8.8.8, depois ip neigh",
+        "expectedOutput": "Nenhuma linha com 8.8.8.8; a do gateway continua lá.",
+        "explanation": "O ARP só pergunta por endereços da rede local: os quadros para 8.8.8.8 saíram com o MAC do gateway. Mesmo que a rede bloqueie ping para a internet, a tabela fica igual."
+      },
+      {
+        "number": 4,
+        "title": "Ver um ARP sem resposta",
+        "instruction": "Escolha um IP provavelmente livre na sua rede, como o final .250 (ex.: 192.168.0.250 numa rede 192.168.0.0/24), faça ping e liste a tabela ARP. Se alguém responder, escolha outro final.",
+        "command": "Windows: ping 192.168.0.250, depois arp -a\nLinux: ping -c 3 192.168.0.250, depois ip neigh",
+        "expectedOutput": "O ping mostra Host de destino inacessível (Destination Host Unreachable) vindo do seu próprio IP, ou só tempo esgotado. No Linux, ip neigh mostra o endereço como INCOMPLETE ou FAILED, sem MAC; no Windows, arp -a não mostra MAC para ele.",
+        "explanation": "Ninguém respondeu ao ARP, então o computador nem montou o quadro do ping. É o sintoma de um host em VLAN errada tentando falar com o gateway."
+      }
+    ],
+    "expectedResult": "Você viu o seu MAC, a associação IP → MAC do gateway criada pelo ARP, que um destino remoto não entra na tabela ARP e como fica um ARP sem resposta."
+  },
+  "mentorQuestions": [
+    {
+      "type": "diagnóstico",
+      "question": "Um host 192.168.10.10 foi configurado por engano com máscara /16 em vez de /24 e precisa falar com 192.168.20.5, que está em outra VLAN. O que acontece na Camada 2 e por que a comunicação falha?",
+      "hints": [
+        "Com /16, o host considera 192.168.20.5 local ou remoto?",
+        "A quem ele vai pedir o MAC, e esse pedido alcança a outra VLAN?"
+      ],
+      "expectedIdeas": [
+        "com /16, o host acha que o destino é local",
+        "ARP direto para 192.168.20.5, sem usar o gateway",
+        "o broadcast não sai da VLAN e ninguém responde"
+      ],
+      "explanation": "Com /16, o host trata 192.168.20.5 como local e faz ARP direto para ele, sem usar o gateway. O broadcast não sai da VLAN e ninguém responde: parece falha remota, mas a causa é a máscara."
+    },
+    {
+      "type": "aplicação",
+      "question": "Um switch recém-ligado tem a tabela MAC vazia, e os hosts já se conhecem. Na mesma VLAN, A (porta 1) envia um quadro para B (porta 2), B responde e, depois, C (porta 3) envia um quadro para A. Em quais quadros houve flooding e como fica a tabela MAC?",
+      "hints": [
+        "O switch aprende pelo MAC de origem.",
+        "Flooding só ocorre quando o MAC de destino não está na tabela."
+      ],
+      "expectedIdeas": [
+        "só A → B sofre flooding",
+        "tabela final: A porta 1, B porta 2, C porta 3"
+      ],
+      "explanation": "Primeiro quadro: o switch aprende A na porta 1 e, sem conhecer B, faz flooding. Resposta: aprende B na porta 2 e entrega a A por unicast. Quadro de C: aprende C na porta 3 e entrega a A por unicast. Um único flooding."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q2.4.7",
+      "question": "Qual campo do frame Ethernet indica se o payload carrega um pacote IPv4 ou uma mensagem ARP?",
+      "options": [
+        "MAC de destino",
+        "EtherType",
+        "FCS",
+        "MAC de origem"
+      ],
+      "answer": 1,
+      "explanation": "O EtherType (16 bits) indica o protocolo do payload. Os MACs identificam as interfaces, e o FCS só detecta erro no quadro.",
+      "topic": "frame Ethernet",
+      "difficulty": "iniciante",
+      "type": "conceito"
+    },
+    {
+      "id": "q2.4.8",
+      "question": "Seu notebook 192.168.10.10/24 envia um pacote para 8.8.8.8. Qual MAC de destino vai no frame que sai da placa de rede?",
+      "options": [
+        "O broadcast FF:FF:FF:FF:FF:FF, porque o destino está na internet",
+        "O MAC da interface do servidor 8.8.8.8",
+        "O MAC do gateway da rede 192.168.10.0/24",
+        "O MAC do próprio notebook, que o switch troca pelo do destino"
+      ],
+      "answer": 2,
+      "explanation": "8.8.8.8 está fora da rede local, então o frame vai ao gateway: o IP de destino continua 8.8.8.8, mas o MAC de destino é o do gateway, obtido por ARP. O broadcast só aparece no ARP Request.",
+      "topic": "MAC vs IP",
+      "difficulty": "intermediário",
+      "type": "cenário"
+    },
+    {
+      "id": "q2.4.3",
+      "question": "Um host não consegue pingar o gateway e não há entrada ARP para ele. Qual hipótese deve ser considerada cedo?",
+      "options": [
+        "Problema local de VLAN, porta, gateway ou enlace",
+        "Servidor DNS configurado incorretamente no host",
+        "Certificado TLS expirado no servidor web",
+        "Firewall de borda bloqueando a saída para a internet"
+      ],
+      "answer": 0,
+      "explanation": "Sem ARP para o gateway, o host nem entrega o frame ao primeiro salto. DNS, TLS e firewall de borda ficam depois; foque a entrega local.",
+      "topic": "troubleshooting",
+      "difficulty": "intermediário",
+      "type": "diagnóstico"
+    },
+    {
+      "id": "q2.4.4",
+      "question": "Por que VLAN não deve ser tratada como firewall?",
+      "options": [
+        "Porque VLAN só separa portas físicas e não funciona com máquinas virtuais.",
+        "Porque VLAN criptografa o tráfego, e o firewall não consegue inspecioná-lo.",
+        "Porque frames de uma VLAN sempre chegam às outras VLANs por flooding.",
+        "Porque VLAN separa domínios de broadcast, mas a política de acesso entre segmentos exige firewall ou ACL."
+      ],
+      "answer": 3,
+      "explanation": "A VLAN isola o domínio de broadcast; se houver roteamento permissivo entre VLANs, o acesso acontece. Quem filtra é a ACL ou o firewall no ponto de roteamento. VLAN não criptografa e o flooding não sai da VLAN.",
+      "topic": "segurança",
+      "difficulty": "intermediário",
+      "type": "segurança"
+    },
+    {
+      "id": "q2.4.5",
+      "question": "Um switch recebe um frame unicast para MAC desconhecido dentro de uma VLAN. O que ele tende a fazer?",
+      "options": [
+        "Envia o frame para todas as portas de todas as VLANs",
+        "Faz flooding nas demais portas da mesma VLAN",
+        "Descarta o frame até aprender o MAC de destino",
+        "Encaminha o frame ao gateway para ser roteado"
+      ],
+      "answer": 1,
+      "explanation": "Com MAC de destino desconhecido, o switch replica o frame só dentro daquela VLAN. Quando o destino responde, o switch aprende o MAC dele e passa a usar unicast.",
+      "topic": "switching",
+      "difficulty": "intermediário",
+      "type": "cenário"
+    },
+    {
+      "id": "q2.4.9",
+      "question": "Um switch recém-ligado recebe, na porta 3, um quadro com MAC de origem AA:AA:AA:11:11:11 e MAC de destino BB:BB:BB:22:22:22. O que ele anota na tabela MAC?",
+      "options": [
+        "AA:AA:AA:11:11:11 na porta 3",
+        "BB:BB:BB:22:22:22 na porta 3",
+        "Os dois MACs na porta 3",
+        "Nada, até receber um ARP Reply"
+      ],
+      "answer": 0,
+      "explanation": "O switch aprende só pelo MAC de origem: quem enviou o quadro está na porta por onde ele entrou. Onde está o destino ele ainda não sabe, por isso faz flooding na VLAN. O switch não depende do ARP para aprender.",
+      "topic": "switching",
+      "difficulty": "iniciante",
+      "type": "cenário"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc2.4.1",
+      "front": "O que é um frame Ethernet?",
+      "back": "É a unidade de dados da Camada 2 usada para transportar payload localmente com MAC de origem, MAC de destino e campos de controle.",
+      "tags": [
+        "camada 2",
+        "ethernet"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc2.4.2",
+      "front": "Para que serve o endereço MAC?",
+      "back": "Identificar uma interface na entrega local de Camada 2. Tem 48 bits, escritos em hexadecimal (ex.: AA:BB:CC:DD:EE:FF); FF:FF:FF:FF:FF:FF é o endereço de broadcast.",
+      "tags": [
+        "mac",
+        "lan"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc2.4.3",
+      "front": "O que um switch aprende?",
+      "back": "Aprende endereços MAC de origem associados às portas por onde os frames entram.",
+      "tags": [
+        "switch",
+        "mac table"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc2.4.4",
+      "front": "O que é uma VLAN?",
+      "back": "Uma separação lógica de Camada 2 que cria domínios de broadcast distintos na mesma infraestrutura física.",
+      "tags": [
+        "vlan",
+        "segmentação"
+      ],
+      "difficulty": "intermediário"
+    },
+    {
+      "id": "fc2.4.5",
+      "front": "Para que serve ARP no IPv4?",
+      "back": "Para descobrir o MAC correspondente a um IP local ou ao gateway dentro da LAN.",
+      "tags": [
+        "arp",
+        "ipv4"
+      ],
+      "difficulty": "iniciante"
+    },
+    {
+      "id": "fc2.4.8",
+      "front": "Num ping para um IP da sua rede local, o que indica a mensagem Host de destino inacessível vinda do seu próprio IP?",
+      "back": "Que o ARP não teve resposta: o computador não descobriu o MAC do destino e nem conseguiu montar o quadro.",
+      "tags": [
+        "arp",
+        "troubleshooting"
+      ],
+      "difficulty": "iniciante"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex2.4.5",
+      "type": "interpretação",
+      "prompt": "Um host Linux com IP fixo 192.168.10.50/24 não pinga o gateway 192.168.10.1. Depois do ping, ip neigh mostra \"192.168.10.1 dev eth0 FAILED\". A equipe de rede consulta a tabela MAC do switch e encontra o MAC do host na porta 12, VLAN 30; pela documentação, esse ponto deveria estar na VLAN 10, a do gateway. Interprete as evidências e diga a hipótese principal e o próximo passo.",
+      "expectedAnswer": "FAILED, sem MAC: o ARP para o gateway não teve resposta. O host está na VLAN 30, e o broadcast ARP não alcança o gateway da VLAN 10. Hipótese: porta 12 na VLAN errada. Próximo passo: a equipe de rede corrige a VLAN da porta numa mudança autorizada; depois, repita ping e ip neigh.",
+      "explanation": "Cruzar a evidência do host (ARP) com a do switch (VLAN e porta) localiza a falha antes de suspeitar de DNS ou firewall."
+    },
+    {
+      "id": "ex2.4.6",
+      "type": "aplicação",
+      "prompt": "Seu notebook tem IP 192.168.0.15/24 e gateway 192.168.0.1. Em /24, um destino é local quando os três primeiros números são iguais aos seus. Para cada destino, diga por qual IP o notebook pergunta no ARP: (a) 192.168.0.40, uma impressora; (b) 8.8.8.8; (c) 192.168.1.40; (d) 192.168.0.1.",
+      "expectedAnswer": "(a) 192.168.0.40 (local); (b) 192.168.0.1 (remoto, vai ao gateway); (c) 192.168.0.1 (192.168.1.x é outra rede, apesar de parecida); (d) 192.168.0.1 (o gateway é local).",
+      "explanation": "O ARP pergunta sempre pelo próximo vizinho na rede local. O item (c) mostra que a decisão vem da máscara, não da semelhança dos números."
+    }
+  ],
+  "challenge": {
+    "title": "Os primeiros quadros de um ping",
+    "scenario": "O notebook N (192.168.10.10/24, MAC 3c:52:82:aa:bb:cc) está na porta 1 de um switch; o gateway G (192.168.10.1, MAC a4:2b:b0:12:34:56), na porta 8, na mesma VLAN. A tabela ARP de N e a tabela MAC do switch estão vazias. N executa ping 8.8.8.8.",
+    "tasks": [
+      "Liste, em ordem, os quadros que passam pelo switch até o primeiro ping chegar ao gateway, com MAC de origem, MAC de destino e EtherType.",
+      "Diga o que o switch aprende em cada quadro e se o entrega por unicast ou por flooding."
+    ],
+    "expectedDeliverables": [
+      "Uma tabela com uma linha por quadro (MACs, EtherType e ação do switch) e a tabela MAC final."
+    ]
+  },
+  "commentedSolution": {
+    "reasoning": "8.8.8.8 está fora de 192.168.10.0/24, então N precisa do MAC do gateway. Com a tabela ARP vazia, o ARP vem antes do ping.",
+    "steps": [
+      "Quadro 1, ARP Request: origem 3c:52:82:aa:bb:cc, destino ff:ff:ff:ff:ff:ff, EtherType 0x0806 (quem tem 192.168.10.1?). O switch aprende N na porta 1 e, como é broadcast, copia o quadro para todas as outras portas da VLAN.",
+      "Quadro 2, ARP Reply: origem a4:2b:b0:12:34:56, destino 3c:52:82:aa:bb:cc, EtherType 0x0806. O switch aprende G na porta 8 e, como já conhece N, entrega só pela porta 1. N guarda 192.168.10.1 → a4:2b:b0:12:34:56.",
+      "Quadro 3, ping: origem 3c:52:82:aa:bb:cc, destino a4:2b:b0:12:34:56, EtherType 0x0800, IP de destino 8.8.8.8. O switch já conhece G e entrega só pela porta 8."
+    ],
+    "commonMistakes": [
+      "Pôr o MAC de 8.8.8.8 no quadro 3: o ARP não sai da rede local, então N nunca descobre esse MAC.",
+      "Achar que o ARP Reply é broadcast: ele vai direto a quem perguntou."
+    ],
+    "finalAnswer": "ARP Request em broadcast (flooding na VLAN), ARP Reply por unicast até N e o ping com MAC de destino do gateway e IP de destino 8.8.8.8. Tabela MAC final: N na porta 1, G na porta 8."
+  },
+  "glossary": [
+    {
+      "term": "Gateway padrão",
+      "shortDefinition": "O roteador da rede local que recebe os pacotes cujo destino está fora dela.",
+      "example": "Numa casa com rede 192.168.0.0/24, o gateway costuma ser o roteador, 192.168.0.1.",
+      "relatedLessons": [
+        "2.5",
+        "4.5"
+      ]
+    },
+    {
+      "term": "Máscara (/24)",
+      "shortDefinition": "Indica qual parte do IP identifica a rede. É com ela que o host decide se o destino é local ou remoto.",
+      "example": "Em 192.168.0.15/24, a rede é 192.168.0.0: os três primeiros números precisam ser iguais para o destino ser local.",
+      "relatedLessons": [
+        "2.5",
+        "4.3"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "standard",
+      "title": "IEEE 802.3 Ethernet",
+      "organization": "IEEE",
+      "url": "https://standards.ieee.org/standard/802_3-2022.html",
+      "note": "Referência para Ethernet."
+    },
+    {
+      "type": "standard",
+      "title": "IEEE 802.1Q VLANs",
+      "organization": "IEEE",
+      "url": "https://standards.ieee.org/standard/802_1Q-2022.html",
+      "note": "Referência para VLAN tagging e bridging."
+    },
+    {
+      "type": "rfc",
+      "title": "RFC 826 — An Ethernet Address Resolution Protocol",
+      "organization": "IETF",
+      "url": "https://www.rfc-editor.org/rfc/rfc826",
+      "note": "Referência histórica e técnica sobre ARP."
+    },
+    {
+      "type": "internal-course",
+      "title": "Redes e Network v2.0 — Aula 2.2",
+      "organization": "Deixando de ser TBN",
+      "url": "",
+      "note": "Encapsulamento, desencapsulamento e PDUs."
+    }
+  ],
+  "linksToOtherCourses": [
+    {
+      "course": "Infraestrutura Moderna, Platform Engineering e DevSecOps",
+      "module": "Kubernetes e redes de plataforma",
+      "lesson": "NetworkPolicy e CNI",
+      "reason": "Isolamento de rede em clusters depende de conceitos de enlace, overlays, bridges e segmentação."
+    },
+    {
+      "course": "Enterprise Identity, IAM e Segurança de Acessos",
+      "module": "Acesso condicional e Zero Trust",
+      "lesson": "Controle de acesso por dispositivo e rede",
+      "reason": "NAC, postura de dispositivo e segmentação de rede se conectam com decisões de identidade e acesso."
+    }
+  ],
+  "progressRules": {
+    "completeWhen": {
+      "read": true,
+      "quizScoreAtLeast": 70
+    },
+    "accessPolicy": {
+      "freeAccess": true,
+      "navigationBlocked": false,
+      "note": "Conclusão usa critérios reais, mas a navegação permanece livre para todas as aulas."
+    },
+    "unlocks": [
+      "2.5"
+    ]
+  }
+}

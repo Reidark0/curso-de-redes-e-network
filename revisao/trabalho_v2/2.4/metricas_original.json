@@ -1,0 +1,103 @@
+{
+  "id": "2.4",
+  "versao": "original",
+  "titulo": "Camada 2 — Enlace: frames, MAC, switch, VLAN e ARP",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4917,
+    "teoria": 2768,
+    "praticaExtra": 1568,
+    "quiz": 279,
+    "flashcards": 124
+  },
+  "porGrupoTeoria": {
+    "introducao": 591,
+    "contexto": 432,
+    "conteudo": 421,
+    "exemplos": 624,
+    "seguranca_troubleshooting": 700
+  },
+  "porSecao": {
+    "motivation": 163,
+    "summary": 60,
+    "history": 178,
+    "problem": 141,
+    "evolution": 113,
+    "concept": 111,
+    "internals": 174,
+    "architecture": 133,
+    "diagram": 3,
+    "analogy": 118,
+    "simpleExample": 105,
+    "enterpriseExample": 105,
+    "cloudExample": 83,
+    "devsecopsExample": 88,
+    "securityExample": 125,
+    "objectives": 57,
+    "learningOutcomes": 76,
+    "glossary": 235,
+    "security": 324,
+    "troubleshooting": 376,
+    "nextTheme": 42
+  },
+  "pratica": {
+    "quiz": 279,
+    "flashcards": 124,
+    "lab": 863,
+    "mentorQuestions": 173,
+    "exercises": 190,
+    "challenge": 150,
+    "commentedSolution": 192
+  },
+  "outros": {
+    "title+subtitle": 28,
+    "nextTheme": 42,
+    "references": 45,
+    "linksToOtherCourses": 63
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 60,
+    "alternativa_5minPorPasso": 30,
+    "plausivel": true,
+    "override": null,
+    "palavras": 863
+  },
+  "duracao": {
+    "declarada": "85-120 min",
+    "estimatedStudyTimeMinutes": 120,
+    "nucleo": 30.3,
+    "nucleoPartes": {
+      "teoria": 21.3,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 105,
+    "praticaExtraPartes": {
+      "lab": 60,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 105,
+    "recomendada": "25-35 min + 105 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

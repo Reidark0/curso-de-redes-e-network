@@ -1,0 +1,99 @@
+{
+  "id": "2.4",
+  "versao": "v1",
+  "titulo": "Camada 2 — Enlace: frames, MAC, switch, VLAN e ARP",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 5405,
+    "teoria": 2978,
+    "praticaExtra": 1625,
+    "quiz": 471,
+    "flashcards": 162
+  },
+  "porGrupoTeoria": {
+    "introducao": 618,
+    "contexto": 171,
+    "conteudo": 815,
+    "exemplos": 544,
+    "seguranca_troubleshooting": 830
+  },
+  "porSecao": {
+    "motivation": 125,
+    "summary": 125,
+    "problem": 171,
+    "concept": 228,
+    "internals": 390,
+    "architecture": 195,
+    "diagram": 2,
+    "analogy": 92,
+    "simpleExample": 127,
+    "enterpriseExample": 167,
+    "cloudExample": 75,
+    "devsecopsExample": 83,
+    "objectives": 57,
+    "learningOutcomes": 76,
+    "glossary": 235,
+    "security": 397,
+    "troubleshooting": 433,
+    "nextTheme": 36
+  },
+  "pratica": {
+    "quiz": 471,
+    "flashcards": 162,
+    "lab": 737,
+    "mentorQuestions": 244,
+    "exercises": 294,
+    "challenge": 150,
+    "commentedSolution": 200
+  },
+  "outros": {
+    "title+subtitle": 25,
+    "nextTheme": 36,
+    "references": 45,
+    "linksToOtherCourses": 63
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 6,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 45,
+    "alternativa_5minPorPasso": 30,
+    "plausivel": true,
+    "override": null,
+    "palavras": 737
+  },
+  "duracao": {
+    "declarada": "110-155 min",
+    "estimatedStudyTimeMinutes": 155,
+    "nucleo": 31.9,
+    "nucleoPartes": {
+      "teoria": 22.9,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 90,
+    "praticaExtraPartes": {
+      "lab": 45,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-40 min",
+    "praticaExtraArredondada": 90,
+    "recomendada": "25-40 min + 90 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 40
+  }
+}

@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <div class="definition-box"><strong>Definição:</strong> a Camada 2 organiza bits em quadros e entrega esses quadros entre interfaces do mesmo enlace ou domínio local, usando endereços de enlace (MAC) e mecanismos como switching, VLANs e, em redes IPv4/Ethernet, ARP.</div>
+  <p>O <strong>endereço MAC</strong> tem 48 bits e é escrito como 6 bytes em hexadecimal, por exemplo <code>AA:BB:CC:DD:EE:FF</code>. Ele identifica a interface (NIC) no enlace. <code>FF:FF:FF:FF:FF:FF</code> é o broadcast: o quadro chega a todas as interfaces do domínio de broadcast, que, numa rede com VLANs, é a própria VLAN.</p>
+  <p>A Camada 2 não substitui a Camada 3: um switch de Camada 2 entrega quadros dentro da LAN ou VLAN e não roteia entre redes IP (só equipamentos multicamada fazem as duas coisas). Para sair da rede local, o tráfego precisa de um gateway. O ARP também é local e próprio do IPv4; no IPv6, essa função é do Neighbor Discovery.</p>
+  <div class="callout warning"><strong>Erros comuns:</strong>
+    <ul>
+      <li><strong>Confundir MAC com IP:</strong> o MAC serve à entrega local do quadro; o IP, ao endereçamento lógico e ao roteamento. Misturar os dois confunde entrega local com roteamento no diagnóstico.</li>
+      <li><strong>Achar que VLAN é firewall:</strong> a VLAN separa domínios de broadcast, mas, com roteamento permissivo entre VLANs, o acesso indevido acontece. Política entre VLANs é papel de firewall ou ACL.</li>
+      <li><strong>Ignorar ARP quando o host não alcança o gateway:</strong> verifique IP, máscara, gateway, ARP e porta/VLAN antes de culpar o DNS.</li>
+    </ul>
+  </div>
+</section>

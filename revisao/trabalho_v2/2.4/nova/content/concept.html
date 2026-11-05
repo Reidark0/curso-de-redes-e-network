@@ -1,0 +1,15 @@
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <div class="definition-box"><strong>Definição:</strong> a Camada 2 organiza bits em quadros (frames) e entrega esses quadros entre interfaces da mesma rede local, usando endereços MAC.</div>
+  <p>O <strong>endereço MAC</strong> tem 48 bits, escritos como 6 bytes em hexadecimal, por exemplo <code>AA:BB:CC:DD:EE:FF</code>. Ele identifica a placa de rede (NIC) e só tem sentido dentro da rede local. O endereço <code>FF:FF:FF:FF:FF:FF</code> é o <strong>broadcast</strong>: um quadro enviado para ele chega a todas as interfaces do mesmo <strong>domínio de broadcast</strong>.</p>
+  <p>O <strong>switch</strong> lê o MAC de destino de cada quadro e o entrega só na porta onde esse MAC está; o Funcionamento interno mostra como ele aprende isso. Uma <strong>VLAN</strong> divide o switch em redes locais separadas: por exemplo, usuários na VLAN 10 e visitantes na VLAN 40. Cada VLAN é um domínio de broadcast próprio: um quadro de uma VLAN nunca é entregue nas portas de outra. Uma porta de acesso (access) pertence a uma única VLAN; entre switches, uma porta trunk leva várias VLANs no mesmo cabo, marcando cada quadro com o número da VLAN (aula 3.7).</p>
+  <p>A Camada 2 não roteia. Para alcançar outra rede, inclusive outra VLAN, o quadro vai para o <strong>gateway</strong>, em geral um por VLAN, que encaminha o pacote pela Camada 3 (aula 2.5).</p>
+  <p>O <strong>ARP</strong> (Address Resolution Protocol) liga os dois endereços no IPv4. O host sabe o IP com que quer falar, mas, para montar o quadro, precisa do MAC. O ARP pergunta por broadcast "quem tem este IP?", e o dono do IP responde com o seu MAC.</p>
+  <div class="callout warning"><strong>Erros comuns</strong>
+    <ul>
+      <li><strong>Confundir MAC com IP:</strong> o MAC serve à entrega do quadro dentro da rede local; o IP, ao endereçamento lógico e ao roteamento entre redes.</li>
+      <li><strong>Achar que VLAN é firewall:</strong> a VLAN separa domínios de broadcast, mas, se o gateway rotear livremente entre VLANs, o acesso acontece. Quem filtra é o firewall ou a ACL (lista de regras de acesso) no ponto de roteamento.</li>
+      <li><strong>Culpar o DNS quando o host não alcança o gateway:</strong> sem resposta de ARP, nenhum quadro sai da rede local; confira IP, máscara, gateway, tabela ARP e a VLAN da porta primeiro.</li>
+    </ul>
+  </div>
+</section>

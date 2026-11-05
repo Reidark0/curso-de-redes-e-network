@@ -1,0 +1,30 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <h3>Campos principais do frame Ethernet</h3>
+  <div class="responsive-table"><table class="data-table"><thead><tr><th>Campo</th><th>Tamanho</th><th>Para que serve</th><th>O que observar</th></tr></thead><tbody>
+    <tr><td>MAC de destino</td><td>48 bits</td><td>Indica o destinatário local do frame.</td><td>Alvo de spoofing e flooding; monitore em redes críticas.</td></tr>
+    <tr><td>MAC de origem</td><td>48 bits</td><td>Indica a interface que enviou o frame.</td><td>O switch aprende a tabela MAC por ele; falsificá-lo afeta visibilidade e segurança.</td></tr>
+    <tr><td>EtherType</td><td>16 bits</td><td>Indica o protocolo que está no payload, como IPv4 ou ARP.</td><td>Ajuda a análise de tráfego e os filtros defensivos.</td></tr>
+    <tr><td>Payload</td><td>variável</td><td>Carrega a PDU de cima (ex.: o pacote IPv4).</td><td>—</td></tr>
+    <tr><td>FCS</td><td>32 bits</td><td>Detecta erro no quadro; o receptor descarta o frame com FCS inválido.</td><td>Erros recorrentes indicam problema físico ou de enlace, não necessariamente ataque.</td></tr>
+  </tbody></table></div>
+  <h3>Do IP ao frame entregue</h3>
+  <ol class="flow-list">
+    <li>O host compara o IP de destino com o seu IP e máscara: o destino é local ou remoto?</li>
+    <li>Se for local, precisa do MAC do destino; se for remoto, do MAC do gateway. Primeiro procura na tabela ARP.</li>
+    <li>Se não conhece o MAC, envia um ARP Request ao broadcast <code>FF:FF:FF:FF:FF:FF</code>, que alcança toda a VLAN: "quem tem o IP X?".</li>
+    <li>O dono do IP (destino ou gateway) responde com um ARP Reply com o seu MAC, e o host guarda a associação IP→MAC.</li>
+    <li>O host monta o frame: MAC de destino, MAC de origem, EtherType, payload e FCS.</li>
+    <li>O switch recebe o frame, aprende o MAC de origem associado à porta de entrada e consulta a tabela MAC.</li>
+    <li>Se conhece o MAC de destino, encaminha só pela porta dele (unicast). Se não conhece, faz flooding: replica o frame em todas as demais portas da mesma VLAN, nunca em outras.</li>
+    <li>O destino recebe o quadro, confere o FCS e o MAC de destino e passa o payload para a camada superior.</li>
+  </ol>
+  <h3>Onde cada etapa costuma falhar</h3>
+  <div class="responsive-table"><table class="data-table"><thead><tr><th>Etapa</th><th>Falha típica</th></tr></thead><tbody>
+    <tr><td>Decisão local × remoto</td><td>Máscara errada faz o host tentar ARP para um destino que deveria ir ao gateway.</td></tr>
+    <tr><td>Tabela ARP</td><td>Entrada ausente, desatualizada (stale) ou falsa causa falha ou risco de interceptação.</td></tr>
+    <tr><td>Aprendizado no switch</td><td>Loop ou MAC flapping (o mesmo MAC alternando entre portas) indica instabilidade ou topologia incorreta.</td></tr>
+    <tr><td>Encaminhamento</td><td>Host ou gateway em VLAN errada não recebe o broadcast ARP nem o unicast.</td></tr>
+  </tbody></table></div>
+  <p>Por isso, ARP, VLAN, trunk, tabela MAC e loops derrubam a comunicação mesmo com IP, DNS e aplicação corretos no papel.</p>
+</section>

@@ -1,0 +1,91 @@
+{
+  "id": "2.4",
+  "versao": "nova",
+  "titulo": "Camada 2 — Enlace: frames, MAC, switch, VLAN e ARP",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3462,
+    "teoria": 1428,
+    "praticaExtra": 1218,
+    "quiz": 485,
+    "flashcards": 162
+  },
+  "porGrupoTeoria": {
+    "introducao": 379,
+    "contexto": 143,
+    "conteudo": 705,
+    "exemplos": 201,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 145,
+    "summary": 88,
+    "problem": 143,
+    "concept": 350,
+    "internals": 353,
+    "diagram": 2,
+    "analogy": 58,
+    "simpleExample": 143,
+    "objectives": 76,
+    "learningOutcomes": 0,
+    "glossary": 70,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 36
+  },
+  "pratica": {
+    "quiz": 485,
+    "flashcards": 162,
+    "lab": 436,
+    "mentorQuestions": 251,
+    "exercises": 238,
+    "challenge": 109,
+    "commentedSolution": 184
+  },
+  "outros": {
+    "title+subtitle": 25,
+    "nextTheme": 36,
+    "references": 45,
+    "linksToOtherCourses": 63
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 4,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 2,
+    "exemplosPorAmbiente": []
+  },
+  "lab": {
+    "estimatedTimeMinutes": 20,
+    "alternativa_5minPorPasso": 20,
+    "plausivel": true,
+    "override": null,
+    "palavras": 436
+  },
+  "duracao": {
+    "declarada": "15-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 20,
+    "nucleoPartes": {
+      "teoria": 11,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 51,
+    "praticaExtraPartes": {
+      "lab": 20,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-25 min",
+    "praticaExtraArredondada": 50,
+    "recomendada": "15-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

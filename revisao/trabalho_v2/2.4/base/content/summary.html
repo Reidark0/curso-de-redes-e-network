@@ -1,0 +1,10 @@
+<section class="lesson-section lesson-section--summary">
+  <h2>Resumo</h2>
+  <ul>
+    <li><strong>Ideia central:</strong> a Camada 2 é o sistema de entrega local: não decide rotas, mas faz interfaces da mesma rede lógica trocarem frames usando MAC, switches e VLANs.</li>
+    <li><strong>Mecanismo:</strong> o switch aprende o MAC de origem por porta, envia unicast ao MAC conhecido e faz flooding (só na VLAN) ao desconhecido; o ARP descobre por broadcast o MAC do destino local ou do gateway.</li>
+    <li><strong>O que lembrar:</strong> MAC é endereço local, IP é lógico (Camada 3). Porta access tem uma VLAN; trunk leva várias, com tag 802.1Q.</li>
+    <li><strong>Erro comum:</strong> tratar VLAN como firewall ou pular para DNS sem olhar ARP, VLAN e tabela MAC.</li>
+    <li><strong>Segurança:</strong> desativar portas sem uso, controlar o tráfego entre VLANs, monitorar ARP e MAC flapping, evitar loops com STP/BPDU Guard.</li>
+  </ul>
+</section>

@@ -1,0 +1,6 @@
+<section class="lesson-section lesson-section--motivation">
+  <h2>1. Motivação</h2>
+  <p>Quando alguém diz “a rede não funciona”, muitas vezes a investigação começa pelo IP, pelo DNS ou pelo firewall. Mas antes de existir pacote IP, antes de existir TCP, antes de existir HTTP e antes de existir autenticação, existe uma pergunta de Camada 2: como um dispositivo entrega um quadro para outro dispositivo dentro da mesma rede local?</p>
+  <p>A Camada 2, chamada de Enlace de Dados, é a camada que organiza os bits vindos da Camada 1 em estruturas chamadas frames, ou quadros. Ela usa endereços MAC, switches, VLANs, controle de erro local e, em redes IPv4 sobre Ethernet, depende de ARP para descobrir qual MAC corresponde a um IP dentro da LAN.</p>
+  <div class="callout callout--problem"><strong>Problema real:</strong> uma estação recebe IP correto por DHCP, mas não consegue falar com o gateway. O DNS não é o problema. A rota padrão existe. O cabo está conectado. Ao investigar, a equipe descobre que a porta está na VLAN errada. O problema estava na Camada 2.</div>
+</section>

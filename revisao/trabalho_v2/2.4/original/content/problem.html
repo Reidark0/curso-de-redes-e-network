@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--problem">
+  <h2>3. Problema</h2>
+  <p>A Camada 2 resolve o problema de entrega local. A Camada 1 transmite bits, mas não sabe onde começa um quadro, onde termina, quem é o destinatário local, qual porta do switch deve receber o tráfego, nem se dois grupos lógicos devem ficar separados.</p>
+  <ul class="flow-list">
+    <li><strong>Delimitação:</strong> transformar fluxo de bits em quadros identificáveis.</li>
+    <li><strong>Endereçamento local:</strong> identificar origem e destino por MAC dentro do enlace.</li>
+    <li><strong>Comutação:</strong> permitir que switches encaminhem tráfego para a porta correta.</li>
+    <li><strong>Segmentação:</strong> separar domínios de broadcast com VLANs.</li>
+    <li><strong>Resolução local:</strong> permitir que IPv4 descubra MAC com ARP.</li>
+    <li><strong>Diagnóstico:</strong> diferenciar falha física, VLAN errada, MAC ausente, loop e problema de gateway.</li>
+  </ul>
+  <p>Sem Camada 2, redes locais seriam uma massa confusa de sinais. Sem entender Camada 2, o profissional tende a culpar IP, firewall ou aplicação quando o defeito pode estar em VLAN, porta, trunk, tabela MAC ou ARP.</p>
+</section>

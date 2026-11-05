@@ -1,0 +1,23 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>Funcionamento interno</h2>
+  <h3>Campos principais do quadro Ethernet</h3>
+  <div class="responsive-table"><table class="data-table"><thead><tr><th>Campo</th><th>Tamanho</th><th>Para que serve</th></tr></thead><tbody>
+    <tr><td>MAC de destino</td><td>48 bits</td><td>Indica o destinatário local do quadro.</td></tr>
+    <tr><td>MAC de origem</td><td>48 bits</td><td>Indica a interface que enviou o quadro. É por ele que o switch aprende onde cada aparelho está.</td></tr>
+    <tr><td>EtherType</td><td>16 bits</td><td>Indica o protocolo que vai dentro do quadro: <code>0x0800</code> = IPv4, <code>0x0806</code> = ARP.</td></tr>
+    <tr><td>Payload</td><td>variável</td><td>Carrega a PDU da camada de cima, por exemplo o pacote IPv4 (aula 2.2).</td></tr>
+    <tr><td>FCS</td><td>32 bits</td><td>Detecta erro no quadro: o receptor descarta o quadro com FCS inválido e conta um erro CRC (aula 2.3).</td></tr>
+  </tbody></table></div>
+  <h3>Do IP ao quadro entregue</h3>
+  <ol class="flow-list">
+    <li>O host compara o IP de destino com o seu IP e máscara: o destino está na rede local ou fora dela?</li>
+    <li>Se for local, precisa do MAC do destino; se for remoto, do MAC do gateway. Primeiro procura na sua tabela ARP.</li>
+    <li>Se não conhece o MAC, envia um ARP Request para <code>FF:FF:FF:FF:FF:FF</code>, que alcança toda a VLAN: "quem tem o IP X?".</li>
+    <li>Só o dono do IP (o destino ou o gateway) responde, com um ARP Reply contendo o seu MAC. O host guarda a associação IP → MAC na tabela ARP.</li>
+    <li>O host monta o quadro: MAC de destino, MAC de origem, EtherType, payload e FCS.</li>
+    <li>O switch recebe o quadro e anota na tabela MAC: "este MAC de origem está nesta porta".</li>
+    <li>Se o MAC de destino está na tabela, o switch envia o quadro só pela porta dele (unicast). Se não está, faz <strong>flooding</strong>: copia o quadro para todas as outras portas da mesma VLAN, nunca para outras VLANs. Quando o destino responder, o switch aprende onde ele está.</li>
+    <li>O destino confere o FCS e o MAC de destino e passa o payload para a camada de cima.</li>
+  </ol>
+  <p>Se uma etapa falha, as seguintes nem acontecem. Com a máscara errada, o host faz ARP para um destino que deveria ir ao gateway. Com o host e o gateway em VLANs diferentes, o ARP Request não chega ao gateway e ninguém responde. Nos dois casos, DNS e aplicação podem estar perfeitos e mesmo assim nada funciona.</p>
+</section>

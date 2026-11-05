@@ -1,0 +1,16 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>Em uma LAN Ethernet simples, o funcionamento interno pode ser entendido em etapas.</p>
+  <ol class="flow-list">
+    <li>O host decide enviar dados para outro IP.</li>
+    <li>Ele verifica se o destino está na mesma rede IP ou se deve enviar ao gateway.</li>
+    <li>Se precisa entregar localmente, procura o MAC correspondente na tabela ARP.</li>
+    <li>Se não conhece o MAC, envia um ARP Request em broadcast dentro da VLAN.</li>
+    <li>O destino, ou o gateway, responde com ARP Reply informando seu MAC.</li>
+    <li>O host monta um frame Ethernet com MAC de origem, MAC de destino, EtherType, payload e FCS.</li>
+    <li>O switch recebe o frame, aprende o MAC de origem pela porta de entrada e consulta sua tabela MAC.</li>
+    <li>Se conhece o destino, encaminha pela porta correta; se não conhece, faz flooding dentro da VLAN.</li>
+    <li>O destino recebe o quadro, valida a entrega local e passa o payload para a camada superior.</li>
+  </ol>
+  <p>Essa dinâmica explica por que problemas de ARP, VLAN, trunk, tabela MAC e loops podem derrubar uma rede mesmo quando IP, DNS e aplicação parecem corretos no papel.</p>
+</section>
