@@ -3,9 +3,9 @@ export const lesson0103 = {
   "moduleId": "m01",
   "order": 3,
   "title": "Tipos de rede: PAN, LAN, WLAN, CAN, MAN, WAN e SAN",
-  "subtitle": "Como alcance, finalidade, meio e domínio administrativo mudam arquitetura, operação, custo e segurança.",
-  "duration": "70-100 min",
-  "estimatedStudyTimeMinutes": 100,
+  "subtitle": "Como alcance, finalidade, meio e dono de uma rede mudam custo, operação e o lugar onde procurar uma falha.",
+  "duration": "15-20 min + 30 min de prática extra",
+  "estimatedStudyTimeMinutes": 20,
   "difficulty": "iniciante-intermediário",
   "type": "intermediária",
   "xp": 165,
@@ -19,9 +19,6 @@ export const lesson0103 = {
     "MAN",
     "WAN",
     "SAN",
-    "cloud",
-    "segurança",
-    "arquitetura",
     "troubleshooting"
   ],
   "prerequisites": [
@@ -48,31 +45,20 @@ export const lesson0103 = {
     }
   ],
   "objectives": [
-    "Diferenciar PAN, LAN, WLAN, CAN, MAN, WAN e SAN pelo alcance e finalidade.",
-    "Relacionar cada tipo de rede com custos, riscos, operação e troubleshooting.",
-    "Entender como tipos de rede coexistem em uma arquitetura corporativa moderna.",
-    "Reconhecer equivalentes em cloud networking e ambientes híbridos.",
-    "Evitar decisões ruins causadas por decorar siglas sem entender contexto."
-  ],
-  "learningOutcomes": [
-    "Dado um cenário, o aluno classifica corretamente o tipo ou os tipos de rede envolvidos.",
-    "Dado um problema de conectividade, o aluno identifica se a hipótese envolve LAN, WLAN, WAN, cloud ou serviço especializado.",
-    "Dada uma arquitetura simples, o aluno aponta riscos e controles de segurança coerentes com cada tipo de rede."
+    "Diferenciar PAN, LAN, WLAN, CAN, MAN, WAN e SAN pelo alcance, pela finalidade, pelo meio e por quem controla a rede.",
+    "Classificar as redes de um cenário real, como uma casa ou uma pequena empresa, reconhecendo que vários tipos coexistem.",
+    "Usar o tipo de rede para localizar uma falha e saber quem acionar, sem confundir WLAN com internet, WAN com LAN ou SAN com NAS."
   ],
   "content": {
-    "motivation": "\n<section class=\"lesson-section lesson-section--motivation\">\n  <h2>Motivação</h2>\n  <p>A rede entre seu fone Bluetooth e o celular, o Wi-Fi da sua casa, a rede cabeada de uma empresa, o link entre filiais, a rede de storage de um datacenter e a internet resolvem o mesmo problema básico (comunicação), mas com escalas, riscos, custos e donos muito diferentes.</p>\n  <div class=\"callout callout--problem\"><strong>Problema real:</strong> chamar tudo de “rede” esconde essas diferenças. Classificar o tipo de rede diz qual meio usar, quem administra, que latência e disponibilidade esperar, onde pôr firewall, quanto custa crescer e quais logs coletar. Uma LAN interna, uma WAN entre filiais, uma WLAN corporativa e uma SAN de datacenter têm requisitos, ameaças e troubleshooting diferentes.</div>\n</section>\n",
-    "problem": "\n<section class=\"lesson-section lesson-section--problem\">\n  <h2>Problema</h2>\n  <p>As siglas surgiram conforme a comunicação ganhou escala: redes locais para compartilhar impressoras e servidores, depois ligações entre prédios, cidades, filiais e datacenters, e redes especializadas para mobilidade (sem fio), periféricos pessoais e armazenamento. Cada uma nasceu para um objetivo diferente:</p>\n  <ul class=\"flow-list\">\n    <li><strong>LAN:</strong> baixa latência e controle interno.</li>\n    <li><strong>WAN:</strong> ligar locais distantes.</li>\n    <li><strong>WLAN:</strong> mobilidade, enfrentando interferência.</li>\n    <li><strong>SAN:</strong> acesso rápido e confiável a armazenamento.</li>\n    <li><strong>PAN:</strong> proximidade e baixo consumo.</li>\n  </ul>\n  <p>Para classificar uma rede, olhe cinco dimensões:</p>\n  <ul class=\"flow-list\">\n    <li><strong>Alcance:</strong> centímetros, sala, prédio, campus, cidade, país ou mundo.</li>\n    <li><strong>Meio:</strong> cobre, fibra, rádio, links de operadora ou rede virtual em cloud.</li>\n    <li><strong>Controle (domínio administrativo):</strong> você, a operadora, o provedor cloud ou várias organizações.</li>\n    <li><strong>Risco:</strong> exposição física, rádio, terceiros, internet, movimento lateral ou indisponibilidade crítica.</li>\n    <li><strong>Custo:</strong> cabo local, APs, switches, circuitos de operadora, VPN, firewalls, storage fabric ou tráfego cloud.</li>\n  </ul>\n  <p>Sem essa classificação, a equipe aplica a solução errada: trata Wi-Fi como se fosse cabo, link WAN como se fosse LAN, põe armazenamento crítico em rede comum sem isolamento ou desenha cloud sem entender alcance e domínio administrativo.</p>\n</section>\n",
-    "concept": "\n<section class=\"lesson-section lesson-section--concept\">\n  <h2>Conceito</h2>\n  <p>Tipos de rede são classificações que descrevem o alcance, a finalidade, o meio de transmissão e o domínio administrativo de uma rede.</p>\n  <div class=\"responsive-table\"><table class=\"data-table\">\n    <thead><tr><th>Tipo</th><th>Alcance típico</th><th>Finalidade</th><th>Limitação principal</th></tr></thead>\n    <tbody>\n      <tr><td>PAN (Personal Area Network)</td><td>Pessoa ou poucos metros</td><td>Periféricos, sensores, celular, wearable</td><td>Baixo alcance, bateria, pareamento e segurança local</td></tr>\n      <tr><td>LAN (Local Area Network)</td><td>Sala, casa, escritório, andar</td><td>Conectar hosts próximos com alto controle</td><td>Broadcast, cabos, switches, segmentação e crescimento</td></tr>\n      <tr><td>WLAN (Wireless LAN)</td><td>Ambiente coberto por rádio</td><td>Mobilidade via Wi-Fi; é uma LAN sem fio</td><td>Interferência, sinal, autenticação e compartilhamento do meio</td></tr>\n      <tr><td>CAN (Campus Area Network)</td><td>Campus, conjunto de prédios</td><td>Interligar unidades próximas sob uma organização</td><td>Backbone, fibra, redundância e administração central</td></tr>\n      <tr><td>MAN (Metropolitan Area Network)</td><td>Cidade ou região metropolitana</td><td>Conectar sites dentro de área urbana</td><td>Dependência de operadora e custo de link</td></tr>\n      <tr><td>WAN (Wide Area Network)</td><td>Região, país ou global</td><td>Conectar filiais, datacenters, internet e cloud</td><td>Latência, custo, SLA, roteamento e segurança</td></tr>\n      <tr><td>SAN (Storage Area Network)</td><td>Datacenter ou ambiente especializado</td><td>Conectar servidores a armazenamento</td><td>Complexidade, custo, isolamento e criticidade</td></tr>\n    </tbody>\n  </table></div>\n  <p>Essas categorias não são caixas rígidas: a mesma empresa tem LAN na filial, WLAN para usuários móveis, WAN entre filiais, SAN no datacenter e redes virtuais em cloud. A sigla não substitui o desenho da arquitetura; ela é o ponto de partida.</p>\n  <div class=\"callout warning\"><strong>Erros comuns:</strong>\n    <ul>\n      <li><strong>Achar que WLAN é “a internet”.</strong> WLAN é o acesso local por rádio; a internet depende de gateway, rota, DNS e provedor. Sem essa separação, o diagnóstico confunde rádio local com acesso WAN.</li>\n      <li><strong>Tratar WAN com a latência de uma LAN.</strong> Uma aplicação que funcionava no mesmo prédio fica lenta quando vai para a filial ou a cloud, por protocolos “tagarelas” (chatty), replicação ruim ou dependência síncrona. Projete considerando latência, perda, SLA, cache e filas.</li>\n      <li><strong>Confundir SAN com NAS.</strong> Os dois põem armazenamento na rede, mas SAN é uma rede especializada que entrega armazenamento em blocos aos servidores; NAS é um serviço de arquivos dentro da rede comum. Confundir leva a subestimar criticidade, desempenho e isolamento.</li>\n      <li><strong>Achar que cloud dispensa redes.</strong> O cabo fica invisível, mas VPC/VNet, subnets, rotas, security groups, endpoints privados e tráfego continuam sendo seu problema; ignorá-los gera subnets públicas, rotas permissivas e custos inesperados.</li>\n      <li><strong>Supor que toda conexão entre sites é internet pública</strong> (ou que toda rede sem fio é insegura por definição). Verifique o serviço contratado e os controles aplicados antes de concluir.</li>\n    </ul>\n  </div>\n</section>\n",
-    "internals": "\n<section class=\"lesson-section lesson-section--internals\">\n  <h2>Funcionamento interno</h2>\n  <p>Todo tipo de rede precisa de meio, regras de comunicação, endereçamento, encaminhamento, controle de acesso e observabilidade. O que muda é onde está a preocupação central:</p>\n  <ol class=\"flow-list\">\n    <li><strong>PAN:</strong> tecnologias de curto alcance e baixo consumo. Foco em pareamento, proximidade e autorização entre dispositivos.</li>\n    <li><strong>LAN:</strong> normalmente Ethernet e switches. Foco em comutação local, endereçamento, VLANs, broadcast, gateway e cabeamento.</li>\n    <li><strong>WLAN:</strong> rádio e access points. Foco em sinal, canal, interferência, autenticação, roaming e densidade de usuários.</li>\n    <li><strong>CAN/MAN/WAN:</strong> enlaces entre locais. Foco em roteamento, redundância, operadora, criptografia e política de tráfego.</li>\n    <li><strong>SAN:</strong> separa o tráfego de armazenamento para desempenho e confiabilidade. Foco em latência, disponibilidade, isolamento e integridade.</li>\n  </ol>\n  <p>Em troubleshooting, o tipo de rede muda as hipóteses: em LAN você olha cabo, switch, VLAN e gateway; em WLAN, sinal e autenticação; em WAN, rota, SLA, VPN e operadora; em SAN, paths, zoning, storage e latência.</p>\n</section>\n",
-    "architecture": "\n<section class=\"lesson-section lesson-section--architecture\">\n  <h2>Arquitetura</h2>\n  <p>Numa arquitetura corporativa, os tipos de rede aparecem empilhados e conectados. Um notebook acessa a WLAN, que se liga à LAN do prédio, que alcança serviços internos, passa por firewalls, usa a WAN para chegar a outra filial e pode consumir recursos em cloud. Um servidor de virtualização pode estar ao mesmo tempo na LAN de gerenciamento, na rede de produção e numa SAN.</p>\n  <ul class=\"flow-list\">\n    <li><strong>Borda de usuário:</strong> PAN, WLAN e LAN.</li>\n    <li><strong>Distribuição interna:</strong> LAN e CAN, geralmente com switches, VLANs e roteamento interno.</li>\n    <li><strong>Interconexão distante:</strong> MAN e WAN, com links de operadora, VPN, SD-WAN ou conexão dedicada.</li>\n    <li><strong>Datacenter:</strong> LAN de servidores, rede de gerenciamento, rede de backup e SAN.</li>\n    <li><strong>Cloud:</strong> redes virtuais, subnets, peering, VPN, links dedicados (ExpressRoute/Direct Connect) e endpoints privados.</li>\n  </ul>\n  <h3>Operação e custo por tipo</h3>\n  <div class=\"responsive-table\"><table class=\"data-table\">\n    <thead><tr><th>Tipo</th><th>O que a operação exige</th><th>Onde está o custo</th></tr></thead>\n    <tbody>\n      <tr><td>PAN e LAN pequena</td><td>Suporte e segurança básicos</td><td>Baixo custo inicial</td></tr>\n      <tr><td>LAN e WLAN</td><td>Inventário local, cabeamento, APs, switches e suporte ao usuário</td><td>WLAN corporativa pode exigir APs gerenciados, controladora, licenças e site survey</td></tr>\n      <tr><td>WAN</td><td>Gestão de operadora, SLA, redundância, roteamento e monitoramento de disponibilidade</td><td>Links dedicados têm custo recorrente alto</td></tr>\n      <tr><td>SAN</td><td>Operação especializada, controle rigoroso e planejamento de performance</td><td>Storage, switches especializados, licenças, redundância e equipe especializada</td></tr>\n      <tr><td>Cloud</td><td>Documentar subnets, rotas, peering, endpoints e custos de tráfego</td><td>Tráfego entre regiões, NAT gateways, firewalls gerenciados e links dedicados</td></tr>\n    </tbody>\n  </table></div>\n  <p>A decisão arquitetural não é escolher uma sigla: é saber qual tipo de rede resolve qual problema e onde aplicar segmentação, segurança, redundância e monitoramento.</p>\n</section>\n",
-    "analogy": "\n<section class=\"lesson-section lesson-section--analogy\">\n  <h2>Analogia</h2>\n  <p>Pense em sistemas de transporte. PAN é levar algo no bolso. LAN é circular dentro de uma casa ou escritório. CAN é circular entre os prédios de uma universidade. MAN é o transporte dentro de uma cidade. WAN são as rodovias entre estados ou países. SAN é um corredor técnico reservado para carga crítica dentro de uma instalação.</p>\n  <div class=\"callout callout--warning\"><strong>Limite da analogia:</strong> ela ajuda com o alcance, mas redes não levam objetos inteiros: dividem a informação em unidades e usam protocolos, endereços, filas, retransmissões e políticas.</div>\n</section>\n",
-    "simpleExample": "\n<section class=\"lesson-section lesson-section--example\">\n  <h2>Exemplo simples</h2>\n  <p>Na sua casa, o celular conectado ao fone Bluetooth forma uma PAN. O notebook ligado ao roteador por cabo faz parte da LAN. O celular no Wi-Fi participa da WLAN. O roteador da operadora liga sua rede doméstica à WAN da internet. Um HD de rede ou NAS doméstico é um serviço de arquivos dentro da sua LAN, não uma SAN.</p>\n  <p>Quando “a internet cai”, a classificação ajuda: o Wi-Fi pode estar funcionando e a WAN indisponível; a LAN pode continuar imprimindo enquanto os serviços externos falham. O problema não é “a rede” inteira, e sim um domínio específico.</p>\n</section>\n",
-    "enterpriseExample": "\n<section class=\"lesson-section lesson-section--enterprise\">\n  <h2>Exemplo empresarial</h2>\n  <p>Uma empresa média pode ter LAN cabeada para estações fixas, WLAN corporativa para notebooks, WLAN de visitantes isolada, CAN ligando prédios próximos, WAN ligando filiais, VPN para usuários remotos e SAN no datacenter. Cada tipo tem dono, custo, política e risco próprios, e o time de segurança traduz isso em requisitos: a WLAN de visitantes não acessa a LAN interna, a WAN entre filiais passa por firewall, a SAN não é roteável para usuários, a rede de gerenciamento é separada e os logs de autenticação Wi-Fi vão para o SIEM.</p>\n</section>\n",
-    "cloudExample": "\n<section class=\"lesson-section lesson-section--cloud\">\n  <h2>Exemplo em cloud</h2>\n  <p>Em cloud as siglas mudam, mas os conceitos continuam. Uma VPC (AWS, GCP) ou VNet (Azure) é a rede virtual controlada pelo cliente. Subnets organizam segmentos. Peering conecta redes virtuais. VPN e links dedicados ligam a rede corporativa à cloud e fazem o papel de WAN híbrida. Private endpoints dão acesso privado a serviços gerenciados.</p>\n  <p>Não ver cabo não significa não ter arquitetura de rede: você ainda precisa entender alcance, rota, domínio administrativo, custo de tráfego, inspeção, DNS privado e políticas. Como essa rede é declarada em IaC (subnets, rotas, security groups, endpoints, conexões híbridas), policy as code no pipeline pode impedir que um serviço de produção fique exposto em subnet pública.</p>\n</section>\n",
-    "securityExample": "\n<section class=\"lesson-section lesson-section--security\">\n  <h2>Exemplo em Segurança</h2>\n  <p>Cada tipo de rede muda o modelo de ameaça e a superfície de ataque:</p>\n  <div class=\"responsive-table\"><table class=\"data-table risk-table\">\n    <thead><tr><th>Tipo</th><th>Risco comum</th><th>Impacto</th><th>Mitigação</th></tr></thead>\n    <tbody>\n      <tr><td>WLAN</td><td>Senha fraca, rogue AP, cobertura indevida</td><td>Acesso não autorizado ou interceptação local</td><td>WPA2/WPA3 Enterprise, segmentação, logs e site survey</td></tr>\n      <tr><td>LAN</td><td>Rede plana sem segmentação</td><td>Movimento lateral após comprometimento</td><td>VLANs, ACLs, NAC, firewall interno e monitoramento</td></tr>\n      <tr><td>WAN</td><td>Link sem criptografia ou política fraca</td><td>Exposição entre sites e indisponibilidade</td><td>VPN, SD-WAN seguro, redundância e SLA</td></tr>\n      <tr><td>SAN</td><td>Acesso indevido a storage</td><td>Perda, corrupção ou vazamento de dados críticos</td><td>Isolamento, zoning, autenticação, multipath e auditoria</td></tr>\n      <tr><td>Cloud</td><td>Subnet pública indevida</td><td>Exposição direta de workloads</td><td>Private subnets, security groups mínimos e endpoints privados</td></tr>\n    </tbody>\n  </table></div>\n</section>\n",
-    "diagram": "\n<section class=\"lesson-section lesson-section--diagram\">\n  <h2>Diagrama SVG</h2>\n  <svg class=\"lesson-svg\" viewBox=\"0 0 1040 520\" role=\"img\" aria-labelledby=\"m01l03-title m01l03-desc\">\n    <title id=\"m01l03-title\">Tipos de rede por alcance e finalidade</title>\n    <desc id=\"m01l03-desc\">Diagrama comparando PAN, LAN, WLAN, CAN, MAN, WAN e SAN dentro de uma arquitetura corporativa.</desc>\n    <defs>\n      <marker id=\"m01l03-arrow\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\" markerUnits=\"strokeWidth\">\n        <path d=\"M0,0 L0,6 L9,3 z\" class=\"svg-arrow\" />\n      </marker>\n    </defs>\n    <rect x=\"35\" y=\"55\" width=\"135\" height=\"70\" rx=\"14\" class=\"svg-node svg-node--client\" />\n    <text x=\"102\" y=\"84\" text-anchor=\"middle\" class=\"svg-label\">PAN</text>\n    <text x=\"102\" y=\"107\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Pessoa</text>\n    <rect x=\"210\" y=\"55\" width=\"145\" height=\"70\" rx=\"14\" class=\"svg-node svg-node--switch\" />\n    <text x=\"282\" y=\"84\" text-anchor=\"middle\" class=\"svg-label\">LAN</text>\n    <text x=\"282\" y=\"107\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Sala / andar</text>\n    <rect x=\"395\" y=\"55\" width=\"145\" height=\"70\" rx=\"14\" class=\"svg-node svg-node--cloud\" />\n    <text x=\"467\" y=\"84\" text-anchor=\"middle\" class=\"svg-label\">WLAN</text>\n    <text x=\"467\" y=\"107\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Wi-Fi</text>\n    <rect x=\"580\" y=\"55\" width=\"145\" height=\"70\" rx=\"14\" class=\"svg-node svg-node--router\" />\n    <text x=\"652\" y=\"84\" text-anchor=\"middle\" class=\"svg-label\">CAN</text>\n    <text x=\"652\" y=\"107\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Campus</text>\n    <rect x=\"765\" y=\"55\" width=\"145\" height=\"70\" rx=\"14\" class=\"svg-node svg-node--router\" />\n    <text x=\"837\" y=\"84\" text-anchor=\"middle\" class=\"svg-label\">MAN</text>\n    <text x=\"837\" y=\"107\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Cidade</text>\n    <rect x=\"430\" y=\"220\" width=\"180\" height=\"80\" rx=\"14\" class=\"svg-node svg-node--cloud\" />\n    <text x=\"520\" y=\"253\" text-anchor=\"middle\" class=\"svg-label\">WAN</text>\n    <text x=\"520\" y=\"278\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Filiais / internet / cloud</text>\n    <rect x=\"720\" y=\"220\" width=\"185\" height=\"80\" rx=\"14\" class=\"svg-node svg-node--server\" />\n    <text x=\"812\" y=\"253\" text-anchor=\"middle\" class=\"svg-label\">SAN</text>\n    <text x=\"812\" y=\"278\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Storage crítico</text>\n    <line x1=\"170\" y1=\"90\" x2=\"210\" y2=\"90\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m01l03-arrow)\" />\n    <line x1=\"355\" y1=\"90\" x2=\"395\" y2=\"90\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m01l03-arrow)\" />\n    <line x1=\"540\" y1=\"90\" x2=\"580\" y2=\"90\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m01l03-arrow)\" />\n    <line x1=\"725\" y1=\"90\" x2=\"765\" y2=\"90\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m01l03-arrow)\" />\n    <path d=\"M650 125 C630 170, 590 200, 555 220\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m01l03-arrow)\" />\n    <line x1=\"610\" y1=\"260\" x2=\"720\" y2=\"260\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m01l03-arrow)\" />\n    <rect x=\"120\" y=\"365\" width=\"800\" height=\"95\" rx=\"16\" class=\"svg-node svg-node--security\" />\n    <text x=\"520\" y=\"400\" text-anchor=\"middle\" class=\"svg-label\">Decisão arquitetural</text>\n    <text x=\"520\" y=\"428\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">alcance + finalidade + meio + controle + custo + risco + evidência</text>\n  </svg>\n</section>\n",
-    "summary": "\n<section class=\"lesson-section lesson-section--summary\">\n  <h2>Resumo</h2>\n  <ul>\n    <li><strong>Modelo mental:</strong> para classificar uma rede, pergunte qual alcance ela cobre, que finalidade atende, quem a controla, qual meio usa, que risco cria e que evidência comprova que funciona.</li>\n    <li><strong>As siglas:</strong> PAN é pessoal; LAN é local; WLAN é local sem fio; CAN é campus; MAN é metropolitana; WAN é longa distância; SAN é armazenamento.</li>\n    <li><strong>Na prática, os tipos coexistem:</strong> WLAN e LAN na borda, CAN/MAN/WAN entre locais, SAN no datacenter e VPC/VNet na cloud.</li>\n    <li><strong>Erro comum:</strong> decorar siglas sem entender o impacto: Wi-Fi não é internet, WAN não tem latência de LAN, SAN não é NAS.</li>\n    <li><strong>Uso real:</strong> a classificação orienta arquitetura, troubleshooting, orçamento, segmentação e monitoramento.</li>\n  </ul>\n</section>\n",
-    "nextTheme": "\n<section class=\"lesson-section lesson-section--next\">\n  <h2>Próximo tema</h2>\n  <p>Na próxima aula, topologias físicas e lógicas: duas redes do mesmo tipo, como duas LANs, podem ter desenhos muito diferentes (estrela, malha, hub-and-spoke, spine-leaf ou topologia virtual em cloud).</p>\n</section>\n"
+    "motivation": "\n<section class=\"lesson-section lesson-section--motivation\">\n  <h2>Motivação</h2>\n  <p>Você abre o notebook e nenhum site carrega. O ícone do Wi-Fi mostra sinal cheio, o fone Bluetooth continua tocando música do celular e alguém na sala ainda consegue imprimir. Mesmo assim, a frase que todo mundo diz é “a rede caiu”. Você reinicia o roteador, troca a senha do Wi-Fi, desliga o Bluetooth, e nada muda, porque o problema estava no link da operadora, do lado de fora da casa.</p>\n  <p>“A rede” é, na verdade, um conjunto de redes diferentes, com alcances e donos diferentes. Sem saber separá-las, você mexe na peça errada e liga para a pessoa errada. Nesta aula você aprende a dar nome a cada uma. Numa empresa, essa mesma classificação decide quem resolve cada falha (a equipe interna ou a operadora), quanto custa cada ligação e onde a segurança precisa de mais cuidado.</p>\n</section>\n",
+    "problem": "\n<section class=\"lesson-section lesson-section--problem\">\n  <h2>Problema</h2>\n  <p>É isso que acontece quando tudo vira “a rede”: a falha de um trecho parece falha do conjunto. E as diferenças entre os trechos são grandes. As primeiras redes locais ligavam computadores de uma mesma sala para compartilhar impressoras e arquivos; depois vieram as ligações entre prédios, cidades e países, e redes feitas para um uso específico, como acesso sem fio, periféricos pessoais e armazenamento.</p>\n  <p>Cada uma dessas redes cobre uma distância, usa um meio, tem um dono e custa de um jeito. Uma ligação entre estados depende de uma operadora e cobra mensalidade; um cabo dentro do escritório é seu. Esta aula mostra como classificar uma rede por essas características e o que a sigla (PAN, LAN, WLAN, CAN, MAN, WAN ou SAN) diz sobre ela.</p>\n</section>\n",
+    "concept": "\n<section class=\"lesson-section lesson-section--concept\">\n  <h2>Conceito</h2>\n  <div class=\"definition-box\">\n    <strong>Definição:</strong> tipos de rede são classificações que descrevem uma rede pelo <strong>alcance</strong> (que distância cobre), pela <strong>finalidade</strong> (para que serve), pelo <strong>meio</strong> (cabo, fibra ou rádio) e por <strong>quem a controla</strong>.\n  </div>\n  <p>Quem controla uma rede é o seu <strong>domínio administrativo</strong>: a própria organização, uma operadora contratada ou um provedor de cloud. Ele diz quem pode mudar a configuração e quem você aciona quando algo falha.</p>\n  <div class=\"responsive-table\"><table class=\"data-table\">\n    <thead><tr><th>Tipo</th><th>Alcance típico</th><th>Finalidade</th><th>Limitação principal</th></tr></thead>\n    <tbody>\n      <tr><td>PAN (Personal Area Network)</td><td>Poucos metros ao redor de uma pessoa</td><td>Ligar periféricos pessoais: fone, relógio, celular</td><td>Alcance curto e bateria</td></tr>\n      <tr><td>LAN (Local Area Network)</td><td>Sala, casa, escritório, andar</td><td>Conectar computadores próximos, sob controle de quem os usa</td><td>Cabos e equipamentos para crescer</td></tr>\n      <tr><td>WLAN (Wireless LAN)</td><td>A área coberta pelo rádio</td><td>Mobilidade via Wi-Fi; é uma LAN sem fio</td><td>Interferência, sinal e meio compartilhado</td></tr>\n      <tr><td>CAN (Campus Area Network)</td><td>Campus, conjunto de prédios</td><td>Interligar prédios próximos da mesma organização, em geral com fibra própria</td><td>Cabeamento entre prédios e redundância</td></tr>\n      <tr><td>MAN (Metropolitan Area Network)</td><td>Cidade ou região metropolitana</td><td>Conectar locais dentro de uma área urbana, em geral com links de operadora</td><td>Dependência da operadora e custo do link</td></tr>\n      <tr><td>WAN (Wide Area Network)</td><td>Estados, países, o mundo</td><td>Conectar filiais, datacenters e a internet</td><td>Latência maior, custo mensal e operadora</td></tr>\n      <tr><td>SAN (Storage Area Network)</td><td>Datacenter</td><td>Ligar servidores ao armazenamento (storage)</td><td>Custo, complexidade e criticidade</td></tr>\n    </tbody>\n  </table></div>\n  <p>Repare que a maioria das siglas é definida pelo alcance, mas duas não: a WLAN se diferencia da LAN pelo meio (rádio), e a SAN pela finalidade (armazenamento). Essas categorias também não são caixas fechadas: a mesma casa ou empresa usa vários tipos ao mesmo tempo, ligados entre si.</p>\n  <div class=\"callout warning\"><strong>Erros comuns</strong>\n    <ul>\n      <li><strong>Achar que tudo é LAN porque é tudo da mesma empresa.</strong> A ligação com uma filial em outro estado é WAN, mesmo que a empresa pague por ela: quem a opera é a operadora.</li>\n      <li><strong>Esperar da WAN a resposta da LAN.</strong> Numa LAN, uma ida e volta leva menos de 1 ms; entre estados, dezenas de milissegundos. Um sistema que faz muitas consultas pequenas, rápido no mesmo prédio, fica lento quando o servidor vai para longe.</li>\n      <li><strong>Confundir SAN com NAS.</strong> Os dois põem armazenamento na rede, mas a SAN entrega ao servidor armazenamento em blocos: o servidor enxerga um disco, como se estivesse ligado nele, e o formata. O NAS é um aparelho que oferece pastas e arquivos compartilhados na rede comum.</li>\n    </ul>\n  </div>\n</section>\n",
+    "internals": "\n<section class=\"lesson-section lesson-section--internals\">\n  <h2>Funcionamento interno</h2>\n  <p>Todo tipo de rede precisa de um meio, de regras de comunicação e de alguém que a opere. O que muda é a preocupação central de cada um:</p>\n  <ol class=\"flow-list\">\n    <li><strong>PAN:</strong> tecnologias de curto alcance e baixo consumo, como Bluetooth. A preocupação é o pareamento: só o fone que você autorizou conversa com o seu celular.</li>\n    <li><strong>LAN:</strong> cabos e switches dentro de um espaço que você controla. A preocupação é organizar quem fala com quem e manter cabos e equipamentos funcionando.</li>\n    <li><strong>WLAN:</strong> rádio e access points (APs). Todos dividem o mesmo ar, então a preocupação é sinal, interferência e quem tem a senha.</li>\n    <li><strong>CAN, MAN e WAN:</strong> ligações entre locais. Quanto maior a distância, mais a ligação depende de operadora, mais tempo cada ida e volta leva e mais caro é o link, cobrado todo mês.</li>\n    <li><strong>SAN:</strong> uma rede separada só para o tráfego entre servidores e storage. Se ela fica lenta, todos os servidores que guardam dados ali ficam lentos juntos.</li>\n  </ol>\n  <p>Por isso o tipo de rede muda as hipóteses quando algo falha. Na LAN você olha cabo e switch; na WLAN, sinal e senha; na WAN, o link e a operadora; na SAN, o caminho até o storage. Se um trecho funciona, a falha tende a estar em outro, e o tipo dele diz qual domínio administrativo acionar.</p>\n</section>\n",
+    "analogy": "\n<section class=\"lesson-section lesson-section--analogy\">\n  <h2>Analogia</h2>\n  <p>Pense em transporte. PAN é levar algo no bolso; LAN é circular dentro de casa; CAN, entre os prédios de uma universidade; MAN, dentro da cidade; WAN, pelas rodovias entre estados e países, que são de outro dono e cobram pedágio. A SAN é um corredor de serviço reservado para carga crítica dentro de um prédio.</p>\n</section>\n",
+    "simpleExample": "\n<section class=\"lesson-section lesson-section--example\">\n  <h2>Exemplo simples</h2>\n  <p>Na sua casa, o celular ligado ao fone Bluetooth forma uma PAN. O notebook ligado ao roteador por cabo faz parte da LAN. O celular no Wi-Fi participa da WLAN. O roteador liga tudo isso ao link da operadora, que é o seu trecho de WAN até a internet. Um HD de rede (NAS) doméstico é um serviço de arquivos dentro da sua LAN, não uma SAN.</p>\n  <p>Agora volte à cena da Motivação. Sinal cheio no Wi-Fi prova que a WLAN funciona; a impressora respondendo prova que a LAN funciona; o fone tocando prova que a PAN funciona. O que sobra é a WAN: o link da operadora ou o que está além dele. Mexer no Wi-Fi ou no Bluetooth não resolve; o telefonema certo é para a operadora.</p>\n</section>\n",
+    "diagram": "\n<section class=\"lesson-section lesson-section--diagram\">\n  <h2>Diagrama SVG</h2>\n  <svg class=\"lesson-svg\" viewBox=\"0 0 1040 460\" role=\"img\" aria-labelledby=\"m01l03-title m01l03-desc\">\n    <title id=\"m01l03-title\">Tipos de rede coexistindo em uma empresa</title>\n    <desc id=\"m01l03-desc\">Dentro da sede, controlada pela empresa, ficam a PAN (fone e celular), a WLAN (Wi-Fi), a LAN (cabos e switch), os servidores e a SAN, que liga os servidores ao storage. A LAN da sede se liga à WAN, controlada pela operadora, que leva à filial e à internet.</desc>\n    <rect x=\"30\" y=\"40\" width=\"600\" height=\"300\" rx=\"16\" class=\"svg-boundary\" />\n    <text x=\"330\" y=\"68\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Sede: a empresa controla</text>\n\n    <rect x=\"60\" y=\"95\" width=\"150\" height=\"72\" rx=\"12\" class=\"svg-node svg-node--client\" />\n    <text x=\"135\" y=\"126\" text-anchor=\"middle\" class=\"svg-label\">PAN</text>\n    <text x=\"135\" y=\"149\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">fone e celular</text>\n\n    <rect x=\"245\" y=\"95\" width=\"150\" height=\"72\" rx=\"12\" class=\"svg-node\" />\n    <text x=\"320\" y=\"126\" text-anchor=\"middle\" class=\"svg-label\">WLAN</text>\n    <text x=\"320\" y=\"149\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Wi-Fi (rádio)</text>\n\n    <rect x=\"430\" y=\"95\" width=\"170\" height=\"72\" rx=\"12\" class=\"svg-node\" />\n    <text x=\"515\" y=\"126\" text-anchor=\"middle\" class=\"svg-label\">LAN</text>\n    <text x=\"515\" y=\"149\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">cabos e switch</text>\n\n    <rect x=\"430\" y=\"240\" width=\"170\" height=\"72\" rx=\"12\" class=\"svg-node\" />\n    <text x=\"515\" y=\"271\" text-anchor=\"middle\" class=\"svg-label\">Servidores</text>\n    <text x=\"515\" y=\"294\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">sistemas internos</text>\n\n    <rect x=\"245\" y=\"240\" width=\"150\" height=\"72\" rx=\"12\" class=\"svg-node svg-node--security\" />\n    <text x=\"320\" y=\"271\" text-anchor=\"middle\" class=\"svg-label\">SAN</text>\n    <text x=\"320\" y=\"294\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">rede só de storage</text>\n\n    <rect x=\"60\" y=\"240\" width=\"150\" height=\"72\" rx=\"12\" class=\"svg-node\" />\n    <text x=\"135\" y=\"271\" text-anchor=\"middle\" class=\"svg-label\">Storage</text>\n    <text x=\"135\" y=\"294\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">discos dos servidores</text>\n\n    <line x1=\"210\" y1=\"131\" x2=\"245\" y2=\"131\" class=\"svg-flow\" />\n    <line x1=\"395\" y1=\"131\" x2=\"430\" y2=\"131\" class=\"svg-flow\" />\n    <line x1=\"515\" y1=\"167\" x2=\"515\" y2=\"240\" class=\"svg-flow\" />\n    <line x1=\"430\" y1=\"276\" x2=\"395\" y2=\"276\" class=\"svg-flow\" />\n    <line x1=\"245\" y1=\"276\" x2=\"210\" y2=\"276\" class=\"svg-flow\" />\n\n    <rect x=\"670\" y=\"95\" width=\"160\" height=\"72\" rx=\"12\" class=\"svg-node svg-node--cloud\" />\n    <text x=\"750\" y=\"126\" text-anchor=\"middle\" class=\"svg-label\">WAN</text>\n    <text x=\"750\" y=\"149\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">link da operadora</text>\n    <text x=\"750\" y=\"82\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">a operadora controla</text>\n\n    <rect x=\"870\" y=\"95\" width=\"150\" height=\"72\" rx=\"12\" class=\"svg-node\" />\n    <text x=\"945\" y=\"126\" text-anchor=\"middle\" class=\"svg-label\">Filial</text>\n    <text x=\"945\" y=\"149\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">outra LAN</text>\n\n    <rect x=\"870\" y=\"240\" width=\"150\" height=\"72\" rx=\"12\" class=\"svg-node svg-node--cloud\" />\n    <text x=\"945\" y=\"271\" text-anchor=\"middle\" class=\"svg-label\">Internet</text>\n    <text x=\"945\" y=\"294\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">sites e cloud</text>\n\n    <line x1=\"600\" y1=\"131\" x2=\"670\" y2=\"131\" class=\"svg-flow\" />\n    <line x1=\"830\" y1=\"131\" x2=\"870\" y2=\"131\" class=\"svg-flow\" />\n    <path d=\"M790 167 C810 220, 840 260, 870 270\" class=\"svg-flow\" />\n\n    <text x=\"520\" y=\"385\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Alcance curto e um só dono: PAN, WLAN, LAN e SAN. Entre locais distantes: WAN, de outro dono.</text>\n    <text x=\"520\" y=\"412\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">Ligando prédios de um mesmo campus, a rede seria uma CAN; locais na mesma cidade, uma MAN.</text>\n  </svg>\n</section>\n",
+    "summary": "\n<section class=\"lesson-section lesson-section--summary\">\n  <h2>Resumo</h2>\n  <ul>\n    <li><strong>Ideia central:</strong> classifique uma rede pelo alcance, pela finalidade, pelo meio e por quem a controla.</li>\n    <li>PAN é pessoal; LAN, local; WLAN, local sem fio; CAN, campus; MAN, cidade; WAN, longa distância; SAN, armazenamento.</li>\n    <li>Os tipos coexistem: sua casa já tem PAN, LAN, WLAN e um trecho de WAN.</li>\n    <li>Wi-Fi conectado não garante internet: a WLAN é só o trecho local.</li>\n    <li>WAN tem latência e custo maiores e costuma depender de operadora.</li>\n  </ul>\n  <p><em>Já domina isso? Faça o quiz: com 70% ou mais, você pode seguir.</em></p>\n</section>\n",
+    "nextTheme": "\n<section class=\"lesson-section lesson-section--next\">\n  <h2>Próximo tema</h2>\n  <p>Na aula 1.4, topologias físicas e lógicas: duas redes do mesmo tipo, como duas LANs, podem ter desenhos muito diferentes, em estrela, em malha ou em árvore.</p>\n</section>\n"
   },
   "networkContext": {
     "osiLayers": [
@@ -118,176 +104,37 @@ export const lesson0103 = {
       "troubleshooting"
     ]
   },
-  "troubleshooting": {
-    "symptoms": [
-      "Wi-Fi conectado, mas sem internet",
-      "Filial lenta",
-      "Servidor local acessível, cloud inacessível",
-      "Storage com alta latência",
-      "Usuários visitantes acessando recursos internos"
-    ],
-    "diagnosticQuestions": [
-      "O problema está em PAN, LAN, WLAN, WAN, cloud ou serviço específico?",
-      "O usuário consegue acessar recursos locais?",
-      "Há perda, latência alta ou falha de resolução de nome?",
-      "O tráfego passa por operadora, VPN, firewall ou proxy?",
-      "Existe isolamento correto entre redes?"
-    ],
-    "commands": [
-      {
-        "platform": "Windows",
-        "command": "ipconfig /all && ping <gateway> && tracert <destino>",
-        "purpose": "Ver configuração local, testar LAN/WLAN e observar caminho até o destino.",
-        "expectedObservation": "IP, gateway, DNS, resposta do gateway e saltos até o destino.",
-        "interpretation": "Se gateway responde e destino externo falha, a hipótese se desloca para DNS, WAN, firewall ou serviço."
-      },
-      {
-        "platform": "Linux",
-        "command": "ip addr && ip route && ping -c 4 <gateway> && traceroute <destino>",
-        "purpose": "Ver interfaces, rotas e caminho de rede.",
-        "expectedObservation": "Interface com IP, rota default e resposta do gateway.",
-        "interpretation": "Ajuda a separar problema local, rota, WAN ou destino."
-      },
-      {
-        "platform": "Cisco IOS",
-        "command": "show ip interface brief\nshow vlan brief\nshow ip route",
-        "purpose": "Ver interfaces, VLANs e rotas em equipamento de rede.",
-        "expectedObservation": "Interfaces up/up, VLANs esperadas e rotas corretas.",
-        "interpretation": "Permite verificar LAN, segmentação e encaminhamento."
-      }
-    ],
-    "decisionTree": [
-      {
-        "if": "Dispositivo vê Wi-Fi, mas não pinga gateway",
-        "then": "Investigar WLAN, autenticação, sinal, VLAN associada ao SSID e AP."
-      },
-      {
-        "if": "Pinga gateway, mas não acessa internet",
-        "then": "Investigar DNS, rota default, NAT, firewall, WAN ou provedor."
-      },
-      {
-        "if": "Recursos locais funcionam, mas filial/cloud está lenta",
-        "then": "Investigar WAN, VPN, latência, perda, MTU, firewall e aplicação."
-      },
-      {
-        "if": "Storage apresenta lentidão crítica",
-        "then": "Investigar SAN, paths, latência, congestionamento, zoning e storage backend."
-      }
-    ]
-  },
-  "security": {
-    "goodPractices": [
-      "Separar redes por função e criticidade: usuários, servidores, visitantes, IoT, gerência e storage.",
-      "Isolar a rede de visitantes da rede interna.",
-      "Criptografar links WAN e acessos remotos.",
-      "Manter SAN e gerenciamento fora do alcance de usuários comuns.",
-      "Documentar domínio administrativo, rotas, responsáveis e logs por tipo de rede."
-    ],
-    "badPractices": [
-      "Usar uma única LAN plana para usuários, servidores, impressoras, visitantes e IoT.",
-      "Expor storage ou gerenciamento em redes de usuário.",
-      "Criar subnets públicas em cloud sem necessidade."
-    ],
-    "commonErrors": [
-      "Confundir conectividade com autorização.",
-      "Achar que NAT substitui firewall.",
-      "Achar que SSID separado sempre significa isolamento real.",
-      "Ignorar custo e risco de tráfego entre regiões cloud."
-    ],
-    "vulnerabilities": [
-      {
-        "name": "Rede plana com movimento lateral",
-        "description": "Usuários, servidores e dispositivos diversos ficam no mesmo domínio, facilitando propagação após comprometimento.",
-        "defensiveExplanation": "O risco aumenta porque o atacante não encontra barreiras internas suficientes.",
-        "mitigation": "Segmentação, ACLs, firewall interno, NAC, EDR e monitoramento."
-      },
-      {
-        "name": "WLAN de visitantes sem isolamento",
-        "description": "Convidados conseguem alcançar recursos internos por erro de VLAN, firewall ou portal.",
-        "defensiveExplanation": "O meio sem fio amplia acesso físico ao perímetro lógico da organização.",
-        "mitigation": "SSID segregado, VLAN dedicada, firewall, captive portal e logs."
-      },
-      {
-        "name": "Exposição indevida em cloud",
-        "description": "Workloads ficam em subnet pública ou com security group amplo sem necessidade.",
-        "defensiveExplanation": "A internet passa a alcançar serviços que deveriam ser privados.",
-        "mitigation": "Private subnets, endpoints privados, security groups mínimos, WAF quando aplicável e revisão de IaC."
-      }
-    ],
-    "monitoring": [
-      "Logs de firewall por zona",
-      "Autenticação Wi-Fi",
-      "NetFlow ou equivalente",
-      "Métricas de link WAN",
-      "Eventos de security group",
-      "Logs de VPN e DNS"
-    ],
-    "hardening": [
-      "Desabilitar portas de switch não usadas",
-      "Aplicar menor privilégio em ACLs e security groups",
-      "Proteger as interfaces de gerência",
-      "Revisar rotas e exposição pública"
-    ],
-    "detectionIdeas": [
-      "Acesso de visitantes a redes internas",
-      "Picos de tráfego entre segmentos",
-      "Conexões incomuns para storage",
-      "Mudanças não autorizadas em rotas",
-      "Subnets públicas criadas por IaC sem aprovação"
-    ]
-  },
   "mentorQuestions": [
     {
-      "type": "reflexão",
-      "question": "Por que decorar as siglas PAN, LAN, WLAN, CAN, MAN, WAN e SAN não é suficiente?",
+      "type": "aplicação",
+      "question": "Para montar cada tela, um sistema faz 200 consultas pequenas ao banco de dados, uma depois da outra. Com o banco na mesma LAN, cada ida e volta leva cerca de 0,5 ms; depois que o banco foi para outro estado, cerca de 30 ms, embora o link não esteja cheio. Quanto tempo cada tela passa esperando, antes e depois? O que daria para mudar?",
       "hints": [
-        "Pense em custo, risco e operação.",
-        "Pense no que muda entre Wi-Fi, filial e storage."
+        "Multiplique o número de consultas pelo tempo de cada ida e volta.",
+        "Comprar um link com mais banda diminui o tempo de cada ida e volta?"
       ],
       "expectedIdeas": [
-        "alcance",
-        "finalidade",
-        "meio",
-        "controle",
-        "segurança",
-        "troubleshooting"
+        "100 ms antes",
+        "6 s depois",
+        "latência da WAN",
+        "menos idas e voltas",
+        "aproximar dados e aplicação"
       ],
-      "explanation": "A utilidade da classificação está em orientar decisões técnicas, não em memorizar nomes."
+      "explanation": "Antes: 200 × 0,5 ms = 100 ms. Depois: 200 × 30 ms = 6 s por tela. Mais banda não encurta cada ida e volta; ajuda fazer menos consultas ou aproximar o banco da aplicação."
     },
     {
-      "type": "diagnóstico",
-      "question": "Um sistema interno funcionava bem com o banco de dados na mesma LAN. Depois que o banco foi movido para a cloud, em outra região, cada tela passou a demorar vários segundos, embora o link não esteja saturado. Por que isso acontece?",
+      "type": "aplicação",
+      "question": "Seu fone Bluetooth começa a cortar o som quando você deixa o celular na mesa e vai até a cozinha, a uns 15 metros e duas paredes de distância. Que característica da PAN explica isso, e por que ela foi projetada assim?",
       "hints": [
-        "Compare a latência típica de uma LAN com a de uma WAN.",
-        "Pense em quantas idas e voltas cada tela faz até o banco."
+        "Qual é o alcance típico de uma PAN?",
+        "Pense na bateria de um fone."
       ],
       "expectedIdeas": [
-        "latência de WAN",
-        "protocolo chatty",
-        "muitas idas e voltas",
-        "dependência síncrona",
-        "cache",
-        "arquitetura distribuída"
+        "alcance de poucos metros",
+        "baixo consumo",
+        "bateria",
+        "paredes atrapalham o rádio"
       ],
-      "explanation": "WAN não tem a latência de uma LAN. Uma aplicação que faz muitas consultas pequenas e síncronas multiplica essa latência a cada ida e volta. A solução passa por projetar para WAN: menos idas e voltas, cache, filas ou aproximar dados e aplicação."
-    },
-    {
-      "type": "cenário real",
-      "question": "Uma empresa quer liberar Wi-Fi de visitantes. Por que não basta criar outro nome de rede?",
-      "hints": [
-        "SSID não é sempre isolamento.",
-        "Pense em VLAN, firewall e logs."
-      ],
-      "expectedIdeas": [
-        "segmentação",
-        "VLAN",
-        "ACL",
-        "firewall",
-        "portal",
-        "logs",
-        "menor privilégio"
-      ],
-      "explanation": "O SSID é a face visível. O isolamento real depende de segmentação, políticas e validação."
+      "explanation": "A PAN foi feita para alcançar poucos metros. Transmitir com pouca potência poupa a bateria do fone, mas limita o alcance, e paredes enfraquecem o sinal. É a troca que a PAN faz, não um defeito."
     }
   ],
   "quiz": [
@@ -313,17 +160,17 @@ export const lesson0103 = {
         "WLAN cobre uma cidade, e LAN cobre um prédio",
         "WLAN é a parte da rede que leva à internet; LAN é só a rede interna",
         "WLAN muda o meio para rádio, mas mantém o alcance local de uma LAN",
-        "WLAN dispensa gateway e DNS, porque o access point resolve tudo"
+        "WLAN dispensa roteador e operadora, porque o access point resolve tudo"
       ],
       "answer": 2,
-      "explanation": "WLAN é uma LAN sem fio: mantém a finalidade local, mas muda o meio (rádio) e os riscos. Internet depende de gateway, rota, DNS e WAN.",
+      "explanation": "WLAN é uma LAN sem fio: mantém o alcance local, mas troca o meio (rádio). Chegar à internet depende do que vem depois dela: o roteador e o link da operadora (WAN).",
       "topic": "WLAN",
       "difficulty": "iniciante",
       "type": "comparação"
     },
     {
       "id": "q1.3.3",
-      "question": "Uma empresa conecta sede e filial em estados diferentes por VPN sobre link de operadora. Qual tipo de rede está mais associado a esse cenário?",
+      "question": "Uma empresa liga a sede e uma filial, em estados diferentes, por um link contratado de uma operadora. Qual tipo de rede está mais associado a esse cenário?",
       "options": [
         "WAN",
         "MAN",
@@ -331,40 +178,10 @@ export const lesson0103 = {
         "WLAN"
       ],
       "answer": 0,
-      "explanation": "Ligar locais distantes, em estados diferentes, é característica de WAN, mesmo quando a ligação usa VPN. MAN se limita a uma cidade ou região metropolitana.",
+      "explanation": "Ligar locais distantes, em estados diferentes, é característica de WAN. MAN se limita a uma cidade ou região metropolitana.",
       "topic": "WAN",
       "difficulty": "iniciante",
       "type": "cenário"
-    },
-    {
-      "id": "q1.3.4",
-      "question": "Qual é um risco típico de uma LAN plana?",
-      "options": [
-        "Tornar a WAN mais lenta que a LAN",
-        "Impedir que usuários alcancem impressoras e servidores",
-        "Exigir roteamento entre todos os hosts",
-        "Facilitar movimento lateral após comprometimento"
-      ],
-      "answer": 3,
-      "explanation": "Sem barreiras internas, um host comprometido alcança os demais. A mitigação é segmentar com VLANs, ACLs e firewall interno.",
-      "topic": "segurança",
-      "difficulty": "intermediário",
-      "type": "segurança"
-    },
-    {
-      "id": "q1.3.5",
-      "question": "Em cloud, qual recurso representa a rede virtual do cliente, dentro da qual ficam as subnets e as rotas?",
-      "options": [
-        "Private endpoint",
-        "VPC/VNet",
-        "Security group",
-        "NAT gateway"
-      ],
-      "answer": 1,
-      "explanation": "VPC (AWS, GCP) e VNet (Azure) são a rede virtual. Private endpoint, security group e NAT gateway são recursos que ficam dentro ou na borda dela.",
-      "topic": "cloud",
-      "difficulty": "iniciante",
-      "type": "cloud"
     },
     {
       "id": "q1.3.6",
@@ -376,22 +193,22 @@ export const lesson0103 = {
         "SAN e NAS são o mesmo serviço com nomes de fabricantes diferentes"
       ],
       "answer": 2,
-      "explanation": "Os dois põem armazenamento na rede, mas a SAN é uma rede dedicada, crítica e isolada. Tratá-la como compartilhamento de arquivos subestima criticidade e isolamento.",
+      "explanation": "Os dois põem armazenamento na rede, mas a SAN é uma rede dedicada em que o servidor enxerga um disco (blocos) e o formata; o NAS oferece pastas e arquivos prontos. Tratar uma SAN como compartilhamento de arquivos subestima o quanto ela é crítica.",
       "topic": "SAN",
       "difficulty": "intermediário",
       "type": "pegadinha comum"
     },
     {
       "id": "q1.3.7",
-      "question": "Um notebook está associado ao Wi-Fi corporativo e responde ao ping do gateway, mas não abre nenhum site. Qual hipótese é a mais coerente?",
+      "question": "Um notebook está conectado ao Wi-Fi do escritório com sinal cheio e consegue imprimir na impressora da sala, mas não abre nenhum site. Qual hipótese é a mais coerente?",
       "options": [
-        "A SAN do datacenter está congestionada",
+        "A SAN do datacenter está lenta",
         "O sinal Wi-Fi está fraco demais para navegar",
-        "A PAN Bluetooth do notebook está bloqueando a internet",
-        "O problema está além da WLAN: DNS, rota default, NAT, firewall ou WAN/provedor"
+        "O fone Bluetooth do notebook está bloqueando a internet",
+        "O problema está além da rede local: no link da operadora (WAN) ou depois dele"
       ],
       "answer": 3,
-      "explanation": "Se o gateway responde, a WLAN e a LAN local estão funcionando. A hipótese se desloca para o que vem depois do gateway: DNS, rota default, NAT, firewall, WAN ou provedor.",
+      "explanation": "Sinal cheio e impressão funcionando mostram que a WLAN e a LAN estão de pé. A hipótese se desloca para o que vem depois delas: o link da operadora (WAN) ou o que está além dele.",
       "topic": "troubleshooting",
       "difficulty": "intermediário",
       "type": "diagnóstico"
@@ -425,7 +242,7 @@ export const lesson0103 = {
     {
       "id": "fc1.3.4",
       "front": "O que é WAN?",
-      "back": "Wide Area Network: rede de longa distância, usada para conectar filiais, datacenters, internet e cloud.",
+      "back": "Wide Area Network: rede de longa distância, entre estados ou países, que liga filiais, datacenters e a internet; costuma depender de operadora.",
       "tags": [
         "WAN"
       ],
@@ -434,7 +251,7 @@ export const lesson0103 = {
     {
       "id": "fc1.3.5",
       "front": "O que é SAN?",
-      "back": "Storage Area Network: rede especializada para conectar servidores a armazenamento crítico.",
+      "back": "Storage Area Network: rede separada que liga servidores ao armazenamento. O servidor enxerga um disco (blocos); um NAS, ao contrário, oferece pastas e arquivos na rede comum.",
       "tags": [
         "SAN",
         "storage"
@@ -444,7 +261,7 @@ export const lesson0103 = {
     {
       "id": "fc1.3.6",
       "front": "Qual pergunta ajuda a classificar um tipo de rede?",
-      "back": "Qual é o alcance, a finalidade, o meio, quem controla, qual custo e qual risco?",
+      "back": "Qual é o alcance, para que ela serve, que meio usa e quem a controla?",
       "tags": [
         "arquitetura"
       ],
@@ -453,7 +270,7 @@ export const lesson0103 = {
     {
       "id": "fc1.3.7",
       "front": "CAN x MAN: qual a diferença?",
-      "back": "CAN (Campus Area Network) interliga prédios de um campus sob uma organização, geralmente com backbone próprio. MAN (Metropolitan Area Network) conecta sites dentro de uma cidade e costuma depender de operadora.",
+      "back": "CAN (Campus Area Network) interliga prédios de um campus da mesma organização, geralmente com fibra própria. MAN (Metropolitan Area Network) conecta locais dentro de uma cidade e costuma depender de operadora.",
       "tags": [
         "CAN",
         "MAN"
@@ -463,7 +280,7 @@ export const lesson0103 = {
     {
       "id": "fc1.3.8",
       "front": "Wi-Fi conectado garante acesso à internet?",
-      "back": "Não. A WLAN é só o acesso local por rádio; a internet depende de gateway, rota, DNS, NAT e WAN/provedor.",
+      "back": "Não. A WLAN é só o trecho local, por rádio; chegar à internet depende do roteador e do link da operadora (WAN).",
       "tags": [
         "WLAN",
         "troubleshooting"
@@ -475,195 +292,60 @@ export const lesson0103 = {
     {
       "id": "ex1.3.1",
       "type": "conceitual",
-      "prompt": "Classifique: celular conectado a relógio inteligente; notebook conectado ao Wi-Fi corporativo; sede conectada à filial; servidor conectado a storage crítico.",
-      "expectedAnswer": "Celular-relógio: PAN; notebook no Wi-Fi: WLAN; sede-filial: WAN; servidor-storage crítico: SAN.",
-      "explanation": "A classificação depende de alcance e finalidade."
+      "prompt": "Classifique cada ligação pelo tipo de rede: (a) celular conectado a um relógio inteligente; (b) notebook no Wi-Fi do escritório; (c) sede em São Paulo ligada à filial no Recife; (d) servidores ligados ao storage por uma rede dedicada; (e) HD de rede (NAS) na sala de casa, acessado pelo Wi-Fi.",
+      "expectedAnswer": "(a) PAN; (b) WLAN; (c) WAN; (d) SAN; (e) o NAS é um serviço de arquivos dentro da LAN/WLAN de casa, não uma SAN.",
+      "explanation": "A classificação depende de alcance, finalidade e meio, não do nome do aparelho."
     },
     {
-      "id": "ex1.3.2",
+      "id": "ex1.3.5",
       "type": "diagnóstico",
-      "prompt": "Um usuário imprime em uma impressora local, mas não acessa um sistema na cloud. O problema está necessariamente na LAN? Explique.",
-      "expectedAnswer": "Não. Se a impressora local funciona, parte da LAN/WLAN pode estar operacional. A falha pode estar em DNS, WAN, firewall, proxy, rota, autenticação ou serviço cloud.",
-      "explanation": "A separação por tipo evita culpar toda a rede."
-    },
-    {
-      "id": "ex1.3.3",
-      "type": "segurança",
-      "prompt": "Liste três controles para Wi-Fi de visitantes em uma empresa.",
-      "expectedAnswer": "SSID separado, VLAN dedicada, firewall bloqueando rede interna, captive portal, logs, limitação de banda e rotação de credenciais.",
-      "explanation": "O objetivo é impedir que visitantes acessem recursos internos."
-    },
-    {
-      "id": "ex1.3.4",
-      "type": "cloud",
-      "prompt": "Dê dois exemplos de recursos cloud que representam decisões de rede.",
-      "expectedAnswer": "VPC/VNet, subnets, route tables, security groups, NAT gateway, VPN, peering, private endpoints, firewall gerenciado.",
-      "explanation": "Cloud oculta cabos, mas não elimina arquitetura de rede."
+      "prompt": "Você trabalha no suporte de uma empresa com sede e filial em estados diferentes. Para cada chamado, diga em que tipo de rede está a falha e quem deve resolvê-la (equipe interna ou operadora): (a) o Wi-Fi do 2º andar sumiu, mas o resto do prédio funciona; (b) na sede, ninguém abre nenhum site, mas os sistemas internos e as impressoras funcionam; (c) todos os sistemas que guardam dados no storage ficaram lentos ao mesmo tempo.",
+      "expectedAnswer": "(a) WLAN, provavelmente o access point do andar: equipe interna. (b) WAN, o link de internet da sede: operadora (depois de conferir o roteador da empresa). (c) SAN: equipe interna do datacenter.",
+      "explanation": "O tipo de rede aponta o trecho e o domínio administrativo: quem pode mexer nele."
     }
   ],
   "challenge": {
-    "title": "Planeje os tipos de rede de uma empresa pequena",
-    "scenario": "Uma empresa tem uma sede com 80 usuários, Wi-Fi corporativo, Wi-Fi de visitantes, uma filial em outra cidade, alguns servidores internos, backup em cloud e um storage crítico para virtualização.",
+    "title": "Classifique as redes de uma empresa pequena",
+    "scenario": "Uma empresa tem uma sede com 80 usuários em cabos e Wi-Fi, um Wi-Fi separado para visitantes, uma filial em outro estado, alguns servidores internos, backup em cloud e um storage ligado aos servidores por uma rede dedicada. Um usuário da filial liga dizendo que \"a rede caiu\": ele imprime normalmente na filial, mas não abre o sistema que fica na sede.",
     "tasks": [
-      "Identificar quais tipos de rede aparecem no cenário.",
-      "Descrever a finalidade de cada tipo.",
-      "Indicar pelo menos cinco riscos.",
-      "Indicar controles defensivos para cada risco.",
-      "Explicar quais evidências validariam o desenho."
-    ],
-    "constraints": [
-      "Visitantes não podem acessar rede interna.",
-      "Storage crítico não pode ficar acessível a usuários comuns.",
-      "Conexão com filial deve ser segura.",
-      "Cloud deve preferir acesso privado quando possível."
+      "Listar os tipos de rede do cenário e justificar cada um por alcance, finalidade ou meio.",
+      "Dizer quem controla cada parte: a empresa ou a operadora.",
+      "Dizer por qual tipo de rede você começa a investigar o chamado da filial, e por quê."
     ],
     "expectedDeliverables": [
-      "Tabela de tipos de rede",
-      "Mapa textual da arquitetura",
-      "Lista de riscos e mitigações",
-      "Plano de evidências",
-      "Resumo executivo"
-    ],
-    "gradingRubric": [
-      {
-        "criterion": "Classificação correta dos tipos",
-        "points": 30,
-        "description": "Identifica LAN, WLAN, WAN, SAN e cloud/híbrida com justificativa."
-      },
-      {
-        "criterion": "Risco e mitigação",
-        "points": 30,
-        "description": "Aponta riscos reais e controles coerentes."
-      },
-      {
-        "criterion": "Clareza operacional",
-        "points": 20,
-        "description": "Explica donos, evidências e troubleshooting."
-      },
-      {
-        "criterion": "Integração com cloud e segurança",
-        "points": 20,
-        "description": "Considera VPN, private endpoints, segmentação e logs."
-      }
+      "Uma tabela com tipo de rede, onde aparece e quem controla, e 2 a 3 linhas sobre o chamado."
     ]
   },
   "commentedSolution": {
-    "reasoning": "Primeiro separamos o cenário por alcance e finalidade. Depois indicamos quais redes precisam de isolamento e que evidências comprovam cada parte. Por fim, relacionamos riscos e controles.",
+    "reasoning": "Classifique por alcance e finalidade antes de pensar em equipamentos; depois use o que funciona para descartar trechos.",
     "steps": [
-      "Classificar rede local cabeada como LAN.",
-      "Classificar Wi-Fi corporativo e de visitantes como WLANs distintas.",
-      "Classificar conexão com filial como WAN, possivelmente VPN ou SD-WAN.",
-      "Classificar storage crítico como SAN ou rede especializada de armazenamento.",
-      "Classificar cloud como rede virtual integrada por VPN, peering ou endpoint privado.",
-      "Definir controles: VLANs, firewall, criptografia, logs, private endpoints e isolamento de gerenciamento."
+      "Sede: LAN nos cabos e duas WLANs, a corporativa e a de visitantes. Filial: outra LAN. Tudo controlado pela empresa.",
+      "Sede–filial: WAN, porque liga estados diferentes por link de operadora, que controla esse trecho. O backup em cloud chega pela internet, outro trecho de WAN.",
+      "Servidores–storage: SAN, rede dedicada ao armazenamento, controlada pela empresa.",
+      "Chamado: se o usuário imprime, a LAN da filial funciona. O próximo trecho é a WAN até a sede; comece por ele e, se estiver fora, acione a operadora."
     ],
-    "commonWrongAnswers": [
-      {
-        "answer": "Tudo é LAN porque está na empresa.",
-        "whyItIsWrong": "A filial, cloud, Wi-Fi e storage possuem alcance, finalidade e riscos diferentes."
-      },
-      {
-        "answer": "Criar SSID de visitantes basta para isolar.",
-        "whyItIsWrong": "SSID não garante isolamento sem VLAN, firewall, política e validação."
-      },
-      {
-        "answer": "Storage pode ficar na mesma rede dos usuários.",
-        "whyItIsWrong": "Storage crítico exige isolamento e controle rigoroso para reduzir risco e preservar performance."
-      }
+    "commonMistakes": [
+      "Dizer que tudo é LAN porque pertence à mesma empresa.",
+      "Tratar o storage dedicado como um NAS na rede dos usuários.",
+      "Começar pelo Wi-Fi ou pela impressora da filial: a impressão funcionando já mostra que a rede local está de pé."
     ],
-    "finalAnswer": "Uma solução adequada usa LAN para usuários e servidores locais, WLAN corporativa separada da WLAN de visitantes, WAN/VPN para filial, rede especializada para storage, integração cloud preferencialmente privada e controles de segmentação, criptografia, logging e menor privilégio."
+    "finalAnswer": "LAN e duas WLANs na sede, LAN na filial, WAN até a filial e até a internet, SAN no storage. A operadora controla só a WAN. O chamado começa pela WAN sede–filial."
   },
   "glossary": [
     {
-      "term": "PAN",
-      "shortDefinition": "Rede pessoal de curto alcance.",
-      "longDefinition": "Personal Area Network, usada para comunicação entre dispositivos próximos de uma pessoa, como celular, fone e wearable.",
-      "example": "Celular conectado a um fone Bluetooth.",
-      "relatedTerms": [
-        "Bluetooth",
-        "periférico",
-        "pareamento"
-      ],
+      "term": "Switch",
+      "shortDefinition": "Equipamento que liga os computadores de uma LAN por cabo e entrega cada mensagem só na porta do destino.",
       "relatedLessons": [
-        "1.3",
-        "12.1"
+        "1.7",
+        "3.3"
       ]
     },
     {
-      "term": "LAN",
-      "shortDefinition": "Rede local.",
-      "longDefinition": "Local Area Network, usada para conectar dispositivos dentro de um espaço limitado como casa, escritório, laboratório ou andar.",
-      "example": "Computadores ligados a switches em uma empresa.",
-      "relatedTerms": [
-        "Ethernet",
-        "switch",
-        "VLAN"
-      ],
+      "term": "Access point (AP)",
+      "shortDefinition": "Equipamento que cria o Wi-Fi: transmite e recebe por rádio e liga os dispositivos sem fio à rede cabeada.",
       "relatedLessons": [
-        "1.3",
-        "3.1"
-      ]
-    },
-    {
-      "term": "WLAN",
-      "shortDefinition": "Rede local sem fio.",
-      "longDefinition": "Wireless Local Area Network, normalmente implementada com Wi-Fi e access points.",
-      "example": "Wi-Fi corporativo autenticado por usuário.",
-      "relatedTerms": [
-        "Wi-Fi",
-        "SSID",
-        "access point"
-      ],
-      "relatedLessons": [
-        "1.3",
-        "12.1"
-      ]
-    },
-    {
-      "term": "WAN",
-      "shortDefinition": "Rede de longa distância.",
-      "longDefinition": "Wide Area Network, usada para conectar locais distantes, filiais, datacenters, internet e cloud.",
-      "example": "VPN entre sede e filial.",
-      "relatedTerms": [
-        "VPN",
-        "SD-WAN",
-        "operadora",
-        "SLA"
-      ],
-      "relatedLessons": [
-        "1.3",
-        "10.1",
-        "11.1"
-      ]
-    },
-    {
-      "term": "SAN",
-      "shortDefinition": "Rede de armazenamento.",
-      "longDefinition": "Storage Area Network, rede especializada que entrega armazenamento em blocos a servidores em datacenter. Não confundir com NAS, que é um serviço de arquivos na rede comum.",
-      "example": "Cluster de virtualização acessando storage por rede dedicada.",
-      "relatedTerms": [
-        "storage",
-        "iSCSI",
-        "Fibre Channel",
-        "multipath"
-      ],
-      "relatedLessons": [
-        "1.3"
-      ]
-    },
-    {
-      "term": "Domínio administrativo",
-      "shortDefinition": "Quem controla uma rede ou parte dela.",
-      "longDefinition": "Indica se a rede é gerida pela própria organização, operadora, provedor cloud ou terceiro.",
-      "example": "A LAN da empresa é interna; o link de operadora pertence a terceiro.",
-      "relatedTerms": [
-        "SLA",
-        "responsabilidade compartilhada",
-        "operadora"
-      ],
-      "relatedLessons": [
-        "1.3",
-        "14.1"
+        "1.7",
+        "12.7"
       ]
     }
   ],
@@ -707,11 +389,7 @@ export const lesson0103 = {
   "progressRules": {
     "completeWhen": {
       "read": true,
-      "quizScoreAtLeast": 70,
-      "oneOf": [
-        "exerciseDone",
-        "practicalExerciseDone"
-      ]
+      "quizScoreAtLeast": 70
     },
     "accessPolicy": {
       "freeAccess": true,

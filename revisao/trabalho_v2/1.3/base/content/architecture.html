@@ -1,0 +1,24 @@
+
+<section class="lesson-section lesson-section--architecture">
+  <h2>Arquitetura</h2>
+  <p>Numa arquitetura corporativa, os tipos de rede aparecem empilhados e conectados. Um notebook acessa a WLAN, que se liga à LAN do prédio, que alcança serviços internos, passa por firewalls, usa a WAN para chegar a outra filial e pode consumir recursos em cloud. Um servidor de virtualização pode estar ao mesmo tempo na LAN de gerenciamento, na rede de produção e numa SAN.</p>
+  <ul class="flow-list">
+    <li><strong>Borda de usuário:</strong> PAN, WLAN e LAN.</li>
+    <li><strong>Distribuição interna:</strong> LAN e CAN, geralmente com switches, VLANs e roteamento interno.</li>
+    <li><strong>Interconexão distante:</strong> MAN e WAN, com links de operadora, VPN, SD-WAN ou conexão dedicada.</li>
+    <li><strong>Datacenter:</strong> LAN de servidores, rede de gerenciamento, rede de backup e SAN.</li>
+    <li><strong>Cloud:</strong> redes virtuais, subnets, peering, VPN, links dedicados (ExpressRoute/Direct Connect) e endpoints privados.</li>
+  </ul>
+  <h3>Operação e custo por tipo</h3>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Tipo</th><th>O que a operação exige</th><th>Onde está o custo</th></tr></thead>
+    <tbody>
+      <tr><td>PAN e LAN pequena</td><td>Suporte e segurança básicos</td><td>Baixo custo inicial</td></tr>
+      <tr><td>LAN e WLAN</td><td>Inventário local, cabeamento, APs, switches e suporte ao usuário</td><td>WLAN corporativa pode exigir APs gerenciados, controladora, licenças e site survey</td></tr>
+      <tr><td>WAN</td><td>Gestão de operadora, SLA, redundância, roteamento e monitoramento de disponibilidade</td><td>Links dedicados têm custo recorrente alto</td></tr>
+      <tr><td>SAN</td><td>Operação especializada, controle rigoroso e planejamento de performance</td><td>Storage, switches especializados, licenças, redundância e equipe especializada</td></tr>
+      <tr><td>Cloud</td><td>Documentar subnets, rotas, peering, endpoints e custos de tráfego</td><td>Tráfego entre regiões, NAT gateways, firewalls gerenciados e links dedicados</td></tr>
+    </tbody>
+  </table></div>
+  <p>A decisão arquitetural não é escolher uma sigla: é saber qual tipo de rede resolve qual problema e onde aplicar segmentação, segurança, redundância e monitoramento.</p>
+</section>

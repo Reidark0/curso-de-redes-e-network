@@ -1,0 +1,60 @@
+
+<section class="lesson-section lesson-section--diagram">
+  <h2>Diagrama SVG</h2>
+  <svg class="lesson-svg" viewBox="0 0 1040 460" role="img" aria-labelledby="m01l03-title m01l03-desc">
+    <title id="m01l03-title">Tipos de rede coexistindo em uma empresa</title>
+    <desc id="m01l03-desc">Dentro da sede, controlada pela empresa, ficam a PAN (fone e celular), a WLAN (Wi-Fi), a LAN (cabos e switch), os servidores e a SAN, que liga os servidores ao storage. A LAN da sede se liga à WAN, controlada pela operadora, que leva à filial e à internet.</desc>
+    <rect x="30" y="40" width="600" height="300" rx="16" class="svg-boundary" />
+    <text x="330" y="68" text-anchor="middle" class="svg-label svg-label--small">Sede: a empresa controla</text>
+
+    <rect x="60" y="95" width="150" height="72" rx="12" class="svg-node svg-node--client" />
+    <text x="135" y="126" text-anchor="middle" class="svg-label">PAN</text>
+    <text x="135" y="149" text-anchor="middle" class="svg-label svg-label--small">fone e celular</text>
+
+    <rect x="245" y="95" width="150" height="72" rx="12" class="svg-node" />
+    <text x="320" y="126" text-anchor="middle" class="svg-label">WLAN</text>
+    <text x="320" y="149" text-anchor="middle" class="svg-label svg-label--small">Wi-Fi (rádio)</text>
+
+    <rect x="430" y="95" width="170" height="72" rx="12" class="svg-node" />
+    <text x="515" y="126" text-anchor="middle" class="svg-label">LAN</text>
+    <text x="515" y="149" text-anchor="middle" class="svg-label svg-label--small">cabos e switch</text>
+
+    <rect x="430" y="240" width="170" height="72" rx="12" class="svg-node" />
+    <text x="515" y="271" text-anchor="middle" class="svg-label">Servidores</text>
+    <text x="515" y="294" text-anchor="middle" class="svg-label svg-label--small">sistemas internos</text>
+
+    <rect x="245" y="240" width="150" height="72" rx="12" class="svg-node svg-node--security" />
+    <text x="320" y="271" text-anchor="middle" class="svg-label">SAN</text>
+    <text x="320" y="294" text-anchor="middle" class="svg-label svg-label--small">rede só de storage</text>
+
+    <rect x="60" y="240" width="150" height="72" rx="12" class="svg-node" />
+    <text x="135" y="271" text-anchor="middle" class="svg-label">Storage</text>
+    <text x="135" y="294" text-anchor="middle" class="svg-label svg-label--small">discos dos servidores</text>
+
+    <line x1="210" y1="131" x2="245" y2="131" class="svg-flow" />
+    <line x1="395" y1="131" x2="430" y2="131" class="svg-flow" />
+    <line x1="515" y1="167" x2="515" y2="240" class="svg-flow" />
+    <line x1="430" y1="276" x2="395" y2="276" class="svg-flow" />
+    <line x1="245" y1="276" x2="210" y2="276" class="svg-flow" />
+
+    <rect x="670" y="95" width="160" height="72" rx="12" class="svg-node svg-node--cloud" />
+    <text x="750" y="126" text-anchor="middle" class="svg-label">WAN</text>
+    <text x="750" y="149" text-anchor="middle" class="svg-label svg-label--small">link da operadora</text>
+    <text x="750" y="82" text-anchor="middle" class="svg-label svg-label--small">a operadora controla</text>
+
+    <rect x="870" y="95" width="150" height="72" rx="12" class="svg-node" />
+    <text x="945" y="126" text-anchor="middle" class="svg-label">Filial</text>
+    <text x="945" y="149" text-anchor="middle" class="svg-label svg-label--small">outra LAN</text>
+
+    <rect x="870" y="240" width="150" height="72" rx="12" class="svg-node svg-node--cloud" />
+    <text x="945" y="271" text-anchor="middle" class="svg-label">Internet</text>
+    <text x="945" y="294" text-anchor="middle" class="svg-label svg-label--small">sites e cloud</text>
+
+    <line x1="600" y1="131" x2="670" y2="131" class="svg-flow" />
+    <line x1="830" y1="131" x2="870" y2="131" class="svg-flow" />
+    <path d="M790 167 C810 220, 840 260, 870 270" class="svg-flow" />
+
+    <text x="520" y="385" text-anchor="middle" class="svg-label svg-label--small">Alcance curto e um só dono: PAN, WLAN, LAN e SAN. Entre locais distantes: WAN, de outro dono.</text>
+    <text x="520" y="412" text-anchor="middle" class="svg-label svg-label--small">Ligando prédios de um mesmo campus, a rede seria uma CAN; locais na mesma cidade, uma MAN.</text>
+  </svg>
+</section>

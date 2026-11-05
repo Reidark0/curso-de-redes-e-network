@@ -1,0 +1,28 @@
+
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <div class="definition-box">
+    <strong>Definição:</strong> tipos de rede são classificações que descrevem uma rede pelo <strong>alcance</strong> (que distância cobre), pela <strong>finalidade</strong> (para que serve), pelo <strong>meio</strong> (cabo, fibra ou rádio) e por <strong>quem a controla</strong>.
+  </div>
+  <p>Quem controla uma rede é o seu <strong>domínio administrativo</strong>: a própria organização, uma operadora contratada ou um provedor de cloud. Ele diz quem pode mudar a configuração e quem você aciona quando algo falha.</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Tipo</th><th>Alcance típico</th><th>Finalidade</th><th>Limitação principal</th></tr></thead>
+    <tbody>
+      <tr><td>PAN (Personal Area Network)</td><td>Poucos metros ao redor de uma pessoa</td><td>Ligar periféricos pessoais: fone, relógio, celular</td><td>Alcance curto e bateria</td></tr>
+      <tr><td>LAN (Local Area Network)</td><td>Sala, casa, escritório, andar</td><td>Conectar computadores próximos, sob controle de quem os usa</td><td>Cabos e equipamentos para crescer</td></tr>
+      <tr><td>WLAN (Wireless LAN)</td><td>A área coberta pelo rádio</td><td>Mobilidade via Wi-Fi; é uma LAN sem fio</td><td>Interferência, sinal e meio compartilhado</td></tr>
+      <tr><td>CAN (Campus Area Network)</td><td>Campus, conjunto de prédios</td><td>Interligar prédios próximos da mesma organização, em geral com fibra própria</td><td>Cabeamento entre prédios e redundância</td></tr>
+      <tr><td>MAN (Metropolitan Area Network)</td><td>Cidade ou região metropolitana</td><td>Conectar locais dentro de uma área urbana, em geral com links de operadora</td><td>Dependência da operadora e custo do link</td></tr>
+      <tr><td>WAN (Wide Area Network)</td><td>Estados, países, o mundo</td><td>Conectar filiais, datacenters e a internet</td><td>Latência maior, custo mensal e operadora</td></tr>
+      <tr><td>SAN (Storage Area Network)</td><td>Datacenter</td><td>Ligar servidores ao armazenamento (storage)</td><td>Custo, complexidade e criticidade</td></tr>
+    </tbody>
+  </table></div>
+  <p>Repare que a maioria das siglas é definida pelo alcance, mas duas não: a WLAN se diferencia da LAN pelo meio (rádio), e a SAN pela finalidade (armazenamento). Essas categorias também não são caixas fechadas: a mesma casa ou empresa usa vários tipos ao mesmo tempo, ligados entre si.</p>
+  <div class="callout warning"><strong>Erros comuns</strong>
+    <ul>
+      <li><strong>Achar que tudo é LAN porque é tudo da mesma empresa.</strong> A ligação com uma filial em outro estado é WAN, mesmo que a empresa pague por ela: quem a opera é a operadora.</li>
+      <li><strong>Esperar da WAN a resposta da LAN.</strong> Numa LAN, uma ida e volta leva menos de 1 ms; entre estados, dezenas de milissegundos. Um sistema que faz muitas consultas pequenas, rápido no mesmo prédio, fica lento quando o servidor vai para longe.</li>
+      <li><strong>Confundir SAN com NAS.</strong> Os dois põem armazenamento na rede, mas a SAN entrega ao servidor armazenamento em blocos: o servidor enxerga um disco, como se estivesse ligado nele, e o formata. O NAS é um aparelho que oferece pastas e arquivos compartilhados na rede comum.</li>
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,93 @@
+{
+  "id": "1.3",
+  "versao": "v1",
+  "titulo": "Tipos de rede: PAN, LAN, WLAN, CAN, MAN, WAN e SAN",
+  "tipo": "intermediária",
+  "palavras": {
+    "visiveis": 4085,
+    "teoria": 2511,
+    "praticaExtra": 726,
+    "quiz": 538,
+    "flashcards": 143
+  },
+  "porGrupoTeoria": {
+    "introducao": 519,
+    "contexto": 172,
+    "conteudo": 786,
+    "exemplos": 504,
+    "seguranca_troubleshooting": 530
+  },
+  "porSecao": {
+    "motivation": 106,
+    "summary": 109,
+    "problem": 172,
+    "concept": 390,
+    "internals": 143,
+    "architecture": 251,
+    "diagram": 2,
+    "analogy": 86,
+    "simpleExample": 101,
+    "enterpriseExample": 92,
+    "cloudExample": 115,
+    "securityExample": 110,
+    "objectives": 53,
+    "learningOutcomes": 52,
+    "glossary": 199,
+    "security": 290,
+    "troubleshooting": 240,
+    "nextTheme": 31
+  },
+  "pratica": {
+    "quiz": 538,
+    "flashcards": 143,
+    "lab": 0,
+    "mentorQuestions": 223,
+    "exercises": 165,
+    "challenge": 158,
+    "commentedSolution": 180
+  },
+  "outros": {
+    "title+subtitle": 24,
+    "nextTheme": 31,
+    "references": 57,
+    "linksToOtherCourses": 55
+  },
+  "quantidades": {
+    "quiz": 8,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 5,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "70-100 min",
+    "estimatedStudyTimeMinutes": 100,
+    "nucleo": 30.3,
+    "nucleoPartes": {
+      "teoria": 19.3,
+      "diagramas": 3,
+      "quiz": 8
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "25-35 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}
