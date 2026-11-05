@@ -50,13 +50,6 @@
     "Aplicar raciocínio por camadas em um diagnóstico inicial sem pular etapas.",
     "Reconhecer limitações do OSI e sua relação com o modelo TCP/IP."
   ],
-  "learningOutcomes": [
-    "Dado um sintoma de rede, o aluno consegue associá-lo a uma ou mais camadas prováveis.",
-    "Dado um diagrama simples, o aluno identifica onde aparecem físico, enlace, rede, transporte e aplicação.",
-    "Dado um chamado ambíguo, o aluno formula perguntas por camada antes de concluir a causa.",
-    "Dado um cenário corporativo, o aluno usa OSI para documentar responsabilidades e evidências.",
-    "Dado um problema de segurança, o aluno diferencia controle físico, segmentação, firewall, TLS e autenticação."
-  ],
   "networkContext": {
     "osiLayers": [
       "Camada 1",
@@ -101,133 +94,6 @@
       "modelo TCP/IP",
       "firewalls",
       "cloud networking"
-    ]
-  },
-  "troubleshooting": {
-    "symptoms": [
-      "Sistema não abre",
-      "Ping falha",
-      "Nome não resolve",
-      "Porta não conecta",
-      "Página abre parcialmente",
-      "VPN conecta mas serviço não responde",
-      "Aplicação retorna erro de autenticação"
-    ],
-    "diagnosticQuestions": [
-      "A interface física ou Wi-Fi está ativa?",
-      "O host recebeu IP, máscara, gateway e DNS?",
-      "O gateway responde?",
-      "O destino é alcançável por IP?",
-      "A porta TCP/UDP necessária está aberta?",
-      "O nome DNS resolve para o IP esperado?",
-      "TLS, proxy, WAF ou autenticação estão envolvidos?"
-    ],
-    "commands": [
-      {
-        "platform": "Windows",
-        "command": "ipconfig /all && ping <gateway> && tracert <destino> && nslookup <nome>",
-        "purpose": "Coletar evidências iniciais de configuração, alcance, caminho e DNS.",
-        "expectedObservation": "IP válido, gateway definido, rota com saltos coerentes e DNS resolvendo.",
-        "interpretation": "Falhas em etapas diferentes sugerem camadas diferentes."
-      },
-      {
-        "platform": "Linux",
-        "command": "ip addr && ip route && ping -c 4 <gateway> && traceroute <destino> && dig <nome>",
-        "purpose": "Observar interfaces, rota padrão, alcance, caminho e resolução DNS.",
-        "expectedObservation": "Interface UP, rota default, respostas do gateway e resolução coerente.",
-        "interpretation": "Ausência de rota ou DNS incoerente direciona a investigação."
-      },
-      {
-        "platform": "Cisco IOS",
-        "command": "show ip interface brief\nshow interfaces status\nshow mac address-table\nshow ip route",
-        "purpose": "Ver estado de interfaces, camada 2 e camada 3 em equipamentos de rede.",
-        "expectedObservation": "Interfaces up/up, MACs aprendidos e rotas coerentes.",
-        "interpretation": "Interface down, ausência de MAC ou rota ausente indicam camadas prováveis de falha."
-      }
-    ],
-    "decisionTree": [
-      {
-        "if": "Interface está down",
-        "then": "Investigue camada física: cabo, porta, Wi-Fi, SFP, energia ou driver."
-      },
-      {
-        "if": "Interface tem IP, mas gateway não responde",
-        "then": "Investigue enlace local, VLAN, ARP, switch, firewall local ou gateway."
-      },
-      {
-        "if": "Gateway responde, mas destino por IP não",
-        "then": "Investigue rota, firewall, ACL, VPN ou indisponibilidade remota."
-      },
-      {
-        "if": "Destino por IP responde, mas nome falha",
-        "then": "Investigue DNS, search suffix, split DNS ou DNS privado."
-      },
-      {
-        "if": "Porta conecta, mas aplicação nega acesso",
-        "then": "Investigue TLS, autenticação, autorização, sessão ou aplicação."
-      }
-    ]
-  },
-  "security": {
-    "goodPractices": [
-      "Documentar controles por camada.",
-      "Coletar evidências antes de alterar configuração.",
-      "Separar conectividade de autenticação e autorização.",
-      "Aplicar defesa em profundidade em vez de depender de um único controle.",
-      "Sanitizar diagramas e evidências antes de compartilhar."
-    ],
-    "badPractices": [
-      "Liberar any-any porque o diagnóstico está difícil.",
-      "Tratar ping como prova de acesso autorizado.",
-      "Ignorar camada física e enlace em incidentes internos.",
-      "Expor diagramas completos com IPs, nomes e caminhos sensíveis.",
-      "Culpar DNS ou firewall sem evidência."
-    ],
-    "commonErrors": [
-      "Confundir camada 3 com camada 4.",
-      "Confundir conexão TCP com login bem-sucedido.",
-      "Achar que TLS resolve autorização.",
-      "Achar que NAT é controle de segurança completo."
-    ],
-    "vulnerabilities": [
-      {
-        "name": "Rede plana com controles apenas na borda",
-        "description": "Quando só o perímetro é protegido, um comprometimento interno pode alcançar muitos sistemas.",
-        "defensiveExplanation": "O OSI ajuda a distribuir controles: físico, enlace, rede, transporte e aplicação.",
-        "mitigation": "Segmentação, firewall interno, NAC, autenticação forte, logs e menor privilégio."
-      },
-      {
-        "name": "Exposição de serviço em camada 4 sem controle em camada 7",
-        "description": "Uma porta aberta pode permitir acesso ao serviço se não houver autenticação, autorização e validação adequadas.",
-        "defensiveExplanation": "Abrir porta é diferente de controlar uso seguro da aplicação.",
-        "mitigation": "Firewall mínimo, autenticação forte, WAF quando aplicável, logs e revisão de permissões."
-      },
-      {
-        "name": "Diagnóstico com evidências sensíveis expostas",
-        "description": "Prints de IPs, nomes internos e rotas podem revelar arquitetura para pessoas não autorizadas.",
-        "defensiveExplanation": "Evidência técnica também é informação sensível.",
-        "mitigation": "Sanitização, classificação da informação e compartilhamento apenas com times autorizados."
-      }
-    ],
-    "monitoring": [
-      "Logs de firewall e proxy por porta e aplicação.",
-      "NetFlow ou equivalente para fluxos de camada 3/4.",
-      "Alertas de mudanças de rota, VLAN ou DNS.",
-      "Métricas de disponibilidade por camada.",
-      "SIEM correlacionando eventos de endpoint, rede e aplicação."
-    ],
-    "hardening": [
-      "Desabilitar portas físicas não usadas.",
-      "Documentar VLANs, subnets, rotas e regras.",
-      "Aplicar menor privilégio em regras de firewall.",
-      "Validar TLS e certificados."
-    ],
-    "detectionIdeas": [
-      "Aumento de conexões laterais internas.",
-      "Portas novas expostas sem change request.",
-      "Resolução DNS para destinos incomuns.",
-      "Mudanças de gateway ou ARP inesperadas.",
-      "Erros de TLS ou autenticação em massa."
     ]
   },
   "mentorQuestions": [
@@ -656,11 +522,7 @@
   "progressRules": {
     "completeWhen": {
       "read": true,
-      "quizScoreAtLeast": 70,
-      "oneOf": [
-        "exerciseDone",
-        "practicalExerciseDone"
-      ]
+      "quizScoreAtLeast": 70
     },
     "accessPolicy": {
       "freeAccess": true,

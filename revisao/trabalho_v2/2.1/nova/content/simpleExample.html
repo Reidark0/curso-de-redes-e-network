@@ -1,4 +1,12 @@
 <section class="lesson-section lesson-section--example">
   <h2>Exemplo simples</h2>
-  <p>Você abre um site no notebook. O cabo ou Wi-Fi precisa funcionar. O notebook precisa falar com o gateway local. O IP precisa alcançar o servidor. A porta TCP 443 precisa abrir. O TLS precisa negociar. O HTTP precisa enviar a requisição. O servidor precisa responder. Se a página não abre, o OSI permite perguntar: em qual etapa a evidência quebra?</p>
+  <p>Você abre um site no notebook e a página não carrega. Para ela aparecer, uma cadeia de condições precisa funcionar:</p>
+  <ol>
+    <li><strong>Camada 1:</strong> o cabo está conectado ou o Wi-Fi tem sinal.</li>
+    <li><strong>Camada 2:</strong> o notebook consegue entregar dados ao roteador da rede local.</li>
+    <li><strong>Camada 3:</strong> o IP do servidor é alcançável, passando pelo gateway.</li>
+    <li><strong>Camada 4:</strong> a conexão com a porta 443 do servidor abre.</li>
+    <li><strong>Camadas 5 a 7:</strong> o TLS negocia a criptografia, o HTTP envia o pedido e o servidor responde.</li>
+  </ol>
+  <p>Se a página não abre, a pergunta é: em qual dessas etapas a evidência quebra? Um caso típico: o ping ao IP do servidor responde, mas o site não abre pelo nome. As camadas 1 a 3 funcionam até o servidor. O DNS, que transforma o nome do site em IP, é um serviço da camada 7, então a suspeita vai para ele, não para o cabo.</p>
 </section>

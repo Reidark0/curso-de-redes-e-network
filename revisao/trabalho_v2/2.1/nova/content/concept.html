@@ -1,21 +1,21 @@
 <section class="lesson-section lesson-section--concept">
   <h2>Conceito</h2>
-  <div class="definition-box"><strong>Definição:</strong> o Modelo OSI é um modelo conceitual de referência, com sete camadas, que descreve as responsabilidades da comunicação entre sistemas, do sinal físico até a aplicação. Ele serve para explicar, diagnosticar e documentar redes; não é um protocolo que roda nos equipamentos.</div>
-  <p>Cada camada responde a uma pergunta diferente:</p>
-  <table class="data-table comparison-table">
-    <thead><tr><th>Camada</th><th>Nome</th><th>Pergunta principal</th><th>Exemplos mentais</th></tr></thead>
+  <div class="definition-box"><strong>Definição:</strong> o Modelo OSI (Open Systems Interconnection) é um modelo de referência com sete camadas que descreve as responsabilidades da comunicação entre sistemas, do sinal físico até a aplicação. Ele serve para explicar, diagnosticar e documentar redes; não é um protocolo que roda nos equipamentos.</div>
+  <p>As camadas são numeradas de baixo para cima: a 1 fica mais perto do fio, a 7 mais perto do usuário. Cada uma responde a uma pergunta diferente:</p>
+  <div class="responsive-table"><table class="data-table comparison-table">
+    <thead><tr><th>Camada</th><th>Nome</th><th>Pergunta principal</th><th>Exemplos</th></tr></thead>
     <tbody>
-      <tr><td>7</td><td>Aplicação</td><td>Que serviço o usuário ou sistema está usando?</td><td>HTTP, DNS, API, SMTP, autenticação na aplicação</td></tr>
-      <tr><td>6</td><td>Apresentação</td><td>Como os dados são representados, codificados ou protegidos?</td><td>UTF-8, JSON, TLS conceitualmente, compressão</td></tr>
-      <tr><td>5</td><td>Sessão</td><td>Como a conversa é estabelecida, mantida ou retomada?</td><td>Sessões, estado, tokens, negociação</td></tr>
-      <tr><td>4</td><td>Transporte</td><td>Qual porta, conexão ou fluxo transporta os dados?</td><td>TCP, UDP, portas, handshake, retransmissão</td></tr>
-      <tr><td>3</td><td>Rede</td><td>Como o pacote chega a outra rede?</td><td>IP, roteamento, gateway, TTL</td></tr>
-      <tr><td>2</td><td>Enlace</td><td>Como há entrega local no mesmo enlace?</td><td>Ethernet, MAC, switch, VLAN, ARP</td></tr>
-      <tr><td>1</td><td>Física</td><td>Como bits viram sinais no meio?</td><td>Cobre, fibra, rádio, conectores, potência, ruído</td></tr>
+      <tr><td>7</td><td>Aplicação</td><td>Que serviço o usuário ou o sistema está usando?</td><td>HTTP, DNS, e-mail, login na aplicação</td></tr>
+      <tr><td>6</td><td>Apresentação</td><td>Como os dados são representados, codificados ou protegidos?</td><td>UTF-8, Base64, compressão, criptografia (TLS)</td></tr>
+      <tr><td>5</td><td>Sessão</td><td>Como a conversa é aberta, mantida e retomada?</td><td>sessão de login que continua ativa, reconexão</td></tr>
+      <tr><td>4</td><td>Transporte</td><td>Qual porta e qual conexão levam os dados?</td><td>TCP, UDP, portas (443 no HTTPS)</td></tr>
+      <tr><td>3</td><td>Rede</td><td>Como os dados chegam a outra rede?</td><td>endereço IP, gateway, rotas, roteador</td></tr>
+      <tr><td>2</td><td>Enlace</td><td>Como os dados são entregues dentro da rede local?</td><td>Ethernet, Wi-Fi, endereço MAC, ARP, switch</td></tr>
+      <tr><td>1</td><td>Física</td><td>Como os bits viram sinal no meio?</td><td>cabo, fibra, rádio, conectores, ruído</td></tr>
     </tbody>
-  </table>
+  </table></div>
   <h3>OSI × TCP/IP</h3>
-  <p>A internet usa a pilha TCP/IP, que tem menos camadas e agrupa responsabilidades que o OSI separa:</p>
+  <p>A internet usa a pilha TCP/IP, que tem quatro camadas e agrupa responsabilidades que o OSI separa:</p>
   <div class="responsive-table"><table class="data-table">
     <thead><tr><th>TCP/IP</th><th>Camadas OSI equivalentes</th><th>Exemplos</th></tr></thead>
     <tbody>
@@ -25,5 +25,5 @@
       <tr><td>Acesso à rede</td><td>2 e 1</td><td>Ethernet, Wi-Fi, ARP, cabo, fibra</td></tr>
     </tbody>
   </table></div>
-  <div class="callout warning"><strong>Limites do modelo:</strong> o OSI não é a implementação exata da internet. Nem todo protocolo cabe em uma camada só (o TLS aparece na camada 6 “conceitualmente”, mas roda sobre TCP e é acionado pela aplicação), e firewalls, load balancers, proxies e WAFs operam em várias camadas. Use o OSI como mapa de perguntas, não como substituto da documentação do protocolo (RFCs, documentação oficial) nem como motivo para encerrar a investigação só porque uma camada parece suspeita.</div>
+  <div class="callout warning"><strong>O OSI é um mapa, não a implementação:</strong> nem todo protocolo cabe em uma camada só. O TLS, por exemplo, protege os dados (papel da camada 6), mas roda sobre o TCP e é acionado pela própria aplicação. E equipamentos como firewalls costumam atuar em várias camadas ao mesmo tempo. Use o OSI para organizar perguntas, não como substituto da documentação de cada protocolo.</div>
 </section>
