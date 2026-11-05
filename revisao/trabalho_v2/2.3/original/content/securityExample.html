@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>A Camada 1 tem impactos de segurança diretos. Uma porta de rede ativa em área pública pode permitir conexão não autorizada. Um rack destrancado permite desconectar cabos, inserir dispositivos, capturar tráfego ou causar indisponibilidade. Um AP não autorizado cria um caminho fora do controle. Um enlace sem redundância vira ponto único de falha.</p>
+  <table class="data-table risk-table">
+    <thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead>
+    <tbody>
+      <tr><td>Porta física exposta</td><td>Tomada ativa em recepção ou sala pública.</td><td>Acesso não autorizado à rede.</td><td>Desativar portas sem uso, 802.1X, NAC, segmentação e logs.</td></tr>
+      <tr><td>Rogue AP</td><td>Dispositivo Wi-Fi não autorizado conectado à LAN.</td><td>Bypass de controles e exposição de tráfego.</td><td>Inventário, varredura RF, controle de portas e política de rede.</td></tr>
+      <tr><td>Rack aberto</td><td>Patch panel e switches acessíveis sem controle.</td><td>Sabotagem, mudança indevida ou indisponibilidade.</td><td>Controle físico, câmera, registro de acesso e etiquetagem.</td></tr>
+      <tr><td>Link único</td><td>Sem redundância de uplink ou operadora.</td><td>Indisponibilidade de serviços críticos.</td><td>Redundância, monitoramento, failover e teste periódico.</td></tr>
+    </tbody>
+  </table>
+</section>

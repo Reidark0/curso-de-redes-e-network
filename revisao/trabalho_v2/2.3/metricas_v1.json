@@ -1,0 +1,101 @@
+{
+  "id": "2.3",
+  "versao": "v1",
+  "titulo": "Camada 1 — Física: bits no fio, luz e rádio",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4856,
+    "teoria": 2600,
+    "praticaExtra": 1529,
+    "quiz": 415,
+    "flashcards": 155
+  },
+  "porGrupoTeoria": {
+    "introducao": 665,
+    "contexto": 101,
+    "conteudo": 669,
+    "exemplos": 508,
+    "seguranca_troubleshooting": 657
+  },
+  "porSecao": {
+    "motivation": 120,
+    "summary": 89,
+    "problem": 101,
+    "concept": 174,
+    "internals": 380,
+    "architecture": 113,
+    "diagram": 2,
+    "analogy": 73,
+    "simpleExample": 80,
+    "enterpriseExample": 96,
+    "cloudExample": 80,
+    "devsecopsExample": 51,
+    "securityExample": 128,
+    "objectives": 59,
+    "learningOutcomes": 83,
+    "glossary": 314,
+    "security": 211,
+    "troubleshooting": 446,
+    "nextTheme": 33
+  },
+  "pratica": {
+    "quiz": 415,
+    "flashcards": 155,
+    "lab": 733,
+    "mentorQuestions": 181,
+    "exercises": 249,
+    "challenge": 164,
+    "commentedSolution": 202
+  },
+  "outros": {
+    "title+subtitle": 27,
+    "nextTheme": 33,
+    "references": 53,
+    "linksToOtherCourses": 44
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 5,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 7,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": {
+    "estimatedTimeMinutes": 35,
+    "alternativa_5minPorPasso": 25,
+    "plausivel": true,
+    "override": null,
+    "palavras": 733
+  },
+  "duracao": {
+    "declarada": "100-140 min",
+    "estimatedStudyTimeMinutes": 140,
+    "nucleo": 29,
+    "nucleoPartes": {
+      "teoria": 20,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 80,
+    "praticaExtraPartes": {
+      "lab": 35,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-35 min",
+    "praticaExtraArredondada": 80,
+    "recomendada": "25-35 min + 80 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 35
+  }
+}

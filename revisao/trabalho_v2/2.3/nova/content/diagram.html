@@ -1,0 +1,39 @@
+<section class="lesson-section lesson-section--diagram">
+  <h2>Diagrama SVG</h2>
+  <svg class="lesson-svg" viewBox="0 0 960 420" role="img" aria-labelledby="m02l03-title m02l03-desc">
+    <title id="m02l03-title">Camada 1: bits virando sinais físicos</title>
+    <desc id="m02l03-desc">Diagrama mostrando bits saindo de um host e sendo transmitidos por cobre, fibra e rádio até equipamentos de rede.</desc>
+    <defs>
+      <marker id="m02l03-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
+      </marker>
+    </defs>
+    <rect x="40" y="150" width="140" height="70" rx="12" class="svg-node svg-node--client" />
+    <text x="110" y="178" text-anchor="middle" class="svg-label">Host</text>
+    <text x="110" y="202" text-anchor="middle" class="svg-label svg-label--small">bits 0/1</text>
+    <rect x="250" y="60" width="150" height="70" rx="12" class="svg-node" />
+    <text x="325" y="88" text-anchor="middle" class="svg-label">Cobre</text>
+    <text x="325" y="112" text-anchor="middle" class="svg-label svg-label--small">sinal elétrico</text>
+    <rect x="250" y="175" width="150" height="70" rx="12" class="svg-node" />
+    <text x="325" y="203" text-anchor="middle" class="svg-label">Fibra</text>
+    <text x="325" y="227" text-anchor="middle" class="svg-label svg-label--small">pulsos de luz</text>
+    <rect x="250" y="290" width="150" height="70" rx="12" class="svg-node" />
+    <text x="325" y="318" text-anchor="middle" class="svg-label">Rádio</text>
+    <text x="325" y="342" text-anchor="middle" class="svg-label svg-label--small">onda no ar</text>
+    <rect x="520" y="150" width="150" height="70" rx="12" class="svg-node svg-node--switch" />
+    <text x="595" y="178" text-anchor="middle" class="svg-label">Equipamento</text>
+    <text x="595" y="202" text-anchor="middle" class="svg-label svg-label--small">reconstrói bits</text>
+    <rect x="760" y="150" width="150" height="70" rx="12" class="svg-node svg-node--security" />
+    <text x="835" y="178" text-anchor="middle" class="svg-label">Evidências</text>
+    <text x="835" y="202" text-anchor="middle" class="svg-label svg-label--small">link, erros, SNR</text>
+    <line x1="180" y1="185" x2="250" y2="95" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m02l03-arrow)" />
+    <line x1="180" y1="185" x2="250" y2="210" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m02l03-arrow)" />
+    <line x1="180" y1="185" x2="250" y2="325" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m02l03-arrow)" />
+    <line x1="400" y1="95" x2="520" y2="185" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m02l03-arrow)" />
+    <line x1="400" y1="210" x2="520" y2="185" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m02l03-arrow)" />
+    <line x1="400" y1="325" x2="520" y2="185" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m02l03-arrow)" />
+    <line x1="670" y1="185" x2="760" y2="185" class="svg-flow svg-flow--blocked animated-flow" marker-end="url(#m02l03-arrow)" />
+    <text x="480" y="35" text-anchor="middle" class="svg-label">Camada 1 não interpreta aplicação: ela transporta sinais</text>
+    <text x="480" y="390" text-anchor="middle" class="svg-label svg-label--small">Ruído, atenuação, interferência, distância e energia afetam todas as camadas acima.</text>
+  </svg>
+</section>
