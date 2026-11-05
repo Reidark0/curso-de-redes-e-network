@@ -103,3 +103,10 @@ Verificação do quiz contra a aula v2: q1.5.1 (tipo de sinal) → definição d
   "revisao_humana": ["Rótulos do diagrama ajustados; conferir encaixe do rótulo 'rádio'", "Redução de 32% nas palavras visíveis (teoria -48%)", "Opção correta da q1.5.4 sem NAC/802.1X", "Isolamento elétrico da fibra sem a exceção de cabos com armadura metálica", "ethtool/iw podem exigir instalação ou sudo; comandos não testados no Windows", "references/linksToOtherCourses mantidos da v1"]
 }
 ```
+
+## 8. Correções após o revisor independente
+- Glossário: no termo CRC, `relatedLessons` passou de ["3.1"] para ["3.2"] (Frame Ethernet e endereço MAC, onde o campo de verificação do quadro é ensinado).
+- Mentor: a pergunta 2 (dois prédios a 300 m → fibra) repetia o desafio. Agora: "Uma câmera precisa ficar a 130 m do switch, em área externa: quais são as opções e o que você escolheria?". Hints, expectedIdeas e explanation usam só o que a aula ensina: canal de cobre até 100 m e atenuação; fibra (alcance, transceptor, sem interferência elétrica, isolamento elétrico); switch intermediário para que cada trecho de cobre fique abaixo de 100 m; enlace de rádio quando não dá para passar cabo (obstáculos e interferência); energia da câmera por PoE. Escolha indicada: fibra em área externa; rádio quando cabo for inviável. Complementa a q1.5.7 (cabo de 130 m que cai e volta) sem repeti-la: a questão diagnostica, o mentor pede a solução.
+- Funcionamento interno, item Validação: "o quadro é descartado e precisa ser reenviado" virou "o quadro é descartado. A Ethernet não reenvia nada: quem percebe a falta e reenvia os dados é uma camada de cima (no Wi‑Fi, o próprio rádio também retransmite o quadro)".
+- Métricas após o fechamento: visíveis 2.938, teoria 1.375, núcleo 19,6 min, prática extra 750 palavras (31 min); duration inalterada ("15-25 min + 30 min de prática extra", estimatedStudyTimeMinutes 25), por isso a tabela 5 e o JSON não mudaram. validar: ok, sem erros e sem avisos.
+

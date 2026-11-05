@@ -1,11 +1,11 @@
 <section class="lesson-section lesson-section--concept">
   <h2>Conceito</h2>
   <p>Métricas de rede descrevem a qualidade da comunicação. Cada uma responde a uma pergunta diferente, e cada sintoma aponta primeiro para uma delas.</p>
-  <div class="definition-box"><strong>Definição:</strong> latência é o tempo de ida e volta de um pacote (RTT); jitter é a variação da latência entre pacotes seguidos; perda é a fração de pacotes que não chega; throughput é a vazão útil que de fato passa; disponibilidade é a fração do tempo em que o serviço esteve acessível. Largura de banda é só o teto do link, a capacidade nominal (aula 0.6).</div>
+  <div class="definition-box"><strong>Definição:</strong> latência é o tempo que um pacote leva pelo caminho, de um ponto a outro; o ping a mede como RTT, o tempo de ida e volta; jitter é a variação da latência entre pacotes seguidos; perda é a fração de pacotes que não chega; throughput é a vazão útil que de fato passa; disponibilidade é a fração do tempo em que o serviço esteve acessível. Largura de banda é só o teto do link, a capacidade nominal (aula 0.6).</div>
   <div class="responsive-table"><table class="data-table">
     <thead><tr><th>Métrica</th><th>Pergunta que responde</th><th>Unidade</th><th>Sintoma típico</th></tr></thead>
     <tbody>
-      <tr><td>Latência</td><td>Quanto demora cada ida e volta?</td><td>ms</td><td>Sistema ou site demora a responder a cada clique</td></tr>
+      <tr><td>Latência</td><td>Quanto tempo o pacote leva pelo caminho?</td><td>ms</td><td>Sistema ou site demora a responder a cada clique</td></tr>
       <tr><td>Jitter</td><td>Esse tempo varia muito?</td><td>ms de variação</td><td>Voz picota, vídeo congela, jogo online “dá lag”</td></tr>
       <tr><td>Perda</td><td>Quantos pacotes se perdem?</td><td>%</td><td>Chamada corta, páginas travam e recomeçam</td></tr>
       <tr><td>Throughput</td><td>Quanto dado útil passa por segundo?</td><td>Mbps (MB/s × 8)</td><td>Download ou backup lento</td></tr>

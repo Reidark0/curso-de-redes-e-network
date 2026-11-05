@@ -23,7 +23,7 @@ Base: v1 · Tipo: fundamental · Módulo: m01 (Fundamentos de Redes)
 | Lab (só se executa e vê resultado; 3–4 passos, ~300–400 palavras) | cumpre | 4 passos (gateway, externo, tempo da aplicação, analisar a série); 425 palavras; 20 min |
 | Prática extra (mentor 2–3, exercícios 2–4, desafio + solução; aplicar, não repetir) | cumpre | mentor 2 (backup × voz; disponibilidade vista da filial), exercícios 2 (série de voz; SLA de 99,9%), desafio da filial simplificado com solução |
 | nextTheme 1–2 frases | cumpre | 1 frase (1.9), mantida da v1 |
-| progressRules e duration | cumpre | `{read:true, quizScoreAtLeast:70}`, unlocks/accessPolicy preservados; "15-25 min + 50 min de prática extra", estimatedStudyTimeMinutes 25 |
+| progressRules e duration | cumpre | `{read:true, quizScoreAtLeast:70}`, unlocks/accessPolicy preservados; "20-25 min + 50 min de prática extra", estimatedStudyTimeMinutes 25 |
 | Campos invisíveis | cumpre | lab sem scenario/topology/architecture/cost/safetyNotes/validation/troubleshooting/improvements/evidenceToCollect/questions/challenge/solution; challenge sem constraints/gradingRubric |
 
 Verificação do quiz contra a aula v2: q1.8.3 (voz falha com média boa → jitter) → tabela do Conceito + série de pings; q1.8.5 (quedas de 5 min várias vezes → disponibilidade) → tabela e último parágrafo do Conceito; q1.8.6 (perda até o gateway → trecho local) → Medir por trecho, passo 1; q1.8.7 (99,9% → ≈ 43 min) → tabela de disponibilidade; q1.8.8 (curl dns=1.9 total=2.3 → DNS) → Medir por trecho, passo 3; q1.8.10 (ping 100% de perda e site abre → ICMP bloqueado) → Erros comuns. Gabaritos em 2, 3, 1, 2, 3, 0.
@@ -77,11 +77,11 @@ Verificação do quiz contra a aula v2: q1.8.3 (voz falha com média boa → jit
 ## 5. Métricas
 | | original | v1 | v2 |
 |---|---|---|---|
-| Palavras visíveis | 4.969 | 5.778 | 3.344 |
-| Teoria (palavras) | 2.879 | 3.290 | 1.493 |
-| Núcleo (min, fórmula v2) | 31,1 | 36,3 | 20,5 |
+| Palavras visíveis | 4.969 | 5.778 | 3.414 |
+| Teoria (palavras) | 2.879 | 3.290 | 1.523 |
+| Núcleo (min, fórmula v2) | 31,1 | 36,3 | 20,7 |
 | Prática extra (min) | 90 | 90 | 51 (→ 50) |
-| duration declarada | 80-115 min | 115-160 min | 15-25 min + 50 min de prática extra |
+| duration declarada | 80-115 min | 115-160 min | 20-25 min + 50 min de prática extra |
 
 ## 6. Avisos do validar e justificativas
 - "análise ainda não escrita": resolvido por este arquivo. Nenhum outro aviso.
@@ -101,11 +101,19 @@ Verificação do quiz contra a aula v2: q1.8.3 (voz falha com média boa → jit
   "secoes_removidas": ["learningOutcomes", "architecture", "enterpriseExample", "cloudExample", "devsecopsExample", "security", "troubleshooting"],
   "conceitos_removidos": 15,
   "acrescimos": ["Conceito: tipo de tráfego → métrica a medir primeiro", "Funcionamento interno: medir por trecho (gateway, externo, aplicação)", "Erros comuns reescritos com os limites de medição", "simpleExample novo: chamada do quarto medida por trecho", "Diagrama: faixas trecho local/externo", "Quiz q1.8.10", "Flashcard fc1.8.9", "Mentor: backup × voz; disponibilidade da filial", "Exercício ex1.8.6 (SLA 99,9%)", "Lab: passo de análise da série"],
-  "palavras_visiveis": { "original": 4969, "v1": 5778, "v2": 3344 },
-  "nucleo_min": { "original": 31.1, "v1": 36.3, "v2": 20.5 }, "pratica_extra_min": { "original": 90, "v1": 90, "v2": 50 },
-  "duration_v2": "15-25 min + 50 min de prática extra", "quiz_questoes": 6, "quiz_respondivel": true, "lab": "mantido",
+  "palavras_visiveis": { "original": 4969, "v1": 5778, "v2": 3414 },
+  "nucleo_min": { "original": 31.1, "v1": 36.3, "v2": 20.7 }, "pratica_extra_min": { "original": 90, "v1": 90, "v2": 50 },
+  "duration_v2": "20-25 min + 50 min de prática extra", "quiz_questoes": 6, "quiz_respondivel": true, "lab": "mantido",
   "linguica_restante": "BAIXA", "conteudo_util": "FORTE", "aproveitamento": "BOM",
   "explicacao_mais_direta": "O que a 0.6 já ensina virou uma caixa de recapitulação, e o espaço foi para o método próprio da aula: sintoma → métrica, medir por trecho, ler a série além da média e calcular disponibilidade.",
   "revisao_humana": ["Confirmar que a 0.6 cobre a leitura do ping usada sem explicação", "Rótulos e faixas novas no diagrama", "Measure-Command do lab no Windows não testado; curl.exe não incluído", "Valores do simpleExample e do lab são ilustrativos", "labType 'security' mantido", "references/linksToOtherCourses mantidos da v1"]
 }
 ```
+
+## 8. Correções após o revisor independente
+- Latência: a definição do Conceito dizia que latência "é o tempo de ida e volta (RTT)", o que contradiz a 0.6. Agora: "o tempo que um pacote leva pelo caminho, de um ponto a outro; o ping a mede como RTT, o tempo de ida e volta". A pergunta da tabela passou de "Quanto demora cada ida e volta?" para "Quanto tempo o pacote leva pelo caminho?". Quiz, flashcards, resumo e diagrama ("ms / RTT", "RTT: ida + processamento + volta") já estavam coerentes e não mudaram.
+- Motivação reescrita (≈ 120 palavras): abre com o chamado "o sistema está lento" (provedor, time da aplicação e fornecedor do Wi‑Fi, cada um com um gráfico que o inocenta), mostra que só a medição trecho por trecho encerra a discussão e termina na consequência de não saber medir. Saiu o gancho repetido da 0.6 (plano de 500 Mbps, teste alto, chamada travando).
+- Ajustes de coerência decorrentes: o Exemplo simples, que começava com "Volte à chamada que trava no quarto", agora apresenta o caso ("a chamada de vídeo trava no quarto, embora o teste de velocidade feito na sala mostre quase toda a banda contratada"); o Problema, que abria com "É isso que acontece…", agora abre com "Por trás de chamados assim está uma confusão comum: tomar conectividade por qualidade".
+- Lab, passo 3: saiu `Measure-Command { Invoke-WebRequest … }`. O passo usa o mesmo curl da 0.6, com o mesmo formato (`Linux/macOS: curl -o /dev/null …` e `Windows: curl.exe -o NUL …`), agora como terceiro ponto da medição por trecho, para um site do dia a dia, comparado com os pings dos passos 1 e 2. expectedOutput e explanation ajustados. Na solução comentada, "(curl ou Measure-Command)" virou "(curl)". O item da Revisão humana sobre Measure-Command/curl.exe fica superado (o `curl.exe` segue não testado aqui, mas é o mesmo comando já usado na 0.6).
+- Exercício ex1.8.6: quedas trocadas de 15/20/25 min para 10/15/20 min, para não repetir a conta da pergunta 2 do mentor (60 min → 99,86%). Resposta: 45 min contra 43,2 min permitidos (1,8 min acima); disponibilidade 1 − 45 ÷ 43.200 ≈ 99,896%, abaixo de 99,9% (conferido no terminal), com o alerta de que o arredondamento para 99,90% engana.
+- Métricas após o fechamento: visíveis 3.414, teoria 1.523, núcleo 20,7 min (era 20,5), lab 449 palavras; a duration passou de "15-25 min" para "20-25 min + 50 min de prática extra" (estimatedStudyTimeMinutes 25). Tabela 5 e JSON atualizados. validar: ok, sem erros e sem avisos (um aviso intermediário de prática extra com 752 palavras sumiu ao encurtar a resposta do ex1.8.6).

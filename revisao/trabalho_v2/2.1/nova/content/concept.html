@@ -1,6 +1,6 @@
 <section class="lesson-section lesson-section--concept">
   <h2>Conceito</h2>
-  <div class="definition-box"><strong>Definição:</strong> o Modelo OSI (Open Systems Interconnection) é um modelo de referência com sete camadas que descreve as responsabilidades da comunicação entre sistemas, do sinal físico até a aplicação. Ele serve para explicar, diagnosticar e documentar redes; não é um protocolo que roda nos equipamentos.</div>
+  <div class="definition-box"><strong>Definição:</strong> o Modelo OSI (Open Systems Interconnection) é um modelo conceitual de referência, com sete camadas, que descreve as responsabilidades da comunicação entre sistemas, do sinal físico até a aplicação. Ele serve para explicar, diagnosticar e documentar redes; não é um protocolo que roda nos equipamentos.</div>
   <p>As camadas são numeradas de baixo para cima: a 1 fica mais perto do fio, a 7 mais perto do usuário. Cada uma responde a uma pergunta diferente:</p>
   <div class="responsive-table"><table class="data-table comparison-table">
     <thead><tr><th>Camada</th><th>Nome</th><th>Pergunta principal</th><th>Exemplos</th></tr></thead>
@@ -19,11 +19,11 @@
   <div class="responsive-table"><table class="data-table">
     <thead><tr><th>TCP/IP</th><th>Camadas OSI equivalentes</th><th>Exemplos</th></tr></thead>
     <tbody>
-      <tr><td>Aplicação</td><td>7, 6 e 5</td><td>HTTP, DNS, TLS, SMTP</td></tr>
+      <tr><td>Aplicação</td><td>7, 6 e 5</td><td>HTTP, DNS, TLS, e-mail (SMTP)</td></tr>
       <tr><td>Transporte</td><td>4</td><td>TCP, UDP</td></tr>
       <tr><td>Internet</td><td>3</td><td>IPv4, IPv6, ICMP</td></tr>
       <tr><td>Acesso à rede</td><td>2 e 1</td><td>Ethernet, Wi-Fi, ARP, cabo, fibra</td></tr>
     </tbody>
   </table></div>
-  <div class="callout warning"><strong>O OSI é um mapa, não a implementação:</strong> nem todo protocolo cabe em uma camada só. O TLS, por exemplo, protege os dados (papel da camada 6), mas roda sobre o TCP e é acionado pela própria aplicação. E equipamentos como firewalls costumam atuar em várias camadas ao mesmo tempo. Use o OSI para organizar perguntas, não como substituto da documentação de cada protocolo.</div>
+  <div class="callout warning"><strong>O OSI é um mapa, não a implementação:</strong> nem todo protocolo cabe em uma camada só. O TLS, por exemplo, protege os dados (papel da camada 6), mas roda sobre o TCP e é acionado pela própria aplicação. E componentes reais, como firewalls, costumam operar em várias camadas ao mesmo tempo. Use o OSI para organizar perguntas, não como substituto da documentação de cada protocolo.</div>
 </section>

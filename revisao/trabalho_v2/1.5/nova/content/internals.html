@@ -5,7 +5,7 @@
     <li><strong>Cobre:</strong> a placa de rede ou a porta do switch transforma bits em variações elétricas nos pares de fios. Ao conectar, as duas pontas combinam a velocidade do link (a <em>velocidade negociada</em>). Em 1 Gbps (1000BASE-T) o cabo usa os quatro pares; em 100 Mbps (100BASE-TX), só dois. Por isso um par danificado pode fazer a porta subir a 100 Mbps, ou nem subir.</li>
     <li><strong>Fibra:</strong> um transceptor converte o sinal elétrico em pulsos de luz, e o transceptor da outra ponta converte a luz de volta em sinal elétrico.</li>
     <li><strong>Rádio:</strong> o rádio modula a informação em ondas eletromagnéticas. O receptor precisa separar o sinal útil do ruído e da interferência.</li>
-    <li><strong>Validação:</strong> cada bloco de dados enviado (o quadro) leva um código de verificação, o CRC. Se o sinal chegou degradado, o código não confere, o quadro é descartado e precisa ser reenviado. O usuário percebe lentidão ou queda.</li>
+    <li><strong>Validação:</strong> cada bloco de dados enviado (o quadro) leva um código de verificação, o CRC. Se o sinal chegou degradado, o código não confere e o quadro é descartado. A Ethernet não reenvia nada: quem percebe a falta e reenvia os dados é uma camada de cima (no Wi‑Fi, o próprio rádio também retransmite o quadro). O usuário percebe lentidão ou queda.</li>
   </ol>
   <div class="responsive-table">
     <table class="data-table">

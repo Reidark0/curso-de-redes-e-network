@@ -4,28 +4,28 @@
   "titulo": "Métricas: latência, jitter, perda, throughput e disponibilidade",
   "tipo": "fundamental",
   "palavras": {
-    "visiveis": 3344,
-    "teoria": 1493,
-    "praticaExtra": 1152,
+    "visiveis": 3414,
+    "teoria": 1523,
+    "praticaExtra": 1192,
     "quiz": 391,
     "flashcards": 158
   },
   "porGrupoTeoria": {
-    "introducao": 374,
-    "contexto": 115,
-    "conteudo": 799,
-    "exemplos": 205,
+    "introducao": 367,
+    "contexto": 118,
+    "conteudo": 815,
+    "exemplos": 223,
     "seguranca_troubleshooting": 0
   },
   "porSecao": {
-    "motivation": 136,
+    "motivation": 129,
     "summary": 89,
-    "problem": 115,
-    "concept": 246,
+    "problem": 118,
+    "concept": 262,
     "internals": 524,
     "diagram": 29,
     "analogy": 66,
-    "simpleExample": 139,
+    "simpleExample": 157,
     "objectives": 62,
     "learningOutcomes": 0,
     "glossary": 87,
@@ -36,11 +36,11 @@
   "pratica": {
     "quiz": 391,
     "flashcards": 158,
-    "lab": 425,
+    "lab": 449,
     "mentorQuestions": 203,
-    "exercises": 208,
+    "exercises": 226,
     "challenge": 102,
-    "commentedSolution": 214
+    "commentedSolution": 212
   },
   "outros": {
     "title+subtitle": 20,
@@ -65,14 +65,14 @@
     "alternativa_5minPorPasso": 20,
     "plausivel": true,
     "override": null,
-    "palavras": 425
+    "palavras": 449
   },
   "duracao": {
-    "declarada": "15-25 min + 50 min de prática extra",
+    "declarada": "20-25 min + 50 min de prática extra",
     "estimatedStudyTimeMinutes": 25,
-    "nucleo": 20.5,
+    "nucleo": 20.7,
     "nucleoPartes": {
-      "teoria": 11.5,
+      "teoria": 11.7,
       "diagramas": 3,
       "quiz": 6
     },
@@ -83,9 +83,9 @@
       "exercicios": 12,
       "desafio": 15
     },
-    "faixaNucleo": "15-25 min",
+    "faixaNucleo": "20-25 min",
     "praticaExtraArredondada": 50,
-    "recomendada": "15-25 min + 50 min de prática extra",
+    "recomendada": "20-25 min + 50 min de prática extra",
     "estimatedStudyTimeMinutesRecomendado": 25
   }
 }

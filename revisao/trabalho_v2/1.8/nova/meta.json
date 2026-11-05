@@ -4,7 +4,7 @@
   "order": 8,
   "title": "Métricas: latência, jitter, perda, throughput e disponibilidade",
   "subtitle": "Como medir uma rede antes de culpar link, firewall, Wi‑Fi, cloud ou aplicação.",
-  "duration": "15-25 min + 50 min de prática extra",
+  "duration": "20-25 min + 50 min de prática extra",
   "estimatedStudyTimeMinutes": 25,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
@@ -120,10 +120,10 @@
       },
       {
         "title": "Medir o tempo da aplicação",
-        "instruction": "Meça quanto demora um acesso a um site. O curl do Linux separa o tempo em etapas; o comando do Windows mostra o total.",
-        "command": "Linux: curl -o /dev/null -s -w 'dns=%{time_namelookup} connect=%{time_connect} tls=%{time_appconnect} starttransfer=%{time_starttransfer} total=%{time_total}\\n' https://example.com\nWindows PowerShell: Measure-Command { Invoke-WebRequest -Uri https://example.com -UseBasicParsing }",
-        "expectedOutput": "No Linux, uma linha com os tempos em segundos (dns=…, connect=…, tls=…, starttransfer=…, total=…). No Windows, o tempo total do acesso (TotalMilliseconds).",
-        "explanation": "Os tempos são acumulados desde o início (connect já inclui o dns). Uma etapa que concentra quase todo o total mostra onde está a demora, mesmo com o ping bom."
+        "instruction": "Meça o terceiro ponto, a aplicação, com o mesmo curl da aula 0.6, agora para um site que você usa no dia a dia (ou example.com). Rode-o logo depois dos pings e compare: veja qual etapa concentra a maior parte do total.",
+        "command": "Linux/macOS: curl -o /dev/null -s -w 'dns=%{time_namelookup} connect=%{time_connect} tls=%{time_appconnect} starttransfer=%{time_starttransfer} total=%{time_total}\\n' https://example.com\nWindows: curl.exe -o NUL -s -w 'dns=%{time_namelookup} connect=%{time_connect} tls=%{time_appconnect} starttransfer=%{time_starttransfer} total=%{time_total}\\n' https://example.com",
+        "expectedOutput": "Uma linha com os tempos em segundos: dns=…, connect=…, tls=…, starttransfer=…, total=….",
+        "explanation": "Os tempos são acumulados desde o início (connect já inclui o dns). Se os pings dos passos 1 e 2 estão bons e uma etapa concentra quase todo o total, a demora está nela (DNS, TLS ou servidor), não no caminho."
       },
       {
         "title": "Analisar a série e decidir",
@@ -325,8 +325,8 @@
     {
       "id": "ex1.8.6",
       "type": "cálculo",
-      "prompt": "Um provedor promete 99,9% de disponibilidade mensal (30 dias). No mês, o link caiu três vezes: 15, 20 e 25 minutos. O SLA foi cumprido? Qual foi a disponibilidade real?",
-      "expectedAnswer": "Não. 99,9% permite cerca de 43,2 minutos fora do ar em 43.200 minutos, e o link ficou 60 minutos fora. Disponibilidade real: 1 − 60 ÷ 43.200 ≈ 99,86%.",
+      "prompt": "Um provedor promete 99,9% de disponibilidade mensal (30 dias). No mês, o link caiu três vezes: 10, 15 e 20 minutos. O SLA foi cumprido? Qual foi a disponibilidade real?",
+      "expectedAnswer": "Não, por pouco. 99,9% permite 0,1% de 43.200 minutos = 43,2 minutos fora do ar, e o link ficou 10 + 15 + 20 = 45 minutos fora, 1,8 minuto acima do limite. Disponibilidade real: 1 − 45 ÷ 43.200 ≈ 99,896%, abaixo de 99,9% (arredondada, parece 99,90%: compare os minutos).",
       "explanation": "O exercício aplica o cálculo da tabela de disponibilidade a um caso de cobrança de fornecedor: quedas curtas somadas podem estourar a meta."
     }
   ],
@@ -347,7 +347,7 @@
     "steps": [
       "Na filial, nos horários de reclamação: 20 pings para o gateway. Perda ou tempos variados aqui = trecho local (Wi‑Fi, cabo, roteador).",
       "Ainda na filial: 20 pings para um destino externo. Gateway bom e externo com perda ou picos = link ou provedor da filial.",
-      "Medir o tempo de acesso ao sistema (curl ou Measure-Command) na filial e na matriz. Pings bons e tempo alto nos dois lugares = o sistema; só na filial = o caminho da filial.",
+      "Medir o tempo de acesso ao sistema (curl) na filial e na matriz. Pings bons e tempo alto nos dois lugares = o sistema; só na filial = o caminho da filial.",
       "Repetir em horário sem reclamação: se tudo melhora, o link pode estar saturado nos horários de pico."
     ],
     "commonWrongAnswers": [

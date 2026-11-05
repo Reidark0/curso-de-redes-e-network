@@ -4,8 +4,8 @@ export const lesson0201 = {
   "order": 1,
   "title": "Por que o Modelo OSI existe",
   "subtitle": "Como um modelo de camadas transforma redes complexas em diagnóstico, arquitetura, documentação e comunicação entre times.",
-  "duration": "65-90 min",
-  "estimatedStudyTimeMinutes": 90,
+  "duration": "15-25 min + 30 min de prática extra",
+  "estimatedStudyTimeMinutes": 25,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 195,
@@ -43,33 +43,19 @@ export const lesson0201 = {
     }
   ],
   "objectives": [
-    "Explicar por que o Modelo OSI existe e que problema ele tenta resolver.",
-    "Diferenciar modelo conceitual de implementação real de protocolo.",
-    "Listar as sete camadas do OSI e a responsabilidade central de cada uma.",
-    "Usar o OSI como linguagem comum entre suporte, redes, segurança, cloud e DevSecOps.",
-    "Aplicar raciocínio por camadas em um diagnóstico inicial sem pular etapas.",
-    "Reconhecer limitações do OSI e sua relação com o modelo TCP/IP."
-  ],
-  "learningOutcomes": [
-    "Dado um sintoma de rede, o aluno consegue associá-lo a uma ou mais camadas prováveis.",
-    "Dado um diagrama simples, o aluno identifica onde aparecem físico, enlace, rede, transporte e aplicação.",
-    "Dado um chamado ambíguo, o aluno formula perguntas por camada antes de concluir a causa.",
-    "Dado um cenário corporativo, o aluno usa OSI para documentar responsabilidades e evidências.",
-    "Dado um problema de segurança, o aluno diferencia controle físico, segmentação, firewall, TLS e autenticação."
+    "Explicar por que o Modelo OSI existe (vocabulário comum para dividir a comunicação em responsabilidades) e diferenciá-lo de uma implementação real, como a pilha TCP/IP.",
+    "Listar as sete camadas do OSI, com a pergunta que cada uma responde, e dizer em qual camada TCP/IP cada uma se encaixa.",
+    "Transformar um sintoma vago, como \"o sistema não abre\", em perguntas com evidência por camada, de baixo para cima, sem confundir conectividade com autorização."
   ],
   "content": {
-    "motivation": "<section class=\"lesson-section lesson-section--motivation\">\n  <h2>Motivação</h2>\n  <p>Imagine um chamado: <em>“o sistema não abre”</em>. A frase é vaga demais para agir. O cabo pode estar desconectado, o Wi-Fi fraco, o host sem IP, o gateway errado, o DNS sem resolver, a porta TCP bloqueada, o certificado TLS inválido, a aplicação fora do ar ou a autenticação negada.</p>\n  <p>O Modelo OSI divide esse problema em partes menores, cada uma com responsabilidade própria. Com ele, você diagnostica falhas, documenta, desenha arquitetura e conversa com outros times usando o mesmo mapa.</p>\n  <div class=\"callout callout--problem\"><strong>Problema real:</strong> o SOC vê tentativas de conexão falhando para um serviço interno. Redes diz que há rota. Segurança diz que o firewall não bloqueou. Aplicação diz que o serviço está no ar. Sem um modelo por camadas, cada time fala uma língua e o diagnóstico fica lento.</div>\n</section>\n",
-    "problem": "<section class=\"lesson-section lesson-section--problem\">\n  <h2>Problema</h2>\n  <p>Antes da padronização, cada fabricante criava protocolos e vocabulário próprios, e equipamentos de marcas diferentes conversavam mal. A ISO criou o OSI como <strong>modelo de referência</strong> para descrever como sistemas abertos se comunicam e dividir responsabilidades. A internet acabou implementada sobre a pilha TCP/IP, mas o vocabulário do OSI ficou: “problema de camada 2”, “bloqueio na camada 4” e “controle de camada 7” são termos usados por redes, segurança, cloud, fabricantes e certificações.</p>\n  <p>Sem esse modelo, qualquer falha vira “problema de rede”. Só que um problema de DNS é diferente de um problema de cabo, uma porta TCP bloqueada é diferente de senha incorreta e um certificado inválido é diferente de firewall bloqueando. Com o mesmo rótulo para tudo, o time:</p>\n  <ul>\n    <li>aciona a equipe errada e perde tempo;</li>\n    <li>reinicia coisas sem necessidade e deixa de coletar evidências;</li>\n    <li>compra link, appliance ou licença quando a causa está em outra camada;</li>\n    <li>toma decisões de segurança baseadas em suposições vagas.</li>\n  </ul>\n</section>\n",
-    "concept": "<section class=\"lesson-section lesson-section--concept\">\n  <h2>Conceito</h2>\n  <div class=\"definition-box\"><strong>Definição:</strong> o Modelo OSI é um modelo conceitual de referência, com sete camadas, que descreve as responsabilidades da comunicação entre sistemas, do sinal físico até a aplicação. Ele serve para explicar, diagnosticar e documentar redes; não é um protocolo que roda nos equipamentos.</div>\n  <p>Cada camada responde a uma pergunta diferente:</p>\n  <table class=\"data-table comparison-table\">\n    <thead><tr><th>Camada</th><th>Nome</th><th>Pergunta principal</th><th>Exemplos mentais</th></tr></thead>\n    <tbody>\n      <tr><td>7</td><td>Aplicação</td><td>Que serviço o usuário ou sistema está usando?</td><td>HTTP, DNS, API, SMTP, autenticação na aplicação</td></tr>\n      <tr><td>6</td><td>Apresentação</td><td>Como os dados são representados, codificados ou protegidos?</td><td>UTF-8, JSON, TLS conceitualmente, compressão</td></tr>\n      <tr><td>5</td><td>Sessão</td><td>Como a conversa é estabelecida, mantida ou retomada?</td><td>Sessões, estado, tokens, negociação</td></tr>\n      <tr><td>4</td><td>Transporte</td><td>Qual porta, conexão ou fluxo transporta os dados?</td><td>TCP, UDP, portas, handshake, retransmissão</td></tr>\n      <tr><td>3</td><td>Rede</td><td>Como o pacote chega a outra rede?</td><td>IP, roteamento, gateway, TTL</td></tr>\n      <tr><td>2</td><td>Enlace</td><td>Como há entrega local no mesmo enlace?</td><td>Ethernet, MAC, switch, VLAN, ARP</td></tr>\n      <tr><td>1</td><td>Física</td><td>Como bits viram sinais no meio?</td><td>Cobre, fibra, rádio, conectores, potência, ruído</td></tr>\n    </tbody>\n  </table>\n  <h3>OSI × TCP/IP</h3>\n  <p>A internet usa a pilha TCP/IP, que tem menos camadas e agrupa responsabilidades que o OSI separa:</p>\n  <div class=\"responsive-table\"><table class=\"data-table\">\n    <thead><tr><th>TCP/IP</th><th>Camadas OSI equivalentes</th><th>Exemplos</th></tr></thead>\n    <tbody>\n      <tr><td>Aplicação</td><td>7, 6 e 5</td><td>HTTP, DNS, TLS, SMTP</td></tr>\n      <tr><td>Transporte</td><td>4</td><td>TCP, UDP</td></tr>\n      <tr><td>Internet</td><td>3</td><td>IPv4, IPv6, ICMP</td></tr>\n      <tr><td>Acesso à rede</td><td>2 e 1</td><td>Ethernet, Wi-Fi, ARP, cabo, fibra</td></tr>\n    </tbody>\n  </table></div>\n  <div class=\"callout warning\"><strong>Limites do modelo:</strong> o OSI não é a implementação exata da internet. Nem todo protocolo cabe em uma camada só (o TLS aparece na camada 6 “conceitualmente”, mas roda sobre TCP e é acionado pela aplicação), e firewalls, load balancers, proxies e WAFs operam em várias camadas. Use o OSI como mapa de perguntas, não como substituto da documentação do protocolo (RFCs, documentação oficial) nem como motivo para encerrar a investigação só porque uma camada parece suspeita.</div>\n</section>\n",
-    "internals": "<section class=\"lesson-section lesson-section--internals\">\n  <h2>Funcionamento interno</h2>\n  <p>Ao enviar dados, cada camada adiciona ou interpreta as informações de que precisa para cumprir sua responsabilidade e oferece um serviço à camada de cima:</p>\n  <ol class=\"flow-list\">\n    <li><strong>Aplicação:</strong> o navegador, cliente de API ou serviço cria uma mensagem com significado para a aplicação.</li>\n    <li><strong>Apresentação:</strong> os dados são codificados, serializados e, se for o caso, comprimidos ou protegidos.</li>\n    <li><strong>Sessão:</strong> a comunicação mantém contexto, estado, autenticação ou continuidade lógica, quando aplicável.</li>\n    <li><strong>Transporte:</strong> TCP ou UDP organiza fluxos e portas, com confiabilidade (TCP) ou entrega sem conexão (UDP).</li>\n    <li><strong>Rede:</strong> o IP permite sair da rede local e atravessar roteadores até outra rede.</li>\n    <li><strong>Enlace:</strong> Ethernet, Wi-Fi ou outro enlace entrega quadros localmente, com endereços e regras do domínio local.</li>\n    <li><strong>Física:</strong> os bits viram sinais elétricos, luz ou rádio.</li>\n  </ol>\n  <p>No destino, a leitura é inversa: sinal vira bits, bits viram quadro, o quadro contém o pacote, o pacote contém o segmento e o segmento contém os dados da aplicação. A aula 2.2 aprofunda isso com encapsulamento, desencapsulamento e PDUs.</p>\n  <p>No diagnóstico, transforme cada camada em uma pergunta com evidência e vá do básico para o específico, sem pular etapas: a primeira evidência que falha aponta a camada provável.</p>\n  <div class=\"callout warning\"><strong>Erros comuns:</strong>\n    <ul>\n      <li><strong>Decorar as camadas sem aplicar:</strong> associe cada uma a uma pergunta, uma evidência e um ponto de falha.</li>\n      <li><strong>Chamar qualquer falha de “problema de rede”:</strong> o time errado é acionado e o diagnóstico atrasa.</li>\n      <li><strong>Tratar ping como prova de saúde:</strong> ele só mostra alcance ICMP; não valida porta, TLS, HTTP, autenticação nem autorização. E o ICMP pode estar bloqueado enquanto TCP/443 funciona.</li>\n      <li><strong>Forçar todo produto em uma camada:</strong> proxies, WAFs, load balancers e service mesh são multicamada.</li>\n    </ul>\n  </div>\n</section>\n",
-    "architecture": "<section class=\"lesson-section lesson-section--architecture\">\n  <h2>Arquitetura</h2>\n  <p>Em uma arquitetura real, o OSI ajuda a localizar componentes, evidências e pontos de falha:</p>\n  <ul class=\"flow-list\">\n    <li><strong>Camada 1:</strong> cabos, fibra, rádio, energia, portas físicas, SFPs e interferência.</li>\n    <li><strong>Camada 2:</strong> switches, VLANs, tabela MAC, ARP e domínio de broadcast.</li>\n    <li><strong>Camada 3:</strong> roteadores, gateways, tabelas de rota e subnets.</li>\n    <li><strong>Camada 4:</strong> portas TCP/UDP, firewalls stateful, load balancers L4 e health checks.</li>\n    <li><strong>Camadas 5 a 7:</strong> TLS, HTTP, DNS, autenticação, proxy, WAF, APIs e regras de aplicação.</li>\n  </ul>\n  <p>Em cloud, os mesmos papéis aparecem como VPC/VNet, subnet, route table, security group, NSG, load balancer, private endpoint, NAT gateway, firewall gerenciado, DNS privado e WAF. O caminho físico fica abstraído, mas o OSI continua separando overlay, rota, política e aplicação. Em DevSecOps, aparecem em Terraform, Kubernetes Services, Ingress, NetworkPolicy, service mesh e testes automatizados de conectividade.</p>\n</section>\n",
-    "analogy": "<section class=\"lesson-section lesson-section--analogy\">\n  <h2>Analogia</h2>\n  <p>Pense no envio de uma encomenda. A camada física é a estrada, o veículo e a energia que movem a entrega. A camada de enlace é a entrega dentro do bairro ou prédio. A camada de rede escolhe cidades e rotas. A camada de transporte decide se a entrega exige confirmação. As camadas superiores cuidam do idioma do documento, da conversa e do serviço final.</p>\n  <div class=\"callout callout--warning\"><strong>Limite da analogia:</strong> redes reais não são perfeitamente lineares; protocolos e equipamentos podem misturar camadas.</div>\n</section>\n",
-    "simpleExample": "<section class=\"lesson-section lesson-section--example\">\n  <h2>Exemplo simples</h2>\n  <p>Você abre um site no notebook. O cabo ou Wi-Fi precisa funcionar. O notebook precisa falar com o gateway local. O IP precisa alcançar o servidor. A porta TCP 443 precisa abrir. O TLS precisa negociar. O HTTP precisa enviar a requisição. O servidor precisa responder. Se a página não abre, o OSI permite perguntar: em qual etapa a evidência quebra?</p>\n</section>",
-    "enterpriseExample": "<section class=\"lesson-section lesson-section--enterprise\">\n  <h2>Exemplo empresarial</h2>\n  <p>Um usuário não acessa o ERP. O suporte verifica interface e IP (camadas 1 a 3). Redes verifica VLAN, switch, rota e firewall (2 a 4). Segurança verifica bloqueios, logs e política. Aplicação verifica o status do serviço e a autenticação (7). O OSI não resolve o problema sozinho, mas divide as responsabilidades e evita que todos investiguem a mesma coisa sem ordem.</p>\n</section>\n",
-    "cloudExample": "<section class=\"lesson-section lesson-section--cloud\">\n  <h2>Exemplo em cloud e DevSecOps</h2>\n  <p>Uma VM não acessa um banco privado. Na camada 3, pode ser subnet ou route table. Na camada 4, um security group ou NSG bloqueando a porta. Na camada 7, endpoint errado, string de conexão incorreta ou autenticação negada. Alcançar a porta não significa ter permissão para usar o banco: conectividade não é autorização.</p>\n  <p>O mesmo vale para um pipeline que falha ao publicar uma imagem no registry interno. O runner resolve o nome? Tem rota? A porta 443 abre? O TLS é confiável? A API do registry responde? O token tem permissão? Separar essas perguntas evita tratar erro de autorização como falha de rede, ou bloqueio de porta como falha de credencial.</p>\n</section>\n",
-    "securityExample": "<section class=\"lesson-section lesson-section--security\">\n  <h2>Exemplo em Segurança</h2>\n  <p>Segurança usa o OSI para aplicar defesa em profundidade: um controle em cada camada, para que a falha de um não exponha tudo.</p>\n  <table class=\"data-table risk-table\">\n    <thead><tr><th>Camada</th><th>Risco</th><th>Como aparece</th><th>Mitigação</th></tr></thead>\n    <tbody>\n      <tr><td>1</td><td>Acesso físico indevido</td><td>Porta de rede exposta em área pública</td><td>NAC, bloqueio de portas, racks protegidos</td></tr>\n      <tr><td>2</td><td>Abuso local</td><td>ARP suspeito (ARP spoofing), VLAN indevida, MAC desconhecido</td><td>Port security, segmentação, monitoramento</td></tr>\n      <tr><td>3</td><td>Rota indevida</td><td>Subnets sensíveis alcançáveis sem necessidade</td><td>Rotas mínimas, ACLs, revisão de arquitetura</td></tr>\n      <tr><td>4</td><td>Porta exposta</td><td>Serviço escutando em porta não aprovada</td><td>Firewall, hardening, inventário de portas</td></tr>\n      <tr><td>7</td><td>Falha de aplicação</td><td>Bypass de autenticação, abuso de API, payload malicioso</td><td>WAF, validação de entrada, autenticação forte, políticas de API, logs</td></tr>\n    </tbody>\n  </table>\n</section>\n",
-    "diagram": "<section class=\"lesson-section lesson-section--diagram\">\n  <h2>Diagrama SVG</h2>\n  <svg class=\"lesson-svg\" viewBox=\"0 0 980 520\" role=\"img\" aria-labelledby=\"m02l01-title m02l01-desc\">\n    <title id=\"m02l01-title\">Modelo OSI como pilha de diagnóstico</title>\n    <desc id=\"m02l01-desc\">Diagrama mostrando as sete camadas do Modelo OSI e como elas conectam sintomas, evidências e controles de segurança.</desc>\n    <defs>\n      <marker id=\"m02l01-arrow\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\" markerUnits=\"strokeWidth\">\n        <path d=\"M0,0 L0,6 L9,3 z\" class=\"svg-arrow\"></path>\n      </marker>\n    </defs>\n    <rect x=\"70\" y=\"40\" width=\"300\" height=\"52\" rx=\"10\" class=\"svg-node svg-node--server\"></rect>\n    <text x=\"220\" y=\"73\" text-anchor=\"middle\" class=\"svg-label\">7 Aplicação — HTTP, DNS, API</text>\n    <rect x=\"70\" y=\"100\" width=\"300\" height=\"52\" rx=\"10\" class=\"svg-node svg-node--security\"></rect>\n    <text x=\"220\" y=\"133\" text-anchor=\"middle\" class=\"svg-label\">6 Apresentação — formato, TLS, encoding</text>\n    <rect x=\"70\" y=\"160\" width=\"300\" height=\"52\" rx=\"10\" class=\"svg-node svg-node--cloud\"></rect>\n    <text x=\"220\" y=\"193\" text-anchor=\"middle\" class=\"svg-label\">5 Sessão — estado e continuidade</text>\n    <rect x=\"70\" y=\"220\" width=\"300\" height=\"52\" rx=\"10\" class=\"svg-node svg-node--firewall\"></rect>\n    <text x=\"220\" y=\"253\" text-anchor=\"middle\" class=\"svg-label\">4 Transporte — TCP, UDP, portas</text>\n    <rect x=\"70\" y=\"280\" width=\"300\" height=\"52\" rx=\"10\" class=\"svg-node svg-node--router\"></rect>\n    <text x=\"220\" y=\"313\" text-anchor=\"middle\" class=\"svg-label\">3 Rede — IP, rota, gateway</text>\n    <rect x=\"70\" y=\"340\" width=\"300\" height=\"52\" rx=\"10\" class=\"svg-node svg-node--switch\"></rect>\n    <text x=\"220\" y=\"373\" text-anchor=\"middle\" class=\"svg-label\">2 Enlace — MAC, switch, VLAN, ARP</text>\n    <rect x=\"70\" y=\"400\" width=\"300\" height=\"52\" rx=\"10\" class=\"svg-node svg-node--client\"></rect>\n    <text x=\"220\" y=\"433\" text-anchor=\"middle\" class=\"svg-label\">1 Física — cabo, fibra, rádio, sinal</text>\n\n    <rect x=\"555\" y=\"75\" width=\"300\" height=\"110\" rx=\"14\" class=\"svg-node svg-node--security\"></rect>\n    <text x=\"705\" y=\"108\" text-anchor=\"middle\" class=\"svg-label\">Sintoma</text>\n    <text x=\"705\" y=\"135\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">“o sistema não abre”</text>\n    <text x=\"705\" y=\"160\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">não é diagnóstico</text>\n\n    <rect x=\"555\" y=\"225\" width=\"300\" height=\"110\" rx=\"14\" class=\"svg-node svg-node--cloud\"></rect>\n    <text x=\"705\" y=\"258\" text-anchor=\"middle\" class=\"svg-label\">Evidências por camada</text>\n    <text x=\"705\" y=\"285\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">link, IP, rota, porta, TLS, HTTP</text>\n    <text x=\"705\" y=\"310\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">logs, métricas e capturas</text>\n\n    <rect x=\"555\" y=\"375\" width=\"300\" height=\"90\" rx=\"14\" class=\"svg-node svg-node--server\"></rect>\n    <text x=\"705\" y=\"410\" text-anchor=\"middle\" class=\"svg-label\">Hipótese responsável</text>\n    <text x=\"705\" y=\"438\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">não pule etapas</text>\n\n    <line x1=\"370\" y1=\"250\" x2=\"555\" y2=\"130\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m02l01-arrow)\"></line>\n    <line x1=\"705\" y1=\"185\" x2=\"705\" y2=\"225\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l01-arrow)\"></line>\n    <line x1=\"705\" y1=\"335\" x2=\"705\" y2=\"375\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l01-arrow)\"></line>\n    <text x=\"490\" y=\"495\" text-anchor=\"middle\" class=\"svg-label\">O OSI não é decoração: é um mapa para transformar sintoma em evidência e evidência em hipótese.</text>\n  </svg>\n</section>",
-    "summary": "<section class=\"lesson-section lesson-section--summary\">\n  <h2>Resumo</h2>\n  <ul>\n    <li><strong>Modelo mental:</strong> use o OSI como mapa de perguntas. Cada camada responde uma pergunta diferente; quando uma evidência falha, a hipótese fica mais precisa.</li>\n    <li><strong>Sete camadas:</strong> Física, Enlace, Rede, Transporte, Sessão, Apresentação e Aplicação, cada uma com uma responsabilidade.</li>\n    <li><strong>Sintoma não é diagnóstico:</strong> evidência por camada reduz suposições e direciona o time certo.</li>\n    <li><strong>Conectividade não é autorização:</strong> ping ou porta aberta não provam que a aplicação funciona nem que o acesso é permitido.</li>\n    <li><strong>Limitação:</strong> o OSI é conceitual; a internet usa TCP/IP (4 camadas) e muitos produtos operam em várias camadas.</li>\n  </ul>\n</section>\n",
+    "motivation": "<section class=\"lesson-section lesson-section--motivation\">\n  <h2>Motivação</h2>\n  <p>Imagine um chamado: <em>“o sistema não abre”</em>. A frase é vaga demais para agir. O cabo pode estar solto, o Wi-Fi fraco, o notebook sem IP, o gateway errado, o nome sem resolver no DNS, a porta do servidor bloqueada, o certificado inválido, a aplicação fora do ar ou a senha recusada. São causas diferentes, e cada uma é resolvida por uma pessoa diferente.</p>\n  <p>Sem um jeito de separar essas possibilidades, o chamado passa de time em time: redes diz que há rota, segurança diz que o firewall não bloqueou, a equipe da aplicação diz que o serviço está no ar, e o usuário continua parado. Nesta aula você conhece o mapa que o mercado inteiro usa para dividir esse problema em partes. Na segurança, é o mesmo mapa que ajuda a dizer em que camada um ataque acontece e qual controle o barra.</p>\n</section>\n",
+    "problem": "<section class=\"lesson-section lesson-section--problem\">\n  <h2>Problema</h2>\n  <p>É isso que acontece quando toda falha recebe o mesmo rótulo de “problema de rede”. Um DNS que não resolve é diferente de um cabo solto, e uma porta bloqueada é diferente de uma senha errada. Com um rótulo só, o time errado é acionado, coisas são reiniciadas sem necessidade e as evidências se perdem.</p>\n  <p>A falta de vocabulário comum é antiga: antes da padronização, cada fabricante tinha protocolos e termos próprios, e equipamentos de marcas diferentes conversavam mal. A ISO criou então o Modelo OSI como referência para dividir a comunicação em responsabilidades. A internet acabou rodando sobre outra pilha, a TCP/IP, mas o vocabulário do OSI ficou: “problema de camada 2” e “bloqueio na camada 4” são frases do dia a dia de redes, segurança e cloud. Esta aula mostra as sete camadas e como usá-las para transformar um sintoma em perguntas.</p>\n</section>\n",
+    "concept": "<section class=\"lesson-section lesson-section--concept\">\n  <h2>Conceito</h2>\n  <div class=\"definition-box\"><strong>Definição:</strong> o Modelo OSI (Open Systems Interconnection) é um modelo conceitual de referência, com sete camadas, que descreve as responsabilidades da comunicação entre sistemas, do sinal físico até a aplicação. Ele serve para explicar, diagnosticar e documentar redes; não é um protocolo que roda nos equipamentos.</div>\n  <p>As camadas são numeradas de baixo para cima: a 1 fica mais perto do fio, a 7 mais perto do usuário. Cada uma responde a uma pergunta diferente:</p>\n  <div class=\"responsive-table\"><table class=\"data-table comparison-table\">\n    <thead><tr><th>Camada</th><th>Nome</th><th>Pergunta principal</th><th>Exemplos</th></tr></thead>\n    <tbody>\n      <tr><td>7</td><td>Aplicação</td><td>Que serviço o usuário ou o sistema está usando?</td><td>HTTP, DNS, e-mail, login na aplicação</td></tr>\n      <tr><td>6</td><td>Apresentação</td><td>Como os dados são representados, codificados ou protegidos?</td><td>UTF-8, Base64, compressão, criptografia (TLS)</td></tr>\n      <tr><td>5</td><td>Sessão</td><td>Como a conversa é aberta, mantida e retomada?</td><td>sessão de login que continua ativa, reconexão</td></tr>\n      <tr><td>4</td><td>Transporte</td><td>Qual porta e qual conexão levam os dados?</td><td>TCP, UDP, portas (443 no HTTPS)</td></tr>\n      <tr><td>3</td><td>Rede</td><td>Como os dados chegam a outra rede?</td><td>endereço IP, gateway, rotas, roteador</td></tr>\n      <tr><td>2</td><td>Enlace</td><td>Como os dados são entregues dentro da rede local?</td><td>Ethernet, Wi-Fi, endereço MAC, ARP, switch</td></tr>\n      <tr><td>1</td><td>Física</td><td>Como os bits viram sinal no meio?</td><td>cabo, fibra, rádio, conectores, ruído</td></tr>\n    </tbody>\n  </table></div>\n  <h3>OSI × TCP/IP</h3>\n  <p>A internet usa a pilha TCP/IP, que tem quatro camadas e agrupa responsabilidades que o OSI separa:</p>\n  <div class=\"responsive-table\"><table class=\"data-table\">\n    <thead><tr><th>TCP/IP</th><th>Camadas OSI equivalentes</th><th>Exemplos</th></tr></thead>\n    <tbody>\n      <tr><td>Aplicação</td><td>7, 6 e 5</td><td>HTTP, DNS, TLS, e-mail (SMTP)</td></tr>\n      <tr><td>Transporte</td><td>4</td><td>TCP, UDP</td></tr>\n      <tr><td>Internet</td><td>3</td><td>IPv4, IPv6, ICMP</td></tr>\n      <tr><td>Acesso à rede</td><td>2 e 1</td><td>Ethernet, Wi-Fi, ARP, cabo, fibra</td></tr>\n    </tbody>\n  </table></div>\n  <div class=\"callout warning\"><strong>O OSI é um mapa, não a implementação:</strong> nem todo protocolo cabe em uma camada só. O TLS, por exemplo, protege os dados (papel da camada 6), mas roda sobre o TCP e é acionado pela própria aplicação. E componentes reais, como firewalls, costumam operar em várias camadas ao mesmo tempo. Use o OSI para organizar perguntas, não como substituto da documentação de cada protocolo.</div>\n</section>\n",
+    "internals": "<section class=\"lesson-section lesson-section--internals\">\n  <h2>Funcionamento interno</h2>\n  <p>Cada camada cumpre sua responsabilidade usando o serviço da camada de baixo e oferece um serviço à de cima. O navegador, na camada 7, não precisa saber se a conexão é por cabo ou Wi-Fi: ele conta com o transporte, que conta com a rede, e assim por diante até o sinal.</p>\n  <p>Ao enviar, os dados descem da camada 7 até a 1. Pelo caminho, cada camada acrescenta o que precisa para fazer seu trabalho, como a porta (camada 4), o endereço IP (camada 3) e o endereço MAC (camada 2), e a camada física transforma tudo em sinal. No destino, o caminho é o inverso: do sinal até a aplicação, cada camada lê e retira o que é seu.</p>\n  <h3>Do sintoma à hipótese</h3>\n  <p>No diagnóstico, transforme cada camada em uma pergunta que se responde com uma evidência e siga de baixo para cima, sem pular etapas. A <strong>primeira evidência que falha aponta a camada provável</strong> e, com ela, o time que deve investigar. Se tudo até a camada 4 funciona e o sistema recusa o acesso, o problema não é de conectividade: autenticação (provar quem você é) e autorização (o que você pode fazer) são da aplicação. Conectividade não é autorização.</p>\n  <div class=\"callout warning\"><strong>Erros comuns</strong>\n    <ul>\n      <li><strong>Tratar ping como prova de que o serviço funciona:</strong> ele só mostra que o destino responde ao ICMP; não testa a porta, o TLS, a aplicação nem o login. E muitos servidores bloqueiam ICMP enquanto a porta 443 funciona.</li>\n      <li><strong>Decorar as camadas sem usar:</strong> associe cada uma a uma pergunta, uma evidência e um ponto de falha.</li>\n      <li><strong>Culpar uma camada sem evidência:</strong> “é o firewall” é hipótese até um teste confirmar; pular etapas leva ao time errado.</li>\n    </ul>\n  </div>\n</section>\n",
+    "analogy": "<section class=\"lesson-section lesson-section--analogy\">\n  <h2>Analogia</h2>\n  <p>Pense no envio de uma encomenda: a estrada e o caminhão são a camada física, a entrega dentro do bairro é o enlace, a escolha de cidades e rotas é a rede e a confirmação de recebimento é o transporte. As camadas de cima cuidam do idioma do documento, da conversa e do serviço final. Se a encomenda não chega, você pergunta em que trecho ela parou, em vez de culpar “o correio”.</p>\n</section>\n",
+    "simpleExample": "<section class=\"lesson-section lesson-section--example\">\n  <h2>Exemplo simples</h2>\n  <p>Você abre um site no notebook e a página não carrega. Para ela aparecer, uma cadeia de condições precisa funcionar:</p>\n  <ol>\n    <li><strong>Camada 1:</strong> o cabo está conectado ou o Wi-Fi tem sinal.</li>\n    <li><strong>Camada 2:</strong> o notebook consegue entregar dados ao roteador da rede local.</li>\n    <li><strong>Camada 3:</strong> o IP do servidor é alcançável, passando pelo gateway.</li>\n    <li><strong>Camada 4:</strong> a conexão com a porta 443 do servidor abre.</li>\n    <li><strong>Camadas 5 a 7:</strong> o TLS negocia a criptografia, o HTTP envia o pedido e o servidor responde.</li>\n  </ol>\n  <p>Se a página não abre, a pergunta é: em qual dessas etapas a evidência quebra? Um caso típico: o ping ao IP do servidor responde, mas o site não abre pelo nome. As camadas 1 a 3 funcionam até o servidor. O DNS, que transforma o nome do site em IP, é um serviço da camada 7, então a suspeita vai para ele, não para o cabo.</p>\n</section>\n",
+    "diagram": "<section class=\"lesson-section lesson-section--diagram\">\n  <h2>Diagrama SVG</h2>\n  <svg class=\"lesson-svg\" viewBox=\"0 0 980 520\" role=\"img\" aria-labelledby=\"m02l01-title m02l01-desc\">\n    <title id=\"m02l01-title\">Modelo OSI como pilha de diagnóstico</title>\n    <desc id=\"m02l01-desc\">Diagrama mostrando as sete camadas do Modelo OSI à esquerda e, à direita, o caminho do diagnóstico: o sintoma vira uma pergunta com evidência por camada, e a primeira evidência que falha leva à hipótese e ao time responsável.</desc>\n    <defs>\n      <marker id=\"m02l01-arrow\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\" markerUnits=\"strokeWidth\">\n        <path d=\"M0,0 L0,6 L9,3 z\" class=\"svg-arrow\"></path>\n      </marker>\n    </defs>\n    <rect x=\"70\" y=\"40\" width=\"300\" height=\"52\" rx=\"10\" class=\"svg-node svg-node--server\"></rect>\n    <text x=\"220\" y=\"73\" text-anchor=\"middle\" class=\"svg-label\">7 Aplicação — HTTP, DNS, API</text>\n    <rect x=\"70\" y=\"100\" width=\"300\" height=\"52\" rx=\"10\" class=\"svg-node svg-node--security\"></rect>\n    <text x=\"220\" y=\"133\" text-anchor=\"middle\" class=\"svg-label\">6 Apresentação — formato, codificação, TLS</text>\n    <rect x=\"70\" y=\"160\" width=\"300\" height=\"52\" rx=\"10\" class=\"svg-node svg-node--cloud\"></rect>\n    <text x=\"220\" y=\"193\" text-anchor=\"middle\" class=\"svg-label\">5 Sessão — estado e continuidade</text>\n    <rect x=\"70\" y=\"220\" width=\"300\" height=\"52\" rx=\"10\" class=\"svg-node svg-node--firewall\"></rect>\n    <text x=\"220\" y=\"253\" text-anchor=\"middle\" class=\"svg-label\">4 Transporte — TCP, UDP, portas</text>\n    <rect x=\"70\" y=\"280\" width=\"300\" height=\"52\" rx=\"10\" class=\"svg-node svg-node--router\"></rect>\n    <text x=\"220\" y=\"313\" text-anchor=\"middle\" class=\"svg-label\">3 Rede — IP, rota, gateway</text>\n    <rect x=\"70\" y=\"340\" width=\"300\" height=\"52\" rx=\"10\" class=\"svg-node svg-node--switch\"></rect>\n    <text x=\"220\" y=\"373\" text-anchor=\"middle\" class=\"svg-label\">2 Enlace — MAC, switch, VLAN, ARP</text>\n    <rect x=\"70\" y=\"400\" width=\"300\" height=\"52\" rx=\"10\" class=\"svg-node svg-node--client\"></rect>\n    <text x=\"220\" y=\"433\" text-anchor=\"middle\" class=\"svg-label\">1 Física — cabo, fibra, rádio, sinal</text>\n\n    <rect x=\"555\" y=\"75\" width=\"300\" height=\"110\" rx=\"14\" class=\"svg-node svg-node--security\"></rect>\n    <text x=\"705\" y=\"108\" text-anchor=\"middle\" class=\"svg-label\">Sintoma</text>\n    <text x=\"705\" y=\"135\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">“o sistema não abre”</text>\n    <text x=\"705\" y=\"160\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">não é diagnóstico</text>\n\n    <rect x=\"555\" y=\"225\" width=\"300\" height=\"110\" rx=\"14\" class=\"svg-node svg-node--cloud\"></rect>\n    <text x=\"705\" y=\"258\" text-anchor=\"middle\" class=\"svg-label\">Evidências por camada</text>\n    <text x=\"705\" y=\"285\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">link, IP, rota, porta, TLS, HTTP</text>\n    <text x=\"705\" y=\"310\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">de baixo para cima, sem pular etapas</text>\n\n    <rect x=\"555\" y=\"375\" width=\"300\" height=\"90\" rx=\"14\" class=\"svg-node svg-node--server\"></rect>\n    <text x=\"705\" y=\"410\" text-anchor=\"middle\" class=\"svg-label\">Hipótese e time responsável</text>\n    <text x=\"705\" y=\"438\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">vem da primeira evidência que falha</text>\n\n    <line x1=\"370\" y1=\"280\" x2=\"555\" y2=\"280\" class=\"svg-flow svg-flow--request animated-flow\" marker-end=\"url(#m02l01-arrow)\"></line>\n    <text x=\"462\" y=\"268\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">uma pergunta</text>\n    <text x=\"462\" y=\"300\" text-anchor=\"middle\" class=\"svg-label svg-label--small\">por camada</text>\n    <line x1=\"705\" y1=\"185\" x2=\"705\" y2=\"225\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l01-arrow)\"></line>\n    <line x1=\"705\" y1=\"335\" x2=\"705\" y2=\"375\" class=\"svg-flow svg-flow--response animated-flow\" marker-end=\"url(#m02l01-arrow)\"></line>\n    <text x=\"490\" y=\"495\" text-anchor=\"middle\" class=\"svg-label\">O OSI não é decoração: é um mapa para transformar sintoma em evidência e evidência em hipótese.</text>\n  </svg>\n</section>",
+    "summary": "<section class=\"lesson-section lesson-section--summary\">\n  <h2>Resumo</h2>\n  <ul>\n    <li><strong>Ideia central:</strong> o OSI é um mapa de perguntas; a primeira evidência que falha aponta a camada provável.</li>\n    <li>Sete camadas, de baixo para cima: Física, Enlace, Rede, Transporte, Sessão, Apresentação e Aplicação.</li>\n    <li>O OSI é um modelo de referência; a internet roda sobre TCP/IP, que junta as camadas 5 a 7 em Aplicação.</li>\n    <li>Ping ou porta aberta não provam que a aplicação funciona nem que o acesso é permitido.</li>\n  </ul>\n  <p><em>Já domina isso? Faça o quiz: com 70% ou mais, você pode seguir.</em></p>\n</section>\n",
     "nextTheme": "<section class=\"lesson-section lesson-section--next\">\n  <h2>Próximo tema</h2>\n  <p>Na aula 2.2, você vai ver encapsulamento, desencapsulamento e PDUs: como os dados descem e sobem pela pilha, ganhando cabeçalhos, endereços e controles em cada camada.</p>\n</section>\n"
   },
   "networkContext": {
@@ -118,165 +104,23 @@ export const lesson0201 = {
       "cloud networking"
     ]
   },
-  "troubleshooting": {
-    "symptoms": [
-      "Sistema não abre",
-      "Ping falha",
-      "Nome não resolve",
-      "Porta não conecta",
-      "Página abre parcialmente",
-      "VPN conecta mas serviço não responde",
-      "Aplicação retorna erro de autenticação"
-    ],
-    "diagnosticQuestions": [
-      "A interface física ou Wi-Fi está ativa?",
-      "O host recebeu IP, máscara, gateway e DNS?",
-      "O gateway responde?",
-      "O destino é alcançável por IP?",
-      "A porta TCP/UDP necessária está aberta?",
-      "O nome DNS resolve para o IP esperado?",
-      "TLS, proxy, WAF ou autenticação estão envolvidos?"
-    ],
-    "commands": [
-      {
-        "platform": "Windows",
-        "command": "ipconfig /all && ping <gateway> && tracert <destino> && nslookup <nome>",
-        "purpose": "Coletar evidências iniciais de configuração, alcance, caminho e DNS.",
-        "expectedObservation": "IP válido, gateway definido, rota com saltos coerentes e DNS resolvendo.",
-        "interpretation": "Falhas em etapas diferentes sugerem camadas diferentes."
-      },
-      {
-        "platform": "Linux",
-        "command": "ip addr && ip route && ping -c 4 <gateway> && traceroute <destino> && dig <nome>",
-        "purpose": "Observar interfaces, rota padrão, alcance, caminho e resolução DNS.",
-        "expectedObservation": "Interface UP, rota default, respostas do gateway e resolução coerente.",
-        "interpretation": "Ausência de rota ou DNS incoerente direciona a investigação."
-      },
-      {
-        "platform": "Cisco IOS",
-        "command": "show ip interface brief\nshow interfaces status\nshow mac address-table\nshow ip route",
-        "purpose": "Ver estado de interfaces, camada 2 e camada 3 em equipamentos de rede.",
-        "expectedObservation": "Interfaces up/up, MACs aprendidos e rotas coerentes.",
-        "interpretation": "Interface down, ausência de MAC ou rota ausente indicam camadas prováveis de falha."
-      }
-    ],
-    "decisionTree": [
-      {
-        "if": "Interface está down",
-        "then": "Investigue camada física: cabo, porta, Wi-Fi, SFP, energia ou driver."
-      },
-      {
-        "if": "Interface tem IP, mas gateway não responde",
-        "then": "Investigue enlace local, VLAN, ARP, switch, firewall local ou gateway."
-      },
-      {
-        "if": "Gateway responde, mas destino por IP não",
-        "then": "Investigue rota, firewall, ACL, VPN ou indisponibilidade remota."
-      },
-      {
-        "if": "Destino por IP responde, mas nome falha",
-        "then": "Investigue DNS, search suffix, split DNS ou DNS privado."
-      },
-      {
-        "if": "Porta conecta, mas aplicação nega acesso",
-        "then": "Investigue TLS, autenticação, autorização, sessão ou aplicação."
-      }
-    ]
-  },
-  "security": {
-    "goodPractices": [
-      "Documentar controles por camada.",
-      "Coletar evidências antes de alterar configuração.",
-      "Separar conectividade de autenticação e autorização.",
-      "Aplicar defesa em profundidade em vez de depender de um único controle.",
-      "Sanitizar diagramas e evidências antes de compartilhar."
-    ],
-    "badPractices": [
-      "Liberar any-any porque o diagnóstico está difícil.",
-      "Tratar ping como prova de acesso autorizado.",
-      "Ignorar camada física e enlace em incidentes internos.",
-      "Expor diagramas completos com IPs, nomes e caminhos sensíveis.",
-      "Culpar DNS ou firewall sem evidência."
-    ],
-    "commonErrors": [
-      "Confundir camada 3 com camada 4.",
-      "Confundir conexão TCP com login bem-sucedido.",
-      "Achar que TLS resolve autorização.",
-      "Achar que NAT é controle de segurança completo."
-    ],
-    "vulnerabilities": [
-      {
-        "name": "Rede plana com controles apenas na borda",
-        "description": "Quando só o perímetro é protegido, um comprometimento interno pode alcançar muitos sistemas.",
-        "defensiveExplanation": "O OSI ajuda a distribuir controles: físico, enlace, rede, transporte e aplicação.",
-        "mitigation": "Segmentação, firewall interno, NAC, autenticação forte, logs e menor privilégio."
-      },
-      {
-        "name": "Exposição de serviço em camada 4 sem controle em camada 7",
-        "description": "Uma porta aberta pode permitir acesso ao serviço se não houver autenticação, autorização e validação adequadas.",
-        "defensiveExplanation": "Abrir porta é diferente de controlar uso seguro da aplicação.",
-        "mitigation": "Firewall mínimo, autenticação forte, WAF quando aplicável, logs e revisão de permissões."
-      },
-      {
-        "name": "Diagnóstico com evidências sensíveis expostas",
-        "description": "Prints de IPs, nomes internos e rotas podem revelar arquitetura para pessoas não autorizadas.",
-        "defensiveExplanation": "Evidência técnica também é informação sensível.",
-        "mitigation": "Sanitização, classificação da informação e compartilhamento apenas com times autorizados."
-      }
-    ],
-    "monitoring": [
-      "Logs de firewall e proxy por porta e aplicação.",
-      "NetFlow ou equivalente para fluxos de camada 3/4.",
-      "Alertas de mudanças de rota, VLAN ou DNS.",
-      "Métricas de disponibilidade por camada.",
-      "SIEM correlacionando eventos de endpoint, rede e aplicação."
-    ],
-    "hardening": [
-      "Desabilitar portas físicas não usadas.",
-      "Documentar VLANs, subnets, rotas e regras.",
-      "Aplicar menor privilégio em regras de firewall.",
-      "Validar TLS e certificados."
-    ],
-    "detectionIdeas": [
-      "Aumento de conexões laterais internas.",
-      "Portas novas expostas sem change request.",
-      "Resolução DNS para destinos incomuns.",
-      "Mudanças de gateway ou ARP inesperadas.",
-      "Erros de TLS ou autenticação em massa."
-    ]
-  },
   "mentorQuestions": [
     {
-      "type": "reflexão",
-      "question": "Por que o Modelo OSI continua útil mesmo que a internet real use TCP/IP?",
-      "hints": [
-        "Pense em linguagem comum.",
-        "Pense em diagnóstico, não apenas implementação."
-      ],
-      "expectedIdeas": [
-        "modelo conceitual",
-        "diagnóstico",
-        "comunicação entre times",
-        "camadas",
-        "evidência"
-      ],
-      "explanation": "O OSI é útil porque organiza responsabilidades e perguntas, mesmo quando a implementação real não segue fronteiras perfeitas."
-    },
-    {
       "type": "diagnóstico",
-      "question": "Um host pinga o gateway, mas não abre um site por nome. Quais camadas você investigaria primeiro?",
+      "question": "Um colega diz: \"o Wi-Fi está conectado, então a rede está boa\". O que essa evidência prova e o que ainda falta verificar até o site abrir?",
       "hints": [
-        "Gateway responde, então a camada local tem alguma evidência positiva.",
-        "Nome por domínio envolve DNS."
+        "Wi-Fi conectado é evidência de quais camadas?",
+        "Percorra as camadas de baixo para cima."
       ],
       "expectedIdeas": [
-        "camada 3 parcialmente ok",
+        "camadas 1 e 2",
+        "IP e gateway",
+        "rota até o destino",
         "DNS",
-        "camada 7",
         "porta",
-        "proxy"
+        "aplicação e login"
       ],
-      "explanation": "O próximo foco seria DNS e depois transporte/aplicação. Ping no gateway não prova que DNS, TCP/443 ou HTTP funcionam."
+      "explanation": "Wi-Fi conectado mostra sinal e associação à rede local (camadas 1 e 2). Ainda falta ver se o notebook tem IP e alcança o gateway (3), se o destino é alcançável, se o nome resolve, se a porta abre (4) e se a aplicação responde e aceita o acesso (5 a 7)."
     },
     {
       "type": "cenário real",
@@ -328,6 +172,21 @@ export const lesson0201 = {
       "type": "comparação"
     },
     {
+      "id": "q2.1.8",
+      "question": "O cabo está conectado, o notebook tem IP e o ping ao IP do servidor responde, mas a conexão com a porta 443 do servidor falha. Onde está a hipótese mais provável?",
+      "options": [
+        "Na camada 1, porque o cabo pode estar com defeito",
+        "Na camada 7, porque o HTTP sempre é a causa",
+        "Em nenhuma: sem reiniciar o servidor não dá para levantar hipótese",
+        "Na camada 4: a porta pode estar bloqueada ou o serviço não está escutando"
+      ],
+      "answer": 3,
+      "explanation": "As evidências das camadas 1 a 3 passaram; a primeira que falha é a da porta, que é responsabilidade da camada 4 (Transporte). É ali que a investigação continua.",
+      "topic": "diagnóstico por camadas",
+      "difficulty": "iniciante",
+      "type": "diagnóstico"
+    },
+    {
       "id": "q2.1.3",
       "question": "Por que ping bem-sucedido não prova que uma aplicação web está funcionando?",
       "options": [
@@ -343,34 +202,19 @@ export const lesson0201 = {
       "type": "comparação"
     },
     {
-      "id": "q2.1.4",
-      "question": "Qual é um exemplo de defesa em profundidade usando a lógica do OSI?",
-      "options": [
-        "Usar apenas NAT como segurança",
-        "Desativar logs para reduzir ruído",
-        "Liberar any-any para simplificar diagnóstico",
-        "Proteger físico, segmentar rede, restringir portas e autenticar aplicação"
-      ],
-      "answer": 3,
-      "explanation": "Defesa em profundidade distribui controles por camadas, reduzindo dependência de um único mecanismo.",
-      "topic": "segurança",
-      "difficulty": "intermediário",
-      "type": "segurança"
-    },
-    {
       "id": "q2.1.5",
-      "question": "Em cloud, uma VM alcança a porta do banco, mas recebe erro de permissão. Qual distinção o OSI ajuda a fazer?",
+      "question": "Um servidor de aplicação alcança a porta do banco de dados, mas recebe erro de permissão ao entrar. Qual distinção o OSI ajuda a fazer?",
       "options": [
-        "Todo erro de banco é camada 1",
+        "Todo erro de banco é de camada 1",
         "Conectividade não é o mesmo que autorização",
-        "Security group substitui IAM",
+        "Abrir mais portas no firewall resolve erros de permissão",
         "DNS sempre é a causa"
       ],
       "answer": 1,
-      "explanation": "A porta aberta indica conectividade de transporte, mas permissão depende de identidade, política e aplicação.",
-      "topic": "cloud",
+      "explanation": "A porta alcançada mostra que a conectividade até a camada 4 funciona. A permissão depende de autenticação e autorização, que são da aplicação.",
+      "topic": "conectividade x autorização",
       "difficulty": "intermediário",
-      "type": "cloud"
+      "type": "diagnóstico"
     },
     {
       "id": "q2.1.6",
@@ -410,7 +254,7 @@ export const lesson0201 = {
     },
     {
       "id": "fc2.1.3",
-      "front": "Qual camada trata de MAC, switch, VLAN e ARP?",
+      "front": "Qual camada trata de endereço MAC, switch e ARP?",
       "back": "Camada 2 — Enlace.",
       "tags": [
         "camada 2"
@@ -450,177 +294,79 @@ export const lesson0201 = {
       "id": "ex2.1.1",
       "type": "classificação",
       "prompt": "Classifique os itens em camadas prováveis: cabo desconectado, MAC address, rota default, porta TCP 443, erro HTTP 403.",
-      "expectedAnswer": "Cabo: camada 1; MAC: camada 2; rota default: camada 3; TCP 443: camada 4; HTTP 403: camada 7/aplicação/autorização.",
+      "expectedAnswer": "Cabo desconectado: camada 1; MAC address: camada 2; rota default: camada 3; porta TCP 443: camada 4; erro HTTP 403 (acesso proibido): camada 7, um problema de autorização na aplicação.",
       "explanation": "A classificação ajuda a não misturar conectividade física, enlace, rede, transporte e aplicação."
-    },
-    {
-      "id": "ex2.1.3",
-      "type": "segurança",
-      "prompt": "Explique por que abrir uma porta no firewall não resolve uma falha de autenticação.",
-      "expectedAnswer": "Firewall atua em conectividade/política de tráfego. Autenticação pertence à aplicação/identidade. Se a porta já conecta e a falha é login, o problema está em credenciais, token, IAM, sessão ou autorização.",
-      "explanation": "Conectividade e autorização são dimensões diferentes."
     },
     {
       "id": "ex2.1.4",
       "type": "arquitetura",
-      "prompt": "Escolha um serviço que você usa no trabalho e descreva uma evidência de camada 1, 2/3, 4 e 7.",
-      "expectedAnswer": "Resposta variável: deve conter evidência física ou Wi‑Fi, IP/rota, porta e resposta de aplicação.",
+      "prompt": "Escolha um serviço que você usa (no trabalho ou em casa) e descreva uma evidência de camada 1, de camada 2 ou 3, de camada 4 e de camada 7 que mostraria que ele funciona.",
+      "expectedAnswer": "Resposta variável: deve conter uma evidência física ou de Wi-Fi, uma de IP ou gateway, uma de porta e uma resposta da aplicação.",
       "explanation": "O exercício força a aplicar o modelo a uma situação real."
     }
   ],
   "challenge": {
     "title": "Transforme um chamado genérico em investigação por camadas",
-    "scenario": "Um usuário remoto conectado por VPN diz: “não consigo acessar o sistema financeiro”. O sistema usa HTTPS em um endereço interno e autenticação corporativa.",
+    "scenario": "Um colega do escritório diz: \"não consigo acessar o sistema financeiro\". O sistema é um site interno acessado por HTTPS, pelo nome, com login corporativo. Outros colegas acessam normalmente.",
     "tasks": [
-      "Criar uma tabela com as sete camadas OSI.",
-      "Indicar uma pergunta de diagnóstico por camada.",
-      "Indicar um comando, log ou evidência por camada quando aplicável.",
-      "Separar conectividade, DNS, TLS, aplicação e autorização.",
-      "Apontar riscos de segurança e cuidados ao compartilhar evidências."
+      "Montar uma tabela com as camadas e, para cada uma, uma pergunta de diagnóstico e a evidência que a responde (comando, mensagem ou log).",
+      "Separar conectividade, DNS, porta, TLS, aplicação e autorização.",
+      "Dizer qual time acionar conforme a primeira evidência que falhar."
     ],
     "constraints": [
       "Não assumir que o firewall é a causa sem evidência.",
-      "Não executar testes contra sistemas sem autorização.",
-      "Sanitizar IPs, nomes internos e usuários no relatório.",
-      "Explicar o próximo time a ser acionado com base na primeira evidência de falha."
+      "Sanitizar IPs, nomes internos e usuários antes de compartilhar a tabela."
     ],
     "expectedDeliverables": [
-      "Tabela OSI de diagnóstico",
-      "Hipótese inicial",
-      "Evidências necessárias",
-      "Riscos e sanitização",
-      "Próximo passo recomendado"
-    ],
-    "gradingRubric": [
-      {
-        "criterion": "Separação correta das camadas",
-        "points": 30,
-        "description": "Classifica sintomas e evidências sem misturar camada 3, 4 e 7."
-      },
-      {
-        "criterion": "Qualidade das evidências",
-        "points": 30,
-        "description": "Indica comandos, logs ou observações coerentes para cada etapa."
-      },
-      {
-        "criterion": "Raciocínio de segurança",
-        "points": 20,
-        "description": "Inclui sanitização, autorização e cuidado com dados sensíveis."
-      },
-      {
-        "criterion": "Próximo passo acionável",
-        "points": 20,
-        "description": "Define hipótese e encaminhamento baseado em evidência."
-      }
+      "Tabela de diagnóstico por camada",
+      "Hipótese inicial e próximo passo"
     ]
   },
   "commentedSolution": {
-    "reasoning": "O primeiro passo é não aceitar o sintoma como diagnóstico. Um usuário remoto adiciona variáveis: conexão física/local, internet, VPN, rota interna, DNS privado, porta HTTPS, TLS, proxy, aplicação e IAM.",
+    "reasoning": "Não aceite o sintoma como diagnóstico. Como outros colegas acessam, o sistema provavelmente está no ar: a diferença está no caminho ou na conta deste usuário.",
     "steps": [
-      "Confirmar se o usuário tem conectividade local e internet.",
-      "Confirmar se a VPN está conectada e recebeu rotas/DNS internos.",
-      "Testar resolução do nome interno.",
-      "Testar alcance do IP ou serviço pela porta 443, se autorizado.",
-      "Observar erro TLS/HTTP ou mensagem de autenticação.",
-      "Verificar logs de VPN, firewall, proxy, aplicação ou IAM conforme a primeira falha.",
-      "Sanitizar evidências antes de compartilhar."
+      "Camadas 1 e 2: o cabo ou o Wi-Fi do colega está ativo?",
+      "Camada 3: ipconfig mostra IP e gateway coerentes? O gateway responde ao ping?",
+      "DNS: nslookup do nome do sistema retorna o mesmo IP que os outros colegas recebem?",
+      "Camada 4: a conexão com a porta 443 abre? (Se o ping falhar, não conclua nada: ICMP pode estar bloqueado.)",
+      "Camadas 5 a 7: aparece erro de certificado, erro HTTP ou recusa de login? Recusa de login aponta para a conta ou a permissão, não para a rede."
     ],
     "commonWrongAnswers": [
       {
         "answer": "É firewall, libera tudo.",
-        "whyItIsWrong": "Não há evidência de que a falha está em camada 4/política. Liberar any-any cria risco grave."
-      },
-      {
-        "answer": "Se a VPN conectou, a aplicação obrigatoriamente deveria abrir.",
-        "whyItIsWrong": "VPN conectada não prova rota, DNS, porta, TLS, autorização ou aplicação saudável."
+        "whyItIsWrong": "Não há evidência de falha na camada 4, e liberar tudo cria um risco grave."
       },
       {
         "answer": "Se ping falha, o servidor está fora.",
-        "whyItIsWrong": "ICMP pode ser bloqueado, enquanto TCP/443 pode funcionar."
+        "whyItIsWrong": "ICMP pode estar bloqueado enquanto a porta 443 funciona."
       }
     ],
-    "finalAnswer": "Uma resposta madura cria uma matriz por camada. Se a VPN está conectada, mas DNS interno não resolve, investigue DNS/split DNS. Se DNS resolve e TCP/443 não conecta, investigue rota, firewall, security policy ou disponibilidade do serviço. Se TCP/443 conecta e HTTP retorna 401/403, investigue autenticação/autorização/IAM."
+    "finalAnswer": "Monte a matriz por camada e pare na primeira evidência que falha. Nome não resolve: DNS. Nome resolve e a porta 443 não abre: rota, firewall ou serviço (time de redes ou segurança). Porta abre e o login é recusado: conta ou permissão (time da aplicação ou de identidade)."
   },
   "glossary": [
     {
-      "term": "Modelo OSI",
-      "shortDefinition": "Modelo conceitual de sete camadas para descrever comunicação em rede.",
-      "longDefinition": "Referência que organiza responsabilidades desde sinal físico até aplicação, útil para ensino, documentação, troubleshooting e segurança.",
-      "example": "Usar camada 3 para discutir roteamento e camada 4 para discutir portas TCP/UDP.",
-      "relatedTerms": [
-        "camada",
-        "TCP/IP",
-        "PDU",
-        "encapsulamento"
-      ],
+      "term": "Porta",
+      "shortDefinition": "Número que identifica, dentro de um computador, qual serviço deve receber os dados de uma conexão.",
+      "example": "Um site HTTPS costuma atender na porta TCP 443.",
       "relatedLessons": [
-        "0.8",
-        "1.9",
-        "2.2"
+        "2.6"
       ]
     },
     {
-      "term": "Camada",
-      "shortDefinition": "Bloco conceitual com uma responsabilidade específica na comunicação.",
-      "longDefinition": "Cada camada oferece serviços à camada acima e depende da camada abaixo, ainda que implementações reais possam misturar funções.",
-      "example": "A camada de transporte oferece comunicação por portas para aplicações.",
-      "relatedTerms": [
-        "serviço de camada",
-        "encapsulamento"
-      ],
+      "term": "TLS",
+      "shortDefinition": "Protocolo que criptografa a conexão entre o navegador (ou outro programa) e o servidor; é o que faz o https.",
+      "example": "Um certificado inválido faz o TLS falhar mesmo com a porta 443 aberta.",
       "relatedLessons": [
-        "2.1",
-        "2.2"
+        "2.7",
+        "8.3"
       ]
     },
     {
-      "term": "TCP/IP",
-      "shortDefinition": "Pilha prática de protocolos usada na internet.",
-      "longDefinition": "Modelo de comunicação da internet, geralmente descrito em camadas como acesso à rede, internet, transporte e aplicação.",
-      "example": "IP na camada de internet, TCP na camada de transporte e HTTP na aplicação.",
-      "relatedTerms": [
-        "IP",
-        "TCP",
-        "UDP",
-        "HTTP"
-      ],
+      "term": "ICMP",
+      "shortDefinition": "Protocolo de mensagens de controle da camada de rede; é o que o ping usa.",
+      "example": "Um servidor pode bloquear ICMP (não responde ao ping) e ainda atender na porta 443.",
       "relatedLessons": [
-        "2.1",
-        "2.2",
-        "6.1"
-      ]
-    },
-    {
-      "term": "Troubleshooting por camadas",
-      "shortDefinition": "Método de diagnóstico que testa hipóteses respeitando responsabilidades de cada camada.",
-      "longDefinition": "Forma de investigar falhas coletando evidências de físico, enlace, rede, transporte e aplicação antes de concluir causa.",
-      "example": "Verificar link, IP, gateway, DNS, porta e HTTP em ordem.",
-      "relatedTerms": [
-        "evidência",
-        "hipótese",
-        "diagnóstico"
-      ],
-      "relatedLessons": [
-        "0.8",
-        "1.9",
-        "2.8"
-      ]
-    },
-    {
-      "term": "Defesa em profundidade",
-      "shortDefinition": "Estratégia de segurança com controles distribuídos em várias camadas.",
-      "longDefinition": "Em vez de depender de um único controle, aplica proteções físicas, lógicas, de rede, transporte, aplicação e identidade.",
-      "example": "Port security, segmentação, firewall, TLS, WAF e MFA atuando juntos.",
-      "relatedTerms": [
-        "segmentação",
-        "firewall",
-        "WAF",
-        "IAM"
-      ],
-      "relatedLessons": [
-        "2.1",
-        "9.1",
-        "13.1"
+        "4.8"
       ]
     }
   ],
@@ -671,11 +417,7 @@ export const lesson0201 = {
   "progressRules": {
     "completeWhen": {
       "read": true,
-      "quizScoreAtLeast": 70,
-      "oneOf": [
-        "exerciseDone",
-        "practicalExerciseDone"
-      ]
+      "quizScoreAtLeast": 70
     },
     "accessPolicy": {
       "freeAccess": true,

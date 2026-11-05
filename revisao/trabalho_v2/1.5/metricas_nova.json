@@ -4,16 +4,16 @@
   "titulo": "Meios de transmissão: cobre, fibra e rádio",
   "tipo": "fundamental",
   "palavras": {
-    "visiveis": 2779,
-    "teoria": 1351,
-    "praticaExtra": 615,
+    "visiveis": 2938,
+    "teoria": 1375,
+    "praticaExtra": 750,
     "quiz": 489,
     "flashcards": 180
   },
   "porGrupoTeoria": {
     "introducao": 423,
     "contexto": 131,
-    "conteudo": 607,
+    "conteudo": 631,
     "exemplos": 190,
     "seguranca_troubleshooting": 0
   },
@@ -22,7 +22,7 @@
     "summary": 85,
     "problem": 131,
     "concept": 277,
-    "internals": 329,
+    "internals": 353,
     "diagram": 1,
     "analogy": 54,
     "simpleExample": 136,
@@ -37,7 +37,7 @@
     "quiz": 489,
     "flashcards": 180,
     "lab": 0,
-    "mentorQuestions": 177,
+    "mentorQuestions": 312,
     "exercises": 180,
     "challenge": 94,
     "commentedSolution": 164
@@ -64,9 +64,9 @@
   "duracao": {
     "declarada": "15-25 min + 30 min de prática extra",
     "estimatedStudyTimeMinutes": 25,
-    "nucleo": 19.4,
+    "nucleo": 19.6,
     "nucleoPartes": {
-      "teoria": 10.4,
+      "teoria": 10.6,
       "diagramas": 3,
       "quiz": 6
     },

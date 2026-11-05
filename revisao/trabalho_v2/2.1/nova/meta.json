@@ -4,8 +4,8 @@
   "order": 1,
   "title": "Por que o Modelo OSI existe",
   "subtitle": "Como um modelo de camadas transforma redes complexas em diagnóstico, arquitetura, documentação e comunicação entre times.",
-  "duration": "65-90 min",
-  "estimatedStudyTimeMinutes": 90,
+  "duration": "15-25 min + 30 min de prática extra",
+  "estimatedStudyTimeMinutes": 25,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 195,
@@ -43,12 +43,9 @@
     }
   ],
   "objectives": [
-    "Explicar por que o Modelo OSI existe e que problema ele tenta resolver.",
-    "Diferenciar modelo conceitual de implementação real de protocolo.",
-    "Listar as sete camadas do OSI e a responsabilidade central de cada uma.",
-    "Usar o OSI como linguagem comum entre suporte, redes, segurança, cloud e DevSecOps.",
-    "Aplicar raciocínio por camadas em um diagnóstico inicial sem pular etapas.",
-    "Reconhecer limitações do OSI e sua relação com o modelo TCP/IP."
+    "Explicar por que o Modelo OSI existe (vocabulário comum para dividir a comunicação em responsabilidades) e diferenciá-lo de uma implementação real, como a pilha TCP/IP.",
+    "Listar as sete camadas do OSI, com a pergunta que cada uma responde, e dizer em qual camada TCP/IP cada uma se encaixa.",
+    "Transformar um sintoma vago, como \"o sistema não abre\", em perguntas com evidência por camada, de baixo para cima, sem confundir conectividade com autorização."
   ],
   "networkContext": {
     "osiLayers": [
@@ -98,36 +95,21 @@
   },
   "mentorQuestions": [
     {
-      "type": "reflexão",
-      "question": "Por que o Modelo OSI continua útil mesmo que a internet real use TCP/IP?",
-      "hints": [
-        "Pense em linguagem comum.",
-        "Pense em diagnóstico, não apenas implementação."
-      ],
-      "expectedIdeas": [
-        "modelo conceitual",
-        "diagnóstico",
-        "comunicação entre times",
-        "camadas",
-        "evidência"
-      ],
-      "explanation": "O OSI é útil porque organiza responsabilidades e perguntas, mesmo quando a implementação real não segue fronteiras perfeitas."
-    },
-    {
       "type": "diagnóstico",
-      "question": "Um host pinga o gateway, mas não abre um site por nome. Quais camadas você investigaria primeiro?",
+      "question": "Um colega diz: \"o Wi-Fi está conectado, então a rede está boa\". O que essa evidência prova e o que ainda falta verificar até o site abrir?",
       "hints": [
-        "Gateway responde, então a camada local tem alguma evidência positiva.",
-        "Nome por domínio envolve DNS."
+        "Wi-Fi conectado é evidência de quais camadas?",
+        "Percorra as camadas de baixo para cima."
       ],
       "expectedIdeas": [
-        "camada 3 parcialmente ok",
+        "camadas 1 e 2",
+        "IP e gateway",
+        "rota até o destino",
         "DNS",
-        "camada 7",
         "porta",
-        "proxy"
+        "aplicação e login"
       ],
-      "explanation": "O próximo foco seria DNS e depois transporte/aplicação. Ping no gateway não prova que DNS, TCP/443 ou HTTP funcionam."
+      "explanation": "Wi-Fi conectado mostra sinal e associação à rede local (camadas 1 e 2). Ainda falta ver se o notebook tem IP e alcança o gateway (3), se o destino é alcançável, se o nome resolve, se a porta abre (4) e se a aplicação responde e aceita o acesso (5 a 7)."
     },
     {
       "type": "cenário real",
@@ -179,6 +161,21 @@
       "type": "comparação"
     },
     {
+      "id": "q2.1.8",
+      "question": "O cabo está conectado, o notebook tem IP e o ping ao IP do servidor responde, mas a conexão com a porta 443 do servidor falha. Onde está a hipótese mais provável?",
+      "options": [
+        "Na camada 1, porque o cabo pode estar com defeito",
+        "Na camada 7, porque o HTTP sempre é a causa",
+        "Em nenhuma: sem reiniciar o servidor não dá para levantar hipótese",
+        "Na camada 4: a porta pode estar bloqueada ou o serviço não está escutando"
+      ],
+      "answer": 3,
+      "explanation": "As evidências das camadas 1 a 3 passaram; a primeira que falha é a da porta, que é responsabilidade da camada 4 (Transporte). É ali que a investigação continua.",
+      "topic": "diagnóstico por camadas",
+      "difficulty": "iniciante",
+      "type": "diagnóstico"
+    },
+    {
       "id": "q2.1.3",
       "question": "Por que ping bem-sucedido não prova que uma aplicação web está funcionando?",
       "options": [
@@ -194,34 +191,19 @@
       "type": "comparação"
     },
     {
-      "id": "q2.1.4",
-      "question": "Qual é um exemplo de defesa em profundidade usando a lógica do OSI?",
-      "options": [
-        "Usar apenas NAT como segurança",
-        "Desativar logs para reduzir ruído",
-        "Liberar any-any para simplificar diagnóstico",
-        "Proteger físico, segmentar rede, restringir portas e autenticar aplicação"
-      ],
-      "answer": 3,
-      "explanation": "Defesa em profundidade distribui controles por camadas, reduzindo dependência de um único mecanismo.",
-      "topic": "segurança",
-      "difficulty": "intermediário",
-      "type": "segurança"
-    },
-    {
       "id": "q2.1.5",
-      "question": "Em cloud, uma VM alcança a porta do banco, mas recebe erro de permissão. Qual distinção o OSI ajuda a fazer?",
+      "question": "Um servidor de aplicação alcança a porta do banco de dados, mas recebe erro de permissão ao entrar. Qual distinção o OSI ajuda a fazer?",
       "options": [
-        "Todo erro de banco é camada 1",
+        "Todo erro de banco é de camada 1",
         "Conectividade não é o mesmo que autorização",
-        "Security group substitui IAM",
+        "Abrir mais portas no firewall resolve erros de permissão",
         "DNS sempre é a causa"
       ],
       "answer": 1,
-      "explanation": "A porta aberta indica conectividade de transporte, mas permissão depende de identidade, política e aplicação.",
-      "topic": "cloud",
+      "explanation": "A porta alcançada mostra que a conectividade até a camada 4 funciona. A permissão depende de autenticação e autorização, que são da aplicação.",
+      "topic": "conectividade x autorização",
       "difficulty": "intermediário",
-      "type": "cloud"
+      "type": "diagnóstico"
     },
     {
       "id": "q2.1.6",
@@ -261,7 +243,7 @@
     },
     {
       "id": "fc2.1.3",
-      "front": "Qual camada trata de MAC, switch, VLAN e ARP?",
+      "front": "Qual camada trata de endereço MAC, switch e ARP?",
       "back": "Camada 2 — Enlace.",
       "tags": [
         "camada 2"
@@ -301,177 +283,79 @@
       "id": "ex2.1.1",
       "type": "classificação",
       "prompt": "Classifique os itens em camadas prováveis: cabo desconectado, MAC address, rota default, porta TCP 443, erro HTTP 403.",
-      "expectedAnswer": "Cabo: camada 1; MAC: camada 2; rota default: camada 3; TCP 443: camada 4; HTTP 403: camada 7/aplicação/autorização.",
+      "expectedAnswer": "Cabo desconectado: camada 1; MAC address: camada 2; rota default: camada 3; porta TCP 443: camada 4; erro HTTP 403 (acesso proibido): camada 7, um problema de autorização na aplicação.",
       "explanation": "A classificação ajuda a não misturar conectividade física, enlace, rede, transporte e aplicação."
-    },
-    {
-      "id": "ex2.1.3",
-      "type": "segurança",
-      "prompt": "Explique por que abrir uma porta no firewall não resolve uma falha de autenticação.",
-      "expectedAnswer": "Firewall atua em conectividade/política de tráfego. Autenticação pertence à aplicação/identidade. Se a porta já conecta e a falha é login, o problema está em credenciais, token, IAM, sessão ou autorização.",
-      "explanation": "Conectividade e autorização são dimensões diferentes."
     },
     {
       "id": "ex2.1.4",
       "type": "arquitetura",
-      "prompt": "Escolha um serviço que você usa no trabalho e descreva uma evidência de camada 1, 2/3, 4 e 7.",
-      "expectedAnswer": "Resposta variável: deve conter evidência física ou Wi‑Fi, IP/rota, porta e resposta de aplicação.",
+      "prompt": "Escolha um serviço que você usa (no trabalho ou em casa) e descreva uma evidência de camada 1, de camada 2 ou 3, de camada 4 e de camada 7 que mostraria que ele funciona.",
+      "expectedAnswer": "Resposta variável: deve conter uma evidência física ou de Wi-Fi, uma de IP ou gateway, uma de porta e uma resposta da aplicação.",
       "explanation": "O exercício força a aplicar o modelo a uma situação real."
     }
   ],
   "challenge": {
     "title": "Transforme um chamado genérico em investigação por camadas",
-    "scenario": "Um usuário remoto conectado por VPN diz: “não consigo acessar o sistema financeiro”. O sistema usa HTTPS em um endereço interno e autenticação corporativa.",
+    "scenario": "Um colega do escritório diz: \"não consigo acessar o sistema financeiro\". O sistema é um site interno acessado por HTTPS, pelo nome, com login corporativo. Outros colegas acessam normalmente.",
     "tasks": [
-      "Criar uma tabela com as sete camadas OSI.",
-      "Indicar uma pergunta de diagnóstico por camada.",
-      "Indicar um comando, log ou evidência por camada quando aplicável.",
-      "Separar conectividade, DNS, TLS, aplicação e autorização.",
-      "Apontar riscos de segurança e cuidados ao compartilhar evidências."
+      "Montar uma tabela com as camadas e, para cada uma, uma pergunta de diagnóstico e a evidência que a responde (comando, mensagem ou log).",
+      "Separar conectividade, DNS, porta, TLS, aplicação e autorização.",
+      "Dizer qual time acionar conforme a primeira evidência que falhar."
     ],
     "constraints": [
       "Não assumir que o firewall é a causa sem evidência.",
-      "Não executar testes contra sistemas sem autorização.",
-      "Sanitizar IPs, nomes internos e usuários no relatório.",
-      "Explicar o próximo time a ser acionado com base na primeira evidência de falha."
+      "Sanitizar IPs, nomes internos e usuários antes de compartilhar a tabela."
     ],
     "expectedDeliverables": [
-      "Tabela OSI de diagnóstico",
-      "Hipótese inicial",
-      "Evidências necessárias",
-      "Riscos e sanitização",
-      "Próximo passo recomendado"
-    ],
-    "gradingRubric": [
-      {
-        "criterion": "Separação correta das camadas",
-        "points": 30,
-        "description": "Classifica sintomas e evidências sem misturar camada 3, 4 e 7."
-      },
-      {
-        "criterion": "Qualidade das evidências",
-        "points": 30,
-        "description": "Indica comandos, logs ou observações coerentes para cada etapa."
-      },
-      {
-        "criterion": "Raciocínio de segurança",
-        "points": 20,
-        "description": "Inclui sanitização, autorização e cuidado com dados sensíveis."
-      },
-      {
-        "criterion": "Próximo passo acionável",
-        "points": 20,
-        "description": "Define hipótese e encaminhamento baseado em evidência."
-      }
+      "Tabela de diagnóstico por camada",
+      "Hipótese inicial e próximo passo"
     ]
   },
   "commentedSolution": {
-    "reasoning": "O primeiro passo é não aceitar o sintoma como diagnóstico. Um usuário remoto adiciona variáveis: conexão física/local, internet, VPN, rota interna, DNS privado, porta HTTPS, TLS, proxy, aplicação e IAM.",
+    "reasoning": "Não aceite o sintoma como diagnóstico. Como outros colegas acessam, o sistema provavelmente está no ar: a diferença está no caminho ou na conta deste usuário.",
     "steps": [
-      "Confirmar se o usuário tem conectividade local e internet.",
-      "Confirmar se a VPN está conectada e recebeu rotas/DNS internos.",
-      "Testar resolução do nome interno.",
-      "Testar alcance do IP ou serviço pela porta 443, se autorizado.",
-      "Observar erro TLS/HTTP ou mensagem de autenticação.",
-      "Verificar logs de VPN, firewall, proxy, aplicação ou IAM conforme a primeira falha.",
-      "Sanitizar evidências antes de compartilhar."
+      "Camadas 1 e 2: o cabo ou o Wi-Fi do colega está ativo?",
+      "Camada 3: ipconfig mostra IP e gateway coerentes? O gateway responde ao ping?",
+      "DNS: nslookup do nome do sistema retorna o mesmo IP que os outros colegas recebem?",
+      "Camada 4: a conexão com a porta 443 abre? (Se o ping falhar, não conclua nada: ICMP pode estar bloqueado.)",
+      "Camadas 5 a 7: aparece erro de certificado, erro HTTP ou recusa de login? Recusa de login aponta para a conta ou a permissão, não para a rede."
     ],
     "commonWrongAnswers": [
       {
         "answer": "É firewall, libera tudo.",
-        "whyItIsWrong": "Não há evidência de que a falha está em camada 4/política. Liberar any-any cria risco grave."
-      },
-      {
-        "answer": "Se a VPN conectou, a aplicação obrigatoriamente deveria abrir.",
-        "whyItIsWrong": "VPN conectada não prova rota, DNS, porta, TLS, autorização ou aplicação saudável."
+        "whyItIsWrong": "Não há evidência de falha na camada 4, e liberar tudo cria um risco grave."
       },
       {
         "answer": "Se ping falha, o servidor está fora.",
-        "whyItIsWrong": "ICMP pode ser bloqueado, enquanto TCP/443 pode funcionar."
+        "whyItIsWrong": "ICMP pode estar bloqueado enquanto a porta 443 funciona."
       }
     ],
-    "finalAnswer": "Uma resposta madura cria uma matriz por camada. Se a VPN está conectada, mas DNS interno não resolve, investigue DNS/split DNS. Se DNS resolve e TCP/443 não conecta, investigue rota, firewall, security policy ou disponibilidade do serviço. Se TCP/443 conecta e HTTP retorna 401/403, investigue autenticação/autorização/IAM."
+    "finalAnswer": "Monte a matriz por camada e pare na primeira evidência que falha. Nome não resolve: DNS. Nome resolve e a porta 443 não abre: rota, firewall ou serviço (time de redes ou segurança). Porta abre e o login é recusado: conta ou permissão (time da aplicação ou de identidade)."
   },
   "glossary": [
     {
-      "term": "Modelo OSI",
-      "shortDefinition": "Modelo conceitual de sete camadas para descrever comunicação em rede.",
-      "longDefinition": "Referência que organiza responsabilidades desde sinal físico até aplicação, útil para ensino, documentação, troubleshooting e segurança.",
-      "example": "Usar camada 3 para discutir roteamento e camada 4 para discutir portas TCP/UDP.",
-      "relatedTerms": [
-        "camada",
-        "TCP/IP",
-        "PDU",
-        "encapsulamento"
-      ],
+      "term": "Porta",
+      "shortDefinition": "Número que identifica, dentro de um computador, qual serviço deve receber os dados de uma conexão.",
+      "example": "Um site HTTPS costuma atender na porta TCP 443.",
       "relatedLessons": [
-        "0.8",
-        "1.9",
-        "2.2"
+        "2.6"
       ]
     },
     {
-      "term": "Camada",
-      "shortDefinition": "Bloco conceitual com uma responsabilidade específica na comunicação.",
-      "longDefinition": "Cada camada oferece serviços à camada acima e depende da camada abaixo, ainda que implementações reais possam misturar funções.",
-      "example": "A camada de transporte oferece comunicação por portas para aplicações.",
-      "relatedTerms": [
-        "serviço de camada",
-        "encapsulamento"
-      ],
+      "term": "TLS",
+      "shortDefinition": "Protocolo que criptografa a conexão entre o navegador (ou outro programa) e o servidor; é o que faz o https.",
+      "example": "Um certificado inválido faz o TLS falhar mesmo com a porta 443 aberta.",
       "relatedLessons": [
-        "2.1",
-        "2.2"
+        "2.7",
+        "8.3"
       ]
     },
     {
-      "term": "TCP/IP",
-      "shortDefinition": "Pilha prática de protocolos usada na internet.",
-      "longDefinition": "Modelo de comunicação da internet, geralmente descrito em camadas como acesso à rede, internet, transporte e aplicação.",
-      "example": "IP na camada de internet, TCP na camada de transporte e HTTP na aplicação.",
-      "relatedTerms": [
-        "IP",
-        "TCP",
-        "UDP",
-        "HTTP"
-      ],
+      "term": "ICMP",
+      "shortDefinition": "Protocolo de mensagens de controle da camada de rede; é o que o ping usa.",
+      "example": "Um servidor pode bloquear ICMP (não responde ao ping) e ainda atender na porta 443.",
       "relatedLessons": [
-        "2.1",
-        "2.2",
-        "6.1"
-      ]
-    },
-    {
-      "term": "Troubleshooting por camadas",
-      "shortDefinition": "Método de diagnóstico que testa hipóteses respeitando responsabilidades de cada camada.",
-      "longDefinition": "Forma de investigar falhas coletando evidências de físico, enlace, rede, transporte e aplicação antes de concluir causa.",
-      "example": "Verificar link, IP, gateway, DNS, porta e HTTP em ordem.",
-      "relatedTerms": [
-        "evidência",
-        "hipótese",
-        "diagnóstico"
-      ],
-      "relatedLessons": [
-        "0.8",
-        "1.9",
-        "2.8"
-      ]
-    },
-    {
-      "term": "Defesa em profundidade",
-      "shortDefinition": "Estratégia de segurança com controles distribuídos em várias camadas.",
-      "longDefinition": "Em vez de depender de um único controle, aplica proteções físicas, lógicas, de rede, transporte, aplicação e identidade.",
-      "example": "Port security, segmentação, firewall, TLS, WAF e MFA atuando juntos.",
-      "relatedTerms": [
-        "segmentação",
-        "firewall",
-        "WAF",
-        "IAM"
-      ],
-      "relatedLessons": [
-        "2.1",
-        "9.1",
-        "13.1"
+        "4.8"
       ]
     }
   ],

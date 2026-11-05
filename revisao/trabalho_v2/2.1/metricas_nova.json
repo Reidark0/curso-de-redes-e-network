@@ -1,0 +1,85 @@
+{
+  "id": "2.1",
+  "versao": "nova",
+  "titulo": "Por que o Modelo OSI existe",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 2657,
+    "teoria": 1356,
+    "praticaExtra": 605,
+    "quiz": 424,
+    "flashcards": 96
+  },
+  "porGrupoTeoria": {
+    "introducao": 391,
+    "contexto": 145,
+    "conteudo": 594,
+    "exemplos": 226,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 145,
+    "summary": 83,
+    "problem": 145,
+    "concept": 309,
+    "internals": 283,
+    "diagram": 2,
+    "analogy": 74,
+    "simpleExample": 152,
+    "objectives": 72,
+    "learningOutcomes": 0,
+    "glossary": 91,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 28
+  },
+  "pratica": {
+    "quiz": 424,
+    "flashcards": 96,
+    "lab": 0,
+    "mentorQuestions": 166,
+    "exercises": 130,
+    "challenge": 110,
+    "commentedSolution": 199
+  },
+  "outros": {
+    "title+subtitle": 22,
+    "nextTheme": 28,
+    "references": 71,
+    "linksToOtherCourses": 55
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 3,
+    "exemplosPorAmbiente": []
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "15-25 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 19.4,
+    "nucleoPartes": {
+      "teoria": 10.4,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 31,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-25 min",
+    "praticaExtraArredondada": 30,
+    "recomendada": "15-25 min + 30 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}
