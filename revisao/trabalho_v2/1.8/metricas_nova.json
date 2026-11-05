@@ -1,0 +1,91 @@
+{
+  "id": "1.8",
+  "versao": "nova",
+  "titulo": "Métricas: latência, jitter, perda, throughput e disponibilidade",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 3344,
+    "teoria": 1493,
+    "praticaExtra": 1152,
+    "quiz": 391,
+    "flashcards": 158
+  },
+  "porGrupoTeoria": {
+    "introducao": 374,
+    "contexto": 115,
+    "conteudo": 799,
+    "exemplos": 205,
+    "seguranca_troubleshooting": 0
+  },
+  "porSecao": {
+    "motivation": 136,
+    "summary": 89,
+    "problem": 115,
+    "concept": 246,
+    "internals": 524,
+    "diagram": 29,
+    "analogy": 66,
+    "simpleExample": 139,
+    "objectives": 62,
+    "learningOutcomes": 0,
+    "glossary": 87,
+    "security": 0,
+    "troubleshooting": 0,
+    "nextTheme": 30
+  },
+  "pratica": {
+    "quiz": 391,
+    "flashcards": 158,
+    "lab": 425,
+    "mentorQuestions": 203,
+    "exercises": 208,
+    "challenge": 102,
+    "commentedSolution": 214
+  },
+  "outros": {
+    "title+subtitle": 20,
+    "nextTheme": 30,
+    "references": 49,
+    "linksToOtherCourses": 51
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 2,
+    "exercicios": 2,
+    "passosLab": 4,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 3,
+    "glossario": 3,
+    "exemplosPorAmbiente": []
+  },
+  "lab": {
+    "estimatedTimeMinutes": 20,
+    "alternativa_5minPorPasso": 20,
+    "plausivel": true,
+    "override": null,
+    "palavras": 425
+  },
+  "duracao": {
+    "declarada": "15-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutes": 25,
+    "nucleo": 20.5,
+    "nucleoPartes": {
+      "teoria": 11.5,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 51,
+    "praticaExtraPartes": {
+      "lab": 20,
+      "mentor": 4,
+      "exercicios": 12,
+      "desafio": 15
+    },
+    "faixaNucleo": "15-25 min",
+    "praticaExtraArredondada": 50,
+    "recomendada": "15-25 min + 50 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 25
+  }
+}

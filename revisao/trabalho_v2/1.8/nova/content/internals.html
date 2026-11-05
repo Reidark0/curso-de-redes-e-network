@@ -1,40 +1,25 @@
 <section class="lesson-section lesson-section--internals">
   <h2>Funcionamento interno</h2>
-  <p>Cada métrica nasce de um mecanismo diferente. Por isso uma ferramenta só raramente responde tudo.</p>
+  <h3>Medir por trecho</h3>
+  <p>Uma medição feita só de ponta a ponta diz que algo piorou, não onde. Como você viu na aula 1.7, o tráfego sai pela placa de rede, passa pelo switch ou access point, chega ao roteador (o gateway da rede) e segue pela internet até o serviço. Meça em três pontos, do mais próximo ao mais distante:</p>
   <ol class="flow-list">
-    <li><strong>Latência:</strong> soma tempo de transmissão, propagação no meio, processamento em equipamentos, filas, inspeção de firewall, negociação de protocolo e resposta do serviço.</li>
-    <li><strong>RTT:</strong> round-trip time mede ida e volta. O ping mostra RTT, não apenas a ida.</li>
-    <li><strong>Jitter:</strong> aparece quando pacotes sucessivos têm latências diferentes. Filas, Wi‑Fi instável, congestionamento e QoS ruim aumentam o jitter.</li>
-    <li><strong>Perda:</strong> ocorre quando pacotes são descartados por erro físico, fila cheia, política, congestionamento, rádio ruim, MTU, firewall ou falha de caminho.</li>
-    <li><strong>Throughput:</strong> depende da menor capacidade efetiva do caminho, do overhead, da janela TCP, da perda, da latência, do processamento, da criptografia e dos limites do serviço.</li>
-    <li><strong>Disponibilidade:</strong> é calculada ao longo do tempo. Um serviço pode ter boa latência quando está no ar e disponibilidade ruim se cai várias vezes ao dia.</li>
+    <li><strong>Gateway:</strong> 20 pings para o roteador da sua rede (<code>ping -n 20</code> no Windows, <code>ping -c 20</code> no Linux). Numa rede local saudável, o RTT fica em poucos milissegundos, sem perda. Perda ou tempos muito variados aqui apontam para o trecho local: Wi‑Fi, cabo, placa de rede ou o próprio roteador.</li>
+    <li><strong>Destino externo:</strong> o mesmo teste para um endereço na internet, como <code>8.8.8.8</code>. Se o gateway está bom e só aqui aparecem perda ou picos, o problema está do roteador para fora: link, provedor ou caminho.</li>
+    <li><strong>Aplicação:</strong> se os dois pings estão bons e o sistema continua lento, a demora está no serviço, não no caminho. A ferramenta <code>curl</code> divide o tempo de um acesso a um site em etapas (o laboratório mostra o comando): resolver o nome (DNS), conectar, negociar a criptografia (TLS) e receber a resposta. Em <code>dns=1.9 total=2.3</code>, quase todo o tempo foi gasto resolvendo o nome.</li>
   </ol>
 
-  <h3>Como ler a saída do ping</h3>
-  <div class="responsive-table"><table class="data-table">
-    <thead><tr><th>O que aparece</th><th>Windows (<code>ping -n 20</code>)</th><th>Linux (<code>ping -c 20</code>)</th><th>Métrica</th></tr></thead>
-    <tbody>
-      <tr><td>Pacotes enviados × recebidos</td><td><code>Perdidos = 1 (5% de perda)</code></td><td><code>20 packets transmitted, 19 received, 5% packet loss</code></td><td>Perda</td></tr>
-      <tr><td>Tempos de resposta</td><td><code>Mínimo</code>, <code>Máximo</code>, <code>Média</code></td><td><code>rtt min/avg/max/mdev</code></td><td>Latência (RTT)</td></tr>
-      <tr><td>Distância entre mínimo e máximo; <code>mdev</code> no Linux</td><td>Máximo muito acima do mínimo</td><td><code>mdev</code> alto (desvio dos tempos)</td><td>Pista de jitter</td></tr>
-      <tr><td>Nenhuma resposta (destino inacessível ou ICMP bloqueado: confirme com um teste TCP)</td><td><code>Esgotado o tempo limite do pedido.</code></td><td><code>100% packet loss</code></td><td>Disponibilidade (com cautela)</td></tr>
-    </tbody>
-  </table></div>
-
-  <h3>Média, percentil e jitter numa série real</h3>
+  <h3>Média, percentil e jitter numa série</h3>
   <p>Dez pings seguidos para o mesmo destino: <code>20, 21, 20, 22, 21, 20, 120, 21, 20, 115 ms</code>.</p>
   <ul>
     <li><strong>Média:</strong> 400 ÷ 10 = 40 ms. Parece aceitável.</li>
-    <li><strong>Distribuição:</strong> 2 de 10 respostas (20%) passaram de 100 ms. É isso que o usuário sente. Em ambientes profissionais você olha percentis: o <strong>p95</strong> é o valor abaixo do qual ficam 95% das medições (o p99, 99%). Médias escondem picos; percentis os mostram.</li>
+    <li><strong>Distribuição:</strong> 2 de 10 respostas (20%) passaram de 100 ms, e é isso que o usuário sente. Por isso medições profissionais usam percentis: o <strong>p95</strong> é o valor abaixo do qual ficam 95% das medições (o p99, 99%). Aqui o p95 passa de 100 ms. Médias escondem picos; percentis os mostram.</li>
     <li><strong>Jitter:</strong> uma estimativa simples é a média das diferenças entre respostas consecutivas: (1+1+2+1+1+100+99+1+95) ÷ 9 ≈ 33 ms. Para uma chamada de voz, isso já é ruim, mesmo com média de 40 ms.</li>
   </ul>
 
-  <h3>Por que muita banda ainda pode parecer lenta</h3>
-  <p>Uma conexão TCP só envia uma “janela” de dados antes de esperar a confirmação, que leva um RTT para voltar. O throughput máximo de uma conexão fica limitado a <strong>janela ÷ RTT</strong>. Com janela de 64 KB (65.535 bytes, sem escala de janela) e RTT de 100 ms: 65.535 × 8 ÷ 0,1 s ≈ 5,2 Mbps, mesmo num link de 1 Gbps. Latência alta e perda (que força retransmissão e reduz a janela) derrubam a vazão útil sem que a banda contratada mude.</p>
-
   <h3>Disponibilidade em números</h3>
+  <p>Disponibilidade é o tempo no ar dividido pelo tempo total. Um mês de 30 dias tem 43.200 minutos, e cada “nove” a mais divide por 10 o tempo fora do ar permitido:</p>
   <div class="responsive-table"><table class="data-table">
-    <thead><tr><th>Disponibilidade</th><th>Indisponibilidade permitida em 30 dias (43.200 min)</th></tr></thead>
+    <thead><tr><th>Disponibilidade</th><th>Indisponibilidade permitida em 30 dias</th></tr></thead>
     <tbody>
       <tr><td>99%</td><td>432 min ≈ 7,2 h</td></tr>
       <tr><td>99,9%</td><td>≈ 43 min</td></tr>
@@ -43,10 +28,11 @@
   </table></div>
   <p>Essas metas aparecem em <strong>SLA</strong> (acordo de nível de serviço: o compromisso formal com cliente ou fornecedor, normalmente com consequência se for descumprido) e em <strong>SLO</strong> (objetivo de nível de serviço: a meta interna que o time persegue, em geral mais exigente que o SLA para dar margem).</p>
 
-  <div class="callout warning"><strong>Erros comuns:</strong>
+  <div class="callout warning"><strong>Erros comuns</strong>
     <ul>
-      <li>Confundir largura de banda com throughput: o plano é vendido em capacidade nominal; a ferramenta mostra a vazão real. Comparar os dois direto gera expectativas irreais e diagnóstico errado.</li>
-      <li>Achar que ping baixo significa aplicação saudável: ping prova conectividade básica; problemas de DNS, TLS, autenticação, banco ou servidor passam despercebidos.</li>
-      <li>Olhar só a média de latência em voz e vídeo: as chamadas continuam ruins com “ping aceitável”. Meça variação e perda, sobretudo em Wi‑Fi, VPN e links congestionados.</li>    </ul>
+      <li>Concluir que o serviço caiu porque o ping não responde: muitos servidores e firewalls bloqueiam o ping (ICMP). Se o site abre no navegador, ele está disponível.</li>
+      <li>Tomar o teste de velocidade como prova de que a rede está boa: ele mede o throughput até um servidor de teste, num momento e de um ponto; não mede o jitter durante uma chamada nem o caminho até o sistema da empresa.</li>
+      <li>Medir a disponibilidade de um só ponto: um sistema que nunca caiu visto de dentro do datacenter pode ter ficado inacessível para uma filial cujo link caiu.</li>
+    </ul>
   </div>
 </section>

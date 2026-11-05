@@ -1,10 +1,11 @@
 <section class="lesson-section lesson-section--summary">
   <h2>Resumo</h2>
   <ul>
-    <li><strong>Ideia central:</strong> nunca aceite “rede lenta” como diagnóstico. Converta a reclamação numa pergunta (é tempo, variação, descarte, vazão útil, disponibilidade ou aplicação?) e meça por trecho.</li>
-    <li><strong>O que lembrar:</strong> latência mede tempo (RTT no ping), jitter mede variação, perda mede descarte, throughput mede vazão útil e disponibilidade mede acesso ao longo do tempo. Largura de banda é só o teto.</li>
-    <li><strong>Números que ajudam:</strong> MB/s × 8 = Mbps; throughput de uma conexão TCP ≤ janela ÷ RTT; 99,9% de disponibilidade ainda permite ≈ 43 min de queda em 30 dias; médias escondem picos que o p95/p99 mostra.</li>
-    <li><strong>Erro comum:</strong> confundir banda contratada com performance real da aplicação, ou ping bom com aplicação saudável.</li>
-    <li><strong>Uso real:</strong> métricas permitem justificar mudanças, priorizar incidentes, cobrar fornecedores e separar problema de rede, aplicação, cloud e segurança.</li>
+    <li><strong>Ideia central:</strong> troque “está lento” por uma pergunta (tempo, variação, descarte, vazão ou queda?) e meça por trecho.</li>
+    <li>Latência mede tempo; jitter, variação; perda, descarte; throughput, vazão útil; disponibilidade, tempo no ar.</li>
+    <li>Médias escondem picos: olhe o p95 e o jitter.</li>
+    <li>99,9% em 30 dias ainda permite ≈ 43 min fora do ar; SLA é o compromisso, SLO a meta interna.</li>
+    <li>Ping bom não prova aplicação saudável; ping sem resposta não prova serviço fora do ar.</li>
   </ul>
+  <p><em>Já domina isso? Faça o quiz: com 70% ou mais, você pode seguir.</em></p>
 </section>

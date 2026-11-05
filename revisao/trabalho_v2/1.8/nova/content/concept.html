@@ -1,15 +1,16 @@
 <section class="lesson-section lesson-section--concept">
   <h2>Conceito</h2>
-  <p>Métricas de rede descrevem a qualidade, a capacidade e a confiabilidade da comunicação. Elas não são sinônimos: cada uma responde a uma pergunta diferente.</p>
-  <div class="definition-box"><strong>Definição:</strong> latência é o tempo para a comunicação ocorrer; jitter é a variação da latência; perda é a fração de pacotes que não chega; throughput é a vazão útil efetivamente obtida; disponibilidade é a proporção de tempo em que um serviço ou caminho está acessível conforme o esperado. Largura de banda é outra coisa: a capacidade nominal do link, o teto, e não o que de fato passa.</div>
-  <table class="data-table comparison-table">
-    <thead><tr><th>Métrica</th><th>Pergunta que responde</th><th>Unidade comum</th><th>Sintoma típico</th></tr></thead>
+  <p>Métricas de rede descrevem a qualidade da comunicação. Cada uma responde a uma pergunta diferente, e cada sintoma aponta primeiro para uma delas.</p>
+  <div class="definition-box"><strong>Definição:</strong> latência é o tempo de ida e volta de um pacote (RTT); jitter é a variação da latência entre pacotes seguidos; perda é a fração de pacotes que não chega; throughput é a vazão útil que de fato passa; disponibilidade é a fração do tempo em que o serviço esteve acessível. Largura de banda é só o teto do link, a capacidade nominal (aula 0.6).</div>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Métrica</th><th>Pergunta que responde</th><th>Unidade</th><th>Sintoma típico</th></tr></thead>
     <tbody>
-      <tr><td>Latência</td><td>Quanto tempo demora?</td><td>ms</td><td>Sistema responde devagar</td></tr>
-      <tr><td>Jitter</td><td>Esse tempo varia muito?</td><td>ms de variação</td><td>Voz e vídeo falhando</td></tr>
-      <tr><td>Perda</td><td>Quanto tráfego se perde?</td><td>%</td><td>Retransmissões, quedas e lentidão</td></tr>
-      <tr><td>Throughput</td><td>Quanto tráfego útil passa?</td><td>Mbps, Gbps, MB/s</td><td>Backup ou download lento</td></tr>
-      <tr><td>Disponibilidade</td><td>Esteve acessível no período?</td><td>% ou tempo de indisponibilidade</td><td>Interrupções recorrentes</td></tr>
+      <tr><td>Latência</td><td>Quanto demora cada ida e volta?</td><td>ms</td><td>Sistema ou site demora a responder a cada clique</td></tr>
+      <tr><td>Jitter</td><td>Esse tempo varia muito?</td><td>ms de variação</td><td>Voz picota, vídeo congela, jogo online “dá lag”</td></tr>
+      <tr><td>Perda</td><td>Quantos pacotes se perdem?</td><td>%</td><td>Chamada corta, páginas travam e recomeçam</td></tr>
+      <tr><td>Throughput</td><td>Quanto dado útil passa por segundo?</td><td>Mbps (MB/s × 8)</td><td>Download ou backup lento</td></tr>
+      <tr><td>Disponibilidade</td><td>Esteve acessível no período?</td><td>% ou minutos fora do ar</td><td>Quedas recorrentes, “às vezes não abre”</td></tr>
     </tbody>
-  </table>
+  </table></div>
+  <p>O tipo de tráfego diz qual pergunta fazer primeiro. Voz, vídeo e jogos enviam pacotes pequenos o tempo todo e precisam deles no ritmo certo: sofrem com jitter e perda mesmo usando pouca banda. Backups e downloads grandes dependem de throughput. Sistemas que fazem muitas idas e voltas a cada clique sentem cada milissegundo de latência. E um serviço rápido quando está no ar ainda pode ter disponibilidade ruim, se cai várias vezes ao dia.</p>
 </section>

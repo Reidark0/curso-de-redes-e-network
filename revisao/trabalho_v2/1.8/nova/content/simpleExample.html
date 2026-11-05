@@ -1,5 +1,13 @@
 <section class="lesson-section lesson-section--example">
   <h2>Exemplo simples</h2>
-  <p>Em casa, você tem internet de 500 Mbps. Um teste de velocidade mostra 480 Mbps perto do roteador, mas uma chamada de vídeo trava no quarto. Isso não contradiz o plano: o throughput máximo perto do roteador pode ser alto, mas no quarto o Wi‑Fi pode ter sinal fraco, interferência, perda e jitter. Para streaming e chamadas, estabilidade pode importar mais que banda nominal.</p>
-  <p>Outro exemplo: um download grande atinge 50 MB/s, ou seja, 50 × 8 = 400 Mbps (o navegador mostra bytes; o link é vendido em bits). Mesmo assim, abrir um site pode parecer lento porque o problema está em DNS, TLS, servidor remoto ou latência inicial, e não na capacidade de download contínuo.</p>
+  <p>Volte à chamada que trava no quarto. Você mede por trecho, com 20 pings em cada teste:</p>
+  <div class="responsive-table"><table class="data-table">
+    <thead><tr><th>Teste</th><th>Perda</th><th>Tempos (mínimo–máximo)</th></tr></thead>
+    <tbody>
+      <tr><td>Do quarto (Wi‑Fi) para o gateway</td><td>10% (2 de 20)</td><td>4–180 ms</td></tr>
+      <tr><td>Da sala, perto do roteador, para o gateway</td><td>0%</td><td>2–5 ms</td></tr>
+      <tr><td>Da sala para <code>8.8.8.8</code></td><td>0%</td><td>14–19 ms</td></tr>
+    </tbody>
+  </table></div>
+  <p>Perto do roteador, o trecho local e a internet estão bons. Do quarto, já no primeiro trecho há perda e tempos que vão de 4 a 180 ms: jitter e perda no Wi‑Fi, por causa de paredes, distância ou interferência. O teste de velocidade não mostrou isso porque foi feito na sala e mede quanto passa num download contínuo, não a variação durante uma chamada. Um plano de 1 Gbps não muda nada; aproximar o roteador, usar cabo ou instalar um access point no quarto resolve.</p>
 </section>

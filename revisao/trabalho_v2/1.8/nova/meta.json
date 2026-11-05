@@ -4,8 +4,8 @@
   "order": 8,
   "title": "Métricas: latência, jitter, perda, throughput e disponibilidade",
   "subtitle": "Como medir uma rede antes de culpar link, firewall, Wi‑Fi, cloud ou aplicação.",
-  "duration": "115-160 min",
-  "estimatedStudyTimeMinutes": 160,
+  "duration": "15-25 min + 50 min de prática extra",
+  "estimatedStudyTimeMinutes": 25,
   "difficulty": "iniciante-intermediário",
   "type": "fundamental",
   "xp": 195,
@@ -48,18 +48,9 @@
     }
   ],
   "objectives": [
-    "Diferenciar latência, jitter, perda, throughput e disponibilidade.",
-    "Entender por que uma rede pode ter muita banda e ainda assim parecer lenta.",
-    "Relacionar métricas com sintomas reais de voz, vídeo, API, VPN, backup, cloud e sistemas corporativos.",
-    "Coletar evidências iniciais com comandos seguros no Windows, Linux e Cisco IOS.",
-    "Evitar diagnósticos genéricos como 'a rede está lenta' sem evidência mensurável.",
-    "Interpretar impactos de segurança e observabilidade a partir de métricas anômalas."
-  ],
-  "learningOutcomes": [
-    "Dado um sintoma de lentidão, o aluno escolhe quais métricas medir primeiro.",
-    "Dado um resultado de ping, traceroute ou teste HTTP, o aluno diferencia latência, perda e indisponibilidade.",
-    "Dado um cenário de cloud ou VPN, o aluno reconhece gargalos de throughput, latência entre regiões e dependências de disponibilidade.",
-    "Dado um incidente, o aluno identifica quando métricas podem indicar saturação, degradação, falha parcial ou possível abuso."
+    "Associar sintomas comuns (resposta lenta, áudio picotando, download lento, quedas recorrentes) à métrica que os explica: latência, jitter, perda, throughput ou disponibilidade.",
+    "Medir por trecho (gateway, destino externo, aplicação) e analisar uma série de pings: média, picos que ela esconde (percentil) e estimativa de jitter.",
+    "Calcular a indisponibilidade permitida por uma meta de disponibilidade (99%, 99,9%, 99,99%) e diferenciar SLA de SLO."
   ],
   "networkContext": {
     "osiLayers": [
@@ -102,352 +93,80 @@
       "monitoramento de segurança"
     ]
   },
-  "troubleshooting": {
-    "symptoms": [
-      "Usuário relata lentidão genérica",
-      "Voz e vídeo picotando",
-      "Download ou backup lento",
-      "Sistema indisponível em alguns horários",
-      "VPN conecta mas fica instável",
-      "API com timeouts intermitentes"
-    ],
-    "diagnosticQuestions": [
-      "O problema é para todos os usuários, uma filial, um Wi‑Fi, uma aplicação ou um destino específico?",
-      "Há perda ou apenas latência alta?",
-      "A latência é constante ou variável?",
-      "O throughput baixo ocorre em qualquer destino ou apenas em um serviço?",
-      "A indisponibilidade é total ou parcial?",
-      "Houve mudança de rota, firewall, proxy, DNS, VPN, aplicação ou cloud?"
-    ],
-    "commands": [
-      {
-        "platform": "Windows",
-        "command": "ping -n 20 8.8.8.8\ntracert 8.8.8.8\nTest-NetConnection exemplo.com -Port 443",
-        "purpose": "Observar RTT, perda aparente, caminho e conectividade TCP básica.",
-        "expectedObservation": "Respostas com tempo estável, sem perda recorrente e porta TCP acessível quando o serviço está disponível.",
-        "interpretation": "Se ICMP falha mas TCP funciona, pode haver bloqueio de ICMP; se ambos falham, investigar conectividade, rota ou política."
-      },
-      {
-        "platform": "Linux",
-        "command": "ping -c 20 8.8.8.8\ntraceroute 8.8.8.8\ncurl -o /dev/null -s -w 'dns=%{time_namelookup} connect=%{time_connect} tls=%{time_appconnect} starttransfer=%{time_starttransfer} total=%{time_total}\\n' https://example.com",
-        "purpose": "Separar RTT, caminho e tempos de DNS, conexão, TLS e resposta HTTP.",
-        "expectedObservation": "Tempos coerentes e sem perda recorrente.",
-        "interpretation": "Se DNS ou TLS demora muito, o problema pode não ser throughput de link."
-      },
-      {
-        "platform": "Cisco IOS",
-        "command": "show interfaces\nshow processes cpu sorted\nshow ip route\nshow logging",
-        "purpose": "Ver erros de interface, descarte, CPU, rota e eventos relevantes.",
-        "expectedObservation": "Baixos erros/descartes, CPU saudável e rota esperada.",
-        "interpretation": "Erros de CRC, input errors ou output drops na interface, ou CPU alta em equipamento intermediário, podem explicar perda, jitter ou indisponibilidade."
-      }
-    ],
-    "decisionTree": [
-      {
-        "if": "Há perda recorrente em vários destinos",
-        "then": "Investigar meio físico, Wi‑Fi, interface, filas, firewall, operadora ou caminho compartilhado."
-      },
-      {
-        "if": "Não há perda, mas latência é alta apenas para uma região",
-        "then": "Investigar distância, rota, peering, região cloud e localização do serviço."
-      },
-      {
-        "if": "Throughput é baixo apenas para um serviço",
-        "then": "Investigar servidor, limitação de aplicação, CDN, TLS, proxy ou política específica."
-      },
-      {
-        "if": "Disponibilidade falha em janelas curtas",
-        "then": "Correlacionar monitoramento, mudanças, logs, rotas e eventos de segurança no mesmo horário."
-      },
-      {
-        "if": "A aplicação demora para abrir, mas downloads são rápidos",
-        "then": "Medir tempos de DNS, conexão, TLS e resposta HTTP (curl -w) e o tempo do servidor: throughput alto não elimina latência nem aplicação lenta. Comprar banda aqui não resolve a experiência."
-      },
-      {
-        "if": "Chamada de vídeo picota, mas a média do ping parece boa",
-        "then": "Medir jitter e perda ao longo do tempo (série de pings, máximo × mínimo, mdev), comparar Wi‑Fi com cabo e verificar QoS e filas: a média esconde variação e descarte."
-      },
-      {
-        "if": "Backup demora muito apenas em um horário específico",
-        "then": "Medir throughput real, saturação do link e tráfego concorrente naquele horário antes de culpar o servidor: transferências grandes dependem de vazão útil contínua."
-      }
-    ]
-  },
-  "security": {
-    "goodPractices": [
-      "Criar baselines de tráfego, latência, perda e disponibilidade por site e aplicação.",
-      "Correlacionar métricas de rede com logs de firewall, DNS, proxy, endpoint e identidade: a métrica indica uma hipótese, não prova a causa.",
-      "Proteger dashboards e relatórios de métricas porque revelam arquitetura e hábitos internos.",
-      "Executar testes de performance apenas com autorização e sem causar indisponibilidade.",
-      "Alertar por anomalia e contexto, não apenas por números isolados."
-    ],
-    "badPractices": [
-      "Concluir que há ataque apenas porque o tráfego aumentou.",
-      "Fazer teste agressivo em rede de produção sem janela ou autorização.",
-      "Guardar evidências com IPs internos, usuários e destinos sensíveis em local público.",
-      "Ignorar disponibilidade parcial por afetar apenas uma filial ou grupo de usuários.",
-      "Desabilitar inspeção de segurança sem medir impacto e risco."
-    ],
-    "commonErrors": [
-      "Confundir indisponibilidade de aplicação com queda de internet.",
-      "Tratar perda baixa como irrelevante em aplicações sensíveis a tempo real.",
-      "Ignorar que criptografia, inspeção e proxy podem adicionar latência legítima.",
-      "Não separar problema de rede, DNS, TLS, autenticação e autorização."
-    ],
-    "vulnerabilities": [
-      {
-        "name": "Exfiltração mascarada como tráfego legítimo",
-        "description": "Transferências anormais de saída podem parecer backup, sincronização ou uso comum se não houver baseline.",
-        "defensiveExplanation": "O foco defensivo é comparar destino, volume, horário, identidade e endpoint com comportamento esperado.",
-        "mitigation": "Egress filtering, DLP, UEBA, baselines, alertas de destino incomum e investigação de identidade e endpoint."
-      },
-      {
-        "name": "Saturação de controle de segurança",
-        "description": "Firewall, proxy ou WAF sobrecarregado (sessões caindo, CPU alta) gera perda e latência, degrada a disponibilidade e cria pressão por bypass inseguro. Pode ser ataque volumétrico/DDoS, falta de capacidade ou regra mal planejada.",
-        "defensiveExplanation": "Métricas de CPU, sessão, throughput e drops ajudam a diferenciar ataque, capacidade e regra mal planejada.",
-        "mitigation": "Capacity planning, rate limit, proteção DDoS, tuning de regras, escala horizontal e monitoramento."
-      },
-      {
-        "name": "Falsa disponibilidade por monitoramento limitado",
-        "description": "Monitorar apenas de dentro do datacenter pode esconder falhas de usuários remotos, filiais ou regiões, inclusive quedas curtas recorrentes causadas por rota instável ou mudança mal controlada.",
-        "defensiveExplanation": "Disponibilidade precisa refletir a experiência real dos públicos relevantes.",
-        "mitigation": "Monitoramento sintético multi-região, probes em filiais, SLOs por jornada crítica e change management."
-      }
-    ],
-    "monitoring": [
-      "RTT por site",
-      "perda por caminho",
-      "jitter em voz/vídeo",
-      "throughput de entrada e saída",
-      "disponibilidade por aplicação",
-      "drops e erros de interface",
-      "CPU e sessões de firewall",
-      "anomalias de egress"
-    ],
-    "hardening": [
-      "Aplicar QoS quando necessário",
-      "limitar e monitorar egress",
-      "dimensionar firewalls e proxies",
-      "segmentar tráfego crítico",
-      "documentar thresholds",
-      "proteger dados de monitoramento"
-    ],
-    "detectionIdeas": [
-      "Comparar throughput atual com baseline histórico",
-      "Investigar picos de conexões com baixa taxa útil: podem indicar varredura, falha de autenticação em massa ou serviço degradado",
-      "Correlacionar queda de disponibilidade com mudanças",
-      "Alertar perda persistente em links críticos",
-      "Detectar destinos externos incomuns com alto volume",
-      "Investigar picos de latência após mudanças de segurança",
-      "Investigar jitter em voz corporativa em horários específicos: fila, QoS ausente ou tráfego concorrente"
-    ]
-  },
   "lab": {
     "id": "lab-1.8",
-    "title": "Coleta segura de métricas básicas de rede",
+    "title": "Medindo por trecho: gateway, internet e aplicação",
     "labType": "security",
-    "objective": "Medir latência, perda aparente, caminho e tempo HTTP de forma leve, registrando evidências sem gerar carga agressiva.",
-    "scenario": "Você recebeu uma reclamação de lentidão e precisa criar uma primeira fotografia técnica da conectividade a partir do seu computador.",
-    "topology": "Aluno -> rede local -> gateway -> internet ou serviço interno autorizado",
-    "architecture": "Host do aluno usando comandos locais para observar ICMP, rota e tempo de aplicação em destino autorizado.",
+    "objective": "Medir RTT, perda e variação até o gateway e até um destino externo, medir o tempo de um acesso a um site e decidir qual trecho investigar.",
     "prerequisites": [
-      "Ter concluído as aulas 0.4, 0.6 e 1.7.",
-      "Ter terminal Windows PowerShell ou Linux disponível."
+      "Terminal do Windows (PowerShell) ou do Linux/macOS.",
+      "Use poucos pacotes (20) e destinos seus ou públicos, como 8.8.8.8."
     ],
-    "tools": [
-      "Windows PowerShell",
-      "Terminal Linux",
-      "Opcional: painel do roteador/firewall quando autorizado",
-      "Opcional: planilha ou arquivo Markdown para registrar evidências"
-    ],
-    "estimatedTimeMinutes": 45,
-    "cost": "zero",
-    "safetyNotes": [
-      "Não execute testes de carga nem varreduras: use poucos pacotes (20) e destinos próprios, públicos de teste ou autorizados.",
-      "Não publique IPs internos, nomes de host, usuários ou destinos sensíveis.",
-      "Em rede corporativa, siga as regras internas de monitoramento."
-    ],
+    "estimatedTimeMinutes": 20,
     "steps": [
       {
-        "title": "Escolher destinos autorizados",
-        "instruction": "Selecione um destino local, como gateway, e um destino externo ou serviço autorizado para comparação.",
-        "command": "Windows: ipconfig\nLinux: ip route | grep default",
-        "expectedOutput": "Endereço do gateway padrão ou rota default.",
-        "explanation": "O gateway ajuda a separar problema local de problema externo."
+        "title": "Achar o gateway e medir o trecho local",
+        "instruction": "Descubra o endereço do gateway (no Windows, a linha Gateway Padrão; no Linux, o IP depois de default via) e envie 20 pings para ele. Anote perda, mínimo, máximo e média.",
+        "command": "Windows: ipconfig\nWindows: ping -n 20 <gateway>\nLinux: ip route | grep default\nLinux: ping -c 20 <gateway>",
+        "expectedOutput": "Em rede local saudável: 0% de perda e tempos de poucos milissegundos, com mínimo e máximo próximos.",
+        "explanation": "Perda ou máximo muito acima do mínimo já no gateway apontam para o trecho local. No Wi‑Fi, repita perto do roteador e compare."
       },
       {
-        "title": "Medir RTT para o gateway",
-        "instruction": "Envie 20 pings para o gateway e registre mínimo, máximo, média e % de perda (no Linux, também o mdev).",
-        "command": "Windows: ping -n 20 <gateway>\nLinux: ping -c 20 <gateway>",
-        "expectedOutput": "Respostas com tempos baixos e perda zero ou quase zero em rede local saudável.",
-        "explanation": "Latência alta ou perda para o gateway sugere problema local, Wi‑Fi, cabo, interface ou equipamento de acesso."
-      },
-      {
-        "title": "Medir RTT para destino externo autorizado",
-        "instruction": "Repita o teste para um destino externo autorizado ou público de teste.",
+        "title": "Medir o trecho externo",
+        "instruction": "Repita o teste para um destino na internet e compare com o resultado do gateway.",
         "command": "Windows: ping -n 20 8.8.8.8\nLinux: ping -c 20 8.8.8.8",
-        "expectedOutput": "Tempos maiores que o gateway e sem perda recorrente em cenário saudável.",
-        "explanation": "Comparar gateway e externo ajuda a separar rede local de caminho externo."
+        "expectedOutput": "Tempos maiores que os do gateway (dezenas de milissegundos é comum) e perda zero ou quase zero.",
+        "explanation": "Gateway bom e destino externo com perda ou picos indicam o trecho do roteador para fora: link, provedor ou caminho."
       },
       {
-        "title": "Observar caminho",
-        "instruction": "Use traceroute/tracert para observar saltos até o destino.",
-        "command": "Windows: tracert 8.8.8.8\nLinux: traceroute 8.8.8.8",
-        "expectedOutput": "Lista de saltos ou alguns saltos sem resposta por política.",
-        "explanation": "Nem todo salto responde, mas mudanças ou atrasos grandes podem orientar a investigação."
-      },
-      {
-        "title": "Medir tempo HTTP",
-        "instruction": "Meça tempos de uma requisição HTTPS para um site permitido.",
+        "title": "Medir o tempo da aplicação",
+        "instruction": "Meça quanto demora um acesso a um site. O curl do Linux separa o tempo em etapas; o comando do Windows mostra o total.",
         "command": "Linux: curl -o /dev/null -s -w 'dns=%{time_namelookup} connect=%{time_connect} tls=%{time_appconnect} starttransfer=%{time_starttransfer} total=%{time_total}\\n' https://example.com\nWindows PowerShell: Measure-Command { Invoke-WebRequest -Uri https://example.com -UseBasicParsing }",
-        "expectedOutput": "Tempo total e, no Linux, tempos separados de DNS, conexão, TLS e início de resposta.",
-        "explanation": "HTTP pode estar lento por DNS, TCP, TLS ou aplicação, mesmo se ping estiver bom."
+        "expectedOutput": "No Linux, uma linha com os tempos em segundos (dns=…, connect=…, tls=…, starttransfer=…, total=…). No Windows, o tempo total do acesso (TotalMilliseconds).",
+        "explanation": "Os tempos são acumulados desde o início (connect já inclui o dns). Uma etapa que concentra quase todo o total mostra onde está a demora, mesmo com o ping bom."
       },
       {
-        "title": "Registrar interpretação",
-        "instruction": "Crie uma tabela com as colunas métrica, comando, resultado, hipótese e limite da evidência, com uma linha para cada passo anterior e o horário dos testes.",
-        "expectedOutput": "Tabela curta com resultados, hipóteses e limites. Exemplo de linha: Perda | ping -c 20 <gateway> | 0% | trecho local saudável | ICMP pode ter prioridade diferente do tráfego real.",
-        "explanation": "Evidência sem interpretação vira coleção de números; interpretação sem limite vira conclusão frágil."
+        "title": "Analisar a série e decidir",
+        "instruction": "Pegue os 10 primeiros tempos do passo 2. Calcule a média, conte quantos passam do dobro do mínimo e estime o jitter pela média das diferenças entre respostas seguidas. Depois diga qual trecho você investigaria primeiro, se algum.",
+        "expectedOutput": "Média, quantidade de picos, jitter estimado e uma conclusão, por exemplo: gateway 0% e 2–4 ms; externo 0% e 14–19 ms; jitter ≈ 2 ms; nenhum trecho suspeito.",
+        "explanation": "A média esconde picos; os picos e o jitter mostram se voz e vídeo sofreriam nesse caminho."
       }
     ],
-    "expectedResult": "O aluno deve produzir uma primeira fotografia de métricas com RTT local, RTT externo, caminho, tempo HTTP, hipóteses e limites de evidência.",
-    "validation": [
-      {
-        "check": "Gateway identificado",
-        "command": "ipconfig ou ip route",
-        "expected": "Rota default ou gateway encontrado.",
-        "ifFails": "Verifique se a interface está conectada e se há configuração IP válida."
-      },
-      {
-        "check": "Ping local coletado",
-        "command": "ping para gateway",
-        "expected": "Resultado com estatísticas de tempo e perda.",
-        "ifFails": "Investigue firewall local, Wi‑Fi, cabo, VLAN, IP e gateway."
-      },
-      {
-        "check": "Tempo HTTP coletado",
-        "command": "curl ou Invoke-WebRequest",
-        "expected": "Tempo de resposta registrado.",
-        "ifFails": "Verifique DNS, proxy, firewall, TLS, acesso à internet ou bloqueio corporativo."
-      }
-    ],
-    "troubleshooting": [
-      {
-        "symptom": "Ping para gateway falha",
-        "probableCause": "Problema local de IP, Wi‑Fi, cabo, gateway, VLAN ou firewall local.",
-        "howToConfirm": "Verificar IP, rota default, interface e conectividade física.",
-        "fix": "Corrigir configuração local, reconectar rede ou acionar suporte de acesso."
-      },
-      {
-        "symptom": "Gateway responde bem, destino externo perde pacotes",
-        "probableCause": "Problema em rota externa, firewall, operadora ou política.",
-        "howToConfirm": "Testar mais de um destino autorizado e verificar logs do gateway/firewall quando possível.",
-        "fix": "Escalar com evidências para rede, segurança ou provedor."
-      },
-      {
-        "symptom": "Ping bom, HTTP lento",
-        "probableCause": "DNS, TLS, proxy, servidor remoto, aplicação ou autenticação.",
-        "howToConfirm": "Medir tempos HTTP separados e testar destino alternativo autorizado.",
-        "fix": "Investigar camada de aplicação, DNS, proxy ou serviço."
-      },
-      {
-        "symptom": "Resultados variam muito",
-        "probableCause": "Jitter, Wi‑Fi instável, congestionamento ou rota variável.",
-        "howToConfirm": "Repetir medições em horários diferentes e comparar cabeado vs Wi‑Fi se possível.",
-        "fix": "Melhorar meio, QoS, canal Wi‑Fi, capacidade ou rota."
-      }
-    ],
-    "improvements": [
-      "Repetir as medições em horários diferentes",
-      "Comparar Wi‑Fi e cabo",
-      "Medir de uma filial ou VM autorizada e correlacionar com logs de firewall e mudanças"
-    ],
-    "evidenceToCollect": [
-      "Gateway e interface usada",
-      "Estatísticas de ping local",
-      "Estatísticas de ping externo",
-      "Traceroute/tracert",
-      "Tempo HTTP",
-      "Horário dos testes",
-      "Hipóteses e limites"
-    ],
-    "questions": [
-      "Qual métrica piorou primeiro?",
-      "O problema parece local, externo ou de aplicação?",
-      "Que evidência ainda falta para concluir?",
-      "O teste usado mede a aplicação real ou apenas conectividade básica?"
-    ],
-    "challenge": "Monte um relatório curto para um chamado de lentidão, separando fatos medidos, hipóteses e próximos testes recomendados.",
-    "solution": "Uma boa solução registra resultados sem exagerar conclusões: se o gateway responde bem e HTTP demora, não declare 'link ruim'; investigue DNS, TLS, proxy e aplicação. Se há perda para o gateway, priorize meio local, Wi‑Fi, cabo ou switch. Se há perda apenas externa, escale com evidências de horário, destino e caminho."
+    "expectedResult": "Você mediu os dois trechos e o tempo da aplicação, calculou média e jitter de uma série real e sabe dizer qual trecho investigar."
   },
   "mentorQuestions": [
     {
-      "type": "reflexão",
-      "question": "Por que 'rede lenta' não é um diagnóstico técnico suficiente?",
+      "type": "aplicação",
+      "question": "Uma empresa faz o backup noturno pela internet e, de dia, os atendentes usam telefone pela rede (voz sobre IP). Para cada um, qual métrica você acompanharia primeiro e por quê?",
       "hints": [
-        "Pense em métricas diferentes.",
-        "Pense em aplicação, DNS, TLS e servidor."
+        "Um transfere muito dado de uma vez; o outro envia pacotes pequenos o tempo todo.",
+        "O que importa para a voz: quantidade ou ritmo?"
       ],
       "expectedIdeas": [
-        "latência",
-        "jitter",
-        "perda",
-        "throughput",
-        "disponibilidade",
-        "camadas"
+        "backup: throughput",
+        "voz: jitter e perda",
+        "tráfego em tempo real",
+        "volume contínuo"
       ],
-      "explanation": "A frase descreve percepção do usuário, mas não identifica qual propriedade da comunicação piorou."
-    },
-    {
-      "type": "diagnóstico",
-      "question": "Uma chamada de vídeo picota, mas o teste de velocidade mostra alta vazão. Que métrica você investigaria?",
-      "hints": [
-        "Chamadas são sensíveis a variação.",
-        "Nem tudo depende de download grande."
-      ],
-      "expectedIdeas": [
-        "jitter",
-        "perda",
-        "Wi‑Fi",
-        "QoS",
-        "latência variável"
-      ],
-      "explanation": "Voz e vídeo sofrem com jitter e perda mesmo quando throughput máximo parece bom."
+      "explanation": "O backup depende de vazão útil sustentada (throughput) para terminar na janela da noite. A voz usa pouca banda, mas precisa dos pacotes no ritmo certo: jitter e perda estragam a chamada mesmo com o link folgado."
     },
     {
       "type": "cenário real",
-      "question": "Uma API em cloud fica lenta apenas para usuários de uma filial. Como você separaria rede local, WAN e aplicação?",
+      "question": "O monitoramento instalado no datacenter mostra 100% de disponibilidade do sistema no mês, mas a filial teve três quedas de link de 20 minutos. Para os usuários da filial, qual foi a disponibilidade? O que muda no jeito de medir?",
       "hints": [
-        "Compare gateway, destino externo e API.",
-        "Meça de outro ponto."
+        "Disponibilidade para quem?",
+        "30 dias têm 43.200 minutos."
       ],
       "expectedIdeas": [
-        "medição por trecho",
-        "RTT",
-        "traceroute",
-        "tempo HTTP",
-        "logs",
-        "comparação com outra filial"
+        "60 min fora do ar",
+        "cerca de 99,86%",
+        "medir de onde o usuário está",
+        "mais de um ponto de medição"
       ],
-      "explanation": "Comparar pontos e trechos evita culpar a aplicação quando o problema é rota ou culpar a rede quando o problema é serviço."
+      "explanation": "Para a filial, foram 60 minutos sem acesso: 1 − 60 ÷ 43.200 ≈ 99,86%. Medir só de dentro do datacenter esconde isso; a disponibilidade precisa ser medida também de onde os usuários estão."
     }
   ],
   "quiz": [
-    {
-      "id": "q1.8.2",
-      "question": "Qual é a melhor definição de throughput?",
-      "options": [
-        "A capacidade nominal contratada do link",
-        "A vazão útil real obtida",
-        "A variação da latência",
-        "O tempo total de indisponibilidade"
-      ],
-      "answer": 1,
-      "explanation": "Throughput é quanto tráfego útil passa de fato; a capacidade nominal contratada é a largura de banda, o teto, e o throughput costuma ficar abaixo dela.",
-      "topic": "throughput",
-      "difficulty": "iniciante",
-      "type": "comparação"
-    },
     {
       "id": "q1.8.3",
       "question": "Voz e vídeo falham, mas a média de ping parece razoável. Qual métrica pode estar escondendo o problema?",
@@ -462,21 +181,6 @@
       "topic": "jitter",
       "difficulty": "iniciante-intermediário",
       "type": "diagnóstico"
-    },
-    {
-      "id": "q1.8.4",
-      "question": "Throughput de saída muito acima do baseline para destino incomum pode indicar o quê?",
-      "options": [
-        "Possível exfiltração ou transferência anômala, que precisa ser correlacionada",
-        "Prova de ataque, que justifica bloquear o host imediatamente",
-        "Melhoria de performance após upgrade do link",
-        "Jitter alto no link de saída"
-      ],
-      "answer": 0,
-      "explanation": "Não prova ataque sozinho (pode ser backup ou sincronização legítima), mas é um sinal que merece correlação com destino, horário, identidade, endpoint e logs.",
-      "topic": "segurança",
-      "difficulty": "intermediário",
-      "type": "segurança"
     },
     {
       "id": "q1.8.5",
@@ -539,31 +243,22 @@
       "type": "comando/output"
     },
     {
-      "id": "q1.8.9",
-      "question": "Uma conexão TCP com janela de 64 KB e RTT de 100 ms transfere bem abaixo do link de 1 Gbps. Qual é a explicação mais provável?",
+      "id": "q1.8.10",
+      "question": "O ping para o servidor de um site mostra 100% de perda, mas o site abre normalmente no navegador. O que concluir?",
       "options": [
-        "O throughput de uma conexão fica limitado a janela ÷ RTT, cerca de 5 Mbps aqui",
-        "O link entrega sempre só 50% da banda nominal",
-        "O jitter reduz a capacidade nominal do link",
-        "A disponibilidade do serviço está abaixo de 99%"
+        "O servidor ou um firewall no caminho provavelmente bloqueia o ping (ICMP); o site está disponível.",
+        "O site está fora do ar e o navegador mostra uma cópia antiga.",
+        "O link tem perda total e precisa ser trocado.",
+        "O jitter está alto demais para o ping funcionar."
       ],
       "answer": 0,
-      "explanation": "Sem escala de janela, 65.535 bytes × 8 ÷ 0,1 s ≈ 5,2 Mbps: a latência limita a vazão útil de uma conexão mesmo com muita banda.",
-      "topic": "throughput",
-      "difficulty": "intermediário",
-      "type": "cálculo"
+      "explanation": "Muitos servidores e firewalls bloqueiam o ping. Se o serviço responde quando acessado de verdade, ele está disponível; ping sem resposta não prova queda.",
+      "topic": "disponibilidade",
+      "difficulty": "iniciante-intermediário",
+      "type": "diagnóstico"
     }
   ],
   "flashcards": [
-    {
-      "id": "fc1.8.1",
-      "front": "O que é latência?",
-      "back": "É o tempo que a comunicação leva para ocorrer, frequentemente observado como RTT em testes de ping.",
-      "tags": [
-        "latência"
-      ],
-      "difficulty": "iniciante"
-    },
     {
       "id": "fc1.8.2",
       "front": "O que é jitter?",
@@ -579,15 +274,6 @@
       "back": "É quando pacotes não chegam ao destino ou são descartados no caminho.",
       "tags": [
         "perda"
-      ],
-      "difficulty": "iniciante"
-    },
-    {
-      "id": "fc1.8.4",
-      "front": "Throughput é igual à largura de banda contratada?",
-      "back": "Não. Throughput é a vazão útil real; largura de banda contratada é capacidade nominal.",
-      "tags": [
-        "throughput"
       ],
       "difficulty": "iniciante"
     },
@@ -619,235 +305,86 @@
       "difficulty": "iniciante"
     },
     {
-      "id": "fc1.8.8",
-      "front": "Um download mostra 50 MB/s. Quanto é isso em Mbps?",
-      "back": "400 Mbps: multiplique bytes por 8 para comparar com a velocidade do link, que é vendida em bits.",
+      "id": "fc1.8.9",
+      "front": "Ping para o gateway está bom, mas para 8.8.8.8 há perda e picos. Onde investigar?",
+      "back": "Do roteador para fora: link, provedor ou caminho. O trecho local (Wi‑Fi, cabo, placa, roteador) está saudável.",
       "tags": [
-        "throughput"
+        "troubleshooting"
       ],
       "difficulty": "iniciante"
     }
   ],
   "exercises": [
     {
-      "id": "ex1.8.1",
-      "type": "conceitual",
-      "prompt": "Explique com suas palavras a diferença entre largura de banda e throughput.",
-      "expectedAnswer": "Largura de banda é a capacidade nominal ou máxima teórica de um link; throughput é a vazão útil real obtida após overhead, perdas, latência, processamento e limitações do caminho.",
-      "explanation": "Essa distinção evita prometer que um link de 1 Gbps sempre entregará 1 Gbps de aplicação."
-    },
-    {
       "id": "ex1.8.5",
       "type": "comando/output",
       "prompt": "Dez pings para um servidor de voz retornam 30, 31, 30, 150, 29, 30, 160, 31, 30, 29 ms, com 0% de perda. Calcule a média, diga o que ela esconde e qual métrica explica as reclamações de áudio picotado.",
-      "expectedAnswer": "Média = 550 ÷ 10 = 55 ms, que parece aceitável. Ela esconde que 2 de 10 respostas (20%) chegaram a 150 ms ou mais. A métrica é o jitter: as diferenças entre respostas consecutivas somam 1+1+120+121+1+130+129+1+1 = 505, cerca de 56 ms em média, ruim para voz. O próximo passo é medir ao longo do tempo, comparar Wi‑Fi e cabo e verificar QoS e filas.",
+      "expectedAnswer": "Média = 550 ÷ 10 = 55 ms, que parece aceitável. Ela esconde que 2 de 10 respostas (20%) chegaram a 150 ms ou mais. A métrica é o jitter: as diferenças entre respostas consecutivas somam 1+1+120+121+1+130+129+1+1 = 505, cerca de 56 ms em média, ruim para voz. O próximo passo é medir por trecho (gateway e destino externo) para achar onde a variação começa e comparar Wi‑Fi com cabo.",
       "explanation": "Média e perda zero não bastam para tráfego em tempo real; a variação (jitter) e os picos (percentis) é que definem a experiência."
     },
     {
-      "id": "ex1.8.3",
-      "type": "comando/output",
-      "prompt": "Você executa ping para o gateway e observa 10% de perda. O que isso sugere e qual próximo passo?",
-      "expectedAnswer": "Sugere problema local no meio, interface, Wi‑Fi, cabo, porta, gateway ou congestionamento local. O próximo passo é verificar interface, sinal/cabo, trocar meio quando possível e comparar com outro dispositivo.",
-      "explanation": "Perda até o gateway geralmente deve ser investigada antes de culpar internet ou aplicação."
-    },
-    {
-      "id": "ex1.8.4",
-      "type": "segurança",
-      "prompt": "Explique por que throughput de saída anormal pode ser relevante para segurança, mas não deve ser tratado como prova isolada de ataque.",
-      "expectedAnswer": "Pode indicar exfiltração ou uso indevido, mas também pode ser backup, atualização, sincronização ou atividade legítima. É necessário correlacionar destino, horário, identidade, endpoint, processo e logs.",
-      "explanation": "Métrica indica hipótese; investigação exige contexto."
+      "id": "ex1.8.6",
+      "type": "cálculo",
+      "prompt": "Um provedor promete 99,9% de disponibilidade mensal (30 dias). No mês, o link caiu três vezes: 15, 20 e 25 minutos. O SLA foi cumprido? Qual foi a disponibilidade real?",
+      "expectedAnswer": "Não. 99,9% permite cerca de 43,2 minutos fora do ar em 43.200 minutos, e o link ficou 60 minutos fora. Disponibilidade real: 1 − 60 ÷ 43.200 ≈ 99,86%.",
+      "explanation": "O exercício aplica o cálculo da tabela de disponibilidade a um caso de cobrança de fornecedor: quedas curtas somadas podem estourar a meta."
     }
   ],
   "challenge": {
     "title": "Transforme 'a rede está lenta' em investigação mensurável",
-    "scenario": "Uma empresa relata lentidão intermitente no sistema de atendimento. Usuários de uma filial reclamam mais que usuários da matriz. O sistema está em cloud e passa por firewall, proxy e autenticação corporativa.",
+    "scenario": "Os atendentes de uma filial reclamam que o sistema de atendimento, que fica na internet, está lento em alguns momentos do dia. Na matriz, ninguém reclama. O gerente quer contratar mais banda para a filial.",
     "tasks": [
-      "Definir quais métricas coletar",
-      "Separar testes locais, WAN, cloud e aplicação",
-      "Indicar comandos ou fontes de evidência",
-      "Listar hipóteses e como descartar cada uma",
-      "Indicar riscos de segurança ou anomalias possíveis"
-    ],
-    "constraints": [
-      "Não executar teste de carga",
-      "Não usar ferramentas ofensivas",
-      "Não coletar dados sensíveis sem autorização",
-      "Explicar limites de cada evidência"
+      "Dizer quais métricas você mediria e de onde (filial e matriz).",
+      "Montar a sequência de testes por trecho com os comandos da aula e o que cada resultado indicaria.",
+      "Explicar ao gerente quando mais banda resolveria e quando não."
     ],
     "expectedDeliverables": [
-      "Tabela de métricas",
-      "Plano de coleta",
-      "Hipóteses priorizadas",
-      "Critérios de escalonamento",
-      "Resumo executivo para gestor"
-    ],
-    "gradingRubric": [
-      {
-        "criterion": "Separação correta das métricas",
-        "points": 25,
-        "description": "Distingue latência, jitter, perda, throughput e disponibilidade."
-      },
-      {
-        "criterion": "Coleta por trecho",
-        "points": 25,
-        "description": "Compara filial, matriz, gateway, WAN, cloud e aplicação."
-      },
-      {
-        "criterion": "Segurança e ética",
-        "points": 20,
-        "description": "Evita testes agressivos e protege evidências sensíveis."
-      },
-      {
-        "criterion": "Raciocínio de troubleshooting",
-        "points": 20,
-        "description": "Lista hipóteses e formas de confirmar ou descartar."
-      },
-      {
-        "criterion": "Comunicação",
-        "points": 10,
-        "description": "Apresenta conclusões com limites e próximos passos."
-      }
+      "Um plano de 5 a 10 linhas com os testes, o que cada resultado indicaria e a resposta ao gerente."
     ]
   },
   "commentedSolution": {
-    "reasoning": "A investigação deve começar separando percepção de métrica. A filial afetada sugere comparar localidade, rota, Wi‑Fi/cabeamento, firewall/proxy e acesso à cloud. Como o sistema passa por autenticação, também é necessário separar rede de identidade e aplicação.",
+    "reasoning": "A reclamação está concentrada na filial e é intermitente. Isso aponta para o caminho da filial, não para o sistema, mas só a comparação de medições confirma.",
     "steps": [
-      "Medir RTT e perda para gateway da filial",
-      "Medir destino externo autorizado",
-      "Medir tempo HTTP/TLS do sistema ou endpoint de saúde autorizado",
-      "Comparar com matriz",
-      "Verificar logs de firewall/proxy no horário",
-      "Verificar disponibilidade e métricas do serviço cloud",
-      "Correlacionar com mudanças e eventos de segurança"
+      "Na filial, nos horários de reclamação: 20 pings para o gateway. Perda ou tempos variados aqui = trecho local (Wi‑Fi, cabo, roteador).",
+      "Ainda na filial: 20 pings para um destino externo. Gateway bom e externo com perda ou picos = link ou provedor da filial.",
+      "Medir o tempo de acesso ao sistema (curl ou Measure-Command) na filial e na matriz. Pings bons e tempo alto nos dois lugares = o sistema; só na filial = o caminho da filial.",
+      "Repetir em horário sem reclamação: se tudo melhora, o link pode estar saturado nos horários de pico."
     ],
     "commonWrongAnswers": [
       {
         "answer": "Comprar mais banda imediatamente",
-        "whyItIsWrong": "Banda pode não resolver jitter, perda, DNS, TLS, proxy, aplicação ou cloud em região distante."
+        "whyItIsWrong": "Só resolve se a medição mostrar o link da filial saturado nos horários de pico. Não resolve perda no Wi‑Fi, jitter nem lentidão do sistema."
       },
       {
-        "answer": "Culpar a aplicação sem medir rede",
-        "whyItIsWrong": "A reclamação concentrada em uma filial pode apontar para caminho, Wi‑Fi, WAN ou proxy local."
-      },
-      {
-        "answer": "Fazer teste de carga sem autorização",
-        "whyItIsWrong": "Pode causar indisponibilidade e violar regras de segurança."
+        "answer": "Culpar o sistema sem medir",
+        "whyItIsWrong": "A matriz usa o mesmo sistema e não reclama: a diferença está no caminho da filial até ele."
       }
     ],
-    "finalAnswer": "Uma solução adequada coleta métricas por trecho, compara filial e matriz, mede latência, perda, jitter quando aplicável, tempo HTTP/TLS e disponibilidade, e correlaciona com logs de firewall, proxy, cloud e identidade. A conclusão deve separar fatos, hipóteses e próximos testes."
+    "finalAnswer": "Meça na filial e na matriz, por trecho (gateway, destino externo, aplicação), nos horários de reclamação e fora deles. Mais banda só resolve se o link da filial estiver saturado nos horários de pico; perda local, jitter ou sistema lento pedem outra correção."
   },
   "glossary": [
     {
-      "term": "Latência",
-      "shortDefinition": "Tempo para a comunicação ocorrer.",
-      "longDefinition": "Em redes, normalmente é observada como RTT, incluindo ida, processamento e volta.",
-      "example": "Ping de 30 ms para um destino indica RTT aproximado de 30 milissegundos.",
-      "relatedTerms": [
-        "RTT",
-        "jitter",
-        "throughput"
-      ],
+      "term": "ICMP",
+      "shortDefinition": "Protocolo de mensagens de controle da rede; é o que o ping usa para pedir e receber respostas.",
+      "example": "Um firewall pode bloquear o ICMP e deixar o site acessível.",
       "relatedLessons": [
-        "0.6",
-        "1.8",
-        "6.1"
+        "4.8"
       ]
     },
     {
-      "term": "Jitter",
-      "shortDefinition": "Variação da latência.",
-      "longDefinition": "Diferença entre tempos de chegada ou resposta de pacotes sucessivos, importante para voz e vídeo.",
-      "example": "Uma chamada pode falhar se a latência alterna entre 20 ms e 400 ms.",
-      "relatedTerms": [
-        "latência",
-        "QoS",
-        "perda"
-      ],
+      "term": "DNS",
+      "shortDefinition": "Serviço que transforma nomes, como example.com, em endereços IP.",
+      "example": "Se o DNS demora, todo acesso por nome demora, mesmo com o ping bom.",
       "relatedLessons": [
-        "1.8",
-        "12.5"
+        "7.1"
       ]
     },
     {
-      "term": "Perda de pacotes",
-      "shortDefinition": "Pacotes descartados ou não entregues.",
-      "longDefinition": "Pode ocorrer por erro físico, congestão, filas, políticas, Wi‑Fi ruim ou falhas de caminho.",
-      "example": "Ping com 5% de perda indica instabilidade relevante.",
-      "relatedTerms": [
-        "retransmissão",
-        "congestionamento",
-        "CRC"
-      ],
+      "term": "TLS",
+      "shortDefinition": "Protocolo que criptografa a conexão entre o navegador (ou outro programa) e o servidor; é o que faz o https.",
+      "example": "No curl, o tempo tls mostra quanto levou para negociar essa criptografia.",
       "relatedLessons": [
-        "1.5",
-        "1.8",
-        "15.3"
-      ]
-    },
-    {
-      "term": "Throughput",
-      "shortDefinition": "Vazão útil real de tráfego.",
-      "longDefinition": "Quantidade de dados úteis transmitidos por unidade de tempo, geralmente menor que a capacidade nominal.",
-      "example": "Um link de 500 Mbps pode entregar 430 Mbps úteis em determinado teste.",
-      "relatedTerms": [
-        "largura de banda",
-        "overhead",
-        "Mbps"
-      ],
-      "relatedLessons": [
-        "0.4",
-        "0.6",
-        "1.8"
-      ]
-    },
-    {
-      "term": "Disponibilidade",
-      "shortDefinition": "Proporção de tempo em que serviço ou caminho está acessível.",
-      "longDefinition": "Métrica de confiabilidade usada em SLA, SLO e operação de serviços críticos.",
-      "example": "99,9% de disponibilidade ainda permite cerca de 43 minutos de indisponibilidade em 30 dias.",
-      "relatedTerms": [
-        "SLA",
-        "SLO",
-        "monitoramento"
-      ],
-      "relatedLessons": [
-        "1.8",
-        "15.8"
-      ]
-    },
-    {
-      "term": "SLO",
-      "shortDefinition": "Objetivo de nível de serviço.",
-      "longDefinition": "Meta interna para qualidade, disponibilidade ou desempenho de um serviço, em geral mais exigente que o SLA (o compromisso formal com cliente ou fornecedor).",
-      "example": "Responder 95% das requisições em até 300 ms.",
-      "relatedTerms": [
-        "SLA",
-        "disponibilidade",
-        "percentil"
-      ],
-      "relatedLessons": [
-        "1.8",
-        "15.10"
-      ]
-    },
-    {
-      "term": "Largura de banda",
-      "shortDefinition": "Capacidade nominal de um link.",
-      "longDefinition": "Taxa máxima teórica de transmissão, em bits por segundo, que o link ou plano oferece. O throughput real costuma ficar abaixo dela.",
-      "example": "Plano de 500 Mbps: 500 Mbps é a largura de banda; 430 Mbps medidos são o throughput.",
-      "relatedTerms": [
-        "throughput",
-        "Mbps"
-      ]
-    },
-    {
-      "term": "Percentil (p95/p99)",
-      "shortDefinition": "Valor abaixo do qual fica uma porcentagem das medições.",
-      "longDefinition": "O p95 é o tempo abaixo do qual ficam 95% das medições. Mostra os picos que a média esconde.",
-      "example": "Média de 40 ms com p95 de 120 ms indica que 5% das requisições levam 120 ms ou mais.",
-      "relatedTerms": [
-        "latência",
-        "SLO"
+        "8.3"
       ]
     }
   ],
@@ -872,13 +409,6 @@
       "organization": "IETF",
       "url": "",
       "note": "Referência conceitual para métricas de desempenho em redes IP."
-    },
-    {
-      "type": "official-doc",
-      "title": "Cisco interface and troubleshooting commands",
-      "organization": "Cisco",
-      "url": "",
-      "note": "Comandos de interface e diagnóstico serão aprofundados em módulos posteriores."
     }
   ],
   "linksToOtherCourses": [
@@ -898,11 +428,7 @@
   "progressRules": {
     "completeWhen": {
       "read": true,
-      "quizScoreAtLeast": 70,
-      "oneOf": [
-        "labMarkedDone",
-        "practicalExerciseDone"
-      ]
+      "quizScoreAtLeast": 70
     },
     "accessPolicy": {
       "freeAccess": true,

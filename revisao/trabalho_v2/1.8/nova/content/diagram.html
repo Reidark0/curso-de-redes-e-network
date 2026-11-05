@@ -1,9 +1,9 @@
 <section class="lesson-section lesson-section--diagram">
   <h2>Diagrama</h2>
-  <p>O diagrama separa métricas que parecem semelhantes, mas medem coisas diferentes: tempo, variação, perda, vazão útil e disponibilidade.</p>
+  <p>O diagrama mostra o caminho medido em trechos (local até o gateway; do gateway até o serviço) e as cinco métricas, cada uma respondendo a uma pergunta diferente.</p>
   <svg class="lesson-svg" viewBox="0 0 980 500" role="img" aria-labelledby="m01l08-title m01l08-desc">
     <title id="m01l08-title">Métricas de rede no caminho entre cliente e serviço</title>
-    <desc id="m01l08-desc">Cliente envia tráfego por switch, firewall, WAN e servidor. O diagrama destaca latência, jitter, perda, throughput e disponibilidade.</desc>
+    <desc id="m01l08-desc">Cliente envia tráfego por switch, gateway e internet até o serviço. O caminho é dividido em trecho local e trecho externo, e o diagrama destaca latência, jitter, perda, throughput e disponibilidade.</desc>
     <defs>
       <marker id="m01l08-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
         <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
@@ -13,12 +13,17 @@
     <text x="110" y="130" text-anchor="middle" class="svg-label">Cliente</text>
     <rect x="240" y="90" width="140" height="70" rx="12" class="svg-node svg-node--switch" />
     <text x="310" y="130" text-anchor="middle" class="svg-label">Switch</text>
-    <rect x="440" y="90" width="140" height="70" rx="12" class="svg-node svg-node--firewall" />
-    <text x="510" y="130" text-anchor="middle" class="svg-label">Firewall</text>
+    <rect x="440" y="90" width="140" height="70" rx="12" class="svg-node" />
+    <text x="510" y="130" text-anchor="middle" class="svg-label">Gateway</text>
     <rect x="640" y="90" width="140" height="70" rx="12" class="svg-node svg-node--cloud" />
-    <text x="710" y="130" text-anchor="middle" class="svg-label">WAN/Cloud</text>
+    <text x="710" y="130" text-anchor="middle" class="svg-label">Internet</text>
     <rect x="820" y="90" width="120" height="70" rx="12" class="svg-node svg-node--server" />
     <text x="880" y="130" text-anchor="middle" class="svg-label">Serviço</text>
+
+    <line x1="40" y1="60" x2="580" y2="60" class="svg-flow svg-flow--request" />
+    <text x="310" y="48" text-anchor="middle" class="svg-label svg-label--small">trecho local: ping para o gateway</text>
+    <line x1="600" y1="60" x2="940" y2="60" class="svg-flow svg-flow--response" />
+    <text x="770" y="48" text-anchor="middle" class="svg-label svg-label--small">trecho externo: ping para a internet, tempo da aplicação</text>
 
     <line x1="180" y1="125" x2="240" y2="125" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l08-arrow)" />
     <line x1="380" y1="125" x2="440" y2="125" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m01l08-arrow)" />
