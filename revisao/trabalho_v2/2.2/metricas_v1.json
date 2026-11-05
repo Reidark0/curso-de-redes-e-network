@@ -1,0 +1,93 @@
+{
+  "id": "2.2",
+  "versao": "v1",
+  "titulo": "Encapsulamento, desencapsulamento e PDUs",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4375,
+    "teoria": 2898,
+    "praticaExtra": 778,
+    "quiz": 393,
+    "flashcards": 117
+  },
+  "porGrupoTeoria": {
+    "introducao": 650,
+    "contexto": 143,
+    "conteudo": 961,
+    "exemplos": 508,
+    "seguranca_troubleshooting": 636
+  },
+  "porSecao": {
+    "motivation": 134,
+    "summary": 108,
+    "problem": 143,
+    "concept": 244,
+    "internals": 510,
+    "architecture": 174,
+    "diagram": 33,
+    "analogy": 98,
+    "simpleExample": 115,
+    "enterpriseExample": 86,
+    "cloudExample": 117,
+    "securityExample": 92,
+    "objectives": 58,
+    "learningOutcomes": 79,
+    "glossary": 271,
+    "security": 246,
+    "troubleshooting": 390,
+    "nextTheme": 38
+  },
+  "pratica": {
+    "quiz": 393,
+    "flashcards": 117,
+    "lab": 0,
+    "mentorQuestions": 156,
+    "exercises": 265,
+    "challenge": 143,
+    "commentedSolution": 214
+  },
+  "outros": {
+    "title+subtitle": 21,
+    "nextTheme": 38,
+    "references": 79,
+    "linksToOtherCourses": 51
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "70-100 min",
+    "estimatedStudyTimeMinutes": 100,
+    "nucleo": 31.3,
+    "nucleoPartes": {
+      "teoria": 22.3,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-40 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "25-40 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 40
+  }
+}

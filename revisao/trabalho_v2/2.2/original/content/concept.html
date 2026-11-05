@@ -1,0 +1,15 @@
+<section class="lesson-section lesson-section--concept">
+  <h2>5. Conceito</h2>
+  <p><strong>Encapsulamento</strong> é o processo no qual dados de uma camada superior recebem informações adicionais, geralmente cabeçalhos e às vezes trailers, para serem tratados pela camada inferior. <strong>Desencapsulamento</strong> é o processo inverso: o destino remove e interpreta essas informações camada por camada até entregar os dados à aplicação.</p>
+  <div class="definition-box"><strong>Definição:</strong> PDU, Protocol Data Unit, é a unidade de dados tratada por uma camada específica. Em termos práticos: dados na aplicação, segmento ou datagrama na camada de transporte, pacote na camada de rede, quadro na camada de enlace e bits na camada física.</div>
+  <table class="data-table comparison-table">
+    <thead><tr><th>Camada</th><th>PDU comum</th><th>Informação adicionada</th><th>Exemplo</th></tr></thead>
+    <tbody>
+      <tr><td>Aplicação</td><td>Dados</td><td>Mensagem da aplicação</td><td>HTTP request, consulta DNS, payload JSON</td></tr>
+      <tr><td>Transporte</td><td>Segmento ou datagrama</td><td>Portas, estado, controle de fluxo ou checksum</td><td>TCP 443, UDP 53</td></tr>
+      <tr><td>Rede</td><td>Pacote</td><td>IP de origem, IP de destino, TTL, protocolo</td><td>IPv4 ou IPv6</td></tr>
+      <tr><td>Enlace</td><td>Quadro</td><td>MAC de origem, MAC de destino, EtherType, FCS</td><td>Ethernet</td></tr>
+      <tr><td>Física</td><td>Bits/sinais</td><td>Codificação física no meio</td><td>Cobre, fibra ou rádio</td></tr>
+    </tbody>
+  </table>
+</section>

@@ -1,0 +1,68 @@
+<section class="lesson-section lesson-section--diagram">
+  <h2>14. Diagrama SVG</h2>
+  <p>O diagrama abaixo mostra a ideia central: a mensagem da aplicação desce pela pilha, ganha cabeçalhos e vira uma PDU diferente em cada grupo de camadas; no destino, o processo é invertido.</p>
+  <svg class="lesson-svg" viewBox="0 0 960 520" role="img" aria-labelledby="m02l02-title m02l02-desc">
+    <title id="m02l02-title">Encapsulamento e desencapsulamento no Modelo OSI</title>
+    <desc id="m02l02-desc">Cliente encapsula dados em segmento, pacote, quadro e bits; servidor desencapsula na ordem inversa.</desc>
+    <defs>
+      <marker id="m02l02-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" class="svg-arrow" />
+      </marker>
+    </defs>
+
+    <rect x="40" y="40" width="250" height="420" rx="18" class="svg-zone" />
+    <text x="165" y="75" text-anchor="middle" class="svg-label">Origem: encapsula</text>
+
+    <rect x="670" y="40" width="250" height="420" rx="18" class="svg-zone" />
+    <text x="795" y="75" text-anchor="middle" class="svg-label">Destino: desencapsula</text>
+
+    <rect x="90" y="105" width="150" height="46" rx="10" class="svg-node svg-node--client" />
+    <text x="165" y="134" text-anchor="middle" class="svg-label svg-label--small">Dados</text>
+
+    <rect x="90" y="170" width="150" height="46" rx="10" class="svg-node" />
+    <text x="165" y="199" text-anchor="middle" class="svg-label svg-label--small">Segmento TCP/UDP</text>
+
+    <rect x="90" y="235" width="150" height="46" rx="10" class="svg-node svg-node--router" />
+    <text x="165" y="264" text-anchor="middle" class="svg-label svg-label--small">Pacote IP</text>
+
+    <rect x="90" y="300" width="150" height="46" rx="10" class="svg-node svg-node--switch" />
+    <text x="165" y="329" text-anchor="middle" class="svg-label svg-label--small">Quadro Ethernet</text>
+
+    <rect x="90" y="365" width="150" height="46" rx="10" class="svg-node" />
+    <text x="165" y="394" text-anchor="middle" class="svg-label svg-label--small">Bits / Sinais</text>
+
+    <line x1="165" y1="151" x2="165" y2="170" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m02l02-arrow)" />
+    <line x1="165" y1="216" x2="165" y2="235" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m02l02-arrow)" />
+    <line x1="165" y1="281" x2="165" y2="300" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m02l02-arrow)" />
+    <line x1="165" y1="346" x2="165" y2="365" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m02l02-arrow)" />
+
+    <rect x="355" y="210" width="250" height="100" rx="18" class="svg-node svg-node--cloud" />
+    <text x="480" y="245" text-anchor="middle" class="svg-label">Rede</text>
+    <text x="480" y="276" text-anchor="middle" class="svg-label svg-label--small">Switches, roteadores, firewalls</text>
+
+    <line x1="240" y1="388" x2="355" y2="280" class="svg-flow svg-flow--request animated-flow" marker-end="url(#m02l02-arrow)" />
+    <line x1="605" y1="280" x2="720" y2="388" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m02l02-arrow)" />
+
+    <rect x="720" y="365" width="150" height="46" rx="10" class="svg-node" />
+    <text x="795" y="394" text-anchor="middle" class="svg-label svg-label--small">Bits / Sinais</text>
+
+    <rect x="720" y="300" width="150" height="46" rx="10" class="svg-node svg-node--switch" />
+    <text x="795" y="329" text-anchor="middle" class="svg-label svg-label--small">Quadro Ethernet</text>
+
+    <rect x="720" y="235" width="150" height="46" rx="10" class="svg-node svg-node--router" />
+    <text x="795" y="264" text-anchor="middle" class="svg-label svg-label--small">Pacote IP</text>
+
+    <rect x="720" y="170" width="150" height="46" rx="10" class="svg-node" />
+    <text x="795" y="199" text-anchor="middle" class="svg-label svg-label--small">Segmento TCP/UDP</text>
+
+    <rect x="720" y="105" width="150" height="46" rx="10" class="svg-node svg-node--server" />
+    <text x="795" y="134" text-anchor="middle" class="svg-label svg-label--small">Dados</text>
+
+    <line x1="795" y1="365" x2="795" y2="346" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m02l02-arrow)" />
+    <line x1="795" y1="300" x2="795" y2="281" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m02l02-arrow)" />
+    <line x1="795" y1="235" x2="795" y2="216" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m02l02-arrow)" />
+    <line x1="795" y1="170" x2="795" y2="151" class="svg-flow svg-flow--response animated-flow" marker-end="url(#m02l02-arrow)" />
+
+    <text x="480" y="360" text-anchor="middle" class="svg-label svg-label--small">PDU muda conforme a camada: dados → segmento → pacote → quadro → bits</text>
+  </svg>
+</section>

@@ -1,0 +1,6 @@
+<section class="lesson-section lesson-section--motivation">
+  <h2>1. Motivação</h2>
+  <p>Na aula anterior, você viu por que o Modelo OSI existe: ele ajuda a dividir a comunicação em responsabilidades. Agora vem a pergunta prática: quando uma aplicação envia uma mensagem, como essa mensagem realmente atravessa as camadas? Ela não sai do navegador diretamente como “página web” pelo cabo. Ela é transformada, organizada, empacotada, endereçada, enquadrada e finalmente convertida em sinais físicos.</p>
+  <p>Encapsulamento é o processo que permite que uma mensagem de aplicação ganhe informações de transporte, rede e enlace antes de viajar. Desencapsulamento é o processo inverso no destino. Esse mecanismo aparece em Wireshark, tcpdump, firewalls, roteadores, VPNs, proxies, MTU, MSS, fragmentação, logs de rede e troubleshooting.</p>
+  <div class="callout callout--problem"><strong>Problema real:</strong> um sistema interno falha apenas quando acessado pela VPN. O DNS resolve, o TCP conecta às vezes, mas uploads grandes falham. Sem entender encapsulamento, alguém pode culpar “a aplicação”. Com encapsulamento, você começa a suspeitar de MTU, overhead da VPN, fragmentação, MSS ou bloqueio de ICMP necessário para Path MTU Discovery.</div>
+</section>

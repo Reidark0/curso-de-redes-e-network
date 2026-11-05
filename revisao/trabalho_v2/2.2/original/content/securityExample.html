@@ -1,0 +1,13 @@
+<section class="lesson-section lesson-section--security">
+  <h2>13. Exemplo em Segurança</h2>
+  <p>Segurança depende de entender o que está encapsulado e em qual camada o controle atua. Um firewall de rede pode permitir TCP 443, mas isso não significa que qualquer conteúdo HTTPS seja seguro. Um WAF pode inspecionar camada de aplicação, mas não corrige rota insegura. TLS protege conteúdo, mas não oculta todos os metadados. VPN protege um túnel, mas pode carregar tráfego indesejado se a política for fraca.</p>
+  <table class="data-table risk-table">
+    <thead><tr><th>Risco</th><th>Como aparece</th><th>Impacto</th><th>Mitigação</th></tr></thead>
+    <tbody>
+      <tr><td>Confundir porta liberada com aplicação segura</td><td>Firewall permite 443 sem inspeção adequada</td><td>Tráfego malicioso pode usar canal permitido</td><td>WAF, proxy, inspeção, logs e validação de identidade</td></tr>
+      <tr><td>Overhead de túnel ignorado</td><td>VPN adiciona cabeçalhos e reduz MTU efetiva</td><td>Falhas intermitentes e perda de pacotes grandes</td><td>Ajuste de MTU/MSS, PMTUD, testes e documentação</td></tr>
+      <tr><td>Coleta insegura de pacotes</td><td>PCAP contém tokens, cookies ou dados pessoais</td><td>Vazamento de credenciais e dados sensíveis</td><td>Sanitização, autorização, escopo mínimo e armazenamento seguro</td></tr>
+      <tr><td>Túnel indevido</td><td>Pacotes encapsulados contornam controles esperados</td><td>Perda de visibilidade e movimento lateral</td><td>Política de egress, detecção de túneis, inspeção e segmentação</td></tr>
+    </tbody>
+  </table>
+</section>

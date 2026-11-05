@@ -1,0 +1,22 @@
+<section class="lesson-section lesson-section--concept">
+  <h2>Conceito</h2>
+  <p><strong>Encapsulamento</strong> é o processo no qual os dados de uma camada superior recebem informações adicionais para serem tratados pela camada inferior: quase sempre um <strong>cabeçalho</strong>, na frente, e às vezes um <strong>trailer</strong>, no fim. Na Ethernet, o trailer é o FCS (Frame Check Sequence), de 4 bytes, que permite detectar quadros corrompidos. <strong>Desencapsulamento</strong> é o inverso: o destino valida, interpreta e remove essas informações camada por camada até entregar os dados à aplicação.</p>
+  <div class="definition-box"><strong>Definição:</strong> PDU (Protocol Data Unit) é a unidade de dados tratada por uma camada específica. O nome varia conforme a literatura; o uso mais comum é <em>segmento</em> para TCP e <em>datagrama</em> para UDP.</div>
+  <div class="responsive-table"><table class="data-table comparison-table">
+    <thead><tr><th>Camada</th><th>PDU comum</th><th>Informação adicionada</th><th>Exemplo</th></tr></thead>
+    <tbody>
+      <tr><td>Aplicação</td><td>Dados</td><td>Mensagem da aplicação</td><td>HTTP request, consulta DNS, payload JSON</td></tr>
+      <tr><td>Transporte</td><td>Segmento ou datagrama</td><td>Portas, estado, controle de fluxo ou checksum</td><td>TCP 443, UDP 53</td></tr>
+      <tr><td>Rede</td><td>Pacote</td><td>IP de origem, IP de destino, TTL, protocolo</td><td>IPv4 ou IPv6</td></tr>
+      <tr><td>Enlace</td><td>Quadro</td><td>MAC de origem, MAC de destino, EtherType, FCS</td><td>Ethernet</td></tr>
+      <tr><td>Física</td><td>Bits/sinais</td><td>Codificação física no meio</td><td>Cobre, fibra ou rádio</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout warning"><strong>Erros comuns:</strong>
+    <ul>
+      <li><strong>Chamar toda PDU de pacote.</strong> O diagnóstico passa a misturar quadro, pacote e segmento. Use “pacote” para a camada de rede e “PDU” como termo genérico.</li>
+      <li><strong>Achar que o MAC de destino é o do servidor final.</strong> O IP é fim a fim; o MAC é do próximo salto. Fora da LAN, é normalmente o MAC do gateway local.</li>
+      <li><strong>Confundir encapsulamento com criptografia.</strong> Encapsular acrescenta contexto; cifrar esconde conteúdo.</li>
+    </ul>
+  </div>
+</section>

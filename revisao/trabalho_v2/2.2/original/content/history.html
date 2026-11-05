@@ -1,0 +1,6 @@
+<section class="lesson-section lesson-section--history">
+  <h2>2. História</h2>
+  <p>Redes modernas não nasceram como uma única camada mágica. O crescimento da comunicação entre computadores exigiu separação de responsabilidades. Um programa precisava falar com outro programa, mas também era necessário identificar portas, hosts, redes, interfaces locais e sinais físicos. Cada camada passou a adicionar informações próprias para cumprir sua parte do trabalho.</p>
+  <p>Essa ideia de “envelopar” dados não é exclusiva do Modelo OSI. Ela aparece na pilha TCP/IP real. Uma mensagem HTTP, por exemplo, pode ser carregada por TCP, encapsulada em IP, transportada dentro de um quadro Ethernet e convertida em bits no meio físico. Em redes modernas, ainda podem existir camadas adicionais: VLAN, PPPoE, GRE, IPsec, VXLAN, WireGuard, TLS, HTTP/2, HTTP/3 e service mesh.</p>
+  <p>A história prática do encapsulamento é a história da interoperabilidade. Um switch não precisa entender o conteúdo da aplicação para encaminhar um quadro. Um roteador não precisa entender o HTML da página para encaminhar um pacote IP. Um firewall de camada 4 pode avaliar porta e estado sem interpretar toda a aplicação. Essa separação torna a rede escalável, mas também cria pontos de falha e investigação em várias camadas.</p>
+</section>

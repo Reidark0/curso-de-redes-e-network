@@ -1,0 +1,12 @@
+<section class="lesson-section lesson-section--problem">
+  <h2>3. Problema</h2>
+  <p>O problema é que dados de aplicação, sozinhos, não dizem como devem atravessar a rede. Uma string JSON, uma requisição HTTP ou um arquivo enviado por um cliente não possuem, por si só, todas as informações necessárias para chegar ao destino correto. A rede precisa saber qual processo deve receber os dados, qual host é destino, qual próximo salto deve ser usado, qual endereço local de enlace entrega o quadro e como transformar tudo em sinal físico.</p>
+  <ul class="flow-list">
+    <li><strong>Sem transporte:</strong> o destino não sabe qual processo ou porta deve receber a conversa.</li>
+    <li><strong>Sem rede:</strong> não há endereço lógico para encaminhamento entre redes.</li>
+    <li><strong>Sem enlace:</strong> não há entrega local no próximo salto.</li>
+    <li><strong>Sem física:</strong> não há transmissão real pelo cabo, fibra ou rádio.</li>
+    <li><strong>Sem desencapsulamento:</strong> o destino não consegue remover as informações de cada camada e entregar apenas os dados úteis à aplicação.</li>
+  </ul>
+  <p>Em troubleshooting, ignorar isso leva a diagnósticos rasos. Um pacote pode sair da aplicação, mas morrer no transporte. Pode passar pelo transporte, mas ser descartado por rota. Pode chegar ao roteador, mas não sair pela interface correta. Pode sair pela interface, mas ser bloqueado por firewall, VLAN, MTU ou erro físico.</p>
+</section>

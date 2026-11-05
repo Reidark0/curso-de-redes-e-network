@@ -1,0 +1,12 @@
+<section class="lesson-section lesson-section--problem">
+  <h2>Problema</h2>
+  <p>Dados de aplicação (uma string JSON, uma requisição HTTP, um arquivo) não dizem, sozinhos, como atravessar a rede. Cada camada acrescenta a informação que falta:</p>
+  <ul class="flow-list">
+    <li><strong>Sem transporte:</strong> o destino não sabe qual processo ou porta deve receber a conversa.</li>
+    <li><strong>Sem rede:</strong> não há endereço lógico para encaminhar entre redes.</li>
+    <li><strong>Sem enlace:</strong> não há entrega local ao próximo salto.</li>
+    <li><strong>Sem física:</strong> não há transmissão real pelo cabo, fibra ou rádio.</li>
+    <li><strong>Sem desencapsulamento:</strong> o destino não consegue remover as informações de cada camada e entregar só os dados úteis à aplicação.</li>
+  </ul>
+  <p>Por isso a falha pode estar em qualquer envelope: o segmento não chega à porta certa, o pacote é descartado por falta de rota ou por firewall, o quadro cai na VLAN errada ou é corrompido por erro físico, ou um pacote maior que a MTU do caminho some enquanto os pequenos passam.</p>
+</section>

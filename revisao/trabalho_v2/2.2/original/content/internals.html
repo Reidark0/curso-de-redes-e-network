@@ -1,0 +1,14 @@
+<section class="lesson-section lesson-section--internals">
+  <h2>6. Funcionamento interno</h2>
+  <p>Imagine um navegador acessando <code>https://intranet.exemplo.local</code>. Antes de qualquer conteúdo aparecer, várias decisões acontecem. O nome precisa ser resolvido, a conexão precisa ser estabelecida, o TLS precisa ser negociado, a requisição precisa ser enviada e a resposta precisa voltar. Aqui, vamos simplificar para o envio de uma mensagem depois que o destino já foi determinado.</p>
+  <ol class="flow-list">
+    <li><strong>Aplicação cria dados:</strong> a aplicação monta uma mensagem, por exemplo uma requisição HTTP.</li>
+    <li><strong>Transporte adiciona portas:</strong> TCP ou UDP adiciona informações como porta de origem, porta de destino, sequência, checksum e estado, quando aplicável.</li>
+    <li><strong>Rede adiciona endereços IP:</strong> o IP indica origem, destino e informações para roteamento.</li>
+    <li><strong>Enlace adiciona endereços locais:</strong> Ethernet adiciona MAC de origem e MAC do próximo salto, que pode ser o destino local ou o gateway.</li>
+    <li><strong>Física transmite sinais:</strong> o quadro vira sinais elétricos, luz ou rádio.</li>
+    <li><strong>Equipamentos intermediários processam parte do envelope:</strong> switches olham enlace, roteadores olham IP, firewalls podem olhar transporte e aplicação, dependendo do tipo.</li>
+    <li><strong>Destino desencapsula:</strong> a placa recebe bits, valida quadro, entrega pacote IP, entrega segmento à porta correta e a aplicação interpreta os dados.</li>
+  </ol>
+  <p>Um ponto essencial: cada camada normalmente não precisa entender todo o conteúdo das camadas superiores. Um roteador encaminha pelo cabeçalho IP. Ele não precisa entender a página HTML. Um switch encaminha pelo MAC. Ele não precisa entender IP, salvo recursos avançados. Essa separação explica por que ferramentas diferentes enxergam partes diferentes da comunicação.</p>
+</section>

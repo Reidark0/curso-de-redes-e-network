@@ -1,0 +1,97 @@
+{
+  "id": "2.2",
+  "versao": "original",
+  "titulo": "Encapsulamento, desencapsulamento e PDUs",
+  "tipo": "fundamental",
+  "palavras": {
+    "visiveis": 4182,
+    "teoria": 3020,
+    "praticaExtra": 634,
+    "quiz": 254,
+    "flashcards": 103
+  },
+  "porGrupoTeoria": {
+    "introducao": 632,
+    "contexto": 545,
+    "conteudo": 570,
+    "exemplos": 718,
+    "seguranca_troubleshooting": 555
+  },
+  "porSecao": {
+    "motivation": 162,
+    "summary": 68,
+    "history": 186,
+    "problem": 194,
+    "evolution": 165,
+    "concept": 158,
+    "internals": 234,
+    "architecture": 143,
+    "diagram": 35,
+    "analogy": 144,
+    "simpleExample": 105,
+    "enterpriseExample": 108,
+    "cloudExample": 98,
+    "devsecopsExample": 89,
+    "securityExample": 174,
+    "objectives": 58,
+    "learningOutcomes": 79,
+    "glossary": 265,
+    "security": 272,
+    "troubleshooting": 283,
+    "nextTheme": 45
+  },
+  "pratica": {
+    "quiz": 254,
+    "flashcards": 103,
+    "lab": 0,
+    "mentorQuestions": 156,
+    "exercises": 150,
+    "challenge": 143,
+    "commentedSolution": 185
+  },
+  "outros": {
+    "title+subtitle": 22,
+    "nextTheme": 45,
+    "references": 53,
+    "linksToOtherCourses": 51
+  },
+  "quantidades": {
+    "quiz": 6,
+    "flashcards": 6,
+    "mentor": 3,
+    "exercicios": 4,
+    "passosLab": 0,
+    "diagramasSvg": 1,
+    "desafio": true,
+    "objetivos": 6,
+    "glossario": 6,
+    "exemplosPorAmbiente": [
+      "enterpriseExample",
+      "cloudExample",
+      "devsecopsExample",
+      "securityExample"
+    ]
+  },
+  "lab": null,
+  "duracao": {
+    "declarada": "85-120 min",
+    "estimatedStudyTimeMinutes": 120,
+    "nucleo": 32.2,
+    "nucleoPartes": {
+      "teoria": 23.2,
+      "diagramas": 3,
+      "quiz": 6
+    },
+    "praticaExtra": 45,
+    "praticaExtraPartes": {
+      "lab": 0,
+      "mentor": 6,
+      "exercicios": 24,
+      "desafio": 15
+    },
+    "faixaNucleo": "25-40 min",
+    "praticaExtraArredondada": 45,
+    "recomendada": "25-40 min + 45 min de prática extra",
+    "estimatedStudyTimeMinutesRecomendado": 40
+  }
+}
